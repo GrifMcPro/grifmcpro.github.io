@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrifLauncher | Галерея</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">GRIF LAUNCHER</div>
+        <div class="sidebar-menu">
+            <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Главная</a>
+            <a href="shop.html" class="menu-item"><i class="fas fa-store"></i> Магазин</a>
+            <a href="chat.html" class="menu-item"><i class="fas fa-comments"></i> Чат</a>
+            <a href="profile.html" class="menu-item"><i class="fas fa-user"></i> Профиль</a>
+            <a href="gallery.html" class="menu-item active"><i class="fas fa-image"></i> Галерея</a>
+            <a href="support.html" class="menu-item"><i class="fas fa-ticket-alt"></i> Поддержка</a>
+        </div>
+        <div class="sidebar-footer">
+            <div id="authStatus"></div>
+            <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Выйти</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="gallery-header"><h1>🏆 ЛУЧШИЕ РАБОТЫ ИГРОКОВ</h1></div>
+        <div class="gallery-grid" id="galleryGrid">
+            <div class="gallery-item" data-images='["https://picsum.photos/id/104/800/600","https://picsum.photos/id/101/800/600"]'>
+                <img src="https://picsum.photos/id/104/400/300" alt="">
+                <p>Эпичный замок от Player1</p>
+                <div class="gallery-likes">❤️ 24</div>
+            </div>
+            <div class="gallery-item" data-images='["https://picsum.photos/id/106/800/600","https://picsum.photos/id/102/800/600"]'>
+                <img src="https://picsum.photos/id/106/400/300" alt="">
+                <p>Киберпанк город</p>
+                <div class="gallery-likes">❤️ 18</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-img" id="lightboxImg" src="">
+        <button class="lightbox-prev">❮</button>
+        <button class="lightbox-next">❯</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
