@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrifLauncher | Магазин</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a0a 100%);
+            font-family: 'Montserrat', sans-serif;
+            color: #e0e0e0;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #fff, #ffd700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .product-card {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 24px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid rgba(255,215,0,0.2);
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: #ffd700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .product-icon i {
+            font-size: 48px;
+            color: #ffd700;
+            margin-bottom: 16px;
+        }
+        .price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffd700;
+            margin: 16px 0;
+        }
+        .product-card ul {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .product-card li {
+            padding: 6px 0;
+        }
+        .product-card li i {
+            font-size: 14px;
+            margin-right: 8px;
+            color: #ffd700;
+        }
+        .buy-btn {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #0a0a0a;
+            border: none;
+            padding: 12px;
+            border-radius: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-family: 'Orbitron', monospace;
+            transition: 0.2s;
+        }
+        .buy-btn:hover {
+            background: linear-gradient(135deg, #ffaa00, #ff8800);
+            transform: scale(1.02);
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            background: transparent;
+            border: 1px solid #ffd700;
+            color: #ffd700;
+            padding: 10px 24px;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .back-btn:hover {
+            background: rgba(255,215,0,0.15);
+        }
+        @media (max-width: 768px) {
+            .section-title { font-size: 28px; }
+            .shop-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> На главную</a>
+        <div class="section-title">✨ МАГАЗИН ПРИВИЛЕГИЙ</div>
+        <div class="shop-grid">
+            <div class="product-card"><div class="product-icon"><i class="fas fa-crown"></i></div><h3>VIP Стандарт</h3><div class="price">150 ₽</div><ul><li><i class="fas fa-check-circle"></i> Цветной ник</li><li><i class="fas fa-check-circle"></i> Команда /kit</li><li><i class="fas fa-check-circle"></i> Доступ к /fly</li></ul><button class="buy-btn" onclick="alert('Покупка VIP')">КУПИТЬ ЗА 150 ₽</button></div>
+            <div class="product-card"><div class="product-icon"><i class="fas fa-gem"></i></div><h3>VIP+ Продвинутый</h3><div class="price">350 ₽</div><ul><li><i class="fas fa-check-circle"></i> Всё из VIP</li><li><i class="fas fa-check-circle"></i> VIP-чат</li><li><i class="fas fa-check-circle"></i> Команда /heal</li></ul><button class="buy-btn" onclick="alert('Покупка VIP+')">КУПИТЬ ЗА 350 ₽</button></div>
+            <div class="product-card"><div class="product-icon"><i class="fas fa-star"></i></div><h3>MVP Вечный</h3><div class="price">1000 ₽</div><ul><li><i class="fas fa-check-circle"></i> Всё из VIP+</li><li><i class="fas fa-check-circle"></i> Префикс [KING]</li><li><i class="fas fa-check-circle"></i> Команда /god</li></ul><button class="buy-btn" onclick="alert('Покупка MVP')">КУПИТЬ ЗА 1000 ₽</button></div>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.buy-btn').forEach(btn => {
+            btn.onclick = () => alert('Демо-покупка');
+        });
+    </script>
+</body>
+</html>
