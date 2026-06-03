@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrifLauncher | База знаний</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">GRIF LAUNCHER</div>
+        <div class="sidebar-menu">
+            <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Главная</a>
+            <a href="shop.html" class="menu-item"><i class="fas fa-store"></i> Магазин</a>
+            <a href="chat.html" class="menu-item"><i class="fas fa-comments"></i> Чат</a>
+            <a href="profile.html" class="menu-item"><i class="fas fa-user"></i> Профиль</a>
+            <a href="wiki.html" class="menu-item active"><i class="fas fa-book"></i> База знаний</a>
+            <a href="gallery.html" class="menu-item"><i class="fas fa-image"></i> Галерея</a>
+        </div>
+        <div class="sidebar-footer">
+            <div id="authStatus"></div>
+            <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Выйти</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="wiki-header"><h1>📚 БАЗА ЗНАНИЙ</h1></div>
+        <div class="wiki-grid">
+            <div class="wiki-card"><i class="fas fa-gamepad"></i><h3>Как начать играть?</h3><p>Регистрация, установка модов, первый вход на сервер.</p><a href="#">Читать →</a></div>
+            <div class="wiki-card"><i class="fas fa-terminal"></i><h3>Все команды</h3><p>/fly, /home, /tpa, /spawn — полный список с описанием.</p><a href="#">Читать →</a></div>
+            <div class="wiki-card"><i class="fas fa-crown"></i><h3>Привилегии</h3><p>Что даёт каждая привилегия и как её получить.</p><a href="#">Читать →</a></div>
+            <div class="wiki-card"><i class="fas fa-users"></i><h3>Правила сервера</h3><p>Основные правила поведения на проекте.</p><a href="#">Читать →</a></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
