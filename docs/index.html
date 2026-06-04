@@ -3,124 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>GrifLauncher | Modern</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <title>GrifLauncher | Neo Messenger</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #111118;
-            --bg-tertiary: #1a1a24;
-            --surface: rgba(25, 25, 35, 0.7);
-            --surface-hover: rgba(35, 35, 50, 0.8);
-            --border: rgba(255, 215, 0, 0.12);
+            --bg-dark: #0a0a0f;
+            --bg-secondary: #0f0f15;
+            --bg-tertiary: #13131a;
+            --bg-surface: rgba(20, 20, 30, 0.75);
+            --bg-surface-solid: #151520;
+            --border-color: rgba(255, 215, 0, 0.1);
             --border-light: rgba(255, 215, 0, 0.2);
             --accent: #ffd700;
             --accent-dark: #ccaa00;
-            --accent-glow: rgba(255, 215, 0, 0.25);
-            --text-primary: #ffffff;
+            --accent-bg: rgba(255, 215, 0, 0.1);
+            --admin-bg: rgba(255, 215, 0, 0.88);
+            --admin-text: #1a1a1a;
+            --text-primary: #f0f0f0;
             --text-secondary: #a0a0b0;
             --text-muted: #6a6a7a;
             --success: #10b981;
             --danger: #ef4444;
-            --warning: #f59e0b;
             --info: #3b82f6;
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+            --online: #22c55e;
+            --offline: #6b7280;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
             --shadow-glow: 0 0 20px rgba(255, 215, 0, 0.2);
+            --shadow-glow-strong: 0 0 30px rgba(255, 215, 0, 0.3);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-2xl: 28px;
+            --transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
-        
+
         body {
-            background: linear-gradient(135deg, #0a0a0f 0%, #0f0f1a 50%, #0a0a0f 100%);
-            font-family: 'Inter', sans-serif;
+            background: radial-gradient(ellipse at top, #0f0f1a, #0a0a0f);
+            font-family: 'Montserrat', sans-serif;
             color: var(--text-primary);
             min-height: 100vh;
+            overflow-x: hidden;
         }
-        
-        /* Glassmorphism эффекты */
-        .glass {
-            background: var(--surface);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-        }
-        
-        .glass-card {
-            background: var(--surface);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
-        
-        .glass-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent);
-            box-shadow: var(--shadow-glow);
-        }
-        
+
         /* Анимации */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
+
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            0%, 100% { opacity: 0.4; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-2px); }
         }
-        
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+
+        @keyframes typingAnim {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(-3px); opacity: 1; }
         }
-        
-        @keyframes glowPulse {
-            0% { box-shadow: 0 0 0 0 var(--accent-glow); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
-        
-        .animate-in { animation: fadeInUp 0.4s ease; }
-        
+
+        .animate-in { animation: fadeIn 0.3s ease; }
+        .slide-in { animation: slideIn 0.3s ease; }
+
         /* Скроллбар */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; opacity: 0.5; }
-        
-        .main-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-        
-        /* Top Bar */
-        .top-bar {
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-dark); }
+
+        /* Хедер сайта */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--surface);
-            backdrop-filter: blur(20px);
-            border-radius: 60px;
-            padding: 10px 24px;
-            margin-bottom: 30px;
-            border: 1px solid var(--border);
-            animation: fadeInUp 0.4s ease;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-        
+
         .logo-icon {
             width: 40px;
             height: 40px;
@@ -130,23 +124,36 @@
             align-items: center;
             justify-content: center;
         }
-        
-        .logo-icon i { font-size: 22px; color: var(--bg-primary); }
-        .logo-text { font-size: 20px; font-weight: 700; background: linear-gradient(135deg, #fff, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        
+
+        .logo-icon i { font-size: 20px; color: var(--bg-dark); }
+        .logo-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         .balance {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 8px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 18px;
             border-radius: 40px;
-            font-weight: 600;
         }
-        
+
         .balance i { color: var(--accent); font-size: 18px; }
-        .balance span { font-size: 20px; color: var(--accent); }
-        
+        .balance span { font-weight: 700; color: var(--accent); font-size: 18px; }
+
         .btn-logout {
             background: rgba(239, 68, 68, 0.15);
             border: 1px solid rgba(239, 68, 68, 0.3);
@@ -154,416 +161,400 @@
             padding: 8px 20px;
             border-radius: 40px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
-        
-        .btn-logout:hover { background: rgba(239, 68, 68, 0.3); transform: scale(1.02); }
-        
-        /* Меню */
+
+        .btn-logout:hover {
+            background: rgba(239, 68, 68, 0.3);
+            transform: scale(1.02);
+        }
+
         .menu-tabs {
             display: flex;
             gap: 12px;
             justify-content: center;
-            margin-bottom: 35px;
-            flex-wrap: wrap;
+            padding: 12px 0;
         }
-        
+
         .menu-tab {
             background: rgba(25, 25, 35, 0.6);
             backdrop-filter: blur(8px);
-            border: 1px solid var(--border);
-            padding: 10px 28px;
+            border: 1px solid var(--border-color);
+            padding: 8px 24px;
             border-radius: 40px;
             cursor: pointer;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+
+        .menu-tab.active, .menu-tab:hover {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: var(--bg-dark);
+            border-color: transparent;
+            transform: translateY(-1px);
+        }
+
+        .page { display: none; animation: fadeIn 0.3s ease; }
+        .page.active { display: block; }
+
+        /* ========== ЕДИНОЕ КОММУНИКАЦИОННОЕ ОКНО ========== */
+        .chat-window {
+            max-width: 1100px;
+            margin: 100px auto 40px;
+            background: var(--bg-surface);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .chat-window:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow-strong);
+        }
+
+        /* Шапка чата */
+        .chat-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .chat-title h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        
-        .menu-tab i { font-size: 16px; }
-        
-        .menu-tab.active, .menu-tab:hover {
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            color: var(--bg-primary);
-            border-color: transparent;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-glow);
+
+        .chat-title h2 i { color: var(--accent); font-size: 20px; }
+
+        .settings-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 8px;
+            border-radius: 50%;
         }
-        
-        .page { display: none; animation: fadeIn 0.3s ease; }
-        .page.active { display: block; }
-        
-        .section-title {
-            font-size: 32px;
-            font-weight: 700;
-            text-align: center;
-            margin: 25px 0 35px;
-            background: linear-gradient(135deg, #fff, var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+
+        .settings-btn:hover {
+            color: var(--accent);
+            background: rgba(255, 215, 0, 0.1);
+            transform: rotate(90deg);
         }
-        
-        /* Таймер */
-        .timer-card {
-            background: var(--surface);
-            backdrop-filter: blur(16px);
-            border-radius: 32px;
-            padding: 40px;
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
-            border: 1px solid var(--border);
+
+        /* Поиск */
+        .search-bar {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
         }
-        
-        .timer-title { font-size: 24px; font-weight: 600; margin-bottom: 25px; color: var(--accent); }
-        
-        .countdown-wrapper {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+
+        .search-bar i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 14px;
         }
-        
-        .countdown-block {
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 16px 8px 38px;
             background: rgba(0, 0, 0, 0.4);
-            border-radius: 20px;
-            padding: 15px 25px;
-            min-width: 90px;
+            border: 1px solid var(--border-color);
+            border-radius: 40px;
+            color: var(--text-primary);
+            font-size: 13px;
+            outline: none;
+            transition: var(--transition);
         }
-        
-        .countdown-number { font-size: 36px; font-weight: 700; color: var(--accent); }
-        .countdown-label { font-size: 12px; color: var(--text-secondary); margin-top: 5px; }
-        
-        /* Магазин */
-        .shop-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .product-card {
-            background: var(--surface);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid var(--border);
-        }
-        
-        .product-card:hover {
-            transform: translateY(-6px);
+
+        .search-bar input:focus {
             border-color: var(--accent);
             box-shadow: var(--shadow-glow);
         }
-        
-        .product-icon i { font-size: 48px; color: var(--accent); margin-bottom: 15px; }
-        .product-name { font-size: 22px; font-weight: 600; margin-bottom: 10px; }
-        .price { font-size: 28px; font-weight: 700; color: var(--accent); margin: 15px 0; }
-        .product-features { list-style: none; margin: 15px 0; font-size: 13px; color: var(--text-secondary); }
-        .product-features li { padding: 5px 0; display: flex; align-items: center; gap: 8px; justify-content: center; }
-        
-        .buy-btn {
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            border: none;
-            padding: 12px;
-            border-radius: 40px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-        
-        .buy-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); animation: glowPulse 1s infinite; }
-        
-        /* Профиль */
-        .profile-card {
-            background: var(--surface);
-            backdrop-filter: blur(12px);
-            border-radius: 32px;
-            padding: 40px;
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-            border: 1px solid var(--border);
-        }
-        
-        .profile-avatar {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            border-radius: 50%;
+
+        /* Переключение чатов */
+        .chat-switcher {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
+            gap: 8px;
+            padding: 12px 24px;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid var(--border-color);
         }
-        
-        .profile-avatar i { font-size: 48px; color: var(--bg-primary); }
-        .profile-info { text-align: left; margin: 25px 0; }
-        .profile-info p { padding: 10px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; }
-        .profile-info i { width: 24px; color: var(--accent); }
-        
-        .edit-btn, .change-password-btn {
-            background: rgba(59, 130, 246, 0.2);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            color: var(--info);
+
+        .chat-btn {
+            background: none;
+            border: none;
             padding: 8px 20px;
             border-radius: 40px;
+            color: var(--text-secondary);
             cursor: pointer;
-            margin: 5px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 14px;
         }
-        
-        .edit-btn:hover, .change-password-btn:hover { background: rgba(59, 130, 246, 0.4); transform: scale(1.02); }
-        
-        /* Галочки */
-        .badge-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 18px;
-            height: 18px;
-            margin-left: 6px;
-            border-radius: 50%;
-        }
-        .badge-blue { background: #3b82f6; }
-        .badge-red { background: #ef4444; }
-        .badge-gold { background: #ffd700; }
-        .badge-rainbow { background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); border-radius: 4px; animation: shimmer 2s infinite; background-size: 200% 100%; }
-        .badge-rgb { background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff); animation: shimmer 1s infinite; background-size: 200% 100%; }
-        .badge-crown { background: none; color: #ffd700; width: auto; }
-        .badge-icon i { font-size: 10px; color: white; }
-        .badge-crown i { color: #ffd700; font-size: 14px; }
-        
-        /* ========== ЧАТЫ СТИЛЬ DISCORD ========== */
-        .chats-layout {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 20px;
-            background: rgba(10, 10, 15, 0.5);
-            backdrop-filter: blur(16px);
-            border-radius: 28px;
-            padding: 20px;
-            min-height: 70vh;
-            border: 1px solid var(--border);
-        }
-        
-        .chats-sidebar {
-            border-right: 1px solid var(--border);
-            padding-right: 16px;
-        }
-        
-        .chat-section-title {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            margin: 15px 0 10px;
-            padding-left: 8px;
-        }
-        
-        .chat-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 12px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-bottom: 4px;
-        }
-        
-        .chat-item:hover { background: rgba(255, 215, 0, 0.08); }
-        .chat-item.active { background: rgba(255, 215, 0, 0.12); border-left: 3px solid var(--accent); }
-        
-        .chat-avatar {
-            width: 44px;
-            height: 44px;
+
+        .chat-btn:hover { background: rgba(255, 255, 255, 0.05); }
+        .chat-btn.active {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            color: var(--bg-dark);
         }
-        
-        .chat-avatar i { font-size: 20px; color: var(--bg-primary); }
-        .chat-info { flex: 1; min-width: 0; }
-        .chat-name { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-        .chat-preview { font-size: 11px; color: var(--text-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .unread-badge {
-            background: var(--danger);
-            color: white;
-            border-radius: 20px;
-            min-width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 600;
-            padding: 0 6px;
-        }
-        
-        /* Область чата */
-        .chat-area { display: flex; flex-direction: column; height: 65vh; }
-        .chat-header {
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .chat-header .chat-avatar { width: 48px; height: 48px; border-radius: 14px; }
-        .chat-header .chat-avatar i { font-size: 22px; }
-        .chat-header h3 { font-size: 18px; font-weight: 600; }
-        .chat-header-status { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-        
-        /* Сообщения как в Discord */
-        .chat-messages {
-            flex: 1;
+
+        /* Область сообщений */
+        .messages-area {
+            height: 450px;
             overflow-y: auto;
-            padding-right: 10px;
+            padding: 20px 24px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
         }
-        
+
+        /* Сообщения */
         .message {
             display: flex;
             gap: 12px;
-            max-width: 85%;
+            max-width: 80%;
+            animation: fadeIn 0.2s ease;
         }
-        .message.outgoing { align-self: flex-end; flex-direction: row-reverse; }
-        .message.incoming { align-self: flex-start; }
-        
+
+        .message.outgoing {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message.incoming {
+            align-self: flex-start;
+        }
+
         .message-avatar {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            border-radius: 10px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
-        .message-avatar i { font-size: 16px; color: var(--bg-primary); }
-        
-        .message-content { flex: 1; }
-        .message-name {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 4px;
+
+        .message-avatar i { font-size: 18px; color: var(--bg-dark); }
+
+        .message-content {
+            flex: 1;
+            transition: var(--transition);
+        }
+
+        .message:hover .message-actions { opacity: 1; }
+
+        .message-header {
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-bottom: 4px;
             flex-wrap: wrap;
         }
+
+        .message-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .message-time {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        /* Сообщения админа/системы (золотой фон) */
+        .message.admin .message-bubble {
+            background: var(--admin-bg);
+            color: var(--admin-text);
+            border: 1px solid var(--accent);
+        }
+
+        .admin-badge {
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
         .message-bubble {
-            background: rgba(35, 35, 50, 0.9);
-            padding: 10px 14px;
+            background: var(--bg-surface-solid);
+            padding: 10px 16px;
             border-radius: 18px;
             border-top-left-radius: 4px;
             word-break: break-word;
             font-size: 14px;
             line-height: 1.4;
         }
+
         .message.outgoing .message-bubble {
-            background: rgba(255, 215, 0, 0.12);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            background: var(--accent-bg);
+            border: 1px solid var(--border-light);
             border-top-right-radius: 4px;
             border-top-left-radius: 18px;
         }
-        .message-time { font-size: 10px; color: var(--text-muted); margin-top: 4px; }
-        
-        /* Input area */
+
+        /* Реакции */
+        .message-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .reaction-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            border-radius: 20px;
+            padding: 4px 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-secondary);
+        }
+
+        .reaction-btn:hover {
+            background: var(--accent-bg);
+            transform: scale(1.05);
+        }
+
+        /* Индикатор печатания */
+        .typing-indicator {
+            padding: 8px 24px;
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .typing-dots span {
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typingAnim 1.4s infinite;
+        }
+
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        /* Панель ввода */
         .chat-input-area {
+            padding: 16px 24px;
+            border-top: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.2);
             display: flex;
             gap: 12px;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
+            align-items: center;
         }
+
         .chat-input-area input {
             flex: 1;
             padding: 12px 18px;
-            border-radius: 40px;
-            border: 1px solid var(--border);
             background: rgba(0, 0, 0, 0.4);
-            color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 40px;
+            color: var(--text-primary);
             font-size: 14px;
             outline: none;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
-        .chat-input-area input:focus { border-color: var(--accent); }
+
+        .chat-input-area input:focus {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .emoji-btn, .send-btn {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--border-light);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 18px;
+        }
+
         .send-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             border: none;
-            border-radius: 40px;
+            border-radius: 44px;
+            width: auto;
             padding: 0 24px;
-            cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s ease;
+        }
+
+        .emoji-btn:hover, .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Бот интерфейс */
+        .bot-interface {
+            padding: 0 24px 16px;
+        }
+
+        .bot-buttons {
             display: flex;
-            align-items: center;
-            gap: 8px;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
         }
-        .send-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
-        
-        /* Read-only режим для канала */
-        .readonly-mode {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-        .readonly-mode input, .readonly-mode .send-btn {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        .channel-badge {
-            background: rgba(255, 215, 0, 0.15);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            color: var(--accent);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        /* Бот кнопки */
-        .bot-buttons { display: flex; gap: 8px; flex-wrap: wrap; margin: 15px 0; }
+
         .bot-btn {
-            background: rgba(255, 215, 0, 0.08);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--border-light);
             padding: 8px 16px;
             border-radius: 40px;
             cursor: pointer;
+            transition: var(--transition);
             font-size: 13px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
-        .bot-btn:hover { background: rgba(255, 215, 0, 0.2); transform: scale(1.02); }
-        
+
+        .bot-btn:hover {
+            background: rgba(255, 215, 0, 0.25);
+            transform: scale(1.02);
+        }
+
         .wheel-container {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 20px;
-            padding: 20px;
-            margin: 10px 0;
             text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-lg);
+            margin-top: 10px;
         }
+
         .wheel {
             width: 160px;
             height: 160px;
@@ -573,8 +564,9 @@
             transition: transform 3s cubic-bezier(0.2, 0.9, 0.1, 1);
             cursor: pointer;
             position: relative;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            box-shadow: var(--shadow-glow);
         }
+
         .wheel::after {
             content: '▼';
             position: absolute;
@@ -583,43 +575,54 @@
             transform: translateX(-50%);
             font-size: 20px;
             color: var(--accent);
-            text-shadow: 0 0 5px var(--accent);
         }
-        
+
         .tasks-container {
-            max-height: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 12px;
+            max-height: 200px;
             overflow-y: auto;
         }
+
         .task-card {
             background: rgba(0, 0, 0, 0.3);
-            border-radius: 14px;
-            padding: 12px;
+            border-radius: var(--radius-md);
+            padding: 10px;
             margin-bottom: 8px;
         }
-        
+
         /* Админка */
         .admin-section {
-            background: rgba(0, 0, 0, 0.35);
-            border-radius: 24px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: var(--radius-xl);
             padding: 20px;
-            margin-bottom: 25px;
-            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
         }
-        .admin-section h3 { margin-bottom: 15px; color: var(--accent); font-size: 18px; display: flex; align-items: center; gap: 8px; }
+
+        .admin-section h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
         .admin-input, .admin-select {
             width: 100%;
             padding: 10px 14px;
             margin: 6px 0;
             background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
             color: white;
             outline: none;
         }
+
         .admin-input:focus { border-color: var(--accent); }
+
         .admin-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            color: var(--bg-primary);
+            color: var(--bg-dark);
             border: none;
             padding: 10px;
             border-radius: 40px;
@@ -627,19 +630,19 @@
             cursor: pointer;
             width: 100%;
             margin-bottom: 6px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
-        .admin-btn:hover { transform: scale(1.01); }
+
         .admin-btn-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
         .admin-btn-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
         .admin-btn-purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
         .admin-btn-green { background: linear-gradient(135deg, #10b981, #059669); color: white; }
-        
+
         .players-list { max-height: 250px; overflow-y: auto; }
         .player-card {
-            background: rgba(0, 0, 0, 0.35);
-            border-radius: 14px;
-            padding: 10px 14px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: var(--radius-md);
+            padding: 10px;
             margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
@@ -647,15 +650,16 @@
             flex-wrap: wrap;
             gap: 8px;
         }
+
         .log-item {
-            background: rgba(0, 0, 0, 0.25);
-            border-radius: 8px;
-            padding: 8px 12px;
-            margin-bottom: 6px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-sm);
+            padding: 8px;
+            margin-bottom: 5px;
             font-size: 11px;
             border-left: 2px solid var(--accent);
         }
-        
+
         /* Модалки */
         .modal {
             display: none;
@@ -668,29 +672,33 @@
             backdrop-filter: blur(20px);
             justify-content: center;
             align-items: center;
-            z-index: 6000;
+            z-index: 1000;
         }
+
         .modal-content, .auth-modal {
-            background: linear-gradient(135deg, #12121a, #0a0a0f);
-            border-radius: 32px;
+            background: linear-gradient(135deg, var(--bg-surface-solid), var(--bg-tertiary));
+            border-radius: var(--radius-2xl);
             padding: 35px;
             width: 450px;
             max-width: 90%;
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-light);
             text-align: center;
-            animation: fadeInUp 0.3s ease;
+            animation: fadeIn 0.3s ease;
         }
+
         .auth-input {
             width: 100%;
             padding: 14px;
             margin: 10px 0;
             background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--border);
+            border: 1px solid var(--border-color);
             border-radius: 40px;
             color: white;
             outline: none;
         }
+
         .auth-input:focus { border-color: var(--accent); }
+
         .auth-btn {
             width: 100%;
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
@@ -701,6 +709,14 @@
             cursor: pointer;
             margin-top: 10px;
         }
+
+        .tabs-auth {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
         .tab-auth {
             background: none;
             border: none;
@@ -709,166 +725,182 @@
             cursor: pointer;
             padding: 8px 25px;
             border-radius: 40px;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
+
         .tab-auth.active {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            color: var(--bg-primary);
+            color: var(--bg-dark);
         }
+
         .tab-pane-auth { display: none; }
         .tab-pane-auth.active { display: block; }
+
         .admin-only { display: none; }
-        .close-modal { float: right; font-size: 24px; cursor: pointer; color: var(--accent); transition: all 0.3s ease; }
+        .close-modal {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--accent);
+            transition: var(--transition);
+        }
         .close-modal:hover { transform: scale(1.1); }
-        
+
+        .badge-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            margin-left: 6px;
+            border-radius: 50%;
+        }
+        .badge-blue { background: #3b82f6; }
+        .badge-red { background: #ef4444; }
+        .badge-gold { background: #ffd700; }
+        .badge-rainbow { background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); border-radius: 4px; }
+        .badge-rgb { background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff); }
+        .badge-crown { background: none; color: #ffd700; width: auto; }
+        .badge-icon i { font-size: 10px; color: white; }
+        .badge-crown i { color: #ffd700; font-size: 14px; }
+
         @media (max-width: 768px) {
-            .chats-layout { grid-template-columns: 1fr; }
-            .balance span { font-size: 16px; }
-            .menu-tab { padding: 8px 18px; font-size: 13px; }
-            .section-title { font-size: 24px; }
+            .chat-window { margin: 80px 15px 20px; }
+            .message { max-width: 95%; }
+            .chat-title h2 { font-size: 18px; }
         }
     </style>
 </head>
 <body>
-    <div id="closedWindow" class="modal" style="display: none;">
-        <div class="modal-content">
-            <i class="fas fa-lock" style="font-size: 48px; color: var(--danger); margin-bottom: 20px;"></i>
-            <h2>🔒 САЙТ ЗАКРЫТ</h2>
-            <p style="margin: 15px 0;"><span style="color: var(--accent);">📋 Причина:</span> <span id="closedReason"></span></p>
-            <p><span style="color: var(--accent);">⏰ Откроется:</span> <span id="closedUntil"></span></p>
-            <button id="closedExitBtn" class="admin-btn" style="margin-top:20px;">🚪 ПОКИНУТЬ</button>
-        </div>
-    </div>
-
-    <div id="mainContent" class="main-container" style="display: none;">
-        <div class="top-bar">
+    <!-- Хедер -->
+    <div class="site-header">
+        <div class="header-content">
             <div class="logo">
                 <div class="logo-icon"><i class="fas fa-crown"></i></div>
                 <span class="logo-text">GrifLauncher</span>
             </div>
-            <div class="balance"><i class="fas fa-coins"></i> <span id="userBalance">0</span> ₽</div>
-            <button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Выйти</button>
+            <div class="header-right">
+                <div class="balance"><i class="fas fa-coins"></i> <span id="userBalance">0</span> ₽</div>
+                <button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Выйти</button>
+            </div>
         </div>
-        
         <div class="menu-tabs">
-            <div class="menu-tab active" data-page="home"><i class="fas fa-home"></i> Главная</div>
-            <div class="menu-tab" data-page="shop"><i class="fas fa-store"></i> Магазин</div>
-            <div class="menu-tab" data-page="chats"><i class="fas fa-comments"></i> Чаты</div>
-            <div class="menu-tab" data-page="profile"><i class="fas fa-user"></i> Профиль</div>
-            <div class="menu-tab admin-only" data-page="admin"><i class="fas fa-shield-alt"></i> Админ</div>
+            <div class="menu-tab active" data-page="home">🏠 Главная</div>
+            <div class="menu-tab" data-page="shop">🛒 Магазин</div>
+            <div class="menu-tab" data-page="chats">💬 Чаты</div>
+            <div class="menu-tab" data-page="profile">👤 Профиль</div>
+            <div class="menu-tab admin-only" data-page="admin">👑 Админ</div>
         </div>
+    </div>
 
-        <div id="homePage" class="page active">
-            <div class="timer-card">
-                <div class="timer-title" id="eventTitle">ДО ОТКРЫТИЯ СЕЗОНА</div>
-                <div class="countdown-wrapper">
-                    <div class="countdown-block"><div class="countdown-number" id="days">0</div><div class="countdown-label">Дней</div></div>
-                    <div class="countdown-block"><div class="countdown-number" id="hours">0</div><div class="countdown-label">Часов</div></div>
-                    <div class="countdown-block"><div class="countdown-number" id="minutes">0</div><div class="countdown-label">Минут</div></div>
-                    <div class="countdown-block"><div class="countdown-number" id="seconds">0</div><div class="countdown-label">Секунд</div></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="shopPage" class="page">
-            <div class="section-title">✨ ПРИВИЛЕГИИ</div>
-            <div class="shop-grid" id="shopGrid"></div>
-        </div>
-
-        <div id="chatsPage" class="page">
-            <div class="section-title">💬 ЧАТЫ</div>
-            <div class="chats-layout">
-                <div class="chats-sidebar">
-                    <div class="chat-section-title">📢 ОСНОВНЫЕ</div>
-                    <div class="chat-item active" data-chat="channel" data-name="GrifMcPro" data-badge="blue" data-status="Официальный канал">
-                        <div class="chat-avatar"><i class="fas fa-bullhorn"></i></div>
-                        <div class="chat-info">
-                            <div class="chat-name">GrifMcPro <span class="badge-icon badge-blue"><i class="fas fa-check"></i></span></div>
-                            <div class="chat-preview">Официальный канал</div>
-                        </div>
-                    </div>
-                    <div class="chat-item" data-chat="bot" data-name="GrifMcBot" data-badge="gold" data-status="Бот-помощник">
-                        <div class="chat-avatar"><i class="fas fa-robot"></i></div>
-                        <div class="chat-info">
-                            <div class="chat-name">GrifMcBot <span class="badge-icon badge-gold"><i class="fas fa-check"></i></span></div>
-                            <div class="chat-preview">Бот-помощник</div>
-                        </div>
-                    </div>
-                    <div class="chat-section-title" style="margin-top: 20px;">👥 ЛИЧНЫЕ СООБЩЕНИЯ</div>
-                    <div id="usersList"></div>
-                </div>
-                <div class="chat-area">
-                    <div class="chat-header">
-                        <div class="chat-avatar"><i id="currentChatAvatar" class="fas fa-bullhorn"></i></div>
-                        <div>
-                            <h3 id="currentChatName">GrifMcPro</h3>
-                            <div class="chat-header-status" id="currentChatStatus">Официальный канал</div>
-                        </div>
-                    </div>
-                    <div class="chat-messages" id="chatMessages"></div>
-                    <div id="botInterface" style="display: none;">
-                        <div class="bot-buttons">
-                            <button class="bot-btn" data-cmd="/start"><i class="fas fa-play"></i> /start</button>
-                            <button class="bot-btn" data-cmd="/tasks"><i class="fas fa-tasks"></i> /tasks</button>
-                            <button class="bot-btn" data-cmd="/wheel"><i class="fas fa-dice"></i> /wheel</button>
-                            <button class="bot-btn" data-cmd="/help"><i class="fas fa-question"></i> /help</button>
-                        </div>
-                        <div id="wheelGame" style="display: none;">
-                            <div class="wheel-container">
-                                <div class="wheel" id="wheel"></div>
-                                <button id="spinWheelBtn" class="admin-btn" style="margin-top:10px;"><i class="fas fa-dice-d6"></i> КРУТИТЬ</button>
-                                <div id="wheelNextSpin" style="font-size:12px; margin-top:10px;"></div>
-                            </div>
-                        </div>
-                        <div id="tasksList" style="display: none;">
-                            <div id="tasksContainer" class="tasks-container"></div>
-                        </div>
-                    </div>
-                    <div class="chat-input-area" id="chatInputArea">
-                        <input type="text" id="messageInput" placeholder="Напишите сообщение...">
-                        <button class="send-btn" id="sendMessageBtn"><i class="fas fa-paper-plane"></i> Отправить</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="profilePage" class="page">
-            <div class="section-title">👤 ПРОФИЛЬ</div>
-            <div class="profile-card">
-                <div class="profile-avatar"><i class="fas fa-user"></i></div>
-                <div id="profileName" style="font-size: 24px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;"></div>
-                <div class="profile-info" id="profileInfo"></div>
-                <div id="donatesContainer" style="margin: 20px 0;"></div>
-                <div>
-                    <button class="edit-btn" id="editNameBtn"><i class="fas fa-pen"></i> Сменить имя</button>
-                    <button class="change-password-btn" id="changePasswordBtn"><i class="fas fa-key"></i> Сменить пароль</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="adminPage" class="page">
-            <div class="section-title">👑 АДМИН-ПАНЕЛЬ</div>
-            <div id="adminLoginPanel" style="max-width: 400px; margin: 0 auto;">
-                <div class="glass-card" style="padding: 40px; text-align: center;">
-                    <i class="fas fa-lock" style="font-size: 48px; color: var(--accent); margin-bottom: 20px;"></i>
-                    <input type="password" id="adminPassword" placeholder="Ключ доступа" class="admin-input">
-                    <button id="checkAdminPasswordBtn" class="admin-btn"><i class="fas fa-sign-in-alt"></i> ВОЙТИ</button>
-                </div>
-            </div>
-            <div id="adminPanelContent" style="display: none;">
-                <div class="admin-section"><h3><i class="fas fa-users"></i> ПОСЛЕДНИЕ 10 АККАУНТОВ</h3><div class="players-list" id="recentUsersList"></div></div>
-                <div class="admin-section"><h3><i class="fas fa-user-shield"></i> МОДЕРАТОРЫ</h3><input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input"><button id="addModeratorBtn" class="admin-btn-blue"><i class="fas fa-plus"></i> ДОБАВИТЬ</button><div id="moderatorsList" class="players-list"></div></div>
-                <div class="admin-section"><h3><i class="fas fa-dice"></i> ПРОКРУТКИ КОЛЕСА</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue"><i class="fas fa-ticket-alt"></i> ВЫДАТЬ</button></div>
-                <div class="admin-section"><h3><i class="fas fa-tags"></i> ГАЛОЧКИ</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option></select><button id="giveBadgeBtn" class="admin-btn-blue"><i class="fas fa-certificate"></i> ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red"><i class="fas fa-trash"></i> СНЯТЬ</button></div>
-                <div class="admin-section"><h3><i class="fas fa-coins"></i> МОНЕТЫ</h3><input type="text" id="giveNick" placeholder="Никнейм" class="admin-input"><input type="number" id="giveAmount" placeholder="Сумма" class="admin-input"><button id="giveCoinsBtn" class="admin-btn-blue"><i class="fas fa-gift"></i> ВЫДАТЬ</button><button id="globalGiveBtn" class="admin-btn-purple"><i class="fas fa-globe"></i> ВСЕМ</button></div>
-                <div class="admin-section"><h3><i class="fas fa-gavel"></i> БАН / РАЗБАН</h3><input type="text" id="banNick" placeholder="Никнейм" class="admin-input"><input type="text" id="moderatorName" placeholder="Ник модератора" class="admin-input"><textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="banDuration" class="admin-select"><option value="1">1 час</option><option value="24">1 день</option><option value="168">7 дней</option><option value="forever">Навсегда</option></select><button id="banUserBtn" class="admin-btn-red"><i class="fas fa-ban"></i> ЗАБАНИТЬ</button><button id="unbanUserBtn" class="admin-btn-green"><i class="fas fa-check-circle"></i> РАЗБАНИТЬ</button></div>
-                <div class="admin-section"><h3><i class="fas fa-power-off"></i> УПРАВЛЕНИЕ САЙТОМ</h3><textarea id="closeReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="closeDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="24">1 день</option><option value="168">7 дней</option></select><button id="closeSiteBtn" class="admin-btn-red"><i class="fas fa-lock"></i> ЗАКРЫТЬ</button><button id="openSiteBtn" class="admin-btn-green"><i class="fas fa-lock-open"></i> ОТКРЫТЬ</button></div>
-                <div class="admin-section"><h3><i class="fas fa-history"></i> ЛОГИ</h3><div id="logsList" style="max-height: 200px; overflow-y: auto;"></div></div>
+    <!-- Главная страница -->
+    <div id="homePage" class="page active" style="padding-top: 140px;">
+        <div class="timer-card" style="max-width: 700px; margin: 0 auto; background: var(--bg-surface); border-radius: var(--radius-2xl); padding: 40px; text-align: center;">
+            <div class="timer-title">ДО ОТКРЫТИЯ СЕЗОНА</div>
+            <div class="countdown-wrapper" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <div class="countdown-block" style="background: rgba(0,0,0,0.4); border-radius: var(--radius-lg); padding: 15px 25px;"><div class="countdown-number" id="days">0</div><div>Дней</div></div>
+                <div class="countdown-block" style="background: rgba(0,0,0,0.4); border-radius: var(--radius-lg); padding: 15px 25px;"><div class="countdown-number" id="hours">0</div><div>Часов</div></div>
+                <div class="countdown-block" style="background: rgba(0,0,0,0.4); border-radius: var(--radius-lg); padding: 15px 25px;"><div class="countdown-number" id="minutes">0</div><div>Минут</div></div>
+                <div class="countdown-block" style="background: rgba(0,0,0,0.4); border-radius: var(--radius-lg); padding: 15px 25px;"><div class="countdown-number" id="seconds">0</div><div>Секунд</div></div>
             </div>
         </div>
     </div>
 
+    <!-- Магазин -->
+    <div id="shopPage" class="page" style="padding-top: 140px;">
+        <div class="section-title">✨ ПРИВИЛЕГИИ</div>
+        <div class="shop-grid" id="shopGrid" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;"></div>
+    </div>
+
+    <!-- ЕДИНОЕ КОММУНИКАЦИОННОЕ ОКНО -->
+    <div id="chatsPage" class="page" style="padding-top: 130px;">
+        <div class="chat-window">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <h2><i class="fas fa-hashtag"></i> <span id="currentChatTitle">основной</span></h2>
+                    <button class="settings-btn" id="chatSettingsBtn"><i class="fas fa-cog"></i></button>
+                </div>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchMessages" placeholder="Найти сообщение...">
+                </div>
+            </div>
+            <div class="chat-switcher">
+                <button class="chat-btn active" data-chat="channel">📢 # основной</button>
+                <button class="chat-btn" data-chat="bot">🤖 # бот-помощник</button>
+                <button class="chat-btn" data-chat="admin">👑 # личка с админом</button>
+            </div>
+            <div class="messages-area" id="messagesArea">
+                <!-- Сообщения загружаются сюда -->
+            </div>
+            <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                <i class="fas fa-pen-fancy"></i>
+                <span id="typingName"></span> печатает
+                <div class="typing-dots"><span></span><span></span><span></span></div>
+            </div>
+            <div id="botInterface" style="display: none;">
+                <div class="bot-interface">
+                    <div class="bot-buttons">
+                        <button class="bot-btn" data-cmd="/start"><i class="fas fa-play"></i> /start</button>
+                        <button class="bot-btn" data-cmd="/tasks"><i class="fas fa-tasks"></i> /tasks</button>
+                        <button class="bot-btn" data-cmd="/wheel"><i class="fas fa-dice-d6"></i> /wheel</button>
+                        <button class="bot-btn" data-cmd="/help"><i class="fas fa-question-circle"></i> /help</button>
+                    </div>
+                    <div id="wheelGame" style="display: none;">
+                        <div class="wheel-container">
+                            <div class="wheel" id="wheel"></div>
+                            <button id="spinWheelBtn" class="admin-btn" style="margin-top: 10px;"><i class="fas fa-dice-d6"></i> КРУТИТЬ</button>
+                            <div id="wheelNextSpin" style="margin-top: 10px; font-size: 13px;"></div>
+                        </div>
+                    </div>
+                    <div id="tasksList" style="display: none;">
+                        <div id="tasksContainer" class="tasks-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="messageInput" placeholder="Написать сообщение...">
+                <button class="emoji-btn" id="emojiBtn">😊</button>
+                <button class="send-btn" id="sendMessageBtn"><i class="fas fa-paper-plane"></i> Отправить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Профиль -->
+    <div id="profilePage" class="page" style="padding-top: 140px;">
+        <div class="section-title">👤 ПРОФИЛЬ</div>
+        <div class="profile-card" style="max-width: 600px; margin: 0 auto;">
+            <div class="profile-avatar"><i class="fas fa-user"></i></div>
+            <div id="profileName" style="font-size: 24px; font-weight: 700;"></div>
+            <div class="profile-info" id="profileInfo"></div>
+            <div id="donatesContainer" style="margin: 20px 0;"></div>
+            <button class="edit-btn" id="editNameBtn"><i class="fas fa-pen"></i> Сменить имя</button>
+            <button class="change-password-btn" id="changePasswordBtn"><i class="fas fa-key"></i> Сменить пароль</button>
+        </div>
+    </div>
+
+    <!-- Админка -->
+    <div id="adminPage" class="page" style="padding-top: 140px; max-width: 800px; margin: 0 auto; padding: 20px;">
+        <div class="section-title">👑 АДМИН-ПАНЕЛЬ</div>
+        <div id="adminLoginPanel" style="margin-bottom: 20px;">
+            <div class="admin-section" style="text-align: center;">
+                <input type="password" id="adminPassword" placeholder="Ключ доступа" class="admin-input">
+                <button id="checkAdminPasswordBtn" class="admin-btn">ВОЙТИ</button>
+            </div>
+        </div>
+        <div id="adminPanelContent" style="display: none;">
+            <div class="admin-section"><h3>📋 ПОСЛЕДНИЕ 10 АККАУНТОВ</h3><div class="players-list" id="recentUsersList"></div></div>
+            <div class="admin-section"><h3>👑 МОДЕРАТОРЫ</h3><input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input"><button id="addModeratorBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button><div id="moderatorsList" class="players-list"></div></div>
+            <div class="admin-section"><h3>🎡 ПРОКРУТКИ</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">🎫 ВЫДАТЬ</button></div>
+            <div class="admin-section"><h3>✅ ГАЛОЧКИ</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div>
+            <div class="admin-section"><h3>💰 МОНЕТЫ</h3><input type="text" id="giveNick" placeholder="Никнейм" class="admin-input"><input type="number" id="giveAmount" placeholder="Сумма" class="admin-input"><button id="giveCoinsBtn" class="admin-btn-blue">💸 ВЫДАТЬ</button><button id="globalGiveBtn" class="admin-btn-purple">🌍 ВСЕМ</button></div>
+            <div class="admin-section"><h3>🔨 БАН / РАЗБАН</h3><input type="text" id="banNick" placeholder="Никнейм" class="admin-input"><input type="text" id="moderatorName" placeholder="Ник модератора" class="admin-input"><textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="banDuration" class="admin-select"><option value="1">1 час</option><option value="24">1 день</option><option value="168">7 дней</option><option value="forever">Навсегда</option></select><button id="banUserBtn" class="admin-btn-red">⛔ ЗАБАНИТЬ</button><button id="unbanUserBtn" class="admin-btn-green">🔓 РАЗБАНИТЬ</button></div>
+            <div class="admin-section"><h3>🔒 УПРАВЛЕНИЕ САЙТОМ</h3><textarea id="closeReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="closeDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="24">1 день</option><option value="168">7 дней</option></select><button id="closeSiteBtn" class="admin-btn-red">🔒 ЗАКРЫТЬ</button><button id="openSiteBtn" class="admin-btn-green">🔓 ОТКРЫТЬ</button></div>
+            <div class="admin-section"><h3>📜 ЛОГИ</h3><div id="logsList" style="max-height: 200px; overflow-y: auto;"></div></div>
+        </div>
+    </div>
+
+    <!-- Модалки -->
     <div id="authModal" class="modal" style="display: flex;">
         <div class="auth-modal">
             <i class="fas fa-crown" style="font-size: 48px; color: var(--accent); margin-bottom: 20px;"></i>
@@ -917,15 +949,12 @@
             let tasks = [];
             let wheelSpins = {};
             let currentChat = "channel";
-            let currentChatUser = null;
-            let allUsers = [];
-            let unreadCounts = {};
-            let balanceInterval = null;
-            let channelUnsub = null, botUnsub = null, privateUnsub = null;
+            let typingTimeout = null;
+            let messagesUnsub = null;
 
             function showMessage(text, isError = true) {
                 const div = document.createElement('div');
-                div.style.cssText = `position:fixed; bottom:20px; right:20px; background:${isError ? '#ef4444' : '#10b981'}; color:white; padding:12px 24px; border-radius:40px; z-index:10000; animation:fadeInUp 0.3s ease; font-weight:500;`;
+                div.style.cssText = `position:fixed; bottom:20px; right:20px; background:${isError ? '#ef4444' : '#10b981'}; color:white; padding:12px 24px; border-radius:40px; z-index:10000; animation:fadeIn 0.3s ease; font-weight:500;`;
                 div.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${text}`;
                 document.body.appendChild(div);
                 setTimeout(() => div.remove(), 3000);
@@ -938,144 +967,44 @@
                 return `<span class="badge-icon ${map[type]}"><i class="fas ${icon}"></i></span>`;
             }
 
-            // ЛИЧНЫЕ СООБЩЕНИЯ
-            async function loadPrivateUsers() {
-                const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-                const snap = await db.collection('users').get();
-                let filtered = [];
-                snap.forEach(doc => {
-                    const data = doc.data();
-                    const regDate = new Date(data.registeredAt);
-                    if (regDate >= fiveMinutesAgo && data.email !== currentUser?.email) {
-                        if (data.email === MAIN_ADMIN_EMAIL || (data.username && data.username.toUpperCase().startsWith('G'))) {
-                            filtered.push({ uid: doc.id, username: data.username, email: data.email, badge: data.badge, registeredAt: regDate });
-                        }
-                    }
-                });
-                const unique = {};
-                filtered.forEach(u => { const key = u.username; if (!unique[key] || u.registeredAt > unique[key].registeredAt) unique[key] = u; });
-                allUsers = Object.values(unique);
-                renderPrivateUsers();
+            // Сообщения админа с золотым фоном
+            function isAdminMessage(senderEmail) {
+                return senderEmail === MAIN_ADMIN_EMAIL;
             }
 
-            function renderPrivateUsers() {
-                const container = document.getElementById('usersList');
-                if (!container) return;
-                container.innerHTML = '';
-                allUsers.forEach(user => {
-                    const unread = unreadCounts[user.uid] || 0;
-                    const isAdmin = user.email === MAIN_ADMIN_EMAIL;
-                    container.innerHTML += `
-                        <div class="chat-item" data-chat="private" data-userid="${user.uid}" data-username="${user.username}" data-badge="${user.badge || ''}">
-                            <div class="chat-avatar"><i class="fas ${isAdmin ? 'fa-crown' : 'fa-user'}"></i></div>
-                            <div class="chat-info">
-                                <div class="chat-name">${user.username}${getBadgeHtml(user.badge)}</div>
-                                <div class="chat-preview">${isAdmin ? '📢 Писать только если надо! По пустякам не отвечаем!' : 'Пользователь'}</div>
-                            </div>
-                            ${unread > 0 ? `<div class="unread-badge">${unread}</div>` : ''}
-                        </div>
-                    `;
-                });
-                document.querySelectorAll('.chat-item[data-chat="private"]').forEach(el => {
-                    el.removeEventListener('click', privateClickHandler);
-                    el.addEventListener('click', privateClickHandler);
-                });
-            }
+            // Загрузка сообщений для выбранного чата
+            function loadMessages(chatType, targetId = null) {
+                if (messagesUnsub) messagesUnsub();
+                let collectionPath = '';
+                if (chatType === 'channel') collectionPath = 'chats/channel/messages';
+                else if (chatType === 'bot') collectionPath = 'chats/bot/messages';
+                else if (chatType === 'admin' && targetId) collectionPath = `chats/${currentUser.uid}/messages/${targetId}`;
+                else return;
 
-            async function privateClickHandler(e) {
-                const el = e.currentTarget;
-                const userId = el.dataset.userid;
-                const username = el.dataset.username;
-                const badge = el.dataset.badge;
-                currentChat = "private";
-                currentChatUser = userId;
-                document.getElementById('currentChatName').innerHTML = username + getBadgeHtml(badge);
-                document.getElementById('currentChatAvatar').className = 'fas fa-user';
-                document.getElementById('currentChatStatus').innerHTML = 'Личные сообщения';
-                document.getElementById('botInterface').style.display = 'none';
-                document.getElementById('chatInputArea').style.display = 'flex';
-                document.getElementById('chatInputArea').classList.remove('readonly-mode');
-                if (privateUnsub) privateUnsub();
-                const messagesRef = db.collection('chats').doc(currentUser.uid).collection(userId).orderBy('timestamp');
-                privateUnsub = messagesRef.onSnapshot((snapshot) => {
-                    const container = document.getElementById('chatMessages');
-                    if (!container || currentChat !== 'private') return;
-                    container.innerHTML = '';
-                    snapshot.forEach(doc => {
-                        const msg = doc.data();
-                        const isOutgoing = msg.from === currentUser.uid;
-                        container.innerHTML += `
-                            <div class="message ${isOutgoing ? 'outgoing' : 'incoming'}">
-                                <div class="message-avatar"><i class="fas ${isOutgoing ? 'fa-user' : 'fa-user-circle'}"></i></div>
-                                <div class="message-content">
-                                    <div class="message-name">${msg.fromName} ${isOutgoing ? '(Вы)' : ''}</div>
-                                    <div class="message-bubble">${msg.text}</div>
-                                    <div class="message-time">${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    container.scrollTop = container.scrollHeight;
-                });
-                if (unreadCounts[userId]) { unreadCounts[userId] = 0; renderPrivateUsers(); }
-            }
-
-            async function sendPrivateMessage(toUserId, text) {
-                if (!text.trim()) return;
-                const toUser = allUsers.find(u => u.uid === toUserId);
-                if (!toUser) return;
-                await db.collection('chats').doc(currentUser.uid).collection(toUserId).add({
-                    from: currentUser.uid, fromName: currentUser.displayName, text: text, timestamp: new Date()
-                });
-                await db.collection('chats').doc(toUserId).collection(currentUser.uid).add({
-                    from: currentUser.uid, fromName: currentUser.displayName, text: text, timestamp: new Date(), read: false
-                });
-                document.getElementById('messageInput').value = '';
-            }
-
-            // КАНАЛ (только чтение)
-            function loadChannelMessages() {
-                if (channelUnsub) channelUnsub();
-                const messagesRef = db.collection('chats').doc('channel').collection('messages').orderBy('timestamp');
-                channelUnsub = messagesRef.onSnapshot((snapshot) => {
-                    const container = document.getElementById('chatMessages');
-                    if (!container || currentChat !== 'channel') return;
-                    container.innerHTML = '';
-                    snapshot.forEach(doc => {
-                        const msg = doc.data();
-                        container.innerHTML += `
-                            <div class="message incoming">
-                                <div class="message-avatar"><i class="fas fa-bullhorn"></i></div>
-                                <div class="message-content">
-                                    <div class="message-name">${msg.fromName} <span class="channel-badge"><i class="fas fa-microphone"></i> Анонс</span></div>
-                                    <div class="message-bubble">${msg.text}</div>
-                                    <div class="message-time">${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    container.scrollTop = container.scrollHeight;
-                });
-            }
-
-            // БОТ
-            function loadBotMessages() {
-                if (botUnsub) botUnsub();
-                const messagesRef = db.collection('chats').doc('bot').collection('messages').orderBy('timestamp');
-                botUnsub = messagesRef.onSnapshot((snapshot) => {
-                    const container = document.getElementById('chatMessages');
-                    if (!container || currentChat !== 'bot') return;
+                const messagesRef = db.collection(collectionPath).orderBy('timestamp');
+                messagesUnsub = messagesRef.onSnapshot((snapshot) => {
+                    const container = document.getElementById('messagesArea');
+                    if (!container) return;
                     container.innerHTML = '';
                     snapshot.forEach(doc => {
                         const msg = doc.data();
                         const isOutgoing = msg.from === currentUser?.uid;
+                        const isAdmin = isAdminMessage(msg.fromEmail);
                         container.innerHTML += `
-                            <div class="message ${isOutgoing ? 'outgoing' : 'incoming'}">
-                                <div class="message-avatar"><i class="fas ${isOutgoing ? 'fa-user' : 'fa-robot'}"></i></div>
+                            <div class="message ${isOutgoing ? 'outgoing' : 'incoming'} ${isAdmin ? 'admin' : ''}">
+                                <div class="message-avatar"><i class="fas ${isOutgoing ? 'fa-user' : (isAdmin ? 'fa-crown' : 'fa-user-circle')}"></i></div>
                                 <div class="message-content">
-                                    <div class="message-name">${msg.fromName} ${isOutgoing ? '(Вы)' : ''}</div>
+                                    <div class="message-header">
+                                        <span class="message-name">${msg.fromName}${getBadgeHtml(msg.fromBadge)}</span>
+                                        <span class="message-time">${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</span>
+                                        ${isAdmin ? '<span class="admin-badge"><i class="fas fa-crown"></i> Админ</span>' : ''}
+                                    </div>
                                     <div class="message-bubble">${msg.text}</div>
-                                    <div class="message-time">${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
+                                    <div class="message-actions">
+                                        <button class="reaction-btn" onclick="addReaction('${doc.id}', '👍')">👍</button>
+                                        <button class="reaction-btn" onclick="addReaction('${doc.id}', '❤️')">❤️</button>
+                                        <button class="reaction-btn" onclick="addReaction('${doc.id}', '😂')">😂</button>
+                                    </div>
                                 </div>
                             </div>
                         `;
@@ -1084,22 +1013,59 @@
                 });
             }
 
-            function addSystemMessage(text) {
-                db.collection('chats').doc('bot').collection('messages').add({
-                    from: "system", fromName: "GrifMcBot 🤖", text: text, timestamp: new Date()
-                });
+            // Отправка сообщения
+            async function sendMessage(text) {
+                if (!text.trim()) return;
+                if (currentChat === 'channel') {
+                    await db.collection('chats/channel/messages').add({
+                        from: currentUser.uid,
+                        fromName: currentUser.displayName,
+                        fromEmail: currentUser.email,
+                        fromBadge: (await db.collection('users').doc(currentUser.uid).get()).data()?.badge,
+                        text: text,
+                        timestamp: new Date()
+                    });
+                } else if (currentChat === 'bot') {
+                    await db.collection('chats/bot/messages').add({
+                        from: currentUser.uid,
+                        fromName: currentUser.displayName,
+                        text: text,
+                        timestamp: new Date()
+                    });
+                    if (text.startsWith('/')) handleBotCommand(text);
+                } else if (currentChat === 'admin') {
+                    await db.collection(`chats/${MAIN_ADMIN_EMAIL}/messages/${currentUser.uid}`).add({
+                        from: currentUser.uid,
+                        fromName: currentUser.displayName,
+                        fromEmail: currentUser.email,
+                        text: text,
+                        timestamp: new Date()
+                    });
+                }
+                document.getElementById('messageInput').value = '';
             }
 
-            async function sendBotCommand(cmd) {
-                if (cmd === '/start') addSystemMessage("🤖 Привет! Я бот-помощник. Команды: /tasks, /wheel");
-                else if (cmd === '/tasks') addSystemMessage("📋 Доступные задания: Купить Премиум +4000₽, Пополнить баланс +2000₽");
-                else if (cmd === '/wheel') { const spins = wheelSpins[currentUser?.uid] || 0; addSystemMessage(`🎡 У вас ${spins} прокруток!`); }
-                else if (cmd === '/help') addSystemMessage("❓ Доступные команды: /start, /tasks, /wheel, /help");
+            // Бот команды
+            async function handleBotCommand(cmd) {
+                const msgRef = db.collection('chats/bot/messages');
+                if (cmd === '/start') {
+                    await msgRef.add({ from: "system", fromName: "GrifMcBot 🤖", text: "🤖 Привет! Я бот-помощник. Команды: /tasks, /wheel, /help", timestamp: new Date() });
+                } else if (cmd === '/tasks') {
+                    await msgRef.add({ from: "system", fromName: "GrifMcBot 🤖", text: "📋 Доступные задания: Купить Премиум +4000₽, Пополнить баланс +2000₽", timestamp: new Date() });
+                } else if (cmd === '/wheel') {
+                    const spins = wheelSpins[currentUser?.uid] || 0;
+                    await msgRef.add({ from: "system", fromName: "GrifMcBot 🤖", text: `🎡 У вас ${spins} прокруток!`, timestamp: new Date() });
+                } else if (cmd === '/help') {
+                    await msgRef.add({ from: "system", fromName: "GrifMcBot 🤖", text: "❓ /start - приветствие, /tasks - задания, /wheel - колесо удачи", timestamp: new Date() });
+                }
             }
 
             async function spinWheel() {
                 const spins = wheelSpins[currentUser?.uid] || 0;
-                if (spins <= 0) { addSystemMessage("❌ У вас нет прокруток! Получите в админке."); return; }
+                if (spins <= 0) {
+                    await db.collection('chats/bot/messages').add({ from: "system", fromName: "GrifMcBot 🤖", text: "❌ У вас нет прокруток! Получите в админке.", timestamp: new Date() });
+                    return;
+                }
                 const prizes = [1000, 5000, 10000, 50000, 100000, 500000];
                 const prize = prizes[Math.floor(Math.random() * prizes.length)];
                 const newSpins = spins - 1;
@@ -1109,259 +1075,10 @@
                 await db.collection('users').doc(currentUser.uid).update({ balance: newBalance });
                 currentBalance = newBalance;
                 document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                addSystemMessage(`🎉 ВЫ ВЫИГРАЛИ ${prize.toLocaleString()} ₽! Осталось прокруток: ${newSpins}`);
+                await db.collection('chats/bot/messages').add({ from: "system", fromName: "GrifMcBot 🤖", text: `🎉 ВЫ ВЫИГРАЛИ ${prize.toLocaleString()} ₽! Осталось прокруток: ${newSpins}`, timestamp: new Date() });
             }
 
-            // АДМИНКА
-            async function loadModerators() {
-                const doc = await db.collection('settings').doc('moderators').get();
-                moderatorsList = doc.exists ? doc.data().list || [] : [];
-                const container = document.getElementById('moderatorsList');
-                if (container) {
-                    container.innerHTML = moderatorsList.map(m => `<div class="player-card"><span><i class="fas fa-user-shield"></i> ${m.nick}</span><button onclick="window.removeModerator('${m.email}')" style="background:#ef4444; border:none; padding:5px 15px; border-radius:30px; cursor:pointer;">УДАЛИТЬ</button></div>`).join('');
-                }
-            }
-            window.removeModerator = async (email) => {
-                moderatorsList = moderatorsList.filter(m => m.email !== email);
-                await db.collection('settings').doc('moderators').set({ list: moderatorsList });
-                loadModerators();
-                showMessage('Модератор удалён', false);
-            };
-
-            async function loadRecentUsers() {
-                const snap = await db.collection('users').orderBy('registeredAt', 'desc').limit(10).get();
-                const container = document.getElementById('recentUsersList');
-                if (container) {
-                    container.innerHTML = snap.docs.map(doc => {
-                        const data = doc.data();
-                        return `<div class="player-card"><span><strong>${data.username}</strong><br><span style="font-size:12px;">${data.email}</span><br><span style="color:var(--accent);">💰 ${data.balance || 0} ₽</span></span><button onclick="window.showUserActions('${doc.id}','${data.username}','${data.email}')" class="admin-btn-blue" style="width:auto; padding:5px 15px;"><i class="fas fa-cog"></i> ДЕЙСТВИЯ</button></div>`;
-                    }).join('');
-                }
-            }
-
-            window.showUserActions = (userId, username, email) => {
-                const modal = document.createElement('div');
-                modal.className = 'modal';
-                modal.style.display = 'flex';
-                modal.innerHTML = `
-                    <div class="modal-content">
-                        <span class="close-modal" onclick="this.closest('.modal').remove()">&times;</span>
-                        <i class="fas fa-user-cog" style="font-size: 48px; color: var(--accent); margin-bottom: 15px;"></i>
-                        <h3>${username}</h3>
-                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;">
-                            <button onclick="window.banUserPrompt('${userId}','${username}','${email}')" class="admin-btn-red" style="flex:1;"><i class="fas fa-ban"></i> БАН</button>
-                            <button onclick="window.unbanUserPrompt('${email}','${username}')" class="admin-btn-green" style="flex:1;"><i class="fas fa-check-circle"></i> РАЗБАН</button>
-                            <button onclick="window.giveDonatePrompt('${userId}','${username}')" class="admin-btn-blue" style="flex:1;"><i class="fas fa-gift"></i> ДОНАТ</button>
-                            <button onclick="window.removeDonatePrompt('${userId}','${username}')" class="admin-btn-purple" style="flex:1;"><i class="fas fa-trash"></i> СНЯТЬ</button>
-                        </div>
-                    </div>
-                `;
-                document.body.appendChild(modal);
-            };
-
-            window.banUserPrompt = (userId, username, email) => {
-                const reason = prompt('Причина бана:');
-                const duration = prompt('Длительность (часы) или forever:');
-                const moderator = prompt('Ник модератора:');
-                if (reason && duration && moderator) banUser(userId, username, email, reason, duration, moderator);
-            };
-            window.unbanUserPrompt = (email, username) => {
-                const reason = prompt('Причина разбана:');
-                const moderator = prompt('Ник модератора:');
-                if (reason && moderator) unbanUser(email, username, reason, moderator);
-            };
-            window.giveDonatePrompt = (userId, username) => {
-                const donateName = prompt('Название доната:');
-                const reason = prompt('Причина:');
-                if (donateName && reason) giveDonate(userId, username, donateName, reason);
-            };
-            window.removeDonatePrompt = (userId, username) => {
-                const reason = prompt('Причина снятия:');
-                if (reason) removeDonate(userId, username, reason);
-            };
-
-            async function banUser(userId, username, email, reason, duration, moderator) {
-                const until = duration === 'forever' ? null : new Date(Date.now() + parseInt(duration) * 60 * 60 * 1000);
-                await db.collection('bans').add({ userId, username, email, reason, until, active: true, moderator, createdAt: new Date() });
-                addLog('БАН', username, `Модератор: ${moderator}, Причина: ${reason}`);
-                showMessage(`✅ ${username} забанен`, false);
-            }
-            async function unbanUser(email, username, reason, moderator) {
-                const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
-                for (const doc of snap.docs) await doc.ref.update({ active: false });
-                addLog('РАЗБАН', username, `Модератор: ${moderator}, Причина: ${reason}`);
-                showMessage(`✅ ${username} разбанен`, false);
-            }
-            async function giveDonate(userId, username, donateName, reason) {
-                await db.collection('donates').add({ userId, username, product: donateName, price: 0, date: new Date(), givenBy: reason });
-                addLog('ВЫДАЧА ДОНАТА', username, `${donateName} - ${reason}`);
-                showMessage(`✅ Донат ${donateName} выдан ${username}`, false);
-            }
-            async function removeDonate(userId, username, reason) {
-                const snap = await db.collection('donates').where('userId', '==', userId).get();
-                for (const doc of snap.docs) await doc.ref.delete();
-                addLog('СНЯТИЕ ДОНАТА', username, reason);
-                showMessage(`✅ Донаты сняты с ${username}`, false);
-            }
-
-            async function giveCoins(nick, amount) {
-                const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showMessage('Пользователь не найден', true);
-                await snap.docs[0].ref.update({ balance: (snap.docs[0].data().balance || 0) + amount });
-                addLog('ВЫДАЧА МОНЕТ', nick, `${amount} ₽`);
-                showMessage(`✅ Выдано ${amount} ₽ ${nick}`, false);
-                if (currentUser && currentUser.uid === snap.docs[0].id) {
-                    currentBalance += amount;
-                    document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                }
-            }
-
-            async function giveCoinsAll(amount) {
-                const snap = await db.collection('users').get();
-                for (const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
-                addLog('ГЛОБАЛЬНАЯ ВЫДАЧА', 'ВСЕМ', `${amount} ₽`);
-                showMessage(`✅ Выдано ${amount} ₽ всем`, false);
-                if (currentUser) {
-                    const myDoc = await db.collection('users').doc(currentUser.uid).get();
-                    currentBalance = myDoc.data().balance || 50000;
-                    document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                }
-            }
-
-            async function giveBadge(nick, type) {
-                const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showMessage('Пользователь не найден', true);
-                await snap.docs[0].ref.update({ badge: type });
-                addLog('ВЫДАЧА ГАЛОЧКИ', nick, `Тип: ${type}`);
-                showMessage(`✅ Галочка выдана ${nick}`, false);
-                if (currentUser && currentUser.uid === snap.docs[0].id) {
-                    const profileName = document.getElementById('profileName');
-                    if (profileName) profileName.innerHTML = snap.docs[0].data().username + getBadgeHtml(type);
-                }
-            }
-
-            async function giveSpin(nick) {
-                const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showMessage('Пользователь не найден', true);
-                const spins = (snap.docs[0].data().wheelSpins || 0) + 1;
-                await snap.docs[0].ref.update({ wheelSpins: spins });
-                addLog('ВЫДАЧА ПРОКРУТКИ', nick, '');
-                showMessage(`✅ Выдана прокрутка ${nick}`, false);
-                if (currentUser && currentUser.uid === snap.docs[0].id) wheelSpins[currentUser.uid] = spins;
-            }
-
-            async function addLog(action, target, details) {
-                if (!currentUser) return;
-                await db.collection('logs').add({ action, moderator: currentUser.displayName || currentUser.email, target, details, timestamp: new Date() });
-                loadLogs();
-            }
-
-            async function loadLogs() {
-                const snap = await db.collection('logs').orderBy('timestamp', 'desc').limit(30).get();
-                const container = document.getElementById('logsList');
-                if (container) container.innerHTML = snap.docs.map(doc => `<div class="log-item"><i class="far fa-clock"></i> [${new Date(doc.data().timestamp?.toDate()).toLocaleString()}] <strong>${doc.data().action}</strong> → ${doc.data().target}<br><span style="font-size:10px;">${doc.data().details || ''}</span></div>`).join('');
-            }
-
-            // ЗАКРЫТИЕ САЙТА
-            let siteStatusUnsub = null;
-            function listenSiteStatus() {
-                if (siteStatusUnsub) siteStatusUnsub();
-                siteStatusUnsub = db.collection('settings').doc('siteStatus').onSnapshot(async (doc) => {
-                    if (doc.exists && doc.data().closed) {
-                        const data = doc.data();
-                        if (data.until && data.until.toDate() < new Date()) {
-                            await db.collection('settings').doc('siteStatus').update({ closed: false });
-                            return;
-                        }
-                        if (currentUser && currentUser.email !== MAIN_ADMIN_EMAIL && !moderatorsList.some(m => m.email === currentUser.email)) {
-                            document.getElementById('mainContent').style.display = 'none';
-                            document.getElementById('closedReason').innerText = data.reason || 'Технические работы';
-                            document.getElementById('closedUntil').innerText = data.until ? new Date(data.until.toDate()).toLocaleString() : 'Неизвестно';
-                            document.getElementById('closedWindow').style.display = 'flex';
-                        }
-                    } else {
-                        document.getElementById('closedWindow').style.display = 'none';
-                        document.getElementById('mainContent').style.display = 'block';
-                    }
-                });
-            }
-
-            async function closeSite(reason, hours) {
-                const until = new Date(Date.now() + hours * 60 * 60 * 1000);
-                await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until });
-                addLog('ЗАКРЫТИЕ САЙТА', 'Система', reason);
-            }
-            async function openSite() {
-                await db.collection('settings').doc('siteStatus').update({ closed: false });
-                addLog('ОТКРЫТИЕ САЙТА', 'Система', '');
-            }
-
-            // ПРОВЕРКА БАНА
-            let banUnsub = null;
-            function listenBan(user) {
-                if (banUnsub) banUnsub();
-                if (!user) return;
-                banUnsub = db.collection('bans').where('userId', '==', user.uid).where('active', '==', true).onSnapshot((snap) => {
-                    if (!snap.empty) {
-                        const ban = snap.docs[0].data();
-                        if (ban.until && ban.until.toDate() < new Date()) {
-                            snap.docs[0].ref.update({ active: false });
-                            return;
-                        }
-                        document.getElementById('mainContent').style.display = 'none';
-                        alert(`🔨 ВЫ ЗАБАНЕНЫ!\n\nПричина: ${ban.reason}\nРазбан: ${ban.until ? new Date(ban.until.toDate()).toLocaleString() : 'Навсегда'}\nМодератор: ${ban.moderator || 'Система'}`);
-                        auth.signOut();
-                    }
-                });
-            }
-
-            // ТАЙМЕР
-            let timerInterval = null;
-            function startTimer(targetDate) {
-                if (timerInterval) clearInterval(timerInterval);
-                timerInterval = setInterval(() => {
-                    const diff = new Date(targetDate).getTime() - new Date().getTime();
-                    if (diff <= 0) {
-                        document.getElementById('days').innerText = '0'; document.getElementById('hours').innerText = '0';
-                        document.getElementById('minutes').innerText = '0'; document.getElementById('seconds').innerText = '0';
-                    } else {
-                        document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24));
-                        document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
-                        document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
-                        document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
-                    }
-                }, 1000);
-            }
-            async function loadTimer() {
-                const doc = await db.collection('settings').doc('timer').get();
-                let def = new Date(); def.setDate(def.getDate() + 7);
-                startTimer(doc.exists && doc.data().targetDate ? doc.data().targetDate.toDate() : def);
-            }
-
-            // МАГАЗИН
-            const privileges = [
-                { name: "Премиум", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/fly"] },
-                { name: "Креатив", price: 2500, icon: "fa-palette", features: ["WorldEdit"] },
-                { name: "Модер", price: 5000, icon: "fa-shield-alt", features: ["Мут/кик"] },
-                { name: "Лорд", price: 10000, icon: "fa-crown", features: ["/god"] },
-                { name: "Админ", price: 20000, icon: "fa-user-tie", features: ["Баны"] },
-                { name: "Правитель", price: 1000000, icon: "fa-chess-king", features: ["Всё"] }
-            ];
-            function renderShop() {
-                const container = document.getElementById('shopGrid');
-                if (container) container.innerHTML = privileges.map(p => `
-                    <div class="product-card glass-card">
-                        <div class="product-icon"><i class="fas ${p.icon}"></i></div>
-                        <div class="product-name">${p.name}</div>
-                        <div class="price">${p.price.toLocaleString()} ₽</div>
-                        <ul class="product-features">${p.features.map(f => `<li><i class="fas fa-check-circle" style="color:var(--success);"></i> ${f}</li>`).join('')}</ul>
-                        <button class="buy-btn" onclick="window.openBuyModal('${p.name}',${p.price})"><i class="fas fa-shopping-cart"></i> КУПИТЬ</button>
-                    </div>
-                `).join('');
-            }
-            window.openBuyModal = (n,p) => { currentProduct = {name:n, price:p}; document.getElementById('buyProductName').innerText = n; document.getElementById('buyPrice').innerText = p.toLocaleString(); document.getElementById('buyModal').style.display = 'flex'; };
-
-            // ЗАГРУЗКА ДАННЫХ ПОЛЬЗОВАТЕЛЯ
+            // Загрузка данных пользователя
             async function loadUserData(user) {
                 if (!user) return;
                 const doc = await db.collection('users').doc(user.uid).get();
@@ -1387,78 +1104,161 @@
                     <p><i class="fas fa-envelope"></i> ${user.email}</p>
                     <p><i class="fas fa-calendar-alt"></i> ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>
                 `;
-                db.collection('donates').where('userId', '==', user.uid).onSnapshot((snap) => {
-                    const container = document.getElementById('donatesContainer');
-                    if (container) {
-                        container.innerHTML = '<h4 style="color:var(--accent); margin-bottom:15px;"><i class="fas fa-gift"></i> Мои донаты</h4>';
-                        if (snap.empty) container.innerHTML += '<p style="color:var(--text-muted);">Нет покупок</p>';
-                        else snap.forEach(d => container.innerHTML += `<span style="background:rgba(59,130,246,0.2); color:white; padding:5px 14px; border-radius:40px; display:inline-block; margin:4px; font-size:13px;">${d.data().product}</span> `);
-                    }
-                });
                 const hasAdminAccess = user.email === MAIN_ADMIN_EMAIL || moderatorsList.some(m => m.email === user.email);
                 if (hasAdminAccess) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
             }
 
-            function startBalanceUpdater() {
-                if (balanceInterval) clearInterval(balanceInterval);
-                balanceInterval = setInterval(async () => {
-                    if (currentUser) {
-                        const doc = await db.collection('users').doc(currentUser.uid).get();
-                        if (doc.exists) {
-                            currentBalance = doc.data().balance || 50000;
-                            document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                        }
+            // Таймер
+            let timerInterval = null;
+            function startTimer(targetDate) {
+                if (timerInterval) clearInterval(timerInterval);
+                timerInterval = setInterval(() => {
+                    const diff = new Date(targetDate).getTime() - new Date().getTime();
+                    if (diff <= 0) {
+                        document.getElementById('days').innerText = '0'; document.getElementById('hours').innerText = '0';
+                        document.getElementById('minutes').innerText = '0'; document.getElementById('seconds').innerText = '0';
+                    } else {
+                        document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24));
+                        document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
+                        document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
+                        document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
                     }
-                }, 5000);
+                }, 1000);
             }
 
-            // НАВЕШИВАНИЕ КНОПОК
+            // Магазин
+            const privileges = [
+                { name: "Премиум", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/fly"] },
+                { name: "Креатив", price: 2500, icon: "fa-palette", features: ["WorldEdit"] },
+                { name: "Модер", price: 5000, icon: "fa-shield-alt", features: ["Мут/кик"] },
+                { name: "Лорд", price: 10000, icon: "fa-crown", features: ["/god"] },
+                { name: "Админ", price: 20000, icon: "fa-user-tie", features: ["Баны"] },
+                { name: "Правитель", price: 1000000, icon: "fa-chess-king", features: ["Всё"] }
+            ];
+            function renderShop() {
+                const container = document.getElementById('shopGrid');
+                if (container) container.innerHTML = privileges.map(p => `
+                    <div class="product-card">
+                        <div class="product-icon"><i class="fas ${p.icon}"></i></div>
+                        <div class="product-name">${p.name}</div>
+                        <div class="price">${p.price.toLocaleString()} ₽</div>
+                        <ul class="product-features">${p.features.map(f => `<li><i class="fas fa-check-circle" style="color:var(--success);"></i> ${f}</li>`).join('')}</ul>
+                        <button class="buy-btn" onclick="window.openBuyModal('${p.name}',${p.price})">КУПИТЬ</button>
+                    </div>
+                `).join('');
+            }
+            window.openBuyModal = (n,p) => { currentProduct = {name:n, price:p}; document.getElementById('buyProductName').innerText = n; document.getElementById('buyPrice').innerText = p.toLocaleString(); document.getElementById('buyModal').style.display = 'flex'; };
+
+            // Админ функции
+            async function loadModerators() {
+                const doc = await db.collection('settings').doc('moderators').get();
+                moderatorsList = doc.exists ? doc.data().list || [] : [];
+                const container = document.getElementById('moderatorsList');
+                if (container) container.innerHTML = moderatorsList.map(m => `<div class="player-card"><span>👑 ${m.nick}</span><button onclick="window.removeModerator('${m.email}')" style="background:#ef4444; border:none; padding:5px 15px; border-radius:30px;">УДАЛИТЬ</button></div>`).join('');
+            }
+            window.removeModerator = async (email) => {
+                moderatorsList = moderatorsList.filter(m => m.email !== email);
+                await db.collection('settings').doc('moderators').set({ list: moderatorsList });
+                loadModerators();
+                showMessage('Модератор удалён', false);
+            };
+
+            async function loadRecentUsers() {
+                const snap = await db.collection('users').orderBy('registeredAt', 'desc').limit(10).get();
+                const container = document.getElementById('recentUsersList');
+                if (container) container.innerHTML = snap.docs.map(doc => `<div class="player-card"><span><strong>${doc.data().username}</strong><br>${doc.data().email}<br>💰 ${doc.data().balance || 0} ₽</span><button onclick="window.showUserActions('${doc.id}','${doc.data().username}','${doc.data().email}')" class="admin-btn-blue" style="width:auto;">ДЕЙСТВИЯ</button></div>`).join('');
+            }
+
+            window.showUserActions = (userId, username, email) => {
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.style.display = 'flex';
+                modal.innerHTML = `<div class="modal-content"><span class="close-modal" onclick="this.closest('.modal').remove()">&times;</span><h3>${username}</h3><button onclick="window.banUserPrompt('${userId}','${username}','${email}')" class="admin-btn-red">БАН</button><button onclick="window.unbanUserPrompt('${email}','${username}')" class="admin-btn-green">РАЗБАН</button><button onclick="window.giveDonatePrompt('${userId}','${username}')" class="admin-btn-blue">ДОНАТ</button><button onclick="window.removeDonatePrompt('${userId}','${username}')" class="admin-btn-purple">СНЯТЬ</button></div>`;
+                document.body.appendChild(modal);
+            };
+
+            window.banUserPrompt = async (userId, username, email) => {
+                const reason = prompt('Причина:'), duration = prompt('Часы или forever:'), mod = prompt('Модератор:');
+                if (reason && duration && mod) {
+                    const until = duration === 'forever' ? null : new Date(Date.now() + parseInt(duration) * 60 * 60 * 1000);
+                    await db.collection('bans').add({ userId, username, email, reason, until, active: true, moderator: mod, createdAt: new Date() });
+                    showMessage(`✅ ${username} забанен`, false);
+                }
+            };
+            window.unbanUserPrompt = async (email, username) => {
+                const reason = prompt('Причина разбана:'), mod = prompt('Модератор:');
+                if (reason && mod) {
+                    const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
+                    for (const doc of snap.docs) await doc.ref.update({ active: false });
+                    showMessage(`✅ ${username} разбанен`, false);
+                }
+            };
+            window.giveDonatePrompt = async (userId, username) => {
+                const donateName = prompt('Название доната:'), reason = prompt('Причина:');
+                if (donateName && reason) await db.collection('donates').add({ userId, username, product: donateName, price: 0, date: new Date(), givenBy: reason });
+            };
+            window.removeDonatePrompt = async (userId, username) => {
+                const reason = prompt('Причина снятия:');
+                if (reason) { const snap = await db.collection('donates').where('userId', '==', userId).get(); for (const doc of snap.docs) await doc.ref.delete(); }
+            };
+
+            async function giveCoins(nick, amount) {
+                const snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return showMessage('Не найден');
+                await snap.docs[0].ref.update({ balance: (snap.docs[0].data().balance || 0) + amount });
+                showMessage(`✅ Выдано ${amount} ₽ ${nick}`, false);
+            }
+            async function giveBadge(nick, type) {
+                const snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return showMessage('Не найден');
+                await snap.docs[0].ref.update({ badge: type });
+                showMessage(`✅ Галочка выдана ${nick}`, false);
+            }
+            async function giveSpin(nick) {
+                const snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return showMessage('Не найден');
+                const spins = (snap.docs[0].data().wheelSpins || 0) + 1;
+                await snap.docs[0].ref.update({ wheelSpins: spins });
+                showMessage(`✅ Прокрутка выдана ${nick}`, false);
+            }
+
+            async function addLog(action, target, details) {
+                if (!currentUser) return;
+                await db.collection('logs').add({ action, moderator: currentUser.displayName, target, details, timestamp: new Date() });
+            }
+
+            // Обработчики кнопок
             function bindButtons() {
-                document.getElementById('doLoginBtn')?.addEventListener('click', async () => {
-                    try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); }
-                    catch(e) { showMessage(e.message); }
-                });
-                document.getElementById('doRegisterBtn')?.addEventListener('click', async () => {
+                document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); } catch(e) { showMessage(e.message); } };
+                document.getElementById('doRegisterBtn').onclick = async () => {
                     const u = document.getElementById('regUsername').value, e = document.getElementById('regEmail').value, p = document.getElementById('regPass').value;
-                    if (p.length < 6) return showMessage('Пароль минимум 6 символов');
+                    if (p.length < 6) return showMessage('Пароль мин 6');
                     try {
                         const cred = await auth.createUserWithEmailAndPassword(e, p);
                         await cred.user.updateProfile({ displayName: u });
                         await db.collection('users').doc(cred.user.uid).set({ username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1 });
+                        // Автоматически создаём чат с админом
+                        await db.collection(`chats/${MAIN_ADMIN_EMAIL}/messages/${cred.user.uid}`).add({
+                            from: "system", fromName: "Система", text: `👋 ${u} присоединился к чату!`, timestamp: new Date()
+                        });
                         showMessage('✅ Регистрация успешна!', false);
                     } catch(e) { showMessage(e.message); }
-                });
-                document.getElementById('logoutBtn')?.addEventListener('click', () => auth.signOut());
-                document.getElementById('closeBuyModal')?.addEventListener('click', () => document.getElementById('buyModal').style.display = 'none');
-                document.getElementById('closeEditModal')?.addEventListener('click', () => document.getElementById('editNameModal').style.display = 'none');
-                document.getElementById('closePasswordModal')?.addEventListener('click', () => document.getElementById('changePasswordModal').style.display = 'none');
-
-                document.getElementById('confirmBuyBtn')?.addEventListener('click', async () => {
-                    const nick = document.getElementById('buyNick').value;
-                    if (!nick) return showMessage('Введите ник', true);
-                    if (currentBalance < currentProduct.price) return showMessage('Недостаточно средств!', true);
-                    const newBalance = currentBalance - currentProduct.price;
-                    await db.collection('users').doc(currentUser.uid).update({ balance: newBalance });
-                    currentBalance = newBalance;
-                    document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                    await db.collection('donates').add({ userId: currentUser.uid, username: currentUser.displayName, product: currentProduct.name, price: currentProduct.price, serverNick: nick, date: new Date() });
-                    showMessage(`✅ Куплено: ${currentProduct.name}!`, false);
+                };
+                document.getElementById('logoutBtn').onclick = () => auth.signOut();
+                document.getElementById('closeBuyModal').onclick = () => document.getElementById('buyModal').style.display = 'none';
+                document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
+                document.getElementById('closePasswordModal').onclick = () => document.getElementById('changePasswordModal').style.display = 'none';
+                document.getElementById('confirmBuyBtn').onclick = async () => {
+                    if (currentBalance < currentProduct.price) return showMessage('Недостаточно средств');
+                    await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - currentProduct.price });
+                    await db.collection('donates').add({ userId: currentUser.uid, username: currentUser.displayName, product: currentProduct.name, price: currentProduct.price, date: new Date() });
+                    showMessage(`✅ Куплено ${currentProduct.name}!`, false);
                     document.getElementById('buyModal').style.display = 'none';
-                });
-
-                document.getElementById('sendMessageBtn')?.addEventListener('click', () => {
-                    const text = document.getElementById('messageInput').value;
-                    if (currentChat === 'bot') {
-                        if (text.startsWith('/')) sendBotCommand(text);
-                        else addSystemMessage(`Вы: ${text}`);
-                        document.getElementById('messageInput').value = '';
-                    } else if (currentChat === 'private' && currentChatUser) {
-                        sendPrivateMessage(currentChatUser, text);
-                    }
-                });
-
-                document.getElementById('editNameBtn')?.addEventListener('click', () => document.getElementById('editNameModal').style.display = 'flex');
-                document.getElementById('saveNameBtn')?.addEventListener('click', async () => {
+                    loadUserData(currentUser);
+                };
+                document.getElementById('sendMessageBtn').onclick = () => sendMessage(document.getElementById('messageInput').value);
+                document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
+                document.getElementById('saveNameBtn').onclick = async () => {
                     const newName = document.getElementById('newNameInput').value;
                     if (newName) {
                         await db.collection('users').doc(currentUser.uid).update({ username: newName });
@@ -1466,29 +1266,26 @@
                         showMessage('Имя изменено!', false);
                         document.getElementById('editNameModal').style.display = 'none';
                         loadUserData(currentUser);
-                        loadPrivateUsers();
                     }
-                });
-                document.getElementById('changePasswordBtn')?.addEventListener('click', () => document.getElementById('changePasswordModal').style.display = 'flex');
-                document.getElementById('savePasswordBtn')?.addEventListener('click', async () => {
+                };
+                document.getElementById('changePasswordBtn').onclick = () => document.getElementById('changePasswordModal').style.display = 'flex';
+                document.getElementById('savePasswordBtn').onclick = async () => {
                     try {
                         const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, document.getElementById('oldPasswordInput').value);
                         await currentUser.reauthenticateWithCredential(cred);
                         await currentUser.updatePassword(document.getElementById('newPasswordInput').value);
                         showMessage('Пароль изменён!', false);
                         document.getElementById('changePasswordModal').style.display = 'none';
-                    } catch(e) { showMessage('Неверный старый пароль'); }
-                });
-
-                // АДМИНКА
-                document.getElementById('checkAdminPasswordBtn')?.addEventListener('click', () => {
+                    } catch(e) { showMessage('Неверный пароль'); }
+                };
+                document.getElementById('checkAdminPasswordBtn').onclick = () => {
                     if (document.getElementById('adminPassword').value === 'website') {
                         document.getElementById('adminLoginPanel').style.display = 'none';
                         document.getElementById('adminPanelContent').style.display = 'block';
-                        loadRecentUsers(); loadLogs(); loadModerators();
+                        loadRecentUsers(); loadModerators();
                     } else showMessage('❌ Неверный ключ!');
-                });
-                document.getElementById('addModeratorBtn')?.addEventListener('click', async () => {
+                };
+                document.getElementById('addModeratorBtn').onclick = async () => {
                     const nick = document.getElementById('moderatorNick').value;
                     const snap = await db.collection('users').where('username', '==', nick).get();
                     if (snap.empty) return showMessage('Не найден');
@@ -1498,133 +1295,89 @@
                     await db.collection('settings').doc('moderators').set({ list: moderatorsList });
                     loadModerators();
                     showMessage(`Модератор ${nick} добавлен`, false);
-                });
-                document.getElementById('giveBadgeBtn')?.addEventListener('click', () => giveBadge(document.getElementById('badgeNick').value, document.getElementById('badgeType').value));
-                document.getElementById('removeBadgeBtn')?.addEventListener('click', () => giveBadge(document.getElementById('badgeNick').value, null));
-                document.getElementById('giveCoinsBtn')?.addEventListener('click', () => giveCoins(document.getElementById('giveNick').value, parseInt(document.getElementById('giveAmount').value)));
-                document.getElementById('globalGiveBtn')?.addEventListener('click', () => { const amt = parseInt(prompt('Сумма для всех:')); if (amt) giveCoinsAll(amt); });
-                document.getElementById('giveSpinBtn')?.addEventListener('click', () => giveSpin(document.getElementById('wheelUserNick').value));
-                document.getElementById('banUserBtn')?.addEventListener('click', () => {
-                    const nick = document.getElementById('banNick').value, reason = document.getElementById('banReason').value, duration = document.getElementById('banDuration').value, mod = document.getElementById('moderatorName').value;
-                    if (nick && reason && mod) banUserByNick(nick, reason, duration, mod);
-                    else showMessage('Заполните все поля', true);
-                });
-                document.getElementById('unbanUserBtn')?.addEventListener('click', () => {
-                    const nick = document.getElementById('banNick').value, mod = document.getElementById('moderatorName').value;
-                    if (nick && mod) unbanUserByNick(nick, mod);
-                    else showMessage('Введите ник и модератора', true);
-                });
-                document.getElementById('closeSiteBtn')?.addEventListener('click', () => closeSite(document.getElementById('closeReason').value, parseInt(document.getElementById('closeDuration').value)));
-                document.getElementById('openSiteBtn')?.addEventListener('click', openSite);
-                document.getElementById('spinWheelBtn')?.addEventListener('click', spinWheel);
+                };
+                document.getElementById('giveBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, document.getElementById('badgeType').value);
+                document.getElementById('removeBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, null);
+                document.getElementById('giveCoinsBtn').onclick = () => giveCoins(document.getElementById('giveNick').value, parseInt(document.getElementById('giveAmount').value));
+                document.getElementById('globalGiveBtn').onclick = async () => { const amt = parseInt(prompt('Сумма для всех:')); if (amt) { const snap = await db.collection('users').get(); for (const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amt }); showMessage(`✅ Выдано ${amt} ₽ всем`, false); } };
+                document.getElementById('giveSpinBtn').onclick = () => giveSpin(document.getElementById('wheelUserNick').value);
+                document.getElementById('spinWheelBtn').onclick = spinWheel;
 
-                // Навигация по чатам
-                document.querySelectorAll('.chat-item[data-chat="channel"]').forEach(el => {
-                    el.addEventListener('click', () => {
-                        currentChat = "channel";
-                        currentChatUser = null;
-                        document.getElementById('currentChatName').innerHTML = 'GrifMcPro <span class="badge-icon badge-blue"><i class="fas fa-check"></i></span>';
-                        document.getElementById('currentChatAvatar').className = 'fas fa-bullhorn';
-                        document.getElementById('currentChatStatus').innerHTML = 'Официальный канал • Только чтение';
-                        document.getElementById('botInterface').style.display = 'none';
-                        document.getElementById('chatInputArea').style.display = 'flex';
-                        document.getElementById('chatInputArea').classList.add('readonly-mode');
-                        document.getElementById('messageInput').placeholder = 'Канал доступен только для чтения';
-                        document.getElementById('sendMessageBtn').disabled = true;
-                        loadChannelMessages();
-                    });
+                // Переключение чатов
+                document.querySelectorAll('.chat-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.chat-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        currentChat = btn.dataset.chat;
+                        document.getElementById('currentChatTitle').innerText = btn.innerText.trim();
+                        const botInterface = document.getElementById('botInterface');
+                        const wheelGame = document.getElementById('wheelGame');
+                        const tasksList = document.getElementById('tasksList');
+                        if (currentChat === 'bot') {
+                            botInterface.style.display = 'block';
+                            wheelGame.style.display = 'none';
+                            tasksList.style.display = 'none';
+                            loadMessages('bot');
+                        } else if (currentChat === 'channel') {
+                            botInterface.style.display = 'none';
+                            loadMessages('channel');
+                        } else if (currentChat === 'admin') {
+                            botInterface.style.display = 'none';
+                            loadMessages('admin', MAIN_ADMIN_EMAIL);
+                        }
+                    };
                 });
-                document.querySelectorAll('.chat-item[data-chat="bot"]').forEach(el => {
-                    el.addEventListener('click', () => {
-                        currentChat = "bot";
-                        currentChatUser = null;
-                        document.getElementById('currentChatName').innerHTML = 'GrifMcBot <span class="badge-icon badge-gold"><i class="fas fa-check"></i></span>';
-                        document.getElementById('currentChatAvatar').className = 'fas fa-robot';
-                        document.getElementById('currentChatStatus').innerHTML = 'Бот-помощник';
-                        document.getElementById('botInterface').style.display = 'block';
-                        document.getElementById('chatInputArea').style.display = 'flex';
-                        document.getElementById('chatInputArea').classList.remove('readonly-mode');
-                        document.getElementById('messageInput').placeholder = 'Напишите сообщение или команду...';
-                        document.getElementById('sendMessageBtn').disabled = false;
-                        document.getElementById('wheelGame').style.display = 'none';
-                        document.getElementById('tasksList').style.display = 'none';
-                        loadBotMessages();
-                    });
-                });
+
                 document.querySelectorAll('.bot-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
+                    btn.onclick = () => {
                         const cmd = btn.dataset.cmd;
+                        const wheelGame = document.getElementById('wheelGame');
+                        const tasksList = document.getElementById('tasksList');
                         if (cmd === '/wheel') {
-                            document.getElementById('wheelGame').style.display = 'block';
-                            document.getElementById('tasksList').style.display = 'none';
-                            const spins = wheelSpins[currentUser?.uid] || 0;
-                            document.getElementById('wheelNextSpin').innerHTML = `<i class="fas fa-ticket-alt"></i> Прокруток: ${spins}`;
+                            wheelGame.style.display = 'block';
+                            tasksList.style.display = 'none';
+                            document.getElementById('wheelNextSpin').innerHTML = `🎫 Прокруток: ${wheelSpins[currentUser?.uid] || 0}`;
                         } else if (cmd === '/tasks') {
-                            document.getElementById('wheelGame').style.display = 'none';
-                            document.getElementById('tasksList').style.display = 'block';
-                        } else sendBotCommand(cmd);
-                    });
+                            wheelGame.style.display = 'none';
+                            tasksList.style.display = 'block';
+                        } else handleBotCommand(cmd);
+                    };
                 });
 
                 document.querySelectorAll('.menu-tab').forEach(tab => {
-                    tab.addEventListener('click', () => {
+                    tab.onclick = () => {
                         document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
                         tab.classList.add('active');
                         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                         document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
-                        if (tab.dataset.page === 'admin') { loadRecentUsers(); loadLogs(); }
-                        if (tab.dataset.page === 'chats') { loadPrivateUsers(); document.querySelector('.chat-item[data-chat="channel"]')?.click(); }
-                    });
+                        if (tab.dataset.page === 'admin') { loadRecentUsers(); loadModerators(); }
+                    };
                 });
                 document.querySelectorAll('.tab-auth').forEach(btn => {
-                    btn.addEventListener('click', () => {
+                    btn.onclick = () => {
                         document.querySelectorAll('.tab-auth').forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
                         const isLogin = btn.dataset.tab === 'login';
                         document.getElementById('loginPaneAuth').classList.toggle('active', isLogin);
                         document.getElementById('registerPaneAuth').classList.toggle('active', !isLogin);
-                    });
+                    };
                 });
             }
 
-            async function banUserByNick(nick, reason, duration, moderator) {
-                const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showMessage('Не найден');
-                const user = snap.docs[0];
-                const until = duration === 'forever' ? null : new Date(Date.now() + parseInt(duration) * 60 * 60 * 1000);
-                await db.collection('bans').add({ userId: user.id, username: nick, email: user.data().email, reason, until, active: true, moderator, createdAt: new Date() });
-                addLog('БАН', nick, `Модератор: ${moderator}, Причина: ${reason}`);
-                showMessage(`✅ ${nick} забанен`, false);
-            }
-            async function unbanUserByNick(nick, moderator) {
-                const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showMessage('Не найден');
-                const bans = await db.collection('bans').where('userId', '==', snap.docs[0].id).where('active', '==', true).get();
-                for (const d of bans.docs) await d.ref.update({ active: false });
-                addLog('РАЗБАН', nick, `Модератор: ${moderator}`);
-                showMessage(`✅ ${nick} разбанен`, false);
-            }
-
+            // Запуск
             auth.onAuthStateChanged(async (user) => {
                 if (user) {
                     currentUser = user;
                     await loadModerators();
                     await loadUserData(user);
                     renderShop();
-                    loadTimer();
-                    loadPrivateUsers();
-                    listenSiteStatus();
-                    listenBan(user);
-                    startBalanceUpdater();
+                    let def = new Date(); def.setDate(def.getDate() + 7);
+                    startTimer(def);
                     bindButtons();
-                    document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('mainContent')?.remove();
                     document.getElementById('authModal').style.display = 'none';
-                    document.querySelector('.chat-item[data-chat="channel"]')?.click();
+                    document.querySelector('.chat-btn.active')?.click();
                 } else {
-                    if (balanceInterval) clearInterval(balanceInterval);
-                    if (siteStatusUnsub) siteStatusUnsub();
-                    if (banUnsub) banUnsub();
-                    document.getElementById('mainContent').style.display = 'none';
                     document.getElementById('authModal').style.display = 'flex';
                     bindButtons();
                 }
