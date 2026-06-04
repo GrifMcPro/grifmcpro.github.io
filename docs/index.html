@@ -90,7 +90,6 @@
             border-radius: 40px;
             cursor: pointer;
         }
-        .btn-logout:hover { background: rgba(239,68,68,0.2); transform: scale(1.02); }
         .menu-tabs {
             display: flex;
             gap: 15px;
@@ -234,7 +233,7 @@
             font-size: 13px;
             margin: 5px;
         }
-        /* ГАЛОЧКИ - ПРЯМО В РОСТ БУКВ */
+        /* ГАЛОЧКИ-СМАЙЛЫ */
         .badge-icon {
             display: inline-flex;
             align-items: center;
@@ -255,7 +254,7 @@
         .badge-rgb { background: black; border-radius: 50%; animation: rgbBorder 1s infinite; }
         .badge-rgb i { font-size: 11px; animation: rgbText 1s infinite; }
         .badge-crown { color: #ffd700; font-size: 14px; width: auto; background: none; }
-        /* ДРУЗЬЯ И ЧАТЫ */
+        /* ЧАТЫ */
         .friends-layout {
             display: grid;
             grid-template-columns: 340px 1fr;
@@ -400,6 +399,14 @@
             border: 1px solid rgba(255,215,0,0.3);
             background: rgba(0,0,0,0.5);
             color: white;
+        }
+        .emoji-btn {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 50%;
+            width: 48px;
+            cursor: pointer;
+            font-size: 20px;
         }
         .send-btn {
             background: linear-gradient(135deg, #ffd700, #ffaa00);
@@ -683,8 +690,10 @@
                     <div class="chat-messages" id="chatMessages"></div>
                     <div class="chat-input-area" id="chatInputArea" style="display:none;">
                         <input type="text" id="messageInput" placeholder="Напишите сообщение...">
+                        <button class="emoji-btn" id="emojiBtn">😊</button>
                         <button class="send-btn" id="sendMessageBtn">📤 ОТПРАВИТЬ</button>
                     </div>
+                    <div id="emojiPicker" class="emoji-picker" style="position:absolute; bottom:80px; right:20px; background:#1a1a1a; border-radius:20px; padding:10px; display:none; grid-template-columns:repeat(5,1fr); gap:10px; z-index:100; border:1px solid #ffd700;"></div>
                 </div>
             </div>
         </div>
@@ -808,6 +817,9 @@
         const MAIN_ADMINS = ["ramonenok@bk.ru", "GrifMCpro@mail.ru"];
         const SYSTEM_NAME = "Система";
         
+        // СМАЙЛЫ ДЛЯ ЧАТА
+        const EMOJIS = ["😀", "😂", "🥰", "😎", "🔥", "❤️", "💀", "🎉", "✨", "⭐", "✅", "❌", "⚠️"];
+        
         function getBadgeHtml(type) {
             if(!type) return '';
             switch(type) {
@@ -836,11 +848,7 @@
         let timerInterval = null;
         let moderatorsList = [];
         let currentChatWith = null;
-
-        async function addLog(action, target, details) {
-            if(!currentUser) return;
-            await db.collection('logs').add({ action, moderator: SYSTEM_NAME, target, details, timestamp: new Date() });
-        }
+        let siteClosedListener = null;
 
         function renderShop() {
             const container = document.getElementById('shopGrid');
@@ -905,13 +913,48 @@
             const hasAdminAccess = MAIN_ADMINS.includes(user.email) || moderatorsList.some(m => m.email === user.email);
             if(hasAdminAccess) {
                 document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
-                await db.collection('users').doc(user.uid).update({ isAdmin: true });
             }
             
             document.getElementById('userTagInput').value = data.username;
             const privacyVal = data.privacy || "all";
             if(privacyVal === "all") document.querySelector('input[value="all"]').checked = true;
             else document.querySelector('input[value="friends"]').checked = true;
+        }
+
+        async function addLog(action, target, details) {
+            if(!currentUser) return;
+            await db.collection('logs').add({ action, moderator: SYSTEM_NAME, target, details, timestamp: new Date() });
+        }
+
+        // РЕАЛЬНОЕ ВРЕМЯ ДЛЯ БАЛАНСА
+        function startBalanceListener() {
+            if(!currentUser) return;
+            db.collection('users').doc(currentUser.uid).onSnapshot((doc) => {
+                if(doc.exists) {
+                    const newBalance = doc.data().balance || 50000;
+                    if(currentBalance !== newBalance) {
+                        currentBalance = newBalance;
+                        document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
+                        document.getElementById('profileBalance').innerText = currentBalance.toLocaleString();
+                    }
+                }
+            });
+        }
+
+        // РЕАЛЬНОЕ ВРЕМЯ ДЛЯ ЗАКРЫТИЯ САЙТА
+        function startSiteClosedListener() {
+            if(siteClosedListener) siteClosedListener();
+            siteClosedListener = db.collection('settings').doc('siteStatus').onSnapshot((doc) => {
+                if(doc.exists && doc.data().closed && currentUser && !MAIN_ADMINS.includes(currentUser.email) && !moderatorsList.some(m => m.email === currentUser.email)) {
+                    document.getElementById('mainContent').style.display = 'none';
+                    document.getElementById('closedReason').innerText = doc.data().reason;
+                    document.getElementById('closedUntil').innerText = doc.data().until ? new Date(doc.data().until.toDate()).toLocaleString() : 'Неизвестно';
+                    document.getElementById('closedWindow').style.display = 'flex';
+                } else if(doc.exists && !doc.data().closed) {
+                    document.getElementById('closedWindow').style.display = 'none';
+                    if(currentUser) document.getElementById('mainContent').style.display = 'block';
+                }
+            });
         }
 
         // ДРУЗЬЯ
@@ -964,22 +1007,30 @@
             currentChatWith = { id: friendId, name: friendName, chatId };
             document.getElementById('currentChatName').innerHTML = friendName;
             document.getElementById('chatInputArea').style.display = 'flex';
-            const messagesSnap = await db.collection('chats').doc(chatId).collection('messages').orderBy('timestamp').limit(100).get();
-            const container = document.getElementById('chatMessages');
-            container.innerHTML = '';
-            for(const doc of messagesSnap.docs) {
-                const msg = doc.data();
-                const isOutgoing = msg.from === currentUser.uid;
-                const fromUserDoc = await db.collection('users').doc(msg.from).get();
-                const fromBadge = fromUserDoc.exists ? fromUserDoc.data().badge : null;
-                container.innerHTML += `
-                    <div class="message ${isOutgoing ? 'outgoing' : 'incoming'}">
-                        <div class="message-bubble">${msg.text}</div>
-                        <div class="message-meta">${msg.fromName}${getBadgeHtml(fromBadge)} • ${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
-                    </div>
-                `;
-            }
-            container.scrollTop = container.scrollHeight;
+            
+            // Реальное время для сообщений
+            db.collection('chats').doc(chatId).collection('messages').orderBy('timestamp').onSnapshot((snapshot) => {
+                const container = document.getElementById('chatMessages');
+                if(!container) return;
+                snapshot.docChanges().forEach((change) => {
+                    if(change.type === 'added') {
+                        const msg = change.doc.data();
+                        const isOutgoing = msg.from === currentUser.uid;
+                        (async () => {
+                            const fromUserDoc = await db.collection('users').doc(msg.from).get();
+                            const fromBadge = fromUserDoc.exists ? fromUserDoc.data().badge : null;
+                            const msgDiv = document.createElement('div');
+                            msgDiv.className = `message ${isOutgoing ? 'outgoing' : 'incoming'}`;
+                            msgDiv.innerHTML = `
+                                <div class="message-bubble">${msg.text}</div>
+                                <div class="message-meta">${msg.fromName}${getBadgeHtml(fromBadge)} • ${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
+                            `;
+                            container.appendChild(msgDiv);
+                            container.scrollTop = container.scrollHeight;
+                        })();
+                    }
+                });
+            });
         };
 
         window.acceptFriend = async (friendId) => {
@@ -1046,9 +1097,27 @@
                 timestamp: new Date(),
                 badgeType: userBadge
             });
-            await db.collection('chats').doc(currentChatWith.chatId).update({ lastMessage: text, lastMessageTime: new Date() });
             document.getElementById('messageInput').value = '';
-            loadChatWithFriend(currentChatWith.id, currentChatWith.name);
+        };
+
+        // ЭМОДЗИ ПИКЕР
+        document.getElementById('emojiBtn').onclick = () => {
+            const picker = document.getElementById('emojiPicker');
+            if(picker.style.display === 'grid') {
+                picker.style.display = 'none';
+            } else {
+                picker.innerHTML = '';
+                EMOJIS.forEach(emoji => {
+                    const span = document.createElement('span');
+                    span.textContent = emoji;
+                    span.onclick = () => {
+                        document.getElementById('messageInput').value += emoji;
+                        picker.style.display = 'none';
+                    };
+                    picker.appendChild(span);
+                });
+                picker.style.display = 'grid';
+            }
         };
 
         document.querySelectorAll('input[name="privacy"]').forEach(radio => {
@@ -1067,8 +1136,7 @@
         // АДМИНКА
         async function loadModerators() {
             const doc = await db.collection('settings').doc('moderators').get();
-            if(doc.exists) moderatorsList = doc.data().list || [];
-            else moderatorsList = [];
+            moderatorsList = doc.exists ? doc.data().list || [] : [];
             const container = document.getElementById('moderatorsList');
             if(container) {
                 container.innerHTML = moderatorsList.map(m => `<div style="background:rgba(0,0,0,0.5); border-radius:16px; padding:10px; margin-bottom:8px; display:flex; justify-content:space-between;"><span>👑 ${m.nick || m.email}</span><button onclick="removeModerator('${m.email}')" style="background:#ef4444; border:none; padding:5px 15px; border-radius:30px; cursor:pointer;">УДАЛИТЬ</button></div>`).join('');
@@ -1116,7 +1184,7 @@
             if(snap.empty) return alert('Пользователь не найден');
             await snap.docs[0].ref.update({ badge: badgeType });
             addLog('ВЫДАЧА ЗНАЧКА', nick, `Тип: ${badgeType}`);
-            alert(`✅ Значок выдан ${nick}! Обновите страницу, чтобы увидеть.`);
+            alert(`✅ Значок выдан ${nick}!`);
             loadBadgeUsers();
             if(currentUser && currentUser.displayName === nick) loadUserData(currentUser);
             document.getElementById('badgeNick').value = '';
@@ -1132,6 +1200,29 @@
             loadBadgeUsers();
             if(currentUser && currentUser.displayName === nick) loadUserData(currentUser);
             document.getElementById('badgeNick').value = '';
+        };
+
+        // ВЫДАЧА МОНЕТ
+        document.getElementById('giveCoinsBtn').onclick = async () => {
+            const nick = document.getElementById('giveNick').value.trim();
+            const amount = parseInt(document.getElementById('giveAmount').value);
+            if(!nick || isNaN(amount)) return alert('Введите ник и сумму');
+            const snap = await db.collection('users').where('username', '==', nick).get();
+            if(snap.empty) return alert('Пользователь не найден');
+            const newBalance = (snap.docs[0].data().balance || 0) + amount;
+            await snap.docs[0].ref.update({ balance: newBalance });
+            addLog('ВЫДАЧА МОНЕТ', nick, `${amount} ₽`);
+            alert(`✅ Выдано ${amount} ₽ ${nick}`);
+            document.getElementById('giveNick').value = '';
+            document.getElementById('giveAmount').value = '';
+        };
+        document.getElementById('globalGiveBtn').onclick = async () => {
+            const amount = parseInt(prompt("Сумма для всех:"));
+            if(isNaN(amount)) return;
+            const snap = await db.collection('users').get();
+            for(const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
+            addLog('ГЛОБАЛЬНАЯ ВЫДАЧА', 'ВСЕМ', `${amount} ₽`);
+            alert(`✅ Выдано ${amount} ₽ всем`);
         };
 
         // БАН
@@ -1171,6 +1262,12 @@
             }
             await db.collection('bans').add({ userId, username, email, reason, until, durationText, active: true, moderator: SYSTEM_NAME, createdAt: new Date(), shown: false });
             addLog('БАН', email, `${username} - Причина: ${reason}, Срок: ${durationText}`);
+            
+            // Отправляем уведомление пользователю в реальном времени
+            const userRef = db.collection('users').doc(userId);
+            userRef.update({ banNotification: { reason, durationText, moderator: SYSTEM_NAME, timestamp: new Date() } });
+            setTimeout(() => userRef.update({ banNotification: null }), 5000);
+            
             alert(`✅ Бан выдан ${username}`);
             document.querySelector('.modal').remove();
         };
@@ -1199,6 +1296,14 @@
             for(const doc of snap.docs) await doc.ref.update({ active: false });
             await db.collection('unbanLogs').add({ email, username, reason, moderator: SYSTEM_NAME, unbanDate: new Date(), shown: false });
             addLog('РАЗБАН', email, `${username} - Причина: ${reason}`);
+            
+            // Отправляем уведомление
+            const userSnap = await db.collection('users').where('email', '==', email).get();
+            if(!userSnap.empty) {
+                userSnap.docs[0].ref.update({ unbanNotification: { reason, moderator: SYSTEM_NAME, timestamp: new Date() } });
+                setTimeout(() => userSnap.docs[0].ref.update({ unbanNotification: null }), 5000);
+            }
+            
             alert(`✅ Разбан выполнен для ${username}`);
             document.querySelector('.modal').remove();
         };
@@ -1227,6 +1332,12 @@
             if(!donateName || !reason) return alert('Заполните все поля');
             await db.collection('donates').add({ userId, username, product: donateName, price: 0, serverNick: username, date: new Date(), givenBy: SYSTEM_NAME, reason, shown: false });
             addLog('ВЫДАЧА ДОНАТА', username, `${donateName} - Причина: ${reason}`);
+            
+            // Уведомление в реальном времени
+            const userRef = db.collection('users').doc(userId);
+            userRef.update({ donateNotification: { donateName, reason, moderator: SYSTEM_NAME, timestamp: new Date() } });
+            setTimeout(() => userRef.update({ donateNotification: null }), 5000);
+            
             alert(`✅ Донат ${donateName} выдан ${username}`);
             document.querySelector('.modal').remove();
         };
@@ -1255,60 +1366,14 @@
             for(const doc of snap.docs) await doc.ref.delete();
             await db.collection('donateRemoveLogs').add({ userId, username, reason, moderator: SYSTEM_NAME, date: new Date(), shown: false });
             addLog('СНЯТИЕ ДОНАТА', username, `Причина: ${reason}`);
+            
+            // Уведомление
+            const userRef = db.collection('users').doc(userId);
+            userRef.update({ removeDonateNotification: { reason, moderator: SYSTEM_NAME, timestamp: new Date() } });
+            setTimeout(() => userRef.update({ removeDonateNotification: null }), 5000);
+            
             alert(`✅ Донаты сняты с ${username}`);
             document.querySelector('.modal').remove();
-        };
-
-        // ВЫДАЧА МОНЕТ
-        document.getElementById('giveCoinsBtn').onclick = async () => {
-            const nick = document.getElementById('giveNick').value.trim();
-            const amount = parseInt(document.getElementById('giveAmount').value);
-            if(!nick || isNaN(amount)) return alert('Введите ник и сумму');
-            const snap = await db.collection('users').where('username', '==', nick).get();
-            if(snap.empty) return alert('Пользователь не найден');
-            const newBalance = (snap.docs[0].data().balance || 0) + amount;
-            await snap.docs[0].ref.update({ balance: newBalance });
-            addLog('ВЫДАЧА МОНЕТ', nick, `${amount} ₽`);
-            alert(`✅ Выдано ${amount} ₽ ${nick}`);
-            document.getElementById('giveNick').value = '';
-            document.getElementById('giveAmount').value = '';
-        };
-        document.getElementById('globalGiveBtn').onclick = async () => {
-            const amount = parseInt(prompt("Сумма для всех:"));
-            if(isNaN(amount)) return;
-            const snap = await db.collection('users').get();
-            for(const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
-            addLog('ГЛОБАЛЬНАЯ ВЫДАЧА', 'ВСЕМ', `${amount} ₽`);
-            alert(`✅ Выдано ${amount} ₽ всем`);
-        };
-
-        // ЗАКРЫТИЕ САЙТА
-        async function checkSiteClosed() {
-            const doc = await db.collection('settings').doc('siteStatus').get();
-            if(doc.exists && doc.data().closed) {
-                const data = doc.data();
-                if(data.until && data.until.toDate() < new Date()) {
-                    await db.collection('settings').doc('siteStatus').update({ closed: false });
-                    return null;
-                }
-                return data;
-            }
-            return null;
-        }
-
-        document.getElementById('closeSiteBtn').onclick = async () => {
-            const reason = document.getElementById('closeReason').value.trim();
-            const hours = parseInt(document.getElementById('closeDuration').value);
-            if(!reason) return alert('Укажите причину');
-            const until = new Date(Date.now() + hours * 60 * 60 * 1000);
-            await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until, moderator: SYSTEM_NAME });
-            addLog('ЗАКРЫТИЕ САЙТА', 'Система', reason);
-            alert(`🔒 Сайт закрыт до ${until.toLocaleString()}`);
-        };
-        document.getElementById('openSiteBtn').onclick = async () => {
-            await db.collection('settings').doc('siteStatus').update({ closed: false });
-            addLog('ОТКРЫТИЕ САЙТА', 'Система', 'Сайт открыт');
-            alert('🔓 Сайт открыт');
         };
 
         window.showUserActions = (userId, username, email) => {
@@ -1383,6 +1448,21 @@
             addLog('НАСТРОЙКА ТАЙМЕРА', 'Админ', `Событие: ${eventName}`);
             startTimer(targetDate, eventName, eventDesc);
             alert('Таймер обновлён!');
+        };
+
+        document.getElementById('closeSiteBtn').onclick = async () => {
+            const reason = document.getElementById('closeReason').value.trim();
+            const hours = parseInt(document.getElementById('closeDuration').value);
+            if(!reason) return alert('Укажите причину');
+            const until = new Date(Date.now() + hours * 60 * 60 * 1000);
+            await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until, moderator: SYSTEM_NAME });
+            addLog('ЗАКРЫТИЕ САЙТА', 'Система', reason);
+            alert(`🔒 Сайт закрыт до ${until.toLocaleString()}`);
+        };
+        document.getElementById('openSiteBtn').onclick = async () => {
+            await db.collection('settings').doc('siteStatus').update({ closed: false });
+            addLog('ОТКРЫТИЕ САЙТА', 'Система', 'Сайт открыт');
+            alert('🔓 Сайт открыт');
         };
 
         document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
@@ -1469,24 +1549,14 @@
             document.getElementById('loadingPage').style.display = 'none';
             if(user) {
                 currentUser = user;
-                const siteClosed = await checkSiteClosed();
-                if(siteClosed && !MAIN_ADMINS.includes(user.email) && !moderatorsList.some(m => m.email === user.email)) {
-                    document.getElementById('mainContent').style.display = 'none';
-                    document.getElementById('closedReason').innerText = siteClosed.reason;
-                    document.getElementById('closedUntil').innerText = siteClosed.until ? new Date(siteClosed.until.toDate()).toLocaleString() : 'Неизвестно';
-                    document.getElementById('closedWindow').style.display = 'flex';
-                    document.getElementById('closedExitBtn').onclick = async () => { await auth.signOut(); };
-                    return;
-                }
-                document.getElementById('mainContent').style.display = 'block';
-                document.getElementById('authModal').style.display = 'none';
                 await loadModerators();
+                startBalanceListener();
+                startSiteClosedListener();
                 await loadUserData(user);
                 renderShop();
                 loadTimer();
                 loadFriendsAndChats();
                 loadBadgeUsers();
-                setInterval(() => { if(currentChatWith) loadChatWithFriend(currentChatWith.id, currentChatWith.name); }, 3000);
             } else {
                 document.getElementById('mainContent').style.display = 'none';
                 document.getElementById('authModal').style.display = 'flex';
