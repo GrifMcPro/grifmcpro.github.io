@@ -17,28 +17,29 @@
         }
 
         :root {
-            --bg-dark: #0a0a0f;
-            --bg-secondary: #0f0f15;
-            --bg-tertiary: #13131a;
-            --bg-surface: rgba(15, 15, 25, 0.75);
-            --bg-surface-solid: #151520;
+            --bg-dark: #0a0a12;
+            --bg-secondary: #0f0f18;
+            --bg-tertiary: #151520;
+            --bg-surface: rgba(20, 20, 35, 0.75);
+            --bg-surface-solid: #181825;
             --border-color: rgba(255, 215, 0, 0.12);
             --border-light: rgba(255, 215, 0, 0.2);
             --accent: #ffd700;
             --accent-dark: #ccaa00;
-            --accent-glow: rgba(255, 215, 0, 0.3);
-            --admin-bg: rgba(255, 215, 0, 0.88);
-            --admin-text: #1a1a1a;
+            --accent-glow: rgba(255, 215, 0, 0.2);
+            --purple: #8b5cf6;
+            --pink: #ec4899;
+            --cyan: #06b6d4;
             --text-primary: #f0f0f0;
-            --text-secondary: #a0a0b0;
-            --text-muted: #6a6a7a;
+            --text-secondary: #a0a0b5;
+            --text-muted: #6a6a80;
             --success: #10b981;
             --danger: #ef4444;
             --info: #3b82f6;
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
             --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-            --shadow-glow: 0 0 20px rgba(255, 215, 0, 0.25);
+            --shadow-glow: 0 0 15px rgba(255, 215, 0, 0.2);
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
@@ -48,7 +49,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0a0a0f 0%, #0f0f1a 50%, #0a0a0f 100%);
+            background: linear-gradient(135deg, #0a0a12 0%, #0f0f1a 50%, #0a0a12 100%);
             font-family: 'Montserrat', sans-serif;
             color: var(--text-primary);
             min-height: 100vh;
@@ -59,30 +60,39 @@
             to { opacity: 1; transform: translateY(0); }
         }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes glowPulse {
-            0%, 100% { box-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent-glow); }
-            50% { box-shadow: 0 0 20px var(--accent), 0 0 30px var(--accent-glow); }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-5px); }
         }
+        @keyframes rgbRotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        @keyframes rainbowRotate {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
 
         .animate-in { animation: fadeInUp 0.5s ease; }
-        .glow-animation { animation: glowPulse 2s infinite; }
+        .pulse-animation { animation: pulse 2s infinite; }
+        .float-animation { animation: float 3s ease infinite; }
 
         ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--bg-tertiary); }
+        ::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
 
-        /* Хедер - КОМПАКТНЫЙ */
+        /* Хедер */
         .site-header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 100;
-            background: rgba(10, 10, 15, 0.95);
+            background: rgba(10, 10, 18, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
             padding: 6px 30px;
@@ -105,7 +115,7 @@
         .logo-icon {
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            background: linear-gradient(135deg, var(--accent), var(--purple));
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -119,7 +129,7 @@
             font-family: 'Orbitron', monospace;
             font-size: 16px;
             font-weight: 800;
-            background: linear-gradient(135deg, #fff, var(--accent), #fff);
+            background: linear-gradient(135deg, #fff, var(--accent), var(--purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -179,7 +189,7 @@
         }
 
         .menu-tab {
-            background: rgba(25, 25, 35, 0.6);
+            background: rgba(25, 25, 40, 0.6);
             backdrop-filter: blur(8px);
             border: 1px solid var(--border-color);
             padding: 5px 20px;
@@ -206,13 +216,12 @@
         .page { display: none; animation: fadeIn 0.3s ease; }
         .page.active { display: block; }
 
-        /* ОТСТУПЫ ДЛЯ СТРАНИЦ (чтобы хедер не перекрывал) */
         #homePage, #shopPage, #chatsPage, #profilePage, #adminPage {
             padding-top: 75px;
             min-height: 100vh;
         }
 
-        /* ГЛАВНАЯ - ТАЙМЕР НА ВЕСЬ ЭКРАН */
+        /* ТАЙМЕР */
         .hero-timer {
             min-height: calc(100vh - 75px);
             display: flex;
@@ -244,7 +253,7 @@
             font-family: 'Orbitron', monospace;
             font-size: 42px;
             font-weight: 800;
-            background: linear-gradient(135deg, #fff, var(--accent), var(--accent-dark));
+            background: linear-gradient(135deg, #fff, var(--accent), var(--purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -260,7 +269,7 @@
         }
 
         .countdown-block {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(20px);
             border-radius: var(--radius-2xl);
             padding: 25px 35px;
@@ -342,7 +351,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.05), transparent);
             transition: 0.5s;
         }
 
@@ -435,7 +444,7 @@
         .profile-avatar {
             width: 100px;
             height: 100px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            background: linear-gradient(135deg, var(--accent), var(--purple));
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -452,7 +461,9 @@
             margin-bottom: 15px;
             display: inline-flex;
             align-items: center;
-            gap: 0;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .profile-info {
@@ -479,6 +490,7 @@
             gap: 12px;
             justify-content: center;
             margin-top: 15px;
+            flex-wrap: wrap;
         }
 
         .profile-btn {
@@ -517,7 +529,7 @@
             border: 1px solid var(--border-light);
         }
 
-        /* ГАЛОЧКИ - КРУГЛЫЕ, РАЗМЕРОМ С БУКВУ, МАЛЕНЬКИЙ ОТСТУП КАК В TG */
+        /* ГАЛОЧКИ - 10 ВИДОВ, КРАСИВЫЕ КРУГЛЫЕ ЗНАЧКИ */
         .badge-icon {
             display: inline-flex;
             align-items: center;
@@ -530,24 +542,51 @@
             flex-shrink: 0;
         }
         .badge-icon i { font-size: 10px; color: white; }
-        .badge-crown i { color: var(--accent); font-size: 12px; }
         
-        .badge-blue { background: #3b82f6; }
-        .badge-red { background: #ef4444; }
-        .badge-gold { background: #ffd700; }
-        .badge-rainbow { background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); }
-        .badge-rgb { background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff); animation: rgbShift 2s infinite; background-size: 200% 100%; }
+        /* Синяя */
+        .badge-blue { background: #3b82f6; box-shadow: 0 0 5px #3b82f6; }
+        /* Красная */
+        .badge-red { background: #ef4444; box-shadow: 0 0 5px #ef4444; }
+        /* Золотая */
+        .badge-gold { background: #ffd700; box-shadow: 0 0 5px #ffd700; }
+        .badge-gold i { color: #1a1a1a; }
+        /* Радужная - градиент по кругу */
+        .badge-rainbow {
+            background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff);
+            background-size: 200% 200%;
+            animation: rainbowRotate 2s ease infinite;
+        }
+        /* RGB - переливающийся контур */
+        .badge-rgb {
+            background: #1a1a2a;
+            border: 2px solid;
+            border-color: #ff0000;
+            animation: rgbBorder 1s linear infinite;
+        }
+        .badge-rgb i { color: white; }
+        /* Корона */
         .badge-crown { background: none; width: auto; border-radius: 0; }
-        .badge-crown i { font-size: 14px; }
-        
-        @keyframes rgbShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+        .badge-crown i { color: #ffd700; font-size: 14px; }
+        /* Алмазная */
+        .badge-diamond { background: linear-gradient(135deg, #00ffff, #0088ff); box-shadow: 0 0 5px #00ffff; }
+        /* Звездная */
+        .badge-star { background: linear-gradient(135deg, #ffd700, #ff8800); box-shadow: 0 0 5px #ffd700; }
+        /* Игровая */
+        .badge-game { background: linear-gradient(135deg, #ff00ff, #8800ff); box-shadow: 0 0 5px #ff00ff; }
+        /* Огненная */
+        .badge-fire { background: linear-gradient(135deg, #ff4400, #ff0000); box-shadow: 0 0 5px #ff4400; animation: pulse 1s infinite; }
+
+        @keyframes rgbBorder {
+            0% { border-color: #ff0000; box-shadow: 0 0 3px #ff0000; }
+            25% { border-color: #00ff00; box-shadow: 0 0 3px #00ff00; }
+            50% { border-color: #0000ff; box-shadow: 0 0 3px #0000ff; }
+            75% { border-color: #ff00ff; box-shadow: 0 0 3px #ff00ff; }
+            100% { border-color: #ff0000; box-shadow: 0 0 3px #ff0000; }
         }
 
         /* ЧАТЫ */
         .chats-section {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -561,7 +600,7 @@
         }
 
         .chat-top-btn {
-            background: rgba(25, 25, 35, 0.8);
+            background: rgba(25, 25, 40, 0.8);
             backdrop-filter: blur(8px);
             border: 1px solid var(--border-color);
             padding: 8px 24px;
@@ -614,6 +653,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .chat-title h2 {
@@ -621,7 +662,8 @@
             font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
+            flex-wrap: wrap;
         }
 
         .chat-title h2 i { color: var(--accent); font-size: 16px; }
@@ -702,7 +744,8 @@
             font-size: 13px;
             display: inline-flex;
             align-items: center;
-            gap: 0;
+            gap: 4px;
+            flex-wrap: wrap;
         }
 
         .message-time { font-size: 9px; color: var(--text-muted); }
@@ -738,6 +781,7 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .chat-input-area input {
@@ -749,14 +793,31 @@
             color: var(--text-primary);
             outline: none;
             font-size: 13px;
+            min-width: 150px;
         }
 
         .chat-input-area input:focus { border-color: var(--accent); }
 
+        .emoji-picker-btn {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--border-light);
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 16px;
+        }
+
+        .emoji-picker-btn:hover {
+            background: rgba(255, 215, 0, 0.25);
+            transform: scale(1.05);
+        }
+
         .send-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             border: none;
-            padding: 10px 22px;
+            padding: 10px 24px;
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
@@ -768,6 +829,35 @@
         }
 
         .send-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
+
+        .emoji-panel {
+            display: none;
+            position: absolute;
+            bottom: 70px;
+            right: 20px;
+            background: var(--bg-surface-solid);
+            border-radius: var(--radius-lg);
+            padding: 10px;
+            border: 1px solid var(--border-light);
+            z-index: 100;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            max-width: 250px;
+        }
+
+        .emoji-panel span {
+            font-size: 22px;
+            cursor: pointer;
+            text-align: center;
+            padding: 5px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .emoji-panel span:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: scale(1.1);
+        }
 
         .bot-interface {
             padding: 0 20px 12px;
@@ -921,7 +1011,7 @@
             font-size: 13px;
         }
 
-        .admin-btn:hover { transform: scale(1.01); }
+        .admin-btn:hover { transform: scale(1.01); box-shadow: var(--shadow-glow); }
         .admin-btn-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
         .admin-btn-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
         .admin-btn-purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
@@ -949,6 +1039,27 @@
             font-size: 11px;
             border-left: 2px solid var(--accent);
         }
+
+        /* Уведомления (тосты) */
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--bg-surface-solid), var(--bg-tertiary));
+            border-left: 3px solid var(--accent);
+            padding: 12px 20px;
+            border-radius: var(--radius-lg);
+            color: var(--text-primary);
+            font-size: 13px;
+            z-index: 1000;
+            animation: fadeInUp 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast-notification i { color: var(--accent); font-size: 16px; }
 
         /* Модалки */
         .modal {
@@ -1071,6 +1182,8 @@
             .product-card { margin: 0 10px; }
             .chat-top-btn { padding: 6px 16px; font-size: 12px; }
             .message { max-width: 95%; }
+            .chat-title { flex-direction: column; align-items: flex-start; }
+            .search-bar { max-width: 100%; width: 100%; }
         }
     </style>
 </head>
@@ -1129,6 +1242,7 @@
                 <button class="chat-top-btn active" data-chat="channel"><i class="fas fa-hashtag"></i> GrifMcPro <span class="badge-icon badge-gold"><i class="fas fa-check"></i></span></button>
                 <button class="chat-top-btn" data-chat="bot"><i class="fas fa-robot"></i> GrifMcBot <span class="badge-icon badge-gold"><i class="fas fa-check"></i></span></button>
                 <button class="chat-top-btn" data-chat="leader"><i class="fas fa-crown"></i> GrifMcProLeader <span class="badge-icon badge-crown"><i class="fas fa-crown"></i></span></button>
+                <button class="chat-top-btn" data-chat="private"><i class="fas fa-user-friends"></i> Личные <span class="badge-icon badge-blue"><i class="fas fa-user"></i></span></button>
             </div>
 
             <div class="chat-window">
@@ -1167,9 +1281,24 @@
                         </div>
                     </div>
                 </div>
+                <div id="privateChatInterface" style="display: none;">
+                    <div class="bot-interface">
+                        <div class="search-bar" style="max-width: 100%; margin-bottom: 10px;">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="privateSearchInput" placeholder="Поиск по тегу или нику...">
+                        </div>
+                        <div id="usersList" style="max-height: 150px; overflow-y: auto; margin-bottom: 10px;"></div>
+                    </div>
+                </div>
                 <div class="chat-input-area">
                     <input type="text" id="messageInput" placeholder="Написать сообщение...">
+                    <button class="emoji-picker-btn" id="emojiPickerBtn"><i class="far fa-smile"></i></button>
                     <button class="send-btn" id="sendMessageBtn"><i class="fas fa-paper-plane"></i> Отправить</button>
+                </div>
+                <div id="emojiPanel" class="emoji-panel">
+                    <span>😀</span><span>😂</span><span>🥰</span><span>😎</span><span>🔥</span><span>❤️</span>
+                    <span>🎉</span><span>✨</span><span>⭐</span><span>✅</span><span>⚠️</span><span>💀</span>
+                    <span>👑</span><span>🎮</span><span>💎</span><span>⚡</span><span>🍕</span><span>🍺</span>
                 </div>
             </div>
         </div>
@@ -1182,9 +1311,13 @@
                 <div class="profile-avatar"><i class="fas fa-user"></i></div>
                 <div class="profile-name" id="profileName"></div>
                 <div class="profile-info" id="profileInfo"></div>
+                <div class="profile-info">
+                    <p><i class="fas fa-tag"></i> <strong>Тег для поиска:</strong> <span id="userTag"></span></p>
+                </div>
                 <div id="donatesContainer" class="donates-list"></div>
                 <div class="profile-actions">
                     <button class="profile-btn" id="editNameBtn"><i class="fas fa-pen"></i> Сменить имя</button>
+                    <button class="profile-btn" id="editTagBtn"><i class="fas fa-tag"></i> Сменить тег</button>
                     <button class="profile-btn" id="changePasswordBtn"><i class="fas fa-key"></i> Сменить пароль</button>
                 </div>
             </div>
@@ -1206,7 +1339,7 @@
                     <div class="admin-block"><h3><i class="fas fa-users"></i> ПОСЛЕДНИЕ 10 АККАУНТОВ</h3><div class="players-list" id="recentUsersList"></div></div>
                     <div class="admin-block"><h3><i class="fas fa-user-shield"></i> МОДЕРАТОРЫ</h3><input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input"><button id="addModeratorBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button><div id="moderatorsList" class="players-list"></div></div>
                     <div class="admin-block"><h3><i class="fas fa-dice-d6"></i> ПРОКРУТКИ КОЛЕСА</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">🎫 ВЫДАТЬ</button></div>
-                    <div class="admin-block"><h3><i class="fas fa-tags"></i> ГАЛОЧКИ</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div>
+                    <div class="admin-block"><h3><i class="fas fa-tags"></i> ГАЛОЧКИ (10 ВИДОВ)</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option><option value="diamond">💎 Алмазная</option><option value="star">⭐ Звездная</option><option value="game">🎮 Игровая</option><option value="fire">🔥 Огненная</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div>
                     <div class="admin-block"><h3><i class="fas fa-coins"></i> МОНЕТЫ</h3><input type="text" id="giveNick" placeholder="Никнейм" class="admin-input"><input type="number" id="giveAmount" placeholder="Сумма" class="admin-input"><button id="giveCoinsBtn" class="admin-btn-blue">💸 ВЫДАТЬ</button><button id="globalGiveBtn" class="admin-btn-purple">🌍 ВСЕМ</button></div>
                     <div class="admin-block"><h3><i class="fas fa-gavel"></i> БАН / РАЗБАН</h3><input type="text" id="banNick" placeholder="Никнейм" class="admin-input"><input type="text" id="moderatorName" placeholder="Ник модератора" class="admin-input"><textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="banDuration" class="admin-select"><option value="1">1 час</option><option value="24">1 день</option><option value="168">7 дней</option><option value="forever">Навсегда</option></select><button id="banUserBtn" class="admin-btn-red">⛔ ЗАБАНИТЬ</button><button id="unbanUserBtn" class="admin-btn-green">🔓 РАЗБАНИТЬ</button></div>
                     <div class="admin-block"><h3><i class="fas fa-lock"></i> УПРАВЛЕНИЕ САЙТОМ</h3><textarea id="closeReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="closeDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="24">1 день</option><option value="168">7 дней</option></select><button id="closeSiteBtn" class="admin-btn-red">🔒 ЗАКРЫТЬ</button><button id="openSiteBtn" class="admin-btn-green">🔓 ОТКРЫТЬ</button></div>
@@ -1241,6 +1374,7 @@
 
     <div id="buyModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeBuyModal">&times;</span><h3 id="buyProductName" style="font-size: 20px;"></h3><p style="margin: 12px 0;">Цена: <strong id="buyPrice" style="color: var(--accent); font-size: 22px;"></strong> ₽</p><input type="text" id="buyNick" placeholder="Ваш ник" class="admin-input"><button id="confirmBuyBtn" class="admin-btn"><i class="fas fa-shopping-cart"></i> КУПИТЬ</button></div></div>
     <div id="editNameModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeEditModal">&times;</span><h3>Сменить имя</h3><input type="text" id="newNameInput" placeholder="Новое имя" class="admin-input"><button id="saveNameBtn" class="admin-btn">Сохранить</button></div></div>
+    <div id="editTagModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeTagModal">&times;</span><h3>Сменить тег</h3><input type="text" id="newTagInput" placeholder="Новый тег (например: #игрок)" class="admin-input"><button id="saveTagBtn" class="admin-btn">Сохранить</button></div></div>
     <div id="changePasswordModal" class="modal"><div class="modal-content"><span class="close-modal" id="closePasswordModal">&times;</span><h3>Сменить пароль</h3><input type="password" id="oldPasswordInput" placeholder="Старый пароль" class="admin-input"><input type="password" id="newPasswordInput" placeholder="Новый пароль" class="admin-input"><button id="savePasswordBtn" class="admin-btn">Сохранить</button></div></div>
 
     <script>
@@ -1264,30 +1398,42 @@
             let moderatorsList = [];
             let wheelSpins = {};
             let currentChat = "channel";
+            let currentPrivateUser = null;
             let messagesUnsub = null;
+            let allUsers = [];
 
-            function showMessage(text, isError = true) {
-                const div = document.createElement('div');
-                div.style.cssText = `position:fixed; bottom:20px; right:20px; background:${isError ? '#ef4444' : '#10b981'}; color:white; padding:10px 20px; border-radius:40px; z-index:10000; font-weight:500; font-size:13px;`;
-                div.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${text}`;
-                document.body.appendChild(div);
-                setTimeout(() => div.remove(), 3000);
+            function showToast(message, isError = false) {
+                const toast = document.createElement('div');
+                toast.className = 'toast-notification';
+                toast.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${message}`;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 3000);
             }
 
             function getBadgeHtml(type) {
                 if (!type) return '';
-                const map = { blue:'badge-blue', red:'badge-red', gold:'badge-gold', rainbow:'badge-rainbow', rgb:'badge-rgb', crown:'badge-crown' };
-                const icon = type === 'crown' ? 'fa-crown' : 'fa-check';
-                return `<span class="badge-icon ${map[type]}"><i class="fas ${icon}"></i></span>`;
+                const icons = {
+                    blue: 'fa-check', red: 'fa-check', gold: 'fa-check', rainbow: 'fa-check', rgb: 'fa-check',
+                    crown: 'fa-crown', diamond: 'fa-gem', star: 'fa-star', game: 'fa-gamepad', fire: 'fa-fire'
+                };
+                const icon = icons[type] || 'fa-check';
+                return `<span class="badge-icon badge-${type}"><i class="fas ${icon}"></i></span>`;
             }
 
             function loadMessages() {
                 if (messagesUnsub) messagesUnsub();
                 let collectionPath = '';
-                if (currentChat === 'channel') collectionPath = 'chats/channel/messages';
-                else if (currentChat === 'bot') collectionPath = 'chats/bot/messages';
-                else if (currentChat === 'leader') collectionPath = `chats/leader/${MAIN_ADMIN_EMAIL}/messages`;
-                else return;
+                if (currentChat === 'channel') {
+                    collectionPath = 'chats/channel/messages';
+                } else if (currentChat === 'bot') {
+                    collectionPath = 'chats/bot/messages';
+                } else if (currentChat === 'leader') {
+                    collectionPath = `chats/leader/${MAIN_ADMIN_EMAIL}/messages`;
+                } else if (currentChat === 'private' && currentPrivateUser) {
+                    collectionPath = `chats/private/${currentUser.uid}/${currentPrivateUser}`;
+                } else {
+                    return;
+                }
 
                 const messagesRef = db.collection(collectionPath).orderBy('timestamp');
                 messagesUnsub = messagesRef.onSnapshot((snapshot) => {
@@ -1320,29 +1466,27 @@
                 if (!text.trim()) return;
                 if (currentChat === 'channel') {
                     await db.collection('chats/channel/messages').add({
-                        from: currentUser.uid,
-                        fromName: currentUser.displayName,
-                        fromEmail: currentUser.email,
+                        from: currentUser.uid, fromName: currentUser.displayName, fromEmail: currentUser.email,
                         fromBadge: (await db.collection('users').doc(currentUser.uid).get()).data()?.badge,
-                        text: text,
-                        timestamp: new Date()
+                        text: text, timestamp: new Date()
                     });
                 } else if (currentChat === 'bot') {
                     await db.collection('chats/bot/messages').add({
-                        from: currentUser.uid,
-                        fromName: currentUser.displayName,
-                        text: text,
-                        timestamp: new Date()
+                        from: currentUser.uid, fromName: currentUser.displayName, text: text, timestamp: new Date()
                     });
                     if (text.startsWith('/')) handleBotCommand(text);
                 } else if (currentChat === 'leader') {
                     await db.collection(`chats/leader/${MAIN_ADMIN_EMAIL}/messages`).add({
-                        from: currentUser.uid,
-                        fromName: currentUser.displayName,
-                        fromEmail: currentUser.email,
+                        from: currentUser.uid, fromName: currentUser.displayName, fromEmail: currentUser.email,
                         fromBadge: (await db.collection('users').doc(currentUser.uid).get()).data()?.badge,
-                        text: text,
-                        timestamp: new Date()
+                        text: text, timestamp: new Date()
+                    });
+                } else if (currentChat === 'private' && currentPrivateUser) {
+                    await db.collection(`chats/private/${currentUser.uid}/${currentPrivateUser}`).add({
+                        from: currentUser.uid, fromName: currentUser.displayName, text: text, timestamp: new Date()
+                    });
+                    await db.collection(`chats/private/${currentPrivateUser}/${currentUser.uid}`).add({
+                        from: currentUser.uid, fromName: currentUser.displayName, text: text, timestamp: new Date()
                     });
                 }
                 document.getElementById('messageInput').value = '';
@@ -1378,6 +1522,7 @@
                 currentBalance = newBalance;
                 document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
                 await db.collection('chats/bot/messages').add({ from: "system", fromName: "GrifMcBot 🤖", text: `🎉 ВЫИГРАЛИ ${prize.toLocaleString()} ₽! Осталось: ${newSpins}`, timestamp: new Date() });
+                showToast(`🎉 Выиграно ${prize.toLocaleString()} ₽!`);
             }
 
             async function loadUserData(user) {
@@ -1391,6 +1536,7 @@
                         balance: 50000,
                         registeredAt: new Date().toISOString(),
                         wheelSpins: 1,
+                        tag: `#${user.displayName?.substring(0, 4) || 'user'}`,
                         badge: user.email === MAIN_ADMIN_EMAIL ? 'crown' : null
                     });
                     currentBalance = 50000;
@@ -1408,6 +1554,7 @@
                     <p><i class="fas fa-envelope"></i> ${user.email}</p>
                     <p><i class="fas fa-calendar-alt"></i> ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>
                 `;
+                document.getElementById('userTag').innerHTML = data?.tag || '#unknown';
                 
                 db.collection('donates').where('userId', '==', user.uid).onSnapshot((snap) => {
                     const container = document.getElementById('donatesContainer');
@@ -1420,6 +1567,45 @@
                 
                 const hasAdminAccess = user.email === MAIN_ADMIN_EMAIL || moderatorsList.some(m => m.email === user.email);
                 if (hasAdminAccess) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
+            }
+
+            async function loadPrivateUsers() {
+                const snap = await db.collection('users').get();
+                allUsers = [];
+                snap.forEach(doc => {
+                    const data = doc.data();
+                    if (data.email !== currentUser?.email) {
+                        allUsers.push({ uid: doc.id, username: data.username, tag: data.tag, badge: data.badge });
+                    }
+                });
+                renderPrivateUsers();
+            }
+
+            function renderPrivateUsers() {
+                const container = document.getElementById('usersList');
+                if (!container) return;
+                const searchTerm = document.getElementById('privateSearchInput')?.value.toLowerCase() || '';
+                const filtered = allUsers.filter(u => 
+                    u.username.toLowerCase().includes(searchTerm) || 
+                    (u.tag && u.tag.toLowerCase().includes(searchTerm))
+                );
+                container.innerHTML = filtered.map(user => `
+                    <div class="chat-item" data-userid="${user.uid}" style="display:flex; align-items:center; gap:10px; padding:8px; border-radius:var(--radius-md); cursor:pointer; background:rgba(0,0,0,0.3); margin-bottom:5px;">
+                        <div style="width:32px; height:32px; background:linear-gradient(135deg,var(--accent),var(--accent-dark)); border-radius:50%; display:flex; align-items:center; justify-content:center;"><i class="fas fa-user" style="font-size:14px;"></i></div>
+                        <div style="flex:1;"><strong>${user.username}</strong>${getBadgeHtml(user.badge)}<br><span style="font-size:11px; color:var(--text-muted);">${user.tag || 'Нет тега'}</span></div>
+                    </div>
+                `).join('');
+                document.querySelectorAll('#usersList .chat-item').forEach(el => {
+                    el.onclick = () => {
+                        currentPrivateUser = el.dataset.userid;
+                        currentChat = 'private';
+                        document.getElementById('currentChatTitle').innerHTML = `<i class="fas fa-user-friends"></i> Личный чат с ${el.querySelector('strong').innerText}`;
+                        document.getElementById('privateChatInterface').style.display = 'none';
+                        document.getElementById('botInterface').style.display = 'none';
+                        document.getElementById('messageInput').disabled = false;
+                        loadMessages();
+                    };
+                });
             }
 
             let timerInterval = null;
@@ -1471,7 +1657,7 @@
                 moderatorsList = moderatorsList.filter(m => m.email !== email);
                 await db.collection('settings').doc('moderators').set({ list: moderatorsList });
                 loadModerators();
-                showMessage('Модератор удалён', false);
+                showToast('Модератор удалён');
             };
 
             async function loadRecentUsers() {
@@ -1493,7 +1679,7 @@
                 if (reason && duration && mod) {
                     const until = duration === 'forever' ? null : new Date(Date.now() + parseInt(duration) * 60 * 60 * 1000);
                     await db.collection('bans').add({ userId, username, email, reason, until, active: true, moderator: mod, createdAt: new Date() });
-                    showMessage(`✅ ${username} забанен`, false);
+                    showToast(`✅ ${username} забанен`);
                 }
             };
             window.unbanUserPrompt = async (email, username) => {
@@ -1501,7 +1687,7 @@
                 if (reason && mod) {
                     const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
                     for (const doc of snap.docs) await doc.ref.update({ active: false });
-                    showMessage(`✅ ${username} разбанен`, false);
+                    showToast(`✅ ${username} разбанен`);
                 }
             };
             window.giveDonatePrompt = async (userId, username) => {
@@ -1515,64 +1701,76 @@
 
             async function giveCoins(nick, amount) {
                 const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showMessage('Не найден');
+                if (snap.empty) return showToast('Не найден', true);
                 await snap.docs[0].ref.update({ balance: (snap.docs[0].data().balance || 0) + amount });
-                showMessage(`✅ Выдано ${amount} ₽ ${nick}`, false);
+                showToast(`✅ Выдано ${amount} ₽ ${nick}`);
             }
             async function giveBadge(nick, type) {
                 const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showMessage('Не найден');
+                if (snap.empty) return showToast('Не найден', true);
                 await snap.docs[0].ref.update({ badge: type });
-                showMessage(`✅ Галочка выдана ${nick}`, false);
+                showToast(`✅ Галочка выдана ${nick}`);
                 if (currentUser && currentUser.uid === snap.docs[0].id) {
                     document.getElementById('profileName').innerHTML = snap.docs[0].data().username + getBadgeHtml(type);
                 }
             }
             async function giveSpin(nick) {
                 const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showMessage('Не найден');
+                if (snap.empty) return showToast('Не найден', true);
                 const spins = (snap.docs[0].data().wheelSpins || 0) + 1;
                 await snap.docs[0].ref.update({ wheelSpins: spins });
-                showMessage(`✅ Прокрутка выдана ${nick}`, false);
+                showToast(`✅ Прокрутка выдана ${nick}`);
             }
 
             function bindButtons() {
-                document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); } catch(e) { showMessage(e.message); } };
+                document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); } catch(e) { showToast(e.message, true); } };
                 document.getElementById('doRegisterBtn').onclick = async () => {
                     const u = document.getElementById('regUsername').value, e = document.getElementById('regEmail').value, p = document.getElementById('regPass').value;
-                    if (p.length < 6) return showMessage('Пароль мин 6');
+                    if (p.length < 6) return showToast('Пароль мин 6', true);
                     try {
                         const cred = await auth.createUserWithEmailAndPassword(e, p);
                         await cred.user.updateProfile({ displayName: u });
                         await db.collection('users').doc(cred.user.uid).set({ 
                             username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1,
-                            badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null
+                            tag: `#${u.substring(0, 4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null
                         });
-                        showMessage('✅ Регистрация успешна!', false);
-                    } catch(e) { showMessage(e.message); }
+                        showToast('✅ Регистрация успешна!');
+                    } catch(e) { showToast(e.message, true); }
                 };
                 document.getElementById('logoutBtn').onclick = () => auth.signOut();
                 document.getElementById('closeBuyModal').onclick = () => document.getElementById('buyModal').style.display = 'none';
                 document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
+                document.getElementById('closeTagModal').onclick = () => document.getElementById('editTagModal').style.display = 'none';
                 document.getElementById('closePasswordModal').onclick = () => document.getElementById('changePasswordModal').style.display = 'none';
                 document.getElementById('confirmBuyBtn').onclick = async () => {
-                    if (currentBalance < currentProduct.price) return showMessage('Недостаточно средств');
+                    if (currentBalance < currentProduct.price) return showToast('Недостаточно средств', true);
                     await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - currentProduct.price });
                     await db.collection('donates').add({ userId: currentUser.uid, username: currentUser.displayName, product: currentProduct.name, price: currentProduct.price, date: new Date() });
-                    showMessage(`✅ Куплено ${currentProduct.name}!`, false);
+                    showToast(`✅ Куплено ${currentProduct.name}!`);
                     document.getElementById('buyModal').style.display = 'none';
                     loadUserData(currentUser);
                 };
                 document.getElementById('sendMessageBtn').onclick = () => sendMessage(document.getElementById('messageInput').value);
                 document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
+                document.getElementById('editTagBtn').onclick = () => document.getElementById('editTagModal').style.display = 'flex';
                 document.getElementById('saveNameBtn').onclick = async () => {
                     const newName = document.getElementById('newNameInput').value;
                     if (newName) {
                         await db.collection('users').doc(currentUser.uid).update({ username: newName });
                         await currentUser.updateProfile({ displayName: newName });
-                        showMessage('Имя изменено!', false);
+                        showToast('Имя изменено!');
                         document.getElementById('editNameModal').style.display = 'none';
                         loadUserData(currentUser);
+                        loadPrivateUsers();
+                    }
+                };
+                document.getElementById('saveTagBtn').onclick = async () => {
+                    const newTag = document.getElementById('newTagInput').value;
+                    if (newTag) {
+                        await db.collection('users').doc(currentUser.uid).update({ tag: newTag });
+                        showToast('Тег изменён!');
+                        document.getElementById('editTagModal').style.display = 'none';
+                        document.getElementById('userTag').innerHTML = newTag;
                     }
                 };
                 document.getElementById('changePasswordBtn').onclick = () => document.getElementById('changePasswordModal').style.display = 'flex';
@@ -1581,47 +1779,79 @@
                         const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, document.getElementById('oldPasswordInput').value);
                         await currentUser.reauthenticateWithCredential(cred);
                         await currentUser.updatePassword(document.getElementById('newPasswordInput').value);
-                        showMessage('Пароль изменён!', false);
+                        showToast('Пароль изменён!');
                         document.getElementById('changePasswordModal').style.display = 'none';
-                    } catch(e) { showMessage('Неверный пароль'); }
+                    } catch(e) { showToast('Неверный пароль', true); }
                 };
                 document.getElementById('checkAdminPasswordBtn').onclick = () => {
                     if (document.getElementById('adminPassword').value === 'website') {
                         document.getElementById('adminLoginPanel').style.display = 'none';
                         document.getElementById('adminPanelContent').style.display = 'block';
                         loadRecentUsers(); loadModerators();
-                    } else showMessage('❌ Неверный ключ!');
+                    } else showToast('❌ Неверный ключ!', true);
                 };
                 document.getElementById('addModeratorBtn').onclick = async () => {
                     const nick = document.getElementById('moderatorNick').value;
                     const snap = await db.collection('users').where('username', '==', nick).get();
-                    if (snap.empty) return showMessage('Не найден');
+                    if (snap.empty) return showToast('Не найден', true);
                     const data = snap.docs[0].data();
-                    if (moderatorsList.some(m => m.email === data.email)) return showMessage('Уже есть');
+                    if (moderatorsList.some(m => m.email === data.email)) return showToast('Уже есть', true);
                     moderatorsList.push({ nick: data.username, email: data.email });
                     await db.collection('settings').doc('moderators').set({ list: moderatorsList });
                     loadModerators();
-                    showMessage(`Модератор ${nick} добавлен`, false);
+                    showToast(`Модератор ${nick} добавлен`);
                 };
                 document.getElementById('giveBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, document.getElementById('badgeType').value);
                 document.getElementById('removeBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, null);
                 document.getElementById('giveCoinsBtn').onclick = () => giveCoins(document.getElementById('giveNick').value, parseInt(document.getElementById('giveAmount').value));
-                document.getElementById('globalGiveBtn').onclick = async () => { const amt = parseInt(prompt('Сумма для всех:')); if (amt) { const snap = await db.collection('users').get(); for (const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amt }); showMessage(`✅ Выдано ${amt} ₽ всем`, false); } };
+                document.getElementById('globalGiveBtn').onclick = async () => { const amt = parseInt(prompt('Сумма для всех:')); if (amt) { const snap = await db.collection('users').get(); for (const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amt }); showToast(`✅ Выдано ${amt} ₽ всем`); } };
                 document.getElementById('giveSpinBtn').onclick = () => giveSpin(document.getElementById('wheelUserNick').value);
                 document.getElementById('spinWheelBtn').onclick = spinWheel;
 
+                // Эмодзи
+                const emojiBtn = document.getElementById('emojiPickerBtn');
+                const emojiPanel = document.getElementById('emojiPanel');
+                emojiBtn.onclick = () => {
+                    emojiPanel.style.display = emojiPanel.style.display === 'grid' ? 'none' : 'grid';
+                };
+                document.querySelectorAll('#emojiPanel span').forEach(emoji => {
+                    emoji.onclick = () => {
+                        document.getElementById('messageInput').value += emoji.textContent;
+                        emojiPanel.style.display = 'none';
+                    };
+                });
+                document.addEventListener('click', (e) => {
+                    if (!emojiBtn.contains(e.target) && !emojiPanel.contains(e.target)) {
+                        emojiPanel.style.display = 'none';
+                    }
+                });
+
+                // Переключение чатов
                 document.querySelectorAll('.chat-top-btn').forEach(btn => {
                     btn.onclick = () => {
                         document.querySelectorAll('.chat-top-btn').forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
                         currentChat = btn.dataset.chat;
-                        const chatNames = { channel: 'GrifMcPro', bot: 'GrifMcBot', leader: 'GrifMcProLeader' };
-                        const chatIcons = { channel: 'fa-hashtag', bot: 'fa-robot', leader: 'fa-crown' };
-                        const badges = { channel: '<span class="badge-icon badge-gold"><i class="fas fa-check"></i></span>', bot: '<span class="badge-icon badge-gold"><i class="fas fa-check"></i></span>', leader: '<span class="badge-icon badge-crown"><i class="fas fa-crown"></i></span>' };
+                        const chatNames = {
+                            channel: 'GrifMcPro', bot: 'GrifMcBot', leader: 'GrifMcProLeader', private: 'Личные сообщения'
+                        };
+                        const chatIcons = {
+                            channel: 'fa-hashtag', bot: 'fa-robot', leader: 'fa-crown', private: 'fa-user-friends'
+                        };
+                        const badges = {
+                            channel: '<span class="badge-icon badge-gold"><i class="fas fa-check"></i></span>',
+                            bot: '<span class="badge-icon badge-gold"><i class="fas fa-check"></i></span>',
+                            leader: '<span class="badge-icon badge-crown"><i class="fas fa-crown"></i></span>',
+                            private: ''
+                        };
                         document.getElementById('currentChatTitle').innerHTML = `<i class="fas ${chatIcons[currentChat]}"></i> ${chatNames[currentChat]} ${badges[currentChat]}`;
-                        const botInterface = document.getElementById('botInterface');
-                        if (currentChat === 'bot') botInterface.style.display = 'block';
-                        else botInterface.style.display = 'none';
+                        document.getElementById('botInterface').style.display = currentChat === 'bot' ? 'block' : 'none';
+                        document.getElementById('privateChatInterface').style.display = currentChat === 'private' ? 'block' : 'none';
+                        document.getElementById('messageInput').disabled = currentChat === 'private';
+                        if (currentChat === 'private') {
+                            loadPrivateUsers();
+                            document.getElementById('privateSearchInput').oninput = () => renderPrivateUsers();
+                        }
                         loadMessages();
                     };
                 });
@@ -1649,7 +1879,7 @@
                         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                         document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
                         if (tab.dataset.page === 'admin') { loadRecentUsers(); loadModerators(); }
-                        if (tab.dataset.page === 'chats') loadMessages();
+                        if (tab.dataset.page === 'chats') { document.querySelector('.chat-top-btn.active')?.click(); }
                     };
                 });
                 document.querySelectorAll('.tab-auth').forEach(btn => {
@@ -1673,7 +1903,7 @@
                     startTimer(def);
                     bindButtons();
                     document.getElementById('authModal').style.display = 'none';
-                    document.querySelector('.chat-top-btn.active').click();
+                    document.querySelector('.chat-top-btn.active')?.click();
                 } else {
                     document.getElementById('authModal').style.display = 'flex';
                     bindButtons();
