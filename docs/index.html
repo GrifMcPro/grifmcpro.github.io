@@ -39,15 +39,14 @@
             75% { color: #ff00ff; text-shadow: 0 0 5px #ff00ff; }
             100% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
         }
+        @keyframes rainbowText {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
         @keyframes bgMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
-        }
-        @keyframes crownFloat {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-2px); }
-            100% { transform: translateY(0px); }
         }
         
         body {
@@ -264,22 +263,71 @@
             transition: 0.2s;
         }
         
-        /* БЭДЖИ (ГАЛОЧКИ И КОРОНА) */
-        .badge-icon {
+        /* ГАЛОЧКИ - КАК В ТЕЛЕГРАММ */
+        .badge-verified-blue {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             width: 20px;
             height: 20px;
+            background: #1e88e5;
+            border-radius: 50%;
             margin-left: 6px;
             vertical-align: middle;
-            display: inline-block;
         }
-        .badge-check-blue { color: #1e88e5; filter: drop-shadow(0 0 2px #1e88e5); }
-        .badge-check-red { color: #ef4444; filter: drop-shadow(0 0 2px #ef4444); }
-        .badge-check-gold { color: #ffd700; filter: drop-shadow(0 0 2px #ffd700); }
-        .badge-check-rainbow { background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .badge-check-rgb { animation: rgbText 1s infinite; }
-        .badge-crown { color: #ffd700; filter: drop-shadow(0 0 2px #ffd700); animation: crownFloat 2s ease-in-out infinite; }
+        .badge-verified-blue i { font-size: 12px; color: white; }
+        .badge-verified-red {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: #ef4444;
+            border-radius: 50%;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+        .badge-verified-red i { font-size: 12px; color: white; }
+        .badge-verified-gold {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: #ffd700;
+            border-radius: 50%;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+        .badge-verified-gold i { font-size: 12px; color: #0a0a0a; }
+        .badge-verified-rainbow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            border-radius: 0;
+            margin-left: 6px;
+            vertical-align: middle;
+            animation: rainbowText 2s infinite;
+        }
+        .badge-verified-rainbow i { font-size: 14px; color: white; filter: drop-shadow(0 0 2px black); }
+        .badge-verified-rgb {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: black;
+            border-radius: 50%;
+            margin-left: 6px;
+            vertical-align: middle;
+            animation: rgbBorder 1s infinite;
+        }
+        .badge-verified-rgb i { font-size: 12px; animation: rgbText 1s infinite; }
         
-        /* ДРУЗЬЯ И ЧАТЫ - КРАСИВО */
+        /* ДРУЗЬЯ И ЧАТЫ */
         .friends-layout {
             display: grid;
             grid-template-columns: 340px 1fr;
@@ -319,7 +367,6 @@
             font-weight: bold;
             transition: 0.2s;
         }
-        .search-box button:hover { transform: scale(1.02); }
         .section-subtitle {
             font-family: 'Orbitron', monospace;
             font-size: 16px;
@@ -373,7 +420,6 @@
             font-weight: bold;
             transition: 0.2s;
         }
-        .request-actions button:hover { transform: scale(1.02); }
         .chat-area {
             display: flex;
             flex-direction: column;
@@ -432,7 +478,6 @@
             font-size: 20px;
             transition: 0.2s;
         }
-        .emoji-btn:hover { background: rgba(255,215,0,0.2); }
         .send-btn {
             background: linear-gradient(135deg, #ffd700, #ffaa00);
             border: none;
@@ -454,8 +499,7 @@
             z-index: 100;
             border: 1px solid #ffd700;
         }
-        .emoji-picker span { cursor: pointer; font-size: 28px; text-align: center; padding: 5px; transition: 0.2s; }
-        .emoji-picker span:hover { transform: scale(1.1); }
+        .emoji-picker span { cursor: pointer; font-size: 28px; text-align: center; padding: 5px; }
         
         .settings-group {
             margin-bottom: 20px;
@@ -463,7 +507,6 @@
             background: rgba(0,0,0,0.3);
             border-radius: 24px;
         }
-        .settings-group label { margin-right: 20px; cursor: pointer; }
         
         /* АДМИН-ПАНЕЛЬ */
         .admin-section {
@@ -780,7 +823,9 @@
             <div class="section-title">👤 МОЙ ПРОФИЛЬ</div>
             <div class="profile-card">
                 <div class="profile-avatar"><i class="fas fa-user"></i></div>
-                <h2 id="profileName" style="display: inline-flex; align-items: center; gap: 0;"></h2>
+                <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap;">
+                    <h2 id="profileName" style="display: inline-flex; align-items: center; gap: 0;"></h2>
+                </div>
                 <div class="profile-info" id="profileInfo"></div>
                 <div id="donatesContainer" style="margin: 20px 0; text-align: center;"></div>
                 <div><button class="edit-btn" id="editNameBtn">✏️ Сменить имя</button>
@@ -814,7 +859,7 @@
                     <button id="addModeratorBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button>
                     <div id="moderatorsList" style="margin-top:15px;"></div>
                 </div>
-                <div class="admin-section"><h3>✅ ВЫДАЧА ГАЛОЧЕК И КОРОНЫ</h3>
+                <div class="admin-section"><h3>✅ ВЫДАЧА ГАЛОЧЕК (ВЕРИФИКАЦИЯ)</h3>
                     <input type="text" id="badgeNick" placeholder="Никнейм игрока" class="admin-input">
                     <select id="badgeType" class="admin-select">
                         <option value="blue">🔵 Синяя галочка</option>
@@ -822,10 +867,9 @@
                         <option value="gold">🟡 Золотая галочка</option>
                         <option value="rainbow">🌈 Радужная галочка</option>
                         <option value="rgb">✨ RGB галочка</option>
-                        <option value="crown">👑 Корона</option>
                     </select>
-                    <button id="giveBadgeBtn" class="admin-btn-blue">🎫 ВЫДАТЬ ЗНАЧОК</button>
-                    <button id="removeBadgeBtn" class="admin-btn-red">❌ СНЯТЬ ВСЕ ЗНАЧКИ</button>
+                    <button id="giveBadgeBtn" class="admin-btn-blue">🎫 ВЫДАТЬ ГАЛОЧКУ</button>
+                    <button id="removeBadgeBtn" class="admin-btn-red">❌ СНЯТЬ ГАЛОЧКУ</button>
                     <div id="badgeUsersList" style="margin-top:10px;"></div>
                 </div>
                 <div class="admin-section"><h3>⏰ НАСТРОЙКА ТАЙМЕРА</h3>
@@ -896,15 +940,24 @@
         const MAIN_ADMINS = ["ramonenok@bk.ru", "GrifMCpro@mail.ru"];
         const SYSTEM_NAME = "Система";
         
-        // Классы для бэджей
-        const BADGE_CLASSES = {
-            blue: 'badge-check-blue fas fa-check-circle',
-            red: 'badge-check-red fas fa-check-circle',
-            gold: 'badge-check-gold fas fa-check-circle',
-            rainbow: 'badge-check-rainbow fas fa-check-circle',
-            rgb: 'badge-check-rgb fas fa-check-circle',
-            crown: 'badge-crown fas fa-crown'
-        };
+        // ФУНКЦИЯ ДЛЯ ОТОБРАЖЕНИЯ БЭДЖА ПО ТИПУ
+        function getBadgeHtml(type) {
+            if(!type) return '';
+            switch(type) {
+                case 'blue':
+                    return `<span class="badge-verified-blue"><i class="fas fa-check"></i></span>`;
+                case 'red':
+                    return `<span class="badge-verified-red"><i class="fas fa-check"></i></span>`;
+                case 'gold':
+                    return `<span class="badge-verified-gold"><i class="fas fa-check"></i></span>`;
+                case 'rainbow':
+                    return `<span class="badge-verified-rainbow"><i class="fas fa-check"></i></span>`;
+                case 'rgb':
+                    return `<span class="badge-verified-rgb"><i class="fas fa-check"></i></span>`;
+                default:
+                    return '';
+            }
+        }
 
         const privileges = [
             { name: "Премиум", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/kit", "/fly"] },
@@ -971,13 +1024,11 @@
             currentBalance = data.balance || 50000;
             document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
             
-            // Отображаем ник с бэйджами
             const nameSpan = document.getElementById('profileName');
             nameSpan.innerHTML = '';
             nameSpan.appendChild(document.createTextNode(data.username));
             if(data.badge) {
-                const badgeClass = BADGE_CLASSES[data.badge] || BADGE_CLASSES.blue;
-                nameSpan.insertAdjacentHTML('beforeend', `<i class="${badgeClass}" style="font-size: 16px; margin-left: 6px;"></i>`);
+                nameSpan.insertAdjacentHTML('beforeend', getBadgeHtml(data.badge));
             }
             
             document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> <strong>Email:</strong> ${user.email}</p><p><i class="fas fa-calendar"></i> <strong>Регистрация:</strong> ${data.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`;
@@ -987,7 +1038,7 @@
             if(donatesContainer) {
                 donatesContainer.innerHTML = '<h4>🎁 Мои донаты</h4>';
                 if(donatesSnap.empty) donatesContainer.innerHTML += '<p>Нет покупок</p>';
-                else donatesSnap.forEach(d => donatesContainer.innerHTML += `<span class="donate-badge" style="background:linear-gradient(135deg,#3b82f6,#2563eb); padding:5px 14px; border-radius:40px; font-size:12px; display:inline-block; margin:4px;">${d.data().product}</span> `);
+                else donatesSnap.forEach(d => donatesContainer.innerHTML += `<span class="donate-badge" style="background:linear-gradient(135deg,#3b82f6,#2563eb); color:white; padding:5px 14px; border-radius:40px; font-size:12px; display:inline-block; margin:4px;">${d.data().product}</span> `);
             }
             
             const hasAdminAccess = MAIN_ADMINS.includes(user.email) || moderatorsList.some(m => m.email === user.email);
@@ -1001,7 +1052,6 @@
             document.getElementById('userTagInput').value = data.username;
         }
 
-        // ДРУЗЬЯ
         async function loadFriendsAndChats() {
             const userDoc = await db.collection('users').doc(currentUser.uid).get();
             const friends = userDoc.data()?.friends || [];
@@ -1014,11 +1064,7 @@
                     const friendDoc = await db.collection('users').doc(friendId).get();
                     if(friendDoc.exists) {
                         const friendData = friendDoc.data();
-                        let badgeHtml = '';
-                        if(friendData.badge) {
-                            const badgeClass = BADGE_CLASSES[friendData.badge] || BADGE_CLASSES.blue;
-                            badgeHtml = `<i class="${badgeClass}" style="font-size: 12px; margin-left: 5px;"></i>`;
-                        }
+                        const badgeHtml = getBadgeHtml(friendData.badge);
                         friendsHtml += `<div class="friend-item" onclick="loadChatWithFriend('${friendId}', '${friendData.username}')">
                             <div class="friend-avatar"><i class="fas fa-user"></i></div>
                             <div class="friend-info">
@@ -1040,7 +1086,7 @@
                         const reqData = reqDoc.data();
                         requestsHtml += `<div class="request-item">
                             <div class="friend-avatar" style="width:40px; height:40px;"><i class="fas fa-user-plus"></i></div>
-                            <div class="friend-info"><div class="friend-name">${reqData.username}</div></div>
+                            <div class="friend-info"><div class="friend-name">${reqData.username}${getBadgeHtml(reqData.badge)}</div></div>
                             <div class="request-actions">
                                 <button onclick="acceptFriend('${reqId}')" style="background:#22c55e; color:white;">✓ ПРИНЯТЬ</button>
                                 <button onclick="declineFriend('${reqId}')" style="background:#ef4444; color:white;">✗ ОТКЛОНИТЬ</button>
@@ -1063,9 +1109,10 @@
             for(const doc of messagesSnap.docs) {
                 const msg = doc.data();
                 const isOutgoing = msg.from === currentUser.uid;
+                const badgeHtml = msg.badgeType ? getBadgeHtml(msg.badgeType) : '';
                 container.innerHTML += `
                     <div class="message ${isOutgoing ? 'outgoing' : 'incoming'}">
-                        <div class="message-bubble">${msg.text}</div>
+                        <div class="message-bubble">${msg.text}${badgeHtml}</div>
                         <div class="message-meta">${msg.fromName} • ${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
                     </div>
                 `;
@@ -1127,11 +1174,16 @@
                 alert('Этот пользователь принимает сообщения только от друзей');
                 return;
             }
+            // Проверяем, есть ли у отправителя бэйдж
+            const userDoc = await db.collection('users').doc(currentUser.uid).get();
+            const hasBadge = userDoc.data()?.badge;
+            
             await db.collection('chats').doc(currentChatWith.chatId).collection('messages').add({
                 from: currentUser.uid,
                 fromName: currentUser.displayName,
                 text: text,
-                timestamp: new Date()
+                timestamp: new Date(),
+                badgeType: hasBadge || null
             });
             await db.collection('chats').doc(currentChatWith.chatId).update({ lastMessage: text, lastMessageTime: new Date() });
             document.getElementById('messageInput').value = '';
@@ -1157,7 +1209,6 @@
             document.getElementById('emojiPicker').style.display = 'none';
         };
 
-        // НАСТРОЙКИ
         document.querySelectorAll('input[name="privacy"]').forEach(radio => {
             radio.onclick = async () => {
                 const val = radio.value;
@@ -1172,7 +1223,6 @@
             alert('Тег скопирован: ' + currentUser.displayName);
         };
 
-        // АДМИНКА
         async function loadModerators() {
             const doc = await db.collection('settings').doc('moderators').get();
             moderatorsList = doc.exists ? doc.data().list || [] : [];
@@ -1210,8 +1260,7 @@
                 for(const doc of snap.docs) {
                     const data = doc.data();
                     if(data.badge) {
-                        const badgeClass = BADGE_CLASSES[data.badge] || BADGE_CLASSES.blue;
-                        container.innerHTML += `<div style="background:rgba(0,0,0,0.3); border-radius:16px; padding:8px; margin-bottom:5px; display:flex; justify-content:space-between;"><span><strong>${data.username}</strong> <i class="${badgeClass}" style="font-size:14px;"></i></span></div>`;
+                        container.innerHTML += `<div style="background:rgba(0,0,0,0.3); border-radius:16px; padding:8px; margin-bottom:5px; display:flex; justify-content:space-between;"><span><strong>${data.username}</strong> ${getBadgeHtml(data.badge)}</span></div>`;
                     }
                 }
             }
@@ -1224,10 +1273,11 @@
             const snap = await db.collection('users').where('username', '==', nick).get();
             if(snap.empty) return alert('Пользователь не найден');
             await snap.docs[0].ref.update({ badge: badgeType });
-            addLog('ВЫДАЧА ЗНАЧКА', nick, `Тип: ${badgeType}`);
-            alert(`✅ Значок выдан ${nick}`);
+            addLog('ВЫДАЧА ГАЛОЧКИ', nick, `Тип: ${badgeType}`);
+            alert(`✅ ГАЛОЧКА выдана ${nick}!`);
             loadBadgeUsers();
             document.getElementById('badgeNick').value = '';
+            if(currentUser && currentUser.displayName === nick) loadUserData(currentUser);
         };
         document.getElementById('removeBadgeBtn').onclick = async () => {
             const nick = document.getElementById('badgeNick').value.trim();
@@ -1235,10 +1285,11 @@
             const snap = await db.collection('users').where('username', '==', nick).get();
             if(snap.empty) return alert('Пользователь не найден');
             await snap.docs[0].ref.update({ badge: null });
-            addLog('СНЯТИЕ ЗНАЧКА', nick, '');
-            alert(`❌ Значок снят с ${nick}`);
+            addLog('СНЯТИЕ ГАЛОЧКИ', nick, '');
+            alert(`❌ ГАЛОЧКА снята с ${nick}`);
             loadBadgeUsers();
             document.getElementById('badgeNick').value = '';
+            if(currentUser && currentUser.displayName === nick) loadUserData(currentUser);
         };
 
         async function loadNewPlayers() {
@@ -1246,7 +1297,7 @@
             const snap = await db.collection('users').where('registeredAt', '>=', thirtyMinutesAgo.toISOString()).get();
             const container = document.getElementById('newPlayersList');
             if(container) {
-                container.innerHTML = snap.docs.map(doc => `<div class="player-card"><span><strong>${doc.data().username}</strong><br>${doc.data().email}<br>💰 ${doc.data().balance || 0} ₽</span></div>`).join('');
+                container.innerHTML = snap.docs.map(doc => `<div class="player-card"><span><strong>${doc.data().username}</strong>${getBadgeHtml(doc.data().badge)}<br>${doc.data().email}<br>💰 ${doc.data().balance || 0} ₽</span></div>`).join('');
             }
         }
 
@@ -1436,24 +1487,3 @@
                     document.getElementById('mainContent').style.display = 'none';
                     document.getElementById('closedReason').innerText = siteClosed.reason;
                     document.getElementById('closedUntil').innerText = siteClosed.until ? new Date(siteClosed.until.toDate()).toLocaleString() : 'Неизвестно';
-                    document.getElementById('closedWindow').style.display = 'flex';
-                    document.getElementById('closedExitBtn').onclick = async () => { await auth.signOut(); };
-                    return;
-                }
-                document.getElementById('mainContent').style.display = 'block';
-                document.getElementById('authModal').style.display = 'none';
-                await loadModerators();
-                await loadUserData(user);
-                renderShop();
-                loadTimer();
-                loadFriendsAndChats();
-                loadBadgeUsers();
-                setInterval(() => { if(currentChatWith) loadChatWithFriend(currentChatWith.id, currentChatWith.name); }, 3000);
-            } else {
-                document.getElementById('mainContent').style.display = 'none';
-                document.getElementById('authModal').style.display = 'flex';
-            }
-        });
-    </script>
-</body>
-</html>
