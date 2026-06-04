@@ -57,7 +57,7 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
-            opacity: 0.2;
+            opacity: 0.15;
         }
         .hero-overlay {
             position: fixed;
@@ -65,7 +65,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0.6), rgba(0,0,0,0.85));
+            background: radial-gradient(circle, rgba(0,0,0,0.7), rgba(0,0,0,0.9));
             z-index: -1;
         }
         .main-container { max-width: 1400px; width: 100%; margin: 0 auto; padding: 20px; }
@@ -73,22 +73,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             backdrop-filter: blur(12px);
             border-radius: 60px;
             padding: 12px 24px;
             margin-bottom: 30px;
-            border: 1px solid rgba(255,215,0,0.3);
-            animation: borderGlow 3s infinite;
+            border: 1px solid rgba(255,215,0,0.5);
+            animation: rgbBorder 3s infinite;
         }
         .balance { 
             font-family: 'Orbitron', monospace; 
             font-size: 28px; 
             font-weight: bold; 
-            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            background: linear-gradient(135deg, #ffd700, #ffaa00, #ff00ff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            animation: rainbow 3s infinite;
         }
         .balance span { color: #fff; }
         .btn-logout {
@@ -98,6 +99,7 @@
             padding: 8px 24px;
             border-radius: 40px;
             cursor: pointer;
+            transition: 0.3s;
         }
         .btn-logout:hover { background: rgba(239,68,68,0.2); transform: scale(1.02); }
         
@@ -109,9 +111,9 @@
             flex-wrap: wrap;
         }
         .menu-tab {
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,215,0,0.3);
+            border: 1px solid rgba(255,215,0,0.4);
             padding: 12px 32px;
             border-radius: 60px;
             cursor: pointer;
@@ -119,26 +121,28 @@
             font-weight: bold;
             transition: 0.3s;
         }
-        .menu-tab.active { 
+        .menu-tab.active, .menu-tab:hover { 
             background: linear-gradient(135deg, #ffd700, #ffaa00); 
             color: #0a0a0a;
             border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255,215,0,0.5);
         }
         .page { display: none; }
-        .page.active { display: block; }
+        .page.active { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
         .section-title {
             font-family: 'Orbitron', monospace;
             font-size: 36px;
             text-align: center;
             margin: 25px 0 35px;
-            background: linear-gradient(135deg, #fff, #ffd700);
+            background: linear-gradient(135deg, #fff, #ffd700, #ff00ff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             animation: rgbText 4s infinite;
         }
         
-        /* ТАЙМЕР */
         .timer-container {
             display: flex;
             justify-content: center;
@@ -147,15 +151,15 @@
             margin: 20px 0;
         }
         .timer-card {
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             backdrop-filter: blur(16px);
             border-radius: 60px;
             padding: 50px 40px;
             text-align: center;
             max-width: 800px;
             width: 100%;
-            border: 1px solid rgba(255,215,0,0.3);
-            animation: borderGlow 3s infinite;
+            border: 1px solid rgba(255,215,0,0.5);
+            animation: rgbBorder 3s infinite;
         }
         .timer-title {
             font-family: 'Orbitron', monospace;
@@ -170,7 +174,7 @@
             flex-wrap: wrap;
         }
         .countdown-block {
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.7);
             border-radius: 30px;
             padding: 20px 30px;
             min-width: 110px;
@@ -184,14 +188,13 @@
             color: #ffd700;
         }
         
-        /* МАГАЗИН */
         .shop-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
         }
         .product-card {
-            background: rgba(0,0,0,0.55);
+            background: rgba(0,0,0,0.7);
             backdrop-filter: blur(12px);
             border-radius: 28px;
             padding: 25px;
@@ -199,7 +202,7 @@
             transition: 0.3s;
             border: 1px solid rgba(255,215,0,0.3);
         }
-        .product-card:hover { transform: translateY(-6px); border-color: #ffd700; }
+        .product-card:hover { transform: translateY(-6px); border-color: #ffd700; animation: borderGlow 1s infinite; }
         .product-icon i { font-size: 52px; color: #ffd700; margin-bottom: 15px; }
         .product-name { font-size: 24px; font-weight: bold; color: white; }
         .price { font-size: 30px; font-weight: bold; color: #ffd700; margin: 15px 0; }
@@ -211,18 +214,20 @@
             font-weight: bold;
             cursor: pointer;
             width: 100%;
+            transition: 0.3s;
         }
+        .buy-btn:hover { transform: scale(1.02); box-shadow: 0 0 15px gold; }
         
-        /* ПРОФИЛЬ */
         .profile-card {
-            background: rgba(0,0,0,0.55);
+            background: rgba(0,0,0,0.7);
             backdrop-filter: blur(12px);
             border-radius: 40px;
             padding: 40px;
             text-align: center;
             max-width: 700px;
             margin: 0 auto;
-            border: 1px solid rgba(255,215,0,0.3);
+            border: 1px solid rgba(255,215,0,0.5);
+            animation: rgbBorder 5s infinite;
         }
         .profile-avatar {
             width: 120px;
@@ -238,19 +243,7 @@
         .profile-info { text-align: left; margin: 25px 0; }
         .profile-info p { padding: 10px 0; border-bottom: 1px solid rgba(255,215,0,0.2); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
         .profile-info i { width: 30px; color: #ffd700; }
-        .profile-info span, .profile-info strong { color: white; }
-        .edit-btn, .change-password-btn {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-size: 13px;
-            margin: 5px;
-        }
         
-        /* ГАЛОЧКИ */
         .badge-icon {
             display: inline-flex;
             align-items: center;
@@ -272,22 +265,18 @@
         .badge-rgb i { font-size: 12px; animation: rgbText 1s infinite; }
         .badge-crown { color: #ffd700; font-size: 16px; width: auto; background: none; }
         
-        /* ЧАТЫ */
         .chats-layout {
             display: grid;
             grid-template-columns: 320px 1fr;
             gap: 25px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.7);
             backdrop-filter: blur(16px);
             border-radius: 40px;
             padding: 25px;
             min-height: 70vh;
-            border: 1px solid rgba(255,215,0,0.3);
+            border: 1px solid rgba(255,215,0,0.5);
         }
-        .chats-sidebar {
-            border-right: 1px solid rgba(255,215,0,0.2);
-            padding-right: 20px;
-        }
+        .chats-sidebar { border-right: 1px solid rgba(255,215,0,0.2); padding-right: 20px; }
         .chat-item {
             display: flex;
             align-items: center;
@@ -296,17 +285,14 @@
             border-radius: 24px;
             cursor: pointer;
             transition: 0.3s;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,215,0,0.1);
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,215,0,0.2);
             margin-bottom: 10px;
         }
-        .chat-item:hover {
-            background: rgba(255,215,0,0.15);
-            transform: translateX(8px);
-        }
-        .chat-item.active {
+        .chat-item:hover, .chat-item.active {
             background: rgba(255,215,0,0.25);
             border-color: #ffd700;
+            transform: translateX(8px);
         }
         .chat-avatar {
             width: 55px;
@@ -318,58 +304,23 @@
             justify-content: center;
         }
         .chat-avatar i { font-size: 28px; color: #0a0a0a; }
-        .chat-info { flex: 1; }
-        .chat-name { font-weight: bold; font-size: 18px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; color: white; }
-        .chat-preview { font-size: 13px; color: #aaa; margin-top: 4px; }
+        .chat-name { font-weight: bold; font-size: 18px; display: flex; align-items: center; gap: 8px; color: white; }
         
-        .chat-area {
-            display: flex;
-            flex-direction: column;
-            height: 70vh;
-        }
-        .chat-header {
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255,215,0,0.2);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .chat-header h3 { font-size: 24px; font-family: 'Orbitron', monospace; color: #ffd700; }
-        .chat-messages { 
-            flex: 1; 
-            overflow-y: auto; 
-            padding-right: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .message {
-            display: flex;
-            flex-direction: column;
-            max-width: 80%;
-        }
+        .chat-area { display: flex; flex-direction: column; height: 70vh; }
+        .chat-messages { flex: 1; overflow-y: auto; padding-right: 15px; display: flex; flex-direction: column; gap: 12px; }
+        .message { display: flex; flex-direction: column; max-width: 80%; }
         .message.outgoing { align-self: flex-end; }
         .message.incoming { align-self: flex-start; }
         .message-bubble {
             padding: 12px 18px;
             border-radius: 22px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.8);
             border: 1px solid rgba(255,215,0,0.3);
             word-break: break-word;
             color: white;
         }
         .message.outgoing .message-bubble { background: rgba(255,215,0,0.2); border-color: #ffd700; }
-        .message-meta { 
-            font-size: 11px; 
-            color: #aaa; 
-            margin-top: 5px; 
-            padding-left: 12px; 
-            display: flex; 
-            align-items: center; 
-            gap: 6px; 
-            flex-wrap: wrap; 
-        }
+        
         .chat-input-area {
             display: flex;
             gap: 12px;
@@ -381,18 +332,10 @@
             flex: 1;
             padding: 14px 20px;
             border-radius: 60px;
-            border: 1px solid rgba(255,215,0,0.3);
-            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,215,0,0.5);
+            background: rgba(0,0,0,0.7);
             color: white;
             font-size: 15px;
-        }
-        .emoji-btn {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,215,0,0.3);
-            border-radius: 50%;
-            width: 52px;
-            cursor: pointer;
-            font-size: 22px;
         }
         .send-btn {
             background: linear-gradient(135deg, #ffd700, #ffaa00);
@@ -401,38 +344,24 @@
             padding: 0 30px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 14px;
         }
-        .bot-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin: 10px 0;
-        }
+        .bot-buttons { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0; }
         .bot-btn {
             background: rgba(255,215,0,0.2);
             border: 1px solid rgba(255,215,0,0.5);
             padding: 8px 16px;
             border-radius: 40px;
             cursor: pointer;
-            font-size: 13px;
             transition: 0.2s;
         }
-        .bot-btn:hover { background: rgba(255,215,0,0.4); transform: scale(1.02); }
-        .wheel-container {
-            background: rgba(0,0,0,0.5);
-            border-radius: 20px;
-            padding: 15px;
-            margin: 10px 0;
-            text-align: center;
-        }
+        .bot-btn:hover { background: rgba(255,215,0,0.5); transform: scale(1.02); }
+        
         .wheel {
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: conic-gradient(#ffd700 0deg 36deg, #ffaa00 36deg 72deg, #ff8800 72deg 108deg, #ff6600 108deg 144deg, #ff4400 144deg 180deg, #ff2200 180deg 216deg, #ff0000 216deg 252deg, #cc0000 252deg 288deg, #990000 288deg 324deg, #660000 324deg 360deg);
+            background: conic-gradient(#ffd700, #ffaa00, #ff8800, #ff6600, #ff4400, #ff2200, #ff0000);
             margin: 10px auto;
-            position: relative;
             transition: transform 3s cubic-bezier(0.2, 0.9, 0.1, 1);
             cursor: pointer;
         }
@@ -445,77 +374,16 @@
             font-size: 24px;
             color: #ffd700;
         }
-        .wheel-result {
-            margin-top: 10px;
-            font-weight: bold;
-            color: #ffd700;
-        }
-        .emoji-picker {
-            position: absolute;
-            bottom: 80px;
-            right: 20px;
-            background: #1a1a1a;
-            border-radius: 20px;
-            padding: 10px;
-            display: none;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            z-index: 100;
-            border: 1px solid #ffd700;
-        }
+        .wheel-container { background: rgba(0,0,0,0.5); border-radius: 20px; padding: 15px; margin: 10px 0; text-align: center; position: relative; }
         
-        /* АДМИН-ПАНЕЛЬ */
         .admin-section {
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.6);
             border-radius: 32px;
             padding: 25px;
             margin-bottom: 30px;
-            border: 1px solid rgba(255,215,0,0.2);
+            border: 1px solid rgba(255,215,0,0.3);
         }
         .admin-section h3 { margin-bottom: 20px; color: #ffd700; font-family: 'Orbitron', monospace; }
-        .players-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        .player-card {
-            background: rgba(0,0,0,0.5);
-            border-radius: 20px;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .log-item {
-            background: rgba(0,0,0,0.3);
-            border-radius: 12px;
-            padding: 10px;
-            margin-bottom: 8px;
-            font-size: 13px;
-            border-left: 3px solid #ffd700;
-        }
-        .admin-input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,215,0,0.3);
-            border-radius: 16px;
-            color: white;
-        }
-        .admin-select {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,215,0,0.3);
-            border-radius: 16px;
-            color: white;
-        }
         .admin-btn {
             background: linear-gradient(135deg, #ffd700, #ffaa00);
             color: #0a0a0a;
@@ -528,11 +396,18 @@
             margin-bottom: 8px;
         }
         .admin-btn-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
-        .admin-btn-purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
         .admin-btn-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
-        .admin-btn-green { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
+        .admin-btn-purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
+        .admin-input, .admin-select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            background: rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,215,0,0.5);
+            border-radius: 16px;
+            color: white;
+        }
         
-        /* МОДАЛКИ */
         .modal {
             display: none;
             position: fixed;
@@ -546,61 +421,22 @@
             align-items: center;
             z-index: 6000;
         }
-        .modal-content {
-            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
-            border-radius: 36px;
-            padding: 35px;
-            width: 500px;
-            max-width: 90%;
-            border: 1px solid #ffd700;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        .close-modal { float: right; font-size: 28px; cursor: pointer; color: #ffd700; }
-        .auth-modal {
+        .modal-content, .auth-modal {
             background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
             border-radius: 48px;
-            padding: 50px;
+            padding: 40px;
             width: 500px;
             max-width: 90%;
             border: 2px solid;
             animation: rgbBorder 3s infinite;
             text-align: center;
         }
-        .auth-modal h2 { 
-            margin-bottom: 30px; 
-            font-family: 'Orbitron', monospace; 
-            font-size: 36px;
-            animation: rgbText 3s infinite;
-            font-weight: bold;
-        }
-        .tabs-auth {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        .tab-auth {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 10px 30px;
-            border-radius: 60px;
-            font-family: 'Orbitron', monospace;
-        }
-        .tab-auth.active { 
-            background: linear-gradient(135deg, #ffd700, #ffaa00); 
-            color: #0a0a0a;
-            box-shadow: 0 0 15px rgba(255,215,0,0.5);
-        }
         .auth-input {
             width: 100%;
-            padding: 16px;
-            margin: 12px 0;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,215,0,0.3);
+            padding: 14px;
+            margin: 10px 0;
+            background: rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,215,0,0.5);
             border-radius: 60px;
             color: white;
         }
@@ -608,15 +444,28 @@
             width: 100%;
             background: linear-gradient(135deg, #ffd700, #ffaa00);
             border: none;
-            padding: 16px;
+            padding: 14px;
             border-radius: 60px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 15px;
+        }
+        .tab-auth {
+            background: none;
+            border: none;
+            color: white;
             font-size: 18px;
+            cursor: pointer;
+            padding: 8px 25px;
+            border-radius: 40px;
+            font-family: 'Orbitron', monospace;
+        }
+        .tab-auth.active {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: black;
         }
         .tab-pane-auth { display: none; }
         .tab-pane-auth.active { display: block; }
+        .admin-only { display: none; }
         .closed-modal {
             position: fixed;
             top: 0;
@@ -639,7 +488,6 @@
             border: 2px solid #ff8800;
             animation: borderGlow 2s infinite;
         }
-        .admin-only { display: none; }
         
         @media (max-width: 768px) {
             .section-title { font-size: 28px; }
@@ -699,7 +547,6 @@
             <div class="shop-grid" id="shopGrid"></div>
         </div>
 
-        <!-- ЧАТЫ -->
         <div id="chatsPage" class="page">
             <div class="section-title">💬 ОФИЦИАЛЬНЫЕ ЧАТЫ</div>
             <div class="chats-layout">
@@ -748,10 +595,8 @@
                     </div>
                     <div class="chat-input-area" id="chatInputArea">
                         <input type="text" id="messageInput" placeholder="Напишите сообщение...">
-                        <button class="emoji-btn" id="emojiBtn">😊</button>
                         <button class="send-btn" id="sendMessageBtn">📤 ОТПРАВИТЬ</button>
                     </div>
-                    <div id="emojiPicker" class="emoji-picker"></div>
                 </div>
             </div>
         </div>
@@ -786,14 +631,12 @@
                 <div class="admin-section"><h3>🎡 УПРАВЛЕНИЕ КОЛЕСОМ УДАЧИ</h3>
                     <input type="text" id="wheelUserNick" placeholder="Никнейм игрока" class="admin-input">
                     <button id="giveSpinBtn" class="admin-btn-blue">🎫 ВЫДАТЬ ПРОКРУТКУ</button>
-                    <button id="removeSpinBtn" class="admin-btn-red">❌ ЗАБРАТЬ ПРОКРУТКУ</button>
                 </div>
                 <div class="admin-section"><h3>📋 УПРАВЛЕНИЕ ЗАДАНИЯМИ</h3>
                     <input type="text" id="taskName" placeholder="Название" class="admin-input">
                     <input type="number" id="taskReward" placeholder="Награда (₽)" class="admin-input">
                     <textarea id="taskDesc" rows="2" placeholder="Описание" class="admin-input"></textarea>
                     <button id="addTaskBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button>
-                    <div id="tasksListAdmin" style="margin-top:10px;"></div>
                 </div>
                 <div class="admin-section"><h3>✅ ВЫДАЧА ГАЛОЧЕК</h3>
                     <input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input">
@@ -813,15 +656,6 @@
                     <input type="number" id="giveAmount" placeholder="Сумма" class="admin-input">
                     <button id="giveCoinsBtn" class="admin-btn-blue">💸 ВЫДАТЬ</button>
                     <button id="globalGiveBtn" class="admin-btn-purple">🌍 ВЫДАТЬ ВСЕМ</button>
-                </div>
-                <div class="admin-section"><h3>🔒 УПРАВЛЕНИЕ САЙТОМ</h3>
-                    <textarea id="closeReason" rows="2" placeholder="Причина" class="admin-input"></textarea>
-                    <select id="closeDuration" class="admin-select">
-                        <option value="1">1 час</option><option value="6">6 часов</option><option value="12">12 часов</option>
-                        <option value="24">1 день</option><option value="72">3 дня</option><option value="168">7 дней</option>
-                    </select>
-                    <button id="closeSiteBtn" class="admin-btn-red">🔒 ЗАКРЫТЬ</button>
-                    <button id="openSiteBtn" class="admin-btn-green">🔓 ОТКРЫТЬ</button>
                 </div>
                 <div class="admin-section"><h3>📜 ЛОГИ</h3><div id="logsList"></div></div>
             </div>
@@ -849,812 +683,631 @@
         </div>
     </div>
 
+    <div id="buyModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeBuyModal">&times;</span><h3 id="buyProductName"></h3><p>Цена: <strong id="buyPrice"></strong> ₽</p><input type="text" id="buyNick" placeholder="Ваш ник" class="admin-input"><button id="confirmBuyBtn" class="admin-btn">КУПИТЬ</button></div></div>
     <div id="editNameModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeEditModal">&times;</span><h3>Сменить имя</h3><input type="text" id="newNameInput" placeholder="Новое имя" class="admin-input"><button id="saveNameBtn" class="admin-btn">Сохранить</button></div></div>
     <div id="changePasswordModal" class="modal"><div class="modal-content"><span class="close-modal" id="closePasswordModal">&times;</span><h3>Сменить пароль</h3><input type="password" id="oldPasswordInput" placeholder="Старый пароль" class="admin-input"><input type="password"id="newPasswordInput" placeholder="Новый пароль (мин. 6)" class="admin-input"><button id="savePasswordBtn" class="admin-btn">Сохранить</button></div></div>
-    <div id="buyModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeBuyModal">&times;</span><h3 id="buyProductName"></h3><p>Цена: <strong id="buyPrice"></strong> ₽</p><input type="text" id="buyNick" placeholder="Ваш ник" class="admin-input"><button id="confirmBuyBtn" class="admin-btn">КУПИТЬ</button></div></div>
-    <div id="userActionsModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeUserActionsModal">&times;</span><div id="userActionsContent"></div></div></div>
 
     <script>
-        // ДОЖИДАЕМСЯ ЗАГРУЗКИ DOM
-        document.addEventListener('DOMContentLoaded', function() {
-            
-        const firebaseConfig = {
-            apiKey: "AIzaSyCK9vHX-OQIw48SGi8S_8U7pIjq60gahEA",
-            authDomain: "siteorgooo.firebaseapp.com",
-            projectId: "siteorgooo",
-            storageBucket: "siteorgooo.firebasestorage.app",
-            messagingSenderId: "891797808455",
-            appId: "1:891797808455:web:fa5e94be661dcc87d81862"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
+        // ==================== ПОЛНОСТЬЮ РАБОЧИЙ СКРИПТ ====================
+        (function() {
+            const firebaseConfig = {
+                apiKey: "AIzaSyCK9vHX-OQIw48SGi8S_8U7pIjq60gahEA",
+                authDomain: "siteorgooo.firebaseapp.com",
+                projectId: "siteorgooo",
+                storageBucket: "siteorgooo.firebasestorage.app",
+                messagingSenderId: "891797808455",
+                appId: "1:891797808455:web:fa5e94be661dcc87d81862"
+            };
+            if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+            const auth = firebase.auth();
+            const db = firebase.firestore();
 
-        const MAIN_ADMINS = ["ramonenok@bk.ru", "GrifMCpro@mail.ru"];
-        const SYSTEM_NAME = "Система";
-        const EMOJIS = ["😀", "😂", "🥰", "😎", "🔥", "❤️", "🎉", "✨", "⭐", "✅", "⚠️"];
-        
-        function getBadgeHtml(type) {
-            if(!type) return '';
-            switch(type) {
-                case 'blue': return `<span class="badge-icon badge-blue"><i class="fas fa-check"></i></span>`;
-                case 'red': return `<span class="badge-icon badge-red"><i class="fas fa-check"></i></span>`;
-                case 'gold': return `<span class="badge-icon badge-gold"><i class="fas fa-check"></i></span>`;
-                case 'rainbow': return `<span class="badge-icon badge-rainbow"><i class="fas fa-check"></i></span>`;
-                case 'rgb': return `<span class="badge-icon badge-rgb"><i class="fas fa-check"></i></span>`;
-                case 'crown': return `<span class="badge-icon badge-crown"><i class="fas fa-crown"></i></span>`;
-                default: return '';
+            const MAIN_ADMINS = ["ramonenok@bk.ru", "GrifMCpro@mail.ru"];
+            let currentUser = null;
+            let currentBalance = 0;
+            let currentProduct = null;
+            let moderatorsList = [];
+            let tasks = [];
+            let wheelSpins = {};
+            let currentChat = "channel";
+
+            function getBadgeHtml(type) {
+                if(!type) return '';
+                const map = { blue:'badge-blue', red:'badge-red', gold:'badge-gold', rainbow:'badge-rainbow', rgb:'badge-rgb', crown:'badge-crown' };
+                return `<span class="badge-icon ${map[type]}"><i class="fas fa-check"></i></span>`;
             }
-        }
 
-        const privileges = [
-            { name: "Премиум", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/kit", "/fly"] },
-            { name: "Креатив", price: 2500, icon: "fa-palette", features: ["Доступ к креативу", "WorldEdit"] },
-            { name: "Модер", price: 5000, icon: "fa-shield-alt", features: ["Мут/кик", "Проверка игроков"] },
-            { name: "Лорд", price: 10000, icon: "fa-crown", features: ["Команда /god", "Неприкосновенность"] },
-            { name: "Админ", price: 20000, icon: "fa-user-tie", features: ["Баны/кики", "Управление"] },
-            { name: "Правитель", price: 1000000, icon: "fa-chess-king", features: ["Верховный правитель"] }
-        ];
+            const privileges = [
+                { name: "Премиум", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/kit", "/fly"] },
+                { name: "Креатив", price: 2500, icon: "fa-palette", features: ["Доступ к креативу", "WorldEdit"] },
+                { name: "Модер", price: 5000, icon: "fa-shield-alt", features: ["Мут/кик", "Проверка игроков"] },
+                { name: "Лорд", price: 10000, icon: "fa-crown", features: ["Команда /god", "Неприкосновенность"] },
+                { name: "Админ", price: 20000, icon: "fa-user-tie", features: ["Баны/кики", "Управление"] },
+                { name: "Правитель", price: 1000000, icon: "fa-chess-king", features: ["Верховный правитель"] }
+            ];
 
-        let currentUser = null;
-        let currentBalance = 0;
-        let currentProduct = null;
-        let timerInterval = null;
-        let moderatorsList = [];
-        let currentChat = "channel";
-        let tasks = [];
-        let wheelSpins = {};
+            function renderShop() {
+                const container = document.getElementById('shopGrid');
+                if(!container) return;
+                container.innerHTML = privileges.map(p => `
+                    <div class="product-card">
+                        <div class="product-icon"><i class="fas ${p.icon}"></i></div>
+                        <div class="product-name">${p.name}</div>
+                        <div class="price">${p.price.toLocaleString()} ₽</div>
+                        <ul style="margin:15px 0; text-align:left;">${p.features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}</ul>
+                        <button class="buy-btn" onclick="window.openBuyModal('${p.name}', ${p.price})">КУПИТЬ</button>
+                    </div>
+                `).join('');
+            }
 
-        function renderShop() {
-            const container = document.getElementById('shopGrid');
-            if(!container) return;
-            container.innerHTML = privileges.map(p => `
-                <div class="product-card">
-                    <div class="product-icon"><i class="fas ${p.icon}"></i></div>
-                    <div class="product-name">${p.name}</div>
-                    <div class="price">${p.price.toLocaleString()} ₽</div>
-                    <ul style="margin:15px 0; text-align:left;">${p.features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}</ul>
-                    <button class="buy-btn" onclick="openBuyModal('${p.name}', ${p.price})">КУПИТЬ</button>
-                </div>
-            `).join('');
-        }
+            window.openBuyModal = function(name, price) {
+                currentProduct = { name, price };
+                document.getElementById('buyProductName').innerText = name;
+                document.getElementById('buyPrice').innerText = price.toLocaleString();
+                document.getElementById('buyModal').style.display = 'flex';
+            };
 
-        window.openBuyModal = function(name, price) {
-            currentProduct = { name, price };
-            document.getElementById('buyProductName').innerText = name;
-            document.getElementById('buyPrice').innerText = price.toLocaleString();
-            document.getElementById('buyModal').style.display = 'flex';
-        };
+            async function loadUserData(user) {
+                try {
+                    const doc = await db.collection('users').doc(user.uid).get();
+                    const data = doc.data();
+                    if(!data) {
+                        await db.collection('users').doc(user.uid).set({
+                            username: user.displayName,
+                            email: user.email,
+                            balance: 50000,
+                            registeredAt: new Date().toISOString(),
+                            wheelSpins: 1
+                        });
+                        currentBalance = 50000;
+                        wheelSpins[user.uid] = 1;
+                    } else {
+                        currentBalance = data.balance || 50000;
+                        wheelSpins[user.uid] = data.wheelSpins || 1;
+                    }
+                    document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
+                    
+                    const nameDiv = document.getElementById('profileName');
+                    if(nameDiv) {
+                        nameDiv.innerHTML = (data.username || user.displayName) + (data.badge ? getBadgeHtml(data.badge) : '');
+                    }
+                    
+                    document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> <strong>Email:</strong> <span style="color:white;">${user.email}</span></p><p><i class="fas fa-calendar"></i> <strong>Регистрация:</strong> <span style="color:white;">${data.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</span></p>`;
+                    
+                    const donatesSnap = await db.collection('donates').where('userId', '==', user.uid).get();
+                    const donatesContainer = document.getElementById('donatesContainer');
+                    if(donatesContainer) {
+                        donatesContainer.innerHTML = '<h4 style="color:#ffd700;">🎁 Мои донаты</h4>';
+                        if(donatesSnap.empty) donatesContainer.innerHTML += '<p style="color:white;">Нет покупок</p>';
+                        else donatesSnap.forEach(d => donatesContainer.innerHTML += `<span style="background:linear-gradient(135deg,#3b82f6,#2563eb); color:white; padding:5px 14px; border-radius:40px; font-size:12px; display:inline-block; margin:4px;">${d.data().product}</span> `);
+                    }
+                    
+                    const hasAdminAccess = MAIN_ADMINS.includes(user.email) || moderatorsList.some(m => m.email === user.email);
+                    if(hasAdminAccess) {
+                        document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
+                    }
+                } catch(e) { console.error("User load error:", e); }
+            }
 
-        document.getElementById('confirmBuyBtn').onclick = async function() {
-            const nick = document.getElementById('buyNick').value.trim();
-            if(!nick) return alert('Введите ник');
-            if(currentBalance < currentProduct.price) return alert('Недостаточно средств!');
-            const newBalance = currentBalance - currentProduct.price;
-            await db.collection('users').doc(currentUser.uid).update({ balance: newBalance });
-            currentBalance = newBalance;
-            document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-            await db.collection('donates').add({ userId: currentUser.uid, username: currentUser.displayName, product: currentProduct.name, price: currentProduct.price, serverNick: nick, date: new Date() });
-            addLog('ПОКУПКА', currentUser.email, `${currentProduct.name} за ${currentProduct.price} ₽`);
-            alert(`✅ Куплено: ${currentProduct.name}!`);
-            document.getElementById('buyModal').style.display = 'none';
-            loadUserData(currentUser);
-        };
+            async function addLog(action, target, details) {
+                if(!currentUser) return;
+                try {
+                    await db.collection('logs').add({ action, moderator: "Система", target, details, timestamp: new Date() });
+                } catch(e) {}
+            }
 
-        async function loadUserData(user) {
-            try {
-                const doc = await db.collection('users').doc(user.uid).get();
-                const data = doc.data();
-                if(!data) {
-                    await db.collection('users').doc(user.uid).set({
-                        username: user.displayName,
-                        email: user.email,
-                        balance: 50000,
-                        registeredAt: new Date().toISOString(),
-                        wheelSpins: 1
+            // ЧАТЫ
+            function loadChannelMessages() {
+                db.collection('chats').doc('channel').collection('messages').orderBy('timestamp').onSnapshot((snapshot) => {
+                    const container = document.getElementById('chatMessages');
+                    if(!container || currentChat !== 'channel') return;
+                    container.innerHTML = '';
+                    snapshot.forEach(doc => {
+                        const msg = doc.data();
+                        const isOutgoing = msg.from === currentUser?.uid;
+                        container.innerHTML += `
+                            <div class="message ${isOutgoing ? 'outgoing' : 'incoming'}">
+                                <div class="message-bubble">${msg.text}</div>
+                                <div class="message-meta">${msg.fromName} • ${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
+                            </div>
+                        `;
                     });
-                    currentBalance = 50000;
-                    wheelSpins[user.uid] = 1;
-                } else {
-                    currentBalance = data.balance || 50000;
-                    wheelSpins[user.uid] = data.wheelSpins || 1;
+                    container.scrollTop = container.scrollHeight;
+                });
+            }
+
+            function loadBotMessages() {
+                db.collection('chats').doc('bot').collection('messages').orderBy('timestamp').onSnapshot((snapshot) => {
+                    const container = document.getElementById('chatMessages');
+                    if(!container || currentChat !== 'bot') return;
+                    container.innerHTML = '';
+                    snapshot.forEach(doc => {
+                        const msg = doc.data();
+                        const isOutgoing = msg.from === currentUser?.uid;
+                        container.innerHTML += `
+                            <div class="message ${isOutgoing ? 'outgoing' : 'incoming'}">
+                                <div class="message-bubble">${msg.text}</div>
+                                <div class="message-meta">${msg.fromName}${msg.from === 'system' ? ' 🤖' : ''}</div>
+                            </div>
+                        `;
+                    });
+                    container.scrollTop = container.scrollHeight;
+                });
+            }
+
+            function addSystemMessage(text) {
+                db.collection('chats').doc('bot').collection('messages').add({
+                    from: "system",
+                    fromName: "GrifMcBot",
+                    text: text,
+                    timestamp: new Date()
+                });
+            }
+
+            async function loadTasks() {
+                const doc = await db.collection('settings').doc('tasks').get();
+                if(doc.exists) tasks = doc.data().list || [];
+                else {
+                    tasks = [
+                        { name: "Купить Премиум", reward: 4000, desc: "Приобретите привилегию Премиум" },
+                        { name: "Пополнить баланс", reward: 2000, desc: "Пополните баланс на 1000 ₽" },
+                        { name: "Пригласить друга", reward: 5000, desc: "Пригласите друга на сервер" }
+                    ];
+                    await db.collection('settings').doc('tasks').set({ list: tasks });
                 }
+                renderTasksList();
+            }
+
+            function renderTasksList() {
+                const container = document.getElementById('tasksContainer');
+                if(!container) return;
+                container.innerHTML = tasks.map(t => `
+                    <div style="background:rgba(0,0,0,0.3); border-radius:16px; padding:12px; margin-bottom:8px;">
+                        <div><strong>📌 ${t.name}</strong></div>
+                        <div style="font-size:13px;">${t.desc}</div>
+                        <div style="color:#ffd700;">💰 ${t.reward.toLocaleString()} ₽</div>
+                        <button class="bot-btn" onclick="window.completeTask('${t.name}', ${t.reward})" style="margin-top:8px;">✅ ВЫПОЛНИТЬ</button>
+                    </div>
+                `).join('');
+            }
+
+            window.completeTask = async function(taskName, reward) {
+                const newBalance = currentBalance + reward;
+                await db.collection('users').doc(currentUser.uid).update({ balance: newBalance });
+                currentBalance = newBalance;
                 document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                
-                const nameDiv = document.getElementById('profileName');
-                nameDiv.innerHTML = '';
-                nameDiv.appendChild(document.createTextNode(data.username || user.displayName));
-                if(data.badge) {
-                    nameDiv.insertAdjacentHTML('beforeend', getBadgeHtml(data.badge));
-                }
-                
-                document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> <strong>Email:</strong> <span style="color:white;">${user.email}</span></p><p><i class="fas fa-calendar"></i> <strong>Регистрация:</strong> <span style="color:white;">${data.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</span></p>`;
-                
-                const donatesSnap = await db.collection('donates').where('userId', '==', user.uid).get();
-                const donatesContainer = document.getElementById('donatesContainer');
-                if(donatesContainer) {
-                    donatesContainer.innerHTML = '<h4 style="color:#ffd700;">🎁 Мои донаты</h4>';
-                    if(donatesSnap.empty) donatesContainer.innerHTML += '<p style="color:white;">Нет покупок</p>';
-                    else donatesSnap.forEach(d => donatesContainer.innerHTML += `<span style="background:linear-gradient(135deg,#3b82f6,#2563eb); color:white; padding:5px 14px; border-radius:40px; font-size:12px; display:inline-block; margin:4px;">${d.data().product}</span> `);
-                }
-                
-                const hasAdminAccess = MAIN_ADMINS.includes(user.email) || moderatorsList.some(m => m.email === user.email);
-                if(hasAdminAccess) {
-                    document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
-                }
-            } catch(e) { console.error("User load error:", e); }
-        }
-
-        async function addLog(action, target, details) {
-            if(!currentUser) return;
-            try {
-                await db.collection('logs').add({ action, moderator: SYSTEM_NAME, target, details, timestamp: new Date() });
-            } catch(e) { console.error("Log error:", e); }
-        }
-
-        // ЧАТЫ
-        async function loadChannelMessages() {
-            const messagesRef = db.collection('chats').doc('channel').collection('messages').orderBy('timestamp');
-            messagesRef.onSnapshot((snapshot) => {
-                const container = document.getElementById('chatMessages');
-                if(!container || currentChat !== 'channel') return;
-                container.innerHTML = '';
-                snapshot.forEach(doc => {
-                    const msg = doc.data();
-                    const isOutgoing = msg.from === currentUser?.uid;
-                    const isAdminMsg = MAIN_ADMINS.includes(msg.fromEmail);
-                    container.innerHTML += `
-                        <div class="message ${isOutgoing ? 'outgoing' : 'incoming'}">
-                            <div class="message-bubble">${msg.text}</div>
-                            <div class="message-meta">${msg.fromName}${isAdminMsg ? getBadgeHtml('blue') : ''} • ${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
-                        </div>
-                    `;
-                });
-                container.scrollTop = container.scrollHeight;
-            });
-        }
-
-        async function loadBotMessages() {
-            const messagesRef = db.collection('chats').doc('bot').collection('messages').orderBy('timestamp');
-            messagesRef.onSnapshot((snapshot) => {
-                const container = document.getElementById('chatMessages');
-                if(!container || currentChat !== 'bot') return;
-                container.innerHTML = '';
-                snapshot.forEach(doc => {
-                    const msg = doc.data();
-                    const isOutgoing = msg.from === currentUser?.uid;
-                    container.innerHTML += `
-                        <div class="message ${isOutgoing ? 'outgoing' : 'incoming'}">
-                            <div class="message-bubble">${msg.text}</div>
-                            <div class="message-meta">${msg.fromName}${msg.from === 'system' ? ' 🤖' : ''} • ${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
-                        </div>
-                    `;
-                });
-                container.scrollTop = container.scrollHeight;
-            });
-        }
-
-        async function loadTasks() {
-            const doc = await db.collection('settings').doc('tasks').get();
-            if(doc.exists) tasks = doc.data().list || [];
-            else {
-                tasks = [
-                    { name: "Купить Премиум", reward: 4000, desc: "Приобретите привилегию Премиум" },
-                    { name: "Пополнить баланс", reward: 2000, desc: "Пополните баланс на 1000 ₽" },
-                    { name: "Пригласить друга", reward: 5000, desc: "Пригласите друга на сервер" }
-                ];
-                await db.collection('settings').doc('tasks').set({ list: tasks });
-            }
-            renderTasksList();
-        }
-
-        function renderTasksList() {
-            const container = document.getElementById('tasksContainer');
-            if(!container) return;
-            container.innerHTML = tasks.map(t => `
-                <div style="background:rgba(0,0,0,0.3); border-radius:16px; padding:12px; margin-bottom:8px;">
-                    <div><strong>📌 ${t.name}</strong></div>
-                    <div style="font-size:13px;">${t.desc}</div>
-                    <div style="color:#ffd700;">💰 ${t.reward.toLocaleString()} ₽</div>
-                    <button class="bot-btn" onclick="completeTask('${t.name}', ${t.reward})" style="margin-top:8px;">✅ ВЫПОЛНИТЬ</button>
-                </div>
-            `).join('');
-        }
-
-        window.completeTask = async function(taskName, reward) {
-            const newBalance = currentBalance + reward;
-            await db.collection('users').doc(currentUser.uid).update({ balance: newBalance });
-            currentBalance = newBalance;
-            document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-            addSystemMessage("bot", `✅ Задание "${taskName}" выполнено! +${reward.toLocaleString()} ₽`);
-        };
-
-        function addSystemMessage(chat, text) {
-            const messagesRef = db.collection('chats').doc(chat).collection('messages');
-            messagesRef.add({
-                from: "system",
-                fromName: "GrifMcBot",
-                text: text,
-                timestamp: new Date()
-            });
-        }
-
-        async function sendBotCommand(cmd) {
-            const msgRef = db.collection('chats').doc('bot').collection('messages');
-            if(cmd === '/start') {
-                await msgRef.add({ from: "system", fromName: "GrifMcBot", text: "🤖 Привет! Я бот-помощник. Доступные команды:\n/tasks - задания\n/wheel - колесо удачи\n/help - помощь", timestamp: new Date() });
-            } else if(cmd === '/tasks') {
-                await msgRef.add({ from: "system", fromName: "GrifMcBot", text: "📋 Доступные задания:", timestamp: new Date() });
-                for(const t of tasks) {
-                    await msgRef.add({ from: "system", fromName: "GrifMcBot", text: `📌 ${t.name} - ${t.desc} (💰 ${t.reward} ₽)`, timestamp: new Date() });
-                }
-                await msgRef.add({ from: "system", fromName: "GrifMcBot", text: "Нажмите на кнопку задания выше, чтобы выполнить!", timestamp: new Date() });
-            } else if(cmd === '/wheel') {
-                const spins = wheelSpins[currentUser.uid] || 0;
-                await msgRef.add({ from: "system", fromName: "GrifMcBot", text: `🎡 У вас ${spins} прокруток колеса удачи!`, timestamp: new Date() });
-            }
-        }
-
-        async function spinWheel() {
-            const spins = wheelSpins[currentUser.uid] || 0;
-            if(spins <= 0) {
-                addSystemMessage("bot", "❌ У вас нет прокруток! Получите их в админке или за задания.");
-                return;
-            }
-            const prizes = [1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000, 10000000, 500000000];
-            const prize = prizes[Math.floor(Math.random() * prizes.length)];
-            const newSpins = spins - 1;
-            wheelSpins[currentUser.uid] = newSpins;
-            await db.collection('users').doc(currentUser.uid).update({ wheelSpins: newSpins });
-            const newBalance = currentBalance + prize;
-            await db.collection('users').doc(currentUser.uid).update({ balance: newBalance });
-            currentBalance = newBalance;
-            document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-            addSystemMessage("bot", `🎉 ВЫ ВЫИГРАЛИ ${prize.toLocaleString()} ₽ на колесе удачи! Осталось прокруток: ${newSpins}`);
-        }
-
-        document.getElementById('sendMessageBtn').onclick = async function() {
-            const text = document.getElementById('messageInput').value.trim();
-            if(!text) return;
-            if(currentChat === 'channel') {
-                const isAdmin = MAIN_ADMINS.includes(currentUser.email);
-                if(!isAdmin) {
-                    alert('Только создатель канала может писать сообщения!');
-                    return;
-                }
-                await db.collection('chats').doc('channel').collection('messages').add({
-                    from: currentUser.uid,
-                    fromName: currentUser.displayName,
-                    fromEmail: currentUser.email,
-                    text: text,
-                    timestamp: new Date()
-                });
-            } else if(currentChat === 'bot') {
-                await db.collection('chats').doc('bot').collection('messages').add({
-                    from: currentUser.uid,
-                    fromName: currentUser.displayName,
-                    text: text,
-                    timestamp: new Date()
-                });
-                if(text.startsWith('/')) sendBotCommand(text);
-                else if(text.toLowerCase().includes('задание')) sendBotCommand('/tasks');
-                else if(text.toLowerCase().includes('колесо')) sendBotCommand('/wheel');
-            }
-            document.getElementById('messageInput').value = '';
-        };
-
-        document.querySelectorAll('.chat-item').forEach(item => {
-            item.onclick = () => {
-                document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
-                currentChat = item.dataset.chat;
-                const name = item.querySelector('.chat-name').innerHTML;
-                document.getElementById('currentChatName').innerHTML = name;
-                document.getElementById('chatMessages').innerHTML = '';
-                
-                if(currentChat === 'channel') {
-                    document.getElementById('botInterface').style.display = 'none';
-                    document.getElementById('chatInputArea').style.display = 'flex';
-                    loadChannelMessages();
-                } else {
-                    document.getElementById('botInterface').style.display = 'block';
-                    document.getElementById('chatInputArea').style.display = 'flex';
-                    document.getElementById('wheelGame').style.display = 'none';
-                    document.getElementById('tasksList').style.display = 'none';
-                    loadBotMessages();
-                }
+                addSystemMessage(`✅ Задание "${taskName}" выполнено! +${reward.toLocaleString()} ₽`);
             };
-        });
 
-        document.querySelectorAll('.bot-btn').forEach(btn => {
-            btn.onclick = () => {
-                const cmd = btn.dataset.cmd;
-                if(cmd === '/wheel') {
-                    document.getElementById('wheelGame').style.display = 'block';
-                    document.getElementById('tasksList').style.display = 'none';
-                    const spins = wheelSpins[currentUser.uid] || 0;
-                    document.getElementById('wheelNextSpin').innerHTML = `🎫 Прокруток: ${spins}`;
+            async function sendBotCommand(cmd) {
+                if(cmd === '/start') {
+                    addSystemMessage("🤖 Привет! Я бот-помощник. Команды: /tasks, /wheel");
                 } else if(cmd === '/tasks') {
-                    document.getElementById('wheelGame').style.display = 'none';
-                    document.getElementById('tasksList').style.display = 'block';
-                    renderTasksList();
-                } else {
-                    document.getElementById('wheelGame').style.display = 'none';
-                    document.getElementById('tasksList').style.display = 'none';
-                    sendBotCommand(cmd);
-                }
-            };
-        });
-
-        document.getElementById('spinWheelBtn').onclick = spinWheel;
-
-        // ЭМОДЗИ
-        document.getElementById('emojiBtn').onclick = () => {
-            const picker = document.getElementById('emojiPicker');
-            if(picker.style.display === 'grid') picker.style.display = 'none';
-            else {
-                picker.innerHTML = '';
-                EMOJIS.forEach(emoji => {
-                    const span = document.createElement('span');
-                    span.textContent = emoji;
-                    span.style.cursor = 'pointer';
-                    span.style.fontSize = '24px';
-                    span.style.padding = '5px';
-                    span.onclick = () => {
-                        document.getElementById('messageInput').value += emoji;
-                        picker.style.display = 'none';
-                    };
-                    picker.appendChild(span);
-                });
-                picker.style.display = 'grid';
-            }
-        };
-
-        // АДМИНКА
-        async function loadModerators() {
-            const doc = await db.collection('settings').doc('moderators').get();
-            moderatorsList = doc.exists ? doc.data().list || [] : [];
-            const container = document.getElementById('moderatorsList');
-            if(container) {
-                container.innerHTML = moderatorsList.map(m => `<div style="background:rgba(0,0,0,0.5); border-radius:16px; padding:10px; margin-bottom:8px; display:flex; justify-content:space-between;"><span>👑 ${m.nick || m.email}</span><button onclick="removeModerator('${m.email}')" style="background:#ef4444; border:none; padding:5px 15px; border-radius:30px; cursor:pointer;">УДАЛИТЬ</button></div>`).join('');
-            }
-        }
-        window.removeModerator = async function(email) {
-            moderatorsList = moderatorsList.filter(m => m.email !== email);
-            await db.collection('settings').doc('moderators').set({ list: moderatorsList });
-            loadModerators();
-            alert('Модератор удалён');
-        };
-        document.getElementById('addModeratorBtn').onclick = async function() {
-            const nick = document.getElementById('moderatorNick').value.trim();
-            if(!nick) return alert('Введите ник');
-            const userSnap = await db.collection('users').where('username', '==', nick).get();
-            if(userSnap.empty) return alert('Пользователь не найден');
-            const userData = userSnap.docs[0].data();
-            if(moderatorsList.some(m => m.email === userData.email)) return alert('Уже в списке');
-            moderatorsList.push({ nick: userData.username, email: userData.email });
-            await db.collection('settings').doc('moderators').set({ list: moderatorsList });
-            document.getElementById('moderatorNick').value = '';
-            loadModerators();
-            alert(`Модератор ${nick} добавлен`);
-        };
-
-        document.getElementById('giveBadgeBtn').onclick = async function() {
-            const nick = document.getElementById('badgeNick').value.trim();
-            const type = document.getElementById('badgeType').value;
-            if(!nick) return alert('Введите ник');
-            const snap = await db.collection('users').where('username', '==', nick).get();
-            if(snap.empty) return alert('Пользователь не найден');
-            await snap.docs[0].ref.update({ badge: type });
-            addLog('ВЫДАЧА ЗНАЧКА', nick, `Тип: ${type}`);
-            alert(`✅ Значок выдан ${nick}!`);
-            document.getElementById('badgeNick').value = '';
-        };
-        document.getElementById('removeBadgeBtn').onclick = async function() {
-            const nick = document.getElementById('badgeNick').value.trim();
-            if(!nick) return alert('Введите ник');
-            const snap = await db.collection('users').where('username', '==', nick).get();
-            if(snap.empty) return alert('Пользователь не найден');
-            await snap.docs[0].ref.update({ badge: null });
-            addLog('СНЯТИЕ ЗНАЧКА', nick, '');
-            alert(`❌ Значок снят с ${nick}`);
-            document.getElementById('badgeNick').value = '';
-        };
-
-        document.getElementById('giveCoinsBtn').onclick = async function() {
-            const nick = document.getElementById('giveNick').value.trim();
-            const amount = parseInt(document.getElementById('giveAmount').value);
-            if(!nick || isNaN(amount)) return alert('Введите ник и сумму');
-            const snap = await db.collection('users').where('username', '==', nick).get();
-            if(snap.empty) return alert('Пользователь не найден');
-            const newBalance = (snap.docs[0].data().balance || 0) + amount;
-            await snap.docs[0].ref.update({ balance: newBalance });
-            addLog('ВЫДАЧА МОНЕТ', nick, `${amount} ₽`);
-            alert(`✅ Выдано ${amount} ₽ ${nick}`);
-            document.getElementById('giveNick').value = '';
-            document.getElementById('giveAmount').value = '';
-        };
-        document.getElementById('globalGiveBtn').onclick = async function() {
-            const amount = parseInt(prompt("Сумма для всех:"));
-            if(isNaN(amount)) return;
-            const snap = await db.collection('users').get();
-            for(const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
-            addLog('ГЛОБАЛЬНАЯ ВЫДАЧА', 'ВСЕМ', `${amount} ₽`);
-            alert(`✅ Выдано ${amount} ₽ всем`);
-        };
-
-        document.getElementById('giveSpinBtn').onclick = async function() {
-            const nick = document.getElementById('wheelUserNick').value.trim();
-            if(!nick) return alert('Введите ник');
-            const snap = await db.collection('users').where('username', '==', nick).get();
-            if(snap.empty) return alert('Пользователь не найден');
-            const spins = (snap.docs[0].data().wheelSpins || 0) + 1;
-            await snap.docs[0].ref.update({ wheelSpins: spins });
-            alert(`✅ Выдана прокрутка ${nick}`);
-            document.getElementById('wheelUserNick').value = '';
-        };
-
-        document.getElementById('addTaskBtn').onclick = async function() {
-            const name = document.getElementById('taskName').value.trim();
-            const reward = parseInt(document.getElementById('taskReward').value);
-            const desc = document.getElementById('taskDesc').value.trim();
-            if(!name || isNaN(reward) || !desc) return alert('Заполните все поля');
-            tasks.push({ name, reward, desc });
-            await db.collection('settings').doc('tasks').set({ list: tasks });
-            alert('✅ Задание добавлено');
-            document.getElementById('taskName').value = '';
-            document.getElementById('taskReward').value = '';
-            document.getElementById('taskDesc').value = '';
-            renderTasksList();
-        };
-
-        async function loadNewPlayers() {
-            const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
-            const snap = await db.collection('users').where('registeredAt', '>=', thirtyMinutesAgo.toISOString()).get();
-            const container = document.getElementById('newPlayersList');
-            if(container) {
-                container.innerHTML = snap.docs.map(doc => `<div class="player-card"><span><strong style="color:white;">${doc.data().username}</strong>${getBadgeHtml(doc.data().badge)}<br><span style="color:white;">${doc.data().email}</span><br>💰 <span style="color:white;">${doc.data().balance || 0}</span> ₽</span><div><button onclick="showUserActions('${doc.id}', '${doc.data().username}', '${doc.data().email}')" class="admin-btn-blue" style="padding:6px 15px;">⚡ ДЕЙСТВИЯ</button></div></div>`).join('');
-            }
-        }
-
-        async function loadLogs() {
-            const snap = await db.collection('logs').orderBy('timestamp', 'desc').limit(30).get();
-            const container = document.getElementById('logsList');
-            if(container) container.innerHTML = snap.docs.map(doc => `<div class="log-item">[${new Date(doc.data().timestamp?.toDate()).toLocaleString()}] <strong>${doc.data().action}</strong> → ${doc.data().target}<br>${doc.data().details || ''}</div>`).join('');
-        }
-
-        async function loadTimer() {
-            const doc = await db.collection('settings').doc('timer').get();
-            if(doc.exists) {
-                const data = doc.data();
-                document.getElementById('timerEventName').value = data.eventName || '';
-                document.getElementById('timerEventDesc').value = data.eventDesc || '';
-                if(data.targetDate) {
-                    let target = data.targetDate.toDate ? data.targetDate.toDate() : new Date(data.targetDate);
-                    document.getElementById('timerTargetDate').value = target.toISOString().slice(0, 16);
-                    startTimer(target, data.eventName, data.eventDesc);
+                    addSystemMessage("📋 Список заданий в меню выше ↑");
+                } else if(cmd === '/wheel') {
+                    const spins = wheelSpins[currentUser?.uid] || 0;
+                    addSystemMessage(`🎡 У вас ${spins} прокруток!`);
                 }
             }
-        }
 
-        function startTimer(targetDate, eventName, eventDesc) {
-            if(timerInterval) clearInterval(timerInterval);
-            document.getElementById('eventTitle').innerText = eventName || 'ДО ОТКРЫТИЯ НОВОГО СЕЗОНА';
-            document.getElementById('eventDesc').innerHTML = eventDesc || '';
-            timerInterval = setInterval(() => {
-                const now = new Date().getTime();
-                const target = new Date(targetDate).getTime();
-                const diff = target - now;
-                if(diff <= 0) {
-                    document.getElementById('days').innerText = '0';
-                    document.getElementById('hours').innerText = '0';
-                    document.getElementById('minutes').innerText = '0';
-                    document.getElementById('seconds').innerText = '0';
-                } else {
-                    document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24));
-                    document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
-                    document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
-                    document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
-                }
-            }, 1000);
-        }
-
-        document.getElementById('updateTimerBtn').onclick = async function() {
-            const eventName = document.getElementById('timerEventName').value;
-            const eventDesc = document.getElementById('timerEventDesc').value;
-            const targetDate = new Date(document.getElementById('timerTargetDate').value);
-            if(isNaN(targetDate.getTime())) return alert('Выберите дату');
-            await db.collection('settings').doc('timer').set({ eventName, eventDesc, targetDate });
-            addLog('НАСТРОЙКА ТАЙМЕРА', 'Админ', `Событие: ${eventName}`);
-            startTimer(targetDate, eventName, eventDesc);
-            alert('Таймер обновлён!');
-        };
-
-        async function checkSiteClosed() {
-            const doc = await db.collection('settings').doc('siteStatus').get();
-            if(doc.exists && doc.data().closed) {
-                const data = doc.data();
-                if(data.until && data.until.toDate() < new Date()) {
-                    await db.collection('settings').doc('siteStatus').update({ closed: false });
-                    return null;
-                }
-                return data;
-            }
-            return null;
-        }
-
-        document.getElementById('closeSiteBtn').onclick = async function() {
-            const reason = document.getElementById('closeReason').value.trim();
-            const hours = parseInt(document.getElementById('closeDuration').value);
-            if(!reason) return alert('Укажите причину');
-            const until = new Date(Date.now() + hours * 60 * 60 * 1000);
-            await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until, moderator: SYSTEM_NAME });
-            addLog('ЗАКРЫТИЕ САЙТА', 'Система', reason);
-            alert(`🔒 Сайт закрыт до ${until.toLocaleString()}`);
-        };
-        document.getElementById('openSiteBtn').onclick = async function() {
-            await db.collection('settings').doc('siteStatus').update({ closed: false });
-            addLog('ОТКРЫТИЕ САЙТА', 'Система', 'Сайт открыт');
-            alert('🔓 Сайт открыт');
-        };
-
-        window.showUserActions = function(userId, username, email) {
-            const content = `
-                <h4 style="color:white;">👤 ${username}</h4>
-                <button onclick="showBanModal('${userId}', '${username}', '${email}')" class="admin-btn-red" style="margin:5px;">🔨 БАН</button>
-                <button onclick="showUnbanModal('${email}', '${username}')" class="admin-btn-green" style="margin:5px;">🔓 РАЗБАН</button>
-                <button onclick="showGiveDonateModal('${userId}', '${username}')" class="admin-btn-blue" style="margin:5px;">🎁 ВЫДАТЬ ДОНАТ</button>
-                <button onclick="showRemoveDonateModal('${userId}', '${username}')" class="admin-btn-purple" style="margin:5px;">🗑️ СНЯТЬ ДОНАТ</button>
-            `;
-            document.getElementById('userActionsContent').innerHTML = content;
-            document.getElementById('userActionsModal').style.display = 'flex';
-        };
-
-        // БАН
-        window.showBanModal = function(userId, username, email) {
-            const modalHtml = `
-                <div class="modal-content">
-                    <span class="close-modal" onclick="closeTopModal()">&times;</span>
-                    <h3>🔨 Выдать бан: ${username}</h3>
-                    <textarea id="banReasonInput" rows="2" placeholder="Причина бана" class="admin-input"></textarea>
-                    <select id="banDurationInput" class="admin-select">
-                        <option value="1">1 час</option><option value="6">6 часов</option><option value="12">12 часов</option>
-                        <option value="24">1 день</option><option value="72">3 дня</option><option value="168">7 дней</option>
-                        <option value="720">30 дней</option><option value="forever">Навсегда</option>
-                    </select>
-                    <button onclick="executeBan('${userId}', '${username}', '${email}')" class="admin-btn-red">⛔ ЗАБАНИТЬ</button>
-                </div>
-            `;
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            modal.style.display = 'flex';
-            modal.innerHTML = modalHtml;
-            document.body.appendChild(modal);
-            window.closeTopModal = () => modal.remove();
-        };
-        window.executeBan = async function(userId, username, email) {
-            const reason = document.getElementById('banReasonInput').value.trim();
-            const duration = document.getElementById('banDurationInput').value;
-            if(!reason) return alert('Укажите причину');
-            let until = null;
-            let durationText = '';
-            if(duration !== 'forever') {
-                const hours = parseInt(duration);
-                until = new Date(Date.now() + hours * 60 * 60 * 1000);
-                durationText = `${hours} часов`;
-            } else {
-                durationText = 'Навсегда';
-            }
-            await db.collection('bans').add({ userId, username, email, reason, until, durationText, active: true, moderator: SYSTEM_NAME, createdAt: new Date(), shown: false });
-            addLog('БАН', email, `${username} - Причина: ${reason}, Срок: ${durationText}`);
-            alert(`✅ Бан выдан ${username}`);
-            document.querySelector('.modal').remove();
-        };
-
-        // РАЗБАН
-        window.showUnbanModal = function(email, username) {
-            const modalHtml = `
-                <div class="modal-content">
-                    <span class="close-modal" onclick="closeTopModal()">&times;</span>
-                    <h3>🔓 Разбанить: ${username}</h3>
-                    <textarea id="unbanReasonInput" rows="2" placeholder="Причина разбана" class="admin-input"></textarea>
-                    <button onclick="executeUnban('${email}', '${username}')" class="admin-btn-green">✅ РАЗБАНИТЬ</button>
-                </div>
-            `;
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            modal.style.display = 'flex';
-            modal.innerHTML = modalHtml;
-            document.body.appendChild(modal);
-            window.closeTopModal = () => modal.remove();
-        };
-        window.executeUnban = async function(email, username) {
-            const reason = document.getElementById('unbanReasonInput').value.trim();
-            if(!reason) return alert('Укажите причину разбана');
-            const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
-            for(const doc of snap.docs) await doc.ref.update({ active: false });
-            await db.collection('unbanLogs').add({ email, username, reason, moderator: SYSTEM_NAME, unbanDate: new Date(), shown: false });
-            addLog('РАЗБАН', email, `${username} - Причина: ${reason}`);
-            alert(`✅ Разбан выполнен для ${username}`);
-            document.querySelector('.modal').remove();
-        };
-
-        // ВЫДАЧА ДОНАТА
-        window.showGiveDonateModal = function(userId, username) {
-            const modalHtml = `
-                <div class="modal-content">
-                    <span class="close-modal" onclick="closeTopModal()">&times;</span>
-                    <h3>🎁 Выдать донат: ${username}</h3>
-                    <input type="text" id="donateNameInput" placeholder="Название доната" class="admin-input">
-                    <textarea id="donateReasonInput" rows="2" placeholder="Причина выдачи" class="admin-input"></textarea>
-                    <button onclick="executeGiveDonate('${userId}', '${username}')" class="admin-btn-blue">🎁 ВЫДАТЬ</button>
-                </div>
-            `;
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            modal.style.display = 'flex';
-            modal.innerHTML = modalHtml;
-            document.body.appendChild(modal);
-            window.closeTopModal = () => modal.remove();
-        };
-        window.executeGiveDonate = async function(userId, username) {
-            const donateName = document.getElementById('donateNameInput').value.trim();
-            const reason = document.getElementById('donateReasonInput').value.trim();
-            if(!donateName || !reason) return alert('Заполните все поля');
-            await db.collection('donates').add({ userId, username, product: donateName, price: 0, serverNick: username, date: new Date(), givenBy: SYSTEM_NAME, reason, shown: false });
-            addLog('ВЫДАЧА ДОНАТА', username, `${donateName} - Причина: ${reason}`);
-            alert(`✅ Донат ${donateName} выдан ${username}`);
-            document.querySelector('.modal').remove();
-        };
-
-        // СНЯТИЕ ДОНАТА
-        window.showRemoveDonateModal = function(userId, username) {
-            const modalHtml = `
-                <div class="modal-content">
-                    <span class="close-modal" onclick="closeTopModal()">&times;</span>
-                    <h3>🗑️ Снять донат: ${username}</h3>
-                    <textarea id="removeDonateReasonInput" rows="2" placeholder="Причина снятия" class="admin-input"></textarea>
-                    <button onclick="executeRemoveDonate('${userId}', '${username}')" class="admin-btn-red">🗑️ СНЯТЬ</button>
-                </div>
-            `;
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            modal.style.display = 'flex';
-            modal.innerHTML = modalHtml;
-            document.body.appendChild(modal);
-            window.closeTopModal = () => modal.remove();
-        };
-        window.executeRemoveDonate = async function(userId, username) {
-            const reason = document.getElementById('removeDonateReasonInput').value.trim();
-            if(!reason) return alert('Укажите причину');
-            const snap = await db.collection('donates').where('userId', '==', userId).get();
-            for(const doc of snap.docs) await doc.ref.delete();
-            await db.collection('donateRemoveLogs').add({ userId, username, reason, moderator: SYSTEM_NAME, date: new Date(), shown: false });
-            addLog('СНЯТИЕ ДОНАТА', username, `Причина: ${reason}`);
-            alert(`✅ Донаты сняты с ${username}`);
-            document.querySelector('.modal').remove();
-        };
-
-        document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
-        document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
-        document.getElementById('saveNameBtn').onclick = async () => {
-            const newName = document.getElementById('newNameInput').value.trim();
-            if(!newName) return alert('Введите новое имя');
-            await db.collection('users').doc(currentUser.uid).update({ username: newName });
-            await currentUser.updateProfile({ displayName: newName });
-            alert('Имя изменено!');
-            document.getElementById('editNameModal').style.display = 'none';
-            loadUserData(currentUser);
-        };
-        document.getElementById('changePasswordBtn').onclick = () => document.getElementById('changePasswordModal').style.display = 'flex';
-        document.getElementById('closePasswordModal').onclick = () => document.getElementById('changePasswordModal').style.display = 'none';
-        document.getElementById('savePasswordBtn').onclick = async () => {
-            const oldPass = document.getElementById('oldPasswordInput').value;
-            const newPass = document.getElementById('newPasswordInput').value;
-            if(!oldPass || !newPass) return alert('Заполните поля');
-            if(newPass.length < 6) return alert('Пароль минимум 6 символов');
-            try {
-                const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, oldPass);
-                await currentUser.reauthenticateWithCredential(cred);
-                await currentUser.updatePassword(newPass);
-                alert('Пароль изменён!');
-                document.getElementById('changePasswordModal').style.display = 'none';
-            } catch(e) { alert('Неверный старый пароль'); }
-        };
-        
-        // КНОПКИ ВХОДА И РЕГИСТРАЦИИ
-        document.getElementById('doRegisterBtn').onclick = async () => {
-            const username = document.getElementById('regUsername').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const pass = document.getElementById('regPass').value;
-            if(!username || !email || !pass) return alert('Заполните все поля');
-            if(pass.length < 6) return alert('Пароль минимум 6 символов');
-            try {
-                const cred = await auth.createUserWithEmailAndPassword(email, pass);
-                await cred.user.updateProfile({ displayName: username });
-                const isAdmin = MAIN_ADMINS.includes(email);
-                await db.collection('users').doc(cred.user.uid).set({ username, email, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1, badge: isAdmin ? 'blue' : null });
-                document.getElementById('authModal').style.display = 'none';
-                alert('✅ Регистрация успешна! Баланс: 50 000 ₽');
-            } catch(e) { alert('Ошибка: ' + e.message); }
-        };
-        
-        document.getElementById('doLoginBtn').onclick = async () => {
-            const email = document.getElementById('loginEmail').value.trim();
-            const pass = document.getElementById('loginPass').value;
-            if(!email || !pass) return alert('Введите email и пароль');
-            try { 
-                await auth.signInWithEmailAndPassword(email, pass); 
-                document.getElementById('authModal').style.display = 'none';
-            } catch(e) { alert('Ошибка: ' + e.message); }
-        };
-        
-        document.getElementById('logoutBtn').onclick = async () => { await auth.signOut(); };
-        document.getElementById('closeBuyModal').onclick = () => document.getElementById('buyModal').style.display = 'none';
-        document.getElementById('closeUserActionsModal').onclick = () => document.getElementById('userActionsModal').style.display = 'none';
-        
-        document.getElementById('checkAdminPasswordBtn').onclick = () => {
-            if(document.getElementById('adminPassword').value === 'website') {
-                document.getElementById('adminLoginPanel').style.display = 'none';
-                document.getElementById('adminPanelContent').style.display = 'block';
-                loadNewPlayers(); loadLogs(); loadTimer(); loadModerators();
-            } else alert('❌ Неверный ключ!');
-        };
-
-        // ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК АВТОРИЗАЦИИ
-        document.querySelectorAll('.tab-auth').forEach(btn => {
-            btn.onclick = () => {
-                document.querySelectorAll('.tab-auth').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                document.getElementById('loginPaneAuth').classList.toggle('active', btn.dataset.tab === 'login');
-                document.getElementById('registerPaneAuth').classList.toggle('active', btn.dataset.tab === 'register');
-            };
-        });
-
-        // ПЕРЕКЛЮЧЕНИЕ МЕНЮ
-        document.querySelectorAll('.menu-tab').forEach(tab => {
-            tab.onclick = () => {
-                document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
-                if(tab.dataset.page === 'admin') { loadNewPlayers(); loadLogs(); loadTimer(); loadModerators(); }
-                if(tab.dataset.page === 'chats') {
-                    document.querySelector('.chat-item.active')?.click();
-                }
-            };
-        });
-
-        // ОСНОВНАЯ ЛОГИКА
-        auth.onAuthStateChanged(async (user) => {
-            if(user) {
-                currentUser = user;
-                const siteClosed = await checkSiteClosed();
-                if(siteClosed && !MAIN_ADMINS.includes(user.email) && !moderatorsList.some(m => m.email === user.email)) {
-                    document.getElementById('mainContent').style.display = 'none';
-                    document.getElementById('closedReason').innerText = siteClosed.reason;
-                    document.getElementById('closedUntil').innerText = siteClosed.until ? new Date(siteClosed.until.toDate()).toLocaleString() : 'Неизвестно';
-                    document.getElementById('closedWindow').style.display = 'flex';
-                    document.getElementById('closedExitBtn').onclick = async () => { await auth.signOut(); };
+            async function spinWheel() {
+                const spins = wheelSpins[currentUser?.uid] || 0;
+                if(spins <= 0) {
+                    addSystemMessage("❌ У вас нет прокруток! Получите в админке.");
                     return;
                 }
-                document.getElementById('mainContent').style.display = 'block';
-                document.getElementById('authModal').style.display = 'none';
-                await loadModerators();
-                await loadUserData(user);
-                renderShop();
-                loadTimer();
-                loadTasks();
-                loadChannelMessages();
-                loadBotMessages();
-                document.querySelector('.chat-item')?.click();
-            } else {
-                document.getElementById('mainContent').style.display = 'none';
-                document.getElementById('authModal').style.display = 'flex';
+                const prizes = [1000, 5000, 10000, 50000, 100000, 500000];
+                const prize = prizes[Math.floor(Math.random() * prizes.length)];
+                const newSpins = spins - 1;
+                wheelSpins[currentUser.uid] = newSpins;
+                await db.collection('users').doc(currentUser.uid).update({ wheelSpins: newSpins });
+                const newBalance = currentBalance + prize;
+                await db.collection('users').doc(currentUser.uid).update({ balance: newBalance });
+                currentBalance = newBalance;
+                document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
+                addSystemMessage(`🎉 ВЫ ВЫИГРАЛИ ${prize.toLocaleString()} ₽! Осталось прокруток: ${newSpins}`);
             }
-        });
-        
-        }); // КОНЕЦ DOMContentLoaded
+
+            // АДМИНКА
+            async function loadModerators() {
+                const doc = await db.collection('settings').doc('moderators').get();
+                moderatorsList = doc.exists ? doc.data().list || [] : [];
+                const container = document.getElementById('moderatorsList');
+                if(container) {
+                    container.innerHTML = moderatorsList.map(m => `<div style="background:rgba(0,0,0,0.5); border-radius:16px; padding:10px; margin-bottom:8px; display:flex; justify-content:space-between;"><span>👑 ${m.nick || m.email}</span><button onclick="window.removeModerator('${m.email}')" style="background:#ef4444; border:none; padding:5px 15px; border-radius:30px; cursor:pointer;">УДАЛИТЬ</button></div>`).join('');
+                }
+            }
+
+            window.removeModerator = async function(email) {
+                moderatorsList = moderatorsList.filter(m => m.email !== email);
+                await db.collection('settings').doc('moderators').set({ list: moderatorsList });
+                loadModerators();
+                alert('Модератор удалён');
+            };
+
+            async function loadNewPlayers() {
+                const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
+                const snap = await db.collection('users').where('registeredAt', '>=', thirtyMinutesAgo.toISOString()).get();
+                const container = document.getElementById('newPlayersList');
+                if(container) {
+                    container.innerHTML = snap.docs.map(doc => `<div class="player-card"><span><strong style="color:white;">${doc.data().username}</strong>${getBadgeHtml(doc.data().badge)}<br><span style="color:white;">${doc.data().email}</span><br>💰 <span style="color:white;">${doc.data().balance || 0}</span> ₽</span></div>`).join('');
+                }
+            }
+
+            async function loadLogs() {
+                const snap = await db.collection('logs').orderBy('timestamp', 'desc').limit(30).get();
+                const container = document.getElementById('logsList');
+                if(container) container.innerHTML = snap.docs.map(doc => `<div class="log-item">[${new Date(doc.data().timestamp?.toDate()).toLocaleString()}] <strong>${doc.data().action}</strong> → ${doc.data().target}<br>${doc.data().details || ''}</div>`).join('');
+            }
+
+            // ТАЙМЕР
+            let timerInterval = null;
+            function startTimer(targetDate, eventName, eventDesc) {
+                if(timerInterval) clearInterval(timerInterval);
+                document.getElementById('eventTitle').innerText = eventName || 'ДО ОТКРЫТИЯ НОВОГО СЕЗОНА';
+                document.getElementById('eventDesc').innerHTML = eventDesc || '';
+                timerInterval = setInterval(() => {
+                    const now = new Date().getTime();
+                    const target = new Date(targetDate).getTime();
+                    const diff = target - now;
+                    if(diff <= 0) {
+                        document.getElementById('days').innerText = '0';
+                        document.getElementById('hours').innerText = '0';
+                        document.getElementById('minutes').innerText = '0';
+                        document.getElementById('seconds').innerText = '0';
+                    } else {
+                        document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24));
+                        document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
+                        document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
+                        document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
+                    }
+                }, 1000);
+            }
+
+            async function loadTimer() {
+                const doc = await db.collection('settings').doc('timer').get();
+                if(doc.exists && doc.data().targetDate) {
+                    let target = doc.data().targetDate.toDate ? doc.data().targetDate.toDate() : new Date(doc.data().targetDate);
+                    startTimer(target, doc.data().eventName, doc.data().eventDesc);
+                } else {
+                    let defaultTarget = new Date();
+                    defaultTarget.setDate(defaultTarget.getDate() + 7);
+                    startTimer(defaultTarget, "ДО ОТКРЫТИЯ НОВОГО СЕЗОНА", "");
+                }
+            }
+
+            // ========== НАВЕШИВАНИЕ ВСЕХ КНОПОК ==========
+            function bindAllButtons() {
+                // Вход/Регистрация
+                document.getElementById('doLoginBtn')?.addEventListener('click', async () => {
+                    const email = document.getElementById('loginEmail').value;
+                    const pass = document.getElementById('loginPass').value;
+                    if(!email || !pass) return alert('Введите email и пароль');
+                    try {
+                        await auth.signInWithEmailAndPassword(email, pass);
+                        document.getElementById('authModal').style.display = 'none';
+                    } catch(e) { alert('Ошибка: ' + e.message); }
+                });
+                
+                document.getElementById('doRegisterBtn')?.addEventListener('click', async () => {
+                    const username = document.getElementById('regUsername').value;
+                    const email = document.getElementById('regEmail').value;
+                    const pass = document.getElementById('regPass').value;
+                    if(!username || !email || !pass) return alert('Заполните все поля');
+                    if(pass.length < 6) return alert('Пароль минимум 6 символов');
+                    try {
+                        const cred = await auth.createUserWithEmailAndPassword(email, pass);
+                        await cred.user.updateProfile({ displayName: username });
+                        await db.collection('users').doc(cred.user.uid).set({
+                            username, email, balance: 50000,
+                            registeredAt: new Date().toISOString(), wheelSpins: 1
+                        });
+                        document.getElementById('authModal').style.display = 'none';
+                        alert('✅ Регистрация успешна! Баланс: 50 000 ₽');
+                    } catch(e) { alert('Ошибка: ' + e.message); }
+                });
+                
+                document.getElementById('logoutBtn')?.addEventListener('click', () => auth.signOut());
+                
+                // Админка
+                document.getElementById('checkAdminPasswordBtn')?.addEventListener('click', () => {
+                    if(document.getElementById('adminPassword').value === 'website') {
+                        document.getElementById('adminLoginPanel').style.display = 'none';
+                        document.getElementById('adminPanelContent').style.display = 'block';
+                        loadNewPlayers(); loadLogs(); loadModerators();
+                    } else alert('❌ Неверный ключ!');
+                });
+                
+                // Покупка
+                document.getElementById('confirmBuyBtn')?.addEventListener('click', async () => {
+                    const nick = document.getElementById('buyNick').value.trim();
+                    if(!nick) return alert('Введите ник');
+                    if(currentBalance < currentProduct.price) return alert('Недостаточно средств!');
+                    const newBalance = currentBalance - currentProduct.price;
+                    await db.collection('users').doc(currentUser.uid).update({ balance: newBalance });
+                    currentBalance = newBalance;
+                    document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
+                    await db.collection('donates').add({
+                        userId: currentUser.uid, username: currentUser.displayName,
+                        product: currentProduct.name, price: currentProduct.price,
+                        serverNick: nick, date: new Date()
+                    });
+                    alert(`✅ Куплено: ${currentProduct.name}!`);
+                    document.getElementById('buyModal').style.display = 'none';
+                    loadUserData(currentUser);
+                });
+                
+                // Чат
+                document.getElementById('sendMessageBtn')?.addEventListener('click', async () => {
+                    const text = document.getElementById('messageInput').value.trim();
+                    if(!text) return;
+                    if(currentChat === 'channel') {
+                        if(!MAIN_ADMINS.includes(currentUser.email)) {
+                            alert('Только создатель канала может писать!');
+                            return;
+                        }
+                        await db.collection('chats').doc('channel').collection('messages').add({
+                            from: currentUser.uid, fromName: currentUser.displayName,
+                            fromEmail: currentUser.email, text, timestamp: new Date()
+                        });
+                    } else if(currentChat === 'bot') {
+                        await db.collection('chats').doc('bot').collection('messages').add({
+                            from: currentUser.uid, fromName: currentUser.displayName, text, timestamp: new Date()
+                        });
+                        if(text.startsWith('/')) sendBotCommand(text);
+                    }
+                    document.getElementById('messageInput').value = '';
+                });
+                
+                document.getElementById('spinWheelBtn')?.addEventListener('click', spinWheel);
+                
+                // Админ кнопки
+                document.getElementById('addModeratorBtn')?.addEventListener('click', async () => {
+                    const nick = document.getElementById('moderatorNick').value.trim();
+                    if(!nick) return alert('Введите ник');
+                    const snap = await db.collection('users').where('username', '==', nick).get();
+                    if(snap.empty) return alert('Пользователь не найден');
+                    const userData = snap.docs[0].data();
+                    if(moderatorsList.some(m => m.email === userData.email)) return alert('Уже в списке');
+                    moderatorsList.push({ nick: userData.username, email: userData.email });
+                    await db.collection('settings').doc('moderators').set({ list: moderatorsList });
+                    document.getElementById('moderatorNick').value = '';
+                    loadModerators();
+                    alert(`Модератор ${nick} добавлен`);
+                });
+                
+                document.getElementById('giveBadgeBtn')?.addEventListener('click', async () => {
+                    const nick = document.getElementById('badgeNick').value.trim();
+                    const type = document.getElementById('badgeType').value;
+                    if(!nick) return alert('Введите ник');
+                    const snap = await db.collection('users').where('username', '==', nick).get();
+                    if(snap.empty) return alert('Пользователь не найден');
+                    await snap.docs[0].ref.update({ badge: type });
+                    alert(`✅ Значок выдан ${nick}!`);
+                    document.getElementById('badgeNick').value = '';
+                });
+                
+                document.getElementById('removeBadgeBtn')?.addEventListener('click', async () => {
+                    const nick = document.getElementById('badgeNick').value.trim();
+                    if(!nick) return alert('Введите ник');
+                    const snap = await db.collection('users').where('username', '==', nick).get();
+                    if(snap.empty) return alert('Пользователь не найден');
+                    await snap.docs[0].ref.update({ badge: null });
+                    alert(`❌ Значок снят с ${nick}`);
+                    document.getElementById('badgeNick').value = '';
+                });
+                
+                document.getElementById('giveCoinsBtn')?.addEventListener('click', async () => {
+                    const nick = document.getElementById('giveNick').value.trim();
+                    const amount = parseInt(document.getElementById('giveAmount').value);
+                    if(!nick || isNaN(amount)) return alert('Введите ник и сумму');
+                    const snap = await db.collection('users').where('username', '==', nick).get();
+                    if(snap.empty) return alert('Пользователь не найден');
+                    const newBalance = (snap.docs[0].data().balance || 0) + amount;
+                    await snap.docs[0].ref.update({ balance: newBalance });
+                    alert(`✅ Выдано ${amount} ₽ ${nick}`);
+                    document.getElementById('giveNick').value = '';
+                    document.getElementById('giveAmount').value = '';
+                });
+                
+                document.getElementById('globalGiveBtn')?.addEventListener('click', async () => {
+                    const amount = parseInt(prompt("Сумма для всех:"));
+                    if(isNaN(amount)) return;
+                    const snap = await db.collection('users').get();
+                    for(const doc of snap.docs) {
+                        await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
+                    }
+                    alert(`✅ Выдано ${amount} ₽ всем`);
+                });
+                
+                document.getElementById('giveSpinBtn')?.addEventListener('click', async () => {
+                    const nick = document.getElementById('wheelUserNick').value.trim();
+                    if(!nick) return alert('Введите ник');
+                    const snap = await db.collection('users').where('username', '==', nick).get();
+                    if(snap.empty) return alert('Пользователь не найден');
+                    const spins = (snap.docs[0].data().wheelSpins || 0) + 1;
+                    await snap.docs[0].ref.update({ wheelSpins: spins });
+                    alert(`✅ Выдана прокрутка ${nick}`);
+                    document.getElementById('wheelUserNick').value = '';
+                });
+                
+                document.getElementById('addTaskBtn')?.addEventListener('click', async () => {
+                    const name = document.getElementById('taskName').value.trim();
+                    const reward = parseInt(document.getElementById('taskReward').value);
+                    const desc = document.getElementById('taskDesc').value.trim();
+                    if(!name || isNaN(reward) || !desc) return alert('Заполните все поля');
+                    tasks.push({ name, reward, desc });
+                    await db.collection('settings').doc('tasks').set({ list: tasks });
+                    alert('✅ Задание добавлено');
+                    document.getElementById('taskName').value = '';
+                    document.getElementById('taskReward').value = '';
+                    document.getElementById('taskDesc').value = '';
+                    renderTasksList();
+                });
+                
+                // Смена имени и пароля
+                document.getElementById('editNameBtn')?.addEventListener('click', () => {
+                    document.getElementById('editNameModal').style.display = 'flex';
+                });
+                document.getElementById('closeEditModal')?.addEventListener('click', () => {
+                    document.getElementById('editNameModal').style.display = 'none';
+                });
+                document.getElementById('saveNameBtn')?.addEventListener('click', async () => {
+                    const newName = document.getElementById('newNameInput').value.trim();
+                    if(!newName) return alert('Введите новое имя');
+                    await db.collection('users').doc(currentUser.uid).update({ username: newName });
+                    await currentUser.updateProfile({ displayName: newName });
+                    alert('Имя изменено!');
+                    document.getElementById('editNameModal').style.display = 'none';
+                    loadUserData(currentUser);
+                });
+                
+                document.getElementById('changePasswordBtn')?.addEventListener('click', () => {
+                    document.getElementById('changePasswordModal').style.display = 'flex';
+                });
+                document.getElementById('closePasswordModal')?.addEventListener('click', () => {
+                    document.getElementById('changePasswordModal').style.display = 'none';
+                });
+                document.getElementById('savePasswordBtn')?.addEventListener('click', async () => {
+                    const oldPass = document.getElementById('oldPasswordInput').value;
+                    const newPass = document.getElementById('newPasswordInput').value;
+                    if(!oldPass || !newPass) return alert('Заполните поля');
+                    if(newPass.length < 6) return alert('Пароль минимум 6 символов');
+                    try {
+                        const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, oldPass);
+                        await currentUser.reauthenticateWithCredential(cred);
+                        await currentUser.updatePassword(newPass);
+                        alert('Пароль изменён!');
+                        document.getElementById('changePasswordModal').style.display = 'none';
+                    } catch(e) { alert('Неверный старый пароль'); }
+                });
+                
+                // Закрытие модалок
+                document.getElementById('closeBuyModal')?.addEventListener('click', () => {
+                    document.getElementById('buyModal').style.display = 'none';
+                });
+                
+                // Переключение чатов
+                document.querySelectorAll('.chat-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
+                        item.classList.add('active');
+                        currentChat = item.dataset.chat;
+                        const name = item.querySelector('.chat-name').innerHTML;
+                        document.getElementById('currentChatName').innerHTML = name;
+                        document.getElementById('chatMessages').innerHTML = '';
+                        
+                        if(currentChat === 'channel') {
+                            document.getElementById('botInterface').style.display = 'none';
+                            loadChannelMessages();
+                        } else {
+                            document.getElementById('botInterface').style.display = 'block';
+                            document.getElementById('wheelGame').style.display = 'none';
+                            document.getElementById('tasksList').style.display = 'none';
+                            loadBotMessages();
+                        }
+                    });
+                });
+                
+                // Кнопки бота
+                document.querySelectorAll('.bot-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const cmd = btn.dataset.cmd;
+                        if(cmd === '/wheel') {
+                            document.getElementById('wheelGame').style.display = 'block';
+                            document.getElementById('tasksList').style.display = 'none';
+                            const spins = wheelSpins[currentUser?.uid] || 0;
+                            document.getElementById('wheelNextSpin').innerHTML = `🎫 Прокруток: ${spins}`;
+                        } else if(cmd === '/tasks') {
+                            document.getElementById('wheelGame').style.display = 'none';
+                            document.getElementById('tasksList').style.display = 'block';
+                            renderTasksList();
+                        } else {
+                            document.getElementById('wheelGame').style.display = 'none';
+                            document.getElementById('tasksList').style.display = 'none';
+                            sendBotCommand(cmd);
+                        }
+                    });
+                });
+                
+                // Переключение вкладок авторизации
+                document.querySelectorAll('.tab-auth').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.tab-auth').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        const isLogin = btn.dataset.tab === 'login';
+                        document.getElementById('loginPaneAuth').classList.toggle('active', isLogin);
+                        document.getElementById('registerPaneAuth').classList.toggle('active', !isLogin);
+                    });
+                });
+                
+                // Переключение меню
+                document.querySelectorAll('.menu-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                        document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
+                        if(tab.dataset.page === 'admin') {
+                            loadNewPlayers();
+                            loadLogs();
+                        }
+                        if(tab.dataset.page === 'chats') {
+                            document.querySelector('.chat-item.active')?.click();
+                        }
+                    });
+                });
+            }
+            
+            // ЗАКРЫТИЕ САЙТА
+            async function checkSiteClosed() {
+                const doc = await db.collection('settings').doc('siteStatus').get();
+                if(doc.exists && doc.data().closed) {
+                    const data = doc.data();
+                    if(data.until && data.until.toDate() < new Date()) {
+                        await db.collection('settings').doc('siteStatus').update({ closed: false });
+                        return null;
+                    }
+                    return data;
+                }
+                return null;
+            }
+            
+            document.getElementById('closeSiteBtn')?.addEventListener('click', async () => {
+                const reason = document.getElementById('closeReason').value.trim();
+                const hours = parseInt(document.getElementById('closeDuration').value);
+                if(!reason) return alert('Укажите причину');
+                const until = new Date(Date.now() + hours * 60 * 60 * 1000);
+                await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until, moderator: "Система" });
+                alert(`🔒 Сайт закрыт до ${until.toLocaleString()}`);
+            });
+            document.getElementById('openSiteBtn')?.addEventListener('click', async () => {
+                await db.collection('settings').doc('siteStatus').update({ closed: false });
+                alert('🔓 Сайт открыт');
+            });
+            
+            // ГЛАВНАЯ ЛОГИКА
+            auth.onAuthStateChanged(async (user) => {
+                if(user) {
+                    currentUser = user;
+                    await loadModerators();
+                    await loadUserData(user);
+                    renderShop();
+                    loadTimer();
+                    loadTasks();
+                    loadChannelMessages();
+                    loadBotMessages();
+                    bindAllButtons();
+                    document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('authModal').style.display = 'none';
+                    document.querySelector('.chat-item')?.click();
+                } else {
+                    document.getElementById('mainContent').style.display = 'none';
+                    document.getElementById('authModal').style.display = 'flex';
+                    bindAllButtons();
+                }
+            });
+        })();
     </script>
 </body>
 </html>
