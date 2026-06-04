@@ -12,34 +12,23 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        @keyframes rgbBg {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes rgbText {
-            0% { text-shadow: 0 0 5px #ff0000; color: #ff0000; }
-            25% { text-shadow: 0 0 5px #00ff00; color: #00ff00; }
-            50% { text-shadow: 0 0 5px #0000ff; color: #0000ff; }
-            75% { text-shadow: 0 0 5px #ff00ff; color: #ff00ff; }
-            100% { text-shadow: 0 0 5px #ff0000; color: #ff0000; }
-        }
-        @keyframes borderGlow {
-            0% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; }
-            25% { border-color: #00ff00; box-shadow: 0 0 10px #00ff00; }
-            50% { border-color: #0000ff; box-shadow: 0 0 10px #0000ff; }
-            75% { border-color: #ff00ff; box-shadow: 0 0 10px #ff00ff; }
-            100% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; }
-        }
+        /* Анимации */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes borderGlow {
+            0% { border-color: rgba(255,215,0,0.3); box-shadow: 0 0 5px rgba(255,215,0,0.2); }
+            50% { border-color: rgba(255,215,0,0.8); box-shadow: 0 0 15px rgba(255,215,0,0.4); }
+            100% { border-color: rgba(255,215,0,0.3); box-shadow: 0 0 5px rgba(255,215,0,0.2); }
+        }
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 5px #ffd700; }
+            100% { box-shadow: 0 0 20px #ffd700; }
+        }
         
         body {
-            background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e, #0a0a0a);
-            background-size: 400% 400%;
-            animation: rgbBg 15s ease infinite;
+            background: linear-gradient(135deg, #0a0a0a 0%, #0f0f1a 50%, #0a0a0f 100%);
             font-family: 'Montserrat', sans-serif;
             color: #e0e0e0;
             min-height: 100vh;
@@ -52,7 +41,7 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
-            opacity: 0.15;
+            opacity: 0.2;
         }
         .hero-overlay {
             position: fixed;
@@ -74,13 +63,13 @@
             padding: 12px 24px;
             margin-bottom: 30px;
             border: 1px solid rgba(255,215,0,0.3);
-            animation: borderGlow 3s infinite;
+            animation: borderGlow 3s infinite ease-in-out;
         }
         .balance { 
             font-family: 'Orbitron', monospace; 
             font-size: 28px; 
             font-weight: bold; 
-            background: linear-gradient(90deg, #ffd700, #ffaa00, #ffd700);
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -118,8 +107,9 @@
         .menu-tab.active { 
             background: linear-gradient(135deg, #ffd700, #ffaa00); 
             color: #0a0a0a;
-            animation: borderGlow 2s infinite;
+            border-color: #ffd700;
         }
+        .menu-tab:hover:not(.active) { border-color: #ffd700; transform: translateY(-2px); }
         .page { display: none; }
         .page.active { display: block; }
         .section-title {
@@ -127,11 +117,10 @@
             font-size: 36px;
             text-align: center;
             margin: 25px 0 35px;
-            background: linear-gradient(90deg, #fff, #ffd700, #ffaa00, #fff);
+            background: linear-gradient(135deg, #fff, #ffd700);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: rgbText 5s infinite;
         }
         
         /* ТАЙМЕР */
@@ -150,14 +139,14 @@
             text-align: center;
             max-width: 800px;
             width: 100%;
-            border: 2px solid;
-            animation: borderGlow 3s infinite;
+            border: 1px solid rgba(255,215,0,0.3);
+            animation: borderGlow 3s infinite ease-in-out;
         }
         .timer-title {
             font-family: 'Orbitron', monospace;
             font-size: 28px;
             margin-bottom: 25px;
-            animation: rgbText 4s infinite;
+            color: #ffd700;
         }
         .countdown-wrapper {
             display: flex;
@@ -195,7 +184,7 @@
             transition: 0.3s;
             border: 1px solid rgba(255,215,0,0.3);
         }
-        .product-card:hover { transform: translateY(-6px); border-color: #ffd700; animation: borderGlow 1s infinite; }
+        .product-card:hover { transform: translateY(-6px); border-color: #ffd700; animation: glowPulse 1s infinite alternate; }
         .product-icon i { font-size: 52px; color: #ffd700; margin-bottom: 15px; }
         .product-name { font-size: 24px; font-weight: bold; }
         .price { font-size: 30px; font-weight: bold; color: #ffd700; margin: 15px 0; }
@@ -327,7 +316,7 @@
         .admin-btn-purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
         .admin-btn-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
         .admin-btn-green { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
-        .admin-btn:hover { transform: scale(1.01); box-shadow: 0 0 10px #ffd700; }
+        .admin-btn:hover { transform: scale(1.01); }
         
         /* МОДАЛКИ */
         .modal {
@@ -356,7 +345,21 @@
         }
         .close-modal { float: right; font-size: 28px; cursor: pointer; color: #ffd700; }
         
-        /* КРАСИВОЕ МЕНЮ ВХОДА/РЕГИСТРАЦИИ */
+        /* КРАСИВОЕ МЕНЮ ВХОДА/РЕГИСТРАЦИИ (С RGB) */
+        @keyframes rgbBorder {
+            0% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; }
+            25% { border-color: #00ff00; box-shadow: 0 0 10px #00ff00; }
+            50% { border-color: #0000ff; box-shadow: 0 0 10px #0000ff; }
+            75% { border-color: #ff00ff; box-shadow: 0 0 10px #ff00ff; }
+            100% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; }
+        }
+        @keyframes rgbText {
+            0% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
+            25% { color: #00ff00; text-shadow: 0 0 5px #00ff00; }
+            50% { color: #0000ff; text-shadow: 0 0 5px #0000ff; }
+            75% { color: #ff00ff; text-shadow: 0 0 5px #ff00ff; }
+            100% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
+        }
         .auth-modal {
             background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
             border-radius: 48px;
@@ -364,17 +367,15 @@
             width: 500px;
             max-width: 90%;
             border: 2px solid;
-            animation: borderGlow 3s infinite;
+            animation: rgbBorder 3s infinite;
             text-align: center;
         }
         .auth-modal h2 { 
             margin-bottom: 30px; 
             font-family: 'Orbitron', monospace; 
             font-size: 36px;
-            background: linear-gradient(90deg, #ffd700, #ffaa00, #ffd700);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            animation: rgbText 3s infinite;
+            font-weight: bold;
         }
         .tabs-auth {
             display: flex;
@@ -517,7 +518,7 @@
             <h2>🔒 САЙТ ЗАКРЫТ</h2>
             <div><p><span style="color:#ffd700;">📋 Причина:</span> <span id="closedReason"></span></p>
             <p><span style="color:#ffd700;">⏰ Откроется:</span> <span id="closedUntil"></span></p></div>
-            <button class="closed-exit-btn" id="closedExitBtn" style="background:linear-gradient(135deg,#ff8800,#cc5500); color:white; border:none; padding:16px; border-radius:60px; width:100%; cursor:pointer;">🚪 ПОКИНУТЬ САЙТ</button>
+            <button id="closedExitBtn" style="background:linear-gradient(135deg,#ff8800,#cc5500); color:white; border:none; padding:16px; border-radius:60px; width:100%; cursor:pointer;">🚪 ПОКИНУТЬ САЙТ</button>
         </div>
     </div>
 
@@ -651,6 +652,7 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
+        const SYSTEM_NAME = "Система";
         const VERIFIED_SVG = `<svg class="verified-badge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#1e88e5"/><path d="M7 12L10.5 15.5L17 9" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>`;
 
         const privileges = [
@@ -670,7 +672,7 @@
 
         async function addLog(action, target, details) {
             if(!currentUser) return;
-            await db.collection('logs').add({ action, moderator: currentUser.email, target, details, timestamp: new Date() });
+            await db.collection('logs').add({ action, moderator: SYSTEM_NAME, target, details, timestamp: new Date() });
         }
 
         function renderShop() {
@@ -730,14 +732,12 @@
                 else donatesSnap.forEach(d => donatesContainer.innerHTML += `<span class="donate-badge">${d.data().product}</span> `);
             }
             
-            // Проверка на модератора
             const isModerator = moderatorsList.includes(data.username) || data.isAdmin === true;
-            if(isModerator || data.username === currentUser?.displayName) {
+            if(isModerator) {
                 document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
             }
         }
 
-        // ЗАГРУЗКА МОДЕРАТОРОВ
         async function loadModerators() {
             const doc = await db.collection('settings').doc('moderators').get();
             if(doc.exists) {
@@ -802,7 +802,7 @@
             } else {
                 durationText = 'Навсегда';
             }
-            await db.collection('bans').add({ userId, username, email, reason, until, durationText, active: true, moderator: currentUser.email, createdAt: new Date(), shown: false });
+            await db.collection('bans').add({ userId, username, email, reason, until, durationText, active: true, moderator: SYSTEM_NAME, createdAt: new Date(), shown: false });
             addLog('БАН', email, `${username} - Причина: ${reason}, Срок: ${durationText}`);
             alert(`✅ Бан выдан ${username}`);
             document.querySelector('.modal').remove();
@@ -830,7 +830,7 @@
             if(!reason) return alert('Укажите причину разбана');
             const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
             for(const doc of snap.docs) await doc.ref.update({ active: false });
-            await db.collection('unbanLogs').add({ email, username, reason, moderator: currentUser.email, unbanDate: new Date(), shown: false });
+            await db.collection('unbanLogs').add({ email, username, reason, moderator: SYSTEM_NAME, unbanDate: new Date(), shown: false });
             addLog('РАЗБАН', email, `${username} - Причина: ${reason}`);
             alert(`✅ Разбан выполнен для ${username}`);
             document.querySelector('.modal').remove();
@@ -858,7 +858,7 @@
             const donateName = document.getElementById('donateNameInput').value.trim();
             const reason = document.getElementById('donateReasonInput').value.trim();
             if(!donateName || !reason) return alert('Заполните все поля');
-            await db.collection('donates').add({ userId, username, product: donateName, price: 0, serverNick: username, date: new Date(), givenBy: currentUser.email, reason, shown: false });
+            await db.collection('donates').add({ userId, username, product: donateName, price: 0, serverNick: username, date: new Date(), givenBy: SYSTEM_NAME, reason, shown: false });
             addLog('ВЫДАЧА ДОНАТА', username, `${donateName} - Причина: ${reason}`);
             alert(`✅ Донат ${donateName} выдан ${username}`);
             document.querySelector('.modal').remove();
@@ -886,7 +886,7 @@
             if(!reason) return alert('Укажите причину');
             const snap = await db.collection('donates').where('userId', '==', userId).get();
             for(const doc of snap.docs) await doc.ref.delete();
-            await db.collection('donateRemoveLogs').add({ userId, username, reason, moderator: currentUser.email, date: new Date(), shown: false });
+            await db.collection('donateRemoveLogs').add({ userId, username, reason, moderator: SYSTEM_NAME, date: new Date(), shown: false });
             addLog('СНЯТИЕ ДОНАТА', username, `Причина: ${reason}`);
             alert(`✅ Донаты сняты с ${username}`);
             document.querySelector('.modal').remove();
@@ -1079,7 +1079,7 @@
             const hours = parseInt(document.getElementById('closeDuration').value);
             if(!reason) return alert('Укажите причину');
             const until = new Date(Date.now() + hours * 60 * 60 * 1000);
-            await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until, moderator: "Система" });
+            await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until, moderator: SYSTEM_NAME });
             addLog('ЗАКРЫТИЕ САЙТА', 'Система', reason);
             alert(`🔒 Сайт закрыт до ${until.toLocaleString()}`);
         };
