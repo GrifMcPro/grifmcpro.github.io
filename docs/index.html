@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>GrifLauncher | Neo Premium</title>
+    <title>GrifLauncher | RealTime Ultra</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -30,12 +30,13 @@
             --purple: #8b5cf6;
             --pink: #ec4899;
             --cyan: #06b6d4;
-            --text-primary: #f0f0f0;
+            --text-primary: #ffffff;
             --text-secondary: #a0a0b5;
             --text-muted: #6a6a80;
             --success: #10b981;
             --danger: #ef4444;
             --info: #3b82f6;
+            --warning: #f59e0b;
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
             --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
@@ -56,36 +57,155 @@
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
         }
+
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
         }
-        @keyframes rgbRotate {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                text-shadow: 0 0 5px var(--accent);
+            }
+            50% {
+                text-shadow: 0 0 20px var(--accent);
+            }
         }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
         @keyframes rainbowRotate {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
         }
 
-        .animate-in { animation: fadeInUp 0.5s ease; }
-        .pulse-animation { animation: pulse 2s infinite; }
-        .float-animation { animation: float 3s ease infinite; }
+        @keyframes rgbBorder {
+            0% {
+                border-color: #ff0000;
+            }
+            25% {
+                border-color: #00ff00;
+            }
+            50% {
+                border-color: #0000ff;
+            }
+            75% {
+                border-color: #ff00ff;
+            }
+            100% {
+                border-color: #ff0000;
+            }
+        }
 
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+        @keyframes shake {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-5px);
+            }
+            75% {
+                transform: translateX(5px);
+            }
+        }
 
-        /* Хедер */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes typingAnim {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-2px);
+                opacity: 1;
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        .float-animation {
+            animation: float 3s ease infinite;
+        }
+
+        .glow-text {
+            animation: glowPulse 2s infinite;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-dark);
+        }
+
+        /* ========== ХЕДЕР ========== */
         .site-header {
             position: fixed;
             top: 0;
@@ -123,7 +243,10 @@
             animation: float 3s ease infinite;
         }
 
-        .logo-icon i { font-size: 16px; color: var(--bg-dark); }
+        .logo-icon i {
+            font-size: 16px;
+            color: var(--bg-dark);
+        }
 
         .logo-text {
             font-family: 'Orbitron', monospace;
@@ -138,8 +261,12 @@
         }
 
         @keyframes shine {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
+            0% {
+                background-position: 0% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
         }
 
         .header-right {
@@ -158,8 +285,17 @@
             border: 1px solid var(--border-light);
         }
 
-        .balance i { color: var(--accent); font-size: 14px; }
-        .balance span { font-weight: 700; color: var(--accent); font-size: 16px; font-family: 'Orbitron', monospace; }
+        .balance i {
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .balance span {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 16px;
+            font-family: 'Orbitron', monospace;
+        }
 
         .btn-logout {
             background: rgba(239, 68, 68, 0.15);
@@ -181,11 +317,13 @@
             transform: scale(1.02);
         }
 
+        /* ========== МЕНЮ ========== */
         .menu-tabs {
             display: flex;
             gap: 8px;
             justify-content: center;
             margin-top: 6px;
+            flex-wrap: wrap;
         }
 
         .menu-tab {
@@ -201,11 +339,15 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            color: var(--text-primary);
         }
 
-        .menu-tab i { font-size: 12px; }
+        .menu-tab i {
+            font-size: 12px;
+        }
 
-        .menu-tab.active, .menu-tab:hover {
+        .menu-tab.active,
+        .menu-tab:hover {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             color: var(--bg-dark);
             border-color: transparent;
@@ -213,15 +355,25 @@
             box-shadow: var(--shadow-glow);
         }
 
-        .page { display: none; animation: fadeIn 0.3s ease; }
-        .page.active { display: block; }
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
 
-        #homePage, #shopPage, #chatsPage, #profilePage, #adminPage {
+        .page.active {
+            display: block;
+        }
+
+        #homePage,
+        #shopPage,
+        #chatsPage,
+        #profilePage,
+        #adminPage {
             padding-top: 75px;
             min-height: 100vh;
         }
 
-        /* ТАЙМЕР */
+        /* ========== ГЛАВНАЯ - ТАЙМЕР НА ВЕСЬ ЭКРАН ========== */
         .hero-timer {
             min-height: calc(100vh - 75px);
             display: flex;
@@ -229,16 +381,28 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+            background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
         }
 
         .hero-timer::before {
             content: '';
             position: absolute;
-            top: 0;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .hero-timer::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse at center, rgba(255,215,0,0.05) 0%, transparent 70%);
+            height: 100px;
+            background: linear-gradient(transparent, var(--bg-dark));
             pointer-events: none;
         }
 
@@ -251,20 +415,20 @@
 
         .timer-title {
             font-family: 'Orbitron', monospace;
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 800;
             background: linear-gradient(135deg, #fff, var(--accent), var(--purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 40px;
-            letter-spacing: 2px;
+            margin-bottom: 50px;
+            letter-spacing: 3px;
         }
 
         .countdown-wrapper {
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 30px;
             flex-wrap: wrap;
         }
 
@@ -272,21 +436,21 @@
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(20px);
             border-radius: var(--radius-2xl);
-            padding: 25px 35px;
-            min-width: 120px;
+            padding: 30px 40px;
+            min-width: 130px;
             border: 1px solid var(--border-light);
             transition: var(--transition);
         }
 
         .countdown-block:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--accent);
             box-shadow: var(--shadow-glow);
         }
 
         .countdown-number {
             font-family: 'Orbitron', monospace;
-            font-size: 52px;
+            font-size: 56px;
             font-weight: 800;
             color: var(--accent);
             text-shadow: 0 0 20px var(--accent-glow);
@@ -295,11 +459,11 @@
         .countdown-label {
             font-size: 14px;
             color: var(--text-secondary);
-            margin-top: 8px;
-            letter-spacing: 1px;
+            margin-top: 10px;
+            letter-spacing: 2px;
         }
 
-        /* МАГАЗИН */
+        /* ========== МАГАЗИН ========== */
         .shop-section {
             max-width: 1300px;
             margin: 0 auto;
@@ -351,11 +515,14 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.05), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.05), transparent);
             transition: 0.5s;
         }
 
-        .product-card:hover::before { left: 100%; }
+        .product-card:hover::before {
+            left: 100%;
+        }
+
         .product-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
@@ -374,8 +541,18 @@
             border: 1px solid var(--border-light);
         }
 
-        .product-icon i { font-size: 32px; color: var(--accent); }
-        .product-name { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .product-icon i {
+            font-size: 32px;
+            color: var(--accent);
+        }
+
+        .product-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
         .price {
             font-size: 28px;
             font-weight: 800;
@@ -399,7 +576,10 @@
             font-size: 13px;
         }
 
-        .product-features li i { color: var(--success); width: 18px; }
+        .product-features li i {
+            color: var(--success);
+            width: 18px;
+        }
 
         .buy-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
@@ -415,11 +595,15 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
+            color: var(--bg-dark);
         }
 
-        .buy-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
+        .buy-btn:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-glow);
+        }
 
-        /* ПРОФИЛЬ */
+        /* ========== ПРОФИЛЬ ========== */
         .profile-section {
             max-width: 650px;
             margin: 0 auto;
@@ -453,7 +637,10 @@
             animation: float 3s ease infinite;
         }
 
-        .profile-avatar i { font-size: 45px; color: var(--bg-dark); }
+        .profile-avatar i {
+            font-size: 45px;
+            color: var(--bg-dark);
+        }
 
         .profile-name {
             font-size: 24px;
@@ -464,6 +651,7 @@
             gap: 6px;
             flex-wrap: wrap;
             justify-content: center;
+            color: var(--text-primary);
         }
 
         .profile-info {
@@ -481,9 +669,14 @@
             gap: 12px;
             align-items: center;
             font-size: 14px;
+            color: var(--text-primary);
         }
 
-        .profile-info i { width: 22px; color: var(--accent); font-size: 16px; }
+        .profile-info i {
+            width: 22px;
+            color: var(--accent);
+            font-size: 16px;
+        }
 
         .profile-actions {
             display: flex;
@@ -527,9 +720,10 @@
             border-radius: 40px;
             font-size: 12px;
             border: 1px solid var(--border-light);
+            color: var(--text-primary);
         }
 
-        /* ГАЛОЧКИ - 10 ВИДОВ, КРАСИВЫЕ КРУГЛЫЕ ЗНАЧКИ */
+        /* ========== ГАЛОЧКИ - 20 ВИДОВ ========== */
         .badge-icon {
             display: inline-flex;
             align-items: center;
@@ -541,50 +735,136 @@
             vertical-align: middle;
             flex-shrink: 0;
         }
-        .badge-icon i { font-size: 10px; color: white; }
-        
-        /* Синяя */
-        .badge-blue { background: #3b82f6; box-shadow: 0 0 5px #3b82f6; }
-        /* Красная */
-        .badge-red { background: #ef4444; box-shadow: 0 0 5px #ef4444; }
-        /* Золотая */
-        .badge-gold { background: #ffd700; box-shadow: 0 0 5px #ffd700; }
-        .badge-gold i { color: #1a1a1a; }
-        /* Радужная - градиент по кругу */
+
+        .badge-icon i {
+            font-size: 10px;
+            color: white;
+        }
+
+        .badge-blue {
+            background: #3b82f6;
+            box-shadow: 0 0 5px #3b82f6;
+        }
+
+        .badge-red {
+            background: #ef4444;
+            box-shadow: 0 0 5px #ef4444;
+        }
+
+        .badge-gold {
+            background: #ffd700;
+            box-shadow: 0 0 5px #ffd700;
+        }
+
+        .badge-gold i {
+            color: #1a1a1a;
+        }
+
         .badge-rainbow {
             background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff);
             background-size: 200% 200%;
             animation: rainbowRotate 2s ease infinite;
         }
-        /* RGB - переливающийся контур */
+
         .badge-rgb {
             background: #1a1a2a;
             border: 2px solid;
-            border-color: #ff0000;
             animation: rgbBorder 1s linear infinite;
         }
-        .badge-rgb i { color: white; }
-        /* Корона */
-        .badge-crown { background: none; width: auto; border-radius: 0; }
-        .badge-crown i { color: #ffd700; font-size: 14px; }
-        /* Алмазная */
-        .badge-diamond { background: linear-gradient(135deg, #00ffff, #0088ff); box-shadow: 0 0 5px #00ffff; }
-        /* Звездная */
-        .badge-star { background: linear-gradient(135deg, #ffd700, #ff8800); box-shadow: 0 0 5px #ffd700; }
-        /* Игровая */
-        .badge-game { background: linear-gradient(135deg, #ff00ff, #8800ff); box-shadow: 0 0 5px #ff00ff; }
-        /* Огненная */
-        .badge-fire { background: linear-gradient(135deg, #ff4400, #ff0000); box-shadow: 0 0 5px #ff4400; animation: pulse 1s infinite; }
 
-        @keyframes rgbBorder {
-            0% { border-color: #ff0000; box-shadow: 0 0 3px #ff0000; }
-            25% { border-color: #00ff00; box-shadow: 0 0 3px #00ff00; }
-            50% { border-color: #0000ff; box-shadow: 0 0 3px #0000ff; }
-            75% { border-color: #ff00ff; box-shadow: 0 0 3px #ff00ff; }
-            100% { border-color: #ff0000; box-shadow: 0 0 3px #ff0000; }
+        .badge-rgb i {
+            color: white;
         }
 
-        /* ЧАТЫ */
+        .badge-crown {
+            background: none;
+            width: auto;
+            border-radius: 0;
+        }
+
+        .badge-crown i {
+            color: #ffd700;
+            font-size: 14px;
+        }
+
+        .badge-diamond {
+            background: linear-gradient(135deg, #00ffff, #0088ff);
+            box-shadow: 0 0 5px #00ffff;
+        }
+
+        .badge-star {
+            background: linear-gradient(135deg, #ffd700, #ff8800);
+            box-shadow: 0 0 5px #ffd700;
+        }
+
+        .badge-game {
+            background: linear-gradient(135deg, #ff00ff, #8800ff);
+            box-shadow: 0 0 5px #ff00ff;
+        }
+
+        .badge-fire {
+            background: linear-gradient(135deg, #ff4400, #ff0000);
+            box-shadow: 0 0 5px #ff4400;
+            animation: pulse 1s infinite;
+        }
+
+        .badge-mythic {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            box-shadow: 0 0 5px #a855f7;
+        }
+
+        .badge-cosmic {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            box-shadow: 0 0 5px #06b6d4;
+        }
+
+        .badge-ice {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            box-shadow: 0 0 5px #ec4899;
+        }
+
+        .badge-shadow {
+            background: #1f2937;
+            border: 1px solid #4b5563;
+            box-shadow: 0 0 5px #4b5563;
+        }
+
+        .badge-light {
+            background: #f3f4f6;
+            box-shadow: 0 0 5px #f3f4f6;
+        }
+
+        .badge-light i {
+            color: #1a1a1a;
+        }
+
+        .badge-dark {
+            background: #111827;
+            box-shadow: 0 0 5px #111827;
+        }
+
+        .badge-nature {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 0 5px #10b981;
+        }
+
+        .badge-blood {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            box-shadow: 0 0 5px #dc2626;
+        }
+
+        .badge-void {
+            background: #000000;
+            border: 1px solid #333;
+            box-shadow: 0 0 5px #333;
+        }
+
+        .badge-divine {
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+            box-shadow: 0 0 5px #eab308;
+        }
+
+        /* ========== ЧАТЫ - СОВРЕМЕННЫЙ ДИЗАЙН ========== */
         .chats-section {
             max-width: 1200px;
             margin: 0 auto;
@@ -612,9 +892,12 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            color: var(--text-primary);
         }
 
-        .chat-top-btn i { font-size: 14px; }
+        .chat-top-btn i {
+            font-size: 14px;
+        }
 
         .chat-top-btn.active {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
@@ -625,7 +908,7 @@
 
         .chat-top-btn:hover:not(.active) {
             background: rgba(255, 215, 0, 0.15);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
 
         .chat-window {
@@ -638,7 +921,7 @@
         }
 
         .chat-window:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: var(--shadow-glow);
         }
 
@@ -664,9 +947,13 @@
             align-items: center;
             gap: 6px;
             flex-wrap: wrap;
+            color: var(--text-primary);
         }
 
-        .chat-title h2 i { color: var(--accent); font-size: 16px; }
+        .chat-title h2 i {
+            color: var(--accent);
+            font-size: 16px;
+        }
 
         .search-bar {
             position: relative;
@@ -693,7 +980,9 @@
             font-size: 12px;
         }
 
-        .search-bar input:focus { border-color: var(--accent); }
+        .search-bar input:focus {
+            border-color: var(--accent);
+        }
 
         .messages-area {
             height: 400px;
@@ -727,9 +1016,14 @@
             flex-shrink: 0;
         }
 
-        .message-avatar i { font-size: 16px; color: var(--bg-dark); }
+        .message-avatar i {
+            font-size: 16px;
+            color: var(--bg-dark);
+        }
 
-        .message-content { flex: 1; }
+        .message-content {
+            flex: 1;
+        }
 
         .message-header {
             display: flex;
@@ -746,9 +1040,13 @@
             align-items: center;
             gap: 4px;
             flex-wrap: wrap;
+            color: var(--text-primary);
         }
 
-        .message-time { font-size: 9px; color: var(--text-muted); }
+        .message-time {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
 
         .message-bubble {
             background: var(--bg-surface-solid);
@@ -757,6 +1055,7 @@
             border-top-left-radius: 4px;
             word-break: break-word;
             font-size: 13px;
+            color: var(--text-primary);
         }
 
         .message.outgoing .message-bubble {
@@ -796,7 +1095,9 @@
             min-width: 150px;
         }
 
-        .chat-input-area input:focus { border-color: var(--accent); }
+        .chat-input-area input:focus {
+            border-color: var(--accent);
+        }
 
         .emoji-picker-btn {
             background: rgba(255, 215, 0, 0.1);
@@ -826,9 +1127,13 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            color: var(--bg-dark);
         }
 
-        .send-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
+        .send-btn:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-glow);
+        }
 
         .emoji-panel {
             display: none;
@@ -878,9 +1183,13 @@
             cursor: pointer;
             transition: var(--transition);
             font-size: 12px;
+            color: var(--text-primary);
         }
 
-        .bot-btn:hover { background: rgba(255, 215, 0, 0.25); transform: scale(1.02); }
+        .bot-btn:hover {
+            background: rgba(255, 215, 0, 0.25);
+            transform: scale(1.02);
+        }
 
         .wheel-container {
             text-align: center;
@@ -924,11 +1233,39 @@
             padding: 8px;
             margin-bottom: 6px;
             font-size: 12px;
+            color: var(--text-primary);
         }
 
-        /* Админка */
+        .typing-indicator {
+            padding: 6px 20px;
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .typing-dots span {
+            display: inline-block;
+            width: 3px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typingAnim 1.4s infinite;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* ========== АДМИНКА - РАСШИРЕННАЯ ========== */
         .admin-section {
-            max-width: 750px;
+            max-width: 950px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -952,7 +1289,11 @@
             color: transparent;
         }
 
-        .admin-login-box { text-align: center; padding: 20px; }
+        .admin-login-box {
+            text-align: center;
+            padding: 20px;
+        }
+
         .admin-login-box input {
             width: 100%;
             max-width: 260px;
@@ -964,7 +1305,10 @@
             outline: none;
             margin-bottom: 12px;
         }
-        .admin-login-box input:focus { border-color: var(--accent); }
+
+        .admin-login-box input:focus {
+            border-color: var(--accent);
+        }
 
         .admin-block {
             background: rgba(0, 0, 0, 0.3);
@@ -983,7 +1327,8 @@
             gap: 8px;
         }
 
-        .admin-input, .admin-select {
+        .admin-input,
+        .admin-select {
             width: 100%;
             padding: 8px 12px;
             margin: 5px 0;
@@ -995,7 +1340,10 @@
             font-size: 13px;
         }
 
-        .admin-input:focus, .admin-select:focus { border-color: var(--accent); }
+        .admin-input:focus,
+        .admin-select:focus {
+            border-color: var(--accent);
+        }
 
         .admin-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
@@ -1011,13 +1359,51 @@
             font-size: 13px;
         }
 
-        .admin-btn:hover { transform: scale(1.01); box-shadow: var(--shadow-glow); }
-        .admin-btn-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
-        .admin-btn-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
-        .admin-btn-purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
-        .admin-btn-green { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+        .admin-btn:hover {
+            transform: scale(1.01);
+            box-shadow: var(--shadow-glow);
+        }
 
-        .players-list { max-height: 220px; overflow-y: auto; }
+        .admin-btn-blue {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+
+        .admin-btn-red {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        .admin-btn-purple {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            color: white;
+        }
+
+        .admin-btn-green {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .admin-btn-pink {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            color: white;
+        }
+
+        .admin-btn-cyan {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            color: white;
+        }
+
+        .admin-btn-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+
+        .players-list {
+            max-height: 220px;
+            overflow-y: auto;
+        }
+
         .player-card {
             background: rgba(0, 0, 0, 0.3);
             border-radius: var(--radius-md);
@@ -1029,6 +1415,7 @@
             flex-wrap: wrap;
             gap: 8px;
             font-size: 13px;
+            color: var(--text-primary);
         }
 
         .log-item {
@@ -1038,9 +1425,23 @@
             margin-bottom: 5px;
             font-size: 11px;
             border-left: 2px solid var(--accent);
+            color: var(--text-primary);
         }
 
-        /* Уведомления (тосты) */
+        .ban-modal {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border-radius: var(--radius-2xl);
+            padding: 30px;
+            max-width: 450px;
+            text-align: center;
+            border: 2px solid var(--danger);
+        }
+
+        .ban-modal h2 {
+            color: var(--danger);
+            margin-bottom: 15px;
+        }
+
         .toast-notification {
             position: fixed;
             bottom: 20px;
@@ -1059,9 +1460,12 @@
             gap: 10px;
         }
 
-        .toast-notification i { color: var(--accent); font-size: 16px; }
+        .toast-notification i {
+            color: var(--accent);
+            font-size: 16px;
+        }
 
-        /* Модалки */
+        /* ========== МОДАЛКИ ========== */
         .modal {
             display: none;
             position: fixed;
@@ -1076,7 +1480,8 @@
             z-index: 1000;
         }
 
-        .modal-content, .auth-modal {
+        .modal-content,
+        .auth-modal {
             background: linear-gradient(135deg, var(--bg-surface-solid), var(--bg-tertiary));
             border-radius: var(--radius-2xl);
             padding: 30px;
@@ -1099,7 +1504,9 @@
             font-size: 14px;
         }
 
-        .auth-input:focus { border-color: var(--accent); }
+        .auth-input:focus {
+            border-color: var(--accent);
+        }
 
         .auth-btn {
             width: 100%;
@@ -1136,10 +1543,18 @@
             color: var(--bg-dark);
         }
 
-        .tab-pane-auth { display: none; }
-        .tab-pane-auth.active { display: block; }
+        .tab-pane-auth {
+            display: none;
+        }
 
-        .admin-only { display: none; }
+        .tab-pane-auth.active {
+            display: block;
+        }
+
+        .admin-only {
+            display: none;
+        }
+
         .close-modal {
             float: right;
             font-size: 20px;
@@ -1147,43 +1562,127 @@
             color: var(--accent);
             transition: var(--transition);
         }
-        .close-modal:hover { transform: scale(1.1); }
 
-        .typing-indicator {
-            padding: 6px 20px;
-            font-size: 11px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .close-modal:hover {
+            transform: scale(1.1);
         }
 
-        .typing-dots span {
-            display: inline-block;
-            width: 3px;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 50%;
-            margin: 0 2px;
-            animation: typingAnim 1.4s infinite;
-        }
-        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typingAnim {
-            0%, 100% { transform: translateY(0); opacity: 0.5; }
-            50% { transform: translateY(-2px); opacity: 1; }
-        }
-
+        /* ========== АДАПТИВ ДЛЯ ТЕЛЕФОНА ========== */
         @media (max-width: 768px) {
-            .countdown-number { font-size: 32px; }
-            .countdown-block { padding: 15px 20px; min-width: 80px; }
-            .timer-title { font-size: 28px; }
-            .product-card { margin: 0 10px; }
-            .chat-top-btn { padding: 6px 16px; font-size: 12px; }
-            .message { max-width: 95%; }
-            .chat-title { flex-direction: column; align-items: flex-start; }
-            .search-bar { max-width: 100%; width: 100%; }
+            .countdown-number {
+                font-size: 32px;
+            }
+
+            .countdown-block {
+                padding: 15px 20px;
+                min-width: 80px;
+            }
+
+            .timer-title {
+                font-size: 28px;
+            }
+
+            .product-card {
+                margin: 0 10px;
+            }
+
+            .chat-top-btn {
+                padding: 6px 16px;
+                font-size: 12px;
+            }
+
+            .message {
+                max-width: 95%;
+            }
+
+            .chat-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-bar {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .admin-section {
+                padding: 10px;
+            }
+
+            .admin-block {
+                padding: 12px;
+            }
+
+            .site-header {
+                padding: 6px 15px;
+            }
+
+            .logo-text {
+                font-size: 14px;
+            }
+
+            .logo-icon {
+                width: 28px;
+                height: 28px;
+            }
+
+            .logo-icon i {
+                font-size: 14px;
+            }
+
+            .balance span {
+                font-size: 14px;
+            }
+
+            .balance i {
+                font-size: 12px;
+            }
+
+            .menu-tab {
+                padding: 4px 16px;
+                font-size: 11px;
+            }
+
+            #homePage,
+            #shopPage,
+            #chatsPage,
+            #profilePage,
+            #adminPage {
+                padding-top: 70px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .countdown-number {
+                font-size: 24px;
+            }
+
+            .countdown-block {
+                padding: 10px 15px;
+                min-width: 65px;
+            }
+
+            .timer-title {
+                font-size: 22px;
+                margin-bottom: 25px;
+            }
+
+            .product-name {
+                font-size: 18px;
+            }
+
+            .price {
+                font-size: 22px;
+            }
+
+            .profile-name {
+                font-size: 20px;
+            }
+
+            .chat-top-btn {
+                padding: 4px 12px;
+                font-size: 10px;
+            }
         }
     </style>
 </head>
@@ -1208,16 +1707,28 @@
         </div>
     </div>
 
-    <!-- ГЛАВНАЯ -->
+    <!-- ГЛАВНАЯ СТРАНИЦА -->
     <div id="homePage" class="page active">
         <div class="hero-timer">
             <div class="timer-container">
                 <div class="timer-title" id="eventTitle">ДО ОТКРЫТИЯ СЕЗОНА</div>
                 <div class="countdown-wrapper">
-                    <div class="countdown-block"><div class="countdown-number" id="days">0</div><div class="countdown-label">Дней</div></div>
-                    <div class="countdown-block"><div class="countdown-number" id="hours">0</div><div class="countdown-label">Часов</div></div>
-                    <div class="countdown-block"><div class="countdown-number" id="minutes">0</div><div class="countdown-label">Минут</div></div>
-                    <div class="countdown-block"><div class="countdown-number" id="seconds">0</div><div class="countdown-label">Секунд</div></div>
+                    <div class="countdown-block">
+                        <div class="countdown-number" id="days">0</div>
+                        <div class="countdown-label">Дней</div>
+                    </div>
+                    <div class="countdown-block">
+                        <div class="countdown-number" id="hours">0</div>
+                        <div class="countdown-label">Часов</div>
+                    </div>
+                    <div class="countdown-block">
+                        <div class="countdown-number" id="minutes">0</div>
+                        <div class="countdown-label">Минут</div>
+                    </div>
+                    <div class="countdown-block">
+                        <div class="countdown-number" id="seconds">0</div>
+                        <div class="countdown-label">Секунд</div>
+                    </div>
                 </div>
                 <div class="timer-footer" id="eventDesc" style="margin-top: 30px; color: var(--text-muted); font-size: 14px;"></div>
             </div>
@@ -1244,23 +1755,15 @@
                 <button class="chat-top-btn" data-chat="leader"><i class="fas fa-crown"></i> GrifMcProLeader <span class="badge-icon badge-crown"><i class="fas fa-crown"></i></span></button>
                 <button class="chat-top-btn" data-chat="private"><i class="fas fa-user-friends"></i> Личные <span class="badge-icon badge-blue"><i class="fas fa-user"></i></span></button>
             </div>
-
             <div class="chat-window">
                 <div class="chat-header">
                     <div class="chat-title">
                         <h2 id="currentChatTitle"><i class="fas fa-hashtag"></i> GrifMcPro <span class="badge-icon badge-gold"><i class="fas fa-check"></i></span></h2>
-                        <div class="search-bar">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="searchMessages" placeholder="Поиск сообщений...">
-                        </div>
+                        <div class="search-bar"><i class="fas fa-search"></i><input type="text" id="searchMessages" placeholder="Поиск сообщений..."></div>
                     </div>
                 </div>
                 <div class="messages-area" id="messagesArea"></div>
-                <div class="typing-indicator" id="typingIndicator" style="display: none;">
-                    <i class="fas fa-pen-fancy"></i>
-                    <span id="typingName"></span> печатает
-                    <div class="typing-dots"><span></span><span></span><span></span></div>
-                </div>
+                <div class="typing-indicator" id="typingIndicator" style="display: none;"><i class="fas fa-pen-fancy"></i><span id="typingName"></span> печатает<div class="typing-dots"><span></span><span></span><span></span></div></div>
                 <div id="botInterface" style="display: none;">
                     <div class="bot-interface">
                         <div class="bot-buttons">
@@ -1283,10 +1786,7 @@
                 </div>
                 <div id="privateChatInterface" style="display: none;">
                     <div class="bot-interface">
-                        <div class="search-bar" style="max-width: 100%; margin-bottom: 10px;">
-                            <i class="fas fa-search"></i>
-                            <input type="text" id="privateSearchInput" placeholder="Поиск по тегу или нику...">
-                        </div>
+                        <div class="search-bar" style="max-width: 100%; margin-bottom: 10px;"><i class="fas fa-search"></i><input type="text" id="privateSearchInput" placeholder="Поиск по тегу или нику..."></div>
                         <div id="usersList" style="max-height: 150px; overflow-y: auto; margin-bottom: 10px;"></div>
                     </div>
                 </div>
@@ -1331,19 +1831,111 @@
                 <div class="admin-title">👑 АДМИН-ПАНЕЛЬ</div>
                 <div id="adminLoginPanel">
                     <div class="admin-login-box">
-                        <input type="password" id="adminPassword" placeholder="Ключ доступа">
+                        <input type="password" id="adminPassword" placeholder="Ключ доступа (website)">
                         <button id="checkAdminPasswordBtn" class="admin-btn">ВОЙТИ В АДМИНКУ</button>
                     </div>
                 </div>
                 <div id="adminPanelContent" style="display: none;">
-                    <div class="admin-block"><h3><i class="fas fa-users"></i> ПОСЛЕДНИЕ 10 АККАУНТОВ</h3><div class="players-list" id="recentUsersList"></div></div>
-                    <div class="admin-block"><h3><i class="fas fa-user-shield"></i> МОДЕРАТОРЫ</h3><input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input"><button id="addModeratorBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button><div id="moderatorsList" class="players-list"></div></div>
-                    <div class="admin-block"><h3><i class="fas fa-dice-d6"></i> ПРОКРУТКИ КОЛЕСА</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">🎫 ВЫДАТЬ</button></div>
-                    <div class="admin-block"><h3><i class="fas fa-tags"></i> ГАЛОЧКИ (10 ВИДОВ)</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option><option value="diamond">💎 Алмазная</option><option value="star">⭐ Звездная</option><option value="game">🎮 Игровая</option><option value="fire">🔥 Огненная</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div>
-                    <div class="admin-block"><h3><i class="fas fa-coins"></i> МОНЕТЫ</h3><input type="text" id="giveNick" placeholder="Никнейм" class="admin-input"><input type="number" id="giveAmount" placeholder="Сумма" class="admin-input"><button id="giveCoinsBtn" class="admin-btn-blue">💸 ВЫДАТЬ</button><button id="globalGiveBtn" class="admin-btn-purple">🌍 ВСЕМ</button></div>
-                    <div class="admin-block"><h3><i class="fas fa-gavel"></i> БАН / РАЗБАН</h3><input type="text" id="banNick" placeholder="Никнейм" class="admin-input"><input type="text" id="moderatorName" placeholder="Ник модератора" class="admin-input"><textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="banDuration" class="admin-select"><option value="1">1 час</option><option value="24">1 день</option><option value="168">7 дней</option><option value="forever">Навсегда</option></select><button id="banUserBtn" class="admin-btn-red">⛔ ЗАБАНИТЬ</button><button id="unbanUserBtn" class="admin-btn-green">🔓 РАЗБАНИТЬ</button></div>
-                    <div class="admin-block"><h3><i class="fas fa-lock"></i> УПРАВЛЕНИЕ САЙТОМ</h3><textarea id="closeReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="closeDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="24">1 день</option><option value="168">7 дней</option></select><button id="closeSiteBtn" class="admin-btn-red">🔒 ЗАКРЫТЬ</button><button id="openSiteBtn" class="admin-btn-green">🔓 ОТКРЫТЬ</button></div>
-                    <div class="admin-block"><h3><i class="fas fa-history"></i> ЛОГИ</h3><div id="logsList" style="max-height: 180px; overflow-y: auto;"></div></div>
+                    <div class="admin-block">
+                        <h3><i class="fas fa-users"></i> ПОСЛЕДНИЕ 10 АККАУНТОВ</h3>
+                        <div class="players-list" id="recentUsersList"></div>
+                    </div>
+                    <div class="admin-block">
+                        <h3><i class="fas fa-envelope"></i> РАССЫЛКА ЧЕРЕЗ БОТА</h3>
+                        <textarea id="broadcastMsg" rows="2" placeholder="Текст рассылки..." class="admin-input"></textarea>
+                        <button id="sendBroadcastBtn" class="admin-btn-pink">📢 ОТПРАВИТЬ ВСЕМ</button>
+                    </div>
+                    <div class="admin-block">
+                        <h3><i class="fas fa-ban"></i> БЛОКИРОВКА ПОКУПОК</h3>
+                        <select id="shopLockStatus" class="admin-select">
+                            <option value="open">🟢 Магазин открыт</option>
+                            <option value="closed">🔴 Магазин закрыт</option>
+                        </select>
+                        <button id="toggleShopLockBtn" class="admin-btn-warning">🔒 ПРИМЕНИТЬ</button>
+                    </div>
+                    <div class="admin-block">
+                        <h3><i class="fas fa-user-shield"></i> МОДЕРАТОРЫ</h3>
+                        <input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input">
+                        <button id="addModeratorBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button>
+                        <div id="moderatorsList" class="players-list"></div>
+                    </div>
+                    <div class="admin-block">
+                        <h3><i class="fas fa-dice-d6"></i> ПРОКРУТКИ КОЛЕСА</h3>
+                        <input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input">
+                        <button id="giveSpinBtn" class="admin-btn-blue">🎫 ВЫДАТЬ</button>
+                    </div>
+                    <div class="admin-block">
+                        <h3><i class="fas fa-tags"></i> ГАЛОЧКИ (20 ВИДОВ)</h3>
+                        <input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input">
+                        <select id="badgeType" class="admin-select">
+                            <option value="blue">🔵 Синяя</option>
+                            <option value="red">🔴 Красная</option>
+                            <option value="gold">🟡 Золотая</option>
+                            <option value="rainbow">🌈 Радужная</option>
+                            <option value="rgb">✨ RGB</option>
+                            <option value="crown">👑 Корона</option>
+                            <option value="diamond">💎 Алмазная</option>
+                            <option value="star">⭐ Звездная</option>
+                            <option value="game">🎮 Игровая</option>
+                            <option value="fire">🔥 Огненная</option>
+                            <option value="mythic">🔮 Мифическая</option>
+                            <option value="cosmic">🌌 Космическая</option>
+                            <option value="ice">❄️ Ледяная</option>
+                            <option value="shadow">🌑 Теневая</option>
+                            <option value="light">✨ Светлая</option>
+                            <option value="dark">🖤 Тёмная</option>
+                            <option value="nature">🌿 Природная</option>
+                            <option value="blood">🩸 Кровавая</option>
+                            <option value="void">🌀 Пустота</option>
+                            <option value="divine">⚜️ Божественная</option>
+                        </select>
+                        <button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button>
+                        <button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button>
+                    </div>
+                    <div class="admin-block">
+                        <h3><i class="fas fa-coins"></i> МОНЕТЫ</h3>
+                        <input type="text" id="giveNick" placeholder="Никнейм" class="admin-input">
+                        <input type="number" id="giveAmount" placeholder="Сумма" class="admin-input">
+                        <button id="giveCoinsBtn" class="admin-btn-blue">💸 ВЫДАТЬ</button>
+                        <button id="globalGiveBtn" class="admin-btn-purple">🌍 ВСЕМ</button>
+                    </div>
+                    <div class="admin-block">
+                        <h3><i class="fas fa-gavel"></i> БАН / РАЗБАН</h3>
+                        <input type="text" id="banNick" placeholder="Никнейм" class="admin-input">
+                        <input type="text" id="moderatorName" placeholder="Ник модератора" class="admin-input">
+                        <textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea>
+                        <select id="banDuration" class="admin-select">
+                            <option value="1">1 час</option>
+                            <option value="6">6 часов</option>
+                            <option value="12">12 часов</option>
+                            <option value="24">1 день</option>
+                            <option value="168">7 дней</option>
+                            <option value="720">30 дней</option>
+                            <option value="forever">Навсегда</option>
+                        </select>
+                        <button id="banUserBtn" class="admin-btn-red">⛔ ЗАБАНИТЬ</button>
+                        <button id="unbanUserBtn" class="admin-btn-green">🔓 РАЗБАНИТЬ</button>
+                    </div>
+                    <div class="admin-block">
+                        <h3><i class="fas fa-lock"></i> УПРАВЛЕНИЕ САЙТОМ</h3>
+                        <textarea id="closeReason" rows="2" placeholder="Причина" class="admin-input"></textarea>
+                        <select id="closeDuration" class="admin-select">
+                            <option value="1">1 час</option>
+                            <option value="6">6 часов</option>
+                            <option value="24">1 день</option>
+                            <option value="168">7 дней</option>
+                        </select>
+                        <button id="closeSiteBtn" class="admin-btn-red">🔒 ЗАКРЫТЬ</button>
+                        <button id="openSiteBtn" class="admin-btn-green">🔓 ОТКРЫТЬ</button>
+                    </div>
+                    <div class="admin-block">
+                        <h3><i class="fas fa-chart-line"></i> СТАТИСТИКА САЙТА</h3>
+                        <div id="statsList" class="players-list"></div>
+                    </div>
+                    <div class="admin-block">
+                        <h3><i class="fas fa-history"></i> ЛОГИ ДЕЙСТВИЙ</h3>
+                        <div id="logsList" style="max-height: 180px; overflow-y: auto;"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1372,10 +1964,43 @@
         </div>
     </div>
 
-    <div id="buyModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeBuyModal">&times;</span><h3 id="buyProductName" style="font-size: 20px;"></h3><p style="margin: 12px 0;">Цена: <strong id="buyPrice" style="color: var(--accent); font-size: 22px;"></strong> ₽</p><input type="text" id="buyNick" placeholder="Ваш ник" class="admin-input"><button id="confirmBuyBtn" class="admin-btn"><i class="fas fa-shopping-cart"></i> КУПИТЬ</button></div></div>
-    <div id="editNameModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeEditModal">&times;</span><h3>Сменить имя</h3><input type="text" id="newNameInput" placeholder="Новое имя" class="admin-input"><button id="saveNameBtn" class="admin-btn">Сохранить</button></div></div>
-    <div id="editTagModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeTagModal">&times;</span><h3>Сменить тег</h3><input type="text" id="newTagInput" placeholder="Новый тег (например: #игрок)" class="admin-input"><button id="saveTagBtn" class="admin-btn">Сохранить</button></div></div>
-    <div id="changePasswordModal" class="modal"><div class="modal-content"><span class="close-modal" id="closePasswordModal">&times;</span><h3>Сменить пароль</h3><input type="password" id="oldPasswordInput" placeholder="Старый пароль" class="admin-input"><input type="password" id="newPasswordInput" placeholder="Новый пароль" class="admin-input"><button id="savePasswordBtn" class="admin-btn">Сохранить</button></div></div>
+    <div id="buyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeBuyModal">&times;</span>
+            <h3 id="buyProductName" style="font-size: 20px;"></h3>
+            <p style="margin: 12px 0;">Цена: <strong id="buyPrice" style="color: var(--accent); font-size: 22px;"></strong> ₽</p>
+            <input type="text" id="buyNick" placeholder="Ваш ник" class="admin-input">
+            <button id="confirmBuyBtn" class="admin-btn"><i class="fas fa-shopping-cart"></i> КУПИТЬ</button>
+        </div>
+    </div>
+
+    <div id="editNameModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeEditModal">&times;</span>
+            <h3>Сменить имя</h3>
+            <input type="text" id="newNameInput" placeholder="Новое имя" class="admin-input">
+            <button id="saveNameBtn" class="admin-btn">Сохранить</button>
+        </div>
+    </div>
+
+    <div id="editTagModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeTagModal">&times;</span>
+            <h3>Сменить тег</h3>
+            <input type="text" id="newTagInput" placeholder="Новый тег (например: #игрок)" class="admin-input">
+            <button id="saveTagBtn" class="admin-btn">Сохранить</button>
+        </div>
+    </div>
+
+    <div id="changePasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closePasswordModal">&times;</span>
+            <h3>Сменить пароль</h3>
+            <input type="password" id="oldPasswordInput" placeholder="Старый пароль" class="admin-input">
+            <input type="password" id="newPasswordInput" placeholder="Новый пароль" class="admin-input">
+            <button id="savePasswordBtn" class="admin-btn">Сохранить</button>
+        </div>
+    </div>
 
     <script>
         (function() {
@@ -1401,7 +2026,12 @@
             let currentPrivateUser = null;
             let messagesUnsub = null;
             let allUsers = [];
+            let balanceInterval = null;
+            let siteStatusUnsub = null;
+            let banUnsub = null;
+            let shopLockUnsub = null;
 
+            // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
             function showToast(message, isError = false) {
                 const toast = document.createElement('div');
                 toast.className = 'toast-notification';
@@ -1414,26 +2044,107 @@
                 if (!type) return '';
                 const icons = {
                     blue: 'fa-check', red: 'fa-check', gold: 'fa-check', rainbow: 'fa-check', rgb: 'fa-check',
-                    crown: 'fa-crown', diamond: 'fa-gem', star: 'fa-star', game: 'fa-gamepad', fire: 'fa-fire'
+                    crown: 'fa-crown', diamond: 'fa-gem', star: 'fa-star', game: 'fa-gamepad', fire: 'fa-fire',
+                    mythic: 'fa-moon', cosmic: 'fa-globe', ice: 'fa-snowflake', shadow: 'fa-moon', light: 'fa-sun',
+                    dark: 'fa-moon', nature: 'fa-leaf', blood: 'fa-droplet', void: 'fa-circle', divine: 'fa-feather'
                 };
                 const icon = icons[type] || 'fa-check';
                 return `<span class="badge-icon badge-${type}"><i class="fas ${icon}"></i></span>`;
             }
 
+            // ========== РЕАЛЬНОЕ ВРЕМЯ - БАН ==========
+            function listenBan(user) {
+                if (banUnsub) banUnsub();
+                if (!user) return;
+                banUnsub = db.collection('bans').where('userId', '==', user.uid).where('active', '==', true).onSnapshot((snap) => {
+                    if (!snap.empty) {
+                        const ban = snap.docs[0].data();
+                        if (ban.until && ban.until.toDate() < new Date()) {
+                            snap.docs[0].ref.update({ active: false });
+                            return;
+                        }
+                        document.getElementById('mainContent').style.display = 'none';
+                        document.getElementById('authModal').style.display = 'none';
+                        let banDiv = document.getElementById('banModalDiv');
+                        if (!banDiv) {
+                            banDiv = document.createElement('div');
+                            banDiv.id = 'banModalDiv';
+                            banDiv.className = 'modal';
+                            banDiv.style.display = 'flex';
+                            banDiv.innerHTML = `<div class="ban-modal"><h2><i class="fas fa-gavel"></i> ВЫ ЗАБАНЕНЫ!</h2><p><strong>Причина:</strong> ${ban.reason}</p><p><strong>Разбан:</strong> ${ban.until ? new Date(ban.until.toDate()).toLocaleString() : 'Навсегда'}</p><p><strong>Модератор:</strong> ${ban.moderator || 'Система'}</p><button id="banExitBtn" class="admin-btn" style="margin-top:20px;">Выйти</button></div>`;
+                            document.body.appendChild(banDiv);
+                            document.getElementById('banExitBtn')?.addEventListener('click', () => auth.signOut());
+                        }
+                    } else {
+                        const banDiv = document.getElementById('banModalDiv');
+                        if (banDiv) banDiv.remove();
+                        if (!document.getElementById('closedSiteDiv')) document.getElementById('mainContent').style.display = 'block';
+                    }
+                });
+            }
+
+            // ========== РЕАЛЬНОЕ ВРЕМЯ - ЗАКРЫТИЕ САЙТА ==========
+            function listenSiteStatus() {
+                if (siteStatusUnsub) siteStatusUnsub();
+                siteStatusUnsub = db.collection('settings').doc('siteStatus').onSnapshot(async (doc) => {
+                    if (doc.exists && doc.data().closed) {
+                        const data = doc.data();
+                        if (data.until && data.until.toDate() < new Date()) {
+                            await db.collection('settings').doc('siteStatus').update({ closed: false });
+                            return;
+                        }
+                        if (currentUser && currentUser.email !== MAIN_ADMIN_EMAIL && !moderatorsList.some(m => m.email === currentUser.email)) {
+                            document.getElementById('mainContent').style.display = 'none';
+                            document.getElementById('authModal').style.display = 'none';
+                            let closedDiv = document.getElementById('closedSiteDiv');
+                            if (!closedDiv) {
+                                closedDiv = document.createElement('div');
+                                closedDiv.id = 'closedSiteDiv';
+                                closedDiv.className = 'modal';
+                                closedDiv.style.display = 'flex';
+                                closedDiv.innerHTML = `<div class="modal-content"><h2>🔒 САЙТ ЗАКРЫТ</h2><p>📋 ${data.reason || 'Технические работы'}</p><p>⏰ Откроется: ${data.until ? new Date(data.until.toDate()).toLocaleString() : 'Неизвестно'}</p><button id="closedExitBtn" class="admin-btn">Покинуть</button></div>`;
+                                document.body.appendChild(closedDiv);
+                                document.getElementById('closedExitBtn')?.addEventListener('click', () => auth.signOut());
+                            }
+                        }
+                    } else {
+                        const closedDiv = document.getElementById('closedSiteDiv');
+                        if (closedDiv) closedDiv.remove();
+                        if (!document.getElementById('banModalDiv')) document.getElementById('mainContent').style.display = 'block';
+                    }
+                });
+            }
+
+            // ========== РЕАЛЬНОЕ ВРЕМЯ - БЛОКИРОВКА ПОКУПОК ==========
+            let shopLocked = false;
+            function listenShopLock() {
+                if (shopLockUnsub) shopLockUnsub();
+                shopLockUnsub = db.collection('settings').doc('shopLock').onSnapshot((doc) => {
+                    if (doc.exists) shopLocked = doc.data().locked === true;
+                    else shopLocked = false;
+                });
+            }
+
+            // ========== РАССЫЛКА ==========
+            async function sendBroadcast(message) {
+                const users = await db.collection('users').get();
+                for (const userDoc of users.docs) {
+                    await db.collection('chats/bot/messages').add({
+                        from: "system", fromName: "📢 Админ", text: `🔔 РАССЫЛКА:\n${message}`, timestamp: new Date()
+                    });
+                }
+                showToast('✅ Рассылка отправлена всем!', false);
+            }
+
+            // ========== ЧАТЫ ==========
             function loadMessages() {
                 if (messagesUnsub) messagesUnsub();
                 let collectionPath = '';
-                if (currentChat === 'channel') {
-                    collectionPath = 'chats/channel/messages';
-                } else if (currentChat === 'bot') {
-                    collectionPath = 'chats/bot/messages';
-                } else if (currentChat === 'leader') {
-                    collectionPath = `chats/leader/${MAIN_ADMIN_EMAIL}/messages`;
-                } else if (currentChat === 'private' && currentPrivateUser) {
-                    collectionPath = `chats/private/${currentUser.uid}/${currentPrivateUser}`;
-                } else {
-                    return;
-                }
+                if (currentChat === 'channel') collectionPath = 'chats/channel/messages';
+                else if (currentChat === 'bot') collectionPath = 'chats/bot/messages';
+                else if (currentChat === 'leader') collectionPath = `chats/leader/${MAIN_ADMIN_EMAIL}/messages`;
+                else if (currentChat === 'private' && currentPrivateUser) collectionPath = `chats/private/${currentUser.uid}/${currentPrivateUser}`;
+                else return;
 
                 const messagesRef = db.collection(collectionPath).orderBy('timestamp');
                 messagesUnsub = messagesRef.onSnapshot((snapshot) => {
@@ -1464,6 +2175,10 @@
 
             async function sendMessage(text) {
                 if (!text.trim()) return;
+                if (shopLocked && currentChat === 'channel') {
+                    showToast('❌ Магазин временно закрыт администрацией', true);
+                    return;
+                }
                 if (currentChat === 'channel') {
                     await db.collection('chats/channel/messages').add({
                         from: currentUser.uid, fromName: currentUser.displayName, fromEmail: currentUser.email,
@@ -1522,9 +2237,24 @@
                 currentBalance = newBalance;
                 document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
                 await db.collection('chats/bot/messages').add({ from: "system", fromName: "GrifMcBot 🤖", text: `🎉 ВЫИГРАЛИ ${prize.toLocaleString()} ₽! Осталось: ${newSpins}`, timestamp: new Date() });
-                showToast(`🎉 Выиграно ${prize.toLocaleString()} ₽!`);
+                showToast(`🎉 Выиграно ${prize.toLocaleString()} ₽!`, false);
             }
 
+            // ========== БАЛАНС ОБНОВЛЯЕТСЯ КАЖДЫЕ 3 СЕКУНДЫ ==========
+            function startBalanceUpdater() {
+                if (balanceInterval) clearInterval(balanceInterval);
+                balanceInterval = setInterval(async () => {
+                    if (currentUser) {
+                        const doc = await db.collection('users').doc(currentUser.uid).get();
+                        if (doc.exists) {
+                            currentBalance = doc.data().balance || 50000;
+                            document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
+                        }
+                    }
+                }, 3000);
+            }
+
+            // ========== ЗАГРУЗКА ДАННЫХ ПОЛЬЗОВАТЕЛЯ ==========
             async function loadUserData(user) {
                 if (!user) return;
                 const doc = await db.collection('users').doc(user.uid).get();
@@ -1569,6 +2299,130 @@
                 if (hasAdminAccess) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
             }
 
+            // ========== АДМИН ФУНКЦИИ ==========
+            async function loadModerators() {
+                const doc = await db.collection('settings').doc('moderators').get();
+                moderatorsList = doc.exists ? doc.data().list || [] : [];
+                const container = document.getElementById('moderatorsList');
+                if (container) {
+                    container.innerHTML = moderatorsList.map(m => `<div class="player-card"><span>👑 ${m.nick}</span><button onclick="window.removeModerator('${m.email}')" style="background:#ef4444;border:none;padding:4px 12px;border-radius:30px;font-size:11px;">УДАЛИТЬ</button></div>`).join('');
+                }
+            }
+            window.removeModerator = async (email) => {
+                moderatorsList = moderatorsList.filter(m => m.email !== email);
+                await db.collection('settings').doc('moderators').set({ list: moderatorsList });
+                loadModerators();
+                showToast('Модератор удалён', false);
+            };
+
+            async function loadRecentUsers() {
+                const snap = await db.collection('users').orderBy('registeredAt', 'desc').limit(10).get();
+                const container = document.getElementById('recentUsersList');
+                if (container) {
+                    container.innerHTML = snap.docs.map(doc => `<div class="player-card"><span><strong>${doc.data().username}</strong><br>${doc.data().email}<br>💰 ${doc.data().balance || 0} ₽</span><button onclick="window.showUserActions('${doc.id}','${doc.data().username}','${doc.data().email}')" class="admin-btn-blue" style="width:auto;padding:5px 12px;font-size:11px;">ДЕЙСТВИЯ</button></div>`).join('');
+                }
+            }
+
+            window.showUserActions = (userId, username, email) => {
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.style.display = 'flex';
+                modal.innerHTML = `<div class="modal-content"><span class="close-modal" onclick="this.closest('.modal').remove()">&times;</span><h3>${username}</h3><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:15px;"><button onclick="window.banUserPrompt('${userId}','${username}','${email}')" class="admin-btn-red" style="flex:1;">БАН</button><button onclick="window.unbanUserPrompt('${email}','${username}')" class="admin-btn-green" style="flex:1;">РАЗБАН</button><button onclick="window.giveDonatePrompt('${userId}','${username}')" class="admin-btn-blue" style="flex:1;">ДОНАТ</button><button onclick="window.removeDonatePrompt('${userId}','${username}')" class="admin-btn-purple" style="flex:1;">СНЯТЬ</button></div></div>`;
+                document.body.appendChild(modal);
+            };
+
+            window.banUserPrompt = async (userId, username, email) => {
+                const reason = prompt('Причина:'), duration = prompt('Часы или forever:'), mod = prompt('Модератор:');
+                if (reason && duration && mod) {
+                    const until = duration === 'forever' ? null : new Date(Date.now() + parseInt(duration) * 60 * 60 * 1000);
+                    await db.collection('bans').add({ userId, username, email, reason, until, active: true, moderator: mod, createdAt: new Date() });
+                    showToast(`✅ ${username} забанен`, false);
+                }
+            };
+            window.unbanUserPrompt = async (email, username) => {
+                const reason = prompt('Причина разбана:'), mod = prompt('Модератор:');
+                if (reason && mod) {
+                    const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
+                    for (const doc of snap.docs) await doc.ref.update({ active: false });
+                    showToast(`✅ ${username} разбанен`, false);
+                }
+            };
+            window.giveDonatePrompt = async (userId, username) => {
+                const donateName = prompt('Название доната:'), reason = prompt('Причина:');
+                if (donateName && reason) await db.collection('donates').add({ userId, username, product: donateName, price: 0, date: new Date(), givenBy: reason });
+            };
+            window.removeDonatePrompt = async (userId, username) => {
+                const reason = prompt('Причина снятия:');
+                if (reason) {
+                    const snap = await db.collection('donates').where('userId', '==', userId).get();
+                    for (const doc of snap.docs) await doc.ref.delete();
+                }
+            };
+
+            async function giveCoins(nick, amount) {
+                const snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return showToast('Не найден', true);
+                await snap.docs[0].ref.update({ balance: (snap.docs[0].data().balance || 0) + amount });
+                showToast(`✅ Выдано ${amount} ₽ ${nick}`, false);
+            }
+            async function giveBadge(nick, type) {
+                const snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return showToast('Не найден', true);
+                await snap.docs[0].ref.update({ badge: type });
+                showToast(`✅ Галочка выдана ${nick}`, false);
+                if (currentUser && currentUser.uid === snap.docs[0].id) {
+                    document.getElementById('profileName').innerHTML = snap.docs[0].data().username + getBadgeHtml(type);
+                }
+            }
+            async function giveSpin(nick) {
+                const snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return showToast('Не найден', true);
+                const spins = (snap.docs[0].data().wheelSpins || 0) + 1;
+                await snap.docs[0].ref.update({ wheelSpins: spins });
+                showToast(`✅ Прокрутка выдана ${nick}`, false);
+            }
+            async function giveCoinsAll(amount) {
+                const snap = await db.collection('users').get();
+                for (const doc of snap.docs) {
+                    await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
+                }
+                showToast(`✅ Выдано ${amount} ₽ всем`, false);
+            }
+            async function closeSite(reason, hours) {
+                const until = new Date(Date.now() + hours * 60 * 60 * 1000);
+                await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until });
+                showToast(`🔒 Сайт закрыт до ${until.toLocaleString()}`, false);
+            }
+            async function openSite() {
+                await db.collection('settings').doc('siteStatus').update({ closed: false });
+                showToast('🔓 Сайт открыт', false);
+            }
+            async function toggleShopLock(locked) {
+                await db.collection('settings').doc('shopLock').set({ locked: locked });
+                showToast(locked ? '🔒 Магазин заблокирован' : '🟢 Магазин открыт', false);
+            }
+            async function loadStats() {
+                const users = await db.collection('users').get();
+                const container = document.getElementById('statsList');
+                if (container) {
+                    container.innerHTML = `
+                        <div class="player-card">👥 Всего игроков: ${users.size}</div>
+                        <div class="player-card">💰 Общий баланс: ${users.docs.reduce((sum, d) => sum + (d.data().balance || 0), 0).toLocaleString()} ₽</div>
+                        <div class="player-card">🎡 Всего прокруток: ${users.docs.reduce((sum, d) => sum + (d.data().wheelSpins || 0), 0)}</div>
+                    `;
+                }
+            }
+            async function loadLogs() {
+                const snap = await db.collection('logs').orderBy('timestamp', 'desc').limit(30).get();
+                const container = document.getElementById('logsList');
+                if (container) {
+                    container.innerHTML = snap.docs.map(doc => `<div class="log-item">[${new Date(doc.data().timestamp?.toDate()).toLocaleString()}] <strong>${doc.data().action}</strong> → ${doc.data().target}<br>${doc.data().details || ''}</div>`).join('');
+                }
+            }
+            function addLog(action, target, details) {
+                if (currentUser) db.collection('logs').add({ action, moderator: currentUser.displayName, target, details, timestamp: new Date() });
+            }
+
             async function loadPrivateUsers() {
                 const snap = await db.collection('users').get();
                 allUsers = [];
@@ -1580,7 +2434,6 @@
                 });
                 renderPrivateUsers();
             }
-
             function renderPrivateUsers() {
                 const container = document.getElementById('usersList');
                 if (!container) return;
@@ -1590,9 +2443,9 @@
                     (u.tag && u.tag.toLowerCase().includes(searchTerm))
                 );
                 container.innerHTML = filtered.map(user => `
-                    <div class="chat-item" data-userid="${user.uid}" style="display:flex; align-items:center; gap:10px; padding:8px; border-radius:var(--radius-md); cursor:pointer; background:rgba(0,0,0,0.3); margin-bottom:5px;">
-                        <div style="width:32px; height:32px; background:linear-gradient(135deg,var(--accent),var(--accent-dark)); border-radius:50%; display:flex; align-items:center; justify-content:center;"><i class="fas fa-user" style="font-size:14px;"></i></div>
-                        <div style="flex:1;"><strong>${user.username}</strong>${getBadgeHtml(user.badge)}<br><span style="font-size:11px; color:var(--text-muted);">${user.tag || 'Нет тега'}</span></div>
+                    <div class="chat-item" data-userid="${user.uid}" style="display:flex;align-items:center;gap:10px;padding:8px;border-radius:var(--radius-md);cursor:pointer;background:rgba(0,0,0,0.3);margin-bottom:5px;">
+                        <div style="width:32px;height:32px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;"><i class="fas fa-user" style="font-size:14px;"></i></div>
+                        <div style="flex:1;"><strong>${user.username}</strong>${getBadgeHtml(user.badge)}<br><span style="font-size:11px;color:var(--text-muted);">${user.tag || 'Нет тега'}</span></div>
                     </div>
                 `).join('');
                 document.querySelectorAll('#usersList .chat-item').forEach(el => {
@@ -1608,16 +2461,19 @@
                 });
             }
 
+            // ========== ТАЙМЕР ==========
             let timerInterval = null;
             function startTimer(targetDate) {
                 if (timerInterval) clearInterval(timerInterval);
                 timerInterval = setInterval(() => {
                     const diff = new Date(targetDate).getTime() - new Date().getTime();
                     if (diff <= 0) {
-                        document.getElementById('days').innerText = '0'; document.getElementById('hours').innerText = '0';
-                        document.getElementById('minutes').innerText = '0'; document.getElementById('seconds').innerText = '0';
+                        document.getElementById('days').innerText = '0';
+                        document.getElementById('hours').innerText = '0';
+                        document.getElementById('minutes').innerText = '0';
+                        document.getElementById('seconds').innerText = '0';
                     } else {
-                        document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24));
+                        document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
                         document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
                         document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
                         document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
@@ -1625,6 +2481,7 @@
                 }, 1000);
             }
 
+            // ========== МАГАЗИН ==========
             const privileges = [
                 { name: "Премиум", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/fly", "/kit"] },
                 { name: "Креатив", price: 2500, icon: "fa-palette", features: ["WorldEdit", "Доступ в креатив"] },
@@ -1635,122 +2492,78 @@
             ];
             function renderShop() {
                 const container = document.getElementById('shopGrid');
-                if (container) container.innerHTML = privileges.map(p => `
-                    <div class="product-card">
-                        <div class="product-icon"><i class="fas ${p.icon}"></i></div>
-                        <div class="product-name">${p.name}</div>
-                        <div class="price">${p.price.toLocaleString()} ₽</div>
-                        <ul class="product-features">${p.features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}</ul>
-                        <button class="buy-btn" onclick="window.openBuyModal('${p.name}',${p.price})"><i class="fas fa-shopping-cart"></i> КУПИТЬ</button>
-                    </div>
-                `).join('');
-            }
-            window.openBuyModal = (n,p) => { currentProduct = {name:n, price:p}; document.getElementById('buyProductName').innerText = n; document.getElementById('buyPrice').innerText = p.toLocaleString(); document.getElementById('buyModal').style.display = 'flex'; };
-
-            async function loadModerators() {
-                const doc = await db.collection('settings').doc('moderators').get();
-                moderatorsList = doc.exists ? doc.data().list || [] : [];
-                const container = document.getElementById('moderatorsList');
-                if (container) container.innerHTML = moderatorsList.map(m => `<div class="player-card"><span>👑 ${m.nick}</span><button onclick="window.removeModerator('${m.email}')" style="background:#ef4444; border:none; padding:4px 12px; border-radius:30px; font-size:11px;">УДАЛИТЬ</button></div>`).join('');
-            }
-            window.removeModerator = async (email) => {
-                moderatorsList = moderatorsList.filter(m => m.email !== email);
-                await db.collection('settings').doc('moderators').set({ list: moderatorsList });
-                loadModerators();
-                showToast('Модератор удалён');
-            };
-
-            async function loadRecentUsers() {
-                const snap = await db.collection('users').orderBy('registeredAt', 'desc').limit(10).get();
-                const container = document.getElementById('recentUsersList');
-                if (container) container.innerHTML = snap.docs.map(doc => `<div class="player-card"><span><strong>${doc.data().username}</strong><br>${doc.data().email}<br>💰 ${doc.data().balance || 0} ₽</span><button onclick="window.showUserActions('${doc.id}','${doc.data().username}','${doc.data().email}')" class="admin-btn-blue" style="width:auto; padding:5px 12px; font-size:11px;">ДЕЙСТВИЯ</button></div>`).join('');
-            }
-
-            window.showUserActions = (userId, username, email) => {
-                const modal = document.createElement('div');
-                modal.className = 'modal';
-                modal.style.display = 'flex';
-                modal.innerHTML = `<div class="modal-content"><span class="close-modal" onclick="this.closest('.modal').remove()">&times;</span><h3>${username}</h3><div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:15px;"><button onclick="window.banUserPrompt('${userId}','${username}','${email}')" class="admin-btn-red" style="flex:1;">БАН</button><button onclick="window.unbanUserPrompt('${email}','${username}')" class="admin-btn-green" style="flex:1;">РАЗБАН</button><button onclick="window.giveDonatePrompt('${userId}','${username}')" class="admin-btn-blue" style="flex:1;">ДОНАТ</button><button onclick="window.removeDonatePrompt('${userId}','${username}')" class="admin-btn-purple" style="flex:1;">СНЯТЬ</button></div></div>`;
-                document.body.appendChild(modal);
-            };
-
-            window.banUserPrompt = async (userId, username, email) => {
-                const reason = prompt('Причина:'), duration = prompt('Часы или forever:'), mod = prompt('Модератор:');
-                if (reason && duration && mod) {
-                    const until = duration === 'forever' ? null : new Date(Date.now() + parseInt(duration) * 60 * 60 * 1000);
-                    await db.collection('bans').add({ userId, username, email, reason, until, active: true, moderator: mod, createdAt: new Date() });
-                    showToast(`✅ ${username} забанен`);
-                }
-            };
-            window.unbanUserPrompt = async (email, username) => {
-                const reason = prompt('Причина разбана:'), mod = prompt('Модератор:');
-                if (reason && mod) {
-                    const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
-                    for (const doc of snap.docs) await doc.ref.update({ active: false });
-                    showToast(`✅ ${username} разбанен`);
-                }
-            };
-            window.giveDonatePrompt = async (userId, username) => {
-                const donateName = prompt('Название доната:'), reason = prompt('Причина:');
-                if (donateName && reason) await db.collection('donates').add({ userId, username, product: donateName, price: 0, date: new Date(), givenBy: reason });
-            };
-            window.removeDonatePrompt = async (userId, username) => {
-                const reason = prompt('Причина снятия:');
-                if (reason) { const snap = await db.collection('donates').where('userId', '==', userId).get(); for (const doc of snap.docs) await doc.ref.delete(); }
-            };
-
-            async function giveCoins(nick, amount) {
-                const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showToast('Не найден', true);
-                await snap.docs[0].ref.update({ balance: (snap.docs[0].data().balance || 0) + amount });
-                showToast(`✅ Выдано ${amount} ₽ ${nick}`);
-            }
-            async function giveBadge(nick, type) {
-                const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showToast('Не найден', true);
-                await snap.docs[0].ref.update({ badge: type });
-                showToast(`✅ Галочка выдана ${nick}`);
-                if (currentUser && currentUser.uid === snap.docs[0].id) {
-                    document.getElementById('profileName').innerHTML = snap.docs[0].data().username + getBadgeHtml(type);
+                if (container) {
+                    container.innerHTML = privileges.map(p => `
+                        <div class="product-card">
+                            <div class="product-icon"><i class="fas ${p.icon}"></i></div>
+                            <div class="product-name">${p.name}</div>
+                            <div class="price">${p.price.toLocaleString()} ₽</div>
+                            <ul class="product-features">${p.features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}</ul>
+                            <button class="buy-btn" onclick="window.openBuyModal('${p.name}',${p.price})"><i class="fas fa-shopping-cart"></i> КУПИТЬ</button>
+                        </div>
+                    `).join('');
                 }
             }
-            async function giveSpin(nick) {
-                const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showToast('Не найден', true);
-                const spins = (snap.docs[0].data().wheelSpins || 0) + 1;
-                await snap.docs[0].ref.update({ wheelSpins: spins });
-                showToast(`✅ Прокрутка выдана ${nick}`);
-            }
+            window.openBuyModal = (n, p) => {
+                currentProduct = { name: n, price: p };
+                document.getElementById('buyProductName').innerText = n;
+                document.getElementById('buyPrice').innerText = p.toLocaleString();
+                document.getElementById('buyModal').style.display = 'flex';
+            };
 
+            // ========== НАВЕШИВАНИЕ КНОПОК ==========
             function bindButtons() {
-                document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); } catch(e) { showToast(e.message, true); } };
+                // Вход и регистрация
+                document.getElementById('doLoginBtn').onclick = async () => {
+                    try {
+                        await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value);
+                    } catch (e) {
+                        showToast(e.message, true);
+                    }
+                };
                 document.getElementById('doRegisterBtn').onclick = async () => {
-                    const u = document.getElementById('regUsername').value, e = document.getElementById('regEmail').value, p = document.getElementById('regPass').value;
+                    const u = document.getElementById('regUsername').value;
+                    const e = document.getElementById('regEmail').value;
+                    const p = document.getElementById('regPass').value;
                     if (p.length < 6) return showToast('Пароль мин 6', true);
                     try {
                         const cred = await auth.createUserWithEmailAndPassword(e, p);
                         await cred.user.updateProfile({ displayName: u });
-                        await db.collection('users').doc(cred.user.uid).set({ 
-                            username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1,
-                            tag: `#${u.substring(0, 4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null
+                        await db.collection('users').doc(cred.user.uid).set({
+                            username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(),
+                            wheelSpins: 1, tag: `#${u.substring(0, 4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null
                         });
-                        showToast('✅ Регистрация успешна!');
-                    } catch(e) { showToast(e.message, true); }
+                        showToast('✅ Регистрация успешна!', false);
+                    } catch (e) {
+                        showToast(e.message, true);
+                    }
                 };
                 document.getElementById('logoutBtn').onclick = () => auth.signOut();
+                
+                // Закрытие модалок
                 document.getElementById('closeBuyModal').onclick = () => document.getElementById('buyModal').style.display = 'none';
                 document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
                 document.getElementById('closeTagModal').onclick = () => document.getElementById('editTagModal').style.display = 'none';
                 document.getElementById('closePasswordModal').onclick = () => document.getElementById('changePasswordModal').style.display = 'none';
+                
+                // Покупка
                 document.getElementById('confirmBuyBtn').onclick = async () => {
+                    if (shopLocked) return showToast('❌ Магазин временно закрыт администрацией', true);
                     if (currentBalance < currentProduct.price) return showToast('Недостаточно средств', true);
                     await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - currentProduct.price });
-                    await db.collection('donates').add({ userId: currentUser.uid, username: currentUser.displayName, product: currentProduct.name, price: currentProduct.price, date: new Date() });
-                    showToast(`✅ Куплено ${currentProduct.name}!`);
+                    await db.collection('donates').add({
+                        userId: currentUser.uid, username: currentUser.displayName,
+                        product: currentProduct.name, price: currentProduct.price, date: new Date()
+                    });
+                    showToast(`✅ Куплено ${currentProduct.name}!`, false);
                     document.getElementById('buyModal').style.display = 'none';
                     loadUserData(currentUser);
                 };
+                
+                // Отправка сообщений
                 document.getElementById('sendMessageBtn').onclick = () => sendMessage(document.getElementById('messageInput').value);
+                
+                // Редактирование профиля
                 document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
                 document.getElementById('editTagBtn').onclick = () => document.getElementById('editTagModal').style.display = 'flex';
                 document.getElementById('saveNameBtn').onclick = async () => {
@@ -1758,7 +2571,7 @@
                     if (newName) {
                         await db.collection('users').doc(currentUser.uid).update({ username: newName });
                         await currentUser.updateProfile({ displayName: newName });
-                        showToast('Имя изменено!');
+                        showToast('Имя изменено!', false);
                         document.getElementById('editNameModal').style.display = 'none';
                         loadUserData(currentUser);
                         loadPrivateUsers();
@@ -1768,7 +2581,7 @@
                     const newTag = document.getElementById('newTagInput').value;
                     if (newTag) {
                         await db.collection('users').doc(currentUser.uid).update({ tag: newTag });
-                        showToast('Тег изменён!');
+                        showToast('Тег изменён!', false);
                         document.getElementById('editTagModal').style.display = 'none';
                         document.getElementById('userTag').innerHTML = newTag;
                     }
@@ -1779,16 +2592,25 @@
                         const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, document.getElementById('oldPasswordInput').value);
                         await currentUser.reauthenticateWithCredential(cred);
                         await currentUser.updatePassword(document.getElementById('newPasswordInput').value);
-                        showToast('Пароль изменён!');
+                        showToast('Пароль изменён!', false);
                         document.getElementById('changePasswordModal').style.display = 'none';
-                    } catch(e) { showToast('Неверный пароль', true); }
+                    } catch (e) {
+                        showToast('Неверный пароль', true);
+                    }
                 };
+                
+                // Админка
                 document.getElementById('checkAdminPasswordBtn').onclick = () => {
                     if (document.getElementById('adminPassword').value === 'website') {
                         document.getElementById('adminLoginPanel').style.display = 'none';
                         document.getElementById('adminPanelContent').style.display = 'block';
-                        loadRecentUsers(); loadModerators();
-                    } else showToast('❌ Неверный ключ!', true);
+                        loadRecentUsers();
+                        loadModerators();
+                        loadStats();
+                        loadLogs();
+                    } else {
+                        showToast('❌ Неверный ключ!', true);
+                    }
                 };
                 document.getElementById('addModeratorBtn').onclick = async () => {
                     const nick = document.getElementById('moderatorNick').value;
@@ -1799,14 +2621,58 @@
                     moderatorsList.push({ nick: data.username, email: data.email });
                     await db.collection('settings').doc('moderators').set({ list: moderatorsList });
                     loadModerators();
-                    showToast(`Модератор ${nick} добавлен`);
+                    showToast(`Модератор ${nick} добавлен`, false);
                 };
                 document.getElementById('giveBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, document.getElementById('badgeType').value);
                 document.getElementById('removeBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, null);
                 document.getElementById('giveCoinsBtn').onclick = () => giveCoins(document.getElementById('giveNick').value, parseInt(document.getElementById('giveAmount').value));
-                document.getElementById('globalGiveBtn').onclick = async () => { const amt = parseInt(prompt('Сумма для всех:')); if (amt) { const snap = await db.collection('users').get(); for (const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amt }); showToast(`✅ Выдано ${amt} ₽ всем`); } };
+                document.getElementById('globalGiveBtn').onclick = () => {
+                    const amt = parseInt(prompt('Сумма для всех:'));
+                    if (amt) giveCoinsAll(amt);
+                };
                 document.getElementById('giveSpinBtn').onclick = () => giveSpin(document.getElementById('wheelUserNick').value);
                 document.getElementById('spinWheelBtn').onclick = spinWheel;
+                document.getElementById('closeSiteBtn').onclick = () => closeSite(document.getElementById('closeReason').value, parseInt(document.getElementById('closeDuration').value));
+                document.getElementById('openSiteBtn').onclick = openSite;
+                document.getElementById('toggleShopLockBtn').onclick = () => toggleShopLock(document.getElementById('shopLockStatus').value === 'closed');
+                document.getElementById('sendBroadcastBtn').onclick = () => {
+                    const msg = document.getElementById('broadcastMsg').value;
+                    if (msg) sendBroadcast(msg);
+                    else showToast('Введите текст рассылки', true);
+                };
+                document.getElementById('banUserBtn').onclick = () => {
+                    const nick = document.getElementById('banNick').value;
+                    const reason = document.getElementById('banReason').value;
+                    const duration = document.getElementById('banDuration').value;
+                    const mod = document.getElementById('moderatorName').value;
+                    if (nick && reason && mod) banUserByNick(nick, reason, duration, mod);
+                    else showToast('Заполните все поля', true);
+                };
+                document.getElementById('unbanUserBtn').onclick = () => {
+                    const nick = document.getElementById('banNick').value;
+                    const mod = document.getElementById('moderatorName').value;
+                    if (nick && mod) unbanUserByNick(nick, mod);
+                    else showToast('Введите ник и модератора', true);
+                };
+
+                async function banUserByNick(nick, reason, duration, moderator) {
+                    const snap = await db.collection('users').where('username', '==', nick).get();
+                    if (snap.empty) return showToast('Не найден', true);
+                    const user = snap.docs[0];
+                    const until = duration === 'forever' ? null : new Date(Date.now() + parseInt(duration) * 60 * 60 * 1000);
+                    await db.collection('bans').add({
+                        userId: user.id, username: nick, email: user.data().email,
+                        reason, until, active: true, moderator, createdAt: new Date()
+                    });
+                    showToast(`✅ ${nick} забанен`, false);
+                }
+                async function unbanUserByNick(nick, moderator) {
+                    const snap = await db.collection('users').where('username', '==', nick).get();
+                    if (snap.empty) return showToast('Не найден', true);
+                    const bans = await db.collection('bans').where('userId', '==', snap.docs[0].id).where('active', '==', true).get();
+                    for (const d of bans.docs) await d.ref.update({ active: false });
+                    showToast(`✅ ${nick} разбанен`, false);
+                }
 
                 // Эмодзи
                 const emojiBtn = document.getElementById('emojiPickerBtn');
@@ -1832,12 +2698,8 @@
                         document.querySelectorAll('.chat-top-btn').forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
                         currentChat = btn.dataset.chat;
-                        const chatNames = {
-                            channel: 'GrifMcPro', bot: 'GrifMcBot', leader: 'GrifMcProLeader', private: 'Личные сообщения'
-                        };
-                        const chatIcons = {
-                            channel: 'fa-hashtag', bot: 'fa-robot', leader: 'fa-crown', private: 'fa-user-friends'
-                        };
+                        const chatNames = { channel: 'GrifMcPro', bot: 'GrifMcBot', leader: 'GrifMcProLeader', private: 'Личные сообщения' };
+                        const chatIcons = { channel: 'fa-hashtag', bot: 'fa-robot', leader: 'fa-crown', private: 'fa-user-friends' };
                         const badges = {
                             channel: '<span class="badge-icon badge-gold"><i class="fas fa-check"></i></span>',
                             bot: '<span class="badge-icon badge-gold"><i class="fas fa-check"></i></span>',
@@ -1868,20 +2730,32 @@
                         } else if (cmd === '/tasks') {
                             wheelGame.style.display = 'none';
                             tasksList.style.display = 'block';
-                        } else handleBotCommand(cmd);
+                        } else {
+                            handleBotCommand(cmd);
+                        }
                     };
                 });
 
+                // Переключение страниц
                 document.querySelectorAll('.menu-tab').forEach(tab => {
                     tab.onclick = () => {
                         document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
                         tab.classList.add('active');
                         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                         document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
-                        if (tab.dataset.page === 'admin') { loadRecentUsers(); loadModerators(); }
-                        if (tab.dataset.page === 'chats') { document.querySelector('.chat-top-btn.active')?.click(); }
+                        if (tab.dataset.page === 'admin') {
+                            loadRecentUsers();
+                            loadModerators();
+                            loadStats();
+                            loadLogs();
+                        }
+                        if (tab.dataset.page === 'chats') {
+                            document.querySelector('.chat-top-btn.active')?.click();
+                        }
                     };
                 });
+                
+                // Переключение вкладок авторизации
                 document.querySelectorAll('.tab-auth').forEach(btn => {
                     btn.onclick = () => {
                         document.querySelectorAll('.tab-auth').forEach(b => b.classList.remove('active'));
@@ -1893,18 +2767,27 @@
                 });
             }
 
+            // ========== ОСНОВНАЯ ЛОГИКА ==========
             auth.onAuthStateChanged(async (user) => {
                 if (user) {
                     currentUser = user;
                     await loadModerators();
                     await loadUserData(user);
                     renderShop();
-                    let def = new Date(); def.setDate(def.getDate() + 7);
+                    let def = new Date();
+                    def.setDate(def.getDate() + 7);
                     startTimer(def);
+                    listenSiteStatus();
+                    listenBan(user);
+                    listenShopLock();
+                    startBalanceUpdater();
                     bindButtons();
                     document.getElementById('authModal').style.display = 'none';
                     document.querySelector('.chat-top-btn.active')?.click();
                 } else {
+                    if (balanceInterval) clearInterval(balanceInterval);
+                    if (siteStatusUnsub) siteStatusUnsub();
+                    if (banUnsub) banUnsub();
                     document.getElementById('authModal').style.display = 'flex';
                     bindButtons();
                 }
