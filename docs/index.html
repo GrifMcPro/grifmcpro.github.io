@@ -138,11 +138,7 @@
             color: #ccc;
             margin-top: 10px;
         }
-        .event-name {
-            margin-top: 30px;
-            font-size: 18px;
-            color: #ffd700;
-        }
+        .event-name { margin-top: 30px; font-size: 18px; color: #ffd700; }
         /* ЗАКРЫТИЕ САЙТА */
         .closed-modal {
             position: fixed;
@@ -530,8 +526,8 @@
                 <div class="admin-section"><h3>✅ ВЫДАЧА ГАЛОЧКИ</h3>
                     <input type="text" id="verifyNick" placeholder="Никнейм" class="admin-input">
                     <input type="email" id="verifyEmail" placeholder="Email" class="admin-input">
-                    <button id="giveVerifyBtn" class="admin-btn-blue">🎫 ВЫДАТЬ</button>
-                    <button id="removeVerifyBtn" class="admin-btn-red">❌ СНЯТЬ</button>
+                    <button id="giveVerifyBtn" class="admin-btn-blue">🎫 ВЫДАТЬ ГАЛОЧКУ</button>
+                    <button id="removeVerifyBtn" class="admin-btn-red">❌ СНЯТЬ ГАЛОЧКУ</button>
                 </div>
                 <div class="admin-section"><h3>💰 ВЫДАЧА МОНЕТ</h3>
                     <input type="text" id="giveNick" placeholder="Никнейм" class="admin-input">
@@ -592,7 +588,8 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        const ADMIN_EMAIL = "ramonenok@bk.ru";
+        // АДМИНЫ: список email, у кого есть доступ к админке
+        const ADMIN_EMAILS = ["ramonenok@bk.ru", "GrifMCpro@mail.ru"];
         const VERIFIED_SVG = `<svg class="verified-badge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#1e88e5"/><path d="M7 12L10.5 15.5L17 9" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>`;
 
         const privileges = [
@@ -670,8 +667,12 @@
                 if(donatesSnap.empty) donatesContainer.innerHTML += '<p>Нет покупок</p>';
                 else donatesSnap.forEach(d => donatesContainer.innerHTML += `<span class="donate-badge">${d.data().product}</span> `);
             }
-            if(data.isAdmin || user.email === ADMIN_EMAIL) {
+            // Проверяем, является ли пользователь админом по email
+            const isAdmin = ADMIN_EMAILS.includes(user.email);
+            if(isAdmin) {
                 document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
+                // Обновляем поле isAdmin в базе
+                await db.collection('users').doc(user.uid).update({ isAdmin: true });
             }
         }
 
@@ -799,7 +800,7 @@
             if(query.empty) return alert('Пользователь не найден');
             await query.docs[0].ref.update({ isVerified: true });
             addLog('ВЫДАЧА ГАЛОЧКИ', query.docs[0].data().username, '');
-            alert(`Галочка выдана ${query.docs[0].data().username}`);
+            alert(`✅ Галочка выдана ${query.docs[0].data().username}`);
         };
         document.getElementById('removeVerifyBtn').onclick = async () => {
             const nick = document.getElementById('verifyNick').value.trim();
@@ -811,7 +812,7 @@
             if(query.empty) return alert('Пользователь не найден');
             await query.docs[0].ref.update({ isVerified: false });
             addLog('СНЯТИЕ ГАЛОЧКИ', query.docs[0].data().username, '');
-            alert(`Галочка снята с ${query.docs[0].data().username}`);
+            alert(`❌ Галочка снята с ${query.docs[0].data().username}`);
         };
 
         document.getElementById('giveCoinsBtn').onclick = async () => {
@@ -823,7 +824,7 @@
             const newBalance = (snap.docs[0].data().balance || 0) + amount;
             await snap.docs[0].ref.update({ balance: newBalance });
             addLog('ВЫДАЧА МОНЕТ', nick, `${amount} ₽`);
-            alert(`Выдано ${amount} ₽ ${nick}`);
+            alert(`✅ Выдано ${amount} ₽ ${nick}`);
         };
         document.getElementById('globalGiveBtn').onclick = async () => {
             const amount = parseInt(prompt("Сумма для всех:"));
@@ -831,7 +832,7 @@
             const snap = await db.collection('users').get();
             for(const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
             addLog('ГЛОБАЛЬНАЯ ВЫДАЧА', 'ВСЕМ', `${amount} ₽`);
-            alert(`Выдано ${amount} ₽ всем`);
+            alert(`✅ Выдано ${amount} ₽ всем`);
         };
 
         async function checkSiteClosed() {
@@ -854,12 +855,12 @@
             const until = new Date(Date.now() + hours * 60 * 60 * 1000);
             await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until, moderator: "Система" });
             addLog('ЗАКРЫТИЕ САЙТА', 'Система', reason);
-            alert(`Сайт закрыт до ${until.toLocaleString()}`);
+            alert(`🔒 Сайт закрыт до ${until.toLocaleString()}`);
         };
         document.getElementById('openSiteBtn').onclick = async () => {
             await db.collection('settings').doc('siteStatus').update({ closed: false });
             addLog('ОТКРЫТИЕ САЙТА', 'Система', 'Сайт открыт');
-            alert('Сайт открыт');
+            alert('🔓 Сайт открыт');
         };
 
         document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
@@ -897,7 +898,13 @@
             try {
                 const cred = await auth.createUserWithEmailAndPassword(email, pass);
                 await cred.user.updateProfile({ displayName: username });
-                await db.collection('users').doc(cred.user.uid).set({ username, email, balance: 50000, isAdmin: (email === ADMIN_EMAIL), isVerified: (email === ADMIN_EMAIL), registeredAt: new Date().toISOString() });
+                const isAdmin = ADMIN_EMAILS.includes(email);
+                await db.collection('users').doc(cred.user.uid).set({ 
+                    username, email, balance: 50000, 
+                    isAdmin: isAdmin, 
+                    isVerified: isAdmin, 
+                    registeredAt: new Date().toISOString() 
+                });
                 document.getElementById('authModal').style.display = 'none';
                 alert('✅ Регистрация успешна! Баланс: 50 000 ₽');
             } catch(e) { alert('Ошибка: ' + e.message); }
@@ -948,7 +955,7 @@
             if(user) {
                 currentUser = user;
                 const siteClosed = await checkSiteClosed();
-                if(siteClosed && user.email !== ADMIN_EMAIL) {
+                if(siteClosed && !ADMIN_EMAILS.includes(user.email)) {
                     document.getElementById('mainContent').style.display = 'none';
                     document.getElementById('closedReason').innerText = siteClosed.reason;
                     document.getElementById('closedUntil').innerText = siteClosed.until ? new Date(siteClosed.until.toDate()).toLocaleString() : 'Неизвестно';
@@ -961,8 +968,6 @@
                 await loadUserData(user);
                 renderShop();
                 loadTimer();
-                const doc = await db.collection('users').doc(user.uid).get();
-                if(!doc.exists) await db.collection('users').doc(user.uid).set({ isAdmin: (user.email === ADMIN_EMAIL) }, { merge: true });
             } else {
                 document.getElementById('mainContent').style.display = 'none';
                 document.getElementById('authModal').style.display = 'flex';
