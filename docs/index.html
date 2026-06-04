@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrifLauncher | Магазин и профиль</title>
+    <title>GrifLauncher | Премиум магазин</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -89,6 +89,30 @@
             background-clip: text;
             color: transparent;
         }
+        /* ДОСКА ОБЪЯВЛЕНИЙ */
+        .board-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+            margin: 20px 0;
+        }
+        .board {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(16px);
+            border-radius: 48px;
+            padding: 60px 40px;
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .board-message {
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'Orbitron', monospace;
+            line-height: 1.4;
+        }
         /* МАГАЗИН */
         .shop-grid {
             display: grid;
@@ -165,64 +189,6 @@
             display: inline-block;
             margin: 4px;
             cursor: default;
-        }
-        /* ГЛАВНАЯ - ЛЕНТА ОБЪЯВЛЕНИЙ */
-        .news-filters {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        .filter-btn {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,215,0,0.3);
-            padding: 10px 28px;
-            border-radius: 60px;
-            cursor: pointer;
-            font-family: 'Orbitron', monospace;
-            transition: 0.2s;
-        }
-        .filter-btn.active, .filter-btn:hover { background: #ffd700; color: #0a0a0a; border-color: #ffd700; }
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 30px;
-        }
-        .news-card {
-            background: rgba(0,0,0,0.55);
-            backdrop-filter: blur(12px);
-            border-radius: 32px;
-            overflow: hidden;
-            transition: 0.3s;
-            border: 1px solid rgba(255,215,0,0.2);
-        }
-        .news-card.featured {
-            grid-column: span 2;
-            background: rgba(255,69,0,0.1);
-            border: 2px solid #ff4500;
-        }
-        .news-card:hover { transform: translateY(-5px); border-color: #ffd700; }
-        .news-img { width: 100%; height: 200px; object-fit: cover; }
-        .news-content { padding: 25px; }
-        .news-category {
-            display: inline-block;
-            background: rgba(255,215,0,0.2);
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 12px;
-            margin-bottom: 12px;
-        }
-        .news-title { font-size: 24px; font-weight: bold; margin-bottom: 12px; }
-        .news-desc { font-size: 14px; color: #ccc; line-height: 1.5; margin-bottom: 20px; }
-        .news-btn {
-            background: linear-gradient(135deg, #ffd700, #ffaa00);
-            color: #0a0a0a;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 60px;
-            font-weight: bold;
-            cursor: pointer;
         }
         /* АДМИН-ПАНЕЛЬ */
         .admin-section {
@@ -368,10 +334,13 @@
             vertical-align: middle;
             display: inline-block;
         }
-        .admin-login-box {
-            max-width: 400px;
-            margin: 0 auto;
-            text-align: center;
+        .rgb-text { animation: rgbText 2s infinite; }
+        @keyframes rgbText {
+            0% { text-shadow: 0 0 5px #ff0000; color: #ff0000; }
+            25% { text-shadow: 0 0 5px #00ff00; color: #00ff00; }
+            50% { text-shadow: 0 0 5px #0000ff; color: #0000ff; }
+            75% { text-shadow: 0 0 5px #ff00ff; color: #ff00ff; }
+            100% { text-shadow: 0 0 5px #ff0000; color: #ff0000; }
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .loading-spinner {
@@ -386,8 +355,8 @@
         @media (max-width: 768px) {
             .section-title { font-size: 28px; }
             .shop-grid { grid-template-columns: 1fr; }
-            .news-grid { grid-template-columns: 1fr; }
-            .news-card.featured { grid-column: span 1; }
+            .board-message { font-size: 22px; }
+            .board { padding: 30px 20px; }
             .balance { font-size: 20px; }
         }
     </style>
@@ -414,10 +383,13 @@
             <div class="menu-tab admin-only" data-page="admin" style="display:none;">👑 АДМИН</div>
         </div>
 
-        <!-- ГЛАВНАЯ - ЛЕНТА НОВОСТЕЙ -->
+        <!-- ГЛАВНАЯ - ДОСКА ОБЪЯВЛЕНИЙ -->
         <div id="homePage" class="page active">
-            <div class="news-filters" id="newsFilters"></div>
-            <div class="news-grid" id="newsGrid"></div>
+            <div class="board-container">
+                <div class="board" id="board">
+                    <div class="board-message" id="boardMessage">Добро пожаловать в GrifLauncher!</div>
+                </div>
+            </div>
         </div>
 
         <!-- МАГАЗИН -->
@@ -444,8 +416,8 @@
         <!-- АДМИН-ПАНЕЛЬ -->
         <div id="adminPage" class="page">
             <div class="section-title">👑 АДМИН-ПАНЕЛЬ</div>
-            <div id="adminLoginPanel" class="admin-login-box">
-                <div style="background:rgba(0,0,0,0.5); border-radius:40px; padding:40px;">
+            <div id="adminLoginPanel" style="max-width:400px; margin:0 auto;">
+                <div style="background:rgba(0,0,0,0.5); border-radius:40px; padding:40px; text-align:center;">
                     <h3 style="margin-bottom:20px;">🔐 ВХОД В АДМИНКУ</h3>
                     <input type="password" id="adminPassword" placeholder="Введите ключ доступа" style="width:100%; padding:14px; border-radius:60px; margin-bottom:15px;">
                     <button id="checkAdminPasswordBtn" style="background:linear-gradient(135deg,#ffd700,#ffaa00); border:none; padding:14px 30px; border-radius:60px; font-weight:bold; cursor:pointer; width:100%;">ВОЙТИ В АДМИНКУ</button>
@@ -455,6 +427,30 @@
                 <div class="admin-section">
                     <h3>🕐 НОВЫЕ ИГРОКИ (последние 30 минут)</h3>
                     <div class="players-list" id="newPlayersList"></div>
+                </div>
+                <div class="admin-section">
+                    <h3>🎨 НАСТРОЙКА ДОСКИ</h3>
+                    <textarea id="boardText" rows="3" placeholder="Текст объявления" style="width:100%; margin-bottom:15px;"></textarea>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div><label>🔲 Цвет рамки</label><input type="color" id="boardBorderColor" value="#ffd700"></div>
+                        <div><label>📝 Цвет текста</label><input type="color" id="boardTextColor" value="#ffd700"></div>
+                        <div><label>✨ Стиль текста</label><select id="boardTextStyle"><option value="normal">Обычный</option><option value="rgb">RGB переливание</option></select></div>
+                        <div><label>📏 Радиус рамки (px)</label><input type="number" id="boardBorderRadius" value="48" min="0" max="100"></div>
+                    </div>
+                    <button id="updateBoardBtn" style="background:linear-gradient(135deg,#ffd700,#ffaa00); border:none; padding:12px; border-radius:60px; font-weight:bold; cursor:pointer; width:100%;">📌 ОБНОВИТЬ ДОСКУ</button>
+                </div>
+                <div class="admin-section">
+                    <h3>💰 ВЫДАЧА МОНЕТ</h3>
+                    <input type="text" id="giveNick" placeholder="Никнейм игрока" style="width:100%; margin-bottom:10px;">
+                    <input type="number" id="giveAmount" placeholder="Сумма в рублях" style="width:100%; margin-bottom:10px;">
+                    <textarea id="giveReason" rows="2" placeholder="Причина выдачи" style="width:100%; margin-bottom:15px;"></textarea>
+                    <button id="giveCoinsBtn" style="background:#3b82f6; border:none; padding:12px; border-radius:60px; font-weight:bold; cursor:pointer; width:100%; margin-bottom:10px;">💸 ВЫДАТЬ МОНЕТЫ</button>
+                    <button id="globalGiveBtn" style="background:#8b5cf6; border:none; padding:12px; border-radius:60px; font-weight:bold; cursor:pointer; width:100%;">🌍 ВЫДАТЬ ВСЕМ</button>
+                </div>
+                <div class="admin-section">
+                    <h3>🔒 УПРАВЛЕНИЕ САЙТОМ</h3>
+                    <button id="closeSiteBtn" style="background:#ef4444; border:none; padding:12px; border-radius:60px; font-weight:bold; cursor:pointer; width:100%; margin-bottom:10px;">🔒 ЗАКРЫТЬ САЙТ</button>
+                    <button id="openSiteBtn" style="background:#22c55e; border:none; padding:12px; border-radius:60px; font-weight:bold; cursor:pointer; width:100%;">🔓 ОТКРЫТЬ САЙТ</button>
                 </div>
                 <div class="admin-section">
                     <h3>📜 ЛОГИ ДЕЙСТВИЙ</h3>
@@ -508,14 +504,6 @@
         const ADMIN_EMAIL = "ramonenok@bk.ru";
         const VERIFIED_SVG = `<svg class="verified-badge" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#1e88e5"/><path d="M7 12L10.5 15.5L17 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-        // ОБЪЯВЛЕНИЯ ДЛЯ ЛЕНТЫ
-        const newsItems = [
-            { id: 1, title: "🔥 ТУРНИР НА ВЫЖИВАНИЕ", desc: "Призовой фонд 1 000 000 ₽. Регистрация до 15 июня!", img: "https://picsum.photos/id/104/800/400", category: "events", featured: true, buttonText: "УЧАСТВОВАТЬ" },
-            { id: 2, title: "⚡ НОВЫЙ СЕЗОН", desc: "Сезонные награды, эксклюзивные скины и привилегии.", img: "https://picsum.photos/id/106/800/400", category: "updates", featured: false, buttonText: "ПОДРОБНЕЕ" },
-            { id: 3, title: "💎 VIP РАСПРОДАЖА", desc: "Скидка 30% на все привилегии до конца недели!", img: "https://picsum.photos/id/107/800/400", category: "important", featured: false, buttonText: "КУПИТЬ VIP" },
-            { id: 4, title: "🎮 ИВЕНТ «ОХОТА НА ДРАКОНА»", desc: "Убей дракона и получи легендарный меч!", img: "https://picsum.photos/id/108/800/400", category: "events", featured: false, buttonText: "УЧАСТВОВАТЬ" }
-        ];
-
         const privileges = [
             { name: "Премиум", nameEn: "[PREM]", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/kit", "/fly"] },
             { name: "Креатив", nameEn: "[CREAT]", price: 2500, icon: "fa-palette", features: ["Доступ к креативу", "WorldEdit"] },
@@ -557,43 +545,6 @@
                     <button class="buy-btn" onclick="openBuyModal('${p.name}', ${p.price})">КУПИТЬ</button>
                 </div>
             `).join('');
-        }
-
-        function renderNews(category = "all") {
-            const container = document.getElementById('newsGrid');
-            if(!container) return;
-            const filtered = category === "all" ? newsItems : newsItems.filter(n => n.category === category);
-            container.innerHTML = filtered.map(n => `
-                <div class="news-card ${n.featured ? 'featured' : ''}">
-                    <img class="news-img" src="${n.img}" alt="">
-                    <div class="news-content">
-                        <span class="news-category">${n.category === 'events' ? '🎯 ИВЕНТ' : n.category === 'updates' ? '⚡ ОБНОВЛЕНИЕ' : '⚠️ ВАЖНОЕ'}</span>
-                        <h3 class="news-title">${n.title}</h3>
-                        <p class="news-desc">${n.desc}</p>
-                        <button class="news-btn" onclick="alert('Функция в разработке')">${n.buttonText}</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderFilters() {
-            const container = document.getElementById('newsFilters');
-            if(!container) return;
-            const categories = [
-                { id: "all", name: "Все" },
-                { id: "events", name: "Ивенты" },
-                { id: "updates", name: "Обновления" },
-                { id: "important", name: "Важное" }
-            ];
-            container.innerHTML = categories.map(c => `<button class="filter-btn" data-cat="${c.id}">${c.name}</button>`).join('');
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.onclick = () => {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    renderNews(btn.dataset.cat);
-                };
-            });
-            document.querySelector('.filter-btn').classList.add('active');
         }
 
         window.openBuyModal = (name, price) => {
@@ -705,6 +656,80 @@
             document.getElementById('logsList').innerHTML = snap.docs.map(doc => `<div class="log-item">[${new Date(doc.data().timestamp?.toDate()).toLocaleString()}] <strong>${doc.data().action}</strong> → ${doc.data().target}<br>${doc.data().details || ''}</div>`).join('');
         }
 
+        async function loadBoardSettings() {
+            const doc = await db.collection('settings').doc('board').get();
+            if(doc.exists) {
+                const data = doc.data();
+                document.getElementById('boardText').value = data.text || '';
+                document.getElementById('boardBorderColor').value = data.borderColor || '#ffd700';
+                document.getElementById('boardTextColor').value = data.textColor || '#ffd700';
+                document.getElementById('boardTextStyle').value = data.textStyle || 'normal';
+                document.getElementById('boardBorderRadius').value = data.borderRadius || 48;
+                applyBoardSettings(data);
+            }
+        }
+
+        function applyBoardSettings(settings) {
+            const board = document.getElementById('board');
+            const message = document.getElementById('boardMessage');
+            board.style.border = `2px solid ${settings.borderColor || '#ffd700'}`;
+            board.style.borderRadius = `${settings.borderRadius || 48}px`;
+            message.style.color = settings.textColor || '#ffd700';
+            message.innerText = settings.text || 'Добро пожаловать в GrifLauncher!';
+            if(settings.textStyle === 'rgb') message.classList.add('rgb-text');
+            else message.classList.remove('rgb-text');
+        }
+
+        document.getElementById('updateBoardBtn').onclick = async () => {
+            const settings = {
+                text: document.getElementById('boardText').value,
+                borderColor: document.getElementById('boardBorderColor').value,
+                textColor: document.getElementById('boardTextColor').value,
+                textStyle: document.getElementById('boardTextStyle').value,
+                borderRadius: parseInt(document.getElementById('boardBorderRadius').value)
+            };
+            await db.collection('settings').doc('board').set(settings);
+            applyBoardSettings(settings);
+            addLog('НАСТРОЙКА ДОСКИ', 'Админ', 'Изменено объявление');
+            alert('Доска обновлена!');
+        };
+
+        document.getElementById('giveCoinsBtn').onclick = async () => {
+            const nick = document.getElementById('giveNick').value.trim();
+            const amount = parseInt(document.getElementById('giveAmount').value);
+            const reason = document.getElementById('giveReason').value.trim();
+            if(!nick || isNaN(amount)) return alert('Заполните ник и сумму');
+            const snap = await db.collection('users').where('username', '==', nick).get();
+            if(snap.empty) return alert('Пользователь не найден');
+            const newBalance = (snap.docs[0].data().balance || 0) + amount;
+            await snap.docs[0].ref.update({ balance: newBalance });
+            addLog('ВЫДАЧА МОНЕТ', nick, `${amount} ₽. Причина: ${reason}`);
+            alert(`Выдано ${amount} ₽ ${nick}`);
+            document.getElementById('giveNick').value = '';
+            document.getElementById('giveAmount').value = '';
+            document.getElementById('giveReason').value = '';
+        };
+
+        document.getElementById('globalGiveBtn').onclick = async () => {
+            const amount = parseInt(prompt("Сумма для всех:"));
+            if(isNaN(amount)) return;
+            const snap = await db.collection('users').get();
+            for(const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
+            addLog('ГЛОБАЛЬНАЯ ВЫДАЧА', 'ВСЕМ', `${amount} ₽`);
+            alert(`Выдано ${amount} ₽ всем`);
+        };
+
+        document.getElementById('closeSiteBtn').onclick = async () => {
+            await db.collection('settings').doc('siteStatus').set({ closed: true, reason: "Закрыто админом", until: new Date(Date.now() + 24 * 60 * 60 * 1000), moderator: currentUser.email });
+            addLog('ЗАКРЫТИЕ САЙТА', 'Система', 'Сайт закрыт');
+            alert('Сайт закрыт');
+        };
+        document.getElementById('openSiteBtn').onclick = async () => {
+            await db.collection('settings').doc('siteStatus').update({ closed: false });
+            addLog('ОТКРЫТИЕ САЙТА', 'Система', 'Сайт открыт');
+            alert('Сайт открыт');
+        };
+
         document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
         document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
         document.getElementById('saveNameBtn').onclick = async () => {
@@ -764,6 +789,7 @@
                 document.getElementById('adminPanelContent').style.display = 'block';
                 loadNewPlayers();
                 loadLogs();
+                loadBoardSettings();
             } else alert('❌ Неверный ключ!');
         });
 
@@ -774,7 +800,7 @@
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
                 if(tab.dataset.page === 'profile' && currentUser) loadUserData(currentUser);
-                if(tab.dataset.page === 'admin' && currentUser) loadNewPlayers();
+                if(tab.dataset.page === 'admin' && currentUser) { loadNewPlayers(); loadLogs(); loadBoardSettings(); }
             };
         });
         document.querySelectorAll('.tab-auth').forEach(btn => {
@@ -794,8 +820,7 @@
                 document.getElementById('authModal').style.display = 'none';
                 await loadUserData(user);
                 renderShop();
-                renderNews();
-                renderFilters();
+                loadBoardSettings();
                 const doc = await db.collection('users').doc(user.uid).get();
                 if(!doc.exists || doc.data().isAdmin === undefined) await db.collection('users').doc(user.uid).update({ isAdmin: (user.email === ADMIN_EMAIL) });
             } else {
