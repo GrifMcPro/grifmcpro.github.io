@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>GrifLauncher | Neo Messenger</title>
+    <title>GrifLauncher | Neo Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -20,85 +20,83 @@
             --bg-dark: #0a0a0f;
             --bg-secondary: #0f0f15;
             --bg-tertiary: #13131a;
-            --bg-surface: rgba(20, 20, 30, 0.75);
+            --bg-surface: rgba(15, 15, 25, 0.7);
             --bg-surface-solid: #151520;
-            --border-color: rgba(255, 215, 0, 0.1);
+            --border-color: rgba(255, 215, 0, 0.12);
             --border-light: rgba(255, 215, 0, 0.2);
             --accent: #ffd700;
             --accent-dark: #ccaa00;
-            --accent-bg: rgba(255, 215, 0, 0.1);
-            --admin-bg: rgba(255, 215, 0, 0.88);
-            --admin-text: #1a1a1a;
+            --accent-glow: rgba(255, 215, 0, 0.3);
             --text-primary: #f0f0f0;
             --text-secondary: #a0a0b0;
             --text-muted: #6a6a7a;
             --success: #10b981;
             --danger: #ef4444;
             --info: #3b82f6;
-            --online: #22c55e;
-            --offline: #6b7280;
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
             --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-            --shadow-glow: 0 0 20px rgba(255, 215, 0, 0.2);
-            --shadow-glow-strong: 0 0 30px rgba(255, 215, 0, 0.3);
+            --shadow-glow: 0 0 20px rgba(255, 215, 0, 0.25);
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
             --radius-xl: 20px;
             --radius-2xl: 28px;
-            --transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
         body {
-            background: radial-gradient(ellipse at top, #0f0f1a, #0a0a0f);
+            background: linear-gradient(135deg, #0a0a0f 0%, #0f0f1a 50%, #0a0a0f 100%);
             font-family: 'Montserrat', sans-serif;
             color: var(--text-primary);
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
         /* Анимации */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; transform: translateY(0); }
-            50% { opacity: 1; transform: translateY(-2px); }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        @keyframes typingAnim {
-            0%, 100% { transform: translateY(0); opacity: 0.5; }
-            50% { transform: translateY(-3px); opacity: 1; }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent-glow); }
+            50% { box-shadow: 0 0 20px var(--accent), 0 0 30px var(--accent-glow); }
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
-        .animate-in { animation: fadeIn 0.3s ease; }
-        .slide-in { animation: slideIn 0.3s ease; }
+        @keyframes borderRotate {
+            0% { border-image: linear-gradient(0deg, var(--accent), transparent) 1; }
+            100% { border-image: linear-gradient(360deg, var(--accent), transparent) 1; }
+        }
+
+        .animate-in { animation: fadeInUp 0.5s ease; }
+        .glow-animation { animation: glowPulse 2s infinite; }
 
         /* Скроллбар */
-        ::-webkit-scrollbar { width: 5px; height: 5px; }
-        ::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 10px; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-tertiary); }
         ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-dark); }
 
-        /* Хедер сайта */
+        /* Хедер */
         .site-header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 100;
-            background: rgba(10, 10, 15, 0.9);
+            background: rgba(10, 10, 15, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
-            padding: 12px 24px;
+            padding: 12px 30px;
         }
 
         .header-content {
@@ -116,24 +114,33 @@
         }
 
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
+            animation: float 3s ease infinite;
         }
 
-        .logo-icon i { font-size: 20px; color: var(--bg-dark); }
+        .logo-icon i { font-size: 24px; color: var(--bg-dark); }
+
         .logo-text {
             font-family: 'Orbitron', monospace;
-            font-size: 20px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff, var(--accent));
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--accent), #fff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
 
         .header-right {
@@ -145,24 +152,28 @@
         .balance {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             background: rgba(0, 0, 0, 0.5);
-            padding: 8px 18px;
-            border-radius: 40px;
+            padding: 10px 22px;
+            border-radius: 60px;
+            border: 1px solid var(--border-light);
         }
 
-        .balance i { color: var(--accent); font-size: 18px; }
-        .balance span { font-weight: 700; color: var(--accent); font-size: 18px; }
+        .balance i { color: var(--accent); font-size: 20px; }
+        .balance span { font-weight: 700; color: var(--accent); font-size: 22px; font-family: 'Orbitron', monospace; }
 
         .btn-logout {
             background: rgba(239, 68, 68, 0.15);
             border: 1px solid rgba(239, 68, 68, 0.3);
             color: var(--danger);
-            padding: 8px 20px;
-            border-radius: 40px;
+            padding: 10px 24px;
+            border-radius: 60px;
             cursor: pointer;
             transition: var(--transition);
-            font-weight: 500;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-logout:hover {
@@ -170,56 +181,382 @@
             transform: scale(1.02);
         }
 
+        /* Меню */
         .menu-tabs {
             display: flex;
-            gap: 12px;
+            gap: 15px;
             justify-content: center;
-            padding: 12px 0;
+            margin-top: 12px;
         }
 
         .menu-tab {
             background: rgba(25, 25, 35, 0.6);
             backdrop-filter: blur(8px);
             border: 1px solid var(--border-color);
-            padding: 8px 24px;
-            border-radius: 40px;
+            padding: 10px 30px;
+            border-radius: 60px;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
             transition: var(--transition);
-            font-size: 14px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+
+        .menu-tab i { font-size: 16px; }
 
         .menu-tab.active, .menu-tab:hover {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             color: var(--bg-dark);
             border-color: transparent;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
         }
 
         .page { display: none; animation: fadeIn 0.3s ease; }
         .page.active { display: block; }
 
-        /* ========== ЕДИНОЕ КОММУНИКАЦИОННОЕ ОКНО ========== */
+        /* ========== ГЛАВНАЯ - ТАЙМЕР НА ВЕСЬ ЭКРАН ========== */
+        .hero-timer {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-timer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(255,215,0,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .timer-container {
+            text-align: center;
+            z-index: 2;
+            padding: 40px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .timer-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--accent), var(--accent-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+        }
+
+        .countdown-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-block {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            padding: 30px 40px;
+            min-width: 140px;
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .countdown-block:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .countdown-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--accent);
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .countdown-label {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+
+        .timer-footer {
+            margin-top: 60px;
+            font-size: 18px;
+            color: var(--text-muted);
+        }
+
+        /* ========== МАГАЗИН ========== */
+        .shop-section {
+            padding: 100px 30px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .shop-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .shop-header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 48px;
+            background: linear-gradient(135deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .shop-header p {
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--bg-surface);
+            backdrop-filter: blur(16px);
+            border-radius: var(--radius-2xl);
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .product-card:hover::before { left: 100%; }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .product-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-bg), transparent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 1px solid var(--border-light);
+        }
+
+        .product-icon i { font-size: 40px; color: var(--accent); }
+
+        .product-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--accent);
+            margin: 15px 0;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .product-features {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .product-features li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .product-features li i { color: var(--success); width: 20px; }
+
+        .buy-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border: none;
+            padding: 14px;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .buy-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
+
+        /* ========== ПРОФИЛЬ ========== */
+        .profile-section {
+            padding: 100px 30px 60px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .profile-card {
+            background: var(--bg-surface);
+            backdrop-filter: blur(16px);
+            border-radius: var(--radius-2xl);
+            padding: 40px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .profile-card:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            animation: float 3s ease infinite;
+        }
+
+        .profile-avatar i { font-size: 55px; color: var(--bg-dark); }
+
+        .profile-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .profile-info {
+            text-align: left;
+            margin: 25px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+        }
+
+        .profile-info p {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .profile-info i { width: 25px; color: var(--accent); font-size: 18px; }
+
+        .profile-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .profile-btn {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--info);
+            padding: 12px 25px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-btn:hover {
+            background: rgba(59, 130, 246, 0.3);
+            transform: scale(1.02);
+        }
+
+        .donates-list {
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .donate-tag {
+            background: rgba(255, 215, 0, 0.15);
+            padding: 6px 15px;
+            border-radius: 60px;
+            font-size: 13px;
+            border: 1px solid var(--border-light);
+        }
+
+        /* ========== ЧАТЫ ========== */
+        .chats-section {
+            padding: 100px 30px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
         .chat-window {
-            max-width: 1100px;
-            margin: 100px auto 40px;
             background: var(--bg-surface);
             backdrop-filter: blur(20px);
             border-radius: var(--radius-2xl);
-            border: 1px solid var(--border-light);
-            transition: var(--transition);
+            border: 1px solid var(--border-color);
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
         }
 
         .chat-window:hover {
             transform: translateY(-3px);
-            box-shadow: var(--shadow-glow-strong);
+            box-shadow: var(--shadow-glow);
         }
 
-        /* Шапка чата */
         .chat-header {
-            padding: 20px 24px;
+            padding: 20px 25px;
             border-bottom: 1px solid var(--border-color);
             background: rgba(0, 0, 0, 0.2);
         }
@@ -228,113 +565,83 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .chat-title h2 {
-            font-family: 'Montserrat', sans-serif;
             font-size: 22px;
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .chat-title h2 i { color: var(--accent); font-size: 20px; }
+        .chat-title h2 i { color: var(--accent); }
 
-        .settings-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 20px;
-            cursor: pointer;
-            transition: var(--transition);
-            padding: 8px;
-            border-radius: 50%;
-        }
-
-        .settings-btn:hover {
-            color: var(--accent);
-            background: rgba(255, 215, 0, 0.1);
-            transform: rotate(90deg);
-        }
-
-        /* Поиск */
         .search-bar {
             position: relative;
-            width: 100%;
-            max-width: 300px;
+            max-width: 280px;
         }
 
         .search-bar i {
             position: absolute;
-            left: 14px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
-            font-size: 14px;
         }
 
         .search-bar input {
             width: 100%;
-            padding: 8px 16px 8px 38px;
+            padding: 10px 15px 10px 40px;
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border-color);
-            border-radius: 40px;
+            border-radius: 60px;
             color: var(--text-primary);
-            font-size: 13px;
             outline: none;
-            transition: var(--transition);
         }
 
-        .search-bar input:focus {
-            border-color: var(--accent);
-            box-shadow: var(--shadow-glow);
-        }
+        .search-bar input:focus { border-color: var(--accent); }
 
-        /* Переключение чатов */
         .chat-switcher {
             display: flex;
-            gap: 8px;
-            padding: 12px 24px;
+            gap: 10px;
+            padding: 12px 25px;
             background: rgba(0, 0, 0, 0.2);
             border-bottom: 1px solid var(--border-color);
         }
 
-        .chat-btn {
+        .chat-switch-btn {
             background: none;
             border: none;
             padding: 8px 20px;
-            border-radius: 40px;
+            border-radius: 60px;
             color: var(--text-secondary);
             cursor: pointer;
             transition: var(--transition);
             font-weight: 500;
-            font-size: 14px;
         }
 
-        .chat-btn:hover { background: rgba(255, 255, 255, 0.05); }
-        .chat-btn.active {
+        .chat-switch-btn:hover { background: rgba(255, 255, 255, 0.05); }
+        .chat-switch-btn.active {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             color: var(--bg-dark);
         }
 
-        /* Область сообщений */
         .messages-area {
             height: 450px;
             overflow-y: auto;
-            padding: 20px 24px;
+            padding: 20px 25px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 15px;
         }
 
-        /* Сообщения */
         .message {
             display: flex;
             gap: 12px;
             max-width: 80%;
-            animation: fadeIn 0.2s ease;
+            animation: fadeInUp 0.2s ease;
         }
 
         .message.outgoing {
@@ -342,13 +649,9 @@
             flex-direction: row-reverse;
         }
 
-        .message.incoming {
-            align-self: flex-start;
-        }
-
         .message-avatar {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             border-radius: 50%;
             display: flex;
@@ -359,49 +662,18 @@
 
         .message-avatar i { font-size: 18px; color: var(--bg-dark); }
 
-        .message-content {
-            flex: 1;
-            transition: var(--transition);
-        }
-
-        .message:hover .message-actions { opacity: 1; }
+        .message-content { flex: 1; }
 
         .message-header {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
+            gap: 10px;
+            margin-bottom: 5px;
             flex-wrap: wrap;
         }
 
-        .message-name {
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .message-time {
-            font-size: 10px;
-            color: var(--text-muted);
-        }
-
-        /* Сообщения админа/системы (золотой фон) */
-        .message.admin .message-bubble {
-            background: var(--admin-bg);
-            color: var(--admin-text);
-            border: 1px solid var(--accent);
-        }
-
-        .admin-badge {
-            background: var(--accent);
-            color: var(--bg-dark);
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
+        .message-name { font-weight: 600; font-size: 14px; }
+        .message-time { font-size: 10px; color: var(--text-muted); }
 
         .message-bubble {
             background: var(--bg-surface-solid);
@@ -410,7 +682,6 @@
             border-top-left-radius: 4px;
             word-break: break-word;
             font-size: 14px;
-            line-height: 1.4;
         }
 
         .message.outgoing .message-bubble {
@@ -420,59 +691,23 @@
             border-top-left-radius: 18px;
         }
 
-        /* Реакции */
-        .message-actions {
-            display: flex;
-            gap: 6px;
-            margin-top: 6px;
-            opacity: 0;
-            transition: var(--transition);
+        .message.admin .message-bubble {
+            background: var(--admin-bg);
+            color: var(--admin-text);
         }
 
-        .reaction-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: none;
-            border-radius: 20px;
-            padding: 4px 8px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--text-secondary);
-        }
-
-        .reaction-btn:hover {
-            background: var(--accent-bg);
-            transform: scale(1.05);
-        }
-
-        /* Индикатор печатания */
-        .typing-indicator {
-            padding: 8px 24px;
-            font-size: 12px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .typing-dots span {
-            display: inline-block;
-            width: 4px;
-            height: 4px;
+        .admin-badge {
             background: var(--accent);
-            border-radius: 50%;
-            margin: 0 2px;
-            animation: typingAnim 1.4s infinite;
+            color: var(--bg-dark);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
         }
 
-        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-        /* Панель ввода */
         .chat-input-area {
-            padding: 16px 24px;
+            padding: 20px 25px;
             border-top: 1px solid var(--border-color);
-            background: rgba(0, 0, 0, 0.2);
             display: flex;
             gap: 12px;
             align-items: center;
@@ -480,136 +715,97 @@
 
         .chat-input-area input {
             flex: 1;
-            padding: 12px 18px;
+            padding: 14px 20px;
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border-color);
-            border-radius: 40px;
+            border-radius: 60px;
             color: var(--text-primary);
-            font-size: 14px;
             outline: none;
-            transition: var(--transition);
+            font-size: 14px;
         }
 
-        .chat-input-area input:focus {
-            border-color: var(--accent);
-            box-shadow: var(--shadow-glow);
-        }
-
-        .emoji-btn, .send-btn {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid var(--border-light);
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 18px;
-        }
+        .chat-input-area input:focus { border-color: var(--accent); }
 
         .send-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             border: none;
-            border-radius: 44px;
-            width: auto;
-            padding: 0 24px;
+            padding: 12px 28px;
+            border-radius: 60px;
             font-weight: 600;
-        }
-
-        .emoji-btn:hover, .send-btn:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-glow);
-        }
-
-        /* Бот интерфейс */
-        .bot-interface {
-            padding: 0 24px 16px;
-        }
-
-        .bot-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
-
-        .bot-btn {
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid var(--border-light);
-            padding: 8px 16px;
-            border-radius: 40px;
             cursor: pointer;
             transition: var(--transition);
-            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .bot-btn:hover {
-            background: rgba(255, 215, 0, 0.25);
-            transform: scale(1.02);
-        }
+        .send-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
 
-        .wheel-container {
-            text-align: center;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: var(--radius-lg);
-            margin-top: 10px;
-        }
-
-        .wheel {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background: conic-gradient(#ffd700, #ffaa00, #ff8800, #ff6600, #ff4400, #ff2200, #ff0000);
-            margin: 10px auto;
-            transition: transform 3s cubic-bezier(0.2, 0.9, 0.1, 1);
-            cursor: pointer;
-            position: relative;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .wheel::after {
-            content: '▼';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 20px;
-            color: var(--accent);
-        }
-
-        .tasks-container {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: var(--radius-lg);
-            padding: 12px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .task-card {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: var(--radius-md);
-            padding: 10px;
-            margin-bottom: 8px;
-        }
-
-        /* Админка */
+        /* ========== АДМИНКА ========== */
         .admin-section {
+            padding: 100px 30px 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .admin-panel {
+            background: var(--bg-surface);
+            backdrop-filter: blur(16px);
+            border-radius: var(--radius-2xl);
+            padding: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .admin-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .admin-login-box {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .admin-login-box input {
+            width: 100%;
+            max-width: 300px;
+            padding: 14px 20px;
             background: rgba(0, 0, 0, 0.5);
-            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-color);
+            border-radius: 60px;
+            color: white;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        .admin-login-box input:focus { border-color: var(--accent); }
+
+        .admin-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-lg);
             padding: 20px;
             margin-bottom: 20px;
             border: 1px solid var(--border-color);
         }
 
-        .admin-section h3 {
+        .admin-block h3 {
             color: var(--accent);
             margin-bottom: 15px;
             font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .admin-input, .admin-select {
             width: 100%;
-            padding: 10px 14px;
+            padding: 12px 15px;
             margin: 6px 0;
             background: rgba(0, 0, 0, 0.5);
             border: 1px solid var(--border-color);
@@ -618,20 +814,22 @@
             outline: none;
         }
 
-        .admin-input:focus { border-color: var(--accent); }
+        .admin-input:focus, .admin-select:focus { border-color: var(--accent); }
 
         .admin-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             color: var(--bg-dark);
             border: none;
-            padding: 10px;
-            border-radius: 40px;
-            font-weight: 600;
+            padding: 12px;
+            border-radius: 60px;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
-            margin-bottom: 6px;
+            margin-top: 8px;
             transition: var(--transition);
         }
+
+        .admin-btn:hover { transform: scale(1.01); }
 
         .admin-btn-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
         .admin-btn-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
@@ -640,23 +838,23 @@
 
         .players-list { max-height: 250px; overflow-y: auto; }
         .player-card {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: var(--radius-md);
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px;
         }
 
         .log-item {
             background: rgba(0, 0, 0, 0.3);
             border-radius: var(--radius-sm);
-            padding: 8px;
-            margin-bottom: 5px;
-            font-size: 11px;
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            font-size: 12px;
             border-left: 2px solid var(--accent);
         }
 
@@ -678,12 +876,12 @@
         .modal-content, .auth-modal {
             background: linear-gradient(135deg, var(--bg-surface-solid), var(--bg-tertiary));
             border-radius: var(--radius-2xl);
-            padding: 35px;
+            padding: 40px;
             width: 450px;
             max-width: 90%;
             border: 1px solid var(--border-light);
             text-align: center;
-            animation: fadeIn 0.3s ease;
+            animation: fadeInUp 0.3s ease;
         }
 
         .auth-input {
@@ -692,7 +890,7 @@
             margin: 10px 0;
             background: rgba(0, 0, 0, 0.5);
             border: 1px solid var(--border-color);
-            border-radius: 40px;
+            border-radius: 60px;
             color: white;
             outline: none;
         }
@@ -704,8 +902,8 @@
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             border: none;
             padding: 14px;
-            border-radius: 40px;
-            font-weight: 600;
+            border-radius: 60px;
+            font-weight: 700;
             cursor: pointer;
             margin-top: 10px;
         }
@@ -714,7 +912,7 @@
             display: flex;
             gap: 15px;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .tab-auth {
@@ -724,7 +922,7 @@
             font-size: 16px;
             cursor: pointer;
             padding: 8px 25px;
-            border-radius: 40px;
+            border-radius: 60px;
             transition: var(--transition);
         }
 
@@ -764,10 +962,38 @@
         .badge-icon i { font-size: 10px; color: white; }
         .badge-crown i { color: #ffd700; font-size: 14px; }
 
+        .typing-indicator {
+            padding: 8px 25px;
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .typing-dots span {
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typingAnim 1.4s infinite;
+        }
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typingAnim {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(-3px); opacity: 1; }
+        }
+
         @media (max-width: 768px) {
-            .chat-window { margin: 80px 15px 20px; }
-            .message { max-width: 95%; }
-            .chat-title h2 { font-size: 18px; }
+            .countdown-number { font-size: 36px; }
+            .countdown-block { padding: 20px 25px; min-width: 100px; }
+            .timer-title { font-size: 28px; }
+            .product-card { margin: 0 15px; }
+            .profile-section, .chats-section, .admin-section { padding: 100px 15px 40px; }
         }
     </style>
 </head>
@@ -777,7 +1003,7 @@
         <div class="header-content">
             <div class="logo">
                 <div class="logo-icon"><i class="fas fa-crown"></i></div>
-                <span class="logo-text">GrifLauncher</span>
+                <span class="logo-text">GRIFLAUNCHER</span>
             </div>
             <div class="header-right">
                 <div class="balance"><i class="fas fa-coins"></i> <span id="userBalance">0</span> ₽</div>
@@ -793,118 +1019,131 @@
         </div>
     </div>
 
-    <!-- Главная страница -->
-    <div id="homePage" class="page active" style="padding-top: 140px;">
-        <div class="timer-card" style="max-width: 700px; margin: 0 auto; background: var(--bg-surface); border-radius: var(--radius-2xl); padding: 40px; text-align: center;">
-            <div class="timer-title">ДО ОТКРЫТИЯ СЕЗОНА</div>
-            <div class="countdown-wrapper" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                <div class="countdown-block" style="background: rgba(0,0,0,0.4); border-radius: var(--radius-lg); padding: 15px 25px;"><div class="countdown-number" id="days">0</div><div>Дней</div></div>
-                <div class="countdown-block" style="background: rgba(0,0,0,0.4); border-radius: var(--radius-lg); padding: 15px 25px;"><div class="countdown-number" id="hours">0</div><div>Часов</div></div>
-                <div class="countdown-block" style="background: rgba(0,0,0,0.4); border-radius: var(--radius-lg); padding: 15px 25px;"><div class="countdown-number" id="minutes">0</div><div>Минут</div></div>
-                <div class="countdown-block" style="background: rgba(0,0,0,0.4); border-radius: var(--radius-lg); padding: 15px 25px;"><div class="countdown-number" id="seconds">0</div><div>Секунд</div></div>
+    <!-- ГЛАВНАЯ - ТАЙМЕР НА ВЕСЬ ЭКРАН -->
+    <div id="homePage" class="page active">
+        <div class="hero-timer">
+            <div class="timer-container">
+                <div class="timer-title" id="eventTitle">ДО ОТКРЫТИЯ СЕЗОНА</div>
+                <div class="countdown-wrapper">
+                    <div class="countdown-block"><div class="countdown-number" id="days">0</div><div class="countdown-label">Дней</div></div>
+                    <div class="countdown-block"><div class="countdown-number" id="hours">0</div><div class="countdown-label">Часов</div></div>
+                    <div class="countdown-block"><div class="countdown-number" id="minutes">0</div><div class="countdown-label">Минут</div></div>
+                    <div class="countdown-block"><div class="countdown-number" id="seconds">0</div><div class="countdown-label">Секунд</div></div>
+                </div>
+                <div class="timer-footer" id="eventDesc"></div>
             </div>
         </div>
     </div>
 
-    <!-- Магазин -->
-    <div id="shopPage" class="page" style="padding-top: 140px;">
-        <div class="section-title">✨ ПРИВИЛЕГИИ</div>
-        <div class="shop-grid" id="shopGrid" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;"></div>
+    <!-- МАГАЗИН -->
+    <div id="shopPage" class="page">
+        <div class="shop-section">
+            <div class="shop-header">
+                <h1><i class="fas fa-crown"></i> ПРЕМИУМ МАГАЗИН</h1>
+                <p>Выберите привилегию и получите уникальные возможности</p>
+            </div>
+            <div class="shop-grid" id="shopGrid"></div>
+        </div>
     </div>
 
-    <!-- ЕДИНОЕ КОММУНИКАЦИОННОЕ ОКНО -->
-    <div id="chatsPage" class="page" style="padding-top: 130px;">
-        <div class="chat-window">
-            <div class="chat-header">
-                <div class="chat-title">
-                    <h2><i class="fas fa-hashtag"></i> <span id="currentChatTitle">основной</span></h2>
-                    <button class="settings-btn" id="chatSettingsBtn"><i class="fas fa-cog"></i></button>
-                </div>
-                <div class="search-bar">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="searchMessages" placeholder="Найти сообщение...">
-                </div>
-            </div>
-            <div class="chat-switcher">
-                <button class="chat-btn active" data-chat="channel">📢 # основной</button>
-                <button class="chat-btn" data-chat="bot">🤖 # бот-помощник</button>
-                <button class="chat-btn" data-chat="admin">👑 # личка с админом</button>
-            </div>
-            <div class="messages-area" id="messagesArea">
-                <!-- Сообщения загружаются сюда -->
-            </div>
-            <div class="typing-indicator" id="typingIndicator" style="display: none;">
-                <i class="fas fa-pen-fancy"></i>
-                <span id="typingName"></span> печатает
-                <div class="typing-dots"><span></span><span></span><span></span></div>
-            </div>
-            <div id="botInterface" style="display: none;">
-                <div class="bot-interface">
-                    <div class="bot-buttons">
-                        <button class="bot-btn" data-cmd="/start"><i class="fas fa-play"></i> /start</button>
-                        <button class="bot-btn" data-cmd="/tasks"><i class="fas fa-tasks"></i> /tasks</button>
-                        <button class="bot-btn" data-cmd="/wheel"><i class="fas fa-dice-d6"></i> /wheel</button>
-                        <button class="bot-btn" data-cmd="/help"><i class="fas fa-question-circle"></i> /help</button>
-                    </div>
-                    <div id="wheelGame" style="display: none;">
-                        <div class="wheel-container">
-                            <div class="wheel" id="wheel"></div>
-                            <button id="spinWheelBtn" class="admin-btn" style="margin-top: 10px;"><i class="fas fa-dice-d6"></i> КРУТИТЬ</button>
-                            <div id="wheelNextSpin" style="margin-top: 10px; font-size: 13px;"></div>
+    <!-- ЧАТЫ -->
+    <div id="chatsPage" class="page">
+        <div class="chats-section">
+            <div class="chat-window">
+                <div class="chat-header">
+                    <div class="chat-title">
+                        <h2><i class="fas fa-hashtag"></i> <span id="currentChatTitle">основной</span></h2>
+                        <div class="search-bar">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchMessages" placeholder="Поиск сообщений...">
                         </div>
                     </div>
-                    <div id="tasksList" style="display: none;">
-                        <div id="tasksContainer" class="tasks-container"></div>
+                </div>
+                <div class="chat-switcher">
+                    <button class="chat-switch-btn active" data-chat="channel">📢 # основной</button>
+                    <button class="chat-switch-btn" data-chat="bot">🤖 # бот-помощник</button>
+                    <button class="chat-switch-btn" data-chat="admin">👑 # личка с админом</button>
+                </div>
+                <div class="messages-area" id="messagesArea"></div>
+                <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                    <i class="fas fa-pen-fancy"></i>
+                    <span id="typingName"></span> печатает
+                    <div class="typing-dots"><span></span><span></span><span></span></div>
+                </div>
+                <div id="botInterface" style="display: none;">
+                    <div style="padding: 0 25px 15px;">
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="bot-btn" data-cmd="/start" style="background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.3); padding:8px 16px; border-radius:40px; cursor:pointer;">🏠 /start</button>
+                            <button class="bot-btn" data-cmd="/tasks" style="background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.3); padding:8px 16px; border-radius:40px; cursor:pointer;">📋 /tasks</button>
+                            <button class="bot-btn" data-cmd="/wheel" style="background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.3); padding:8px 16px; border-radius:40px; cursor:pointer;">🎡 /wheel</button>
+                            <button class="bot-btn" data-cmd="/help" style="background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.3); padding:8px 16px; border-radius:40px; cursor:pointer;">❓ /help</button>
+                        </div>
+                        <div id="wheelGame" style="display: none; text-align: center; margin-top: 15px;">
+                            <div style="background:rgba(0,0,0,0.3); border-radius:20px; padding:20px;">
+                                <div class="wheel" id="wheel" style="width:160px; height:160px; border-radius:50%; background:conic-gradient(#ffd700, #ffaa00, #ff8800, #ff6600, #ff4400, #ff2200, #ff0000); margin:10px auto; transition:transform 3s cubic-bezier(0.2,0.9,0.1,1); cursor:pointer; position:relative;"></div>
+                                <button id="spinWheelBtn" class="admin-btn" style="margin-top:10px; width:auto; padding:10px 30px;">🎡 КРУТИТЬ</button>
+                                <div id="wheelNextSpin" style="margin-top:10px;"></div>
+                            </div>
+                        </div>
+                        <div id="tasksList" style="display: none; margin-top: 15px;">
+                            <div id="tasksContainer"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="chat-input-area">
-                <input type="text" id="messageInput" placeholder="Написать сообщение...">
-                <button class="emoji-btn" id="emojiBtn">😊</button>
-                <button class="send-btn" id="sendMessageBtn"><i class="fas fa-paper-plane"></i> Отправить</button>
+                <div class="chat-input-area">
+                    <input type="text" id="messageInput" placeholder="Написать сообщение...">
+                    <button class="send-btn" id="sendMessageBtn"><i class="fas fa-paper-plane"></i> Отправить</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Профиль -->
-    <div id="profilePage" class="page" style="padding-top: 140px;">
-        <div class="section-title">👤 ПРОФИЛЬ</div>
-        <div class="profile-card" style="max-width: 600px; margin: 0 auto;">
-            <div class="profile-avatar"><i class="fas fa-user"></i></div>
-            <div id="profileName" style="font-size: 24px; font-weight: 700;"></div>
-            <div class="profile-info" id="profileInfo"></div>
-            <div id="donatesContainer" style="margin: 20px 0;"></div>
-            <button class="edit-btn" id="editNameBtn"><i class="fas fa-pen"></i> Сменить имя</button>
-            <button class="change-password-btn" id="changePasswordBtn"><i class="fas fa-key"></i> Сменить пароль</button>
-        </div>
-    </div>
-
-    <!-- Админка -->
-    <div id="adminPage" class="page" style="padding-top: 140px; max-width: 800px; margin: 0 auto; padding: 20px;">
-        <div class="section-title">👑 АДМИН-ПАНЕЛЬ</div>
-        <div id="adminLoginPanel" style="margin-bottom: 20px;">
-            <div class="admin-section" style="text-align: center;">
-                <input type="password" id="adminPassword" placeholder="Ключ доступа" class="admin-input">
-                <button id="checkAdminPasswordBtn" class="admin-btn">ВОЙТИ</button>
+    <!-- ПРОФИЛЬ -->
+    <div id="profilePage" class="page">
+        <div class="profile-section">
+            <div class="profile-card">
+                <div class="profile-avatar"><i class="fas fa-user"></i></div>
+                <div class="profile-name" id="profileName"></div>
+                <div class="profile-info" id="profileInfo"></div>
+                <div id="donatesContainer" class="donates-list"></div>
+                <div class="profile-actions">
+                    <button class="profile-btn" id="editNameBtn"><i class="fas fa-pen"></i> Сменить имя</button>
+                    <button class="profile-btn" id="changePasswordBtn"><i class="fas fa-key"></i> Сменить пароль</button>
+                </div>
             </div>
         </div>
-        <div id="adminPanelContent" style="display: none;">
-            <div class="admin-section"><h3>📋 ПОСЛЕДНИЕ 10 АККАУНТОВ</h3><div class="players-list" id="recentUsersList"></div></div>
-            <div class="admin-section"><h3>👑 МОДЕРАТОРЫ</h3><input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input"><button id="addModeratorBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button><div id="moderatorsList" class="players-list"></div></div>
-            <div class="admin-section"><h3>🎡 ПРОКРУТКИ</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">🎫 ВЫДАТЬ</button></div>
-            <div class="admin-section"><h3>✅ ГАЛОЧКИ</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div>
-            <div class="admin-section"><h3>💰 МОНЕТЫ</h3><input type="text" id="giveNick" placeholder="Никнейм" class="admin-input"><input type="number" id="giveAmount" placeholder="Сумма" class="admin-input"><button id="giveCoinsBtn" class="admin-btn-blue">💸 ВЫДАТЬ</button><button id="globalGiveBtn" class="admin-btn-purple">🌍 ВСЕМ</button></div>
-            <div class="admin-section"><h3>🔨 БАН / РАЗБАН</h3><input type="text" id="banNick" placeholder="Никнейм" class="admin-input"><input type="text" id="moderatorName" placeholder="Ник модератора" class="admin-input"><textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="banDuration" class="admin-select"><option value="1">1 час</option><option value="24">1 день</option><option value="168">7 дней</option><option value="forever">Навсегда</option></select><button id="banUserBtn" class="admin-btn-red">⛔ ЗАБАНИТЬ</button><button id="unbanUserBtn" class="admin-btn-green">🔓 РАЗБАНИТЬ</button></div>
-            <div class="admin-section"><h3>🔒 УПРАВЛЕНИЕ САЙТОМ</h3><textarea id="closeReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="closeDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="24">1 день</option><option value="168">7 дней</option></select><button id="closeSiteBtn" class="admin-btn-red">🔒 ЗАКРЫТЬ</button><button id="openSiteBtn" class="admin-btn-green">🔓 ОТКРЫТЬ</button></div>
-            <div class="admin-section"><h3>📜 ЛОГИ</h3><div id="logsList" style="max-height: 200px; overflow-y: auto;"></div></div>
+    </div>
+
+    <!-- АДМИНКА -->
+    <div id="adminPage" class="page">
+        <div class="admin-section">
+            <div class="admin-panel">
+                <div class="admin-title">👑 АДМИН-ПАНЕЛЬ</div>
+                <div id="adminLoginPanel">
+                    <div class="admin-login-box">
+                        <input type="password" id="adminPassword" placeholder="Ключ доступа">
+                        <button id="checkAdminPasswordBtn" class="admin-btn">ВОЙТИ В АДМИНКУ</button>
+                    </div>
+                </div>
+                <div id="adminPanelContent" style="display: none;">
+                    <div class="admin-block"><h3><i class="fas fa-users"></i> ПОСЛЕДНИЕ 10 АККАУНТОВ</h3><div class="players-list" id="recentUsersList"></div></div>
+                    <div class="admin-block"><h3><i class="fas fa-user-shield"></i> МОДЕРАТОРЫ</h3><input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input"><button id="addModeratorBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button><div id="moderatorsList" class="players-list"></div></div>
+                    <div class="admin-block"><h3><i class="fas fa-dice-d6"></i> ПРОКРУТКИ КОЛЕСА</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">🎫 ВЫДАТЬ</button></div>
+                    <div class="admin-block"><h3><i class="fas fa-tags"></i> ГАЛОЧКИ</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div>
+                    <div class="admin-block"><h3><i class="fas fa-coins"></i> МОНЕТЫ</h3><input type="text" id="giveNick" placeholder="Никнейм" class="admin-input"><input type="number" id="giveAmount" placeholder="Сумма" class="admin-input"><button id="giveCoinsBtn" class="admin-btn-blue">💸 ВЫДАТЬ</button><button id="globalGiveBtn" class="admin-btn-purple">🌍 ВСЕМ</button></div>
+                    <div class="admin-block"><h3><i class="fas fa-gavel"></i> БАН / РАЗБАН</h3><input type="text" id="banNick" placeholder="Никнейм" class="admin-input"><input type="text" id="moderatorName" placeholder="Ник модератора" class="admin-input"><textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="banDuration" class="admin-select"><option value="1">1 час</option><option value="24">1 день</option><option value="168">7 дней</option><option value="forever">Навсегда</option></select><button id="banUserBtn" class="admin-btn-red">⛔ ЗАБАНИТЬ</button><button id="unbanUserBtn" class="admin-btn-green">🔓 РАЗБАНИТЬ</button></div>
+                    <div class="admin-block"><h3><i class="fas fa-lock"></i> УПРАВЛЕНИЕ САЙТОМ</h3><textarea id="closeReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="closeDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="24">1 день</option><option value="168">7 дней</option></select><button id="closeSiteBtn" class="admin-btn-red">🔒 ЗАКРЫТЬ</button><button id="openSiteBtn" class="admin-btn-green">🔓 ОТКРЫТЬ</button></div>
+                    <div class="admin-block"><h3><i class="fas fa-history"></i> ЛОГИ</h3><div id="logsList" style="max-height: 200px; overflow-y: auto;"></div></div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Модалки -->
+    <!-- МОДАЛКИ -->
     <div id="authModal" class="modal" style="display: flex;">
         <div class="auth-modal">
             <i class="fas fa-crown" style="font-size: 48px; color: var(--accent); margin-bottom: 20px;"></i>
-            <h2 style="margin-bottom: 20px;">GrifLauncher</h2>
+            <h2 style="margin-bottom: 20px;">GRIFLAUNCHER</h2>
             <div class="tabs-auth">
                 <button class="tab-auth active" data-tab="login">ВХОД</button>
                 <button class="tab-auth" data-tab="register">РЕГИСТРАЦИЯ</button>
@@ -949,12 +1188,11 @@
             let tasks = [];
             let wheelSpins = {};
             let currentChat = "channel";
-            let typingTimeout = null;
             let messagesUnsub = null;
 
             function showMessage(text, isError = true) {
                 const div = document.createElement('div');
-                div.style.cssText = `position:fixed; bottom:20px; right:20px; background:${isError ? '#ef4444' : '#10b981'}; color:white; padding:12px 24px; border-radius:40px; z-index:10000; animation:fadeIn 0.3s ease; font-weight:500;`;
+                div.style.cssText = `position:fixed; bottom:20px; right:20px; background:${isError ? '#ef4444' : '#10b981'}; color:white; padding:12px 24px; border-radius:40px; z-index:10000; font-weight:500;`;
                 div.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${text}`;
                 document.body.appendChild(div);
                 setTimeout(() => div.remove(), 3000);
@@ -967,18 +1205,16 @@
                 return `<span class="badge-icon ${map[type]}"><i class="fas ${icon}"></i></span>`;
             }
 
-            // Сообщения админа с золотым фоном
             function isAdminMessage(senderEmail) {
                 return senderEmail === MAIN_ADMIN_EMAIL;
             }
 
-            // Загрузка сообщений для выбранного чата
-            function loadMessages(chatType, targetId = null) {
+            function loadMessages() {
                 if (messagesUnsub) messagesUnsub();
                 let collectionPath = '';
-                if (chatType === 'channel') collectionPath = 'chats/channel/messages';
-                else if (chatType === 'bot') collectionPath = 'chats/bot/messages';
-                else if (chatType === 'admin' && targetId) collectionPath = `chats/${currentUser.uid}/messages/${targetId}`;
+                if (currentChat === 'channel') collectionPath = 'chats/channel/messages';
+                else if (currentChat === 'bot') collectionPath = 'chats/bot/messages';
+                else if (currentChat === 'admin') collectionPath = `chats/admin/${MAIN_ADMIN_EMAIL}/messages`;
                 else return;
 
                 const messagesRef = db.collection(collectionPath).orderBy('timestamp');
@@ -1000,11 +1236,6 @@
                                         ${isAdmin ? '<span class="admin-badge"><i class="fas fa-crown"></i> Админ</span>' : ''}
                                     </div>
                                     <div class="message-bubble">${msg.text}</div>
-                                    <div class="message-actions">
-                                        <button class="reaction-btn" onclick="addReaction('${doc.id}', '👍')">👍</button>
-                                        <button class="reaction-btn" onclick="addReaction('${doc.id}', '❤️')">❤️</button>
-                                        <button class="reaction-btn" onclick="addReaction('${doc.id}', '😂')">😂</button>
-                                    </div>
                                 </div>
                             </div>
                         `;
@@ -1013,39 +1244,27 @@
                 });
             }
 
-            // Отправка сообщения
             async function sendMessage(text) {
                 if (!text.trim()) return;
                 if (currentChat === 'channel') {
                     await db.collection('chats/channel/messages').add({
-                        from: currentUser.uid,
-                        fromName: currentUser.displayName,
-                        fromEmail: currentUser.email,
+                        from: currentUser.uid, fromName: currentUser.displayName, fromEmail: currentUser.email,
                         fromBadge: (await db.collection('users').doc(currentUser.uid).get()).data()?.badge,
-                        text: text,
-                        timestamp: new Date()
+                        text: text, timestamp: new Date()
                     });
                 } else if (currentChat === 'bot') {
                     await db.collection('chats/bot/messages').add({
-                        from: currentUser.uid,
-                        fromName: currentUser.displayName,
-                        text: text,
-                        timestamp: new Date()
+                        from: currentUser.uid, fromName: currentUser.displayName, text: text, timestamp: new Date()
                     });
                     if (text.startsWith('/')) handleBotCommand(text);
                 } else if (currentChat === 'admin') {
-                    await db.collection(`chats/${MAIN_ADMIN_EMAIL}/messages/${currentUser.uid}`).add({
-                        from: currentUser.uid,
-                        fromName: currentUser.displayName,
-                        fromEmail: currentUser.email,
-                        text: text,
-                        timestamp: new Date()
+                    await db.collection(`chats/admin/${MAIN_ADMIN_EMAIL}/messages`).add({
+                        from: currentUser.uid, fromName: currentUser.displayName, fromEmail: currentUser.email, text: text, timestamp: new Date()
                     });
                 }
                 document.getElementById('messageInput').value = '';
             }
 
-            // Бот команды
             async function handleBotCommand(cmd) {
                 const msgRef = db.collection('chats/bot/messages');
                 if (cmd === '/start') {
@@ -1078,7 +1297,6 @@
                 await db.collection('chats/bot/messages').add({ from: "system", fromName: "GrifMcBot 🤖", text: `🎉 ВЫ ВЫИГРАЛИ ${prize.toLocaleString()} ₽! Осталось прокруток: ${newSpins}`, timestamp: new Date() });
             }
 
-            // Загрузка данных пользователя
             async function loadUserData(user) {
                 if (!user) return;
                 const doc = await db.collection('users').doc(user.uid).get();
@@ -1098,14 +1316,22 @@
                     wheelSpins[user.uid] = data.wheelSpins || 1;
                 }
                 document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                const profileName = document.getElementById('profileName');
-                if (profileName) profileName.innerHTML = (data?.username || user.displayName) + getBadgeHtml(data?.badge);
+                document.getElementById('profileName').innerHTML = (data?.username || user.displayName) + getBadgeHtml(data?.badge);
                 document.getElementById('profileInfo').innerHTML = `
                     <p><i class="fas fa-envelope"></i> ${user.email}</p>
                     <p><i class="fas fa-calendar-alt"></i> ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>
                 `;
                 const hasAdminAccess = user.email === MAIN_ADMIN_EMAIL || moderatorsList.some(m => m.email === user.email);
                 if (hasAdminAccess) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
+                
+                db.collection('donates').where('userId', '==', user.uid).onSnapshot((snap) => {
+                    const container = document.getElementById('donatesContainer');
+                    if (container) {
+                        container.innerHTML = '';
+                        snap.forEach(d => container.innerHTML += `<span class="donate-tag"><i class="fas fa-gift"></i> ${d.data().product}</span>`);
+                        if (snap.empty) container.innerHTML = '<span class="donate-tag">Нет покупок</span>';
+                    }
+                });
             }
 
             // Таймер
@@ -1128,12 +1354,12 @@
 
             // Магазин
             const privileges = [
-                { name: "Премиум", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/fly"] },
-                { name: "Креатив", price: 2500, icon: "fa-palette", features: ["WorldEdit"] },
-                { name: "Модер", price: 5000, icon: "fa-shield-alt", features: ["Мут/кик"] },
-                { name: "Лорд", price: 10000, icon: "fa-crown", features: ["/god"] },
-                { name: "Админ", price: 20000, icon: "fa-user-tie", features: ["Баны"] },
-                { name: "Правитель", price: 1000000, icon: "fa-chess-king", features: ["Всё"] }
+                { name: "Премиум", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/fly", "/kit"] },
+                { name: "Креатив", price: 2500, icon: "fa-palette", features: ["WorldEdit", "Доступ в креатив"] },
+                { name: "Модер", price: 5000, icon: "fa-shield-alt", features: ["Мут/кик", "Проверка игроков"] },
+                { name: "Лорд", price: 10000, icon: "fa-crown", features: ["/god", "Неприкосновенность"] },
+                { name: "Админ", price: 20000, icon: "fa-user-tie", features: ["Баны/кики", "Управление"] },
+                { name: "Правитель", price: 1000000, icon: "fa-chess-king", features: ["Верховный правитель", "Всё"] }
             ];
             function renderShop() {
                 const container = document.getElementById('shopGrid');
@@ -1142,8 +1368,8 @@
                         <div class="product-icon"><i class="fas ${p.icon}"></i></div>
                         <div class="product-name">${p.name}</div>
                         <div class="price">${p.price.toLocaleString()} ₽</div>
-                        <ul class="product-features">${p.features.map(f => `<li><i class="fas fa-check-circle" style="color:var(--success);"></i> ${f}</li>`).join('')}</ul>
-                        <button class="buy-btn" onclick="window.openBuyModal('${p.name}',${p.price})">КУПИТЬ</button>
+                        <ul class="product-features">${p.features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}</ul>
+                        <button class="buy-btn" onclick="window.openBuyModal('${p.name}',${p.price})"><i class="fas fa-shopping-cart"></i> КУПИТЬ</button>
                     </div>
                 `).join('');
             }
@@ -1213,6 +1439,9 @@
                 if (snap.empty) return showMessage('Не найден');
                 await snap.docs[0].ref.update({ badge: type });
                 showMessage(`✅ Галочка выдана ${nick}`, false);
+                if (currentUser && currentUser.uid === snap.docs[0].id) {
+                    document.getElementById('profileName').innerHTML = snap.docs[0].data().username + getBadgeHtml(type);
+                }
             }
             async function giveSpin(nick) {
                 const snap = await db.collection('users').where('username', '==', nick).get();
@@ -1227,7 +1456,7 @@
                 await db.collection('logs').add({ action, moderator: currentUser.displayName, target, details, timestamp: new Date() });
             }
 
-            // Обработчики кнопок
+            // Обработчики
             function bindButtons() {
                 document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); } catch(e) { showMessage(e.message); } };
                 document.getElementById('doRegisterBtn').onclick = async () => {
@@ -1237,10 +1466,6 @@
                         const cred = await auth.createUserWithEmailAndPassword(e, p);
                         await cred.user.updateProfile({ displayName: u });
                         await db.collection('users').doc(cred.user.uid).set({ username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1 });
-                        // Автоматически создаём чат с админом
-                        await db.collection(`chats/${MAIN_ADMIN_EMAIL}/messages/${cred.user.uid}`).add({
-                            from: "system", fromName: "Система", text: `👋 ${u} присоединился к чату!`, timestamp: new Date()
-                        });
                         showMessage('✅ Регистрация успешна!', false);
                     } catch(e) { showMessage(e.message); }
                 };
@@ -1304,9 +1529,9 @@
                 document.getElementById('spinWheelBtn').onclick = spinWheel;
 
                 // Переключение чатов
-                document.querySelectorAll('.chat-btn').forEach(btn => {
+                document.querySelectorAll('.chat-switch-btn').forEach(btn => {
                     btn.onclick = () => {
-                        document.querySelectorAll('.chat-btn').forEach(b => b.classList.remove('active'));
+                        document.querySelectorAll('.chat-switch-btn').forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
                         currentChat = btn.dataset.chat;
                         document.getElementById('currentChatTitle').innerText = btn.innerText.trim();
@@ -1317,14 +1542,10 @@
                             botInterface.style.display = 'block';
                             wheelGame.style.display = 'none';
                             tasksList.style.display = 'none';
-                            loadMessages('bot');
-                        } else if (currentChat === 'channel') {
+                        } else {
                             botInterface.style.display = 'none';
-                            loadMessages('channel');
-                        } else if (currentChat === 'admin') {
-                            botInterface.style.display = 'none';
-                            loadMessages('admin', MAIN_ADMIN_EMAIL);
                         }
+                        loadMessages();
                     };
                 });
 
@@ -1351,6 +1572,7 @@
                         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                         document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
                         if (tab.dataset.page === 'admin') { loadRecentUsers(); loadModerators(); }
+                        if (tab.dataset.page === 'chats') loadMessages();
                     };
                 });
                 document.querySelectorAll('.tab-auth').forEach(btn => {
@@ -1374,9 +1596,8 @@
                     let def = new Date(); def.setDate(def.getDate() + 7);
                     startTimer(def);
                     bindButtons();
-                    document.getElementById('mainContent')?.remove();
                     document.getElementById('authModal').style.display = 'none';
-                    document.querySelector('.chat-btn.active')?.click();
+                    document.querySelector('.chat-switch-btn.active').click();
                 } else {
                     document.getElementById('authModal').style.display = 'flex';
                     bindButtons();
