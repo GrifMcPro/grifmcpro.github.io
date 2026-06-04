@@ -182,84 +182,12 @@
             border-radius: 60px;
             color: white;
         }
-        /* ВИКИ */
-        .wiki-categories {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        .wiki-cat-btn {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,215,0,0.3);
-            padding: 10px 25px;
+        .chat-input button {
+            background: #ffd700;
+            border: none;
             border-radius: 60px;
+            padding: 12px 20px;
             cursor: pointer;
-        }
-        .wiki-cat-btn.active { background: #ffd700; color: #0a0a0a; }
-        .wiki-content { display: none; }
-        .wiki-content.active { display: block; }
-        .wiki-card {
-            background: rgba(0,0,0,0.5);
-            border-radius: 24px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-        /* ЧЕНДЖЛОГ */
-        .changelog-tabs {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        .changelog-btn {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,215,0,0.3);
-            padding: 10px 25px;
-            border-radius: 60px;
-            cursor: pointer;
-        }
-        .changelog-btn.active { background: #ffd700; color: #0a0a0a; }
-        .changelog-content { display: none; }
-        .changelog-content.active { display: block; }
-        .changelog-item {
-            background: rgba(0,0,0,0.5);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 15px;
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-        .changelog-item i { font-size: 40px; color: #ffd700; }
-        /* НОВОСТИ С КОММЕНТАРИЯМИ */
-        .news-item {
-            background: rgba(0,0,0,0.5);
-            border-radius: 32px;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-        .comments-section { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,215,0,0.2); }
-        .comment {
-            background: rgba(0,0,0,0.3);
-            border-radius: 16px;
-            padding: 12px;
-            margin-bottom: 10px;
-        }
-        .comment-input {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .comment-input input {
-            flex: 1;
-            padding: 12px;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,215,0,0.3);
-            border-radius: 60px;
-            color: white;
         }
         /* МАГАЗИН */
         .shop-grid {
@@ -296,6 +224,8 @@
             max-width: 700px;
             margin: 0 auto;
         }
+        .profile-info { margin: 20px 0; text-align: left; }
+        .profile-info p { padding: 10px 0; border-bottom: 1px solid rgba(255,215,0,0.2); }
         .edit-btn, .change-password-btn {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
@@ -303,6 +233,31 @@
             padding: 8px 20px;
             border-radius: 40px;
             cursor: pointer;
+            margin: 5px;
+        }
+        /* АДМИНКА */
+        .admin-section {
+            background: rgba(0,0,0,0.4);
+            border-radius: 32px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .players-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .player-card {
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .admin-only { display: none; }
         .verified-badge {
@@ -311,6 +266,79 @@
             margin-left: 6px;
             vertical-align: middle;
         }
+        .admin-input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 16px;
+            color: white;
+        }
+        .admin-btn-gold {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            border: none;
+            padding: 12px;
+            border-radius: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .admin-btn-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
+        .admin-btn-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
+        /* МОДАЛКИ */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.96);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            z-index: 6000;
+        }
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border-radius: 36px;
+            padding: 35px;
+            width: 450px;
+            border: 1px solid #ffd700;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 60px;
+            color: white;
+        }
+        .auth-modal {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border-radius: 48px;
+            padding: 50px;
+            width: 500px;
+            text-align: center;
+            border: 1px solid #ffd700;
+        }
+        .tabs-auth { display: flex; gap: 20px; justify-content: center; margin-bottom: 30px; }
+        .tab-auth {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px 25px;
+            border-radius: 40px;
+            font-family: 'Orbitron', monospace;
+        }
+        .tab-auth.active { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #0a0a0a; }
+        .tab-pane-auth { display: none; }
+        .tab-pane-auth.active { display: block; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .loading-spinner {
             width: 60px;
@@ -353,7 +381,6 @@
 
         <!-- ГЛАВНАЯ -->
         <div id="homePage" class="page active">
-            <!-- Баннер и таймер -->
             <div class="hero-banner">
                 <img class="banner-img" src="https://picsum.photos/id/104/1200/300" alt="Обновление">
                 <div class="countdown">
@@ -367,11 +394,9 @@
                 </div>
             </div>
 
-            <!-- Витрина новинок -->
             <div class="section-title">✨ ГЛАВНЫЕ НОВИНКИ</div>
             <div class="features-grid" id="featuresGrid"></div>
 
-            <!-- Интерактивный календарь событий -->
             <div class="section-title">📅 КАЛЕНДАРЬ СОБЫТИЙ</div>
             <div class="calendar">
                 <div class="calendar-header">
@@ -383,13 +408,12 @@
             </div>
             <div id="eventsList" style="margin-bottom: 30px;"></div>
 
-            <!-- Чат -->
             <div class="section-title">💬 ГЛОБАЛЬНЫЙ ЧАТ</div>
             <div class="chat-widget">
                 <div class="chat-messages" id="chatMessages"></div>
                 <div class="chat-input">
                     <input type="text" id="chatInput" placeholder="Напишите сообщение...">
-                    <button id="sendChatBtn" style="background:#ffd700; border:none; border-radius:60px; padding:12px 20px; cursor:pointer;">📤</button>
+                    <button id="sendChatBtn">📤</button>
                 </div>
             </div>
         </div>
@@ -407,52 +431,86 @@
                 <h2 id="profileName" style="display: inline-flex; align-items: center; gap: 0;"></h2>
                 <div class="profile-info" id="profileInfo"></div>
                 <div id="donatesContainer" style="margin: 20px 0;"></div>
-                <button class="edit-btn" id="editNameBtn">✏️ Сменить имя</button>
-                <button class="change-password-btn" id="changePasswordBtn" style="margin-top:15px;">🔑 Сменить пароль</button>
+                <div>
+                    <button class="edit-btn" id="editNameBtn">✏️ Сменить имя</button>
+                    <button class="change-password-btn" id="changePasswordBtn">🔑 Сменить пароль</button>
+                </div>
             </div>
         </div>
 
-        <!-- АДМИНКА (упрощённо) -->
+        <!-- АДМИНКА -->
         <div id="adminPage" class="page">
             <div class="section-title">👑 АДМИН-ПАНЕЛЬ</div>
-            <div style="max-width:400px; margin:0 auto; background:rgba(0,0,0,0.5); border-radius:40px; padding:40px;">
-                <input type="password" id="adminPassword" placeholder="Ключ доступа" style="width:100%; padding:12px; border-radius:60px; margin-bottom:15px;">
-                <button id="checkAdminBtn" style="background:#ffd700; border:none; padding:12px; border-radius:60px; cursor:pointer; width:100%;">ВОЙТИ</button>
+            <div id="adminLoginPanel" style="max-width:400px; margin:0 auto;">
+                <div style="background:rgba(0,0,0,0.5); border-radius:40px; padding:40px; text-align:center;">
+                    <input type="password" id="adminPassword" placeholder="Ключ доступа" class="admin-input">
+                    <button id="checkAdminPasswordBtn" class="admin-btn-gold">ВОЙТИ В АДМИНКУ</button>
+                </div>
             </div>
-            <div id="adminPanel" style="display:none; margin-top:30px;">
-                <div style="background:rgba(0,0,0,0.5); border-radius:32px; padding:25px;">
-                    <h3>🔨 УПРАВЛЕНИЕ</h3>
-                    <button id="testAdminBtn" style="background:#3b82f6; border:none; padding:10px; border-radius:60px; cursor:pointer; width:100%;">Тест админки</button>
+            <div id="adminPanelContent" style="display:none;">
+                <div class="admin-section">
+                    <h3>🕐 НОВЫЕ ИГРОКИ (последние 30 минут)</h3>
+                    <div class="players-list" id="newPlayersList"></div>
+                </div>
+                <div class="admin-section">
+                    <h3>✅ ВЫДАЧА ГАЛОЧКИ ВЕРИФИКАЦИИ</h3>
+                    <input type="text" id="verifyNick" placeholder="Никнейм" class="admin-input">
+                    <input type="email" id="verifyEmail" placeholder="Email" class="admin-input">
+                    <button id="giveVerifyBtn" class="admin-btn-blue">🎫 ВЫДАТЬ ГАЛОЧКУ</button>
+                    <button id="removeVerifyBtn" class="admin-btn-red">❌ СНЯТЬ ГАЛОЧКУ</button>
+                </div>
+                <div class="admin-section">
+                    <h3>💰 ВЫДАЧА МОНЕТ</h3>
+                    <input type="text" id="giveNick" placeholder="Никнейм" class="admin-input">
+                    <input type="number" id="giveAmount" placeholder="Сумма" class="admin-input">
+                    <button id="giveCoinsBtn" class="admin-btn-blue">💸 ВЫДАТЬ</button>
+                    <button id="globalGiveBtn" class="admin-btn-gold">🌍 ВЫДАТЬ ВСЕМ</button>
+                </div>
+                <div class="admin-section">
+                    <h3>🔒 УПРАВЛЕНИЕ САЙТОМ</h3>
+                    <textarea id="closeReason" rows="2" placeholder="Причина закрытия" class="admin-input"></textarea>
+                    <select id="closeDuration" class="admin-input">
+                        <option value="1">1 час</option><option value="3">3 часа</option><option value="6">6 часов</option>
+                        <option value="12">12 часов</option><option value="24">1 день</option><option value="72">3 дня</option>
+                        <option value="168">7 дней</option><option value="720">30 дней</option>
+                    </select>
+                    <button id="closeSiteBtn" class="admin-btn-red">🔒 ЗАКРЫТЬ САЙТ</button>
+                    <button id="openSiteBtn" class="admin-btn-gold">🔓 ОТКРЫТЬ САЙТ</button>
+                </div>
+                <div class="admin-section">
+                    <h3>📜 ЛОГИ ДЕЙСТВИЙ</h3>
+                    <div id="logsList" style="max-height:300px; overflow-y:auto;"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- МОДАЛКА АВТОРИЗАЦИИ -->
-    <div id="authModal" class="modal" style="display: flex; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.96); justify-content:center; align-items:center; z-index:9999;">
-        <div style="background:linear-gradient(135deg,#1a1a1a,#0a0a0a); border-radius:48px; padding:50px; width:500px; max-width:90%; border:1px solid #ffd700; text-align:center;">
-            <h2 style="margin-bottom:30px;">GRIF LAUNCHER</h2>
-            <div style="display:flex; gap:20px; justify-content:center; margin-bottom:30px;">
-                <button id="loginTab" style="background:linear-gradient(135deg,#ffd700,#ffaa00); border:none; padding:8px 25px; border-radius:40px; cursor:pointer;">ВХОД</button>
-                <button id="registerTab" style="background:none; border:none; color:#fff; padding:8px 25px; border-radius:40px; cursor:pointer;">РЕГИСТРАЦИЯ</button>
+    <!-- МОДАЛКИ -->
+    <div id="authModal" class="modal" style="display: flex;">
+        <div class="auth-modal">
+            <h2>GRIF LAUNCHER</h2>
+            <div class="tabs-auth">
+                <button class="tab-auth active" data-tab="login">ВХОД</button>
+                <button class="tab-auth" data-tab="register">РЕГИСТРАЦИЯ</button>
             </div>
-            <div id="loginPanel">
-                <input type="email" id="loginEmail" placeholder="Email" style="width:100%; padding:14px; margin:10px 0; background:rgba(0,0,0,0.5); border:1px solid rgba(255,215,0,0.3); border-radius:60px; color:white;">
-                <input type="password" id="loginPass" placeholder="Пароль" style="width:100%; padding:14px; margin:10px 0; background:rgba(0,0,0,0.5); border:1px solid rgba(255,215,0,0.3); border-radius:60px; color:white;">
-                <button id="doLoginBtn" style="width:100%; background:linear-gradient(135deg,#ffd700,#ffaa00); border:none; padding:14px; border-radius:60px; font-weight:bold; cursor:pointer;">ВОЙТИ</button>
+            <div id="loginPaneAuth" class="tab-pane-auth active">
+                <input type="email" id="loginEmail" placeholder="Email">
+                <input type="password" id="loginPass" placeholder="Пароль">
+                <button id="doLoginBtn" class="admin-btn-gold">ВОЙТИ</button>
             </div>
-            <div id="registerPanel" style="display:none;">
-                <input type="text" id="regUsername" placeholder="Никнейм" style="width:100%; padding:14px; margin:10px 0; background:rgba(0,0,0,0.5); border:1px solid rgba(255,215,0,0.3); border-radius:60px; color:white;">
-                <input type="email" id="regEmail" placeholder="Email" style="width:100%; padding:14px; margin:10px 0; background:rgba(0,0,0,0.5); border:1px solid rgba(255,215,0,0.3); border-radius:60px; color:white;">
-                <input type="password" id="regPass" placeholder="Пароль (мин. 6)" style="width:100%; padding:14px; margin:10px 0; background:rgba(0,0,0,0.5); border:1px solid rgba(255,215,0,0.3); border-radius:60px; color:white;">
-                <button id="doRegisterBtn" style="width:100%; background:linear-gradient(135deg,#ffd700,#ffaa00); border:none; padding:14px; border-radius:60px; font-weight:bold; cursor:pointer;">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+            <div id="registerPaneAuth" class="tab-pane-auth">
+                <input type="text" id="regUsername" placeholder="Никнейм">
+                <input type="email" id="regEmail" placeholder="Email">
+                <input type="password" id="regPass" placeholder="Пароль (мин. 6)">
+                <button id="doRegisterBtn" class="admin-btn-gold">ЗАРЕГИСТРИРОВАТЬСЯ</button>
             </div>
         </div>
     </div>
 
-    <div id="editNameModal" class="modal"><div style="background:linear-gradient(135deg,#1a1a1a,#0a0a0a); border-radius:36px; padding:35px; width:450px; border:1px solid #ffd700;"><span class="close-modal" id="closeEditModal" style="float:right; font-size:28px; cursor:pointer;">&times;</span><h3>Сменить имя</h3><input type="text" id="newNameInput" placeholder="Новое имя" style="width:100%; padding:14px; margin:10px 0;"><button id="saveNameBtn" style="background:linear-gradient(135deg,#ffd700,#ffaa00); border:none; padding:14px; border-radius:60px; cursor:pointer;">Сохранить</button></div></div>
-    <div id="changePasswordModal" class="modal"><div style="background:linear-gradient(135deg,#1a1a1a,#0a0a0a); border-radius:36px; padding:35px; width:450px; border:1px solid #ffd700;"><span class="close-modal" id="closePasswordModal" style="float:right; font-size:28px; cursor:pointer;">&times;</span><h3>Сменить пароль</h3><input type="password" id="oldPasswordInput" placeholder="Старый пароль" style="width:100%; padding:14px; margin:10px 0;"><input type="password" id="newPasswordInput" placeholder="Новый пароль (мин. 6)" style="width:100%; padding:14px; margin:10px 0;"><button id="savePasswordBtn" style="background:linear-gradient(135deg,#ffd700,#ffaa00); border:none; padding:14px; border-radius:60px; cursor:pointer;">Сохранить</button></div></div>
-    <div id="buyModal" class="modal"><div style="background:linear-gradient(135deg,#1a1a1a,#0a0a0a); border-radius:36px; padding:35px; width:450px; border:1px solid #ffd700;"><span class="close-modal" id="closeBuyModal" style="float:right; font-size:28px; cursor:pointer;">&times;</span><h3 id="buyProductName"></h3><p>Цена: <strong id="buyPrice"></strong> ₽</p><input type="text" id="buyNick" placeholder="Ваш ник на сервере" style="width:100%; padding:14px; margin:10px 0;"><button id="confirmBuyBtn" style="background:linear-gradient(135deg,#ffd700,#ffaa00); border:none; padding:14px; border-radius:60px; cursor:pointer;">КУПИТЬ</button></div></div>
+    <div id="editNameModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeEditModal">&times;</span><h3>Сменить имя</h3><input type="text" id="newNameInput" placeholder="Новое имя"><button id="saveNameBtn" class="admin-btn-gold">Сохранить</button></div></div>
+    <div id="changePasswordModal" class="modal"><div class="modal-content"><span class="close-modal" id="closePasswordModal">&times;</span><h3>Сменить пароль</h3><input type="password" id="oldPasswordInput" placeholder="Старый пароль"><input type="password"id="newPasswordInput" placeholder="Новый пароль (мин. 6)"><button id="savePasswordBtn" class="admin-btn-gold">Сохранить</button></div></div>
+    <div id="buyModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeBuyModal">&times;</span><h3 id="buyProductName"></h3><p>Цена: <strong id="buyPrice"></strong> ₽</p><input type="text" id="buyNick" placeholder="Ваш ник на сервере"><button id="confirmBuyBtn" class="admin-btn-gold">КУПИТЬ</button></div></div>
+    <div id="userActionsModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeUserActionsModal">&times;</span><div id="userActionsContent"></div></div></div>
 
     <script>
         const firebaseConfig = {
@@ -480,7 +538,7 @@
 
         const events = [
             { id: 1, date: "2026-06-15", title: "🔥 ТУРНИР НА ВЫЖИВАНИЕ", time: "20:00", desc: "Призовой фонд 1 000 000 ₽", img: "https://picsum.photos/id/104/200/150" },
-            { id: 2, date: "2026-06-20", title: "🏰 КЛАНОВАЯ ВОЙНА", time: "19:00", desc: "Сброс рейтинга, новый сезон", img: "https://picsum.photos/id/106/200/150" },
+            { id: 2, date: "2026-06-20", title: "🏰 КЛАНОВАЯ ВОЙНА", time: "19:00", desc: "Сброс рейтинга", img: "https://picsum.photos/id/106/200/150" },
             { id: 3, date: "2026-06-25", title: "✨ ОХОТА НА ДРАКОНА", time: "18:00", desc: "Эксклюзивные награды", img: "https://picsum.photos/id/107/200/150" }
         ];
 
@@ -488,6 +546,10 @@
         let currentBalance = 0;
         let currentProduct = null;
         let currentDate = new Date();
+
+        async function addLog(action, target, details) {
+            await db.collection('logs').add({ action, moderator: currentUser?.email, target, details, timestamp: new Date() });
+        }
 
         function renderShop() {
             const container = document.getElementById('shopGrid');
@@ -578,7 +640,7 @@
                 const diff = target - now;
                 if(diff > 0) {
                     document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24));
-                    document.getElementById('hours').innerText = Math.floor((diff % (86400000)) / (3600000));
+                    document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
                     document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
                     document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
                 }
@@ -591,14 +653,18 @@
             document.getElementById('buyPrice').innerText = price;
             document.getElementById('buyModal').style.display = 'flex';
         };
+
         document.getElementById('confirmBuyBtn').onclick = async () => {
-            if(currentBalance < currentProduct.price) return alert('Недостаточно средств');
+            const nick = document.getElementById('buyNick').value.trim();
+            if(!nick) return alert('Введите ник на сервере');
+            if(currentBalance < currentProduct.price) return alert('Недостаточно средств!');
             const newBalance = currentBalance - currentProduct.price;
             await db.collection('users').doc(currentUser.uid).update({ balance: newBalance });
             currentBalance = newBalance;
             document.getElementById('userBalance').innerText = currentBalance;
-            await db.collection('donates').add({ userId: currentUser.uid, product: currentProduct.name, price: currentProduct.price, date: new Date() });
-            alert(`Куплено: ${currentProduct.name}`);
+            await db.collection('donates').add({ userId: currentUser.uid, product: currentProduct.name, price: currentProduct.price, serverNick: nick, date: new Date() });
+            addLog('ПОКУПКА', currentUser.email, `${currentProduct.name} за ${currentProduct.price} ₽`);
+            alert(`✅ Куплено: ${currentProduct.name}!`);
             document.getElementById('buyModal').style.display = 'none';
             loadUserData(currentUser);
         };
@@ -606,9 +672,9 @@
         async function loadUserData(user) {
             const doc = await db.collection('users').doc(user.uid).get();
             const data = doc.data();
+            const isVerified = data.isVerified || false;
             currentBalance = data.balance || 50000;
             document.getElementById('userBalance').innerText = currentBalance;
-            const isVerified = data.isVerified || false;
             const nameSpan = document.getElementById('profileName');
             nameSpan.innerHTML = '';
             nameSpan.appendChild(document.createTextNode(data.username));
@@ -617,16 +683,140 @@
             if(data.isAdmin || user.email === ADMIN_EMAIL) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
         }
 
+        async function loadNewPlayers() {
+            const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
+            const snap = await db.collection('users').where('registeredAt', '>=', thirtyMinutesAgo.toISOString()).get();
+            const container = document.getElementById('newPlayersList');
+            if(!container) return;
+            container.innerHTML = snap.docs.map(doc => {
+                const p = doc.data();
+                return `<div class="player-card"><span><strong>${p.username}</strong> (${p.email})<br>💰 ${p.balance || 0} ₽</span><div class="player-actions"><button onclick="showUserActions('${doc.id}', '${p.username}', '${p.email}')" style="background:#3b82f6; border:none; padding:5px 12px; border-radius:20px; cursor:pointer;">⚡ ДЕЙСТВИЯ</button></div></div>`;
+            }).join('');
+        }
+
+        window.showUserActions = (userId, username, email) => {
+            const content = `
+                <h4>👤 ${username}</h4>
+                <button onclick="actionBan('${userId}', '${username}', '${email}')" style="background:#ef4444; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">🔨 БАН</button>
+                <button onclick="actionUnban('${email}')" style="background:#22c55e; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">🔓 РАЗБАН</button>
+                <button onclick="actionKick('${userId}', '${username}', '${email}')" style="background:#ff6600; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">👢 КИК</button>
+                <button onclick="actionGiveDonate('${userId}', '${username}')" style="background:#3b82f6; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">🎁 ВЫДАТЬ ДОНАТ</button>
+            `;
+            document.getElementById('userActionsContent').innerHTML = content;
+            document.getElementById('userActionsModal').style.display = 'flex';
+        };
+        window.actionBan = async (userId, username, email) => {
+            await db.collection('bans').add({ userId, username, email, reason: "Нарушение", active: true, moderator: "Система", createdAt: new Date() });
+            addLog('БАН', email, username);
+            alert(`Бан выдан ${username}`);
+            document.getElementById('userActionsModal').style.display = 'none';
+        };
+        window.actionUnban = async (email) => {
+            const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
+            snap.forEach(doc => doc.ref.update({ active: false }));
+            addLog('РАЗБАН', email, '');
+            alert('Разбан выполнен');
+            document.getElementById('userActionsModal').style.display = 'none';
+        };
+        window.actionKick = async (userId, username, email) => {
+            await db.collection('kicks').add({ userId, username, email, reason: "Кик от админа", active: true, moderator: "Система", createdAt: new Date() });
+            addLog('КИК', email, username);
+            alert(`Кик выдан ${username}`);
+            document.getElementById('userActionsModal').style.display = 'none';
+        };
+        window.actionGiveDonate = async (userId, username) => {
+            const donateName = prompt("Название доната:");
+            if(!donateName) return;
+            await db.collection('donates').add({ userId, username, product: donateName, price: 0, serverNick: username, date: new Date(), givenBy: currentUser.email });
+            addLog('ВЫДАЧА ДОНАТА', username, donateName);
+            alert(`Донат ${donateName} выдан`);
+            document.getElementById('userActionsModal').style.display = 'none';
+        };
+
+        async function loadLogs() {
+            const snap = await db.collection('logs').orderBy('timestamp', 'desc').limit(50).get();
+            document.getElementById('logsList').innerHTML = snap.docs.map(doc => `<div class="log-item">[${new Date(doc.data().timestamp?.toDate()).toLocaleString()}] <strong>${doc.data().action}</strong> → ${doc.data().target}<br>${doc.data().details || ''}</div>`).join('');
+        }
+
+        async function checkSiteClosed() {
+            const doc = await db.collection('settings').doc('siteStatus').get();
+            if(doc.exists && doc.data().closed) {
+                const data = doc.data();
+                if(data.until && data.until.toDate() < new Date()) {
+                    await db.collection('settings').doc('siteStatus').update({ closed: false });
+                    return null;
+                }
+                return data;
+            }
+            return null;
+        }
+
+        document.getElementById('giveVerifyBtn')?.addEventListener('click', async () => {
+            const nick = document.getElementById('verifyNick').value.trim();
+            const email = document.getElementById('verifyEmail').value.trim();
+            let userQuery;
+            if(nick) userQuery = await db.collection('users').where('username', '==', nick).get();
+            else userQuery = await db.collection('users').where('email', '==', email).get();
+            if(userQuery.empty) return alert('Пользователь не найден');
+            await userQuery.docs[0].ref.update({ isVerified: true });
+            addLog('ВЫДАЧА ВЕРИФИКАЦИИ', userQuery.docs[0].data().username, '');
+            alert(`Галочка выдана ${userQuery.docs[0].data().username}`);
+        });
+        document.getElementById('removeVerifyBtn')?.addEventListener('click', async () => {
+            const nick = document.getElementById('verifyNick').value.trim();
+            const email = document.getElementById('verifyEmail').value.trim();
+            let userQuery;
+            if(nick) userQuery = await db.collection('users').where('username', '==', nick).get();
+            else userQuery = await db.collection('users').where('email', '==', email).get();
+            if(userQuery.empty) return alert('Пользователь не найден');
+            await userQuery.docs[0].ref.update({ isVerified: false });
+            addLog('СНЯТИЕ ВЕРИФИКАЦИИ', userQuery.docs[0].data().username, '');
+            alert(`Галочка снята`);
+        });
+        document.getElementById('giveCoinsBtn')?.addEventListener('click', async () => {
+            const nick = document.getElementById('giveNick').value.trim();
+            const amount = parseInt(document.getElementById('giveAmount').value);
+            if(!nick || isNaN(amount)) return alert('Введите ник и сумму');
+            const snap = await db.collection('users').where('username', '==', nick).get();
+            if(snap.empty) return alert('Пользователь не найден');
+            const newBalance = (snap.docs[0].data().balance || 0) + amount;
+            await snap.docs[0].ref.update({ balance: newBalance });
+            addLog('ВЫДАЧА МОНЕТ', nick, `${amount} ₽`);
+            alert(`Выдано ${amount} ₽`);
+        });
+        document.getElementById('globalGiveBtn')?.addEventListener('click', async () => {
+            const amount = parseInt(prompt("Сумма для всех:"));
+            if(isNaN(amount)) return;
+            const snap = await db.collection('users').get();
+            for(const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
+            addLog('ГЛОБАЛЬНАЯ ВЫДАЧА', 'ВСЕМ', `${amount} ₽`);
+            alert(`Выдано ${amount} ₽ всем`);
+        });
+        document.getElementById('closeSiteBtn')?.addEventListener('click', async () => {
+            const reason = document.getElementById('closeReason').value;
+            const hours = parseInt(document.getElementById('closeDuration').value);
+            if(!reason) return alert('Укажите причину');
+            const until = new Date(Date.now() + hours * 60 * 60 * 1000);
+            await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until, moderator: "Система" });
+            addLog('ЗАКРЫТИЕ САЙТА', 'Система', `Причина: ${reason}`);
+            alert(`Сайт закрыт до ${until.toLocaleString()}`);
+        });
+        document.getElementById('openSiteBtn')?.addEventListener('click', async () => {
+            await db.collection('settings').doc('siteStatus').update({ closed: false });
+            addLog('ОТКРЫТИЕ САЙТА', 'Система', 'Сайт открыт');
+            alert('Сайт открыт');
+        });
+
         document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
         document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
         document.getElementById('saveNameBtn').onclick = async () => {
             const newName = document.getElementById('newNameInput').value.trim();
-            if(!newName) return alert('Введите имя');
+            if(!newName) return alert('Введите новое имя');
             await db.collection('users').doc(currentUser.uid).update({ username: newName });
             await currentUser.updateProfile({ displayName: newName });
-            alert('Имя изменено');
-            loadUserData(currentUser);
+            alert('Имя изменено!');
             document.getElementById('editNameModal').style.display = 'none';
+            loadUserData(currentUser);
         };
         document.getElementById('changePasswordBtn').onclick = () => document.getElementById('changePasswordModal').style.display = 'flex';
         document.getElementById('closePasswordModal').onclick = () => document.getElementById('changePasswordModal').style.display = 'none';
@@ -638,7 +828,7 @@
                 const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, oldPass);
                 await currentUser.reauthenticateWithCredential(cred);
                 await currentUser.updatePassword(newPass);
-                alert('Пароль изменён');
+                alert('Пароль изменён!');
                 document.getElementById('changePasswordModal').style.display = 'none';
             } catch(e) { alert('Неверный старый пароль'); }
         };
@@ -665,16 +855,19 @@
         };
         document.getElementById('logoutBtn').onclick = async () => { await auth.signOut(); };
         document.getElementById('closeBuyModal').onclick = () => document.getElementById('buyModal').style.display = 'none';
-        document.getElementById('checkAdminBtn')?.addEventListener('click', () => {
+        document.getElementById('closeUserActionsModal').onclick = () => document.getElementById('userActionsModal').style.display = 'none';
+        
+        document.getElementById('checkAdminPasswordBtn')?.addEventListener('click', () => {
             if(document.getElementById('adminPassword').value === 'website') {
-                document.getElementById('adminPanel').style.display = 'block';
-            } else alert('Неверный ключ');
+                document.getElementById('adminLoginPanel').style.display = 'none';
+                document.getElementById('adminPanelContent').style.display = 'block';
+                loadNewPlayers();
+                loadLogs();
+            } else alert('❌ Неверный ключ!');
         });
-        document.getElementById('testAdminBtn')?.addEventListener('click', () => alert('Админ-панель в разработке'));
 
         document.getElementById('prevMonthBtn').onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
         document.getElementById('nextMonthBtn').onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
-
         document.querySelectorAll('.menu-tab').forEach(tab => {
             tab.onclick = () => {
                 document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
@@ -682,28 +875,37 @@
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
                 if(tab.dataset.page === 'home') { renderCalendar(); loadChat(); }
+                if(tab.dataset.page === 'admin') { loadNewPlayers(); loadLogs(); }
             };
         });
         document.getElementById('loginTab').onclick = () => {
             document.getElementById('loginPanel').style.display = 'block';
             document.getElementById('registerPanel').style.display = 'none';
-            document.getElementById('loginTab').style.background = 'linear-gradient(135deg,#ffd700,#ffaa00)';
-            document.getElementById('registerTab').style.background = 'none';
-            document.getElementById('registerTab').style.color = '#fff';
         };
         document.getElementById('registerTab').onclick = () => {
             document.getElementById('loginPanel').style.display = 'none';
             document.getElementById('registerPanel').style.display = 'block';
-            document.getElementById('registerTab').style.background = 'linear-gradient(135deg,#ffd700,#ffaa00)';
-            document.getElementById('registerTab').style.color = '#0a0a0a';
-            document.getElementById('loginTab').style.background = 'none';
-            document.getElementById('loginTab').style.color = '#fff';
         };
+        document.querySelectorAll('.tab-auth').forEach(btn => {
+            btn.onclick = () => {
+                document.querySelectorAll('.tab-auth').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('loginPaneAuth').classList.toggle('active', btn.dataset.tab === 'login');
+                document.getElementById('registerPaneAuth').classList.toggle('active', btn.dataset.tab === 'register');
+            };
+        });
 
         auth.onAuthStateChanged(async (user) => {
             document.getElementById('loadingPage').style.display = 'none';
             if(user) {
                 currentUser = user;
+                const siteClosed = await checkSiteClosed();
+                if(siteClosed && user.email !== ADMIN_EMAIL) {
+                    document.getElementById('mainContent').style.display = 'none';
+                    alert(`Сайт закрыт. Причина: ${siteClosed.reason}`);
+                    await auth.signOut();
+                    return;
+                }
                 document.getElementById('mainContent').style.display = 'block';
                 document.getElementById('authModal').style.display = 'none';
                 await loadUserData(user);
