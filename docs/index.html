@@ -139,6 +139,45 @@
             margin-top: 10px;
         }
         .event-name { margin-top: 30px; font-size: 18px; color: #ffd700; }
+        /* ОКНА УВЕДОМЛЕНИЙ */
+        .notify-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.96);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+        .notify-content {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border-radius: 48px;
+            padding: 50px;
+            width: 520px;
+            max-width: 90%;
+            text-align: center;
+            animation: fadeIn 0.3s;
+        }
+        .notify-content i { font-size: 70px; margin-bottom: 20px; }
+        .notify-content h2 { margin-bottom: 20px; font-family: 'Orbitron', monospace; }
+        .notify-content button {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #0a0a0a;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
         /* ЗАКРЫТИЕ САЙТА */
         .closed-modal {
             position: fixed;
@@ -588,7 +627,6 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // АДМИНЫ: список email, у кого есть доступ к админке
         const ADMIN_EMAILS = ["ramonenok@bk.ru", "GrifMCpro@mail.ru"];
         const VERIFIED_SVG = `<svg class="verified-badge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#1e88e5"/><path d="M7 12L10.5 15.5L17 9" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>`;
 
@@ -667,13 +705,242 @@
                 if(donatesSnap.empty) donatesContainer.innerHTML += '<p>Нет покупок</p>';
                 else donatesSnap.forEach(d => donatesContainer.innerHTML += `<span class="donate-badge">${d.data().product}</span> `);
             }
-            // Проверяем, является ли пользователь админом по email
             const isAdmin = ADMIN_EMAILS.includes(user.email);
             if(isAdmin) {
                 document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
-                // Обновляем поле isAdmin в базе
                 await db.collection('users').doc(user.uid).update({ isAdmin: true });
             }
+        }
+
+        // ========== УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЕМ (БАН/РАЗБАН/КИК/ДОНАТЫ) ==========
+        
+        // БАН
+        window.showBanModal = (userId, username, email) => {
+            const modalHtml = `
+                <div class="modal-content" style="max-width:450px;">
+                    <span class="close-modal" onclick="closeTopModal()">&times;</span>
+                    <h3>🔨 Выдать бан: ${username}</h3>
+                    <textarea id="banReasonInput" rows="2" placeholder="Причина бана" class="admin-input"></textarea>
+                    <select id="banDurationInput" class="admin-select">
+                        <option value="1">1 час</option><option value="6">6 часов</option><option value="12">12 часов</option>
+                        <option value="24">1 день</option><option value="72">3 дня</option><option value="168">7 дней</option>
+                        <option value="720">30 дней</option><option value="forever">Навсегда</option>
+                    </select>
+                    <button onclick="executeBan('${userId}', '${username}', '${email}')" class="admin-btn-red">⛔ ЗАБАНИТЬ</button>
+                </div>
+            `;
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = modalHtml;
+            document.body.appendChild(modal);
+            window.closeTopModal = () => modal.remove();
+        };
+        window.executeBan = async (userId, username, email) => {
+            const reason = document.getElementById('banReasonInput').value.trim();
+            const duration = document.getElementById('banDurationInput').value;
+            if(!reason) return alert('Укажите причину');
+            let until = null;
+            let durationText = '';
+            if(duration !== 'forever') {
+                const hours = parseInt(duration);
+                until = new Date(Date.now() + hours * 60 * 60 * 1000);
+                durationText = `${hours} часов`;
+            } else {
+                durationText = 'Навсегда';
+            }
+            await db.collection('bans').add({ userId, username, email, reason, until, durationText, active: true, moderator: currentUser.email, createdAt: new Date(), shown: false });
+            addLog('БАН', email, `${username} - Причина: ${reason}, Срок: ${durationText}`);
+            alert(`✅ Бан выдан ${username}`);
+            document.querySelector('.modal').remove();
+        };
+
+        // РАЗБАН
+        window.showUnbanModal = (email, username) => {
+            const modalHtml = `
+                <div class="modal-content" style="max-width:450px;">
+                    <span class="close-modal" onclick="closeTopModal()">&times;</span>
+                    <h3>🔓 Разбанить: ${username}</h3>
+                    <textarea id="unbanReasonInput" rows="2" placeholder="Причина разбана" class="admin-input"></textarea>
+                    <button onclick="executeUnban('${email}', '${username}')" class="admin-btn-green">✅ РАЗБАНИТЬ</button>
+                </div>
+            `;
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = modalHtml;
+            document.body.appendChild(modal);
+            window.closeTopModal = () => modal.remove();
+        };
+        window.executeUnban = async (email, username) => {
+            const reason = document.getElementById('unbanReasonInput').value.trim();
+            if(!reason) return alert('Укажите причину разбана');
+            const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
+            for(const doc of snap.docs) {
+                await doc.ref.update({ active: false });
+            }
+            await db.collection('unbanLogs').add({ email, username, reason, moderator: currentUser.email, unbanDate: new Date(), shown: false });
+            addLog('РАЗБАН', email, `${username} - Причина: ${reason}`);
+            alert(`✅ Разбан выполнен для ${username}`);
+            document.querySelector('.modal').remove();
+        };
+
+        // КИК
+        window.showKickModal = (userId, username, email) => {
+            const modalHtml = `
+                <div class="modal-content" style="max-width:450px;">
+                    <span class="close-modal" onclick="closeTopModal()">&times;</span>
+                    <h3>👢 Кикнуть: ${username}</h3>
+                    <textarea id="kickReasonInput" rows="2" placeholder="Причина кика" class="admin-input"></textarea>
+                    <button onclick="executeKick('${userId}', '${username}', '${email}')" class="admin-btn-red">👢 КИКНУТЬ</button>
+                </div>
+            `;
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = modalHtml;
+            document.body.appendChild(modal);
+            window.closeTopModal = () => modal.remove();
+        };
+        window.executeKick = async (userId, username, email) => {
+            const reason = document.getElementById('kickReasonInput').value.trim();
+            if(!reason) return alert('Укажите причину');
+            await db.collection('kicks').add({ userId, username, email, reason, active: true, moderator: currentUser.email, createdAt: new Date(), shown: false });
+            addLog('КИК', email, `${username} - Причина: ${reason}`);
+            alert(`✅ Кик выдан ${username}`);
+            document.querySelector('.modal').remove();
+        };
+
+        // ВЫДАЧА ДОНАТА
+        window.showGiveDonateModal = (userId, username) => {
+            const modalHtml = `
+                <div class="modal-content" style="max-width:450px;">
+                    <span class="close-modal" onclick="closeTopModal()">&times;</span>
+                    <h3>🎁 Выдать донат: ${username}</h3>
+                    <input type="text" id="donateNameInput" placeholder="Название доната" class="admin-input">
+                    <textarea id="donateReasonInput" rows="2" placeholder="Причина выдачи" class="admin-input"></textarea>
+                    <button onclick="executeGiveDonate('${userId}', '${username}')" class="admin-btn-blue">🎁 ВЫДАТЬ</button>
+                </div>
+            `;
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = modalHtml;
+            document.body.appendChild(modal);
+            window.closeTopModal = () => modal.remove();
+        };
+        window.executeGiveDonate = async (userId, username) => {
+            const donateName = document.getElementById('donateNameInput').value.trim();
+            const reason = document.getElementById('donateReasonInput').value.trim();
+            if(!donateName || !reason) return alert('Заполните все поля');
+            await db.collection('donates').add({ userId, username, product: donateName, price: 0, serverNick: username, date: new Date(), givenBy: currentUser.email, reason, shown: false });
+            addLog('ВЫДАЧА ДОНАТА', username, `${donateName} - Причина: ${reason}`);
+            alert(`✅ Донат ${donateName} выдан ${username}`);
+            document.querySelector('.modal').remove();
+        };
+
+        // СНЯТИЕ ДОНАТА
+        window.showRemoveDonateModal = (userId, username) => {
+            const modalHtml = `
+                <div class="modal-content" style="max-width:450px;">
+                    <span class="close-modal" onclick="closeTopModal()">&times;</span>
+                    <h3>🗑️ Снять донат: ${username}</h3>
+                    <textarea id="removeDonateReasonInput" rows="2" placeholder="Причина снятия" class="admin-input"></textarea>
+                    <button onclick="executeRemoveDonate('${userId}', '${username}')" class="admin-btn-red">🗑️ СНЯТЬ</button>
+                </div>
+            `;
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            modal.style.display = 'flex';
+            modal.innerHTML = modalHtml;
+            document.body.appendChild(modal);
+            window.closeTopModal = () => modal.remove();
+        };
+        window.executeRemoveDonate = async (userId, username) => {
+            const reason = document.getElementById('removeDonateReasonInput').value.trim();
+            if(!reason) return alert('Укажите причину');
+            const snap = await db.collection('donates').where('userId', '==', userId).get();
+            for(const doc of snap.docs) await doc.ref.delete();
+            await db.collection('donateRemoveLogs').add({ userId, username, reason, moderator: currentUser.email, date: new Date(), shown: false });
+            addLog('СНЯТИЕ ДОНАТА', username, `Причина: ${reason}`);
+            alert(`✅ Донаты сняты с ${username}`);
+            document.querySelector('.modal').remove();
+        };
+
+        // ОТОБРАЖЕНИЕ КНОПОК В СПИСКЕ ИГРОКОВ
+        window.showUserActions = (userId, username, email) => {
+            const content = `
+                <h4>👤 ${username}</h4>
+                <button onclick="showBanModal('${userId}', '${username}', '${email}')" style="background:#ef4444; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">🔨 БАН</button>
+                <button onclick="showUnbanModal('${email}', '${username}')" style="background:#22c55e; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">🔓 РАЗБАН</button>
+                <button onclick="showKickModal('${userId}', '${username}', '${email}')" style="background:#ff6600; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">👢 КИК</button>
+                <button onclick="showGiveDonateModal('${userId}', '${username}')" style="background:#3b82f6; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">🎁 ВЫДАТЬ ДОНАТ</button>
+                <button onclick="showRemoveDonateModal('${userId}', '${username}')" style="background:#8b5cf6; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">🗑️ СНЯТЬ ДОНАТ</button>
+            `;
+            document.getElementById('userActionsContent').innerHTML = content;
+            document.getElementById('userActionsModal').style.display = 'flex';
+        };
+
+        // ========== ПРОВЕРКА УВЕДОМЛЕНИЙ ПРИ ВХОДЕ ==========
+        async function checkNotifications(userId, email) {
+            // Проверка бана
+            const banSnap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
+            for(const doc of banSnap.docs) {
+                const ban = doc.data();
+                if(ban.until && ban.until.toDate() < new Date()) {
+                    await doc.ref.update({ active: false });
+                    continue;
+                }
+                if(!ban.shown) {
+                    await doc.ref.update({ shown: true });
+                    showNotifyWindow('⛔ АККАУНТ ЗАБЛОКИРОВАН', `Причина: ${ban.reason}\nСрок: ${ban.durationText || 'Навсегда'}\nМодератор: ${ban.moderator}`, '#ef4444');
+                    return true;
+                }
+            }
+            
+            // Проверка разбана
+            const unbanSnap = await db.collection('unbanLogs').where('email', '==', email).where('shown', '==', false).get();
+            for(const doc of unbanSnap.docs) {
+                await doc.ref.update({ shown: true });
+                showNotifyWindow('✅ АККАУНТ РАЗБАНИРОВАН', `Причина разбана: ${doc.data().reason}\nМодератор: ${doc.data().moderator}`, '#22c55e');
+            }
+            
+            // Проверка кика
+            const kickSnap = await db.collection('kicks').where('email', '==', email).where('active', '==', true).get();
+            for(const doc of kickSnap.docs) {
+                await doc.ref.update({ active: false });
+                showNotifyWindow('👢 ВАС КИКНУЛИ', `Причина: ${doc.data().reason}\nМодератор: ${doc.data().moderator}`, '#ff6600');
+            }
+            
+            // Проверка выдачи доната
+            const giveDonateSnap = await db.collection('donates').where('userId', '==', userId).where('shown', '==', false).get();
+            for(const doc of giveDonateSnap.docs) {
+                await doc.ref.update({ shown: true });
+                showNotifyWindow('🎁 ВАМ ВЫДАН ДОНАТ', `Донат: ${doc.data().product}\nПричина: ${doc.data().reason || 'Нет'}\nВыдал: ${doc.data().givenBy}`, '#3b82f6');
+            }
+            
+            // Проверка снятия доната
+            const removeDonateSnap = await db.collection('donateRemoveLogs').where('userId', '==', userId).where('shown', '==', false).get();
+            for(const doc of removeDonateSnap.docs) {
+                await doc.ref.update({ shown: true });
+                showNotifyWindow('🗑️ У ВАС СНЯТ ДОНАТ', `Причина снятия: ${doc.data().reason}\nМодератор: ${doc.data().moderator}`, '#8b5cf6');
+            }
+            return false;
+        }
+
+        function showNotifyWindow(title, message, color) {
+            const modalHtml = `
+                <div class="notify-content">
+                    <i class="fas ${title.includes('ЗАБЛОКИРОВАН') ? 'fa-ban' : title.includes('РАЗБАНИРОВАН') ? 'fa-check-circle' : title.includes('КИКНУЛИ') ? 'fa-boot' : title.includes('ДОНАТ') ? 'fa-gift' : 'fa-info-circle'}" style="color:${color};"></i>
+                    <h2 style="color:${color};">${title}</h2>
+                    <div style="text-align:left; background:rgba(0,0,0,0.5); border-radius:20px; padding:15px; margin:15px 0;">${message.replace(/\n/g, '<br>')}</div>
+                    <button onclick="this.closest('.notify-modal').remove()">ПОНЯТНО</button>
+                </div>
+            `;
+            const modal = document.createElement('div');
+            modal.className = 'notify-modal';
+            modal.innerHTML = modalHtml;
+            document.body.appendChild(modal);
         }
 
         async function loadNewPlayers() {
@@ -686,54 +953,6 @@
                 return `<div class="player-card"><span><strong>${p.username}</strong> (${p.email})<br>💰 ${p.balance || 0} ₽</span><div class="player-actions"><button onclick="showUserActions('${doc.id}', '${p.username}', '${p.email}')" style="background:#3b82f6;">⚡ ДЕЙСТВИЯ</button></div></div>`;
             }).join('');
         }
-
-        window.showUserActions = (userId, username, email) => {
-            const content = `
-                <h4>👤 ${username}</h4>
-                <button onclick="actionBan('${userId}', '${username}', '${email}')" style="background:#ef4444; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">🔨 БАН</button>
-                <button onclick="actionUnban('${email}')" style="background:#22c55e; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">🔓 РАЗБАН</button>
-                <button onclick="actionKick('${userId}', '${username}', '${email}')" style="background:#ff6600; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">👢 КИК</button>
-                <button onclick="actionGiveDonate('${userId}', '${username}')" style="background:#3b82f6; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">🎁 ВЫДАТЬ ДОНАТ</button>
-                <button onclick="actionRemoveDonate('${userId}', '${username}')" style="background:#8b5cf6; border:none; padding:8px 16px; border-radius:30px; margin:5px; cursor:pointer;">🗑️ СНЯТЬ ДОНАТ</button>
-            `;
-            document.getElementById('userActionsContent').innerHTML = content;
-            document.getElementById('userActionsModal').style.display = 'flex';
-        };
-
-        window.actionBan = async (userId, username, email) => {
-            await db.collection('bans').add({ userId, username, email, reason: "Нарушение", active: true, moderator: currentUser?.email || "Система", createdAt: new Date() });
-            addLog('БАН', email, username);
-            alert(`Бан выдан ${username}`);
-            document.getElementById('userActionsModal').style.display = 'none';
-        };
-        window.actionUnban = async (email) => {
-            const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
-            snap.forEach(doc => doc.ref.update({ active: false }));
-            addLog('РАЗБАН', email, '');
-            alert('Разбан выполнен');
-            document.getElementById('userActionsModal').style.display = 'none';
-        };
-        window.actionKick = async (userId, username, email) => {
-            await db.collection('kicks').add({ userId, username, email, reason: "Кик от админа", active: true, moderator: currentUser?.email || "Система", createdAt: new Date() });
-            addLog('КИК', email, username);
-            alert(`Кик выдан ${username}`);
-            document.getElementById('userActionsModal').style.display = 'none';
-        };
-        window.actionGiveDonate = async (userId, username) => {
-            const donateName = prompt("Название доната:");
-            if(!donateName) return;
-            await db.collection('donates').add({ userId, username, product: donateName, price: 0, serverNick: username, date: new Date(), givenBy: currentUser?.email });
-            addLog('ВЫДАЧА ДОНАТА', username, donateName);
-            alert(`Донат ${donateName} выдан`);
-            document.getElementById('userActionsModal').style.display = 'none';
-        };
-        window.actionRemoveDonate = async (userId, username) => {
-            const snap = await db.collection('donates').where('userId', '==', userId).get();
-            snap.forEach(doc => doc.ref.delete());
-            addLog('СНЯТИЕ ДОНАТА', username, 'Все донаты');
-            alert(`Донаты сняты`);
-            document.getElementById('userActionsModal').style.display = 'none';
-        };
 
         async function loadLogs() {
             const snap = await db.collection('logs').orderBy('timestamp', 'desc').limit(30).get();
@@ -968,6 +1187,7 @@
                 await loadUserData(user);
                 renderShop();
                 loadTimer();
+                await checkNotifications(user.uid, user.email);
             } else {
                 document.getElementById('mainContent').style.display = 'none';
                 document.getElementById('authModal').style.display = 'flex';
