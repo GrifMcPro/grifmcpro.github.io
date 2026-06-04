@@ -89,29 +89,59 @@
             background-clip: text;
             color: transparent;
         }
-        /* ДОСКА ОБЪЯВЛЕНИЙ */
-        .board-container {
+        /* ТАЙМЕР */
+        .timer-container {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 60vh;
             margin: 20px 0;
         }
-        .board {
+        .timer-card {
             background: rgba(0,0,0,0.5);
             backdrop-filter: blur(16px);
-            border-radius: 48px;
-            padding: 60px 40px;
+            border-radius: 60px;
+            padding: 60px 50px;
             text-align: center;
-            max-width: 900px;
+            max-width: 800px;
             width: 100%;
-            transition: all 0.3s;
+            border: 2px solid rgba(255,215,0,0.5);
         }
-        .board-message {
-            font-size: 32px;
-            font-weight: bold;
+        .timer-title {
             font-family: 'Orbitron', monospace;
-            line-height: 1.4;
+            font-size: 28px;
+            color: #ffd700;
+            margin-bottom: 30px;
+        }
+        .countdown-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .countdown-block {
+            background: rgba(0,0,0,0.6);
+            border-radius: 30px;
+            padding: 25px 35px;
+            min-width: 120px;
+            text-align: center;
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+        .countdown-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 48px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        .countdown-label {
+            font-size: 14px;
+            color: #ccc;
+            margin-top: 10px;
+        }
+        .event-name {
+            margin-top: 30px;
+            font-size: 20px;
+            color: #ffd700;
         }
         /* ЗАКРЫТИЕ САЙТА */
         .closed-modal {
@@ -181,7 +211,6 @@
             font-weight: bold;
             cursor: pointer;
             width: 100%;
-            transition: 0.2s;
         }
         /* ПРОФИЛЬ */
         .profile-card {
@@ -213,7 +242,6 @@
             border-radius: 40px;
             cursor: pointer;
             font-size: 13px;
-            transition: 0.2s;
         }
         .donate-badge {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
@@ -224,7 +252,7 @@
             display: inline-block;
             margin: 4px;
         }
-        /* АДМИН-ПАНЕЛЬ - КРАСИВЫЕ КНОПКИ */
+        /* АДМИН-ПАНЕЛЬ */
         .admin-section {
             background: rgba(0,0,0,0.4);
             border-radius: 32px;
@@ -257,9 +285,7 @@
             color: white;
             margin-left: 8px;
             font-size: 12px;
-            transition: 0.2s;
         }
-        .player-actions button:hover { transform: scale(1.02); opacity: 0.9; }
         .log-item {
             background: rgba(0,0,0,0.3);
             border-radius: 12px;
@@ -268,7 +294,6 @@
             font-size: 13px;
             border-left: 3px solid #ffd700;
         }
-        /* КРАСИВЫЕ КНОПКИ ДЛЯ АДМИНКИ */
         .admin-btn-gold {
             background: linear-gradient(135deg, #ffd700, #ffaa00);
             color: #0a0a0a;
@@ -278,7 +303,6 @@
             font-weight: bold;
             cursor: pointer;
             width: 100%;
-            transition: 0.2s;
             margin-bottom: 10px;
         }
         .admin-btn-blue {
@@ -290,7 +314,6 @@
             font-weight: bold;
             cursor: pointer;
             width: 100%;
-            transition: 0.2s;
             margin-bottom: 10px;
         }
         .admin-btn-purple {
@@ -302,7 +325,6 @@
             font-weight: bold;
             cursor: pointer;
             width: 100%;
-            transition: 0.2s;
             margin-bottom: 10px;
         }
         .admin-btn-red {
@@ -314,7 +336,6 @@
             font-weight: bold;
             cursor: pointer;
             width: 100%;
-            transition: 0.2s;
         }
         .admin-btn-green {
             background: linear-gradient(135deg, #22c55e, #16a34a);
@@ -325,7 +346,6 @@
             font-weight: bold;
             cursor: pointer;
             width: 100%;
-            transition: 0.2s;
         }
         .admin-input {
             width: 100%;
@@ -405,14 +425,6 @@
             vertical-align: middle;
             display: inline-block;
         }
-        .rgb-text { animation: rgbText 2s infinite; }
-        @keyframes rgbText {
-            0% { text-shadow: 0 0 5px #ff0000; color: #ff0000; }
-            25% { text-shadow: 0 0 5px #00ff00; color: #00ff00; }
-            50% { text-shadow: 0 0 5px #0000ff; color: #0000ff; }
-            75% { text-shadow: 0 0 5px #ff00ff; color: #ff00ff; }
-            100% { text-shadow: 0 0 5px #ff0000; color: #ff0000; }
-        }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .loading-spinner {
             width: 60px;
@@ -423,11 +435,12 @@
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
         }
+        .admin-only { display: none; }
         @media (max-width: 768px) {
             .section-title { font-size: 28px; }
             .shop-grid { grid-template-columns: 1fr; }
-            .board-message { font-size: 22px; }
-            .board { padding: 30px 20px; }
+            .countdown-number { font-size: 28px; }
+            .countdown-block { padding: 15px 20px; min-width: 80px; }
         }
     </style>
 </head>
@@ -467,19 +480,29 @@
             <div class="menu-tab admin-only" data-page="admin" style="display:none;">👑 АДМИН</div>
         </div>
 
+        <!-- ГЛАВНАЯ С ТАЙМЕРОМ -->
         <div id="homePage" class="page active">
-            <div class="board-container">
-                <div class="board" id="board">
-                    <div class="board-message" id="boardMessage">Добро пожаловать в GrifLauncher!</div>
+            <div class="timer-container">
+                <div class="timer-card">
+                    <div class="timer-title" id="eventTitle">ДО ОТКРЫТИЯ НОВОГО СЕЗОНА</div>
+                    <div class="countdown-wrapper">
+                        <div class="countdown-block"><div class="countdown-number" id="days">0</div><div class="countdown-label">Дней</div></div>
+                        <div class="countdown-block"><div class="countdown-number" id="hours">0</div><div class="countdown-label">Часов</div></div>
+                        <div class="countdown-block"><div class="countdown-number" id="minutes">0</div><div class="countdown-label">Минут</div></div>
+                        <div class="countdown-block"><div class="countdown-number" id="seconds">0</div><div class="countdown-label">Секунд</div></div>
+                    </div>
+                    <div class="event-name" id="eventDesc"></div>
                 </div>
             </div>
         </div>
 
+        <!-- МАГАЗИН -->
         <div id="shopPage" class="page">
             <div class="section-title">✨ ПРИВИЛЕГИИ</div>
             <div class="shop-grid" id="shopGrid"></div>
         </div>
 
+        <!-- ПРОФИЛЬ -->
         <div id="profilePage" class="page">
             <div class="section-title">👤 МОЙ ПРОФИЛЬ</div>
             <div class="profile-card">
@@ -494,6 +517,7 @@
             </div>
         </div>
 
+        <!-- АДМИН-ПАНЕЛЬ -->
         <div id="adminPage" class="page">
             <div class="section-title">👑 АДМИН-ПАНЕЛЬ</div>
             <div id="adminLoginPanel" style="max-width:400px; margin:0 auto;">
@@ -510,20 +534,16 @@
                     <div class="players-list" id="newPlayersList"></div>
                 </div>
 
-                <!-- НАСТРОЙКА ДОСКИ -->
+                <!-- НАСТРОЙКА ТАЙМЕРА -->
                 <div class="admin-section">
-                    <h3>🎨 НАСТРОЙКА ДОСКИ</h3>
-                    <textarea id="boardText" rows="3" placeholder="Текст объявления" class="admin-input"></textarea>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-                        <div><label>🔲 Цвет рамки</label><input type="color" id="boardBorderColor" value="#ffd700" class="admin-input" style="padding:5px;"></div>
-                        <div><label>📝 Цвет текста</label><input type="color" id="boardTextColor" value="#ffd700" class="admin-input" style="padding:5px;"></div>
-                        <div><label>✨ Стиль текста</label><select id="boardTextStyle" class="admin-select"><option value="normal">Обычный</option><option value="rgb">RGB переливание</option></select></div>
-                        <div><label>📏 Радиус рамки (px)</label><input type="number" id="boardBorderRadius" value="48" min="0" max="100" class="admin-input"></div>
-                    </div>
-                    <button id="updateBoardBtn" class="admin-btn-gold">📌 ОБНОВИТЬ ДОСКУ</button>
+                    <h3>⏰ НАСТРОЙКА ТАЙМЕРА</h3>
+                    <input type="text" id="timerEventName" placeholder="Название события" class="admin-input" value="ДО ОТКРЫТИЯ НОВОГО СЕЗОНА">
+                    <textarea id="timerEventDesc" rows="2" placeholder="Описание события" class="admin-input">⚡ Грандиозное обновление! Новые карты, привилегии и ивенты</textarea>
+                    <input type="datetime-local" id="timerTargetDate" class="admin-input">
+                    <button id="updateTimerBtn" class="admin-btn-gold">📌 ОБНОВИТЬ ТАЙМЕР</button>
                 </div>
 
-                <!-- ВЫДАЧА ВЕРИФИКАЦИИ (ГАЛОЧКИ) -->
+                <!-- ВЫДАЧА ВЕРИФИКАЦИИ -->
                 <div class="admin-section">
                     <h3>✅ ВЫДАЧА ГАЛОЧКИ ВЕРИФИКАЦИИ</h3>
                     <input type="text" id="verifyNick" placeholder="Никнейм игрока" class="admin-input">
@@ -543,19 +563,14 @@
                     <button id="globalGiveBtn" class="admin-btn-purple">🌍 ВЫДАТЬ ВСЕМ</button>
                 </div>
 
-                <!-- УПРАВЛЕНИЕ САЙТОМ (ЗАКРЫТИЕ/ОТКРЫТИЕ) -->
+                <!-- УПРАВЛЕНИЕ САЙТОМ -->
                 <div class="admin-section">
                     <h3>🔒 УПРАВЛЕНИЕ САЙТОМ</h3>
                     <textarea id="closeReason" rows="2" placeholder="Причина закрытия" class="admin-input"></textarea>
                     <select id="closeDuration" class="admin-select">
-                        <option value="1">1 час</option>
-                        <option value="3">3 часа</option>
-                        <option value="6">6 часов</option>
-                        <option value="12">12 часов</option>
-                        <option value="24">1 день</option>
-                        <option value="72">3 дня</option>
-                        <option value="168">7 дней</option>
-                        <option value="720">30 дней</option>
+                        <option value="1">1 час</option><option value="3">3 часа</option><option value="6">6 часов</option>
+                        <option value="12">12 часов</option><option value="24">1 день</option><option value="72">3 дня</option>
+                        <option value="168">7 дней</option><option value="720">30 дней</option>
                     </select>
                     <button id="closeSiteBtn" class="admin-btn-red">🔒 ЗАКРЫТЬ САЙТ</button>
                     <button id="openSiteBtn" class="admin-btn-green" style="margin-top:10px;">🔓 ОТКРЫТЬ САЙТ</button>
@@ -570,6 +585,7 @@
         </div>
     </div>
 
+    <!-- МОДАЛКИ -->
     <div id="authModal" class="modal" style="display: flex;">
         <div class="auth-modal">
             <h2>GRIF LAUNCHER</h2>
@@ -624,6 +640,7 @@
         let currentUser = null;
         let currentBalance = 0;
         let currentProduct = null;
+        let timerInterval = null;
 
         async function addLog(action, target, details) {
             await db.collection('logs').add({ action, moderator: currentUser?.email, target, details, timestamp: new Date() });
@@ -722,6 +739,7 @@
             document.getElementById('userActionsContent').innerHTML = content;
             document.getElementById('userActionsModal').style.display = 'flex';
         };
+
         window.actionBan = async (userId, username, email) => {
             await db.collection('bans').add({ userId, username, email, reason: "Нарушение", until: null, active: true, moderator: "Система", createdAt: new Date() });
             addLog('БАН', email, username);
@@ -762,45 +780,60 @@
             document.getElementById('logsList').innerHTML = snap.docs.map(doc => `<div class="log-item">[${new Date(doc.data().timestamp?.toDate()).toLocaleString()}] <strong>${doc.data().action}</strong> → ${doc.data().target}<br>${doc.data().details || ''}</div>`).join('');
         }
 
-        async function loadBoardSettings() {
-            const doc = await db.collection('settings').doc('board').get();
+        // ТАЙМЕР
+        async function loadTimerSettings() {
+            const doc = await db.collection('settings').doc('timer').get();
             if(doc.exists) {
                 const data = doc.data();
-                document.getElementById('boardText').value = data.text || '';
-                document.getElementById('boardBorderColor').value = data.borderColor || '#ffd700';
-                document.getElementById('boardTextColor').value = data.textColor || '#ffd700';
-                document.getElementById('boardTextStyle').value = data.textStyle || 'normal';
-                document.getElementById('boardBorderRadius').value = data.borderRadius || 48;
-                applyBoardSettings(data);
+                document.getElementById('timerEventName').value = data.eventName || 'ДО ОТКРЫТИЯ НОВОГО СЕЗОНА';
+                document.getElementById('timerEventDesc').value = data.eventDesc || '';
+                if(data.targetDate) {
+                    const date = data.targetDate.toDate ? data.targetDate.toDate() : new Date(data.targetDate);
+                    document.getElementById('timerTargetDate').value = date.toISOString().slice(0, 16);
+                }
+                startTimer(data.targetDate?.toDate ? data.targetDate.toDate() : new Date(data.targetDate), data.eventName, data.eventDesc);
+            } else {
+                const defaultDate = new Date();
+                defaultDate.setDate(defaultDate.getDate() + 7);
+                document.getElementById('timerTargetDate').value = defaultDate.toISOString().slice(0, 16);
+                startTimer(defaultDate, 'ДО ОТКРЫТИЯ НОВОГО СЕЗОНА', '');
             }
         }
 
-        function applyBoardSettings(settings) {
-            const board = document.getElementById('board');
-            const message = document.getElementById('boardMessage');
-            board.style.border = `2px solid ${settings.borderColor || '#ffd700'}`;
-            board.style.borderRadius = `${settings.borderRadius || 48}px`;
-            message.style.color = settings.textColor || '#ffd700';
-            message.innerText = settings.text || 'Добро пожаловать в GrifLauncher!';
-            if(settings.textStyle === 'rgb') message.classList.add('rgb-text');
-            else message.classList.remove('rgb-text');
+        function startTimer(targetDate, eventName, eventDesc) {
+            if(timerInterval) clearInterval(timerInterval);
+            document.getElementById('eventTitle').innerText = eventName || 'ДО ОТКРЫТИЯ НОВОГО СЕЗОНА';
+            document.getElementById('eventDesc').innerHTML = eventDesc || '';
+            timerInterval = setInterval(() => {
+                const now = new Date().getTime();
+                const target = new Date(targetDate).getTime();
+                const diff = target - now;
+                if(diff <= 0) {
+                    document.getElementById('days').innerText = '0';
+                    document.getElementById('hours').innerText = '0';
+                    document.getElementById('minutes').innerText = '0';
+                    document.getElementById('seconds').innerText = '0';
+                    if(timerInterval) clearInterval(timerInterval);
+                } else {
+                    document.getElementById('days').innerText = Math.floor(diff / (1000*60*60*24));
+                    document.getElementById('hours').innerText = Math.floor((diff % (86400000)) / 3600000);
+                    document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
+                    document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
+                }
+            }, 1000);
         }
 
-        document.getElementById('updateBoardBtn').onclick = async () => {
-            const settings = {
-                text: document.getElementById('boardText').value,
-                borderColor: document.getElementById('boardBorderColor').value,
-                textColor: document.getElementById('boardTextColor').value,
-                textStyle: document.getElementById('boardTextStyle').value,
-                borderRadius: parseInt(document.getElementById('boardBorderRadius').value)
-            };
-            await db.collection('settings').doc('board').set(settings);
-            applyBoardSettings(settings);
-            addLog('НАСТРОЙКА ДОСКИ', 'Админ', 'Изменено объявление');
-            alert('Доска обновлена!');
+        document.getElementById('updateTimerBtn').onclick = async () => {
+            const eventName = document.getElementById('timerEventName').value;
+            const eventDesc = document.getElementById('timerEventDesc').value;
+            const targetDate = new Date(document.getElementById('timerTargetDate').value);
+            if(isNaN(targetDate.getTime())) return alert('Выберите корректную дату');
+            await db.collection('settings').doc('timer').set({ eventName, eventDesc, targetDate });
+            addLog('НАСТРОЙКА ТАЙМЕРА', 'Админ', `Событие: ${eventName}, дата: ${targetDate.toLocaleString()}`);
+            startTimer(targetDate, eventName, eventDesc);
+            alert('Таймер обновлён!');
         };
 
-        // ВЫДАЧА ГАЛОЧКИ ВЕРИФИКАЦИИ
         document.getElementById('giveVerifyBtn').onclick = async () => {
             const nick = document.getElementById('verifyNick').value.trim();
             const email = document.getElementById('verifyEmail').value.trim();
@@ -810,13 +843,9 @@
             if(nick) userQuery = await db.collection('users').where('username', '==', nick).get();
             else userQuery = await db.collection('users').where('email', '==', email).get();
             if(userQuery.empty) return alert('Пользователь не найден');
-            const userDoc = userQuery.docs[0];
-            await userDoc.ref.update({ isVerified: true });
-            addLog('ВЫДАЧА ВЕРИФИКАЦИИ', userDoc.data().username, `Причина: ${reason}`);
-            alert(`Галочка выдана ${userDoc.data().username}`);
-            document.getElementById('verifyNick').value = '';
-            document.getElementById('verifyEmail').value = '';
-            document.getElementById('verifyReason').value = '';
+            await userQuery.docs[0].ref.update({ isVerified: true });
+            addLog('ВЫДАЧА ВЕРИФИКАЦИИ', userQuery.docs[0].data().username, `Причина: ${reason}`);
+            alert(`Галочка выдана ${userQuery.docs[0].data().username}`);
         };
 
         document.getElementById('removeVerifyBtn').onclick = async () => {
@@ -827,10 +856,9 @@
             if(nick) userQuery = await db.collection('users').where('username', '==', nick).get();
             else userQuery = await db.collection('users').where('email', '==', email).get();
             if(userQuery.empty) return alert('Пользователь не найден');
-            const userDoc = userQuery.docs[0];
-            await userDoc.ref.update({ isVerified: false });
-            addLog('СНЯТИЕ ВЕРИФИКАЦИИ', userDoc.data().username, '');
-            alert(`Галочка снята с ${userDoc.data().username}`);
+            await userQuery.docs[0].ref.update({ isVerified: false });
+            addLog('СНЯТИЕ ВЕРИФИКАЦИИ', userQuery.docs[0].data().username, '');
+            alert(`Галочка снята`);
         };
 
         document.getElementById('giveCoinsBtn').onclick = async () => {
@@ -844,9 +872,6 @@
             await snap.docs[0].ref.update({ balance: newBalance });
             addLog('ВЫДАЧА МОНЕТ', nick, `${amount} ₽. Причина: ${reason}`);
             alert(`Выдано ${amount} ₽ ${nick}`);
-            document.getElementById('giveNick').value = '';
-            document.getElementById('giveAmount').value = '';
-            document.getElementById('giveReason').value = '';
         };
 
         document.getElementById('globalGiveBtn').onclick = async () => {
@@ -876,8 +901,8 @@
             const hours = parseInt(document.getElementById('closeDuration').value);
             if(!reason) return alert('Укажите причину');
             const until = new Date(Date.now() + hours * 60 * 60 * 1000);
-            await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until, moderator: "Система", closedAt: new Date() });
-            addLog('ЗАКРЫТИЕ САЙТА', 'Система', `Причина: ${reason}, до ${until.toLocaleString()}`);
+            await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until, moderator: "Система" });
+            addLog('ЗАКРЫТИЕ САЙТА', 'Система', `Причина: ${reason}`);
             alert(`Сайт закрыт до ${until.toLocaleString()}`);
         };
         document.getElementById('openSiteBtn').onclick = async () => {
@@ -945,7 +970,7 @@
                 document.getElementById('adminPanelContent').style.display = 'block';
                 loadNewPlayers();
                 loadLogs();
-                loadBoardSettings();
+                loadTimerSettings();
             } else alert('❌ Неверный ключ!');
         });
 
@@ -956,7 +981,7 @@
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
                 if(tab.dataset.page === 'profile' && currentUser) loadUserData(currentUser);
-                if(tab.dataset.page === 'admin' && currentUser) { loadNewPlayers(); loadLogs(); loadBoardSettings(); }
+                if(tab.dataset.page === 'admin' && currentUser) { loadNewPlayers(); loadLogs(); loadTimerSettings(); }
             };
         });
         document.querySelectorAll('.tab-auth').forEach(btn => {
@@ -985,7 +1010,7 @@
                 document.getElementById('authModal').style.display = 'none';
                 await loadUserData(user);
                 renderShop();
-                loadBoardSettings();
+                loadTimerSettings();
                 const doc = await db.collection('users').doc(user.uid).get();
                 if(!doc.exists || doc.data().isAdmin === undefined) await db.collection('users').doc(user.uid).update({ isAdmin: (user.email === ADMIN_EMAIL) });
             } else {
