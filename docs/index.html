@@ -90,7 +90,7 @@
 
         .page { display: none; animation: fadeIn 0.3s ease; }
         .page.active { display: block; }
-        #homePage, #shopPage, #chatsPage, #profilePage, #adminPage, #chatWithCreatorPage { padding-top: 75px; min-height: 100vh; }
+        #homePage, #shopPage, #chatsPage, #profilePage, #adminPage, #chatWithCreatorPage, #messagesPage { padding-top: 75px; min-height: 100vh; }
 
         /* ГЛАВНАЯ - ТАЙМЕР */
         .hero-timer { min-height: calc(100vh - 75px); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: radial-gradient(ellipse at center, rgba(255,215,0,0.08) 0%, transparent 70%); }
@@ -167,7 +167,7 @@
         .badge-void { background: #000000; border: 1px solid #333; box-shadow: 0 0 5px #333; }
         .badge-divine { background: linear-gradient(135deg, #eab308, #ca8a04); box-shadow: 0 0 5px #eab308; }
 
-        /* ЧАТЫ */
+        /* ЧАТЫ - ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ (В РАЗРАБОТКЕ) */
         .chats-section { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .chat-top-switcher { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
         .chat-top-btn { background: rgba(25,25,40,0.8); backdrop-filter: blur(8px); border: 1px solid var(--border-color); padding: 8px 24px; border-radius: 40px; cursor: pointer; transition: var(--transition); font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; color: var(--text-primary); opacity: 0.5; cursor: not-allowed; }
@@ -178,7 +178,36 @@
         .development-message h2 { font-size: 28px; margin-bottom: 10px; }
         .development-message p { color: var(--text-muted); }
 
-        /* ЧАТ С СОЗДАТЕЛЕМ */
+        /* ========== СООБЩЕНИЯ (ДЛЯ RAMONENOK@BK.RU) ========== */
+        .messages-container { max-width: 1200px; margin: 0 auto; padding: 20px; display: flex; gap: 25px; background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); min-height: 500px; }
+        .users-sidebar { width: 300px; border-right: 1px solid var(--border-color); padding-right: 20px; overflow-y: auto; max-height: 500px; }
+        .user-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); margin-bottom: 8px; background: rgba(0,0,0,0.3); }
+        .user-item:hover, .user-item.active { background: rgba(255,215,0,0.2); transform: translateX(5px); }
+        .user-avatar { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .user-avatar i { font-size: 18px; color: var(--bg-dark); }
+        .user-info { flex: 1; }
+        .user-name { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+        .user-preview { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+        .unread-count { background: var(--danger); color: white; border-radius: 50%; min-width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; padding: 0 5px; }
+        .messages-chat-area { flex: 1; display: flex; flex-direction: column; height: 500px; }
+        .messages-chat-header { padding-bottom: 12px; border-bottom: 1px solid var(--border-color); margin-bottom: 15px; display: flex; align-items: center; gap: 12px; }
+        .messages-chat-header .user-avatar { width: 45px; height: 45px; }
+        .messages-chat-header .user-avatar i { font-size: 20px; }
+        .messages-list { flex: 1; overflow-y: auto; padding-right: 10px; display: flex; flex-direction: column; gap: 12px; }
+        .message-item { display: flex; gap: 10px; max-width: 80%; }
+        .message-item.outgoing { align-self: flex-end; flex-direction: row-reverse; }
+        .message-item.incoming { align-self: flex-start; }
+        .message-avatar-small { width: 30px; height: 30px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .message-avatar-small i { font-size: 14px; color: var(--bg-dark); }
+        .message-bubble-small { background: var(--bg-surface-solid); padding: 8px 12px; border-radius: 14px; border-top-left-radius: 4px; font-size: 12px; }
+        .message-item.outgoing .message-bubble-small { background: var(--accent-glow); border: 1px solid var(--border-light); border-top-right-radius: 4px; border-top-left-radius: 14px; }
+        .message-time-small { font-size: 9px; color: var(--text-muted); margin-top: 3px; }
+        .message-input-area { padding-top: 15px; border-top: 1px solid var(--border-color); display: flex; gap: 10px; margin-top: 15px; }
+        .message-input-area input { flex: 1; padding: 10px 14px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); border-radius: 40px; color: var(--text-primary); outline: none; font-size: 12px; }
+        .message-input-area input:focus { border-color: var(--accent); }
+        .send-msg-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 8px 20px; border-radius: 40px; font-weight: 600; cursor: pointer; font-size: 12px; color: var(--bg-dark); }
+
+        /* ЧАТ С СОЗДАТЕЛЕМ (ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ) */
         .chat-with-creator-container { max-width: 800px; margin: 0 auto; padding: 20px; }
         .chat-with-creator-header { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); padding: 25px; text-align: center; border: 1px solid var(--border-light); margin-bottom: 20px; }
         .creator-info { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
@@ -263,7 +292,6 @@
             .countdown-block { padding: 15px 20px; min-width: 80px; }
             .timer-title { font-size: 28px; }
             .product-card { margin: 0 10px; }
-            .chat-top-btn { padding: 6px 16px; font-size: 12px; }
             .admin-section { padding: 10px; }
             .admin-block { padding: 12px; }
             .site-header { padding: 6px 15px; }
@@ -273,17 +301,9 @@
             .balance span { font-size: 14px; }
             .balance i { font-size: 12px; }
             .menu-tab { padding: 4px 16px; font-size: 11px; }
-            #homePage, #shopPage, #chatsPage, #profilePage, #adminPage, #chatWithCreatorPage { padding-top: 70px; }
-        }
-
-        @media (max-width: 480px) {
-            .countdown-number { font-size: 24px; }
-            .countdown-block { padding: 10px 15px; min-width: 65px; }
-            .timer-title { font-size: 22px; margin-bottom: 25px; }
-            .product-name { font-size: 18px; }
-            .price { font-size: 22px; }
-            .profile-name { font-size: 20px; }
-            .chat-top-btn { padding: 4px 12px; font-size: 10px; }
+            #homePage, #shopPage, #chatsPage, #profilePage, #adminPage, #chatWithCreatorPage, #messagesPage { padding-top: 70px; }
+            .messages-container { flex-direction: column; }
+            .users-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 15px; max-height: 200px; }
         }
     </style>
 </head>
@@ -313,14 +333,7 @@
                 <button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Выйти</button>
             </div>
         </div>
-        <div class="menu-tabs">
-            <div class="menu-tab active" data-page="home">🏠 Главная</div>
-            <div class="menu-tab" data-page="shop">🛒 Магазин</div>
-            <div class="menu-tab" data-page="chats">💬 Чаты</div>
-            <div class="menu-tab chat-with-creator-btn" data-page="chatWithCreator">💬 Чат с создателем</div>
-            <div class="menu-tab" data-page="profile">👤 Профиль</div>
-            <div class="menu-tab admin-only" data-page="admin">👑 Админ</div>
-        </div>
+        <div class="menu-tabs" id="dynamicMenuTabs"></div>
     </div>
 
     <!-- ГЛАВНАЯ -->
@@ -353,7 +366,7 @@
         </div>
     </div>
 
-    <!-- ЧАТЫ - В РАЗРАБОТКЕ -->
+    <!-- ЧАТЫ - ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ (В РАЗРАБОТКЕ) -->
     <div id="chatsPage" class="page">
         <div class="chats-section">
             <div class="chat-top-switcher">
@@ -371,7 +384,25 @@
         </div>
     </div>
 
-    <!-- ЧАТ С СОЗДАТЕЛЕМ -->
+    <!-- СООБЩЕНИЯ (ДЛЯ RAMONENOK@BK.RU) -->
+    <div id="messagesPage" class="page">
+        <div class="messages-container">
+            <div class="users-sidebar" id="messagesUsersList"></div>
+            <div class="messages-chat-area" id="messagesChatArea">
+                <div class="messages-chat-header" id="messagesChatHeader" style="display: none;">
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
+                    <div><strong id="chatWithUserName"></strong><div id="chatWithUserStatus" class="user-preview"></div></div>
+                </div>
+                <div class="messages-list" id="messagesList"></div>
+                <div class="message-input-area" id="messageInputArea" style="display: none;">
+                    <input type="text" id="replyMessageInput" placeholder="Написать ответ...">
+                    <button class="send-msg-btn" id="sendReplyBtn">Отправить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЧАТ С СОЗДАТЕЛЕМ (ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ) -->
     <div id="chatWithCreatorPage" class="page">
         <div class="chat-with-creator-container">
             <div class="chat-with-creator-header">
@@ -430,79 +461,16 @@
                     </div>
                 </div>
                 <div id="adminPanelContent" style="display: none;">
-                    <div class="admin-block">
-                        <h3><i class="fas fa-users"></i> ПОСЛЕДНИЕ 5 МИНУТ (АККАУНТЫ)</h3>
-                        <div class="players-list" id="recentUsersList"></div>
-                    </div>
-                    <div class="admin-block">
-                        <h3><i class="fas fa-envelope"></i> МОИ СООБЩЕНИЯ (GrifMcPro)</h3>
-                        <textarea id="broadcastMsg" rows="3" placeholder="Текст сообщения для всех пользователей..." class="admin-input"></textarea>
-                        <button id="sendBroadcastBtn" class="admin-btn-pink">📢 ОТПРАВИТЬ ВСЕМ</button>
-                    </div>
-                    <div class="admin-block">
-                        <h3><i class="fas fa-user-shield"></i> МОДЕРАТОРЫ</h3>
-                        <input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input">
-                        <button id="addModeratorBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button>
-                        <div id="moderatorsList" class="players-list"></div>
-                    </div>
-                    <div class="admin-block">
-                        <h3><i class="fas fa-dice-d6"></i> ПРОКРУТКИ КОЛЕСА</h3>
-                        <input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input">
-                        <button id="giveSpinBtn" class="admin-btn-blue">🎫 ВЫДАТЬ</button>
-                    </div>
-                    <div class="admin-block">
-                        <h3><i class="fas fa-tags"></i> ГАЛОЧКИ (20 ВИДОВ)</h3>
-                        <input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input">
-                        <select id="badgeType" class="admin-select">
-                            <option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option>
-                            <option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option>
-                            <option value="diamond">💎 Алмазная</option><option value="star">⭐ Звездная</option><option value="game">🎮 Игровая</option>
-                            <option value="fire">🔥 Огненная</option><option value="mythic">🔮 Мифическая</option><option value="cosmic">🌌 Космическая</option>
-                            <option value="ice">❄️ Ледяная</option><option value="shadow">🌑 Теневая</option><option value="light">✨ Светлая</option>
-                            <option value="dark">🖤 Тёмная</option><option value="nature">🌿 Природная</option><option value="blood">🩸 Кровавая</option>
-                            <option value="void">🌀 Пустота</option><option value="divine">⚜️ Божественная</option>
-                        </select>
-                        <button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button>
-                        <button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button>
-                    </div>
-                    <div class="admin-block">
-                        <h3><i class="fas fa-coins"></i> МОНЕТЫ</h3>
-                        <input type="text" id="giveNick" placeholder="Никнейм" class="admin-input">
-                        <input type="number" id="giveAmount" placeholder="Сумма" class="admin-input">
-                        <button id="giveCoinsBtn" class="admin-btn-blue">💸 ВЫДАТЬ</button>
-                        <button id="globalGiveBtn" class="admin-btn-purple">🌍 ВСЕМ</button>
-                    </div>
-                    <div class="admin-block">
-                        <h3><i class="fas fa-gavel"></i> БАН / РАЗБАН</h3>
-                        <input type="text" id="banNick" placeholder="Никнейм" class="admin-input">
-                        <input type="text" id="moderatorName" placeholder="Ник модератора" class="admin-input">
-                        <textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea>
-                        <select id="banDuration" class="admin-select">
-                            <option value="1">1 час</option><option value="6">6 часов</option><option value="12">12 часов</option>
-                            <option value="24">1 день</option><option value="168">7 дней</option><option value="720">30 дней</option>
-                            <option value="forever">Навсегда</option>
-                        </select>
-                        <button id="banUserBtn" class="admin-btn-red">⛔ ЗАБАНИТЬ</button>
-                        <button id="unbanUserBtn" class="admin-btn-green">🔓 РАЗБАНИТЬ</button>
-                    </div>
-                    <div class="admin-block">
-                        <h3><i class="fas fa-lock"></i> УПРАВЛЕНИЕ САЙТОМ</h3>
-                        <textarea id="closeReason" rows="2" placeholder="Причина" class="admin-input"></textarea>
-                        <select id="closeDuration" class="admin-select">
-                            <option value="1">1 час</option><option value="6">6 часов</option>
-                            <option value="24">1 день</option><option value="168">7 дней</option>
-                        </select>
-                        <button id="closeSiteBtn" class="admin-btn-red">🔒 ЗАКРЫТЬ САЙТ</button>
-                        <button id="openSiteBtn" class="admin-btn-green">🔓 ОТКРЫТЬ САЙТ</button>
-                    </div>
-                    <div class="admin-block">
-                        <h3><i class="fas fa-chart-line"></i> СТАТИСТИКА САЙТА</h3>
-                        <div id="statsList" class="players-list"></div>
-                    </div>
-                    <div class="admin-block">
-                        <h3><i class="fas fa-history"></i> ЛОГИ ДЕЙСТВИЙ</h3>
-                        <div id="logsList" style="max-height: 180px; overflow-y: auto;"></div>
-                    </div>
+                    <div class="admin-block"><h3><i class="fas fa-users"></i> ПОСЛЕДНИЕ 5 МИНУТ (АККАУНТЫ)</h3><div class="players-list" id="recentUsersList"></div></div>
+                    <div class="admin-block"><h3><i class="fas fa-envelope"></i> МОИ СООБЩЕНИЯ (GrifMcPro)</h3><textarea id="broadcastMsg" rows="3" placeholder="Текст сообщения для всех пользователей..." class="admin-input"></textarea><button id="sendBroadcastBtn" class="admin-btn-pink">📢 ОТПРАВИТЬ ВСЕМ</button></div>
+                    <div class="admin-block"><h3><i class="fas fa-user-shield"></i> МОДЕРАТОРЫ</h3><input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input"><button id="addModeratorBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button><div id="moderatorsList" class="players-list"></div></div>
+                    <div class="admin-block"><h3><i class="fas fa-dice-d6"></i> ПРОКРУТКИ КОЛЕСА</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">🎫 ВЫДАТЬ</button></div>
+                    <div class="admin-block"><h3><i class="fas fa-tags"></i> ГАЛОЧКИ (20 ВИДОВ)</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option><option value="diamond">💎 Алмазная</option><option value="star">⭐ Звездная</option><option value="game">🎮 Игровая</option><option value="fire">🔥 Огненная</option><option value="mythic">🔮 Мифическая</option><option value="cosmic">🌌 Космическая</option><option value="ice">❄️ Ледяная</option><option value="shadow">🌑 Теневая</option><option value="light">✨ Светлая</option><option value="dark">🖤 Тёмная</option><option value="nature">🌿 Природная</option><option value="blood">🩸 Кровавая</option><option value="void">🌀 Пустота</option><option value="divine">⚜️ Божественная</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div>
+                    <div class="admin-block"><h3><i class="fas fa-coins"></i> МОНЕТЫ</h3><input type="text" id="giveNick" placeholder="Никнейм" class="admin-input"><input type="number" id="giveAmount" placeholder="Сумма" class="admin-input"><button id="giveCoinsBtn" class="admin-btn-blue">💸 ВЫДАТЬ</button><button id="globalGiveBtn" class="admin-btn-purple">🌍 ВСЕМ</button></div>
+                    <div class="admin-block"><h3><i class="fas fa-gavel"></i> БАН / РАЗБАН</h3><input type="text" id="banNick" placeholder="Никнейм" class="admin-input"><input type="text" id="moderatorName" placeholder="Ник модератора" class="admin-input"><textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="banDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="12">12 часов</option><option value="24">1 день</option><option value="168">7 дней</option><option value="720">30 дней</option><option value="forever">Навсегда</option></select><button id="banUserBtn" class="admin-btn-red">⛔ ЗАБАНИТЬ</button><button id="unbanUserBtn" class="admin-btn-green">🔓 РАЗБАНИТЬ</button></div>
+                    <div class="admin-block"><h3><i class="fas fa-lock"></i> УПРАВЛЕНИЕ САЙТОМ</h3><textarea id="closeReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="closeDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="24">1 день</option><option value="168">7 дней</option></select><button id="closeSiteBtn" class="admin-btn-red">🔒 ЗАКРЫТЬ САЙТ</button><button id="openSiteBtn" class="admin-btn-green">🔓 ОТКРЫТЬ САЙТ</button></div>
+                    <div class="admin-block"><h3><i class="fas fa-chart-line"></i> СТАТИСТИКА САЙТА</h3><div id="statsList" class="players-list"></div></div>
+                    <div class="admin-block"><h3><i class="fas fa-history"></i> ЛОГИ ДЕЙСТВИЙ</h3><div id="logsList" style="max-height: 180px; overflow-y: auto;"></div></div>
                 </div>
             </div>
         </div>
@@ -609,6 +577,9 @@
             let banUnsub = null;
             let creatorMessagesUnsub = null;
             let creatorBadge = "gold";
+            let currentChatWithUser = null;
+            let messagesUnsub = null;
+            let allMessagesUsers = [];
 
             function showToast(message, isError = false) {
                 const toast = document.createElement('div');
@@ -630,7 +601,145 @@
                 return `<span class="badge-icon badge-${type}"><i class="fas ${icon}"></i></span>`;
             }
 
-            // ЗАГРУЗКА СООБЩЕНИЙ С СОЗДАТЕЛЕМ
+            // ДИНАМИЧЕСКОЕ МЕНЮ
+            function renderMenu() {
+                const container = document.getElementById('dynamicMenuTabs');
+                if (!container) return;
+                const isAdmin = currentUser?.email === MAIN_ADMIN_EMAIL;
+                container.innerHTML = `
+                    <div class="menu-tab active" data-page="home">🏠 Главная</div>
+                    <div class="menu-tab" data-page="shop">🛒 Магазин</div>
+                    ${isAdmin ? '<div class="menu-tab" data-page="messages">💬 Сообщения</div>' : '<div class="menu-tab" data-page="chats">💬 Чаты</div>'}
+                    <div class="menu-tab chat-with-creator-btn" data-page="chatWithCreator">💬 Чат с создателем</div>
+                    <div class="menu-tab" data-page="profile">👤 Профиль</div>
+                    <div class="menu-tab admin-only" data-page="admin">👑 Админ</div>
+                `;
+                document.querySelectorAll('.menu-tab').forEach(tab => {
+                    tab.onclick = () => {
+                        document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                        document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
+                        if (tab.dataset.page === 'admin') { loadRecentUsers(); loadModerators(); loadStats(); loadLogs(); }
+                        if (tab.dataset.page === 'chatWithCreator') { loadCreatorMessages(); loadCreatorBadge(); }
+                        if (tab.dataset.page === 'messages' && isAdmin) { loadMessagesUsers(); }
+                    };
+                });
+            }
+
+            // ЗАГРУЗКА ПОЛЬЗОВАТЕЛЕЙ, КОТОРЫЕ ПИСАЛИ АДМИНУ
+            async function loadMessagesUsers() {
+                if (!currentUser || currentUser.email !== MAIN_ADMIN_EMAIL) return;
+                const usersSnapshot = await db.collection('users').get();
+                const usersWithMessages = [];
+                for (const userDoc of usersSnapshot.docs) {
+                    if (userDoc.data().email === MAIN_ADMIN_EMAIL) continue;
+                    const messagesRef = db.collection('chats').doc('creator').collection('messages');
+                    const q = await messagesRef.where('to', '==', userDoc.id).where('from', '!=', 'system').get();
+                    if (!q.empty) {
+                        const userData = userDoc.data();
+                        usersWithMessages.push({
+                            uid: userDoc.id,
+                            username: userData.username,
+                            email: userData.email,
+                            badge: userData.badge,
+                            unread: q.docs.filter(d => !d.data().read).length
+                        });
+                    }
+                }
+                allMessagesUsers = usersWithMessages;
+                renderUsersList();
+            }
+
+            function renderUsersList() {
+                const container = document.getElementById('messagesUsersList');
+                if (!container) return;
+                container.innerHTML = allMessagesUsers.map(user => `
+                    <div class="user-item" data-userid="${user.uid}" data-username="${user.username}" data-badge="${user.badge || ''}">
+                        <div class="user-avatar"><i class="fas fa-user"></i></div>
+                        <div class="user-info">
+                            <div class="user-name">${user.username}${getBadgeHtml(user.badge)}</div>
+                            <div class="user-preview">${user.unread > 0 ? `📩 ${user.unread} новых` : 'Нет новых'}</div>
+                        </div>
+                        ${user.unread > 0 ? `<div class="unread-count">${user.unread}</div>` : ''}
+                    </div>
+                `).join('');
+                document.querySelectorAll('.user-item').forEach(el => {
+                    el.onclick = () => {
+                        document.querySelectorAll('.user-item').forEach(e => e.classList.remove('active'));
+                        el.classList.add('active');
+                        const userId = el.dataset.userid;
+                        const username = el.dataset.username;
+                        const badge = el.dataset.badge;
+                        currentChatWithUser = userId;
+                        document.getElementById('chatWithUserName').innerHTML = username + getBadgeHtml(badge);
+                        document.getElementById('chatWithUserStatus').innerHTML = 'Пользователь';
+                        document.getElementById('messagesChatHeader').style.display = 'flex';
+                        document.getElementById('messageInputArea').style.display = 'flex';
+                        loadMessagesWithUser(userId);
+                    };
+                });
+            }
+
+            async function loadMessagesWithUser(userId) {
+                if (messagesUnsub) messagesUnsub();
+                const messagesRef = db.collection('chats').doc('creator').collection('messages').where('from', 'in', [userId, currentUser.uid]).orderBy('timestamp');
+                messagesUnsub = messagesRef.onSnapshot((snapshot) => {
+                    const container = document.getElementById('messagesList');
+                    if (!container) return;
+                    container.innerHTML = '';
+                    snapshot.forEach(doc => {
+                        const msg = doc.data();
+                        if (msg.from === 'system') return;
+                        const isOutgoing = msg.from === currentUser.uid;
+                        const senderName = msg.from === currentUser.uid ? 'Вы' : (msg.fromName || 'Пользователь');
+                        container.innerHTML += `
+                            <div class="message-item ${isOutgoing ? 'outgoing' : 'incoming'}">
+                                <div class="message-avatar-small"><i class="fas ${isOutgoing ? 'fa-user' : 'fa-user-circle'}"></i></div>
+                                <div>
+                                    <div class="message-bubble-small">${msg.text}</div>
+                                    <div class="message-time-small">${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
+                                </div>
+                            </div>
+                        `;
+                        if (!msg.read && !isOutgoing) {
+                            doc.ref.update({ read: true });
+                        }
+                    });
+                    container.scrollTop = container.scrollHeight;
+                });
+                // Сброс непрочитанных
+                const unreadSnapshot = await db.collection('chats').doc('creator').collection('messages').where('from', '==', userId).where('read', '==', false).get();
+                for (const doc of unreadSnapshot.docs) {
+                    await doc.ref.update({ read: true });
+                }
+                loadMessagesUsers();
+            }
+
+            async function sendReplyToUser(text) {
+                if (!text.trim() || !currentChatWithUser) return;
+                await db.collection('chats').doc('creator').collection('messages').add({
+                    from: currentUser.uid,
+                    fromName: currentUser.displayName,
+                    to: currentChatWithUser,
+                    text: text,
+                    timestamp: new Date(),
+                    read: false
+                });
+                // Также отправляем в чат с создателем для этого пользователя
+                await db.collection('chats').doc('creator').collection('messages').add({
+                    from: currentUser.uid,
+                    fromName: currentUser.displayName,
+                    to: "creator",
+                    text: text,
+                    timestamp: new Date(),
+                    read: false
+                });
+                document.getElementById('replyMessageInput').value = '';
+                loadMessagesWithUser(currentChatWithUser);
+            }
+
+            // ЧАТ С СОЗДАТЕЛЕМ (ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ)
             async function loadCreatorMessages() {
                 if (creatorMessagesUnsub) creatorMessagesUnsub();
                 if (!currentUser) return;
@@ -642,12 +751,13 @@
                     snapshot.forEach(doc => {
                         const msg = doc.data();
                         const isOutgoing = msg.from === currentUser.uid;
+                        const isAdmin = msg.fromName === 'GrifMcPro' || msg.from === 'system';
                         container.innerHTML += `
                             <div class="message ${isOutgoing ? 'outgoing' : 'incoming'}">
-                                <div class="message-avatar-small"><i class="fas ${isOutgoing ? 'fa-user' : 'fa-crown'}"></i></div>
+                                <div class="message-avatar-small"><i class="fas ${isOutgoing ? 'fa-user' : (isAdmin ? 'fa-crown' : 'fa-user-circle')}"></i></div>
                                 <div class="message-content">
                                     <div class="message-header">
-                                        <span class="message-name">${msg.fromName}${isOutgoing ? '' : getBadgeHtml(creatorBadge)}</span>
+                                        <span class="message-name">${msg.fromName}${isAdmin ? getBadgeHtml(creatorBadge) : ''}</span>
                                         <span class="message-time">${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</span>
                                     </div>
                                     <div class="message-bubble">${msg.text}</div>
@@ -668,18 +778,10 @@
                     text: text,
                     timestamp: new Date()
                 });
-                await db.collection('chats').doc('creator').collection('messages').add({
-                    from: currentUser.uid,
-                    fromName: currentUser.displayName,
-                    to: currentUser.uid,
-                    text: text,
-                    timestamp: new Date()
-                });
                 document.getElementById('creatorMessageInput').value = '';
                 showToast('✅ Сообщение отправлено создателю!', false);
             }
 
-            // ПОЛУЧЕНИЕ ГАЛОЧКИ СОЗДАТЕЛЯ
             async function loadCreatorBadge() {
                 const snap = await db.collection('users').where('email', '==', MAIN_ADMIN_EMAIL).get();
                 if (!snap.empty) {
@@ -688,7 +790,6 @@
                 }
             }
 
-            // КРАСИВОЕ ОКНО БАНА
             function showBanModal(reason, untilDate, moderator) {
                 document.getElementById('banReasonText').innerText = reason;
                 document.getElementById('banUntilText').innerText = untilDate || 'Навсегда';
@@ -698,7 +799,6 @@
                 document.getElementById('authModal').style.display = 'none';
             }
 
-            // ОТПРАВКА НА ПОЧТУ
             async function sendEmail(to, subject, message, productName, price, serverNick, siteNick) {
                 const formData = new FormData();
                 formData.append('access_key', WEB3FORMS_ACCESS_KEY);
@@ -713,7 +813,6 @@
                 } catch (error) { return false; }
             }
 
-            // БАН С КРАСИВЫМ ОКНОМ
             async function banUser(userId, username, email, reason, duration, moderator) {
                 const until = duration === 'forever' ? null : new Date(Date.now() + parseInt(duration) * 60 * 60 * 1000);
                 await db.collection('bans').add({ userId, username, email, reason, until, active: true, moderator, createdAt: new Date() });
@@ -730,7 +829,6 @@
                 showToast(`✅ ${username} разбанен`, false);
             }
 
-            // ЗАКРЫТИЕ САЙТА (НЕ ПЕРЕЗАГРУЖАЕТ АДМИНА)
             async function closeSite(reason, hours) {
                 const until = new Date(Date.now() + hours * 60 * 60 * 1000);
                 await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until });
@@ -747,7 +845,6 @@
                 setTimeout(() => { window.location.reload(); }, 1500);
             }
 
-            // ПРОВЕРКА ПРИ ЗАГРУЗКЕ
             async function checkBanOnLoad(user) {
                 if (!user) return false;
                 const snap = await db.collection('bans').where('userId', '==', user.uid).where('active', '==', true).get();
@@ -780,7 +877,6 @@
                 return false;
             }
 
-            // ЛИСТЕНЕРЫ
             function listenSiteStatus() {
                 if (siteStatusUnsub) siteStatusUnsub();
                 siteStatusUnsub = db.collection('settings').doc('siteStatus').onSnapshot(async (doc) => {
@@ -814,7 +910,6 @@
                 });
             }
 
-            // РАССЫЛКА
             async function sendBroadcast(message) {
                 const users = await db.collection('users').get();
                 let successCount = 0;
@@ -828,7 +923,6 @@
                 showToast(`✅ Рассылка отправлена ${successCount} пользователям!`, false);
             }
 
-            // ЗАГРУЗКА ДАННЫХ ПОЛЬЗОВАТЕЛЯ
             async function loadUserData(user) {
                 if (!user) return;
                 const doc = await db.collection('users').doc(user.uid).get();
@@ -862,7 +956,6 @@
                 if (hasAdminAccess) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
             }
 
-            // АДМИН ФУНКЦИИ (ОПТИМИЗИРОВАНЫ ДЛЯ БЫСТРОТЫ)
             async function loadModerators() {
                 const doc = await db.collection('settings').doc('moderators').get();
                 moderatorsList = doc.exists ? doc.data().list || [] : [];
@@ -911,7 +1004,6 @@
             async function loadLogs() { const snap = await db.collection('logs').orderBy('timestamp', 'desc').limit(30).get(); const container = document.getElementById('logsList'); if (container) container.innerHTML = snap.docs.map(doc => `<div class="log-item">[${new Date(doc.data().timestamp?.toDate()).toLocaleString()}] <strong>${doc.data().action}</strong> → ${doc.data().target}<br>${doc.data().details || ''}</div>`).join(''); }
             function addLog(action, target, details) { if (currentUser) db.collection('logs').add({ action, moderator: currentUser.displayName, target, details, timestamp: new Date() }); }
 
-            // ТАЙМЕР
             let timerInterval = null;
             function startTimer(targetDate) {
                 if (timerInterval) clearInterval(timerInterval);
@@ -922,7 +1014,6 @@
                 }, 1000);
             }
 
-            // МАГАЗИН
             const privileges = [
                 { name: "Премиум", price: 1000, icon: "fa-crown" }, { name: "Креатив", price: 2500, icon: "fa-palette" },
                 { name: "Модер", price: 5000, icon: "fa-shield-alt" }, { name: "Лорд", price: 10000, icon: "fa-crown" },
@@ -963,7 +1054,6 @@
                 return true;
             }
 
-            // БАЛАНС ОБНОВЛЯЕТСЯ КАЖДЫЕ 3 СЕКУНДЫ
             function startBalanceUpdater() {
                 if (balanceInterval) clearInterval(balanceInterval);
                 balanceInterval = setInterval(async () => {
@@ -974,7 +1064,6 @@
                 }, 3000);
             }
 
-            // НАВЕШИВАНИЕ КНОПОК
             function bindButtons() {
                 document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); } catch (e) { showToast(e.message, true); } };
                 document.getElementById('doRegisterBtn').onclick = async () => {
@@ -1014,26 +1103,8 @@
                 document.getElementById('sendCreatorMsgBtn').onclick = () => sendCreatorMessage(document.getElementById('creatorMessageInput').value);
                 document.getElementById('moderatorsBtn').onclick = () => document.getElementById('moderatorsPanel').style.display = 'block';
                 document.getElementById('closeModeratorsBtn').onclick = () => document.getElementById('moderatorsPanel').style.display = 'none';
+                document.getElementById('sendReplyBtn').onclick = () => sendReplyToUser(document.getElementById('replyMessageInput').value);
                 document.getElementById('banModalExitBtn').onclick = () => { document.getElementById('banModalOverlay').style.display = 'none'; auth.signOut(); };
-                document.querySelectorAll('.menu-tab').forEach(tab => {
-                    tab.onclick = () => {
-                        document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
-                        tab.classList.add('active');
-                        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                        document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
-                        if (tab.dataset.page === 'admin') { loadRecentUsers(); loadModerators(); loadStats(); loadLogs(); }
-                        if (tab.dataset.page === 'chatWithCreator') { loadCreatorMessages(); loadCreatorBadge(); }
-                    };
-                });
-                document.querySelectorAll('.tab-auth').forEach(btn => {
-                    btn.onclick = () => {
-                        document.querySelectorAll('.tab-auth').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        const isLogin = btn.dataset.tab === 'login';
-                        document.getElementById('loginPaneAuth').classList.toggle('active', isLogin);
-                        document.getElementById('registerPaneAuth').classList.toggle('active', !isLogin);
-                    };
-                });
             }
 
             auth.onAuthStateChanged(async (user) => {
@@ -1046,6 +1117,7 @@
                     if (isClosed) { auth.signOut(); return; }
                     await loadUserData(user);
                     renderShop();
+                    renderMenu();
                     let def = new Date(); def.setDate(def.getDate() + 7);
                     startTimer(def);
                     listenSiteStatus();
@@ -1053,6 +1125,12 @@
                     startBalanceUpdater();
                     bindButtons();
                     document.getElementById('authModal').style.display = 'none';
+                    if (user.email === MAIN_ADMIN_EMAIL) {
+                        loadMessagesUsers();
+                    } else {
+                        loadCreatorMessages();
+                        loadCreatorBadge();
+                    }
                 } else {
                     if (balanceInterval) clearInterval(balanceInterval);
                     if (siteStatusUnsub) siteStatusUnsub();
