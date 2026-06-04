@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrifLauncher | Магазин и профиль</title>
+    <title>GrifLauncher | Премиум магазин</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -60,112 +60,95 @@
         }
         .menu-tabs {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             flex-wrap: wrap;
         }
         .menu-tab {
             background: rgba(0,0,0,0.5);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255,215,0,0.3);
-            padding: 14px 38px;
+            padding: 12px 32px;
             border-radius: 60px;
             cursor: pointer;
             font-family: 'Orbitron', monospace;
             font-weight: bold;
             transition: 0.3s;
         }
-        .menu-tab.active {
-            background: linear-gradient(135deg, #ffd700, #ffaa00);
-            color: #0a0a0a;
-        }
+        .menu-tab.active { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #0a0a0a; }
         .page { display: none; }
         .page.active { display: block; }
         .section-title {
             font-family: 'Orbitron', monospace;
-            font-size: 38px;
+            font-size: 36px;
             text-align: center;
-            margin: 30px 0 45px;
+            margin: 25px 0 35px;
             background: linear-gradient(135deg, #fff, #ffd700);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-        /* ГЛАВНАЯ - НОВОСТИ, ТОВАРЫ, ИГРОКИ */
-        .news-grid, .shop-grid-home {
+        /* ДОСКА ОБЪЯВЛЕНИЙ */
+        .board {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(16px);
+            border-radius: 48px;
+            padding: 50px 30px;
+            text-align: center;
+            margin: 30px 0;
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+        .board-message {
+            font-size: 32px;
+            font-weight: bold;
+            font-family: 'Orbitron', monospace;
+            line-height: 1.4;
+        }
+        /* МАГАЗИН - СЕТКА С КАТЕГОРИЯМИ */
+        .shop-categories {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .category-btn {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,215,0,0.3);
+            padding: 10px 25px;
+            border-radius: 60px;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            transition: 0.2s;
+        }
+        .category-btn.active, .category-btn:hover { background: #ffd700; color: #0a0a0a; border-color: #ffd700; }
+        .shop-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
-            margin-bottom: 60px;
-        }
-        .news-card, .product-card-home {
-            background: rgba(0,0,0,0.55);
-            backdrop-filter: blur(12px);
-            border-radius: 28px;
-            overflow: hidden;
-            transition: 0.3s;
-            border: 1px solid rgba(255,215,0,0.2);
-        }
-        .news-card:hover, .product-card-home:hover { transform: translateY(-5px); border-color: #ffd700; }
-        .news-img { width: 100%; height: 180px; object-fit: cover; }
-        .news-content { padding: 20px; }
-        .news-date { color: #ffd700; font-size: 12px; margin-bottom: 8px; }
-        .news-title { font-size: 18px; font-weight: bold; margin-bottom: 8px; }
-        .product-card-home { text-align: center; padding: 25px; }
-        .product-card-home i { font-size: 48px; color: #ffd700; margin-bottom: 15px; }
-        .online-players {
-            text-align: center;
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(10px);
-            border-radius: 40px;
-            padding: 30px;
-            margin: 50px 0;
-        }
-        .online-count { font-size: 36px; font-weight: bold; color: #ffd700; font-family: 'Orbitron', monospace; }
-        .avatars-grid {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 25px;
-        }
-        .avatar {
-            position: relative;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            border: 2px solid #ffd700;
-            overflow: hidden;
-        }
-        .avatar img { width: 100%; height: 100%; object-fit: cover; }
-        /* МАГАЗИН */
-        .shop-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 35px;
         }
         .product-card {
             background: rgba(0,0,0,0.55);
             backdrop-filter: blur(12px);
-            border-radius: 32px;
-            padding: 30px;
+            border-radius: 28px;
+            padding: 25px;
             text-align: center;
-            transition: 0.4s;
+            transition: 0.3s;
             border: 1px solid rgba(255,215,0,0.2);
         }
-        .product-card:hover { transform: translateY(-8px); border-color: #ffd700; }
-        .product-icon i { font-size: 60px; color: #ffd700; margin-bottom: 18px; }
-        .product-name { font-size: 26px; font-weight: bold; }
-        .product-name-en { font-size: 14px; color: #ffd700; opacity: 0.8; margin-bottom: 12px; }
-        .price { font-size: 34px; font-weight: bold; color: #ffd700; margin: 18px 0; }
-        .product-card ul { list-style: none; margin: 20px 0; text-align: left; }
-        .product-card li { padding: 10px 0; display: flex; align-items: center; gap: 12px; }
+        .product-card:hover { transform: translateY(-6px); border-color: #ffd700; }
+        .product-icon i { font-size: 52px; color: #ffd700; margin-bottom: 15px; }
+        .product-name { font-size: 24px; font-weight: bold; }
+        .product-name-en { font-size: 13px; color: #ffd700; opacity: 0.8; margin-bottom: 10px; }
+        .price { font-size: 30px; font-weight: bold; color: #ffd700; margin: 15px 0; }
+        .product-card ul { list-style: none; margin: 15px 0; text-align: left; }
+        .product-card li { padding: 8px 0; display: flex; align-items: center; gap: 10px; }
         .buy-btn {
             background: linear-gradient(135deg, #ffd700, #ffaa00);
             color: #0a0a0a;
             border: none;
-            padding: 14px;
+            padding: 12px;
             border-radius: 60px;
             font-weight: bold;
             cursor: pointer;
@@ -176,47 +159,109 @@
             background: rgba(0,0,0,0.55);
             backdrop-filter: blur(12px);
             border-radius: 40px;
-            padding: 45px;
+            padding: 40px;
             text-align: center;
-            max-width: 580px;
+            max-width: 700px;
             margin: 0 auto;
         }
         .profile-avatar {
-            width: 130px;
-            height: 130px;
+            width: 120px;
+            height: 120px;
             background: linear-gradient(135deg, #ffd700, #ffaa00);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 25px;
+            margin: 0 auto 20px;
         }
-        .profile-avatar i { font-size: 65px; color: #0a0a0a; }
+        .profile-avatar i { font-size: 60px; color: #0a0a0a; }
         .profile-info { text-align: left; margin: 25px 0; }
-        .profile-info p { padding: 12px 0; border-bottom: 1px solid rgba(255,215,0,0.2); display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
-        .profile-info i { width: 30px; color: #ffd700; }
+        .profile-info p { padding: 10px 0; border-bottom: 1px solid rgba(255,215,0,0.2); display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+        .profile-info i { width: 28px; color: #ffd700; }
         .edit-btn, .change-password-btn {
             background: #3b82f6;
             color: white;
             border: none;
-            padding: 8px 20px;
+            padding: 7px 18px;
             border-radius: 40px;
             cursor: pointer;
-            margin-left: 15px;
-            font-size: 14px;
+            font-size: 13px;
+        }
+        .donate-badge {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 12px;
+            display: inline-block;
+            margin: 4px;
+            cursor: default;
         }
         .admin-btn {
             background: linear-gradient(135deg, #ef4444, #dc2626);
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 14px 28px;
             border-radius: 60px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
             margin-top: 25px;
         }
-        /* МОДАЛКИ */
+        /* АДМИН-СТРАНИЦА */
+        .admin-section {
+            background: rgba(0,0,0,0.4);
+            border-radius: 32px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .players-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .player-card {
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .player-actions button {
+            background: #3b82f6;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            color: white;
+            margin-left: 8px;
+            font-size: 12px;
+        }
+        .board-item {
+            background: rgba(0,0,0,0.4);
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .log-item {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            border-left: 3px solid #ffd700;
+        }
         .modal {
             display: none;
             position: fixed;
@@ -268,45 +313,23 @@
         .tab-btn.active { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #0a0a0a; }
         .tab-pane { display: none; }
         .tab-pane.active { display: block; }
-        /* ГАЛОЧКА ТЕЛЕГРАМ 1 В 1 */
         .verified-badge {
             width: 20px;
             height: 20px;
             min-width: 20px;
-            max-width: 20px;
             margin-left: 6px;
             vertical-align: middle;
             display: inline-block;
         }
-        .player-item {
-            background: rgba(0,0,0,0.4);
-            border-radius: 16px;
-            padding: 12px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .player-actions button {
-            background: #3b82f6;
-            border: none;
-            padding: 5px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-left: 8px;
-            color: white;
-        }
-        .log-item {
-            background: rgba(0,0,0,0.3);
-            border-radius: 12px;
-            padding: 10px;
-            margin-bottom: 8px;
-            font-size: 13px;
-            border-left: 3px solid #ffd700;
-        }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes rgbText {
+            0% { text-shadow: 0 0 5px #ff0000; color: #ff0000; }
+            25% { text-shadow: 0 0 5px #00ff00; color: #00ff00; }
+            50% { text-shadow: 0 0 5px #0000ff; color: #0000ff; }
+            75% { text-shadow: 0 0 5px #ff00ff; color: #ff00ff; }
+            100% { text-shadow: 0 0 5px #ff0000; color: #ff0000; }
+        }
+        .rgb-text { animation: rgbText 2s infinite; }
         .loading-spinner {
             width: 60px; height: 60px;
             border: 4px solid rgba(255,215,0,0.3);
@@ -317,8 +340,9 @@
         }
         @media (max-width: 768px) {
             .section-title { font-size: 28px; }
-            .shop-grid, .news-grid, .shop-grid-home { grid-template-columns: 1fr; }
+            .shop-grid { grid-template-columns: 1fr; }
             .balance { font-size: 20px; }
+            .board-message { font-size: 22px; }
         }
     </style>
 </head>
@@ -364,27 +388,20 @@
             <div class="menu-tab active" data-page="home">🏠 ГЛАВНАЯ</div>
             <div class="menu-tab" data-page="shop">🛒 МАГАЗИН</div>
             <div class="menu-tab" data-page="profile">👤 ПРОФИЛЬ</div>
+            <div class="menu-tab admin-only" data-page="admin" style="display:none;">👑 АДМИН</div>
         </div>
 
-        <!-- ГЛАВНАЯ -->
+        <!-- ГЛАВНАЯ - ДОСКА ОБЪЯВЛЕНИЙ -->
         <div id="homePage" class="page active">
-            <div class="section-title">📰 ПОСЛЕДНИЕ НОВОСТИ</div>
-            <div class="news-grid" id="newsGrid">
-                <div class="news-card"><img class="news-img" src="https://picsum.photos/id/104/400/200"><div class="news-content"><div class="news-date">01.06.2026</div><div class="news-title">Обновление 2.0</div><div class="news-desc">Новые мини-игры и привилегии</div></div></div>
-                <div class="news-card"><img class="news-img" src="https://picsum.photos/id/106/400/200"><div class="news-content"><div class="news-date">25.05.2026</div><div class="news-title">Новый сезон</div><div class="news-desc">Сезонные награды и эксклюзивные скины</div></div></div>
-                <div class="news-card"><img class="news-img" src="https://picsum.photos/id/107/400/200"><div class="news-content"><div class="news-date">20.05.2026</div><div class="news-title">Розыгрыш VIP</div><div class="news-desc">Участвуй в розыгрыше VIP-статусов</div></div></div>
-            </div>
-            <div class="section-title">⭐ ТОПОВЫЕ ПРИВИЛЕГИИ</div>
-            <div class="shop-grid-home" id="topShopGrid"></div>
-            <div class="online-players">
-                <div class="online-count" id="onlineCount">0 ИГРОКОВ ОНЛАЙН</div>
-                <div class="avatars-grid" id="avatarsGrid"></div>
+            <div class="board">
+                <div class="board-message" id="boardMessage"></div>
             </div>
         </div>
 
-        <!-- МАГАЗИН -->
+        <!-- МАГАЗИН С КАТЕГОРИЯМИ -->
         <div id="shopPage" class="page">
-            <div class="section-title">✨ ВЕСЬ АССОРТИМЕНТ</div>
+            <div class="section-title">✨ ПРИВИЛЕГИИ</div>
+            <div class="shop-categories" id="shopCategories"></div>
             <div class="shop-grid" id="shopGrid"></div>
         </div>
 
@@ -398,9 +415,38 @@
                     <button class="edit-btn" id="editNameBtn">✏️ Сменить имя</button>
                 </div>
                 <div class="profile-info" id="profileInfo"></div>
-                <div class="profile-info" id="donateInfo" style="margin-top: 10px;"></div>
+                <div id="donatesContainer" style="margin: 20px 0; text-align: center;"></div>
                 <button class="change-password-btn" id="changePasswordBtn" style="width:100%; margin-bottom:15px;">🔑 Сменить пароль</button>
                 <button class="admin-btn" id="openAdminBtn">👑 АДМИН ПАНЕЛЬ</button>
+            </div>
+        </div>
+
+        <!-- АДМИН-ПАНЕЛЬ (ОТДЕЛЬНАЯ СТРАНИЦА) -->
+        <div id="adminPage" class="page">
+            <div class="section-title">👑 АДМИН-ПАНЕЛЬ</div>
+            <div id="adminPasswordPanel" style="text-align:center; margin:50px auto; max-width:400px;">
+                <input type="password" id="adminPassword" placeholder="Введите пароль" style="width:100%; padding:14px; border-radius:60px;">
+                <button id="checkAdminPasswordBtn" style="margin-top:15px;">ВОЙТИ</button>
+            </div>
+            <div id="adminPanelContent" style="display:none;">
+                <div class="admin-section">
+                    <h3>📋 НОВЫЕ ИГРОКИ (последние 24ч)</h3>
+                    <div class="players-list" id="newPlayersList"></div>
+                </div>
+                <div class="admin-section">
+                    <h3>📢 УПРАВЛЕНИЕ ДОСКОЙ</h3>
+                    <textarea id="newBoardText" rows="3" placeholder="Текст объявления"></textarea>
+                    <div style="margin:15px 0;">
+                        <select id="boardStyle"><option value="normal">Обычный цвет</option><option value="rgb">RGB переливание</option></select>
+                        <input type="color" id="boardColor" value="#ffd700">
+                    </div>
+                    <button id="updateBoardBtn">📌 ОБНОВИТЬ ДОСКУ</button>
+                    <div id="boardHistory" style="margin-top:20px;"></div>
+                </div>
+                <div class="admin-section">
+                    <h3>📜 ЛОГИ ДЕЙСТВИЙ</h3>
+                    <div id="logsList" style="max-height:300px; overflow-y:auto;"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -409,20 +455,7 @@
     <div id="editNameModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeEditModal">&times;</span><h3>Сменить имя</h3><input type="text" id="newNameInput" placeholder="Новое имя"><button id="saveNameBtn">Сохранить</button></div></div>
     <div id="changePasswordModal" class="modal"><div class="modal-content"><span class="close-modal" id="closePasswordModal">&times;</span><h3>Сменить пароль</h3><input type="password" id="oldPasswordInput" placeholder="Старый пароль"><input type="password"id="newPasswordInput" placeholder="Новый пароль (мин. 6)"><button id="savePasswordBtn">Сохранить</button></div></div>
     <div id="buyModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeBuyModal">&times;</span><h3 id="buyProductName"></h3><p>Цена: <strong id="buyPrice"></strong> ₽</p><input type="text" id="buyNick" placeholder="Ваш ник на сервере"><button id="confirmBuyBtn">ПОДТВЕРДИТЬ ПОКУПКУ</button></div></div>
-
-    <!-- АДМИН МОДАЛКА -->
-    <div id="adminModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeAdminModal">&times;</span>
-            <div id="adminPasswordPanel"><h3>🔐 ВХОД В АДМИН-ПАНЕЛЬ</h3><input type="password" id="adminPassword" placeholder="Введите пароль"><button id="checkAdminPassword">ВОЙТИ</button></div>
-            <div id="adminPanelContent" style="display:none;">
-                <h3>👑 АДМИН-ПАНЕЛЬ</h3>
-                <div style="margin-bottom:20px;"><h4>📋 СПИСОК ИГРОКОВ</h4><div id="playersList"></div></div>
-                <div style="margin-bottom:20px;"><h4>💰 ВЫДАЧА МОНЕТ</h4><input type="text" id="giveNick" placeholder="Никнейм"><input type="number" id="giveAmount" placeholder="Сумма"><textarea id="giveReason" rows="2" placeholder="Причина"></textarea><button id="giveCoinsBtn">💸 ВЫДАТЬ</button><button id="globalGiveBtn">🌍 ВЫДАТЬ ВСЕМ</button></div>
-                <div><h4>📜 ЛОГИ ДЕЙСТВИЙ</h4><div id="logsList" style="max-height:300px; overflow-y:auto;"></div></div>
-            </div>
-        </div>
-    </div>
+    <div id="userActionsModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeUserActionsModal">&times;</span><div id="userActionsContent"></div></div></div>
 
     <script>
         const firebaseConfig = {
@@ -441,23 +474,24 @@
         const VERIFIED_SVG = `<svg class="verified-badge" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#1e88e5"/><path d="M7 12L10.5 15.5L17 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
         const privileges = [
-            { name: "Премиум", nameEn: "[PREM]", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/kit", "/fly"] },
-            { name: "Креатив", nameEn: "[CREAT]", price: 2500, icon: "fa-palette", features: ["Доступ к креативу", "WorldEdit"] },
-            { name: "Модер", nameEn: "[MODER]", price: 5000, icon: "fa-shield-alt", features: ["Мут/кик", "Проверка игроков"] },
-            { name: "Лорд", nameEn: "[LORD]", price: 10000, icon: "fa-crown", features: ["Команда /god", "Неприкосновенность"] },
-            { name: "Админ", nameEn: "[ADMIN]", price: 20000, icon: "fa-user-tie", features: ["Баны/кики", "Управление"] },
-            { name: "Гл Админ", nameEn: "[GLADMIN]", price: 50000, icon: "fa-users", features: ["Все права"] },
-            { name: "Создатель", nameEn: "[CREATOR]", price: 100000, icon: "fa-star", features: ["Полный доступ"] },
-            { name: "Правитель", nameEn: "[LEADER]", price: 1000000, icon: "fa-chess-king", features: ["Верховный правитель"] }
+            { name: "Премиум", nameEn: "[PREM]", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/kit", "/fly"], category: "Основные" },
+            { name: "Креатив", nameEn: "[CREAT]", price: 2500, icon: "fa-palette", features: ["Доступ к креативу", "WorldEdit"], category: "Основные" },
+            { name: "Модер", nameEn: "[MODER]", price: 5000, icon: "fa-shield-alt", features: ["Мут/кик", "Проверка игроков"], category: "Модерация" },
+            { name: "Лорд", nameEn: "[LORD]", price: 10000, icon: "fa-crown", features: ["Команда /god", "Неприкосновенность"], category: "Основные" },
+            { name: "Админ", nameEn: "[ADMIN]", price: 20000, icon: "fa-user-tie", features: ["Баны/кики", "Управление"], category: "Модерация" },
+            { name: "Гл Админ", nameEn: "[GLADMIN]", price: 50000, icon: "fa-users", features: ["Все права"], category: "Модерация" },
+            { name: "Создатель", nameEn: "[CREATOR]", price: 100000, icon: "fa-star", features: ["Полный доступ"], category: "Элитные" },
+            { name: "Основатель", nameEn: "[FOUNDER]", price: 200000, icon: "fa-fire", features: ["Управление проектом"], category: "Элитные" },
+            { name: "Правитель", nameEn: "[LEADER]", price: 1000000, icon: "fa-chess-king", features: ["Верховный правитель"], category: "Элитные" }
         ];
-        const topPrivileges = privileges.slice(0, 3);
+        const categories = [...new Set(privileges.map(p => p.category))];
 
         let currentUser = null;
         let currentBalance = 0;
         let currentProduct = null;
 
-        function addLog(action, target, details) {
-            db.collection('logs').add({ action, moderator: currentUser?.email, target, details, timestamp: new Date() });
+        async function addLog(action, target, details) {
+            await db.collection('logs').add({ action, moderator: currentUser?.email, target, details, timestamp: new Date() });
         }
 
         async function sendEmail(data) {
@@ -469,10 +503,11 @@
             try { await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData }); } catch(e) {}
         }
 
-        function renderShop() {
+        function renderShop(category = "Все") {
             const container = document.getElementById('shopGrid');
             if(!container) return;
-            container.innerHTML = privileges.map(p => `
+            const filtered = category === "Все" ? privileges : privileges.filter(p => p.category === category);
+            container.innerHTML = filtered.map(p => `
                 <div class="product-card">
                     <div class="product-icon"><i class="fas ${p.icon}"></i></div>
                     <div class="product-name">${p.name}</div>
@@ -482,18 +517,21 @@
                     <button class="buy-btn" onclick="openBuyModal('${p.name}', ${p.price})">КУПИТЬ</button>
                 </div>
             `).join('');
-            const topContainer = document.getElementById('topShopGrid');
-            if(topContainer) {
-                topContainer.innerHTML = topPrivileges.map(p => `
-                    <div class="product-card-home">
-                        <i class="fas ${p.icon}"></i>
-                        <h3>${p.name}</h3>
-                        <div class="price">${p.price.toLocaleString()} ₽</div>
-                        <ul style="list-style:none; margin:15px 0; text-align:left;">${p.features.slice(0,2).map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}</ul>
-                        <button class="buy-btn" onclick="openBuyModal('${p.name}', ${p.price})">КУПИТЬ</button>
-                    </div>
-                `).join('');
-            }
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('shopCategories');
+            if(!container) return;
+            let html = `<button class="category-btn active" data-cat="Все">Все</button>`;
+            categories.forEach(cat => html += `<button class="category-btn" data-cat="${cat}">${cat}</button>`);
+            container.innerHTML = html;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.onclick = () => {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderShop(btn.dataset.cat);
+                };
+            });
         }
 
         window.openBuyModal = (name, price) => {
@@ -513,9 +551,9 @@
             currentBalance = newBalance;
             document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
             await db.collection('donates').add({ userId: currentUser.uid, username: currentUser.displayName, product: currentProduct.name, price: currentProduct.price, serverNick: nick, date: new Date() });
-            await sendEmail({ type: 'ПОКУПКА ПРИВИЛЕГИИ', message: `Куплено: ${currentProduct.name}\nЦена: ${currentProduct.price} ₽\nНик на сервере: ${nick}\nОстаток: ${newBalance} ₽` });
-            addLog('ПОКУПКА', currentUser.email, `${currentProduct.name} за ${currentProduct.price} ₽, ник: ${nick}`);
-            alert(`✅ Куплено: ${currentProduct.name}! Остаток: ${newBalance} ₽`);
+            await sendEmail({ type: 'ПОКУПКА ПРИВИЛЕГИИ', message: `Куплено: ${currentProduct.name}\nЦена: ${currentProduct.price} ₽\nНик: ${nick}` });
+            addLog('ПОКУПКА', currentUser.email, `${currentProduct.name} за ${currentProduct.price} ₽`);
+            alert(`✅ Куплено: ${currentProduct.name}!`);
             document.getElementById('buyModal').style.display = 'none';
             loadUserData(currentUser);
         };
@@ -530,110 +568,103 @@
             nameSpan.innerHTML = '';
             nameSpan.appendChild(document.createTextNode(data.username));
             if(isAdmin) nameSpan.insertAdjacentHTML('beforeend', VERIFIED_SVG);
-            const donateSnapshot = await db.collection('donates').where('userId', '==', user.uid).get();
-            let donateHtml = '<p><i class="fas fa-gift"></i> <strong>Приобретённые донаты:</strong></p><ul style="margin-left:45px;">';
-            donateSnapshot.forEach(d => donateHtml += `<li>${d.data().product} - ${d.data().price} ₽ (ник: ${d.data().serverNick})</li>`);
-            donateHtml += donateSnapshot.empty ? '<li>Нет покупок</li></ul>' : '</ul>';
-            document.getElementById('donateInfo').innerHTML = donateHtml;
             document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> <strong>Email:</strong> ${user.email}</p><p><i class="fas fa-calendar"></i> <strong>Регистрация:</strong> ${data.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`;
+            
+            const donatesSnap = await db.collection('donates').where('userId', '==', user.uid).get();
+            const donatesContainer = document.getElementById('donatesContainer');
+            if(donatesContainer) {
+                donatesContainer.innerHTML = '<h4 style="margin-bottom:10px;">🎁 Мои донаты</h4>';
+                if(donatesSnap.empty) donatesContainer.innerHTML += '<p>Нет приобретённых донатов</p>';
+                else donatesSnap.forEach(d => donatesContainer.innerHTML += `<span class="donate-badge">${d.data().product}</span> `);
+            }
+            if(isAdmin) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
         }
 
-        async function loadPlayersList() {
-            const snap = await db.collection('users').get();
-            const players = [];
-            snap.forEach(doc => players.push({ id: doc.id, ...doc.data() }));
-            const container = document.getElementById('playersList');
+        async function loadNewPlayers() {
+            const dayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+            const snap = await db.collection('users').where('registeredAt', '>=', dayAgo.toISOString()).get();
+            const container = document.getElementById('newPlayersList');
             if(!container) return;
-            container.innerHTML = players.map(p => `
-                <div class="player-item">
-                    <span><strong>${p.username}</strong> (${p.email})<br>💰 ${p.balance || 0} ₽</span>
-                    <div class="player-actions">
-                        <button onclick="showPlayerActions('${p.id}', '${p.username}', '${p.email}')">⚡ ДЕЙСТВИЯ</button>
-                    </div>
-                </div>
-            `).join('');
+            container.innerHTML = snap.docs.map(doc => {
+                const p = doc.data();
+                return `<div class="player-card"><span><strong>${p.username}</strong> (${p.email})<br>💰 ${p.balance || 0} ₽</span><div class="player-actions"><button onclick="showUserActions('${doc.id}', '${p.username}', '${p.email}')">⚡ ДЕЙСТВИЯ</button></div></div>`;
+            }).join('');
         }
 
-        window.showPlayerActions = (userId, username, email) => {
-            const actionHtml = `
-                <div style="background:rgba(0,0,0,0.8); padding:15px; border-radius:20px;">
-                    <h4>👤 ${username}</h4>
-                    <button onclick="banUser('${userId}', '${username}', '${email}')" style="background:#ef4444;">🔨 БАН</button>
-                    <button onclick="unbanUserByEmail('${email}')" style="background:#22c55e;">🔓 РАЗБАН</button>
-                    <button onclick="kickUser('${userId}', '${username}', '${email}')" style="background:#ff6600;">👢 КИК</button>
-                    <button onclick="giveDonate('${userId}', '${username}')" style="background:#3b82f6;">🎁 ВЫДАТЬ ДОНАТ</button>
-                    <button onclick="removeDonate('${userId}', '${username}')" style="background:#8b5cf6;">🗑️ СНЯТЬ ДОНАТ</button>
-                </div>
+        window.showUserActions = (userId, username, email) => {
+            const content = `
+                <h4>👤 ${username}</h4>
+                <button onclick="actionBan('${userId}', '${username}', '${email}')" style="background:#ef4444;">🔨 БАН</button>
+                <button onclick="actionUnban('${email}')" style="background:#22c55e;">🔓 РАЗБАН</button>
+                <button onclick="actionKick('${userId}', '${username}', '${email}')" style="background:#ff6600;">👢 КИК</button>
+                <button onclick="actionGiveDonate('${userId}', '${username}')" style="background:#3b82f6;">🎁 ВЫДАТЬ ДОНАТ</button>
+                <button onclick="actionRemoveDonate('${userId}', '${username}')" style="background:#8b5cf6;">🗑️ СНЯТЬ ДОНАТ</button>
             `;
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            modal.style.display = 'flex';
-            modal.innerHTML = `<div class="modal-content" style="width:400px;"><span class="close-modal" onclick="this.parentElement.parentElement.remove()">&times;</span>${actionHtml}</div>`;
-            document.body.appendChild(modal);
+            document.getElementById('userActionsContent').innerHTML = content;
+            document.getElementById('userActionsModal').style.display = 'flex';
         };
-
-        window.banUser = async (userId, username, email) => {
-            await db.collection('bans').add({ userId, username, email, reason: "Нарушение правил", until: null, active: true, moderator: currentUser.email, createdAt: new Date() });
-            addLog('БАН', email, `Пользователь ${username} забанен`);
+        window.actionBan = async (userId, username, email) => {
+            await db.collection('bans').add({ userId, username, email, reason: "Нарушение", until: null, active: true, moderator: currentUser.email, createdAt: new Date() });
+            addLog('БАН', email, username);
             alert(`Бан выдан ${username}`);
+            document.getElementById('userActionsModal').style.display = 'none';
         };
-        window.unbanUserByEmail = async (email) => {
+        window.actionUnban = async (email) => {
             const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
             snap.forEach(doc => doc.ref.update({ active: false }));
-            addLog('РАЗБАН', email, `Бан снят`);
-            alert(`Разбан выполнен`);
+            addLog('РАЗБАН', email, '');
+            alert('Разбан выполнен');
+            document.getElementById('userActionsModal').style.display = 'none';
         };
-        window.kickUser = async (userId, username, email) => {
+        window.actionKick = async (userId, username, email) => {
             await db.collection('kicks').add({ userId, username, email, reason: "Кик от админа", active: true, moderator: currentUser.email, createdAt: new Date() });
-            addLog('КИК', email, `Пользователь ${username} кикнут`);
+            addLog('КИК', email, username);
             alert(`Кик выдан ${username}`);
+            document.getElementById('userActionsModal').style.display = 'none';
         };
-        window.giveDonate = async (userId, username) => {
-            const donateName = prompt("Название доната (например, Премиум):");
+        window.actionGiveDonate = async (userId, username) => {
+            const donateName = prompt("Название доната:");
             if(!donateName) return;
             await db.collection('donates').add({ userId, username, product: donateName, price: 0, serverNick: username, date: new Date(), givenBy: currentUser.email });
-            addLog('ВЫДАЧА ДОНАТА', username, `Выдан донат: ${donateName}`);
-            alert(`Донат ${donateName} выдан ${username}`);
+            addLog('ВЫДАЧА ДОНАТА', username, donateName);
+            alert(`Донат ${donateName} выдан`);
+            document.getElementById('userActionsModal').style.display = 'none';
         };
-        window.removeDonate = async (userId, username) => {
+        window.actionRemoveDonate = async (userId, username) => {
             const snap = await db.collection('donates').where('userId', '==', userId).get();
-            if(snap.empty) return alert('У пользователя нет донатов');
             snap.forEach(doc => doc.ref.delete());
-            addLog('СНЯТИЕ ДОНАТА', username, `Все донаты сняты`);
-            alert(`Донаты сняты с ${username}`);
+            addLog('СНЯТИЕ ДОНАТА', username, 'Все донаты');
+            alert(`Донаты сняты`);
+            document.getElementById('userActionsModal').style.display = 'none';
         };
 
-        document.getElementById('giveCoinsBtn').onclick = async () => {
-            const nick = document.getElementById('giveNick').value.trim();
-            const amount = parseInt(document.getElementById('giveAmount').value);
-            const reason = document.getElementById('giveReason').value.trim();
-            if(!nick || isNaN(amount)) return alert('Заполните поля');
-            const snap = await db.collection('users').where('username', '==', nick).get();
-            if(snap.empty) return alert('Пользователь не найден');
-            const newBalance = (snap.docs[0].data().balance || 0) + amount;
-            await snap.docs[0].ref.update({ balance: newBalance });
-            addLog('ВЫДАЧА МОНЕТ', nick, `${amount} ₽. Причина: ${reason}`);
-            alert(`Выдано ${amount} ₽ ${nick}`);
-        };
-        document.getElementById('globalGiveBtn').onclick = async () => {
-            const amount = parseInt(prompt("Сумма для всех:"));
-            if(isNaN(amount)) return;
-            const snap = await db.collection('users').get();
-            for(const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
-            addLog('ГЛОБАЛЬНАЯ ВЫДАЧА', 'ВСЕМ', `${amount} ₽`);
-            alert(`Выдано ${amount} ₽ всем`);
-        };
+        async function loadBoard() {
+            const doc = await db.collection('settings').doc('board').get();
+            if(doc.exists) {
+                const data = doc.data();
+                const messageEl = document.getElementById('boardMessage');
+                messageEl.innerText = data.text || 'Добро пожаловать в GrifLauncher!';
+                messageEl.style.color = data.color || '#ffd700';
+                if(data.style === 'rgb') messageEl.classList.add('rgb-text');
+                else messageEl.classList.remove('rgb-text');
+            }
+        }
+
         async function loadLogs() {
             const snap = await db.collection('logs').orderBy('timestamp', 'desc').limit(50).get();
             document.getElementById('logsList').innerHTML = snap.docs.map(doc => `<div class="log-item">[${new Date(doc.data().timestamp?.toDate()).toLocaleString()}] <strong>${doc.data().action}</strong> → ${doc.data().target}<br>${doc.data().details || ''}</div>`).join('');
         }
 
-        async function loadOnlinePlayers() {
-            const snap = await db.collection('users').limit(6).get();
-            const avatars = snap.docs.map(doc => `<div class="avatar"><img src="https://ui-avatars.com/api/?background=ffd700&color=000&name=${doc.data().username}"><div class="tooltip">${doc.data().username}</div></div>`).join('');
-            document.getElementById('avatarsGrid').innerHTML = avatars;
-            document.getElementById('onlineCount').innerText = `${snap.size} ИГРОКОВ ОНЛАЙН`;
-        }
+        document.getElementById('updateBoardBtn')?.addEventListener('click', async () => {
+            const text = document.getElementById('newBoardText').value.trim();
+            const style = document.getElementById('boardStyle').value;
+            const color = document.getElementById('boardColor').value;
+            if(!text) return alert('Введите текст');
+            await db.collection('settings').doc('board').set({ text, style, color, updatedBy: currentUser.email, updatedAt: new Date() });
+            await db.collection('boardHistory').add({ text, style, color, moderator: currentUser.email, timestamp: new Date() });
+            alert('Доска обновлена!');
+            loadBoard();
+        });
 
         document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
         document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
@@ -670,9 +701,7 @@
             try {
                 const cred = await auth.createUserWithEmailAndPassword(email, pass);
                 await cred.user.updateProfile({ displayName: username });
-                await db.collection('users').doc(cred.user.uid).set({
-                    username, email, balance: 50000, isAdmin: (email === ADMIN_EMAIL), registeredAt: new Date().toISOString()
-                });
+                await db.collection('users').doc(cred.user.uid).set({ username, email, balance: 50000, isAdmin: (email === ADMIN_EMAIL), registeredAt: new Date().toISOString() });
                 alert('✅ Регистрация успешна! Баланс: 50 000 ₽');
             } catch(e) { alert('Ошибка: ' + e.message); }
         };
@@ -683,24 +712,29 @@
             try { await auth.signInWithEmailAndPassword(email, pass); } catch(e) { alert('Ошибка: ' + e.message); }
         };
         document.getElementById('logoutBtn').onclick = async () => { await auth.signOut(); };
-        document.getElementById('openAdminBtn').onclick = () => document.getElementById('adminModal').style.display = 'flex';
-        document.getElementById('closeAdminModal').onclick = () => document.getElementById('adminModal').style.display = 'none';
-        document.getElementById('checkAdminPassword').onclick = () => {
+        document.getElementById('closeUserActionsModal').onclick = () => document.getElementById('userActionsModal').style.display = 'none';
+        document.getElementById('closeBuyModal').onclick = () => document.getElementById('buyModal').style.display = 'none';
+        
+        document.getElementById('checkAdminPasswordBtn')?.addEventListener('click', () => {
             if(document.getElementById('adminPassword').value === 'website') {
                 document.getElementById('adminPasswordPanel').style.display = 'none';
                 document.getElementById('adminPanelContent').style.display = 'block';
-                loadPlayersList();
+                loadNewPlayers();
                 loadLogs();
             } else alert('❌ Неверный пароль!');
-        };
+        });
+        document.getElementById('openAdminBtn')?.addEventListener('click', () => {
+            document.querySelector('.menu-tab[data-page="admin"]').click();
+        });
+
         document.querySelectorAll('.menu-tab').forEach(tab => {
             tab.onclick = () => {
                 document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
                 document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                 document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
-                if(tab.dataset.page === 'home') loadOnlinePlayers();
                 if(tab.dataset.page === 'profile' && currentUser) loadUserData(currentUser);
+                if(tab.dataset.page === 'admin' && currentUser) loadNewPlayers();
             };
         });
         document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -711,6 +745,7 @@
                 document.getElementById('registerPane').classList.toggle('active', btn.dataset.tab === 'register');
             };
         });
+
         auth.onAuthStateChanged(async (user) => {
             document.getElementById('loadingPage').style.display = 'none';
             if(user) {
@@ -719,7 +754,8 @@
                 document.getElementById('mainContent').style.display = 'block';
                 await loadUserData(user);
                 renderShop();
-                loadOnlinePlayers();
+                renderCategories();
+                loadBoard();
                 const doc = await db.collection('users').doc(user.uid).get();
                 if(!doc.exists || doc.data().isAdmin === undefined) await db.collection('users').doc(user.uid).update({ isAdmin: (user.email === ADMIN_EMAIL) });
             } else {
