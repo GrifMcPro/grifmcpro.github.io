@@ -73,7 +73,6 @@
             padding: 8px 24px;
             border-radius: 40px;
             cursor: pointer;
-            transition: 0.2s;
         }
         .menu-tabs {
             display: flex;
@@ -232,7 +231,6 @@
             width: 100%;
             margin-top: 25px;
         }
-        /* МОДАЛКИ */
         .modal {
             display: none;
             position: fixed;
@@ -299,13 +297,21 @@
             background: linear-gradient(135deg, #ffd700, #ffaa00);
             color: #0a0a0a;
         }
-        .tab-pane { display: none; }
-        .tab-pane.active { display: block; }
+        .tab-pane {
+            display: none;
+        }
+        .tab-pane.active {
+            display: block;
+        }
+        /* ГАЛОЧКА 100% ВИДНА, НЕ УМЕНЬШАЕТСЯ */
         .verified-badge {
-            width: 22px;
-            height: 22px;
+            width: 24px !important;
+            height: 24px !important;
+            min-width: 24px !important;
+            max-width: 24px !important;
             margin-left: 8px;
             vertical-align: middle;
+            display: inline-block;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -387,7 +393,7 @@
             <div class="profile-card">
                 <div class="profile-avatar"><i class="fas fa-user"></i></div>
                 <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px;">
-                    <h2 id="profileName"></h2>
+                    <h2 id="profileName" style="display: flex; align-items: center; gap: 5px;"></h2>
                     <button class="edit-btn" id="editNameBtn">✏️ Сменить имя</button>
                 </div>
                 <div class="profile-info" id="profileInfo"></div>
@@ -430,7 +436,8 @@
         const db = firebase.firestore();
 
         const ADMIN_EMAIL = "ramonenok@bk.ru";
-        const VERIFIED_ICON_URL = "https://avatars.mds.yandex.net/i?id=f4634ad57cb43dc51bc43d742a13a4123a43d9a7-8709977-images-thumbs&n=13";
+        // ПРЯМАЯ ССЫЛКА НА ГАЛОЧКУ (увеличенный размер)
+        const VERIFIED_ICON_URL = "https://avatars.mds.yandex.net/i?id=e68df5cb185633935be518dbdf8d2190_sr-5869826-images-thumbs&n=13";
 
         const privileges = [
             { name: "Премиум", nameEn: "[PREM]", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/kit", "/fly"] },
@@ -438,6 +445,15 @@
             { name: "Модер", nameEn: "[MODER]", price: 5000, icon: "fa-shield-alt", features: ["Мут/кик", "Проверка игроков"] },
             { name: "Лорд", nameEn: "[LORD]", price: 10000, icon: "fa-crown", features: ["Команда /god", "Неприкосновенность"] },
             { name: "Админ", nameEn: "[ADMIN]", price: 20000, icon: "fa-user-tie", features: ["Баны/кики", "Управление"] },
+            { name: "Гл Админ", nameEn: "[GLADMIN]", price: 50000, icon: "fa-users", features: ["Все права", "Управление админами"] },
+            { name: "Создатель", nameEn: "[CREATOR]", price: 100000, icon: "fa-star", features: ["Полный доступ"] },
+            { name: "Основатель", nameEn: "[FOUNDER]", price: 200000, icon: "fa-fire", features: ["Управление проектом"] },
+            { name: "Консоль", nameEn: "[CONSOLE]", price: 300000, icon: "fa-terminal", features: ["Доступ к консоли"] },
+            { name: "Цезарь", nameEn: "[CAESAR]", price: 400000, icon: "fa-landmark", features: ["Префикс [Цезарь]"] },
+            { name: "Сервер", nameEn: "[SERVER]", price: 500000, icon: "fa-server", features: ["Управление сервером"] },
+            { name: "Хелпер", nameEn: "[HELPER]", price: 600000, icon: "fa-handshake", features: ["Помощь игрокам"] },
+            { name: "Хайп", nameEn: "[HYPE]", price: 700000, icon: "fa-chart-line", features: ["Премиум префикс"] },
+            { name: "Стафф", nameEn: "[STAFF]", price: 800000, icon: "fa-tools", features: ["Работа со стаффом"] },
             { name: "Правитель", nameEn: "[LEADER]", price: 1000000, icon: "fa-chess-king", features: ["Верховный правитель"] }
         ];
 
@@ -463,11 +479,20 @@
             const data = doc.data();
             const isAdmin = data.isAdmin || (user.email === ADMIN_EMAIL);
             document.getElementById('userBalance').innerText = (data.balance || 50000).toLocaleString();
+            
+            const nameSpan = document.getElementById('profileName');
+            nameSpan.innerHTML = '';
+            nameSpan.appendChild(document.createTextNode(data.username));
             if(isAdmin) {
-                document.getElementById('profileName').innerHTML = data.username + ` <img src="${VERIFIED_ICON_URL}" alt="Verified" class="verified-badge">`;
-            } else {
-                document.getElementById('profileName').innerHTML = data.username;
+                const img = document.createElement('img');
+                img.src = VERIFIED_ICON_URL;
+                img.className = 'verified-badge';
+                img.alt = 'Verified';
+                img.style.width = '24px';
+                img.style.height = '24px';
+                nameSpan.appendChild(img);
             }
+            
             document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> <strong>Email:</strong> ${user.email}</p><p><i class="fas fa-calendar"></i> <strong>Регистрация:</strong> ${data.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`;
         }
 
