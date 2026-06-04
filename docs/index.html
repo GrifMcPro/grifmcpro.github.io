@@ -11,6 +11,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         @keyframes borderGlow {
             0% { border-color: rgba(255,215,0,0.3); box-shadow: 0 0 5px rgba(255,215,0,0.2); }
             50% { border-color: rgba(255,215,0,0.8); box-shadow: 0 0 15px rgba(255,215,0,0.4); }
@@ -34,6 +35,7 @@
             0% { filter: hue-rotate(0deg); }
             100% { filter: hue-rotate(360deg); }
         }
+        
         body {
             background: linear-gradient(135deg, #0a0a0a 0%, #0f0f1a 50%, #0a0a0f 100%);
             font-family: 'Montserrat', sans-serif;
@@ -90,6 +92,8 @@
             border-radius: 40px;
             cursor: pointer;
         }
+        .btn-logout:hover { background: rgba(239,68,68,0.2); transform: scale(1.02); }
+        
         .menu-tabs {
             display: flex;
             gap: 15px;
@@ -125,6 +129,7 @@
             background-clip: text;
             color: transparent;
         }
+        
         /* ТАЙМЕР */
         .timer-container {
             display: flex;
@@ -170,6 +175,7 @@
             font-weight: bold;
             color: #ffd700;
         }
+        
         /* МАГАЗИН */
         .shop-grid {
             display: grid;
@@ -187,7 +193,7 @@
         }
         .product-card:hover { transform: translateY(-6px); border-color: #ffd700; }
         .product-icon i { font-size: 52px; color: #ffd700; margin-bottom: 15px; }
-        .product-name { font-size: 24px; font-weight: bold; }
+        .product-name { font-size: 24px; font-weight: bold; color: white; }
         .price { font-size: 30px; font-weight: bold; color: #ffd700; margin: 15px 0; }
         .buy-btn {
             background: linear-gradient(135deg, #ffd700, #ffaa00);
@@ -198,7 +204,8 @@
             cursor: pointer;
             width: 100%;
         }
-        /* ПРОФИЛЬ */
+        
+        /* ПРОФИЛЬ - БЕЛЫЙ ТЕКСТ */
         .profile-card {
             background: rgba(0,0,0,0.55);
             backdrop-filter: blur(12px);
@@ -223,6 +230,7 @@
         .profile-info { text-align: left; margin: 25px 0; }
         .profile-info p { padding: 10px 0; border-bottom: 1px solid rgba(255,215,0,0.2); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
         .profile-info i { width: 30px; color: #ffd700; }
+        .profile-info span, .profile-info strong { color: white; }
         .edit-btn, .change-password-btn {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
@@ -233,37 +241,41 @@
             font-size: 13px;
             margin: 5px;
         }
+        #profileName { color: white; font-size: 28px; display: inline-flex; align-items: center; gap: 0; margin-bottom: 10px; }
+        #userTagInput { color: white; background: rgba(0,0,0,0.3); border: none; padding: 10px; border-radius: 40px; width: 100%; margin-top: 5px; }
+        
         /* ГАЛОЧКИ-СМАЙЛЫ */
         .badge-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             margin-left: 6px;
             vertical-align: middle;
         }
         .badge-blue { background: #1e88e5; border-radius: 50%; }
-        .badge-blue i { font-size: 11px; color: white; }
+        .badge-blue i { font-size: 12px; color: white; }
         .badge-red { background: #ef4444; border-radius: 50%; }
-        .badge-red i { font-size: 11px; color: white; }
+        .badge-red i { font-size: 12px; color: white; }
         .badge-gold { background: #ffd700; border-radius: 50%; }
-        .badge-gold i { font-size: 11px; color: #0a0a0a; }
+        .badge-gold i { font-size: 12px; color: #0a0a0a; }
         .badge-rainbow { background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); border-radius: 0; animation: rainbow 2s infinite; }
-        .badge-rainbow i { font-size: 11px; color: white; }
+        .badge-rainbow i { font-size: 12px; color: white; }
         .badge-rgb { background: black; border-radius: 50%; animation: rgbBorder 1s infinite; }
-        .badge-rgb i { font-size: 11px; animation: rgbText 1s infinite; }
-        .badge-crown { color: #ffd700; font-size: 14px; width: auto; background: none; }
-        /* ЧАТЫ */
+        .badge-rgb i { font-size: 12px; animation: rgbText 1s infinite; }
+        .badge-crown { color: #ffd700; font-size: 16px; width: auto; background: none; }
+        
+        /* ДРУЗЬЯ И ЧАТЫ - УВЕЛИЧЕННЫЙ ИНТЕРФЕЙС, БЕЗ БЕЛОЙ ПОЛОСЫ */
         .friends-layout {
             display: grid;
-            grid-template-columns: 340px 1fr;
+            grid-template-columns: 380px 1fr;
             gap: 25px;
             background: rgba(0,0,0,0.5);
             backdrop-filter: blur(16px);
             border-radius: 40px;
             padding: 25px;
-            min-height: 70vh;
+            min-height: 75vh;
             border: 1px solid rgba(255,215,0,0.3);
         }
         .friends-sidebar {
@@ -277,39 +289,55 @@
         }
         .search-box input {
             flex: 1;
-            padding: 12px 18px;
+            padding: 14px 20px;
             border-radius: 60px;
             border: 1px solid rgba(255,215,0,0.3);
             background: rgba(0,0,0,0.5);
             color: white;
+            font-size: 15px;
         }
         .search-box button {
             background: linear-gradient(135deg, #ffd700, #ffaa00);
             border: none;
             border-radius: 60px;
-            padding: 0 25px;
+            padding: 0 30px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 14px;
         }
         .section-subtitle {
             font-family: 'Orbitron', monospace;
-            font-size: 16px;
+            font-size: 18px;
             color: #ffd700;
-            margin: 20px 0 12px;
+            margin: 20px 0 15px;
+            letter-spacing: 1px;
         }
         .friends-list, .requests-list {
-            max-height: 350px;
+            max-height: 400px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
+        }
+        /* Скрываем белую полосу прокрутки на друзьях */
+        .friends-list::-webkit-scrollbar, .requests-list::-webkit-scrollbar, .chat-messages::-webkit-scrollbar {
+            width: 6px;
+            background: transparent;
+        }
+        .friends-list::-webkit-scrollbar-track, .requests-list::-webkit-scrollbar-track, .chat-messages::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+        .friends-list::-webkit-scrollbar-thumb, .requests-list::-webkit-scrollbar-thumb, .chat-messages::-webkit-scrollbar-thumb {
+            background: #ffd700;
+            border-radius: 10px;
         }
         .friend-item, .request-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 15px;
-            border-radius: 20px;
+            padding: 15px 18px;
+            border-radius: 24px;
             cursor: pointer;
             transition: 0.3s;
             background: rgba(0,0,0,0.3);
@@ -317,11 +345,12 @@
         }
         .friend-item:hover, .request-item:hover { 
             background: rgba(255,215,0,0.15); 
-            transform: translateX(5px);
+            transform: translateX(8px);
+            border-color: rgba(255,215,0,0.4);
         }
         .friend-avatar {
-            width: 48px;
-            height: 48px;
+            width: 55px;
+            height: 55px;
             background: linear-gradient(135deg, #ffd700, #ffaa00);
             border-radius: 50%;
             display: flex;
@@ -329,30 +358,31 @@
             justify-content: center;
             margin-right: 15px;
         }
-        .friend-avatar i { font-size: 22px; color: #0a0a0a; }
+        .friend-avatar i { font-size: 24px; color: #0a0a0a; }
         .friend-info { flex: 1; }
-        .friend-name { font-weight: bold; font-size: 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
+        .friend-name { font-weight: bold; font-size: 17px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; color: white; }
         .request-actions button {
             border: none;
             border-radius: 30px;
-            padding: 6px 15px;
+            padding: 8px 18px;
             cursor: pointer;
-            margin-left: 8px;
+            margin-left: 10px;
             font-weight: bold;
+            font-size: 13px;
         }
         .request-actions button:first-child { background: #22c55e; color: white; }
         .request-actions button:last-child { background: #ef4444; color: white; }
         .chat-area {
             display: flex;
             flex-direction: column;
-            height: 68vh;
+            height: 72vh;
         }
         .chat-header {
             padding-bottom: 15px;
             border-bottom: 1px solid rgba(255,215,0,0.2);
             margin-bottom: 15px;
         }
-        .chat-header h3 { font-size: 22px; font-family: 'Orbitron', monospace; color: #ffd700; }
+        .chat-header h3 { font-size: 24px; font-family: 'Orbitron', monospace; color: #ffd700; }
         .chat-messages { 
             flex: 1; 
             overflow-y: auto; 
@@ -369,20 +399,22 @@
         .message.outgoing { align-self: flex-end; }
         .message.incoming { align-self: flex-start; }
         .message-bubble {
-            padding: 10px 16px;
-            border-radius: 20px;
+            padding: 12px 18px;
+            border-radius: 22px;
             background: rgba(0,0,0,0.6);
             border: 1px solid rgba(255,215,0,0.3);
+            word-break: break-word;
+            color: white;
         }
         .message.outgoing .message-bubble { background: rgba(255,215,0,0.2); border-color: #ffd700; }
         .message-meta { 
-            font-size: 10px; 
+            font-size: 11px; 
             color: #aaa; 
             margin-top: 5px; 
-            padding-left: 10px; 
+            padding-left: 12px; 
             display: flex; 
             align-items: center; 
-            gap: 5px; 
+            gap: 6px; 
             flex-wrap: wrap; 
         }
         .chat-input-area {
@@ -394,34 +426,64 @@
         }
         .chat-input-area input {
             flex: 1;
-            padding: 12px 18px;
+            padding: 14px 20px;
             border-radius: 60px;
             border: 1px solid rgba(255,215,0,0.3);
             background: rgba(0,0,0,0.5);
             color: white;
+            font-size: 15px;
         }
         .emoji-btn {
             background: rgba(0,0,0,0.5);
             border: 1px solid rgba(255,215,0,0.3);
             border-radius: 50%;
-            width: 48px;
+            width: 52px;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 22px;
         }
         .send-btn {
             background: linear-gradient(135deg, #ffd700, #ffaa00);
             border: none;
             border-radius: 60px;
-            padding: 0 25px;
+            padding: 0 30px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 14px;
         }
+        
+        /* СМАЙЛЫ-ГАЛОЧКИ В ЭМОДЗИ ПИКЕРЕ */
+        .emoji-picker {
+            position: absolute;
+            bottom: 80px;
+            right: 20px;
+            background: #1a1a1a;
+            border-radius: 24px;
+            padding: 12px;
+            display: none;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            z-index: 100;
+            border: 1px solid #ffd700;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .emoji-item {
+            cursor: pointer;
+            font-size: 28px;
+            text-align: center;
+            padding: 8px;
+            border-radius: 12px;
+            transition: 0.2s;
+        }
+        .emoji-item:hover { background: rgba(255,215,0,0.2); transform: scale(1.1); }
+        
         .settings-group {
             margin-bottom: 20px;
             padding: 15px;
             background: rgba(0,0,0,0.3);
             border-radius: 24px;
         }
+        .settings-group label { color: white; margin-right: 20px; cursor: pointer; }
+        
         /* АДМИН-ПАНЕЛЬ */
         .admin-section {
             background: rgba(0,0,0,0.4);
@@ -489,6 +551,7 @@
         .admin-btn-purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
         .admin-btn-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
         .admin-btn-green { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; }
+        
         /* МОДАЛКИ */
         .modal {
             display: none;
@@ -607,6 +670,7 @@
             margin: 0 auto 20px;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
         @media (max-width: 768px) {
             .section-title { font-size: 28px; }
             .shop-grid { grid-template-columns: 1fr; }
@@ -693,7 +757,7 @@
                         <button class="emoji-btn" id="emojiBtn">😊</button>
                         <button class="send-btn" id="sendMessageBtn">📤 ОТПРАВИТЬ</button>
                     </div>
-                    <div id="emojiPicker" class="emoji-picker" style="position:absolute; bottom:80px; right:20px; background:#1a1a1a; border-radius:20px; padding:10px; display:none; grid-template-columns:repeat(5,1fr); gap:10px; z-index:100; border:1px solid #ffd700;"></div>
+                    <div id="emojiPicker" class="emoji-picker"></div>
                 </div>
             </div>
         </div>
@@ -702,7 +766,7 @@
             <div class="section-title">👤 МОЙ ПРОФИЛЬ</div>
             <div class="profile-card">
                 <div class="profile-avatar"><i class="fas fa-user"></i></div>
-                <h2 id="profileName" style="display: inline-flex; align-items: center; gap: 0;"></h2>
+                <div id="profileName" style="color:white; font-size:28px; display:inline-flex; align-items:center; gap:0; margin-bottom:10px;"></div>
                 <div class="profile-info" id="profileInfo"></div>
                 <div id="donatesContainer" style="margin: 20px 0; text-align: center;"></div>
                 <div><button class="edit-btn" id="editNameBtn">✏️ Сменить имя</button>
@@ -713,7 +777,7 @@
                     <label><input type="radio" name="privacy" value="friends"> Только друзья</label>
                     <div style="margin-top:10px;">
                         <label>🏷️ Мой тег (ник):</label>
-                        <input type="text" id="userTagInput" readonly style="background:rgba(0,0,0,0.3); border:none; padding:8px; border-radius:40px; width:100%; margin-top:5px;">
+                        <input type="text" id="userTagInput" readonly style="color:white; background:rgba(0,0,0,0.3); border:none; padding:10px; border-radius:40px; width:100%; margin-top:5px;">
                         <button id="copyTagBtn" style="background:#ffd700; border:none; border-radius:40px; padding:8px 15px; cursor:pointer; margin-top:10px;">📋 КОПИРОВАТЬ ТЕГ</button>
                     </div>
                 </div>
@@ -814,11 +878,18 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
+        // ГЛАВНЫЕ АДМИНЫ
         const MAIN_ADMINS = ["ramonenok@bk.ru", "GrifMCpro@mail.ru"];
         const SYSTEM_NAME = "Система";
         
-        // СМАЙЛЫ ДЛЯ ЧАТА
-        const EMOJIS = ["😀", "😂", "🥰", "😎", "🔥", "❤️", "💀", "🎉", "✨", "⭐", "✅", "❌", "⚠️"];
+        // СМАЙЛЫ-ГАЛОЧКИ
+        const EMOJIS = [
+            { code: "✅", name: "Синяя", class: "badge-blue" },
+            { code: "🔴", name: "Красная", class: "badge-red" },
+            { code: "⭐", name: "Золотая", class: "badge-gold" },
+            { code: "🌈", name: "Радужная", class: "badge-rainbow" },
+            { code: "✨", name: "RGB", class: "badge-rgb" }
+        ];
         
         function getBadgeHtml(type) {
             if(!type) return '';
@@ -848,7 +919,6 @@
         let timerInterval = null;
         let moderatorsList = [];
         let currentChatWith = null;
-        let siteClosedListener = null;
 
         function renderShop() {
             const container = document.getElementById('shopGrid');
@@ -893,21 +963,21 @@
             currentBalance = data.balance || 50000;
             document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
             
-            const nameSpan = document.getElementById('profileName');
-            nameSpan.innerHTML = '';
-            nameSpan.appendChild(document.createTextNode(data.username));
+            const nameDiv = document.getElementById('profileName');
+            nameDiv.innerHTML = '';
+            nameDiv.appendChild(document.createTextNode(data.username));
             if(data.badge) {
-                nameSpan.insertAdjacentHTML('beforeend', getBadgeHtml(data.badge));
+                nameDiv.insertAdjacentHTML('beforeend', getBadgeHtml(data.badge));
             }
             
-            document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> <strong>Email:</strong> ${user.email}</p><p><i class="fas fa-calendar"></i> <strong>Регистрация:</strong> ${data.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`;
+            document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> <strong>Email:</strong> <span style="color:white;">${user.email}</span></p><p><i class="fas fa-calendar"></i> <strong>Регистрация:</strong> <span style="color:white;">${data.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</span></p>`;
             
             const donatesSnap = await db.collection('donates').where('userId', '==', user.uid).get();
             const donatesContainer = document.getElementById('donatesContainer');
             if(donatesContainer) {
-                donatesContainer.innerHTML = '<h4>🎁 Мои донаты</h4>';
-                if(donatesSnap.empty) donatesContainer.innerHTML += '<p>Нет покупок</p>';
-                else donatesSnap.forEach(d => donatesContainer.innerHTML += `<span class="donate-badge" style="background:linear-gradient(135deg,#3b82f6,#2563eb); color:white; padding:5px 14px; border-radius:40px; font-size:12px; display:inline-block; margin:4px;">${d.data().product}</span> `);
+                donatesContainer.innerHTML = '<h4 style="color:#ffd700;">🎁 Мои донаты</h4>';
+                if(donatesSnap.empty) donatesContainer.innerHTML += '<p style="color:white;">Нет покупок</p>';
+                else donatesSnap.forEach(d => donatesContainer.innerHTML += `<span style="background:linear-gradient(135deg,#3b82f6,#2563eb); color:white; padding:5px 14px; border-radius:40px; font-size:12px; display:inline-block; margin:4px;">${d.data().product}</span> `);
             }
             
             const hasAdminAccess = MAIN_ADMINS.includes(user.email) || moderatorsList.some(m => m.email === user.email);
@@ -924,37 +994,6 @@
         async function addLog(action, target, details) {
             if(!currentUser) return;
             await db.collection('logs').add({ action, moderator: SYSTEM_NAME, target, details, timestamp: new Date() });
-        }
-
-        // РЕАЛЬНОЕ ВРЕМЯ ДЛЯ БАЛАНСА
-        function startBalanceListener() {
-            if(!currentUser) return;
-            db.collection('users').doc(currentUser.uid).onSnapshot((doc) => {
-                if(doc.exists) {
-                    const newBalance = doc.data().balance || 50000;
-                    if(currentBalance !== newBalance) {
-                        currentBalance = newBalance;
-                        document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                        document.getElementById('profileBalance').innerText = currentBalance.toLocaleString();
-                    }
-                }
-            });
-        }
-
-        // РЕАЛЬНОЕ ВРЕМЯ ДЛЯ ЗАКРЫТИЯ САЙТА
-        function startSiteClosedListener() {
-            if(siteClosedListener) siteClosedListener();
-            siteClosedListener = db.collection('settings').doc('siteStatus').onSnapshot((doc) => {
-                if(doc.exists && doc.data().closed && currentUser && !MAIN_ADMINS.includes(currentUser.email) && !moderatorsList.some(m => m.email === currentUser.email)) {
-                    document.getElementById('mainContent').style.display = 'none';
-                    document.getElementById('closedReason').innerText = doc.data().reason;
-                    document.getElementById('closedUntil').innerText = doc.data().until ? new Date(doc.data().until.toDate()).toLocaleString() : 'Неизвестно';
-                    document.getElementById('closedWindow').style.display = 'flex';
-                } else if(doc.exists && !doc.data().closed) {
-                    document.getElementById('closedWindow').style.display = 'none';
-                    if(currentUser) document.getElementById('mainContent').style.display = 'block';
-                }
-            });
         }
 
         // ДРУЗЬЯ
@@ -978,7 +1017,7 @@
                         </div>`;
                     }
                 }
-                friendsContainer.innerHTML = friendsHtml || '<div style="padding:20px; text-align:center;">Нет друзей</div>';
+                friendsContainer.innerHTML = friendsHtml || '<div style="padding:20px; text-align:center; color:white;">Нет друзей</div>';
             }
             
             const requestsContainer = document.getElementById('friendRequestsList');
@@ -998,7 +1037,7 @@
                         </div>`;
                     }
                 }
-                requestsContainer.innerHTML = requestsHtml || '<div style="padding:20px; text-align:center;">Нет заявок</div>';
+                requestsContainer.innerHTML = requestsHtml || '<div style="padding:20px; text-align:center; color:white;">Нет заявок</div>';
             }
         }
 
@@ -1100,7 +1139,7 @@
             document.getElementById('messageInput').value = '';
         };
 
-        // ЭМОДЗИ ПИКЕР
+        // ЭМОДЗИ ПИКЕР С ГАЛОЧКАМИ
         document.getElementById('emojiBtn').onclick = () => {
             const picker = document.getElementById('emojiPicker');
             if(picker.style.display === 'grid') {
@@ -1108,13 +1147,15 @@
             } else {
                 picker.innerHTML = '';
                 EMOJIS.forEach(emoji => {
-                    const span = document.createElement('span');
-                    span.textContent = emoji;
-                    span.onclick = () => {
-                        document.getElementById('messageInput').value += emoji;
+                    const div = document.createElement('div');
+                    div.className = 'emoji-item';
+                    div.innerHTML = emoji.code;
+                    div.title = emoji.name;
+                    div.onclick = () => {
+                        document.getElementById('messageInput').value += emoji.code;
                         picker.style.display = 'none';
                     };
-                    picker.appendChild(span);
+                    picker.appendChild(div);
                 });
                 picker.style.display = 'grid';
             }
@@ -1170,7 +1211,7 @@
                 for(const doc of snap.docs) {
                     const data = doc.data();
                     if(data.badge) {
-                        container.innerHTML += `<div style="background:rgba(0,0,0,0.3); border-radius:16px; padding:8px; margin-bottom:5px;"><span><strong>${data.username}</strong> ${getBadgeHtml(data.badge)}</span></div>`;
+                        container.innerHTML += `<div style="background:rgba(0,0,0,0.3); border-radius:16px; padding:8px; margin-bottom:5px;"><span><strong style="color:white;">${data.username}</strong> ${getBadgeHtml(data.badge)}</span></div>`;
                     }
                 }
             }
@@ -1184,7 +1225,7 @@
             if(snap.empty) return alert('Пользователь не найден');
             await snap.docs[0].ref.update({ badge: badgeType });
             addLog('ВЫДАЧА ЗНАЧКА', nick, `Тип: ${badgeType}`);
-            alert(`✅ Значок выдан ${nick}!`);
+            alert(`✅ Значок выдан ${nick}! Обновите страницу.`);
             loadBadgeUsers();
             if(currentUser && currentUser.displayName === nick) loadUserData(currentUser);
             document.getElementById('badgeNick').value = '';
@@ -1202,7 +1243,6 @@
             document.getElementById('badgeNick').value = '';
         };
 
-        // ВЫДАЧА МОНЕТ
         document.getElementById('giveCoinsBtn').onclick = async () => {
             const nick = document.getElementById('giveNick').value.trim();
             const amount = parseInt(document.getElementById('giveAmount').value);
@@ -1262,12 +1302,6 @@
             }
             await db.collection('bans').add({ userId, username, email, reason, until, durationText, active: true, moderator: SYSTEM_NAME, createdAt: new Date(), shown: false });
             addLog('БАН', email, `${username} - Причина: ${reason}, Срок: ${durationText}`);
-            
-            // Отправляем уведомление пользователю в реальном времени
-            const userRef = db.collection('users').doc(userId);
-            userRef.update({ banNotification: { reason, durationText, moderator: SYSTEM_NAME, timestamp: new Date() } });
-            setTimeout(() => userRef.update({ banNotification: null }), 5000);
-            
             alert(`✅ Бан выдан ${username}`);
             document.querySelector('.modal').remove();
         };
@@ -1296,14 +1330,6 @@
             for(const doc of snap.docs) await doc.ref.update({ active: false });
             await db.collection('unbanLogs').add({ email, username, reason, moderator: SYSTEM_NAME, unbanDate: new Date(), shown: false });
             addLog('РАЗБАН', email, `${username} - Причина: ${reason}`);
-            
-            // Отправляем уведомление
-            const userSnap = await db.collection('users').where('email', '==', email).get();
-            if(!userSnap.empty) {
-                userSnap.docs[0].ref.update({ unbanNotification: { reason, moderator: SYSTEM_NAME, timestamp: new Date() } });
-                setTimeout(() => userSnap.docs[0].ref.update({ unbanNotification: null }), 5000);
-            }
-            
             alert(`✅ Разбан выполнен для ${username}`);
             document.querySelector('.modal').remove();
         };
@@ -1332,12 +1358,6 @@
             if(!donateName || !reason) return alert('Заполните все поля');
             await db.collection('donates').add({ userId, username, product: donateName, price: 0, serverNick: username, date: new Date(), givenBy: SYSTEM_NAME, reason, shown: false });
             addLog('ВЫДАЧА ДОНАТА', username, `${donateName} - Причина: ${reason}`);
-            
-            // Уведомление в реальном времени
-            const userRef = db.collection('users').doc(userId);
-            userRef.update({ donateNotification: { donateName, reason, moderator: SYSTEM_NAME, timestamp: new Date() } });
-            setTimeout(() => userRef.update({ donateNotification: null }), 5000);
-            
             alert(`✅ Донат ${donateName} выдан ${username}`);
             document.querySelector('.modal').remove();
         };
@@ -1366,19 +1386,13 @@
             for(const doc of snap.docs) await doc.ref.delete();
             await db.collection('donateRemoveLogs').add({ userId, username, reason, moderator: SYSTEM_NAME, date: new Date(), shown: false });
             addLog('СНЯТИЕ ДОНАТА', username, `Причина: ${reason}`);
-            
-            // Уведомление
-            const userRef = db.collection('users').doc(userId);
-            userRef.update({ removeDonateNotification: { reason, moderator: SYSTEM_NAME, timestamp: new Date() } });
-            setTimeout(() => userRef.update({ removeDonateNotification: null }), 5000);
-            
             alert(`✅ Донаты сняты с ${username}`);
             document.querySelector('.modal').remove();
         };
 
         window.showUserActions = (userId, username, email) => {
             const content = `
-                <h4>👤 ${username}</h4>
+                <h4 style="color:white;">👤 ${username}</h4>
                 <button onclick="showBanModal('${userId}', '${username}', '${email}')" class="admin-btn-red" style="margin:5px;">🔨 БАН</button>
                 <button onclick="showUnbanModal('${email}', '${username}')" class="admin-btn-green" style="margin:5px;">🔓 РАЗБАН</button>
                 <button onclick="showGiveDonateModal('${userId}', '${username}')" class="admin-btn-blue" style="margin:5px;">🎁 ВЫДАТЬ ДОНАТ</button>
@@ -1393,7 +1407,7 @@
             const snap = await db.collection('users').where('registeredAt', '>=', thirtyMinutesAgo.toISOString()).get();
             const container = document.getElementById('newPlayersList');
             if(container) {
-                container.innerHTML = snap.docs.map(doc => `<div class="player-card"><span><strong>${doc.data().username}</strong>${getBadgeHtml(doc.data().badge)}<br>${doc.data().email}<br>💰 ${doc.data().balance || 0} ₽</span><div><button onclick="showUserActions('${doc.id}', '${doc.data().username}', '${doc.data().email}')" class="admin-btn-blue" style="padding:6px 15px;">⚡ ДЕЙСТВИЯ</button></div></div>`).join('');
+                container.innerHTML = snap.docs.map(doc => `<div class="player-card"><span><strong style="color:white;">${doc.data().username}</strong>${getBadgeHtml(doc.data().badge)}<br><span style="color:white;">${doc.data().email}</span><br>💰 <span style="color:white;">${doc.data().balance || 0}</span> ₽</span><div><button onclick="showUserActions('${doc.id}', '${doc.data().username}', '${doc.data().email}')" class="admin-btn-blue" style="padding:6px 15px;">⚡ ДЕЙСТВИЯ</button></div></div>`).join('');
             }
         }
 
@@ -1449,6 +1463,19 @@
             startTimer(targetDate, eventName, eventDesc);
             alert('Таймер обновлён!');
         };
+
+        async function checkSiteClosed() {
+            const doc = await db.collection('settings').doc('siteStatus').get();
+            if(doc.exists && doc.data().closed) {
+                const data = doc.data();
+                if(data.until && data.until.toDate() < new Date()) {
+                    await db.collection('settings').doc('siteStatus').update({ closed: false });
+                    return null;
+                }
+                return data;
+            }
+            return null;
+        }
 
         document.getElementById('closeSiteBtn').onclick = async () => {
             const reason = document.getElementById('closeReason').value.trim();
@@ -1549,14 +1576,24 @@
             document.getElementById('loadingPage').style.display = 'none';
             if(user) {
                 currentUser = user;
+                const siteClosed = await checkSiteClosed();
+                if(siteClosed && !MAIN_ADMINS.includes(user.email) && !moderatorsList.some(m => m.email === user.email)) {
+                    document.getElementById('mainContent').style.display = 'none';
+                    document.getElementById('closedReason').innerText = siteClosed.reason;
+                    document.getElementById('closedUntil').innerText = siteClosed.until ? new Date(siteClosed.until.toDate()).toLocaleString() : 'Неизвестно';
+                    document.getElementById('closedWindow').style.display = 'flex';
+                    document.getElementById('closedExitBtn').onclick = async () => { await auth.signOut(); };
+                    return;
+                }
+                document.getElementById('mainContent').style.display = 'block';
+                document.getElementById('authModal').style.display = 'none';
                 await loadModerators();
-                startBalanceListener();
-                startSiteClosedListener();
                 await loadUserData(user);
                 renderShop();
                 loadTimer();
                 loadFriendsAndChats();
                 loadBadgeUsers();
+                setInterval(() => { if(currentChatWith) loadChatWithFriend(currentChatWith.id, currentChatWith.name); }, 3000);
             } else {
                 document.getElementById('mainContent').style.display = 'none';
                 document.getElementById('authModal').style.display = 'flex';
