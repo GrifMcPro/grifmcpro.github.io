@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrifLauncher | Премиум магазин</title>
+    <title>GrifLauncher | Магазин и профиль</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -89,40 +89,7 @@
             background-clip: text;
             color: transparent;
         }
-        /* ДОСКА ОБЪЯВЛЕНИЙ */
-        .board {
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(16px);
-            border-radius: 48px;
-            padding: 50px 30px;
-            text-align: center;
-            margin: 30px 0;
-            border: 1px solid rgba(255,215,0,0.3);
-        }
-        .board-message {
-            font-size: 32px;
-            font-weight: bold;
-            font-family: 'Orbitron', monospace;
-            line-height: 1.4;
-        }
-        /* МАГАЗИН - СЕТКА С КАТЕГОРИЯМИ */
-        .shop-categories {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        .category-btn {
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,215,0,0.3);
-            padding: 10px 25px;
-            border-radius: 60px;
-            cursor: pointer;
-            font-family: 'Orbitron', monospace;
-            transition: 0.2s;
-        }
-        .category-btn.active, .category-btn:hover { background: #ffd700; color: #0a0a0a; border-color: #ffd700; }
+        /* МАГАЗИН */
         .shop-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -199,18 +166,65 @@
             margin: 4px;
             cursor: default;
         }
-        .admin-btn {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
+        /* ГЛАВНАЯ - ЛЕНТА ОБЪЯВЛЕНИЙ */
+        .news-filters {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,215,0,0.3);
+            padding: 10px 28px;
+            border-radius: 60px;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            transition: 0.2s;
+        }
+        .filter-btn.active, .filter-btn:hover { background: #ffd700; color: #0a0a0a; border-color: #ffd700; }
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 30px;
+        }
+        .news-card {
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: 1px solid rgba(255,215,0,0.2);
+        }
+        .news-card.featured {
+            grid-column: span 2;
+            background: rgba(255,69,0,0.1);
+            border: 2px solid #ff4500;
+        }
+        .news-card:hover { transform: translateY(-5px); border-color: #ffd700; }
+        .news-img { width: 100%; height: 200px; object-fit: cover; }
+        .news-content { padding: 25px; }
+        .news-category {
+            display: inline-block;
+            background: rgba(255,215,0,0.2);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .news-title { font-size: 24px; font-weight: bold; margin-bottom: 12px; }
+        .news-desc { font-size: 14px; color: #ccc; line-height: 1.5; margin-bottom: 20px; }
+        .news-btn {
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            color: #0a0a0a;
             border: none;
-            padding: 14px 28px;
+            padding: 10px 24px;
             border-radius: 60px;
             font-weight: bold;
             cursor: pointer;
-            width: 100%;
-            margin-top: 25px;
         }
-        /* АДМИН-СТРАНИЦА */
+        /* АДМИН-ПАНЕЛЬ */
         .admin-section {
             background: rgba(0,0,0,0.4);
             border-radius: 32px;
@@ -244,16 +258,6 @@
             margin-left: 8px;
             font-size: 12px;
         }
-        .board-item {
-            background: rgba(0,0,0,0.4);
-            border-radius: 20px;
-            padding: 15px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
         .log-item {
             background: rgba(0,0,0,0.3);
             border-radius: 12px;
@@ -262,6 +266,7 @@
             font-size: 13px;
             border-left: 3px solid #ffd700;
         }
+        /* МОДАЛКИ */
         .modal {
             display: none;
             position: fixed;
@@ -305,14 +310,56 @@
             margin-top: 10px;
         }
         .close-modal { float: right; font-size: 28px; cursor: pointer; color: #ffd700; }
-        .tabs { display: flex; gap: 20px; justify-content: center; margin-bottom: 25px; }
-        .tab-btn {
-            background: none; border: none; color: #fff; font-size: 18px;
-            cursor: pointer; padding: 8px 25px; border-radius: 40px; font-family: 'Orbitron', monospace;
+        .auth-modal {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border-radius: 48px;
+            padding: 50px;
+            width: 500px;
+            max-width: 90%;
+            border: 1px solid #ffd700;
+            text-align: center;
         }
-        .tab-btn.active { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #0a0a0a; }
-        .tab-pane { display: none; }
-        .tab-pane.active { display: block; }
+        .auth-modal h2 { margin-bottom: 30px; color: #ffd700; }
+        .auth-modal input {
+            width: 100%;
+            padding: 16px;
+            margin: 12px 0;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 60px;
+            color: white;
+            font-size: 16px;
+        }
+        .auth-modal button {
+            width: 100%;
+            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            border: none;
+            padding: 16px;
+            border-radius: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+        .tabs-auth {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .tab-auth {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px 25px;
+            border-radius: 40px;
+            font-family: 'Orbitron', monospace;
+        }
+        .tab-auth.active { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #0a0a0a; }
+        .tab-pane-auth { display: none; }
+        .tab-pane-auth.active { display: block; }
         .verified-badge {
             width: 20px;
             height: 20px;
@@ -321,17 +368,15 @@
             vertical-align: middle;
             display: inline-block;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes rgbText {
-            0% { text-shadow: 0 0 5px #ff0000; color: #ff0000; }
-            25% { text-shadow: 0 0 5px #00ff00; color: #00ff00; }
-            50% { text-shadow: 0 0 5px #0000ff; color: #0000ff; }
-            75% { text-shadow: 0 0 5px #ff00ff; color: #ff00ff; }
-            100% { text-shadow: 0 0 5px #ff0000; color: #ff0000; }
+        .admin-login-box {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
         }
-        .rgb-text { animation: rgbText 2s infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .loading-spinner {
-            width: 60px; height: 60px;
+            width: 60px;
+            height: 60px;
             border: 4px solid rgba(255,215,0,0.3);
             border-top-color: #ffd700;
             border-radius: 50%;
@@ -341,8 +386,9 @@
         @media (max-width: 768px) {
             .section-title { font-size: 28px; }
             .shop-grid { grid-template-columns: 1fr; }
+            .news-grid { grid-template-columns: 1fr; }
+            .news-card.featured { grid-column: span 1; }
             .balance { font-size: 20px; }
-            .board-message { font-size: 22px; }
         }
     </style>
 </head>
@@ -354,29 +400,6 @@
 
     <div id="loadingPage" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); display:flex; justify-content:center; align-items:center; z-index:9999;">
         <div style="text-align:center;"><div class="loading-spinner"></div><div style="font-family:'Orbitron'; color:#ffd700;">ЗАГРУЗКА ДАННЫХ...</div></div>
-    </div>
-
-    <div id="authPage" class="main-container" style="display: none;">
-        <div style="text-align:center; margin: 100px auto; max-width: 500px;">
-            <h1 style="font-family:'Orbitron'; font-size:60px; background:linear-gradient(135deg,#fff,#ffd700); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:40px;">GRIF LAUNCHER</h1>
-            <div class="profile-card" style="padding: 40px;">
-                <div class="tabs">
-                    <button class="tab-btn active" data-tab="login">ВХОД</button>
-                    <button class="tab-btn" data-tab="register">РЕГИСТРАЦИЯ</button>
-                </div>
-                <div id="loginPane" class="tab-pane active">
-                    <input type="email" id="loginEmail" placeholder="Email">
-                    <input type="password" id="loginPass" placeholder="Пароль">
-                    <button id="doLoginBtn">ВОЙТИ</button>
-                </div>
-                <div id="registerPane" class="tab-pane">
-                    <input type="text" id="regUsername" placeholder="Никнейм">
-                    <input type="email" id="regEmail" placeholder="Email">
-                    <input type="password" id="regPass" placeholder="Пароль (мин. 6)">
-                    <button id="doRegisterBtn">ЗАРЕГИСТРИРОВАТЬСЯ</button>
-                </div>
-            </div>
-        </div>
     </div>
 
     <div id="mainContent" class="main-container" style="display: none;">
@@ -391,17 +414,15 @@
             <div class="menu-tab admin-only" data-page="admin" style="display:none;">👑 АДМИН</div>
         </div>
 
-        <!-- ГЛАВНАЯ - ДОСКА ОБЪЯВЛЕНИЙ -->
+        <!-- ГЛАВНАЯ - ЛЕНТА НОВОСТЕЙ -->
         <div id="homePage" class="page active">
-            <div class="board">
-                <div class="board-message" id="boardMessage"></div>
-            </div>
+            <div class="news-filters" id="newsFilters"></div>
+            <div class="news-grid" id="newsGrid"></div>
         </div>
 
-        <!-- МАГАЗИН С КАТЕГОРИЯМИ -->
+        <!-- МАГАЗИН -->
         <div id="shopPage" class="page">
             <div class="section-title">✨ ПРИВИЛЕГИИ</div>
-            <div class="shop-categories" id="shopCategories"></div>
             <div class="shop-grid" id="shopGrid"></div>
         </div>
 
@@ -417,31 +438,23 @@
                 <div class="profile-info" id="profileInfo"></div>
                 <div id="donatesContainer" style="margin: 20px 0; text-align: center;"></div>
                 <button class="change-password-btn" id="changePasswordBtn" style="width:100%; margin-bottom:15px;">🔑 Сменить пароль</button>
-                <button class="admin-btn" id="openAdminBtn">👑 АДМИН ПАНЕЛЬ</button>
             </div>
         </div>
 
-        <!-- АДМИН-ПАНЕЛЬ (ОТДЕЛЬНАЯ СТРАНИЦА) -->
+        <!-- АДМИН-ПАНЕЛЬ -->
         <div id="adminPage" class="page">
             <div class="section-title">👑 АДМИН-ПАНЕЛЬ</div>
-            <div id="adminPasswordPanel" style="text-align:center; margin:50px auto; max-width:400px;">
-                <input type="password" id="adminPassword" placeholder="Введите пароль" style="width:100%; padding:14px; border-radius:60px;">
-                <button id="checkAdminPasswordBtn" style="margin-top:15px;">ВОЙТИ</button>
+            <div id="adminLoginPanel" class="admin-login-box">
+                <div style="background:rgba(0,0,0,0.5); border-radius:40px; padding:40px;">
+                    <h3 style="margin-bottom:20px;">🔐 ВХОД В АДМИНКУ</h3>
+                    <input type="password" id="adminPassword" placeholder="Введите ключ доступа" style="width:100%; padding:14px; border-radius:60px; margin-bottom:15px;">
+                    <button id="checkAdminPasswordBtn" style="background:linear-gradient(135deg,#ffd700,#ffaa00); border:none; padding:14px 30px; border-radius:60px; font-weight:bold; cursor:pointer; width:100%;">ВОЙТИ В АДМИНКУ</button>
+                </div>
             </div>
             <div id="adminPanelContent" style="display:none;">
                 <div class="admin-section">
-                    <h3>📋 НОВЫЕ ИГРОКИ (последние 24ч)</h3>
+                    <h3>🕐 НОВЫЕ ИГРОКИ (последние 30 минут)</h3>
                     <div class="players-list" id="newPlayersList"></div>
-                </div>
-                <div class="admin-section">
-                    <h3>📢 УПРАВЛЕНИЕ ДОСКОЙ</h3>
-                    <textarea id="newBoardText" rows="3" placeholder="Текст объявления"></textarea>
-                    <div style="margin:15px 0;">
-                        <select id="boardStyle"><option value="normal">Обычный цвет</option><option value="rgb">RGB переливание</option></select>
-                        <input type="color" id="boardColor" value="#ffd700">
-                    </div>
-                    <button id="updateBoardBtn">📌 ОБНОВИТЬ ДОСКУ</button>
-                    <div id="boardHistory" style="margin-top:20px;"></div>
                 </div>
                 <div class="admin-section">
                     <h3>📜 ЛОГИ ДЕЙСТВИЙ</h3>
@@ -451,7 +464,29 @@
         </div>
     </div>
 
-    <!-- МОДАЛКИ -->
+    <!-- МОДАЛКА АВТОРИЗАЦИИ -->
+    <div id="authModal" class="modal" style="display: flex;">
+        <div class="auth-modal">
+            <h2>GRIF LAUNCHER</h2>
+            <div class="tabs-auth">
+                <button class="tab-auth active" data-tab="login">ВХОД</button>
+                <button class="tab-auth" data-tab="register">РЕГИСТРАЦИЯ</button>
+            </div>
+            <div id="loginPaneAuth" class="tab-pane-auth active">
+                <input type="email" id="loginEmail" placeholder="Email">
+                <input type="password" id="loginPass" placeholder="Пароль">
+                <button id="doLoginBtn">ВОЙТИ</button>
+            </div>
+            <div id="registerPaneAuth" class="tab-pane-auth">
+                <input type="text" id="regUsername" placeholder="Никнейм">
+                <input type="email" id="regEmail" placeholder="Email">
+                <input type="password" id="regPass" placeholder="Пароль (мин. 6)">
+                <button id="doRegisterBtn">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ДРУГИЕ МОДАЛКИ -->
     <div id="editNameModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeEditModal">&times;</span><h3>Сменить имя</h3><input type="text" id="newNameInput" placeholder="Новое имя"><button id="saveNameBtn">Сохранить</button></div></div>
     <div id="changePasswordModal" class="modal"><div class="modal-content"><span class="close-modal" id="closePasswordModal">&times;</span><h3>Сменить пароль</h3><input type="password" id="oldPasswordInput" placeholder="Старый пароль"><input type="password"id="newPasswordInput" placeholder="Новый пароль (мин. 6)"><button id="savePasswordBtn">Сохранить</button></div></div>
     <div id="buyModal" class="modal"><div class="modal-content"><span class="close-modal" id="closeBuyModal">&times;</span><h3 id="buyProductName"></h3><p>Цена: <strong id="buyPrice"></strong> ₽</p><input type="text" id="buyNick" placeholder="Ваш ник на сервере"><button id="confirmBuyBtn">ПОДТВЕРДИТЬ ПОКУПКУ</button></div></div>
@@ -473,18 +508,24 @@
         const ADMIN_EMAIL = "ramonenok@bk.ru";
         const VERIFIED_SVG = `<svg class="verified-badge" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#1e88e5"/><path d="M7 12L10.5 15.5L17 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-        const privileges = [
-            { name: "Премиум", nameEn: "[PREM]", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/kit", "/fly"], category: "Основные" },
-            { name: "Креатив", nameEn: "[CREAT]", price: 2500, icon: "fa-palette", features: ["Доступ к креативу", "WorldEdit"], category: "Основные" },
-            { name: "Модер", nameEn: "[MODER]", price: 5000, icon: "fa-shield-alt", features: ["Мут/кик", "Проверка игроков"], category: "Модерация" },
-            { name: "Лорд", nameEn: "[LORD]", price: 10000, icon: "fa-crown", features: ["Команда /god", "Неприкосновенность"], category: "Основные" },
-            { name: "Админ", nameEn: "[ADMIN]", price: 20000, icon: "fa-user-tie", features: ["Баны/кики", "Управление"], category: "Модерация" },
-            { name: "Гл Админ", nameEn: "[GLADMIN]", price: 50000, icon: "fa-users", features: ["Все права"], category: "Модерация" },
-            { name: "Создатель", nameEn: "[CREATOR]", price: 100000, icon: "fa-star", features: ["Полный доступ"], category: "Элитные" },
-            { name: "Основатель", nameEn: "[FOUNDER]", price: 200000, icon: "fa-fire", features: ["Управление проектом"], category: "Элитные" },
-            { name: "Правитель", nameEn: "[LEADER]", price: 1000000, icon: "fa-chess-king", features: ["Верховный правитель"], category: "Элитные" }
+        // ОБЪЯВЛЕНИЯ ДЛЯ ЛЕНТЫ
+        const newsItems = [
+            { id: 1, title: "🔥 ТУРНИР НА ВЫЖИВАНИЕ", desc: "Призовой фонд 1 000 000 ₽. Регистрация до 15 июня!", img: "https://picsum.photos/id/104/800/400", category: "events", featured: true, buttonText: "УЧАСТВОВАТЬ" },
+            { id: 2, title: "⚡ НОВЫЙ СЕЗОН", desc: "Сезонные награды, эксклюзивные скины и привилегии.", img: "https://picsum.photos/id/106/800/400", category: "updates", featured: false, buttonText: "ПОДРОБНЕЕ" },
+            { id: 3, title: "💎 VIP РАСПРОДАЖА", desc: "Скидка 30% на все привилегии до конца недели!", img: "https://picsum.photos/id/107/800/400", category: "important", featured: false, buttonText: "КУПИТЬ VIP" },
+            { id: 4, title: "🎮 ИВЕНТ «ОХОТА НА ДРАКОНА»", desc: "Убей дракона и получи легендарный меч!", img: "https://picsum.photos/id/108/800/400", category: "events", featured: false, buttonText: "УЧАСТВОВАТЬ" }
         ];
-        const categories = [...new Set(privileges.map(p => p.category))];
+
+        const privileges = [
+            { name: "Премиум", nameEn: "[PREM]", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/kit", "/fly"] },
+            { name: "Креатив", nameEn: "[CREAT]", price: 2500, icon: "fa-palette", features: ["Доступ к креативу", "WorldEdit"] },
+            { name: "Модер", nameEn: "[MODER]", price: 5000, icon: "fa-shield-alt", features: ["Мут/кик", "Проверка игроков"] },
+            { name: "Лорд", nameEn: "[LORD]", price: 10000, icon: "fa-crown", features: ["Команда /god", "Неприкосновенность"] },
+            { name: "Админ", nameEn: "[ADMIN]", price: 20000, icon: "fa-user-tie", features: ["Баны/кики", "Управление"] },
+            { name: "Гл Админ", nameEn: "[GLADMIN]", price: 50000, icon: "fa-users", features: ["Все права"] },
+            { name: "Создатель", nameEn: "[CREATOR]", price: 100000, icon: "fa-star", features: ["Полный доступ"] },
+            { name: "Правитель", nameEn: "[LEADER]", price: 1000000, icon: "fa-chess-king", features: ["Верховный правитель"] }
+        ];
 
         let currentUser = null;
         let currentBalance = 0;
@@ -503,11 +544,10 @@
             try { await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData }); } catch(e) {}
         }
 
-        function renderShop(category = "Все") {
+        function renderShop() {
             const container = document.getElementById('shopGrid');
             if(!container) return;
-            const filtered = category === "Все" ? privileges : privileges.filter(p => p.category === category);
-            container.innerHTML = filtered.map(p => `
+            container.innerHTML = privileges.map(p => `
                 <div class="product-card">
                     <div class="product-icon"><i class="fas ${p.icon}"></i></div>
                     <div class="product-name">${p.name}</div>
@@ -519,19 +559,41 @@
             `).join('');
         }
 
-        function renderCategories() {
-            const container = document.getElementById('shopCategories');
+        function renderNews(category = "all") {
+            const container = document.getElementById('newsGrid');
             if(!container) return;
-            let html = `<button class="category-btn active" data-cat="Все">Все</button>`;
-            categories.forEach(cat => html += `<button class="category-btn" data-cat="${cat}">${cat}</button>`);
-            container.innerHTML = html;
-            document.querySelectorAll('.category-btn').forEach(btn => {
+            const filtered = category === "all" ? newsItems : newsItems.filter(n => n.category === category);
+            container.innerHTML = filtered.map(n => `
+                <div class="news-card ${n.featured ? 'featured' : ''}">
+                    <img class="news-img" src="${n.img}" alt="">
+                    <div class="news-content">
+                        <span class="news-category">${n.category === 'events' ? '🎯 ИВЕНТ' : n.category === 'updates' ? '⚡ ОБНОВЛЕНИЕ' : '⚠️ ВАЖНОЕ'}</span>
+                        <h3 class="news-title">${n.title}</h3>
+                        <p class="news-desc">${n.desc}</p>
+                        <button class="news-btn" onclick="alert('Функция в разработке')">${n.buttonText}</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderFilters() {
+            const container = document.getElementById('newsFilters');
+            if(!container) return;
+            const categories = [
+                { id: "all", name: "Все" },
+                { id: "events", name: "Ивенты" },
+                { id: "updates", name: "Обновления" },
+                { id: "important", name: "Важное" }
+            ];
+            container.innerHTML = categories.map(c => `<button class="filter-btn" data-cat="${c.id}">${c.name}</button>`).join('');
+            document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.onclick = () => {
-                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
-                    renderShop(btn.dataset.cat);
+                    renderNews(btn.dataset.cat);
                 };
             });
+            document.querySelector('.filter-btn').classList.add('active');
         }
 
         window.openBuyModal = (name, price) => {
@@ -581,8 +643,8 @@
         }
 
         async function loadNewPlayers() {
-            const dayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-            const snap = await db.collection('users').where('registeredAt', '>=', dayAgo.toISOString()).get();
+            const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
+            const snap = await db.collection('users').where('registeredAt', '>=', thirtyMinutesAgo.toISOString()).get();
             const container = document.getElementById('newPlayersList');
             if(!container) return;
             container.innerHTML = snap.docs.map(doc => {
@@ -638,33 +700,10 @@
             document.getElementById('userActionsModal').style.display = 'none';
         };
 
-        async function loadBoard() {
-            const doc = await db.collection('settings').doc('board').get();
-            if(doc.exists) {
-                const data = doc.data();
-                const messageEl = document.getElementById('boardMessage');
-                messageEl.innerText = data.text || 'Добро пожаловать в GrifLauncher!';
-                messageEl.style.color = data.color || '#ffd700';
-                if(data.style === 'rgb') messageEl.classList.add('rgb-text');
-                else messageEl.classList.remove('rgb-text');
-            }
-        }
-
         async function loadLogs() {
             const snap = await db.collection('logs').orderBy('timestamp', 'desc').limit(50).get();
             document.getElementById('logsList').innerHTML = snap.docs.map(doc => `<div class="log-item">[${new Date(doc.data().timestamp?.toDate()).toLocaleString()}] <strong>${doc.data().action}</strong> → ${doc.data().target}<br>${doc.data().details || ''}</div>`).join('');
         }
-
-        document.getElementById('updateBoardBtn')?.addEventListener('click', async () => {
-            const text = document.getElementById('newBoardText').value.trim();
-            const style = document.getElementById('boardStyle').value;
-            const color = document.getElementById('boardColor').value;
-            if(!text) return alert('Введите текст');
-            await db.collection('settings').doc('board').set({ text, style, color, updatedBy: currentUser.email, updatedAt: new Date() });
-            await db.collection('boardHistory').add({ text, style, color, moderator: currentUser.email, timestamp: new Date() });
-            alert('Доска обновлена!');
-            loadBoard();
-        });
 
         document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
         document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
@@ -702,6 +741,7 @@
                 const cred = await auth.createUserWithEmailAndPassword(email, pass);
                 await cred.user.updateProfile({ displayName: username });
                 await db.collection('users').doc(cred.user.uid).set({ username, email, balance: 50000, isAdmin: (email === ADMIN_EMAIL), registeredAt: new Date().toISOString() });
+                document.getElementById('authModal').style.display = 'none';
                 alert('✅ Регистрация успешна! Баланс: 50 000 ₽');
             } catch(e) { alert('Ошибка: ' + e.message); }
         };
@@ -709,7 +749,10 @@
             const email = document.getElementById('loginEmail').value.trim();
             const pass = document.getElementById('loginPass').value;
             if(!email || !pass) return alert('Введите email и пароль');
-            try { await auth.signInWithEmailAndPassword(email, pass); } catch(e) { alert('Ошибка: ' + e.message); }
+            try {
+                await auth.signInWithEmailAndPassword(email, pass);
+                document.getElementById('authModal').style.display = 'none';
+            } catch(e) { alert('Ошибка: ' + e.message); }
         };
         document.getElementById('logoutBtn').onclick = async () => { await auth.signOut(); };
         document.getElementById('closeUserActionsModal').onclick = () => document.getElementById('userActionsModal').style.display = 'none';
@@ -717,14 +760,11 @@
         
         document.getElementById('checkAdminPasswordBtn')?.addEventListener('click', () => {
             if(document.getElementById('adminPassword').value === 'website') {
-                document.getElementById('adminPasswordPanel').style.display = 'none';
+                document.getElementById('adminLoginPanel').style.display = 'none';
                 document.getElementById('adminPanelContent').style.display = 'block';
                 loadNewPlayers();
                 loadLogs();
-            } else alert('❌ Неверный пароль!');
-        });
-        document.getElementById('openAdminBtn')?.addEventListener('click', () => {
-            document.querySelector('.menu-tab[data-page="admin"]').click();
+            } else alert('❌ Неверный ключ!');
         });
 
         document.querySelectorAll('.menu-tab').forEach(tab => {
@@ -737,12 +777,12 @@
                 if(tab.dataset.page === 'admin' && currentUser) loadNewPlayers();
             };
         });
-        document.querySelectorAll('.tab-btn').forEach(btn => {
+        document.querySelectorAll('.tab-auth').forEach(btn => {
             btn.onclick = () => {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-auth').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                document.getElementById('loginPane').classList.toggle('active', btn.dataset.tab === 'login');
-                document.getElementById('registerPane').classList.toggle('active', btn.dataset.tab === 'register');
+                document.getElementById('loginPaneAuth').classList.toggle('active', btn.dataset.tab === 'login');
+                document.getElementById('registerPaneAuth').classList.toggle('active', btn.dataset.tab === 'register');
             };
         });
 
@@ -750,17 +790,17 @@
             document.getElementById('loadingPage').style.display = 'none';
             if(user) {
                 currentUser = user;
-                document.getElementById('authPage').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
+                document.getElementById('authModal').style.display = 'none';
                 await loadUserData(user);
                 renderShop();
-                renderCategories();
-                loadBoard();
+                renderNews();
+                renderFilters();
                 const doc = await db.collection('users').doc(user.uid).get();
                 if(!doc.exists || doc.data().isAdmin === undefined) await db.collection('users').doc(user.uid).update({ isAdmin: (user.email === ADMIN_EMAIL) });
             } else {
-                document.getElementById('authPage').style.display = 'block';
                 document.getElementById('mainContent').style.display = 'none';
+                document.getElementById('authModal').style.display = 'flex';
             }
         });
     </script>
