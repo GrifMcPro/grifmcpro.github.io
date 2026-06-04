@@ -12,7 +12,6 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* Анимации */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -25,6 +24,20 @@
         @keyframes glowPulse {
             0% { box-shadow: 0 0 5px #ffd700; }
             100% { box-shadow: 0 0 20px #ffd700; }
+        }
+        @keyframes rgbBorder {
+            0% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; }
+            25% { border-color: #00ff00; box-shadow: 0 0 10px #00ff00; }
+            50% { border-color: #0000ff; box-shadow: 0 0 10px #0000ff; }
+            75% { border-color: #ff00ff; box-shadow: 0 0 10px #ff00ff; }
+            100% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; }
+        }
+        @keyframes rgbText {
+            0% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
+            25% { color: #00ff00; text-shadow: 0 0 5px #00ff00; }
+            50% { color: #0000ff; text-shadow: 0 0 5px #0000ff; }
+            75% { color: #ff00ff; text-shadow: 0 0 5px #ff00ff; }
+            100% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
         }
         
         body {
@@ -346,20 +359,6 @@
         .close-modal { float: right; font-size: 28px; cursor: pointer; color: #ffd700; }
         
         /* КРАСИВОЕ МЕНЮ ВХОДА/РЕГИСТРАЦИИ (С RGB) */
-        @keyframes rgbBorder {
-            0% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; }
-            25% { border-color: #00ff00; box-shadow: 0 0 10px #00ff00; }
-            50% { border-color: #0000ff; box-shadow: 0 0 10px #0000ff; }
-            75% { border-color: #ff00ff; box-shadow: 0 0 10px #ff00ff; }
-            100% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; }
-        }
-        @keyframes rgbText {
-            0% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
-            25% { color: #00ff00; text-shadow: 0 0 5px #00ff00; }
-            50% { color: #0000ff; text-shadow: 0 0 5px #0000ff; }
-            75% { color: #ff00ff; text-shadow: 0 0 5px #ff00ff; }
-            100% { color: #ff0000; text-shadow: 0 0 5px #ff0000; }
-        }
         .auth-modal {
             background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
             border-radius: 48px;
@@ -652,6 +651,8 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
+        // ГЛАВНЫЕ АДМИНЫ (по email) - ТВОЯ ПОЧТА ТУТ!
+        const MAIN_ADMINS = ["ramonenok@bk.ru", "GrifMCpro@mail.ru"];
         const SYSTEM_NAME = "Система";
         const VERIFIED_SVG = `<svg class="verified-badge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#1e88e5"/><path d="M7 12L10.5 15.5L17 9" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>`;
 
@@ -669,6 +670,14 @@
         let currentProduct = null;
         let timerInterval = null;
         let moderatorsList = [];
+
+        function isAdmin(email) {
+            // Проверяем по списку главных админов ИЛИ по добавленным модераторам
+            if(MAIN_ADMINS.includes(email)) return true;
+            // Проверяем, есть ли пользователь в списке модераторов по email или нику
+            if(moderatorsList.some(m => m.email === email)) return true;
+            return false;
+        }
 
         async function addLog(action, target, details) {
             if(!currentUser) return;
@@ -732,9 +741,12 @@
                 else donatesSnap.forEach(d => donatesContainer.innerHTML += `<span class="donate-badge">${d.data().product}</span> `);
             }
             
-            const isModerator = moderatorsList.includes(data.username) || data.isAdmin === true;
-            if(isModerator) {
+            // Проверка админа
+            const hasAdminAccess = isAdmin(user.email);
+            if(hasAdminAccess) {
                 document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
+                // Обновляем поле в базе
+                await db.collection('users').doc(user.uid).update({ isAdmin: true });
             }
         }
 
@@ -747,20 +759,24 @@
             }
             const container = document.getElementById('moderatorsList');
             if(container) {
-                container.innerHTML = moderatorsList.map(m => `<div style="background:rgba(0,0,0,0.5); border-radius:16px; padding:10px; margin-bottom:8px; display:flex; justify-content:space-between;"><span>👑 ${m}</span><button onclick="removeModerator('${m}')" style="background:#ef4444; border:none; padding:5px 15px; border-radius:30px; cursor:pointer;">УДАЛИТЬ</button></div>`).join('');
+                container.innerHTML = moderatorsList.map(m => `<div style="background:rgba(0,0,0,0.5); border-radius:16px; padding:10px; margin-bottom:8px; display:flex; justify-content:space-between;"><span>👑 ${m.nick || m.email} (${m.email})</span><button onclick="removeModerator('${m.email}')" style="background:#ef4444; border:none; padding:5px 15px; border-radius:30px; cursor:pointer;">УДАЛИТЬ</button></div>`).join('');
             }
         }
-        window.removeModerator = async (nick) => {
-            moderatorsList = moderatorsList.filter(m => m !== nick);
+        window.removeModerator = async (email) => {
+            moderatorsList = moderatorsList.filter(m => m.email !== email);
             await db.collection('settings').doc('moderators').set({ list: moderatorsList });
             loadModerators();
-            alert(`Модератор ${nick} удалён`);
+            alert(`Модератор удалён`);
         };
         document.getElementById('addModeratorBtn').onclick = async () => {
             const nick = document.getElementById('moderatorNick').value.trim();
             if(!nick) return alert('Введите ник');
-            if(moderatorsList.includes(nick)) return alert('Уже в списке');
-            moderatorsList.push(nick);
+            // Ищем пользователя по нику
+            const userSnap = await db.collection('users').where('username', '==', nick).get();
+            if(userSnap.empty) return alert('Пользователь не найден');
+            const userData = userSnap.docs[0].data();
+            if(moderatorsList.some(m => m.email === userData.email)) return alert('Уже в списке');
+            moderatorsList.push({ nick: userData.username, email: userData.email });
             await db.collection('settings').doc('moderators').set({ list: moderatorsList });
             document.getElementById('moderatorNick').value = '';
             loadModerators();
@@ -1124,7 +1140,7 @@
             try {
                 const cred = await auth.createUserWithEmailAndPassword(email, pass);
                 await cred.user.updateProfile({ displayName: username });
-                await db.collection('users').doc(cred.user.uid).set({ username, email, balance: 50000, isAdmin: false, isVerified: false, registeredAt: new Date().toISOString() });
+                await db.collection('users').doc(cred.user.uid).set({ username, email, balance: 50000, isAdmin: isAdmin(email), isVerified: false, registeredAt: new Date().toISOString() });
                 document.getElementById('authModal').style.display = 'none';
                 alert('✅ Регистрация успешна! Баланс: 50 000 ₽');
             } catch(e) { alert('Ошибка: ' + e.message); }
@@ -1176,7 +1192,7 @@
             if(user) {
                 currentUser = user;
                 const siteClosed = await checkSiteClosed();
-                if(siteClosed && user.email !== "ramonenok@bk.ru") {
+                if(siteClosed && !MAIN_ADMINS.includes(user.email) && !moderatorsList.some(m => m.email === user.email)) {
                     document.getElementById('mainContent').style.display = 'none';
                     document.getElementById('closedReason').innerText = siteClosed.reason;
                     document.getElementById('closedUntil').innerText = siteClosed.until ? new Date(siteClosed.until.toDate()).toLocaleString() : 'Неизвестно';
