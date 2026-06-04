@@ -303,12 +303,12 @@
         .tab-pane.active {
             display: block;
         }
-        /* ГАЛОЧКА 100% ВИДНА, НЕ УМЕНЬШАЕТСЯ */
+        /* ГАЛОЧКА — ЧЁТКАЯ, БЕЗ ФОНА, НЕ СЖИМАЕТСЯ */
         .verified-badge {
-            width: 24px !important;
-            height: 24px !important;
-            min-width: 24px !important;
-            max-width: 24px !important;
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            max-width: 24px;
             margin-left: 8px;
             vertical-align: middle;
             display: inline-block;
@@ -436,8 +436,9 @@
         const db = firebase.firestore();
 
         const ADMIN_EMAIL = "ramonenok@bk.ru";
-        // ПРЯМАЯ ССЫЛКА НА ГАЛОЧКУ (увеличенный размер)
-        const VERIFIED_ICON_URL = "https://avatars.mds.yandex.net/i?id=e68df5cb185633935be518dbdf8d2190_sr-5869826-images-thumbs&n=13";
+        
+        // ЧИСТАЯ SVG-ГАЛОЧКА (прозрачный фон, не сжимается)
+        const VERIFIED_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" style="width:24px; height:24px; margin-left:8px; vertical-align:middle;"><path fill="#1e88e5" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>`;
 
         const privileges = [
             { name: "Премиум", nameEn: "[PREM]", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/kit", "/fly"] },
@@ -484,13 +485,7 @@
             nameSpan.innerHTML = '';
             nameSpan.appendChild(document.createTextNode(data.username));
             if(isAdmin) {
-                const img = document.createElement('img');
-                img.src = VERIFIED_ICON_URL;
-                img.className = 'verified-badge';
-                img.alt = 'Verified';
-                img.style.width = '24px';
-                img.style.height = '24px';
-                nameSpan.appendChild(img);
+                nameSpan.insertAdjacentHTML('beforeend', VERIFIED_SVG);
             }
             
             document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> <strong>Email:</strong> ${user.email}</p><p><i class="fas fa-calendar"></i> <strong>Регистрация:</strong> ${data.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`;
