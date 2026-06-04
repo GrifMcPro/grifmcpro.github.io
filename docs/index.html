@@ -20,13 +20,15 @@
             --bg-dark: #0a0a0f;
             --bg-secondary: #0f0f15;
             --bg-tertiary: #13131a;
-            --bg-surface: rgba(15, 15, 25, 0.7);
+            --bg-surface: rgba(15, 15, 25, 0.75);
             --bg-surface-solid: #151520;
             --border-color: rgba(255, 215, 0, 0.12);
             --border-light: rgba(255, 215, 0, 0.2);
             --accent: #ffd700;
             --accent-dark: #ccaa00;
             --accent-glow: rgba(255, 215, 0, 0.3);
+            --admin-bg: rgba(255, 215, 0, 0.88);
+            --admin-text: #1a1a1a;
             --text-primary: #f0f0f0;
             --text-secondary: #a0a0b0;
             --text-muted: #6a6a7a;
@@ -57,31 +59,19 @@
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes glowPulse {
             0%, 100% { box-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent-glow); }
             50% { box-shadow: 0 0 20px var(--accent), 0 0 30px var(--accent-glow); }
         }
-
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
 
-        @keyframes borderRotate {
-            0% { border-image: linear-gradient(0deg, var(--accent), transparent) 1; }
-            100% { border-image: linear-gradient(360deg, var(--accent), transparent) 1; }
-        }
-
         .animate-in { animation: fadeInUp 0.5s ease; }
         .glow-animation { animation: glowPulse 2s infinite; }
 
-        /* Скроллбар */
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg-tertiary); }
         ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
@@ -217,7 +207,7 @@
         .page { display: none; animation: fadeIn 0.3s ease; }
         .page.active { display: block; }
 
-        /* ========== ГЛАВНАЯ - ТАЙМЕР НА ВЕСЬ ЭКРАН ========== */
+        /* ГЛАВНАЯ - ТАЙМЕР НА ВЕСЬ ЭКРАН */
         .hero-timer {
             min-height: 100vh;
             display: flex;
@@ -295,13 +285,7 @@
             letter-spacing: 2px;
         }
 
-        .timer-footer {
-            margin-top: 60px;
-            font-size: 18px;
-            color: var(--text-muted);
-        }
-
-        /* ========== МАГАЗИН ========== */
+        /* МАГАЗИН */
         .shop-section {
             padding: 100px 30px 60px;
             max-width: 1400px;
@@ -321,11 +305,6 @@
             background-clip: text;
             color: transparent;
             margin-bottom: 15px;
-        }
-
-        .shop-header p {
-            color: var(--text-secondary);
-            font-size: 18px;
         }
 
         .shop-grid {
@@ -358,7 +337,6 @@
         }
 
         .product-card:hover::before { left: 100%; }
-
         .product-card:hover {
             transform: translateY(-8px);
             border-color: var(--accent);
@@ -368,7 +346,7 @@
         .product-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--accent-bg), transparent);
+            background: linear-gradient(135deg, var(--accent-glow), transparent);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -378,13 +356,7 @@
         }
 
         .product-icon i { font-size: 40px; color: var(--accent); }
-
-        .product-name {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
+        .product-name { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
         .price {
             font-size: 32px;
             font-weight: 800;
@@ -428,7 +400,7 @@
 
         .buy-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
 
-        /* ========== ПРОФИЛЬ ========== */
+        /* ПРОФИЛЬ */
         .profile-section {
             padding: 100px 30px 60px;
             max-width: 700px;
@@ -468,10 +440,9 @@
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 20px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            gap: 0;
         }
 
         .profile-info {
@@ -534,13 +505,73 @@
             border: 1px solid var(--border-light);
         }
 
-        /* ========== ЧАТЫ ========== */
+        /* ГАЛОЧКИ - после ника без отступа, в размер букв */
+        .badge-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            height: auto;
+            margin-left: 0;
+            margin-right: 0;
+            vertical-align: middle;
+        }
+        .badge-icon i { font-size: 0.9em; }
+        .badge-blue i, .badge-red i, .badge-gold i, .badge-rainbow i, .badge-rgb i { color: white; }
+        .badge-crown i { color: var(--accent); font-size: 1em; }
+        .badge-blue { background: #3b82f6; border-radius: 50%; padding: 2px; }
+        .badge-red { background: #ef4444; border-radius: 50%; padding: 2px; }
+        .badge-gold { background: #ffd700; border-radius: 50%; padding: 2px; }
+        .badge-rainbow { background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); border-radius: 4px; padding: 2px; }
+        .badge-rgb { background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff); border-radius: 4px; padding: 2px; }
+        .badge-crown { background: none; }
+
+        /* ========== ЧАТЫ - СВЕРХУ КАК В ТЕЛЕГРАМ ========== */
         .chats-section {
             padding: 100px 30px 60px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
+        /* Переключатель чатов сверху */
+        .chat-top-switcher {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .chat-top-btn {
+            background: rgba(25, 25, 35, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            padding: 12px 32px;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-top-btn i { font-size: 18px; }
+
+        .chat-top-btn.active {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: var(--bg-dark);
+            border-color: transparent;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .chat-top-btn:hover:not(.active) {
+            background: rgba(255, 215, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Окно чата */
         .chat-window {
             background: var(--bg-surface);
             backdrop-filter: blur(20px);
@@ -571,9 +602,9 @@
         .chat-title h2 {
             font-size: 22px;
             font-weight: 700;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
         }
 
         .chat-title h2 i { color: var(--accent); }
@@ -602,31 +633,6 @@
         }
 
         .search-bar input:focus { border-color: var(--accent); }
-
-        .chat-switcher {
-            display: flex;
-            gap: 10px;
-            padding: 12px 25px;
-            background: rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .chat-switch-btn {
-            background: none;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 60px;
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
-        }
-
-        .chat-switch-btn:hover { background: rgba(255, 255, 255, 0.05); }
-        .chat-switch-btn.active {
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            color: var(--bg-dark);
-        }
 
         .messages-area {
             height: 450px;
@@ -672,7 +678,14 @@
             flex-wrap: wrap;
         }
 
-        .message-name { font-weight: 600; font-size: 14px; }
+        .message-name {
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0;
+        }
+
         .message-time { font-size: 10px; color: var(--text-muted); }
 
         .message-bubble {
@@ -685,15 +698,10 @@
         }
 
         .message.outgoing .message-bubble {
-            background: var(--accent-bg);
+            background: var(--accent-glow);
             border: 1px solid var(--border-light);
             border-top-right-radius: 4px;
             border-top-left-radius: 18px;
-        }
-
-        .message.admin .message-bubble {
-            background: var(--admin-bg);
-            color: var(--admin-text);
         }
 
         .admin-badge {
@@ -741,7 +749,74 @@
 
         .send-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
 
-        /* ========== АДМИНКА ========== */
+        /* Бот интерфейс */
+        .bot-interface {
+            padding: 0 25px 15px;
+        }
+
+        .bot-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .bot-btn {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--border-light);
+            padding: 8px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 13px;
+        }
+
+        .bot-btn:hover { background: rgba(255, 215, 0, 0.25); transform: scale(1.02); }
+
+        .wheel-container {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-lg);
+        }
+
+        .wheel {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: conic-gradient(#ffd700, #ffaa00, #ff8800, #ff6600, #ff4400, #ff2200, #ff0000);
+            margin: 10px auto;
+            transition: transform 3s cubic-bezier(0.2, 0.9, 0.1, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .wheel::after {
+            content: '▼';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            color: var(--accent);
+        }
+
+        .tasks-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .task-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: var(--radius-md);
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+
+        /* Админка */
         .admin-section {
             padding: 100px 30px 60px;
             max-width: 800px;
@@ -767,11 +842,7 @@
             color: transparent;
         }
 
-        .admin-login-box {
-            text-align: center;
-            padding: 30px;
-        }
-
+        .admin-login-box { text-align: center; padding: 30px; }
         .admin-login-box input {
             width: 100%;
             max-width: 300px;
@@ -783,7 +854,6 @@
             outline: none;
             margin-bottom: 15px;
         }
-
         .admin-login-box input:focus { border-color: var(--accent); }
 
         .admin-block {
@@ -830,7 +900,6 @@
         }
 
         .admin-btn:hover { transform: scale(1.01); }
-
         .admin-btn-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
         .admin-btn-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
         .admin-btn-purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
@@ -944,24 +1013,6 @@
         }
         .close-modal:hover { transform: scale(1.1); }
 
-        .badge-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 18px;
-            height: 18px;
-            margin-left: 6px;
-            border-radius: 50%;
-        }
-        .badge-blue { background: #3b82f6; }
-        .badge-red { background: #ef4444; }
-        .badge-gold { background: #ffd700; }
-        .badge-rainbow { background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); border-radius: 4px; }
-        .badge-rgb { background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff); }
-        .badge-crown { background: none; color: #ffd700; width: auto; }
-        .badge-icon i { font-size: 10px; color: white; }
-        .badge-crown i { color: #ffd700; font-size: 14px; }
-
         .typing-indicator {
             padding: 8px 25px;
             font-size: 12px;
@@ -994,11 +1045,12 @@
             .timer-title { font-size: 28px; }
             .product-card { margin: 0 15px; }
             .profile-section, .chats-section, .admin-section { padding: 100px 15px 40px; }
+            .chat-top-btn { padding: 8px 20px; font-size: 13px; }
+            .message { max-width: 95%; }
         }
     </style>
 </head>
 <body>
-    <!-- Хедер -->
     <div class="site-header">
         <div class="header-content">
             <div class="logo">
@@ -1019,7 +1071,7 @@
         </div>
     </div>
 
-    <!-- ГЛАВНАЯ - ТАЙМЕР НА ВЕСЬ ЭКРАН -->
+    <!-- ГЛАВНАЯ -->
     <div id="homePage" class="page active">
         <div class="hero-timer">
             <div class="timer-container">
@@ -1030,7 +1082,7 @@
                     <div class="countdown-block"><div class="countdown-number" id="minutes">0</div><div class="countdown-label">Минут</div></div>
                     <div class="countdown-block"><div class="countdown-number" id="seconds">0</div><div class="countdown-label">Секунд</div></div>
                 </div>
-                <div class="timer-footer" id="eventDesc"></div>
+                <div class="timer-footer" id="eventDesc" style="margin-top: 40px; color: var(--text-muted);"></div>
             </div>
         </div>
     </div>
@@ -1049,20 +1101,22 @@
     <!-- ЧАТЫ -->
     <div id="chatsPage" class="page">
         <div class="chats-section">
+            <!-- Переключатель чатов сверху как в Telegram -->
+            <div class="chat-top-switcher">
+                <button class="chat-top-btn active" data-chat="channel"><i class="fas fa-hashtag"></i> GrifMcPro <span class="badge-icon badge-gold"><i class="fas fa-check"></i></span></button>
+                <button class="chat-top-btn" data-chat="bot"><i class="fas fa-robot"></i> GrifMcBot <span class="badge-icon badge-gold"><i class="fas fa-check"></i></span></button>
+                <button class="chat-top-btn" data-chat="leader"><i class="fas fa-crown"></i> GrifMcProLeader <span class="badge-icon badge-crown"><i class="fas fa-crown"></i></span></button>
+            </div>
+
             <div class="chat-window">
                 <div class="chat-header">
                     <div class="chat-title">
-                        <h2><i class="fas fa-hashtag"></i> <span id="currentChatTitle">основной</span></h2>
+                        <h2 id="currentChatTitle"><i class="fas fa-hashtag"></i> GrifMcPro <span class="badge-icon badge-gold"><i class="fas fa-check"></i></span></h2>
                         <div class="search-bar">
                             <i class="fas fa-search"></i>
                             <input type="text" id="searchMessages" placeholder="Поиск сообщений...">
                         </div>
                     </div>
-                </div>
-                <div class="chat-switcher">
-                    <button class="chat-switch-btn active" data-chat="channel">📢 # основной</button>
-                    <button class="chat-switch-btn" data-chat="bot">🤖 # бот-помощник</button>
-                    <button class="chat-switch-btn" data-chat="admin">👑 # личка с админом</button>
                 </div>
                 <div class="messages-area" id="messagesArea"></div>
                 <div class="typing-indicator" id="typingIndicator" style="display: none;">
@@ -1071,22 +1125,22 @@
                     <div class="typing-dots"><span></span><span></span><span></span></div>
                 </div>
                 <div id="botInterface" style="display: none;">
-                    <div style="padding: 0 25px 15px;">
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <button class="bot-btn" data-cmd="/start" style="background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.3); padding:8px 16px; border-radius:40px; cursor:pointer;">🏠 /start</button>
-                            <button class="bot-btn" data-cmd="/tasks" style="background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.3); padding:8px 16px; border-radius:40px; cursor:pointer;">📋 /tasks</button>
-                            <button class="bot-btn" data-cmd="/wheel" style="background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.3); padding:8px 16px; border-radius:40px; cursor:pointer;">🎡 /wheel</button>
-                            <button class="bot-btn" data-cmd="/help" style="background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.3); padding:8px 16px; border-radius:40px; cursor:pointer;">❓ /help</button>
+                    <div class="bot-interface">
+                        <div class="bot-buttons">
+                            <button class="bot-btn" data-cmd="/start"><i class="fas fa-play"></i> /start</button>
+                            <button class="bot-btn" data-cmd="/tasks"><i class="fas fa-tasks"></i> /tasks</button>
+                            <button class="bot-btn" data-cmd="/wheel"><i class="fas fa-dice-d6"></i> /wheel</button>
+                            <button class="bot-btn" data-cmd="/help"><i class="fas fa-question-circle"></i> /help</button>
                         </div>
-                        <div id="wheelGame" style="display: none; text-align: center; margin-top: 15px;">
-                            <div style="background:rgba(0,0,0,0.3); border-radius:20px; padding:20px;">
-                                <div class="wheel" id="wheel" style="width:160px; height:160px; border-radius:50%; background:conic-gradient(#ffd700, #ffaa00, #ff8800, #ff6600, #ff4400, #ff2200, #ff0000); margin:10px auto; transition:transform 3s cubic-bezier(0.2,0.9,0.1,1); cursor:pointer; position:relative;"></div>
-                                <button id="spinWheelBtn" class="admin-btn" style="margin-top:10px; width:auto; padding:10px 30px;">🎡 КРУТИТЬ</button>
-                                <div id="wheelNextSpin" style="margin-top:10px;"></div>
+                        <div id="wheelGame" style="display: none;">
+                            <div class="wheel-container">
+                                <div class="wheel" id="wheel"></div>
+                                <button id="spinWheelBtn" class="admin-btn" style="margin-top: 10px; width: auto; padding: 10px 30px;"><i class="fas fa-dice-d6"></i> КРУТИТЬ</button>
+                                <div id="wheelNextSpin" style="margin-top: 10px;"></div>
                             </div>
                         </div>
-                        <div id="tasksList" style="display: none; margin-top: 15px;">
-                            <div id="tasksContainer"></div>
+                        <div id="tasksList" style="display: none;">
+                            <div id="tasksContainer" class="tasks-container"></div>
                         </div>
                     </div>
                 </div>
@@ -1181,6 +1235,7 @@
             const db = firebase.firestore();
 
             const MAIN_ADMIN_EMAIL = "ramonenok@bk.ru";
+            const ADMIN_CHAT_ID = "GrifMcProLeader";
             let currentUser = null;
             let currentBalance = 0;
             let currentProduct = null;
@@ -1205,17 +1260,19 @@
                 return `<span class="badge-icon ${map[type]}"><i class="fas ${icon}"></i></span>`;
             }
 
-            function isAdminMessage(senderEmail) {
-                return senderEmail === MAIN_ADMIN_EMAIL;
-            }
-
+            // Загрузка сообщений для выбранного чата
             function loadMessages() {
                 if (messagesUnsub) messagesUnsub();
                 let collectionPath = '';
-                if (currentChat === 'channel') collectionPath = 'chats/channel/messages';
-                else if (currentChat === 'bot') collectionPath = 'chats/bot/messages';
-                else if (currentChat === 'admin') collectionPath = `chats/admin/${MAIN_ADMIN_EMAIL}/messages`;
-                else return;
+                if (currentChat === 'channel') {
+                    collectionPath = 'chats/channel/messages';
+                } else if (currentChat === 'bot') {
+                    collectionPath = 'chats/bot/messages';
+                } else if (currentChat === 'leader') {
+                    collectionPath = `chats/leader/${MAIN_ADMIN_EMAIL}/messages`;
+                } else {
+                    return;
+                }
 
                 const messagesRef = db.collection(collectionPath).orderBy('timestamp');
                 messagesUnsub = messagesRef.onSnapshot((snapshot) => {
@@ -1225,9 +1282,9 @@
                     snapshot.forEach(doc => {
                         const msg = doc.data();
                         const isOutgoing = msg.from === currentUser?.uid;
-                        const isAdmin = isAdminMessage(msg.fromEmail);
+                        const isAdmin = msg.fromEmail === MAIN_ADMIN_EMAIL;
                         container.innerHTML += `
-                            <div class="message ${isOutgoing ? 'outgoing' : 'incoming'} ${isAdmin ? 'admin' : ''}">
+                            <div class="message ${isOutgoing ? 'outgoing' : 'incoming'}">
                                 <div class="message-avatar"><i class="fas ${isOutgoing ? 'fa-user' : (isAdmin ? 'fa-crown' : 'fa-user-circle')}"></i></div>
                                 <div class="message-content">
                                     <div class="message-header">
@@ -1248,18 +1305,29 @@
                 if (!text.trim()) return;
                 if (currentChat === 'channel') {
                     await db.collection('chats/channel/messages').add({
-                        from: currentUser.uid, fromName: currentUser.displayName, fromEmail: currentUser.email,
+                        from: currentUser.uid,
+                        fromName: currentUser.displayName,
+                        fromEmail: currentUser.email,
                         fromBadge: (await db.collection('users').doc(currentUser.uid).get()).data()?.badge,
-                        text: text, timestamp: new Date()
+                        text: text,
+                        timestamp: new Date()
                     });
                 } else if (currentChat === 'bot') {
                     await db.collection('chats/bot/messages').add({
-                        from: currentUser.uid, fromName: currentUser.displayName, text: text, timestamp: new Date()
+                        from: currentUser.uid,
+                        fromName: currentUser.displayName,
+                        text: text,
+                        timestamp: new Date()
                     });
                     if (text.startsWith('/')) handleBotCommand(text);
-                } else if (currentChat === 'admin') {
-                    await db.collection(`chats/admin/${MAIN_ADMIN_EMAIL}/messages`).add({
-                        from: currentUser.uid, fromName: currentUser.displayName, fromEmail: currentUser.email, text: text, timestamp: new Date()
+                } else if (currentChat === 'leader') {
+                    await db.collection(`chats/leader/${MAIN_ADMIN_EMAIL}/messages`).add({
+                        from: currentUser.uid,
+                        fromName: currentUser.displayName,
+                        fromEmail: currentUser.email,
+                        fromBadge: (await db.collection('users').doc(currentUser.uid).get()).data()?.badge,
+                        text: text,
+                        timestamp: new Date()
                     });
                 }
                 document.getElementById('messageInput').value = '';
@@ -1307,7 +1375,8 @@
                         email: user.email,
                         balance: 50000,
                         registeredAt: new Date().toISOString(),
-                        wheelSpins: 1
+                        wheelSpins: 1,
+                        badge: user.email === MAIN_ADMIN_EMAIL ? 'crown' : null
                     });
                     currentBalance = 50000;
                     wheelSpins[user.uid] = 1;
@@ -1316,13 +1385,14 @@
                     wheelSpins[user.uid] = data.wheelSpins || 1;
                 }
                 document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                document.getElementById('profileName').innerHTML = (data?.username || user.displayName) + getBadgeHtml(data?.badge);
+                const profileNameEl = document.getElementById('profileName');
+                if (profileNameEl) {
+                    profileNameEl.innerHTML = (data?.username || user.displayName) + getBadgeHtml(data?.badge);
+                }
                 document.getElementById('profileInfo').innerHTML = `
                     <p><i class="fas fa-envelope"></i> ${user.email}</p>
                     <p><i class="fas fa-calendar-alt"></i> ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>
                 `;
-                const hasAdminAccess = user.email === MAIN_ADMIN_EMAIL || moderatorsList.some(m => m.email === user.email);
-                if (hasAdminAccess) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
                 
                 db.collection('donates').where('userId', '==', user.uid).onSnapshot((snap) => {
                     const container = document.getElementById('donatesContainer');
@@ -1332,9 +1402,11 @@
                         if (snap.empty) container.innerHTML = '<span class="donate-tag">Нет покупок</span>';
                     }
                 });
+                
+                const hasAdminAccess = user.email === MAIN_ADMIN_EMAIL || moderatorsList.some(m => m.email === user.email);
+                if (hasAdminAccess) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
             }
 
-            // Таймер
             let timerInterval = null;
             function startTimer(targetDate) {
                 if (timerInterval) clearInterval(timerInterval);
@@ -1352,7 +1424,6 @@
                 }, 1000);
             }
 
-            // Магазин
             const privileges = [
                 { name: "Премиум", price: 1000, icon: "fa-crown", features: ["Цветной ник", "/fly", "/kit"] },
                 { name: "Креатив", price: 2500, icon: "fa-palette", features: ["WorldEdit", "Доступ в креатив"] },
@@ -1375,7 +1446,6 @@
             }
             window.openBuyModal = (n,p) => { currentProduct = {name:n, price:p}; document.getElementById('buyProductName').innerText = n; document.getElementById('buyPrice').innerText = p.toLocaleString(); document.getElementById('buyModal').style.display = 'flex'; };
 
-            // Админ функции
             async function loadModerators() {
                 const doc = await db.collection('settings').doc('moderators').get();
                 moderatorsList = doc.exists ? doc.data().list || [] : [];
@@ -1456,7 +1526,6 @@
                 await db.collection('logs').add({ action, moderator: currentUser.displayName, target, details, timestamp: new Date() });
             }
 
-            // Обработчики
             function bindButtons() {
                 document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); } catch(e) { showMessage(e.message); } };
                 document.getElementById('doRegisterBtn').onclick = async () => {
@@ -1465,7 +1534,10 @@
                     try {
                         const cred = await auth.createUserWithEmailAndPassword(e, p);
                         await cred.user.updateProfile({ displayName: u });
-                        await db.collection('users').doc(cred.user.uid).set({ username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1 });
+                        await db.collection('users').doc(cred.user.uid).set({ 
+                            username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1,
+                            badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null
+                        });
                         showMessage('✅ Регистрация успешна!', false);
                     } catch(e) { showMessage(e.message); }
                 };
@@ -1528,13 +1600,28 @@
                 document.getElementById('giveSpinBtn').onclick = () => giveSpin(document.getElementById('wheelUserNick').value);
                 document.getElementById('spinWheelBtn').onclick = spinWheel;
 
-                // Переключение чатов
-                document.querySelectorAll('.chat-switch-btn').forEach(btn => {
+                // Переключение чатов (сверху как в Telegram)
+                document.querySelectorAll('.chat-top-btn').forEach(btn => {
                     btn.onclick = () => {
-                        document.querySelectorAll('.chat-switch-btn').forEach(b => b.classList.remove('active'));
+                        document.querySelectorAll('.chat-top-btn').forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
                         currentChat = btn.dataset.chat;
-                        document.getElementById('currentChatTitle').innerText = btn.innerText.trim();
+                        const chatNames = {
+                            channel: 'GrifMcPro',
+                            bot: 'GrifMcBot',
+                            leader: 'GrifMcProLeader'
+                        };
+                        const chatIcons = {
+                            channel: 'fa-hashtag',
+                            bot: 'fa-robot',
+                            leader: 'fa-crown'
+                        };
+                        const badges = {
+                            channel: '<span class="badge-icon badge-gold"><i class="fas fa-check"></i></span>',
+                            bot: '<span class="badge-icon badge-gold"><i class="fas fa-check"></i></span>',
+                            leader: '<span class="badge-icon badge-crown"><i class="fas fa-crown"></i></span>'
+                        };
+                        document.getElementById('currentChatTitle').innerHTML = `<i class="fas ${chatIcons[currentChat]}"></i> ${chatNames[currentChat]} ${badges[currentChat]}`;
                         const botInterface = document.getElementById('botInterface');
                         const wheelGame = document.getElementById('wheelGame');
                         const tasksList = document.getElementById('tasksList');
@@ -1586,7 +1673,6 @@
                 });
             }
 
-            // Запуск
             auth.onAuthStateChanged(async (user) => {
                 if (user) {
                     currentUser = user;
@@ -1597,7 +1683,7 @@
                     startTimer(def);
                     bindButtons();
                     document.getElementById('authModal').style.display = 'none';
-                    document.querySelector('.chat-switch-btn.active').click();
+                    document.querySelector('.chat-top-btn.active').click();
                 } else {
                     document.getElementById('authModal').style.display = 'flex';
                     bindButtons();
