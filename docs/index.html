@@ -56,11 +56,15 @@
         @keyframes rainbowRotate { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         @keyframes rgbBorder { 0% { border-color: #ff0000; } 25% { border-color: #00ff00; } 50% { border-color: #0000ff; } 75% { border-color: #ff00ff; } 100% { border-color: #ff0000; } }
         @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        @keyframes rgbTextAnim { 0% { color: #ff0000; text-shadow: 0 0 5px #ff0000; } 25% { color: #00ff00; text-shadow: 0 0 5px #00ff00; } 50% { color: #0000ff; text-shadow: 0 0 5px #0000ff; } 75% { color: #ff00ff; text-shadow: 0 0 5px #ff00ff; } 100% { color: #ff0000; text-shadow: 0 0 5px #ff0000; } }
+        @keyframes rgbBorderAnim { 0% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; } 25% { border-color: #00ff00; box-shadow: 0 0 10px #00ff00; } 50% { border-color: #0000ff; box-shadow: 0 0 10px #0000ff; } 75% { border-color: #ff00ff; box-shadow: 0 0 10px #ff00ff; } 100% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; } }
 
         .animate-in { animation: fadeInUp 0.5s ease; }
         .pulse-animation { animation: pulse 2s infinite; }
         .float-animation { animation: float 3s ease infinite; }
         .glow-text { animation: glowPulse 2s infinite; }
+        .rgb-text-animation { animation: rgbTextAnim 3s infinite; }
+        .rgb-border-animation { animation: rgbBorderAnim 3s infinite; }
 
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 10px; }
@@ -97,7 +101,7 @@
         .hero-timer::before { content: ''; position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background: radial-gradient(circle, rgba(255,215,0,0.03) 0%, transparent 50%); animation: rotate 20s linear infinite; }
         .hero-timer::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100px; background: linear-gradient(transparent, var(--bg-dark)); pointer-events: none; }
         .timer-container { text-align: center; z-index: 2; padding: 30px; animation: fadeInUp 0.8s ease; }
-        .timer-title { font-family: 'Orbitron', monospace; font-size: 48px; font-weight: 800; background: linear-gradient(135deg, #fff, var(--accent), var(--purple)); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 50px; letter-spacing: 3px; }
+        .timer-title { font-family: 'Orbitron', monospace; font-size: 48px; font-weight: 800; margin-bottom: 50px; letter-spacing: 3px; }
         .countdown-wrapper { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
         .countdown-block { background: rgba(0,0,0,0.5); backdrop-filter: blur(20px); border-radius: var(--radius-2xl); padding: 30px 40px; min-width: 130px; border: 1px solid var(--border-light); transition: var(--transition); }
         .countdown-block:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: var(--shadow-glow); }
@@ -139,7 +143,7 @@
         .donates-list { margin: 15px 0; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
         .donate-tag { background: rgba(255,215,0,0.15); padding: 5px 12px; border-radius: 40px; font-size: 12px; border: 1px solid var(--border-light); color: var(--text-primary); }
 
-        /* ГАЛОЧКИ - 20 ВИДОВ */
+        /* ГАЛОЧКИ - 20 ВИДОВ + 5 ДЛЯ ОТВЕТОВ */
         .badge-icon { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; margin-left: 4px; vertical-align: middle; flex-shrink: 0; }
         .badge-icon i { font-size: 10px; color: white; }
         .badge-blue { background: #3b82f6; box-shadow: 0 0 5px #3b82f6; }
@@ -166,8 +170,11 @@
         .badge-blood { background: linear-gradient(135deg, #dc2626, #991b1b); box-shadow: 0 0 5px #dc2626; }
         .badge-void { background: #000000; border: 1px solid #333; box-shadow: 0 0 5px #333; }
         .badge-divine { background: linear-gradient(135deg, #eab308, #ca8a04); box-shadow: 0 0 5px #eab308; }
+        /* Дополнительные галочки для ответов */
+        .badge-purple { background: #8b5cf6; box-shadow: 0 0 5px #8b5cf6; }
+        .badge-teal { background: #14b8a6; box-shadow: 0 0 5px #14b8a6; }
 
-        /* ЧАТЫ - ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ (В РАЗРАБОТКЕ) */
+        /* ЧАТЫ - ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ */
         .chats-section { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .chat-top-switcher { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
         .chat-top-btn { background: rgba(25,25,40,0.8); backdrop-filter: blur(8px); border: 1px solid var(--border-color); padding: 8px 24px; border-radius: 40px; cursor: pointer; transition: var(--transition); font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; color: var(--text-primary); opacity: 0.5; cursor: not-allowed; }
@@ -178,15 +185,15 @@
         .development-message h2 { font-size: 28px; margin-bottom: 10px; }
         .development-message p { color: var(--text-muted); }
 
-        /* ========== СООБЩЕНИЯ (ДЛЯ RAMONENOK@BK.RU) ========== */
+        /* СООБЩЕНИЯ (ДЛЯ RAMONENOK@BK.RU) */
         .messages-container { max-width: 1200px; margin: 0 auto; padding: 20px; display: flex; gap: 25px; background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); min-height: 500px; }
-        .users-sidebar { width: 300px; border-right: 1px solid var(--border-color); padding-right: 20px; overflow-y: auto; max-height: 500px; }
+        .users-sidebar { width: 320px; border-right: 1px solid var(--border-color); padding-right: 20px; overflow-y: auto; max-height: 500px; }
         .user-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); margin-bottom: 8px; background: rgba(0,0,0,0.3); }
         .user-item:hover, .user-item.active { background: rgba(255,215,0,0.2); transform: translateX(5px); }
         .user-avatar { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
         .user-avatar i { font-size: 18px; color: var(--bg-dark); }
         .user-info { flex: 1; }
-        .user-name { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+        .user-name { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
         .user-preview { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
         .unread-count { background: var(--danger); color: white; border-radius: 50%; min-width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; padding: 0 5px; }
         .messages-chat-area { flex: 1; display: flex; flex-direction: column; height: 500px; }
@@ -196,18 +203,26 @@
         .messages-list { flex: 1; overflow-y: auto; padding-right: 10px; display: flex; flex-direction: column; gap: 12px; }
         .message-item { display: flex; gap: 10px; max-width: 80%; }
         .message-item.outgoing { align-self: flex-end; flex-direction: row-reverse; }
-        .message-item.incoming { align-self: flex-start; }
+        .message-item.incoming { align-self: flex-start; flex-direction: row; }
         .message-avatar-small { width: 30px; height: 30px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .message-avatar-small i { font-size: 14px; color: var(--bg-dark); }
         .message-bubble-small { background: var(--bg-surface-solid); padding: 8px 12px; border-radius: 14px; border-top-left-radius: 4px; font-size: 12px; }
         .message-item.outgoing .message-bubble-small { background: var(--accent-glow); border: 1px solid var(--border-light); border-top-right-radius: 4px; border-top-left-radius: 14px; }
         .message-time-small { font-size: 9px; color: var(--text-muted); margin-top: 3px; }
+        .reaction-buttons { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+        .reaction-badge { display: inline-flex; align-items: center; gap: 3px; background: rgba(0,0,0,0.4); padding: 2px 8px; border-radius: 20px; cursor: pointer; transition: var(--transition); font-size: 11px; }
+        .reaction-badge:hover { background: rgba(255,215,0,0.2); transform: scale(1.02); }
+        .reaction-badge i { font-size: 10px; margin-right: 2px; }
+        .reply-area { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+        .reply-input { flex: 1; padding: 6px 10px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); border-radius: 40px; color: white; font-size: 11px; outline: none; }
+        .reply-input:focus { border-color: var(--accent); }
+        .reply-send-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 4px 12px; border-radius: 40px; font-weight: 600; cursor: pointer; font-size: 10px; color: var(--bg-dark); }
         .message-input-area { padding-top: 15px; border-top: 1px solid var(--border-color); display: flex; gap: 10px; margin-top: 15px; }
         .message-input-area input { flex: 1; padding: 10px 14px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); border-radius: 40px; color: var(--text-primary); outline: none; font-size: 12px; }
         .message-input-area input:focus { border-color: var(--accent); }
         .send-msg-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 8px 20px; border-radius: 40px; font-weight: 600; cursor: pointer; font-size: 12px; color: var(--bg-dark); }
 
-        /* ЧАТ С СОЗДАТЕЛЕМ (ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ) */
+        /* ЧАТ С СОЗДАТЕЛЕМ */
         .chat-with-creator-container { max-width: 800px; margin: 0 auto; padding: 20px; }
         .chat-with-creator-header { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); padding: 25px; text-align: center; border: 1px solid var(--border-light); margin-bottom: 20px; }
         .creator-info { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
@@ -366,7 +381,7 @@
         </div>
     </div>
 
-    <!-- ЧАТЫ - ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ (В РАЗРАБОТКЕ) -->
+    <!-- ЧАТЫ - ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ -->
     <div id="chatsPage" class="page">
         <div class="chats-section">
             <div class="chat-top-switcher">
@@ -402,7 +417,7 @@
         </div>
     </div>
 
-    <!-- ЧАТ С СОЗДАТЕЛЕМ (ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ) -->
+    <!-- ЧАТ С СОЗДАТЕЛЕМ -->
     <div id="chatWithCreatorPage" class="page">
         <div class="chat-with-creator-container">
             <div class="chat-with-creator-header">
@@ -461,6 +476,21 @@
                     </div>
                 </div>
                 <div id="adminPanelContent" style="display: none;">
+                    <!-- НАСТРОЙКА ТАЙМЕРА -->
+                    <div class="admin-block">
+                        <h3><i class="fas fa-clock"></i> НАСТРОЙКА ТАЙМЕРА</h3>
+                        <div style="display: grid; gap: 10px;">
+                            <input type="text" id="timerEventName" placeholder="Название события" class="admin-input">
+                            <textarea id="timerEventDesc" rows="2" placeholder="Описание события" class="admin-input"></textarea>
+                            <input type="datetime-local" id="timerTargetDate" class="admin-input">
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button id="applyTimerRgbText" class="admin-btn-cyan" style="flex:1;">🔴 RGB Текст</button>
+                                <button id="applyTimerRgbBorder" class="admin-btn-pink" style="flex:1;">✨ RGB Рамка</button>
+                                <button id="applyTimerRgbBoth" class="admin-btn-purple" style="flex:1;">🌈 RGB Всё</button>
+                            </div>
+                            <button id="updateTimerBtn" class="admin-btn-green">💾 СОХРАНИТЬ ТАЙМЕР</button>
+                        </div>
+                    </div>
                     <div class="admin-block"><h3><i class="fas fa-users"></i> ПОСЛЕДНИЕ 5 МИНУТ (АККАУНТЫ)</h3><div class="players-list" id="recentUsersList"></div></div>
                     <div class="admin-block"><h3><i class="fas fa-envelope"></i> МОИ СООБЩЕНИЯ (GrifMcPro)</h3><textarea id="broadcastMsg" rows="3" placeholder="Текст сообщения для всех пользователей..." class="admin-input"></textarea><button id="sendBroadcastBtn" class="admin-btn-pink">📢 ОТПРАВИТЬ ВСЕМ</button></div>
                     <div class="admin-block"><h3><i class="fas fa-user-shield"></i> МОДЕРАТОРЫ</h3><input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input"><button id="addModeratorBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button><div id="moderatorsList" class="players-list"></div></div>
@@ -580,6 +610,8 @@
             let currentChatWithUser = null;
             let messagesUnsub = null;
             let allMessagesUsers = [];
+            let timerInterval = null;
+            let currentReplies = {};
 
             function showToast(message, isError = false) {
                 const toast = document.createElement('div');
@@ -595,7 +627,8 @@
                     blue: 'fa-check', red: 'fa-check', gold: 'fa-check', rainbow: 'fa-check', rgb: 'fa-check',
                     crown: 'fa-crown', diamond: 'fa-gem', star: 'fa-star', game: 'fa-gamepad', fire: 'fa-fire',
                     mythic: 'fa-moon', cosmic: 'fa-globe', ice: 'fa-snowflake', shadow: 'fa-moon', light: 'fa-sun',
-                    dark: 'fa-moon', nature: 'fa-leaf', blood: 'fa-droplet', void: 'fa-circle', divine: 'fa-feather'
+                    dark: 'fa-moon', nature: 'fa-leaf', blood: 'fa-droplet', void: 'fa-circle', divine: 'fa-feather',
+                    purple: 'fa-check', teal: 'fa-check'
                 };
                 const icon = icons[type] || 'fa-check';
                 return `<span class="badge-icon badge-${type}"><i class="fas ${icon}"></i></span>`;
@@ -627,7 +660,65 @@
                 });
             }
 
-            // ЗАГРУЗКА ПОЛЬЗОВАТЕЛЕЙ, КОТОРЫЕ ПИСАЛИ АДМИНУ
+            // ТАЙМЕР
+            function startTimer(targetDate, eventName, eventDesc) {
+                if (timerInterval) clearInterval(timerInterval);
+                document.getElementById('eventTitle').innerText = eventName || 'ДО ОТКРЫТИЯ СЕЗОНА';
+                document.getElementById('eventDesc').innerHTML = eventDesc || '';
+                timerInterval = setInterval(() => {
+                    const diff = new Date(targetDate).getTime() - new Date().getTime();
+                    if (diff <= 0) {
+                        document.getElementById('days').innerText = '0';
+                        document.getElementById('hours').innerText = '0';
+                        document.getElementById('minutes').innerText = '0';
+                        document.getElementById('seconds').innerText = '0';
+                    } else {
+                        document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
+                        document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
+                        document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
+                    }
+                }, 1000);
+            }
+
+            async function loadTimer() {
+                const doc = await db.collection('settings').doc('timer').get();
+                if (doc.exists && doc.data().targetDate) {
+                    let target = doc.data().targetDate.toDate ? doc.data().targetDate.toDate() : new Date(doc.data().targetDate);
+                    startTimer(target, doc.data().eventName, doc.data().eventDesc);
+                    if (document.getElementById('timerEventName')) {
+                        document.getElementById('timerEventName').value = doc.data().eventName || '';
+                        document.getElementById('timerEventDesc').value = doc.data().eventDesc || '';
+                        document.getElementById('timerTargetDate').value = target.toISOString().slice(0, 16);
+                    }
+                } else {
+                    let def = new Date();
+                    def.setDate(def.getDate() + 7);
+                    startTimer(def, "ДО ОТКРЫТИЯ СЕЗОНА", "");
+                }
+            }
+
+            async function updateTimer(eventName, eventDesc, targetDate) {
+                await db.collection('settings').doc('timer').set({ eventName, eventDesc, targetDate: new Date(targetDate) });
+                startTimer(new Date(targetDate), eventName, eventDesc);
+                showToast('✅ Таймер обновлён!', false);
+            }
+
+            function applyRgbToTimer(option) {
+                const titleEl = document.getElementById('eventTitle');
+                const blocks = document.querySelectorAll('.countdown-block');
+                if (option === 'text' || option === 'both') {
+                    titleEl.classList.add('rgb-text-animation');
+                }
+                if (option === 'border' || option === 'both') {
+                    blocks.forEach(block => {
+                        block.classList.add('rgb-border-animation');
+                    });
+                }
+                showToast(`✨ RGB эффект применён!`, false);
+            }
+
+            // ЗАГРУЗКА ПОЛЬЗОВАТЕЛЕЙ ДЛЯ СООБЩЕНИЙ
             async function loadMessagesUsers() {
                 if (!currentUser || currentUser.email !== MAIN_ADMIN_EMAIL) return;
                 const usersSnapshot = await db.collection('users').get();
@@ -692,13 +783,24 @@
                         const msg = doc.data();
                         if (msg.from === 'system') return;
                         const isOutgoing = msg.from === currentUser.uid;
-                        const senderName = msg.from === currentUser.uid ? 'Вы' : (msg.fromName || 'Пользователь');
+                        const msgId = doc.id;
+                        const replyHtml = !isOutgoing ? `
+                            <div class="reply-area" id="reply-area-${msgId}">
+                                <input type="text" id="reply-input-${msgId}" class="reply-input" placeholder="Ответить...">
+                                <button class="reply-send-btn" onclick="window.sendReplyWithBadge('${msgId}', '${userId}', 'blue')">🔵</button>
+                                <button class="reply-send-btn" onclick="window.sendReplyWithBadge('${msgId}', '${userId}', 'red')">🔴</button>
+                                <button class="reply-send-btn" onclick="window.sendReplyWithBadge('${msgId}', '${userId}', 'gold')">🟡</button>
+                                <button class="reply-send-btn" onclick="window.sendReplyWithBadge('${msgId}', '${userId}', 'purple')">🟣</button>
+                                <button class="reply-send-btn" onclick="window.sendReplyWithBadge('${msgId}', '${userId}', 'teal')">🔵</button>
+                            </div>
+                        ` : '';
                         container.innerHTML += `
                             <div class="message-item ${isOutgoing ? 'outgoing' : 'incoming'}">
                                 <div class="message-avatar-small"><i class="fas ${isOutgoing ? 'fa-user' : 'fa-user-circle'}"></i></div>
                                 <div>
                                     <div class="message-bubble-small">${msg.text}</div>
                                     <div class="message-time-small">${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
+                                    ${replyHtml}
                                 </div>
                             </div>
                         `;
@@ -708,7 +810,6 @@
                     });
                     container.scrollTop = container.scrollHeight;
                 });
-                // Сброс непрочитанных
                 const unreadSnapshot = await db.collection('chats').doc('creator').collection('messages').where('from', '==', userId).where('read', '==', false).get();
                 for (const doc of unreadSnapshot.docs) {
                     await doc.ref.update({ read: true });
@@ -716,6 +817,33 @@
                 loadMessagesUsers();
             }
 
+            window.sendReplyWithBadge = async (msgId, userId, badgeColor) => {
+                const input = document.getElementById(`reply-input-${msgId}`);
+                const text = input?.value.trim();
+                if (!text) return;
+                const badgeHtml = getBadgeHtml(badgeColor);
+                await db.collection('chats').doc('creator').collection('messages').add({
+                    from: currentUser.uid,
+                    fromName: currentUser.displayName,
+                    to: userId,
+                    text: `${badgeHtml} ${text}`,
+                    timestamp: new Date(),
+                    read: false
+                });
+                await db.collection('chats').doc('creator').collection('messages').add({
+                    from: currentUser.uid,
+                    fromName: currentUser.displayName,
+                    to: "creator",
+                    text: `${badgeHtml} ${text}`,
+                    timestamp: new Date(),
+                    read: false
+                });
+                if (input) input.value = '';
+                loadMessagesWithUser(userId);
+                showToast(`✅ Ответ отправлен с ${badgeColor} галочкой!`, false);
+            };
+
+            // ОТПРАВКА ОБЫЧНОГО ОТВЕТА
             async function sendReplyToUser(text) {
                 if (!text.trim() || !currentChatWithUser) return;
                 await db.collection('chats').doc('creator').collection('messages').add({
@@ -726,20 +854,11 @@
                     timestamp: new Date(),
                     read: false
                 });
-                // Также отправляем в чат с создателем для этого пользователя
-                await db.collection('chats').doc('creator').collection('messages').add({
-                    from: currentUser.uid,
-                    fromName: currentUser.displayName,
-                    to: "creator",
-                    text: text,
-                    timestamp: new Date(),
-                    read: false
-                });
                 document.getElementById('replyMessageInput').value = '';
                 loadMessagesWithUser(currentChatWithUser);
             }
 
-            // ЧАТ С СОЗДАТЕЛЕМ (ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ)
+            // ЧАТ С СОЗДАТЕЛЕМ
             async function loadCreatorMessages() {
                 if (creatorMessagesUnsub) creatorMessagesUnsub();
                 if (!currentUser) return;
@@ -795,8 +914,6 @@
                 document.getElementById('banUntilText').innerText = untilDate || 'Навсегда';
                 document.getElementById('banModeratorText').innerText = moderator || 'Система';
                 document.getElementById('banModalOverlay').style.display = 'flex';
-                document.getElementById('mainContent').style.display = 'none';
-                document.getElementById('authModal').style.display = 'none';
             }
 
             async function sendEmail(to, subject, message, productName, price, serverNick, siteNick) {
@@ -1004,16 +1121,7 @@
             async function loadLogs() { const snap = await db.collection('logs').orderBy('timestamp', 'desc').limit(30).get(); const container = document.getElementById('logsList'); if (container) container.innerHTML = snap.docs.map(doc => `<div class="log-item">[${new Date(doc.data().timestamp?.toDate()).toLocaleString()}] <strong>${doc.data().action}</strong> → ${doc.data().target}<br>${doc.data().details || ''}</div>`).join(''); }
             function addLog(action, target, details) { if (currentUser) db.collection('logs').add({ action, moderator: currentUser.displayName, target, details, timestamp: new Date() }); }
 
-            let timerInterval = null;
-            function startTimer(targetDate) {
-                if (timerInterval) clearInterval(timerInterval);
-                timerInterval = setInterval(() => {
-                    const diff = new Date(targetDate).getTime() - new Date().getTime();
-                    if (diff <= 0) { document.getElementById('days').innerText = '0'; document.getElementById('hours').innerText = '0'; document.getElementById('minutes').innerText = '0'; document.getElementById('seconds').innerText = '0'; }
-                    else { document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)); document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000); document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000); document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000); }
-                }, 1000);
-            }
-
+            // МАГАЗИН
             const privileges = [
                 { name: "Премиум", price: 1000, icon: "fa-crown" }, { name: "Креатив", price: 2500, icon: "fa-palette" },
                 { name: "Модер", price: 5000, icon: "fa-shield-alt" }, { name: "Лорд", price: 10000, icon: "fa-crown" },
@@ -1105,6 +1213,41 @@
                 document.getElementById('closeModeratorsBtn').onclick = () => document.getElementById('moderatorsPanel').style.display = 'none';
                 document.getElementById('sendReplyBtn').onclick = () => sendReplyToUser(document.getElementById('replyMessageInput').value);
                 document.getElementById('banModalExitBtn').onclick = () => { document.getElementById('banModalOverlay').style.display = 'none'; auth.signOut(); };
+                document.getElementById('applyTimerRgbText').onclick = () => applyRgbToTimer('text');
+                document.getElementById('applyTimerRgbBorder').onclick = () => applyRgbToTimer('border');
+                document.getElementById('applyTimerRgbBoth').onclick = () => applyRgbToTimer('both');
+                document.getElementById('updateTimerBtn').onclick = async () => {
+                    const name = document.getElementById('timerEventName').value;
+                    const desc = document.getElementById('timerEventDesc').value;
+                    const date = document.getElementById('timerTargetDate').value;
+                    if (!date) return showToast('Выберите дату', true);
+                    await updateTimer(name, desc, date);
+                };
+                window.sendReplyWithBadge = async (msgId, userId, badgeColor) => {
+                    const input = document.getElementById(`reply-input-${msgId}`);
+                    const text = input?.value.trim();
+                    if (!text) return;
+                    const badgeHtml = getBadgeHtml(badgeColor);
+                    await db.collection('chats').doc('creator').collection('messages').add({
+                        from: currentUser.uid,
+                        fromName: currentUser.displayName,
+                        to: userId,
+                        text: `${badgeHtml} ${text}`,
+                        timestamp: new Date(),
+                        read: false
+                    });
+                    await db.collection('chats').doc('creator').collection('messages').add({
+                        from: currentUser.uid,
+                        fromName: currentUser.displayName,
+                        to: "creator",
+                        text: `${badgeHtml} ${text}`,
+                        timestamp: new Date(),
+                        read: false
+                    });
+                    if (input) input.value = '';
+                    loadMessagesWithUser(userId);
+                    showToast(`✅ Ответ отправлен с ${badgeColor} галочкой!`, false);
+                };
             }
 
             auth.onAuthStateChanged(async (user) => {
@@ -1118,8 +1261,7 @@
                     await loadUserData(user);
                     renderShop();
                     renderMenu();
-                    let def = new Date(); def.setDate(def.getDate() + 7);
-                    startTimer(def);
+                    loadTimer();
                     listenSiteStatus();
                     listenBan(user);
                     startBalanceUpdater();
