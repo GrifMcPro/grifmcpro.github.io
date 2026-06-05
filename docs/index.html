@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>GrifMcPro | Уведомления</title>
+    <title>GrifMcPro | Тест</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -36,24 +36,22 @@
         
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes pulse2 { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.08); opacity: 0.9; } }
         @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-3px); } }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes rgbTextAnim { 0% { color: #ff0000; } 25% { color: #00ff00; } 50% { color: #0000ff; } 75% { color: #ff00ff; } 100% { color: #ff0000; } }
-        @keyframes rgbBorderAnim { 0% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; } 25% { border-color: #00ff00; } 50% { border-color: #0000ff; } 75% { border-color: #ff00ff; } 100% { border-color: #ff0000; } }
+        @keyframes rgbBorderAnim { 0% { border-color: #ff0000; box-shadow: 0 0 5px #ff0000; } 25% { border-color: #00ff00; } 50% { border-color: #0000ff; } 75% { border-color: #ff00ff; } 100% { border-color: #ff0000; } }
         @keyframes rainbowRotate { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
-        @keyframes shimmer { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
-        @keyframes starGlow { 0% { box-shadow: 0 0 0px #ffd700; } 50% { box-shadow: 0 0 8px #ffd700; } 100% { box-shadow: 0 0 0px #ffd700; } }
-        @keyframes gamePulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
-        @keyframes fireGlow { 0% { box-shadow: 0 0 0px #ff4400; } 50% { box-shadow: 0 0 8px #ff4400; } 100% { box-shadow: 0 0 0px #ff4400; } }
-        @keyframes mythicGlow { 0% { box-shadow: 0 0 0px #a855f7; } 50% { box-shadow: 0 0 8px #a855f7; } 100% { box-shadow: 0 0 0px #a855f7; } }
-        @keyframes iceGlow { 0% { box-shadow: 0 0 0px #ec4899; } 50% { box-shadow: 0 0 8px #ec4899; } 100% { box-shadow: 0 0 0px #ec4899; } }
-        @keyframes shadowPulse { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
-        @keyframes lightGlow { 0% { box-shadow: 0 0 0px #f3f4f6; } 50% { box-shadow: 0 0 8px #f3f4f6; } 100% { box-shadow: 0 0 0px #f3f4f6; } }
-        @keyframes darkPulse { 0% { background: #111827; } 50% { background: #1f2937; } 100% { background: #111827; } }
-        @keyframes natureGlow { 0% { box-shadow: 0 0 0px #10b981; } 50% { box-shadow: 0 0 8px #10b981; } 100% { box-shadow: 0 0 0px #10b981; } }
-        @keyframes bloodGlow { 0% { box-shadow: 0 0 0px #dc2626; } 50% { box-shadow: 0 0 8px #dc2626; } 100% { box-shadow: 0 0 0px #dc2626; } }
-        @keyframes purpleGlow { 0% { box-shadow: 0 0 0px #8b5cf6; } 50% { box-shadow: 0 0 8px #8b5cf6; } 100% { box-shadow: 0 0 0px #8b5cf6; } }
-        @keyframes tealGlow { 0% { box-shadow: 0 0 0px #14b8a6; } 50% { box-shadow: 0 0 8px #14b8a6; } 100% { box-shadow: 0 0 0px #14b8a6; } }
+        @keyframes shimmer { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+        @keyframes starGlow { 0% { text-shadow: 0 0 0px #ffd700; } 50% { text-shadow: 0 0 5px #ffd700; } 100% { text-shadow: 0 0 0px #ffd700; } }
+        @keyframes fireGlow { 0% { text-shadow: 0 0 0px #ff4400; } 50% { text-shadow: 0 0 5px #ff4400; } 100% { text-shadow: 0 0 0px #ff4400; } }
+        @keyframes mythicGlow { 0% { text-shadow: 0 0 0px #a855f7; } 50% { text-shadow: 0 0 5px #a855f7; } 100% { text-shadow: 0 0 0px #a855f7; } }
+        @keyframes iceGlow { 0% { text-shadow: 0 0 0px #ec4899; } 50% { text-shadow: 0 0 5px #ec4899; } 100% { text-shadow: 0 0 0px #ec4899; } }
+        @keyframes shadowPulse { 0% { opacity: 0.8; } 50% { opacity: 1; } 100% { opacity: 0.8; } }
+        @keyframes natureGlow { 0% { text-shadow: 0 0 0px #10b981; } 50% { text-shadow: 0 0 5px #10b981; } 100% { text-shadow: 0 0 0px #10b981; } }
+        @keyframes bloodGlow { 0% { text-shadow: 0 0 0px #dc2626; } 50% { text-shadow: 0 0 5px #dc2626; } 100% { text-shadow: 0 0 0px #dc2626; } }
+        @keyframes purpleGlow { 0% { text-shadow: 0 0 0px #8b5cf6; } 50% { text-shadow: 0 0 5px #8b5cf6; } 100% { text-shadow: 0 0 0px #8b5cf6; } }
+        @keyframes tealGlow { 0% { text-shadow: 0 0 0px #14b8a6; } 50% { text-shadow: 0 0 5px #14b8a6; } 100% { text-shadow: 0 0 0px #14b8a6; } }
         @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         
@@ -123,139 +121,104 @@
         .donates-list { margin: 20px 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
         .donate-tag { background: rgba(255,215,0,0.12); padding: 6px 14px; border-radius: 40px; font-size: 12px; }
 
-        /* ===== 20 КРАСИВЫХ АНИМИРОВАННЫХ ГАЛОЧЕК (как в Telegram) ===== */
+        /* ===== 20 КРАСИВЫХ АНИМИРОВАННЫХ ГАЛОЧЕК (как в старом коде) ===== */
         .badge-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            margin-left: 5px;
+            margin-left: 6px;
             vertical-align: middle;
             flex-shrink: 0;
         }
         .badge-icon i {
-            font-size: 10px;
+            font-size: 11px;
             color: white;
         }
 
-        /* АНИМАЦИИ ДЛЯ КАЖДОЙ ГАЛОЧКИ */
-        .badge-verified { background: #3b82f6; animation: pulse 2s infinite; }
-        .badge-blue { background: #3b82f6; animation: pulse 2s infinite; }
-        .badge-red { background: #ef4444; animation: pulse 2s infinite; }
-        .badge-gold { background: #ffd700; animation: pulse 2s infinite; }
+        /* АНИМАЦИИ */
+        .badge-verified { background: #3b82f6; animation: pulse 1.5s ease infinite, pulse2 1s ease infinite; }
+        .badge-blue { background: #3b82f6; animation: pulse 1.5s ease infinite; }
+        .badge-red { background: #ef4444; animation: pulse 1.5s ease infinite; }
+        .badge-gold { background: #ffd700; animation: pulse 1.5s ease infinite; }
         .badge-gold i { color: #1a1a1a; }
-
-        /* РАДУЖНАЯ - анимированный градиент */
         .badge-rainbow {
             background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff);
             background-size: 200% 200%;
-            animation: rainbowRotate 1.5s ease infinite, pulse 1.5s infinite;
+            animation: rainbowRotate 2s ease infinite, pulse 1.5s ease infinite;
         }
-
-        /* RGB - мигающая рамка */
         .badge-rgb {
             background: #1a1a2a;
             border: 2px solid;
-            animation: rgbBorderAnim 1s infinite, pulse 1s infinite;
+            animation: rgbBorderAnim 2s infinite, pulse 1s ease infinite;
         }
-        .badge-rgb i { color: #fff; }
-
-        /* КОРОНА - пульсирующая с золотом */
         .badge-crown {
             background: linear-gradient(135deg, #7c3aed, #a855f7);
             width: auto;
             border-radius: 20px;
-            padding: 2px 8px;
-            animation: pulse 1.5s infinite, float 2s ease infinite;
+            padding: 2px 10px;
+            animation: pulse 1.5s ease infinite, float 2s ease infinite;
         }
-        .badge-crown i { color: #ffd700; font-size: 10px; }
-
-        /* АЛМАЗНАЯ - мерцающая */
+        .badge-crown i { color: #ffd700; font-size: 12px; }
         .badge-diamond {
             background: linear-gradient(135deg, #00ffff, #0088ff);
-            animation: pulse 1.5s infinite, shimmer 2s ease infinite;
+            animation: pulse 1.5s ease infinite, shimmer 2s ease infinite;
         }
-
-        /* ЗВЕЗДНАЯ - мерцает */
         .badge-star {
             background: linear-gradient(135deg, #ffd700, #ff8800);
-            animation: pulse 1.5s infinite, starGlow 1s ease infinite;
+            animation: pulse 1.5s ease infinite, starGlow 1.5s ease infinite;
         }
-
-        /* ИГРОВАЯ - пульсирует */
         .badge-game {
             background: linear-gradient(135deg, #ff00ff, #8800ff);
-            animation: pulse 0.8s infinite, gamePulse 0.5s ease infinite;
+            animation: pulse 0.8s ease infinite;
         }
-
-        /* ОГНЕННАЯ - горит */
         .badge-fire {
             background: linear-gradient(135deg, #ff4400, #ff0000);
-            animation: pulse 0.6s infinite, fireGlow 0.5s ease infinite;
+            animation: pulse 0.6s ease infinite, fireGlow 0.8s ease infinite;
         }
-
-        /* МИФИЧЕСКАЯ */
         .badge-mythic {
             background: linear-gradient(135deg, #a855f7, #7c3aed);
-            animation: pulse 1.5s infinite, mythicGlow 1.5s ease infinite;
+            animation: pulse 1.5s ease infinite, mythicGlow 1.5s ease infinite;
         }
-
-        /* КОСМИЧЕСКАЯ */
         .badge-cosmic {
             background: linear-gradient(135deg, #06b6d4, #0891b2);
-            animation: pulse 2s infinite, shimmer 1.5s ease infinite;
+            animation: pulse 2s ease infinite, shimmer 2s ease infinite;
         }
-
-        /* ЛЕДЯНАЯ */
         .badge-ice {
             background: linear-gradient(135deg, #ec4899, #db2777);
-            animation: pulse 2s infinite, iceGlow 1s ease infinite;
+            animation: pulse 2s ease infinite, iceGlow 1.5s ease infinite;
         }
-
-        /* ТЕНЕВАЯ */
         .badge-shadow {
             background: #1f2937;
             border: 1px solid #4b5563;
             animation: shadowPulse 1.5s ease infinite;
         }
-
-        /* СВЕТЛАЯ */
         .badge-light {
             background: #f3f4f6;
-            animation: pulse 2s infinite, lightGlow 1s ease infinite;
+            animation: pulse 2s ease infinite;
         }
         .badge-light i { color: #1a1a1a; }
-
-        /* ТЁМНАЯ */
         .badge-dark {
             background: #111827;
-            animation: darkPulse 1.5s ease infinite;
+            animation: pulse 2s ease infinite;
         }
-
-        /* ПРИРОДНАЯ */
         .badge-nature {
             background: linear-gradient(135deg, #10b981, #059669);
-            animation: pulse 2s infinite, natureGlow 1.5s ease infinite;
+            animation: pulse 2s ease infinite, natureGlow 1.5s ease infinite;
         }
-
-        /* КРОВАВАЯ */
         .badge-blood {
             background: linear-gradient(135deg, #dc2626, #991b1b);
-            animation: pulse 1s infinite, bloodGlow 0.8s ease infinite;
+            animation: pulse 1s ease infinite, bloodGlow 1s ease infinite;
         }
-
-        /* ФИОЛЕТОВАЯ */
         .badge-purple {
             background: #8b5cf6;
-            animation: pulse 2s infinite, purpleGlow 1.5s ease infinite;
+            animation: pulse 2s ease infinite, purpleGlow 1.5s ease infinite;
         }
-
-        /* БИРЮЗОВАЯ */
         .badge-teal {
             background: #14b8a6;
-            animation: pulse 2s infinite, tealGlow 1.5s ease infinite;
+            animation: pulse 2s ease infinite, tealGlow 1.5s ease infinite;
         }
 
         /* СЕКРЕТНЫЙ ЗАМОК И АДМИНКА */
