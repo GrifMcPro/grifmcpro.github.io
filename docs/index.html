@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>GrifMcPro | Официальный сайт</title>
+    <title>GrifMcPro | Уведомления</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -345,35 +345,30 @@
             const MAIN_ADMIN_EMAIL = "ramonenok@bk.ru";
             const ADMIN_SECRET_CODE = "website";
             
-            // ========== MAIL.RU ОТПРАВКА (ТВОИ ДАННЫЕ) ==========
-            const MAILRU_EMAIL = "danil.kichuk@bk.ru";
-            const MAILRU_PASSWORD = "bDvASofwoKIvRnF2SjmC";
+            // ========== ОТПРАВКА ЧЕРЕЗ ПРОКСИ (РАБОТАЕТ В РФ) ==========
             const ADMIN_EMAIL = "ramonenok@bk.ru";
+            const PROXY_URL = "https://smtp-proxy.grifmcpro.workers.dev/send";
             
-            async function sendMailRu(subject, message) {
+            async function sendNotification(subject, message) {
                 try {
-                    // Используем публичный SMTP-прокси (бесплатный, работает в РФ)
-                    const response = await fetch("https://smtp-proxy.grifmcpro.workers.dev/send", {
+                    const response = await fetch(PROXY_URL, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                            from: MAILRU_EMAIL,
-                            password: MAILRU_PASSWORD,
                             to: ADMIN_EMAIL,
                             subject: subject,
                             text: message
                         })
                     });
-                    const result = await response.json();
                     if (response.ok) {
-                        console.log("✅ Письмо отправлено через Mail.ru");
+                        console.log("✅ Уведомление отправлено");
                         return true;
                     } else {
-                        console.error("❌ Ошибка Mail.ru:", result);
+                        console.error("❌ Ошибка отправки");
                         return false;
                     }
-                } catch (error) {
-                    console.error("❌ Ошибка отправки:", error);
+                } catch(e) {
+                    console.error("❌ Ошибка:", e);
                     return false;
                 }
             }
@@ -712,8 +707,8 @@
                 
                 showNotification(`✅ Куплено ${product.name}!`, 'success');
                 
-                // Отправка письма через Mail.ru
-                sendMailRu(
+                // Отправка уведомления
+                sendNotification(
                     "💰 НОВЫЙ ДОНАТ!",
                     `Пользователь: ${siteNick} (${currentUser.email})\nТовар: ${product.name}\nСумма: ${product.price} ₽\nНик на сервере: ${serverNick}`
                 );
@@ -732,7 +727,7 @@
                 
                 showNotification(`✅ Тест-сервер заказан!`, 'success');
                 
-                sendMailRu(
+                sendNotification(
                     "🖥️ ЗАКАЗ ТЕСТ-СЕРВЕРА",
                     `Пользователь: ${siteNick} (${currentUser.email})\nДлительность: ${days === 'forever' ? 'Навсегда' : days + ' дней'}\nСумма: ${price} ₽\nНик на сервере: ${serverNick}`
                 );
