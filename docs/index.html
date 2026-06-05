@@ -473,7 +473,8 @@
 
             <!-- Вкладка создания обращения -->
             <div id="appeal-tab-create" class="appeals-tab active">
-                <div class="appeal-form">
+                <div id="appealsClosedInfo" class="closed-notice" style="display: none;"></div>
+                <div class="appeal-form" id="appealFormBlock">
                     <h2><i class="fas fa-paper-plane"></i> Новое обращение</h2>
                     <input type="text" id="appealPlayerNick" placeholder="Ваш никнейм">
                     <input type="text" id="appealAdminNick" placeholder="Ник администратора (если есть)">
@@ -491,15 +492,14 @@
 
             <!-- Вкладка моих обращений -->
             <div id="appeal-tab-my" class="appeals-tab">
-                <div id="appealsClosedInfo" class="closed-notice" style="display: none;"></div>
-                <div id="appealsList" class="appeals-list"></div>
+                <div id="myAppealsList" class="appeals-list"></div>
             </div>
         </div>
     </div>
 
     <div class="secret-admin-trigger" id="secretAdminTrigger"><i class="fas fa-lock"></i></div>
 
-    <div id="adminPagePanel" class="admin-page"><div class="close-admin-page" id="closeAdminPageBtn"><i class="fas fa-times"></i></div><div class="admin-rgb-bg"><div class="admin-glass-panel"><h1><i class="fas fa-crown"></i> АДМИН-ПАНЕЛЬ</h1><div class="admin-category-buttons"><button class="admin-cat-btn active" data-cat="monets">Монеты</button><button class="admin-cat-btn" data-cat="broadcast">Рассылка</button><button class="admin-cat-btn" data-cat="bans">Баны / Разбаны</button><button class="admin-cat-btn" data-cat="site">Управление сайтом</button><button class="admin-cat-btn" data-cat="donates">Управление донатами</button><button class="admin-cat-btn" data-cat="timer">Таймер</button><button class="admin-cat-btn" data-cat="badges">Галочки</button><button class="admin-cat-btn" data-cat="spins">Прокрутки</button><button class="admin-cat-btn" data-cat="purchases">📋 Логи покупок</button><button class="admin-cat-btn" data-cat="appeals">📨 Обращения</button><button class="admin-cat-btn" data-cat="moderators">👥 Модераторы</button></div>
+    <div id="adminPagePanel" class="admin-page"><div class="close-admin-page" id="closeAdminPageBtn"><i class="fas fa-times"></i></div><div class="admin-rgb-bg"><div class="admin-glass-panel"><h1><i class="fas fa-crown"></i> АДМИН-ПАНЕЛЬ</h1><div class="admin-category-buttons"><button class="admin-cat-btn active" data-cat="monets">Монеты</button><button class="admin-cat-btn" data-cat="broadcast">Рассылка</button><button class="admin-cat-btn" data-cat="bans">Баны / Разбаны</button><button class="admin-cat-btn" data-cat="site">Управление сайтом</button><button class="admin-cat-btn" data-cat="donates">Управление донатами</button><button class="admin-cat-btn" data-cat="timer">Таймер</button><button class="admin-cat-btn" data-cat="badges">Галочки</button><button class="admin-cat-btn" data-cat="spins">Прокрутки</button><button class="admin-cat-btn" data-cat="purchases">📋 Логи покупок</button><button class="admin-cat-btn" data-cat="appeals">📨 ОБРАЩЕНИЯ ЛЮДЕЙ</button><button class="admin-cat-btn" data-cat="moderators">👥 Модераторы</button></div>
     <div id="cat-monets" class="admin-category active"><div class="admin-block"><h3><i class="fas fa-coins"></i> Выдать монеты</h3><input type="text" id="giveNick" placeholder="Никнейм" class="admin-input"><input type="number" id="giveAmount" placeholder="Сумма" class="admin-input"><button id="giveCoinsBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="globalGiveBtn" class="admin-btn-purple">ВСЕМ</button></div></div>
     <div id="cat-broadcast" class="admin-category"><div class="admin-block"><h3><i class="fas fa-bullhorn"></i> Рассылка</h3><textarea id="broadcastMsg" rows="3" placeholder="Текст сообщения..." class="admin-input"></textarea><button id="sendBroadcastBtn" class="admin-btn-pink">ОТПРАВИТЬ ВСЕМ</button></div></div>
     <div id="cat-bans" class="admin-category"><div class="admin-block"><h3><i class="fas fa-gavel"></i> Бан / Разбан</h3><input type="text" id="banNick" placeholder="Никнейм" class="admin-input"><input type="text" id="moderatorName" placeholder="Модератор" class="admin-input"><textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="banDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="12">12 часов</option><option value="24">1 день</option><option value="168">7 дней</option><option value="720">30 дней</option><option value="forever">Навсегда</option></select><button id="banUserBtn" class="admin-btn-red">ЗАБАНИТЬ</button><button id="unbanUserBtn" class="admin-btn-green">РАЗБАНИТЬ</button></div></div>
@@ -509,7 +509,7 @@
     <div id="cat-badges" class="admin-category"><div class="admin-block"><h3><i class="fas fa-tags"></i> Галочки (30 видов)</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option><option value="diamond">💎 Алмазная</option><option value="star">⭐ Звездная</option><option value="game">🎮 Игровая</option><option value="fire">🔥 Огненная</option><option value="mythic">🔮 Мифическая</option><option value="cosmic">🌌 Космическая</option><option value="ice">❄️ Ледяная</option><option value="shadow">🌑 Теневая</option><option value="light">✨ Светлая</option><option value="dark">🖤 Тёмная</option><option value="nature">🌿 Природная</option><option value="blood">🩸 Кровавая</option><option value="void">🌀 Пустота</option><option value="divine">⚜️ Божественная</option><option value="purple">🟣 Фиолетовая</option><option value="teal">🔷 Бирюзовая</option><option value="sapphire">💙 Сапфировая</option><option value="emerald">💚 Изумрудная</option><option value="ruby">❤️ Рубиновая</option><option value="amber">🧡 Янтарная</option><option value="jade">💚 Нефритовая</option><option value="coral">🪸 Коралловая</option><option value="indigo">🟣 Индиго</option><option value="magenta">🩷 Магента</option><option value="bronze">🥉 Бронзовая</option><option value="platinum">⚪ Платиновая</option><option value="obsidian">⬛ Обсидиановая</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div></div>
     <div id="cat-spins" class="admin-category"><div class="admin-block"><h3><i class="fas fa-dice-d6"></i> Прокрутки колеса</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">ВЫДАТЬ</button></div></div>
     <div id="cat-purchases" class="admin-category"><div class="admin-block"><h3><i class="fas fa-shopping-cart"></i> ЛОГИ ПОКУПОК</h3><div id="purchasesList" class="players-list" style="max-height: 400px;"></div><button id="clearPurchasesBtn" class="admin-btn-red">ОЧИСТИТЬ ЛОГИ</button></div></div>
-    <div id="cat-appeals" class="admin-category"><div class="admin-block"><h3><i class="fas fa-envelope"></i> ОБРАЩЕНИЯ ИГРОКОВ</h3>
+    <div id="cat-appeals" class="admin-category"><div class="admin-block"><h3><i class="fas fa-envelope"></i> ОБРАЩЕНИЯ ЛЮДЕЙ</h3>
         <div style="margin-bottom: 15px; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 16px;">
             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                 <input type="checkbox" id="closeAppealsToggle"> <span>🔒 Закрыть отправку обращений</span>
@@ -550,7 +550,7 @@
             const ADMIN_SECRET_CODE = "website";
             
             let currentUser = null, currentBalance = 0, currentProduct = null, moderatorsList = [], timerInterval = null, siteStatusUnsub = null, banUnsub = null, balanceInterval = null, timerUnsub = null, userBadgeUnsub = null;
-            let appealsUnsub = null, adminAppealsUnsub = null;
+            let myAppealsUnsub = null, adminAppealsUnsub = null;
 
             function showNotification(msg, type = 'success') {
                 let container = document.getElementById('notifContainer');
@@ -589,18 +589,21 @@
                         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                         document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
                         if (tab.dataset.page === 'profile') loadUserData(currentUser);
-                        if (tab.dataset.page === 'appeals') { loadAppeals(); loadAppealsClosedStatus(); }
+                        if (tab.dataset.page === 'appeals') { 
+                            loadMyAppeals(); 
+                            loadAppealsClosedStatus();
+                        }
                     };
                 });
             }
 
-            // ОБРАЩЕНИЯ - ЗАГРУЗКА ДЛЯ ПОЛЬЗОВАТЕЛЯ
-            async function loadAppeals() {
-                if (appealsUnsub) appealsUnsub();
+            // МОИ ОБРАЩЕНИЯ
+            async function loadMyAppeals() {
+                if (myAppealsUnsub) myAppealsUnsub();
                 if (!currentUser) return;
                 
-                appealsUnsub = db.collection('appeals').where('playerId', '==', currentUser.uid).orderBy('createdAt', 'desc').onSnapshot((snap) => {
-                    const container = document.getElementById('appealsList');
+                myAppealsUnsub = db.collection('appeals').where('playerId', '==', currentUser.uid).orderBy('createdAt', 'desc').onSnapshot((snap) => {
+                    const container = document.getElementById('myAppealsList');
                     if (!container) return;
                     if (snap.empty) {
                         container.innerHTML = '<div class="appeal-card" style="text-align: center;">📭 У вас пока нет обращений</div>';
@@ -636,8 +639,8 @@
                 });
             }
 
-            // АДМИН - ЗАГРУЗКА ОБРАЩЕНИЙ
-            async function loadAdminAppeals() {
+            // АДМИН - ЗАГРУЗКА ОБРАЩЕНИЙ ЛЮДЕЙ
+            function loadAdminAppeals() {
                 if (adminAppealsUnsub) adminAppealsUnsub();
                 adminAppealsUnsub = db.collection('appeals').orderBy('createdAt', 'desc').onSnapshot((snap) => {
                     const container = document.getElementById('adminAppealsList');
@@ -710,15 +713,23 @@
 
             async function loadAppealsClosedStatus() {
                 const doc = await db.collection('settings').doc('appealsSettings').get();
+                const closedInfo = document.getElementById('appealsClosedInfo');
+                const formBlock = document.getElementById('appealFormBlock');
                 if (doc.exists && doc.data().closed) {
-                    document.getElementById('appealsClosedInfo').style.display = 'block';
-                    document.getElementById('appealsClosedInfo').innerHTML = `<i class="fas fa-lock"></i> 🔒 ОТПРАВКА ОБРАЩЕНИЙ ЗАКРЫТА<br>Причина: ${doc.data().reason || 'Технические работы'}`;
-                    document.querySelector('#appeal-tab-create .appeal-form').style.opacity = '0.5';
-                    document.querySelector('#appeal-tab-create .appeal-form').style.pointerEvents = 'none';
+                    if (closedInfo) {
+                        closedInfo.style.display = 'block';
+                        closedInfo.innerHTML = `<i class="fas fa-lock"></i> 🔒 ОТПРАВКА ОБРАЩЕНИЙ ЗАКРЫТА<br>Причина: ${doc.data().reason || 'Технические работы'}`;
+                    }
+                    if (formBlock) {
+                        formBlock.style.opacity = '0.5';
+                        formBlock.style.pointerEvents = 'none';
+                    }
                 } else {
-                    document.getElementById('appealsClosedInfo').style.display = 'none';
-                    document.querySelector('#appeal-tab-create .appeal-form').style.opacity = '1';
-                    document.querySelector('#appeal-tab-create .appeal-form').style.pointerEvents = 'auto';
+                    if (closedInfo) closedInfo.style.display = 'none';
+                    if (formBlock) {
+                        formBlock.style.opacity = '1';
+                        formBlock.style.pointerEvents = 'auto';
+                    }
                 }
             }
 
@@ -1178,7 +1189,7 @@
                         btn.classList.add('active');
                         document.querySelectorAll('.appeals-tab').forEach(t => t.classList.remove('active'));
                         document.getElementById(`appeal-tab-${btn.dataset.appealTab}`).classList.add('active');
-                        if (btn.dataset.appealTab === 'my') loadAppeals();
+                        if (btn.dataset.appealTab === 'my') loadMyAppeals();
                     };
                 });
                 
@@ -1232,13 +1243,13 @@
                     bindButtons();
                     initSecretAdmin();
                     document.getElementById('authModal').style.display = 'none';
-                    loadAppeals();
+                    loadMyAppeals();
                     loadAppealsClosedStatus();
                 } else {
                     if (balanceInterval) clearInterval(balanceInterval);
                     if (siteStatusUnsub) siteStatusUnsub();
                     if (banUnsub) banUnsub();
-                    if (appealsUnsub) appealsUnsub();
+                    if (myAppealsUnsub) myAppealsUnsub();
                     document.getElementById('authModal').style.display = 'flex';
                     bindButtons();
                     initSecretAdmin();
