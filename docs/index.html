@@ -91,8 +91,8 @@
         .product-name { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
         .price { font-size: 32px; font-weight: 800; color: var(--accent); margin: 15px 0; font-family: 'Orbitron', monospace; }
         .donate-note { font-size: 11px; color: var(--text-muted); margin: 12px 0; padding: 10px; background: rgba(255,215,0,0.06); border-radius: 14px; }
-        .buy-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 14px; border-radius: 40px; font-weight: 700; cursor: pointer; width: 100%; color: #0a0a12; transition: 0.3s; font-size: 16px; margin-top: 10px; }
-        .buy-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
+        .buy-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 14px; border-radius: 40px; font-weight: 700; cursor: pointer; width: 100%; color: #0a0a12; transition: 0.1s; font-size: 16px; margin-top: 10px; }
+        .buy-btn:active { transform: scale(0.98); }
 
         .profile-section { max-width: 650px; margin: 0 auto; padding: 20px; }
         .profile-card { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: 32px; padding: 35px; text-align: center; border: 1px solid var(--border-color); transition: 0.3s; }
@@ -330,6 +330,7 @@
 
     <script>
         (function(){
+            // ========== FIREBASE ==========
             const firebaseConfig = {
                 apiKey: "AIzaSyCK9vHX-OQIw48SGi8S_8U7pIjq60gahEA",
                 authDomain: "siteorgooo.firebaseapp.com",
@@ -344,34 +345,19 @@
             const MAIN_ADMIN_EMAIL = "ramonenok@bk.ru";
             const ADMIN_SECRET_CODE = "website";
             
-            // ========== ОТПРАВКА ПИСЕМ НА ПОЧТУ (FormSubmit) ==========
+            // ========== ОТПРАВКА НА ПОЧТУ (БЫСТРАЯ) ==========
             const ADMIN_EMAIL = "ramonenok@bk.ru";
             const FORMSUBMIT_URL = "https://formsubmit.co/ajax/" + ADMIN_EMAIL;
             
-            async function sendAdminEmail(subject, message) {
+            async function sendFastEmail(subject, message) {
                 try {
-                    const response = await fetch(FORMSUBMIT_URL, {
+                    await fetch(FORMSUBMIT_URL, {
                         method: "POST",
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            subject: subject,
-                            message: message,
-                            _captcha: "false"
-                        })
+                        body: JSON.stringify({ subject, message, _captcha: "false" })
                     });
-                    if (response.ok) {
-                        console.log("✅ Письмо отправлено на", ADMIN_EMAIL);
-                        return true;
-                    } else {
-                        console.error("❌ Ошибка отправки");
-                        return false;
-                    }
-                } catch (error) {
-                    console.error("❌ Ошибка сети:", error);
-                    return false;
-                }
+                } catch(e) { console.error(e); }
             }
-            // ==========================================================
             
             let currentUser = null, currentBalance = 0, currentProduct = null, moderatorsList = [], timerInterval = null, siteStatusUnsub = null, banUnsub = null, balanceInterval = null, timerUnsub = null;
 
@@ -396,12 +382,7 @@
                 const container = document.getElementById('dynamicMenuTabs');
                 if (!container) return;
                 const isAdmin = currentUser?.email === MAIN_ADMIN_EMAIL;
-                container.innerHTML = `
-                    <div class="menu-tab active" data-page="home">Главная</div>
-                    <div class="menu-tab" data-page="shop">Магазин</div>
-                    <div class="menu-tab" data-page="profile">Профиль</div>
-                    <div class="menu-tab admin-only" data-page="admin">Админ</div>
-                `;
+                container.innerHTML = `<div class="menu-tab active" data-page="home">Главная</div><div class="menu-tab" data-page="shop">Магазин</div><div class="menu-tab" data-page="profile">Профиль</div><div class="menu-tab admin-only" data-page="admin">Админ</div>`;
                 document.querySelectorAll('.menu-tab').forEach(tab => {
                     tab.onclick = () => {
                         document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
@@ -661,7 +642,7 @@
                 showNotification(`Все донаты ${nick} удалены`, 'warning');
             }
 
-            // МАГАЗИН
+            // МАГАЗИН (БЫСТРЫЕ КНОПКИ)
             const privileges = [
                 { name: "Премиум", price: 1000 }, { name: "Креатив", price: 2500 }, { name: "Модер", price: 5000 },
                 { name: "Лорд", price: 10000 }, { name: "Админ", price: 20000 }, { name: "Гл админ", price: 50000 },
@@ -675,19 +656,21 @@
                 const container = document.getElementById('shopGrid');
                 if (container) {
                     container.innerHTML = privileges.map(p => `
-                        <div class="product-card">
+                        <div class="product-card" data-name="${p.name}" data-price="${p.price}">
                             <div class="product-name">${p.name}</div>
                             <div class="price">${p.price.toLocaleString()} ₽</div>
                             <div class="donate-note"><i class="fas fa-clock"></i> Донат будет выдан в течение 10 минут</div>
-                            <button class="buy-btn" data-product='${JSON.stringify(p)}'>КУПИТЬ</button>
+                            <button class="buy-btn">КУПИТЬ</button>
                         </div>
                     `).join('');
                     
-                    document.querySelectorAll('.buy-btn').forEach(btn => {
-                        btn.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            const product = JSON.parse(btn.dataset.product);
-                            window.openBuyModal(product.name, product.price);
+                    document.querySelectorAll('.product-card').forEach(card => {
+                        card.addEventListener('click', (e) => {
+                            if (e.target.classList.contains('buy-btn') || e.target.classList.contains('product-card')) {
+                                const name = card.dataset.name;
+                                const price = parseInt(card.dataset.price);
+                                openBuyModal(name, price);
+                            }
                         });
                     });
                 }
@@ -702,18 +685,21 @@
             
             async function purchaseProduct(product, serverNick, siteNick) {
                 if (currentBalance < product.price) { showNotification('Недостаточно средств', 'error'); return false; }
+                
+                // МГНОВЕННАЯ ПОКУПКА - сначала списываем деньги, потом всё остальное
                 await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - product.price });
                 await db.collection('donates').add({ userId: currentUser.uid, username: currentUser.displayName, product: product.name, price: product.price, date: new Date() });
                 currentBalance -= product.price;
                 document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
                 
-                // ОТПРАВКА НА ПОЧТУ
-                await sendAdminEmail(
+                showNotification(`✅ Куплено ${product.name}!`, 'success');
+                
+                // Отправка письма (в фоне, не блокирует)
+                sendFastEmail(
                     "💰 НОВЫЙ ДОНАТ!",
-                    `Пользователь: ${siteNick} (${currentUser.email})\nТовар: ${product.name}\nСумма: ${product.price} ₽\nНик на сервере: ${serverNick}\nДата: ${new Date().toLocaleString()}`
+                    `Пользователь: ${siteNick} (${currentUser.email})\nТовар: ${product.name}\nСумма: ${product.price} ₽\nНик на сервере: ${serverNick}`
                 );
                 
-                showNotification(`✅ Куплено ${product.name}!`, 'success');
                 return true;
             }
 
@@ -721,17 +707,17 @@
                 const prices = { 10: 250000, 20: 500000, 30: 900000, forever: 2000000 };
                 const price = prices[days];
                 if (currentBalance < price) { showNotification('Недостаточно средств', 'error'); return; }
+                
                 await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - price });
                 currentBalance -= price;
                 document.getElementById('userBalance').innerText = currentBalance;
                 
-                // ОТПРАВКА НА ПОЧТУ
-                await sendAdminEmail(
-                    "🖥️ ЗАКАЗ ТЕСТ-СЕРВЕРА",
-                    `Пользователь: ${siteNick} (${currentUser.email})\nДлительность: ${days === 'forever' ? 'Навсегда' : days + ' дней'}\nСумма: ${price} ₽\nНик на сервере: ${serverNick}\nДата: ${new Date().toLocaleString()}`
-                );
-                
                 showNotification(`✅ Тест-сервер заказан!`, 'success');
+                
+                sendFastEmail(
+                    "🖥️ ЗАКАЗ ТЕСТ-СЕРВЕРА",
+                    `Пользователь: ${siteNick} (${currentUser.email})\nДлительность: ${days === 'forever' ? 'Навсегда' : days + ' дней'}\nСумма: ${price} ₽\nНик на сервере: ${serverNick}`
+                );
             }
 
             // ПОЛЬЗОВАТЕЛЬ
