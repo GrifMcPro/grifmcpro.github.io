@@ -40,16 +40,15 @@
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes rgbTextAnim { 0% { color: #ff0000; } 25% { color: #00ff00; } 50% { color: #0000ff; } 75% { color: #ff00ff; } 100% { color: #ff0000; } }
         @keyframes rgbBorderAnim { 0% { border-color: #ff0000; } 25% { border-color: #00ff00; } 50% { border-color: #0000ff; } 75% { border-color: #ff00ff; } 100% { border-color: #ff0000; } }
-        @keyframes rgbBgAnim { 0% { background-position: 0% 50%; background-color: #ff0000; } 25% { background-position: 50% 50%; background-color: #00ff00; } 50% { background-position: 100% 50%; background-color: #0000ff; } 75% { background-position: 50% 50%; background-color: #ff00ff; } 100% { background-position: 0% 50%; background-color: #ff0000; } }
         @keyframes rainbowRotate { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes shine { 0% { background-position: -100% 0; } 100% { background-position: 200% 0; } }
-        @keyframes glitch { 0%,100% { text-shadow: 0 0 5px #ff0000, 0 0 10px #00ff00; } 50% { text-shadow: 0 0 10px #ff00ff, 0 0 20px #0000ff; } }
+        @keyframes rgbBg { 0% { background-position: 0% 0%; } 25% { background-position: 100% 0%; } 50% { background-position: 100% 100%; } 75% { background-position: 0% 100%; } 100% { background-position: 0% 0%; } }
+        @keyframes rgbShadow { 0% { box-shadow: 0 0 10px #ff0000; } 25% { box-shadow: 0 0 20px #00ff00; } 50% { box-shadow: 0 0 10px #0000ff; } 75% { box-shadow: 0 0 20px #ff00ff; } 100% { box-shadow: 0 0 10px #ff0000; } }
         
         .rgb-text-animation { animation: rgbTextAnim 3s infinite; }
         .rgb-border-animation { animation: rgbBorderAnim 3s infinite; }
-        .rgb-bg-animation { animation: rgbBgAnim 6s ease infinite; background-size: 400% 400%; }
+        .rgb-shadow-animation { animation: rgbShadow 2s infinite; }
         
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #151520; border-radius: 10px; }
@@ -86,43 +85,6 @@
         .countdown-block:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: var(--shadow-glow); }
         .countdown-number { font-family: 'Orbitron', monospace; font-size: 56px; font-weight: 800; color: var(--accent); text-shadow: 0 0 20px var(--accent-glow); min-width: 90px; display: inline-block; }
         .countdown-label { font-size: 13px; color: var(--text-secondary); margin-top: 10px; letter-spacing: 2px; }
-
-        /* СТРАНИЦА ПРАВИЛ */
-        .rules-section { max-width: 1300px; margin: 0 auto; padding: 20px; }
-        .rules-header { text-align: center; margin-bottom: 35px; }
-        .rules-header h1 { font-family: 'Orbitron', monospace; font-size: 42px; background: linear-gradient(135deg, #fff, var(--accent), var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 3s infinite; background-size: 200% auto; }
-        .rules-header p { color: var(--text-muted); font-size: 14px; margin-top: 10px; }
-        
-        .rules-category { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: 32px; margin-bottom: 30px; border: 1px solid var(--border-color); overflow: hidden; transition: 0.3s; }
-        .rules-category:hover { border-color: var(--accent); box-shadow: var(--shadow-glow); transform: translateY(-3px); }
-        .rules-category-header { background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(139,92,246,0.1)); padding: 20px 30px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); }
-        .rules-category-header h2 { font-family: 'Orbitron', monospace; font-size: 24px; display: flex; align-items: center; gap: 12px; }
-        .rules-category-header h2 i { color: var(--accent); font-size: 26px; }
-        .rules-category-header .toggle-icon { color: var(--accent); font-size: 18px; transition: 0.3s; }
-        .rules-category-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
-        .rules-category-content.open { max-height: 5000px; }
-        .rule-item { padding: 18px 30px; border-bottom: 1px solid var(--border-color); transition: 0.2s; }
-        .rule-item:hover { background: rgba(255,215,0,0.05); }
-        .rule-item:last-child { border-bottom: none; }
-        .rule-title { font-weight: 700; font-size: 18px; color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .rule-punishment { display: inline-block; background: linear-gradient(135deg, var(--danger), #dc2626); padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; color: white; margin-left: 10px; }
-        .rule-punishment-permanent { background: linear-gradient(135deg, #000, #333); border: 1px solid var(--danger); }
-        .rule-description { color: var(--text-secondary); font-size: 14px; line-height: 1.5; padding-left: 25px; }
-        .rule-description ul { margin-left: 20px; margin-top: 8px; list-style: none; }
-        .rule-description li { margin: 5px 0; position: relative; padding-left: 20px; }
-        .rule-description li::before { content: '•'; color: var(--accent); position: absolute; left: 0; }
-        .rule-note { background: rgba(255,215,0,0.08); border-left: 3px solid var(--accent); padding: 12px 18px; margin-top: 12px; border-radius: 12px; font-size: 13px; color: var(--text-primary); }
-        
-        .appeal-section { background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(139,92,246,0.05)); border-radius: 28px; padding: 30px; margin-top: 40px; text-align: center; border: 2px dashed var(--accent); animation: rgbBorderAnim 3s infinite; }
-        .appeal-section h3 { font-size: 26px; margin-bottom: 15px; animation: rgbTextAnim 3s infinite; }
-        .appeal-section p { color: var(--text-secondary); margin-bottom: 20px; }
-        .appeal-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 14px 40px; border-radius: 40px; font-weight: 700; cursor: pointer; font-size: 16px; color: #0a0a12; transition: 0.3s; }
-        .appeal-btn:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--accent); }
-        
-        .rules-warning-banner { background: linear-gradient(135deg, #1a0a0a, #0a0a1a); border-radius: 28px; padding: 20px 30px; margin-bottom: 30px; text-align: center; border: 2px solid var(--danger); animation: pulse 1.5s infinite; }
-        .rules-warning-banner i { font-size: 40px; color: var(--danger); margin-bottom: 10px; }
-        .rules-warning-banner h3 { color: var(--danger); font-size: 22px; margin-bottom: 10px; }
-        .rules-warning-banner p { color: var(--text-secondary); font-size: 14px; }
 
         .shop-section { max-width: 1300px; margin: 0 auto; padding: 20px; }
         .shop-header { text-align: center; margin-bottom: 35px; }
@@ -295,6 +257,7 @@
         }
         .admin-page.active { display: block; }
         .admin-rgb-bg { background: linear-gradient(135deg, #1a0a2a, #0a1a2a, #2a0a1a, #1a2a0a); background-size: 400% 400%; animation: rgbBgAnim 12s ease infinite; min-height: 100vh; padding: 30px; }
+        @keyframes rgbBgAnim { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .admin-glass-panel { background: rgba(10,10,18,0.85); backdrop-filter: blur(20px); border-radius: 40px; padding: 35px; border: 1px solid rgba(255,215,0,0.2); max-width: 1200px; margin: 0 auto; }
         .admin-glass-panel h1 { font-family: 'Orbitron', monospace; font-size: 38px; text-align: center; margin-bottom: 35px; background: linear-gradient(135deg, #fff, var(--accent), var(--purple)); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .admin-category-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 35px; }
@@ -389,6 +352,38 @@
         .tab-pane-auth.active { display: block; }
         .close-modal { float: right; font-size: 22px; cursor: pointer; color: var(--accent); }
 
+        /* СТИЛИ ДЛЯ СТРАНИЦЫ ПРАВИЛ */
+        .rules-container { max-width: 1300px; margin: 0 auto; padding: 20px; }
+        .rules-header { text-align: center; margin-bottom: 40px; }
+        .rules-header h1 { font-family: 'Orbitron', monospace; font-size: 48px; background: linear-gradient(135deg, #fff, var(--accent), var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; animation: rgbTextAnim 3s infinite; }
+        .rules-header p { color: var(--text-secondary); margin-top: 15px; font-size: 16px; }
+        
+        .rules-nav { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+        .rules-nav-btn { background: rgba(25,25,40,0.6); backdrop-filter: blur(8px); border: 1px solid var(--border-color); padding: 12px 28px; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 14px; color: var(--text-primary); transition: 0.3s; }
+        .rules-nav-btn.active, .rules-nav-btn:hover { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #0a0a12; transform: translateY(-2px); box-shadow: var(--shadow-glow); }
+        
+        .rules-section { display: none; animation: fadeInUp 0.4s ease; }
+        .rules-section.active { display: block; }
+        
+        .rules-card { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: 28px; padding: 30px; margin-bottom: 25px; border: 1px solid var(--border-color); transition: 0.3s; }
+        .rules-card:hover { border-color: var(--accent); box-shadow: var(--shadow-glow); transform: translateY(-3px); }
+        .rules-card h2 { font-family: 'Orbitron', monospace; font-size: 28px; margin-bottom: 20px; background: linear-gradient(135deg, #fff, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .rules-card h3 { font-size: 20px; margin: 20px 0 10px 0; color: var(--accent); }
+        .rule-item { padding: 15px 0; border-bottom: 1px solid var(--border-color); }
+        .rule-item:last-child { border-bottom: none; }
+        .rule-title { font-weight: 700; font-size: 18px; color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .rule-punishment { display: inline-block; background: rgba(239,68,68,0.2); border-left: 3px solid var(--danger); padding: 5px 12px; border-radius: 8px; font-size: 13px; color: var(--danger); margin-top: 8px; }
+        .rule-list { margin: 10px 0 10px 25px; color: var(--text-secondary); line-height: 1.6; }
+        .rule-list li { margin: 5px 0; }
+        
+        .punishment-card { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05)); border-left: 5px solid var(--danger); border-radius: 20px; padding: 25px; margin-bottom: 25px; animation: rgbShadowAnim 2s infinite; }
+        .punishment-card h3 { color: var(--danger); font-size: 24px; margin-bottom: 15px; }
+        .punishment-card p { color: var(--text-primary); line-height: 1.6; }
+        .punishment-highlight { background: rgba(255,215,0,0.15); border-radius: 16px; padding: 20px; margin: 20px 0; text-align: center; }
+        .punishment-highlight i { font-size: 50px; color: var(--accent); margin-bottom: 10px; }
+        .appeal-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 12px 30px; border-radius: 40px; font-weight: 700; cursor: pointer; color: #0a0a12; transition: 0.3s; margin-top: 15px; }
+        .appeal-btn:hover { transform: scale(1.05); box-shadow: var(--shadow-glow); }
+
         @media (max-width: 768px) {
             .countdown-number { font-size: 38px; }
             .countdown-block { padding: 15px 12px; width: 95px; }
@@ -402,8 +397,8 @@
             .profile-avatar { width: 80px; height: 80px; }
             .profile-avatar i { font-size: 35px; }
             .profile-name { font-size: 22px; }
-            .rules-category-header h2 { font-size: 18px; }
-            .rule-title { font-size: 15px; }
+            .rules-card h2 { font-size: 22px; }
+            .rule-title { font-size: 16px; }
         }
     </style>
 </head>
@@ -419,230 +414,237 @@
 
     <div id="profilePage" class="page"><div class="profile-section"><div class="profile-card"><div class="profile-avatar"><i class="fas fa-user"></i></div><div class="profile-name" id="profileName"></div><div class="profile-stats" id="profileStats"></div><div class="profile-info" id="profileInfo"></div><div class="profile-info"><p><i class="fas fa-tag"></i> <strong>Тег:</strong> <span id="userTag"></span></p></div><div id="donatesContainer" class="donates-list"></div><div class="profile-actions"><button class="profile-btn" id="editNameBtn"><i class="fas fa-user-edit"></i> Сменить имя</button><button class="profile-btn" id="changePasswordBtn"><i class="fas fa-key"></i> Сменить пароль</button></div></div></div></div>
 
+    <!-- СТРАНИЦА ПРАВИЛ -->
     <div id="rulesPage" class="page">
-        <div class="rules-section">
+        <div class="rules-container">
             <div class="rules-header">
                 <h1><i class="fas fa-gavel"></i> ПРАВИЛА ПРОЕКТА</h1>
-                <p>Нарушение правил влечёт за собой наказание. Будьте внимательны и уважайте других игроков!</p>
+                <p class="rgb-text-animation">Нарушение правил влечёт за собой наказание! Будьте внимательны!</p>
             </div>
             
-            <div class="rules-warning-banner">
-                <i class="fas fa-exclamation-triangle"></i>
-                <h3>⚠️ ВАЖНОЕ ПРЕДУПРЕЖДЕНИЕ ⚠️</h3>
-                <p><strong>ВЫДАЧА НАКАЗАНИЯ БЕЗ ДОКАЗАТЕЛЬСТВ — НАРУШЕНИЕ!</strong> Если администратор выдал наказание без доказательств, а игрок отправил обжалование (жалобу) — администратор получит наказание согласно пункту 3.4 правил.</p>
-                <p style="margin-top: 10px;"><strong>⚖️ Обжалование доступно в разделе "БАН-КОН" — каждый игрок может подать жалобу на некорректное наказание!</strong></p>
+            <div class="rules-nav">
+                <button class="rules-nav-btn active" data-rule-section="punishment">⚠️ ВЫДАЧА НАКАЗАНИЙ</button>
+                <button class="rules-nav-btn" data-rule-section="general">📜 ОБЩИЕ ПРАВИЛА</button>
+                <button class="rules-nav-btn" data-rule-section="communication">💬 ПРАВИЛА ОБЩЕНИЯ</button>
+                <button class="rules-nav-btn" data-rule-section="mechanics">🎮 ИГРОВЫЕ МЕХАНИКИ</button>
+                <button class="rules-nav-btn" data-rule-section="survival">🌍 ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</button>
             </div>
 
-            <!-- Выдача наказаний - главная страница -->
-            <div class="rules-category">
-                <div class="rules-category-header" onclick="toggleRulesCategory(this)">
-                    <h2><i class="fas fa-balance-scale"></i> ВЫДАЧА НАКАЗАНИЙ</h2>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
+            <!-- РАЗДЕЛ: ВЫДАЧА НАКАЗАНИЙ -->
+            <div id="rule-section-punishment" class="rules-section active">
+                <div class="punishment-card rgb-border-animation">
+                    <h3><i class="fas fa-balance-scale"></i> ВЫДАЧА НАКАЗАНИЙ</h3>
+                    <p><strong>Важно!</strong> При получении наказания в игре — наказание автоматически действует и на сайте.<br>
+                    Выдача наказания <span class="rgb-text-animation">БЕЗ ДОКАЗАТЕЛЬСТВ</span> является нарушением со стороны администратора!</p>
                 </div>
-                <div class="rules-category-content">
+
+                <div class="punishment-highlight">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>ОБЖАЛОВАНИЕ НАКАЗАНИЯ</h3>
+                    <p>Если вы считаете, что наказание было выдано некорректно или без доказательств — вы можете подать жалобу!</p>
+                    <p>🔹 Администратор, выдавший наказание без доказательств, получит наказание сам!</p>
+                    <p>🔹 Если вам выдали бан на сайте — вы можете его обжаловать через раздел "Жалобы" (в разработке)</p>
+                    <button class="appeal-btn" id="appealBtnTemp"><i class="fas fa-gavel"></i> ПОДАТЬ ЖАЛОБУ (скоро)</button>
+                </div>
+
+                <div class="rules-card">
+                    <h2><i class="fas fa-info-circle"></i> Как работает система наказаний?</h2>
                     <div class="rule-item">
-                        <div class="rule-title">
-                            <i class="fas fa-gavel"></i> 3.4 | Некорректные наказания
-                            <span class="rule-punishment">Бан на 1 день</span>
-                        </div>
-                        <div class="rule-description">
-                            Выдача наказаний игрокам по неадекватной причине, не по правилам, не по режиму нарушения или без доказательств.<br>
-                            Неадекватной считается причина, содержащая оскорбления, родню, несвязный бред, советы не относящиеся к нарушению, шутки и подобное.<br><br>
-                            <strong>🚨 ВАЖНО: Если администратор выдал наказание без доказательств — это прямое нарушение данного пункта!</strong><br><br>
-                            Доказательствами считаются скриншоты или видео, фиксирующие нарушение. Их необходимо хранить 14 дней с момента выдачи наказания и предоставлять, если оф.команда проекта потребует того.<br><br>
-                            <strong>Наказания по этому пункту:</strong>
-                            <ul>
-                                <li>Некорректное наказание самого себя: Бан на 6 часов</li>
-                                <li>Другого игрока по неадекватной причине или без доказательств: Бан на 3 дня</li>
-                                <li>За наказание по неадекватной причине на Гриферском, администрация вправе ограничить игроку доступ к наказаниям</li>
-                            </ul>
-                            <div class="rule-note">
-                                <i class="fas fa-info-circle"></i> Если вы получили наказание без доказательств — вы имеете полное право подать обжалование! Администратор, выдавший наказание без доказательств, будет наказан!
-                            </div>
-                        </div>
+                        <div class="rule-title">🔴 Наказание в игре = наказание на сайте</div>
+                        <p>Если вас забанили на сервере, доступ к сайту также будет ограничен до окончания срока бана.</p>
+                        <div class="rule-punishment">Автоматическая синхронизация наказаний</div>
                     </div>
                     <div class="rule-item">
-                        <div class="rule-title">
-                            <i class="fas fa-undo-alt"></i> 3.5 | Некорректные снятия наказаний
-                            <span class="rule-punishment">Бан на 1 день</span>
-                        </div>
-                        <div class="rule-description">
-                            Снятие корректного наказания с нарушителя, либо указание неподходящей причины снятия наказания (не относящейся к 3.4).<br>
-                            Лучше перепроверьте некорректность наказания, прежде, чем снимать его с игрока. Не ведитесь на подозрительные просьбы кого-то разбанить.
-                        </div>
+                        <div class="rule-title">🟡 Администратор обязан иметь доказательства</div>
+                        <p>Любое наказание должно быть подтверждено скриншотом или видеозаписью. Доказательства хранятся 14 дней.</p>
+                        <div class="rule-punishment">Нарушение: Бан на 3 дня</div>
                     </div>
                     <div class="rule-item">
-                        <div class="rule-title">
-                            <i class="fas fa-shield-alt"></i> ОБЖАЛОВАНИЕ НАКАЗАНИЙ
-                            <span class="rule-punishment rule-punishment-permanent">Право каждого игрока</span>
-                        </div>
-                        <div class="rule-description">
-                            Каждый игрок имеет право обжаловать выданное ему наказание, если считает его некорректным или выданным без доказательств.<br><br>
-                            <strong>Как подать обжалование:</strong>
-                            <ul>
-                                <li>В разделе "БАН-КОН" нажмите кнопку "Обжалование"</li>
-                                <li>Укажите никнейм, причину обжалования и приложите доказательства (если есть)</li>
-                                <li>Администрация рассмотрит вашу жалобу в течение 24 часов</li>
-                                <li>Если наказание было выдано без доказательств — оно будет снято, а администратор получит наказание</li>
-                            </ul>
-                            <div class="rule-note">
-                                <i class="fas fa-gavel"></i> <strong>Помните:</strong> Наказание без доказательств — это нарушение правил самим администратором!
-                            </div>
-                        </div>
+                        <div class="rule-title">🟢 Обжалование наказаний</div>
+                        <p>Если у администратора нет доказательств нарушения — наказание снимается, а администратор получает наказание.</p>
+                        <div class="rule-punishment">За выдачу наказания без доказательств: Бан на 3 дня</div>
                     </div>
                 </div>
             </div>
 
-            <!-- 1. Общие правила -->
-            <div class="rules-category">
-                <div class="rules-category-header" onclick="toggleRulesCategory(this)">
-                    <h2><i class="fas fa-globe"></i> 1. Общие правила</h2>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
-                </div>
-                <div class="rules-category-content">
+            <!-- РАЗДЕЛ: ОБЩИЕ ПРАВИЛА -->
+            <div id="rule-section-general" class="rules-section">
+                <div class="rules-card">
+                    <h2><i class="fas fa-globe"></i> 1. ОБЩИЕ ПРАВИЛА</h2>
+                    
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-user-secret"></i> 1.1 | Передача аккаунта <span class="rule-punishment rule-punishment-permanent">Бан навсегда + полное снятие</span></div>
-                        <div class="rule-description">Разглашение пароля от аккаунта, доступа к нему или совместная игра на нём. Наказуемо даже в виде объявления о продаже или в шуточной форме.</div>
+                        <div class="rule-title">1.1 | Передача аккаунта</div>
+                        <p>Разглашение пароля от аккаунта, доступа к нему или совместная игра на нём. Наказуемо даже в виде объявления о продаже или в шуточной форме.</p>
+                        <div class="rule-punishment">⚠️ Бан навсегда и полное снятие</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-money-bill-wave"></i> 1.2 | Торговля за реальные деньги <span class="rule-punishment rule-punishment-permanent">Бан по IP навсегда</span></div>
-                        <div class="rule-description">Продажа игровых ценностей за внеигровые ресурсы. Исключение для сделок о покупке доната на нашем сервере за ценности.</div>
+                        <div class="rule-title">1.2 | Торговля за реальные деньги</div>
+                        <p>Продажа игровых ценностей за внеигровые ресурсы. Исключение для сделок о покупке доната на нашем сервере за ценности.</p>
+                        <div class="rule-punishment">⚠️ Бан по IP навсегда</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-bomb"></i> 1.3 | Вред проекту <span class="rule-punishment">Бан по IP навсегда + полное снятие</span></div>
-                        <div class="rule-description">Нанесение проекту тяжкого вреда в финансовом или техническом плане:
-                            <ul><li>Краш проекта, создание лаг-машин</li><li>DDOS-атаки, бот-атаки</li><li>Намеренное засорение мира, полная застройка чужих приватов</li><li>Злоупотребление багами сервера, его недоработками</li><li>Разглашение критических багов и недоработок игрокам</li></ul>
-                        </div>
+                        <div class="rule-title">1.3 | Вред проекту</div>
+                        <p>Нанесение проекту тяжкого вреда в финансовом или техническом плане: краш проекта, создание лаг-машин, DDOS-атаки, намеренное засорение мира, злоупотребление багами, разглашение критических багов.</p>
+                        <div class="rule-punishment">⚠️ Умышленный: Бан по IP навсегда и полное снятие. Без умысла: Бан навсегда по IP</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-tag"></i> 1.4 | Недопустимые ники <span class="rule-punishment rule-punishment-permanent">Бан навсегда</span></div>
-                        <div class="rule-description">Регистрация ников, которые оскорбляют другого игрока, содержат острые политические темы, выдают игрока за оф.команду проекта или содержат названия читов.</div>
+                        <div class="rule-title">1.4 | Недопустимые ники</div>
+                        <p>Регистрация ников, которые оскорбляют игроков, содержат острые политические темы, выдают за команду проекта, содержат названия читов или других проектов.</p>
+                        <div class="rule-punishment">⚠️ Бан навсегда</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-mask"></i> 1.5 | Притворство командой проекта <span class="rule-punishment">Бан по IP на 3 дня</span></div>
-                        <div class="rule-description">Выдача себя за члена официальной команды проекта. Наказуем также вызов на проверку и требование доказательств.</div>
+                        <div class="rule-title">1.5 | Притворство командой проекта</div>
+                        <p>Выдача себя за члена официальной команды проекта. Наказуем также вызов на проверку и требование доказательств.</p>
+                        <div class="rule-punishment">⚠️ Бан по IP на 3 дня</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-handshake"></i> 1.6 | Махинации <span class="rule-punishment rule-punishment-permanent">Бан по IP навсегда + полное снятие</span></div>
-                        <div class="rule-description">Взлом аккаунтов, обман администрации, подделка доказательств, деанонимизация игроков.</div>
+                        <div class="rule-title">1.6 | Махинации</div>
+                        <p>Взлом аккаунтов, попытки выманить пароль, обман администрации, подделка доказательств, деанонимизация игроков или команды.</p>
+                        <div class="rule-punishment">⚠️ Бан по IP навсегда и полное снятие</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-comment-slash"></i> 1.7 | Вред официальной команде проекта <span class="rule-punishment">Бан на 1 день</span></div>
-                        <div class="rule-description">Необоснованная критика, помеха работе, отправка бессмысленных репортов.</div>
+                        <div class="rule-title">1.7 | Вред официальной команде проекта</div>
+                        <p>Необоснованная критика, угрозы, помеха работе, отправка ложных репортов.</p>
+                        <div class="rule-punishment">⚠️ Бан на 1 день</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-redo-alt"></i> 1.8 | Обход наказаний с продолжением <span class="rule-punishment">Бан по IP навсегда</span></div>
-                        <div class="rule-description">Обход корректно полученного наказания через другой аккаунт и продолжение нарушений.</div>
+                        <div class="rule-title">1.8 | Обход наказаний с продолжением</div>
+                        <p>Обход корректно полученного наказания через другой аккаунт и продолжение нарушений.</p>
+                        <div class="rule-punishment">⚠️ Обход по IP: Бан по IP навсегда всех аккаунтов. Обход не по IP: Бан по IP на 3 дня</div>
                     </div>
                 </div>
             </div>
 
-            <!-- 2. Правила общения -->
-            <div class="rules-category">
-                <div class="rules-category-header" onclick="toggleRulesCategory(this)">
-                    <h2><i class="fas fa-comments"></i> 2. Правила общения</h2>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
-                </div>
-                <div class="rules-category-content">
+            <!-- РАЗДЕЛ: ПРАВИЛА ОБЩЕНИЯ -->
+            <div id="rule-section-communication" class="rules-section">
+                <div class="rules-card">
+                    <h2><i class="fas fa-comments"></i> 2. ПРАВИЛА ОБЩЕНИЯ</h2>
+                    <p class="rule-punishment" style="margin-bottom: 15px;">Примечание: За нарушение пунктов 2.2, 2.3, 2.4 в /pc, /bc, /opchat вместо мута выдаётся бан на тот же срок.</p>
+                    
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-ad"></i> 2.1 | Реклама <span class="rule-punishment rule-punishment-permanent">Бан по IP навсегда</span></div>
-                        <div class="rule-description">Реклама сторонних ресурсов: серверов, сайтов, читов, каналов, стримов.</div>
+                        <div class="rule-title">2.1 | Реклама</div>
+                        <p>Реклама сторонних ресурсов: серверов, сайтов, читов, каналов, стримов, видео (кроме сотрудничества с сервером).</p>
+                        <div class="rule-punishment">⚠️ Бан по IP навсегда. При рекламе сервера: Бан по IP навсегда с полным снятием</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-fill-drip"></i> 2.2 | Засорение чата <span class="rule-punishment">Мут на 30 минут</span></div>
-                        <div class="rule-description">Написание КАПСом, повторение сообщений, попрошайничество, использование цвета "&k".</div>
+                        <div class="rule-title">2.2 | Засорение чата</div>
+                        <p>Написание четырёх слов в минуту КАПСом, повторение сообщений, попрошайничество, использование цвета &k, реклама профилей, упоминание сторонних проектов.</p>
+                        <div class="rule-punishment">⚠️ Мут на 30 минут</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-angry"></i> 2.3 | Оскорбительное поведение <span class="rule-punishment">Мут до 7 дней</span></div>
-                        <div class="rule-description">Оскорбления, токсичность в сторону других игроков. Наказуемо даже в завуалированном виде.</div>
+                        <div class="rule-title">2.3 | Оскорбительное поведение</div>
+                        <p>Оскорбления, токсичность в сторону игроков на почве религии, мировоззрения, нации, угрозы деанонимизации. Наказуемо даже в завуалированном виде.</p>
+                        <div class="rule-punishment">⚠️ В сторону игрока: Мут на 3 часа. С упоминанием родни/религии: Мут на 1 день. Угрозы деанонимизации: Мут по IP на 7 дней. С 15 раза: Мут по IP навсегда</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-landmark"></i> 2.4 | Политические дискуссии <span class="rule-punishment">Мут на 6 часов</span></div>
-                        <div class="rule-description">Любые сообщения, задевающие острые политические темы.</div>
+                        <div class="rule-title">2.4 | Политические дискуссии</div>
+                        <p>Сообщения, задевающие острые политические темы и способные вызвать конфликт.</p>
+                        <div class="rule-punishment">⚠️ Мут на 6 часов</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-terminal"></i> 2.5 | Спам командами <span class="rule-punishment">Бан на 10 минут</span></div>
-                        <div class="rule-description">Ввод схожих команд, которые видны другому игроку, с промежутком менее минуты.</div>
+                        <div class="rule-title">2.5 | Спам командами</div>
+                        <p>Ввод схожих команд (/pay, /time, /marry) с промежутком менее минуты.</p>
+                        <div class="rule-punishment">⚠️ Бан на 10 минут</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-skull"></i> 2.6 | Оскорбление проекта или его оф.команды <span class="rule-punishment">Бан по IP</span></div>
-                        <div class="rule-description">Оскорбления в сторону проекта или его официальной команды.</div>
+                        <div class="rule-title">2.6 | Оскорбление проекта или его команды</div>
+                        <p>Оскорбления в сторону проекта или официальной команды. Токсичность из пункта 2.3 в сторону команды.</p>
+                        <div class="rule-punishment">⚠️ Команды: Бан по IP на 3 дня. Проекта: Бан по IP навсегда / при повторе с полным снятием</div>
                     </div>
                 </div>
             </div>
 
-            <!-- 3. Игровые механики -->
-            <div class="rules-category">
-                <div class="rules-category-header" onclick="toggleRulesCategory(this)">
-                    <h2><i class="fas fa-gamepad"></i> 3. Игровые механики</h2>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
-                </div>
-                <div class="rules-category-content">
+            <!-- РАЗДЕЛ: ИГРОВЫЕ МЕХАНИКИ -->
+            <div id="rule-section-mechanics" class="rules-section">
+                <div class="rules-card">
+                    <h2><i class="fas fa-cogs"></i> 3. ИГРОВЫЕ МЕХАНИКИ</h2>
+                    
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-tachometer-alt"></i> 3.1 | Читерство <span class="rule-punishment rule-punishment-permanent">Бан по IP навсегда + полное снятие</span></div>
-                        <div class="rule-description">Читерство, хранение предметов читов, уход от проверки, кооперация с читерами.</div>
+                        <div class="rule-title">3.1 | Читерство</div>
+                        <p>Использование читов, хранение предметов читов, уход от проверки, помеха проведению проверки. Кооперация с читерами.</p>
+                        <div class="rule-punishment">⚠️ Бан по IP навсегда / при повторе с полным снятием</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-draw-polygon"></i> 3.2 | Недопустимые постройки <span class="rule-punishment">Бан на 6 часов + удаление</span></div>
-                        <div class="rule-description">Постройки, оскорбляющие игроков, содержащие политические темы, непристойности.</div>
+                        <div class="rule-title">3.2 | Недопустимые постройки</div>
+                        <p>Постройки, оскорбляющие игроков, с политическими темами, непристойные, содержащие другие сервера или названия читов, делающие перемещение невозможным.</p>
+                        <div class="rule-punishment">⚠️ Бан на 6 часов, удаление последствий</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-paintbrush"></i> 3.3 | Недопустимая кастомизация <span class="rule-punishment">Бан на 6 часов</span></div>
-                        <div class="rule-description">Скины, плащи, префиксы, ники с оскорблениями или выдающие за команду проекта.</div>
+                        <div class="rule-title">3.3 | Недопустимая кастомизация</div>
+                        <p>Скины, плащи, префиксы, сообщения о входе, названия кланов, которые оскорбляют, содержат политику, выдают за команду или владельца привилегии, содержат другие сервера или читы.</p>
+                        <div class="rule-punishment">⚠️ Бан на 6 часов</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-gavel"></i> 3.4 | Некорректные наказания <span class="rule-punishment">Бан до 3 дней</span></div>
-                        <div class="rule-description">Выдача наказаний без доказательств или по неадекватной причине.<br>
-                        <strong>⚠️ Администратор, выдавший наказание без доказательств, получает бан на 3 дня!</strong></div>
+                        <div class="rule-title">3.4 | Некорректные наказания</div>
+                        <p>Выдача наказаний по неадекватной причине, не по правилам, без доказательств. Доказательства хранятся 14 дней.</p>
+                        <div class="rule-punishment">⚠️ Некорректное наказание себя: Бан на 6 часов. Другого игрока: Бан на 3 дня</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-undo-alt"></i> 3.5 | Некорректные снятия наказаний <span class="rule-punishment">Бан на 1 день</span></div>
-                        <div class="rule-description">Снятие корректного наказания с нарушителя.</div>
+                        <div class="rule-title">3.5 | Некорректные снятия наказаний</div>
+                        <p>Снятие корректного наказания с нарушителя или указание неподходящей причины.</p>
+                        <div class="rule-punishment">⚠️ Бан на 1 день</div>
                     </div>
+
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-chart-line"></i> 3.6 | Фарм статистики <span class="rule-punishment">Бан до 3 дней + сброс</span></div>
-                        <div class="rule-description">Накрутка статистики путями, не предусмотренными целью режима.</div>
+                        <div class="rule-title">3.6 | Фарм статистики</div>
+                        <p>Накрутка статистик через многократное убийство на респавне или использование мультиаккаунтов.</p>
+                        <div class="rule-punishment">⚠️ Небольшая: Бан на 12 часов. Большая: Бан на 3 дня и сброс статистики</div>
                     </div>
                 </div>
             </div>
 
-            <!-- 4. Правила для Выживаний -->
-            <div class="rules-category">
-                <div class="rules-category-header" onclick="toggleRulesCategory(this)">
-                    <h2><i class="fas fa-tree"></i> 4. Правила для Выживаний</h2>
-                    <i class="fas fa-chevron-down toggle-icon"></i>
-                </div>
-                <div class="rules-category-content">
+            <!-- РАЗДЕЛ: ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ -->
+            <div id="rule-section-survival" class="rules-section">
+                <div class="rules-card">
+                    <h2><i class="fas fa-tree"></i> 4. ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</h2>
+                    <p class="rule-punishment" style="margin-bottom: 15px;">Наказания за этот раздел выдаются только локально, на Выживаниях</p>
+                    
                     <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-trap"></i> 4.1 | Гриферство <span class="rule-punishment">Бан на 3 дня</span></div>
-                        <div class="rule-description">Введение игрока в заблуждение с целью личной выгоды или вреда: зазыв в ловушку, обман при торговле.</div>
+                        <div class="rule-title">4.1 | Гриферство</div>
+                        <p>Введение игрока в заблуждение с целью личной выгоды или вреда: зазыв в ловушку, обман с целью навредить региону, обман при торговле.</p>
+                        <div class="rule-punishment">⚠️ Бан на 3 дня</div>
                     </div>
-                    <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-hand-paper"></i> 4.2 | Помеха игрокам <span class="rule-punishment">Предупреждение / бан на 3 часа</span></div>
-                        <div class="rule-description">Отказ покидать регион, нахождение на аренах в /fly, злоупотребление командами /kb, /tp.</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-city"></i> 4.3 | Недопустимые изменения спавна <span class="rule-punishment">Бан до 7 дней</span></div>
-                        <div class="rule-description">Изменение первозданных структур спавна, создание помех игрокам.</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-crown"></i> 4.4 | Злоупотребление правами доната <span class="rule-punishment">Бан до 3 дней</span></div>
-                        <div class="rule-description">Использование привилегий для убийств, изменения чужих регионов, инвентаря.</div>
-                    </div>
-                    <div class="rule-item">
-                        <div class="rule-title"><i class="fas fa-exchange-alt"></i> 4.5 | Телепортация без разрешения <span class="rule-punishment">Бан на 2 часа</span></div>
-                        <div class="rule-description">Использование /tphere, /tpohere для телепортации игрока против его воли.</div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Обжалование наказаний -->
-            <div class="appeal-section">
-                <i class="fas fa-gavel" style="font-size: 50px; margin-bottom: 15px; display: block; animation: rgbTextAnim 3s infinite;"></i>
-                <h3>⚖️ ОБЖАЛОВАНИЕ НАКАЗАНИЙ ⚖️</h3>
-                <p>Если вы считаете, что наказание было выдано некорректно или без доказательств — вы имеете право подать жалобу!</p>
-                <p><strong>Правило 3.4:</strong> Администратор, выдавший наказание без доказательств, получает бан на 3 дня.</p>
-                <button class="appeal-btn" id="appealBtn"><i class="fas fa-envelope"></i> ПОДАТЬ ОБЖАЛОВАНИЕ</button>
+                    <div class="rule-item">
+                        <div class="rule-title">4.2 | Помеха игрокам</div>
+                        <p>Отказ покидать регион по просьбе, нахождение на аренах спавна в /fly,/god,/gm 1, злоупотребление /kb,/gm 0,/tp, множественное использование взрывных зелий, фейерверков.</p>
+                        <div class="rule-punishment">⚠️ Предупреждение, при повторе бан на 3 часа</div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-title">4.3 | Недопустимые изменения спавна</div>
+                        <p>Изменения, затрагивающие первозданные структуры спавна, создающие помехи, с большим количеством голов/табличек, сильно закрывающие небо.</p>
+                        <div class="rule-punishment">⚠️ Недопустимое изменение: Бан на 7 дней. Умышленная порча: Бан навсегда и полное снятие</div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-title">4.4 | Злоупотребление правами доната</div>
+                        <p>Использование привилегий для убийства игроков, изменения чужого региона без согласия, изменения инвентаря, удаления чужих /warp-ов.</p>
+                        <div class="rule-punishment">⚠️ Бан на 1 день. Намеренное изменение региона: Бан на 3 дня. От 5 раз: Бан навсегда и снятие</div>
+                    </div>
+
+                    <div class="rule-item">
+                        <div class="rule-title">4.5 | Телепортация без разрешения</div>
+                        <p>Использование /tphere, /tpohere, /spawn [Ник] для телепортации игрока против его воли.</p>
+                        <div class="rule-punishment">⚠️ Бан на 2 часа</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -671,15 +673,6 @@
     <div id="changePasswordModal" class="modal"><div class="modal-content"><span class="close-modal" id="closePasswordModal">&times;</span><h3>Сменить пароль</h3><input type="password" id="oldPasswordInput" placeholder="Старый пароль" class="admin-input"><input type="password" id="newPasswordInput" placeholder="Новый пароль" class="admin-input"><button id="savePasswordBtn" class="admin-btn">Сохранить</button></div></div>
 
     <script>
-        // Функция для сворачивания/разворачивания категорий правил
-        function toggleRulesCategory(header) {
-            const content = header.parentElement.querySelector('.rules-category-content');
-            const icon = header.querySelector('.toggle-icon');
-            content.classList.toggle('open');
-            icon.classList.toggle('fa-chevron-down');
-            icon.classList.toggle('fa-chevron-up');
-        }
-
         (function(){
             const firebaseConfig = {
                 apiKey: "AIzaSyCK9vHX-OQIw48SGi8S_8U7pIjq60gahEA",
@@ -736,9 +729,22 @@
                         document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
                         if (tab.dataset.page === 'admin') { loadRecentUsers(); loadModerators(); loadStats(); loadPurchases(); }
                         if (tab.dataset.page === 'profile') { loadUserData(currentUser); }
+                        if (tab.dataset.page === 'rules') { initRulesPage(); }
                     };
                 });
                 if (currentUser?.email === MAIN_ADMIN_EMAIL) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
+            }
+
+            function initRulesPage() {
+                // Навигация по разделам правил
+                document.querySelectorAll('.rules-nav-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.rules-nav-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        document.querySelectorAll('.rules-section').forEach(s => s.classList.remove('active'));
+                        document.getElementById(`rule-section-${btn.dataset.ruleSection}`).classList.add('active');
+                    };
+                });
             }
 
             async function addPurchaseLog(type, productName, price, serverNick, siteNick, userEmail) {
@@ -1202,8 +1208,13 @@
                 document.getElementById('clearPurchasesBtn').onclick = () => { if (confirm('Очистить все логи покупок?')) clearPurchases(); };
                 document.getElementById('banExitBtn').onclick = () => { document.getElementById('banModalOverlay').style.display = 'none'; auth.signOut(); };
                 document.getElementById('siteClosedExitBtn').onclick = () => auth.signOut();
-                document.getElementById('appealBtn').onclick = () => { showNotification('Функция обжалования скоро появится! Пока вы можете написать в поддержку.', 'warning'); };
                 document.querySelectorAll('.tab-auth').forEach(btn => { btn.onclick = () => { document.querySelectorAll('.tab-auth').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const isLogin = btn.dataset.tab === 'login'; document.getElementById('loginPaneAuth').classList.toggle('active', isLogin); document.getElementById('registerPaneAuth').classList.toggle('active', !isLogin); }; });
+                
+                // Кнопка жалобы (временная, для демонстрации)
+                const appealBtn = document.getElementById('appealBtnTemp');
+                if (appealBtn) {
+                    appealBtn.onclick = () => showNotification('Система жалоб в разработке! Скоро будет доступна.', 'warning');
+                }
             }
 
             auth.onAuthStateChanged(async (user) => {
