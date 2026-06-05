@@ -35,24 +35,16 @@
         body { background: linear-gradient(135deg, #0a0a12 0%, #0f0f1a 100%); font-family: 'Montserrat', sans-serif; color: var(--text-primary); min-height: 100vh; overflow-x: hidden; }
         
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes rgbTextAnim { 0% { color: #ff0000; text-shadow: 0 0 5px #ff0000; } 25% { color: #00ff00; text-shadow: 0 0 5px #00ff00; } 50% { color: #0000ff; text-shadow: 0 0 5px #0000ff; } 75% { color: #ff00ff; text-shadow: 0 0 5px #ff00ff; } 100% { color: #ff0000; text-shadow: 0 0 5px #ff0000; } }
-        @keyframes rgbBorderAnim { 0% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; } 25% { border-color: #00ff00; box-shadow: 0 0 10px #00ff00; } 50% { border-color: #0000ff; box-shadow: 0 0 10px #0000ff; } 75% { border-color: #ff00ff; box-shadow: 0 0 10px #ff00ff; } 100% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; } }
-        @keyframes rgbBgAnim { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes rgbTextAnim { 0% { color: #ff0000; } 25% { color: #00ff00; } 50% { color: #0000ff; } 75% { color: #ff00ff; } 100% { color: #ff0000; } }
+        @keyframes rgbBorderAnim { 0% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; } 25% { border-color: #00ff00; } 50% { border-color: #0000ff; } 75% { border-color: #ff00ff; } 100% { border-color: #ff0000; } }
         @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes crownGlow { 0% { filter: drop-shadow(0 0 2px #ffd700); } 50% { filter: drop-shadow(0 0 15px #ffd700) drop-shadow(0 0 5px #8b5cf6); } 100% { filter: drop-shadow(0 0 2px #ffd700); } }
-        @keyframes rainbowRotate { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         
-        .animate-in { animation: fadeInUp 0.5s ease; }
-        .pulse-animation { animation: pulse 2s infinite; }
-        .float-animation { animation: float 3s ease infinite; }
         .rgb-text-animation { animation: rgbTextAnim 3s infinite; }
         .rgb-border-animation { animation: rgbBorderAnim 3s infinite; }
-        .rgb-bg-animation { background: linear-gradient(135deg, #ff0000, #00ff00, #0000ff, #ff00ff, #ff0000); background-size: 400% 400%; animation: rgbBgAnim 8s ease infinite; }
         
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #151520; border-radius: 10px; }
@@ -64,49 +56,42 @@
         .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), var(--purple)); border-radius: 12px; display: flex; align-items: center; justify-content: center; animation: float 3s ease infinite; }
         .logo-icon i { font-size: 22px; color: #0a0a12; }
         .logo-text { font-family: 'Orbitron', monospace; font-size: 22px; font-weight: 800; background: linear-gradient(135deg, #fff, var(--accent), var(--purple)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .verify-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #1a1a2e, #0f0f1a); padding: 4px 14px; border-radius: 30px; font-size: 11px; border: 1px solid rgba(255,215,0,0.3); backdrop-filter: blur(4px); }
-        .verify-badge i { color: #3b82f6; font-size: 12px; }
-        .verify-badge span { color: var(--text-secondary); }
+        .verify-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #1a1a2e, #0f0f1a); padding: 4px 14px; border-radius: 30px; font-size: 11px; border: 1px solid rgba(255,215,0,0.3); }
+        .verify-badge i { color: #3b82f6; }
         .header-right { display: flex; align-items: center; gap: 15px; }
         .balance { display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.5); padding: 8px 18px; border-radius: 40px; border: 1px solid var(--border-light); backdrop-filter: blur(4px); transition: 0.3s; }
-        .balance:hover { border-color: var(--accent); box-shadow: var(--shadow-glow); }
-        .balance i { color: var(--accent); font-size: 14px; }
-        .balance span { font-weight: 700; color: var(--accent); font-size: 16px; font-family: 'Orbitron', monospace; }
+        .balance i, .balance span { color: var(--accent); font-weight: 700; }
         .btn-logout { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: var(--danger); padding: 8px 20px; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 13px; transition: 0.3s; }
         .btn-logout:hover { background: rgba(239,68,68,0.3); transform: scale(1.02); }
         
         .menu-tabs { display: flex; gap: 12px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
-        .menu-tab { background: rgba(25,25,40,0.6); backdrop-filter: blur(8px); border: 1px solid var(--border-color); padding: 8px 28px; border-radius: 40px; cursor: pointer; font-weight: 600; transition: 0.3s; font-size: 14px; color: var(--text-primary); position: relative; }
-        .menu-tab.active, .menu-tab:hover { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #0a0a12; border-color: transparent; transform: translateY(-2px); box-shadow: var(--shadow-glow); }
-        .unread-badge { position: absolute; top: -8px; right: -8px; background: var(--danger); color: white; border-radius: 50%; min-width: 20px; height: 20px; font-size: 10px; display: flex; align-items: center; justify-content: center; padding: 0 5px; font-weight: bold; }
+        .menu-tab { background: rgba(25,25,40,0.6); backdrop-filter: blur(8px); border: 1px solid var(--border-color); padding: 8px 28px; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 14px; color: var(--text-primary); transition: 0.3s; }
+        .menu-tab.active, .menu-tab:hover { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #0a0a12; transform: translateY(-2px); box-shadow: var(--shadow-glow); }
         
         .page { display: none; animation: fadeInUp 0.4s ease; }
         .page.active { display: block; }
-        #homePage, #shopPage, #profilePage, #messagesPage { padding-top: 85px; min-height: 100vh; }
+        #homePage, #shopPage, #profilePage, #adminPage { padding-top: 85px; min-height: 100vh; }
 
         .hero-timer { min-height: calc(100vh - 85px); display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
         .hero-timer::before { content: ''; position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background: radial-gradient(circle, rgba(255,215,0,0.05) 0%, transparent 70%); animation: rotate 30s linear infinite; }
-        .hero-timer::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100px; background: linear-gradient(transparent, var(--bg-dark)); pointer-events: none; }
         .timer-container { z-index: 2; padding: 40px; background: rgba(0,0,0,0.2); backdrop-filter: blur(10px); border-radius: 50px; margin: 20px; }
         .timer-title { font-family: 'Orbitron', monospace; font-size: 48px; font-weight: 800; margin-bottom: 50px; letter-spacing: 4px; background: linear-gradient(135deg, #fff, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .countdown-wrapper { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
         .countdown-block { background: rgba(0,0,0,0.6); backdrop-filter: blur(20px); border-radius: 28px; padding: 25px 20px; width: 140px; border: 1px solid var(--border-light); transition: 0.3s; text-align: center; }
         .countdown-block:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: var(--shadow-glow); }
-        .countdown-number { font-family: 'Orbitron', monospace; font-size: 56px; font-weight: 800; color: var(--accent); text-shadow: 0 0 20px var(--accent-glow); min-width: 90px; display: inline-block; line-height: 1.2; }
-        .countdown-label { font-size: 13px; color: var(--text-secondary); margin-top: 10px; letter-spacing: 2px; text-transform: uppercase; }
+        .countdown-number { font-family: 'Orbitron', monospace; font-size: 56px; font-weight: 800; color: var(--accent); text-shadow: 0 0 20px var(--accent-glow); min-width: 90px; display: inline-block; }
+        .countdown-label { font-size: 13px; color: var(--text-secondary); margin-top: 10px; letter-spacing: 2px; }
 
         .shop-section { max-width: 1300px; margin: 0 auto; padding: 20px; }
         .shop-header { text-align: center; margin-bottom: 35px; }
         .shop-header h1 { font-family: 'Orbitron', monospace; font-size: 38px; background: linear-gradient(135deg, #fff, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .shop-header p { color: var(--text-secondary); font-size: 14px; margin-top: 8px; }
         .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 25px; }
-        .product-card { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: 28px; padding: 25px; text-align: center; border: 1px solid var(--border-color); transition: 0.3s; }
+        .product-card { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: 28px; padding: 25px; text-align: center; border: 1px solid var(--border-color); transition: 0.3s; cursor: pointer; }
         .product-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: var(--shadow-glow); }
-        .product-name { font-size: 24px; font-weight: 700; margin-bottom: 12px; background: linear-gradient(135deg, #fff, var(--text-secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .product-name { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
         .price { font-size: 32px; font-weight: 800; color: var(--accent); margin: 15px 0; font-family: 'Orbitron', monospace; }
-        .donate-note { font-size: 11px; color: var(--text-muted); margin: 12px 0; padding: 10px; background: rgba(255,215,0,0.06); border-radius: 14px; border: 1px solid rgba(255,215,0,0.15); }
-        .donate-note i { margin-right: 5px; color: var(--accent); }
-        .buy-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 14px; border-radius: 40px; font-weight: 700; cursor: pointer; width: 100%; color: #0a0a12; transition: 0.3s; font-size: 16px; font-weight: 800; }
+        .donate-note { font-size: 11px; color: var(--text-muted); margin: 12px 0; padding: 10px; background: rgba(255,215,0,0.06); border-radius: 14px; }
+        .buy-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 14px; border-radius: 40px; font-weight: 700; cursor: pointer; width: 100%; color: #0a0a12; transition: 0.3s; font-size: 16px; margin-top: 10px; }
         .buy-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
 
         .profile-section { max-width: 650px; margin: 0 auto; padding: 20px; }
@@ -114,65 +99,59 @@
         .profile-card:hover { border-color: var(--accent); box-shadow: var(--shadow-glow); }
         .profile-avatar { width: 110px; height: 110px; background: linear-gradient(135deg, var(--accent), var(--purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; animation: float 3s ease infinite; }
         .profile-avatar i { font-size: 50px; color: #0a0a12; }
-        .profile-name { font-size: 26px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 10px; }
+        .profile-name { font-size: 26px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
         .profile-info { text-align: left; margin: 25px 0; background: rgba(0,0,0,0.3); border-radius: 20px; padding: 18px; }
         .profile-info p { padding: 12px 0; border-bottom: 1px solid var(--border-color); display: flex; gap: 15px; align-items: center; font-size: 14px; }
-        .profile-info p:last-child { border-bottom: none; }
-        .profile-info i { width: 24px; color: var(--accent); font-size: 16px; }
+        .profile-info i { width: 24px; color: var(--accent); }
         .profile-actions { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
         .profile-btn { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: var(--info); padding: 10px 22px; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 13px; transition: 0.3s; }
         .profile-btn:hover { background: rgba(59,130,246,0.3); transform: scale(1.02); }
         .donates-list { margin: 20px 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-        .donate-tag { background: rgba(255,215,0,0.12); padding: 6px 14px; border-radius: 40px; font-size: 12px; border: 1px solid var(--border-light); }
+        .donate-tag { background: rgba(255,215,0,0.12); padding: 6px 14px; border-radius: 40px; font-size: 12px; }
 
-        .messages-container { max-width: 800px; margin: 0 auto; padding: 25px; background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: 32px; min-height: 450px; }
-        .message-item { background: rgba(0,0,0,0.35); border-radius: 18px; padding: 18px; margin-bottom: 12px; border-left: 4px solid var(--accent); transition: 0.3s; }
-        .message-item:hover { transform: translateX(5px); background: rgba(0,0,0,0.45); }
-        .message-text { font-size: 14px; margin-bottom: 8px; line-height: 1.5; }
-        .message-date { font-size: 10px; color: var(--text-muted); }
-
-        /* ========== 30 ВИДОВ ГАЛОЧЕК ========== */
-        .badge-icon { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; margin-left: 6px; vertical-align: middle; flex-shrink: 0; }
+        /* ГАЛОЧКИ */
+        .badge-icon { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; margin-left: 6px; vertical-align: middle; }
         .badge-icon i { font-size: 11px; color: white; }
-        .badge-blue { background: #3b82f6; box-shadow: 0 0 5px #3b82f6; }
-        .badge-red { background: #ef4444; box-shadow: 0 0 5px #ef4444; }
-        .badge-gold { background: #ffd700; box-shadow: 0 0 5px #ffd700; }
+        .badge-blue { background: #3b82f6; }
+        .badge-red { background: #ef4444; }
+        .badge-gold { background: #ffd700; }
         .badge-gold i { color: #1a1a1a; }
         .badge-rainbow { background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); background-size: 200% 200%; animation: rainbowRotate 2s ease infinite; }
+        @keyframes rainbowRotate { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         .badge-rgb { background: #1a1a2a; border: 2px solid; animation: rgbBorderAnim 3s infinite; }
-        .badge-crown { background: linear-gradient(135deg, #7c3aed, #a855f7); box-shadow: 0 0 12px #8b5cf6; width: auto; border-radius: 20px; padding: 2px 10px; animation: pulse 1.5s infinite; }
-        .badge-crown i { color: #ffd700; font-size: 12px; animation: crownGlow 1.5s infinite; }
-        .badge-diamond { background: linear-gradient(135deg, #00ffff, #0088ff); box-shadow: 0 0 8px #00ffff; }
-        .badge-star { background: linear-gradient(135deg, #ffd700, #ff8800); box-shadow: 0 0 8px #ffd700; }
-        .badge-game { background: linear-gradient(135deg, #ff00ff, #8800ff); box-shadow: 0 0 8px #ff00ff; }
-        .badge-fire { background: linear-gradient(135deg, #ff4400, #ff0000); box-shadow: 0 0 8px #ff4400; animation: pulse 1s infinite; }
-        .badge-mythic { background: linear-gradient(135deg, #a855f7, #7c3aed); box-shadow: 0 0 8px #a855f7; }
-        .badge-cosmic { background: linear-gradient(135deg, #06b6d4, #0891b2); box-shadow: 0 0 8px #06b6d4; }
-        .badge-ice { background: linear-gradient(135deg, #ec4899, #db2777); box-shadow: 0 0 8px #ec4899; }
-        .badge-shadow { background: #1f2937; border: 1px solid #4b5563; box-shadow: 0 0 8px #4b5563; }
-        .badge-light { background: #f3f4f6; box-shadow: 0 0 8px #f3f4f6; }
+        .badge-crown { background: linear-gradient(135deg, #7c3aed, #a855f7); width: auto; border-radius: 20px; padding: 2px 10px; animation: pulse 1.5s infinite; }
+        .badge-crown i { color: #ffd700; font-size: 12px; }
+        .badge-diamond { background: linear-gradient(135deg, #00ffff, #0088ff); }
+        .badge-star { background: linear-gradient(135deg, #ffd700, #ff8800); }
+        .badge-game { background: linear-gradient(135deg, #ff00ff, #8800ff); }
+        .badge-fire { background: linear-gradient(135deg, #ff4400, #ff0000); animation: pulse 1s infinite; }
+        .badge-mythic { background: linear-gradient(135deg, #a855f7, #7c3aed); }
+        .badge-cosmic { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+        .badge-ice { background: linear-gradient(135deg, #ec4899, #db2777); }
+        .badge-shadow { background: #1f2937; border: 1px solid #4b5563; }
+        .badge-light { background: #f3f4f6; }
         .badge-light i { color: #1a1a1a; }
-        .badge-dark { background: #111827; box-shadow: 0 0 8px #111827; }
-        .badge-nature { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 0 8px #10b981; }
-        .badge-blood { background: linear-gradient(135deg, #dc2626, #991b1b); box-shadow: 0 0 8px #dc2626; }
-        .badge-void { background: #000000; border: 1px solid #333; box-shadow: 0 0 8px #333; }
-        .badge-divine { background: linear-gradient(135deg, #eab308, #ca8a04); box-shadow: 0 0 8px #eab308; }
-        .badge-purple { background: #8b5cf6; box-shadow: 0 0 8px #8b5cf6; }
-        .badge-teal { background: #14b8a6; box-shadow: 0 0 8px #14b8a6; }
-        .badge-sapphire { background: #0f52ba; box-shadow: 0 0 8px #0f52ba; }
-        .badge-emerald { background: #50c878; box-shadow: 0 0 8px #50c878; }
-        .badge-ruby { background: #e0115f; box-shadow: 0 0 8px #e0115f; }
-        .badge-amber { background: #ffbf00; box-shadow: 0 0 8px #ffbf00; }
-        .badge-jade { background: #00a86b; box-shadow: 0 0 8px #00a86b; }
-        .badge-coral { background: #ff7f50; box-shadow: 0 0 8px #ff7f50; }
-        .badge-indigo { background: #4b0082; box-shadow: 0 0 8px #4b0082; }
-        .badge-magenta { background: #ff00ff; box-shadow: 0 0 8px #ff00ff; }
-        .badge-bronze { background: #cd7f32; box-shadow: 0 0 8px #cd7f32; }
-        .badge-platinum { background: #e5e4e2; box-shadow: 0 0 8px #e5e4e2; }
+        .badge-dark { background: #111827; }
+        .badge-nature { background: linear-gradient(135deg, #10b981, #059669); }
+        .badge-blood { background: linear-gradient(135deg, #dc2626, #991b1b); }
+        .badge-void { background: #000000; border: 1px solid #333; }
+        .badge-divine { background: linear-gradient(135deg, #eab308, #ca8a04); }
+        .badge-purple { background: #8b5cf6; }
+        .badge-teal { background: #14b8a6; }
+        .badge-sapphire { background: #0f52ba; }
+        .badge-emerald { background: #50c878; }
+        .badge-ruby { background: #e0115f; }
+        .badge-amber { background: #ffbf00; }
+        .badge-jade { background: #00a86b; }
+        .badge-coral { background: #ff7f50; }
+        .badge-indigo { background: #4b0082; }
+        .badge-magenta { background: #ff00ff; }
+        .badge-bronze { background: #cd7f32; }
+        .badge-platinum { background: #e5e4e2; }
         .badge-platinum i { color: #1a1a1a; }
-        .badge-obsidian { background: #000000; border: 1px solid #666; box-shadow: 0 0 8px #666; }
+        .badge-obsidian { background: #000000; border: 1px solid #666; }
 
-        /* СЕКРЕТНЫЙ ЗАМОК */
+        /* СЕКРЕТНЫЙ ЗАМОК И АДМИНКА */
         .secret-admin-trigger {
             position: fixed;
             bottom: 25px;
@@ -190,10 +169,9 @@
             transition: 0.3s;
             backdrop-filter: blur(8px);
         }
-        .secret-admin-trigger:hover { background: rgba(255,215,0,0.25); transform: scale(1.1) rotate(5deg); box-shadow: 0 0 20px rgba(255,215,0,0.3); }
+        .secret-admin-trigger:hover { background: rgba(255,215,0,0.25); transform: scale(1.1) rotate(5deg); }
         .secret-admin-trigger i { color: var(--accent); font-size: 22px; }
 
-        /* АДМИН ПАНЕЛЬ */
         .admin-page {
             display: none;
             position: fixed;
@@ -207,6 +185,7 @@
         }
         .admin-page.active { display: block; }
         .admin-rgb-bg { background: linear-gradient(135deg, #1a0a2a, #0a1a2a, #2a0a1a, #1a2a0a); background-size: 400% 400%; animation: rgbBgAnim 12s ease infinite; min-height: 100vh; padding: 30px; }
+        @keyframes rgbBgAnim { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .admin-glass-panel { background: rgba(10,10,18,0.85); backdrop-filter: blur(20px); border-radius: 40px; padding: 35px; border: 1px solid rgba(255,215,0,0.2); max-width: 1200px; margin: 0 auto; }
         .admin-glass-panel h1 { font-family: 'Orbitron', monospace; font-size: 38px; text-align: center; margin-bottom: 35px; background: linear-gradient(135deg, #fff, var(--accent), var(--purple)); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .admin-category-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 35px; }
@@ -216,9 +195,8 @@
         .admin-category.active { display: block; }
         .admin-block { background: rgba(0,0,0,0.45); border-radius: 24px; padding: 25px; margin-bottom: 25px; border: 1px solid rgba(255,215,0,0.12); }
         .admin-block h3 { color: var(--accent); margin-bottom: 18px; font-size: 18px; display: flex; align-items: center; gap: 10px; }
-        .admin-input { width: 100%; padding: 12px 16px; margin: 8px 0; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 40px; color: white; outline: none; font-size: 14px; }
-        .admin-input:focus { border-color: var(--accent); box-shadow: 0 0 8px rgba(255,215,0,0.2); }
-        .admin-select { width: 100%; padding: 12px 16px; margin: 8px 0; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 40px; color: white; cursor: pointer; }
+        .admin-input, .admin-select { width: 100%; padding: 12px 16px; margin: 8px 0; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 40px; color: white; outline: none; font-size: 14px; }
+        .admin-input:focus, .admin-select:focus { border-color: var(--accent); }
         .admin-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 12px; border-radius: 40px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 10px; color: #0a0a12; transition: 0.3s; font-size: 14px; }
         .admin-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
         .admin-btn-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
@@ -228,7 +206,7 @@
         .admin-btn-pink { background: linear-gradient(135deg, #ec4899, #db2777); color: white; }
         .players-list { max-height: 320px; overflow-y: auto; margin-top: 10px; }
         .player-card { background: rgba(0,0,0,0.35); border-radius: 16px; padding: 12px 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .close-admin-page { position: fixed; top: 25px; right: 25px; background: rgba(239,68,68,0.2); border: 1px solid var(--danger); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2100; color: var(--danger); transition: 0.3s; backdrop-filter: blur(4px); }
+        .close-admin-page { position: fixed; top: 25px; right: 25px; background: rgba(239,68,68,0.2); border: 1px solid var(--danger); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2100; color: var(--danger); transition: 0.3s; }
         .close-admin-page:hover { background: rgba(239,68,68,0.4); transform: scale(1.08) rotate(90deg); }
 
         /* МОДАЛЬНЫЕ ОКНА */
@@ -254,9 +232,8 @@
             text-align: center;
             border: 2px solid;
             animation: modalFadeIn 0.4s ease, rgbBorderAnim 3s infinite;
-            box-shadow: 0 0 60px rgba(255,0,0,0.4);
         }
-        .site-closed-content { background: linear-gradient(135deg, #1a1a0a, #0a1a1a, #1a0a1a); box-shadow: 0 0 60px rgba(255,215,0,0.4); }
+        .site-closed-content { background: linear-gradient(135deg, #1a1a0a, #0a1a1a, #1a0a1a); }
         .ban-modal-content i, .site-closed-content i { font-size: 70px; margin-bottom: 20px; animation: rgbTextAnim 3s infinite; }
         .ban-modal-content h2, .site-closed-content h2 { font-size: 30px; margin-bottom: 25px; animation: rgbTextAnim 3s infinite; }
         .ban-info-grid { background: rgba(0,0,0,0.5); border-radius: 24px; padding: 20px; margin: 20px 0; text-align: left; }
@@ -327,9 +304,7 @@
 
     <div id="shopPage" class="page"><div class="shop-section"><div class="shop-header"><h1>ПРЕМИУМ МАГАЗИН</h1><p>Выберите привилегию и получите уникальные возможности</p></div><div class="shop-grid" id="shopGrid"></div><div style="text-align: center; margin-top: 45px;"><button class="buy-btn" id="testServerBtn" style="width: auto; padding: 15px 45px; background: linear-gradient(135deg, var(--purple), var(--pink));"><i class="fas fa-server"></i> ЗАКАЗАТЬ ТЕСТ-СЕРВЕР</button></div></div></div>
 
-    <div id="profilePage" class="page"><div class="profile-section"><div class="profile-card"><div class="profile-avatar"><i class="fas fa-user"></i></div><div class="profile-name" id="profileName"></div><div class="profile-info" id="profileInfo"></div><div class="profile-info"><p><i class="fas fa-tag"></i> <strong>Тег:</strong> <span id="userTag"></span></p></div><div id="donatesContainer" class="donates-list"></div><div class="profile-actions"><button class="profile-btn" id="editNameBtn">Сменить имя</button><button class="profile-btn" id="changePasswordBtn">Сменить пароль</button><button class="profile-btn" id="myMessagesBtn">Мои сообщения</button></div></div></div></div>
-
-    <div id="messagesPage" class="page"><div class="messages-container" id="messagesContainer"><div style="text-align:center;padding:50px;"><i class="fas fa-spinner fa-pulse fa-2x"></i><br><br>Загрузка...</div></div></div>
+    <div id="profilePage" class="page"><div class="profile-section"><div class="profile-card"><div class="profile-avatar"><i class="fas fa-user"></i></div><div class="profile-name" id="profileName"></div><div class="profile-info" id="profileInfo"></div><div class="profile-info"><p><i class="fas fa-tag"></i> <strong>Тег:</strong> <span id="userTag"></span></p></div><div id="donatesContainer" class="donates-list"></div><div class="profile-actions"><button class="profile-btn" id="editNameBtn">Сменить имя</button><button class="profile-btn" id="changePasswordBtn">Сменить пароль</button></div></div></div></div>
 
     <div class="secret-admin-trigger" id="secretAdminTrigger"><i class="fas fa-lock"></i></div>
 
@@ -355,14 +330,21 @@
 
     <script>
         (function(){
-            const firebaseConfig = { apiKey: "AIzaSyCK9vHX-OQIw48SGi8S_8U7pIjq60gahEA", authDomain: "siteorgooo.firebaseapp.com", projectId: "siteorgooo", storageBucket: "siteorgooo.firebasestorage.app", messagingSenderId: "891797808455", appId: "1:891797808455:web:fa5e94be661dcc87d81862" };
+            const firebaseConfig = {
+                apiKey: "AIzaSyCK9vHX-OQIw48SGi8S_8U7pIjq60gahEA",
+                authDomain: "siteorgooo.firebaseapp.com",
+                projectId: "siteorgooo",
+                storageBucket: "siteorgooo.firebasestorage.app",
+                messagingSenderId: "891797808455",
+                appId: "1:891797808455:web:fa5e94be661dcc87d81862"
+            };
             if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
             const auth = firebase.auth();
             const db = firebase.firestore();
             const MAIN_ADMIN_EMAIL = "ramonenok@bk.ru";
             const ADMIN_SECRET_CODE = "website";
             
-            // ========== НОВАЯ ФУНКЦИЯ ОТПРАВКИ НА ПОЧТУ (FormSubmit - работает в РФ) ==========
+            // ========== ОТПРАВКА ПИСЕМ НА ПОЧТУ (FormSubmit) ==========
             const ADMIN_EMAIL = "ramonenok@bk.ru";
             const FORMSUBMIT_URL = "https://formsubmit.co/ajax/" + ADMIN_EMAIL;
             
@@ -378,7 +360,7 @@
                         })
                     });
                     if (response.ok) {
-                        console.log("✅ Уведомление отправлено на", ADMIN_EMAIL);
+                        console.log("✅ Письмо отправлено на", ADMIN_EMAIL);
                         return true;
                     } else {
                         console.error("❌ Ошибка отправки");
@@ -389,9 +371,9 @@
                     return false;
                 }
             }
-            // ====================================================================
+            // ==========================================================
             
-            let currentUser = null, currentBalance = 0, currentProduct = null, moderatorsList = [], timerInterval = null, siteStatusUnsub = null, banUnsub = null, balanceInterval = null, timerUnsub = null, unreadCount = 0, messagesUnsub = null;
+            let currentUser = null, currentBalance = 0, currentProduct = null, moderatorsList = [], timerInterval = null, siteStatusUnsub = null, banUnsub = null, balanceInterval = null, timerUnsub = null;
 
             function showNotification(msg, type = 'success') {
                 let container = document.getElementById('notifContainer');
@@ -413,32 +395,26 @@
             function renderMenu() {
                 const container = document.getElementById('dynamicMenuTabs');
                 if (!container) return;
-                container.innerHTML = `<div class="menu-tab active" data-page="home">Главная</div><div class="menu-tab" data-page="shop">Магазин</div><div class="menu-tab" data-page="profile" id="profileTab">Профиль</div>`;
+                const isAdmin = currentUser?.email === MAIN_ADMIN_EMAIL;
+                container.innerHTML = `
+                    <div class="menu-tab active" data-page="home">Главная</div>
+                    <div class="menu-tab" data-page="shop">Магазин</div>
+                    <div class="menu-tab" data-page="profile">Профиль</div>
+                    <div class="menu-tab admin-only" data-page="admin">Админ</div>
+                `;
                 document.querySelectorAll('.menu-tab').forEach(tab => {
                     tab.onclick = () => {
                         document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
                         tab.classList.add('active');
                         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                         document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
-                        if (tab.dataset.page === 'profile') loadUserMessages();
+                        if (tab.dataset.page === 'admin') { loadRecentUsers(); loadModerators(); loadStats(); }
                     };
                 });
-                updateUnreadBadge();
+                if (currentUser?.email === MAIN_ADMIN_EMAIL) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
             }
 
-            function updateUnreadBadge() {
-                const profileTab = document.getElementById('profileTab');
-                if (!profileTab) return;
-                const existing = profileTab.querySelector('.unread-badge');
-                if (existing) existing.remove();
-                if (unreadCount > 0) {
-                    const badge = document.createElement('span');
-                    badge.className = 'unread-badge';
-                    badge.innerText = unreadCount > 9 ? '9+' : unreadCount;
-                    profileTab.appendChild(badge);
-                }
-            }
-
+            // ТАЙМЕР
             function startTimer(targetDate, eventName, eventDesc) {
                 if (timerInterval) clearInterval(timerInterval);
                 document.getElementById('eventTitle').innerText = eventName || 'ДО ОТКРЫТИЯ СЕЗОНА';
@@ -477,6 +453,7 @@
                 showNotification('Таймер обновлён!', 'success');
             }
 
+            // БАН
             function showBanModal(reason, untilDate, moderator, banDate) {
                 document.getElementById('banModeratorSpan').innerText = moderator || 'Система';
                 document.getElementById('banReasonSpan').innerText = reason;
@@ -530,6 +507,7 @@
                 });
             }
 
+            // ЗАКРЫТИЕ САЙТА
             async function closeSite(reason, hours) {
                 const until = new Date(Date.now() + hours * 3600000);
                 await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until });
@@ -590,6 +568,7 @@
                 });
             }
 
+            // РАССЫЛКА
             async function sendBroadcast(message) {
                 const users = await db.collection('users').get();
                 const adminDoc = await db.collection('users').doc(currentUser.uid).get();
@@ -609,9 +588,32 @@
                 showNotification(`Рассылка отправлена ${users.size-1} пользователям!`, 'success');
             }
 
+            // АДМИН ФУНКЦИИ
             async function loadModerators() {
                 const doc = await db.collection('settings').doc('moderators').get();
                 moderatorsList = doc.exists ? doc.data().list || [] : [];
+                const container = document.getElementById('moderatorsList');
+                if (container) container.innerHTML = moderatorsList.map(m => `<div class="player-card"><span>👑 ${m.nick}</span><button onclick="window.removeModerator('${m.email}')" style="background:#ef4444;border:none;padding:4px 12px;border-radius:30px;font-size:11px;">УДАЛИТЬ</button></div>`).join('');
+            }
+            window.removeModerator = async (email) => {
+                moderatorsList = moderatorsList.filter(m => m.email !== email);
+                await db.collection('settings').doc('moderators').set({ list: moderatorsList });
+                loadModerators();
+                showNotification('Модератор удалён', 'success');
+            };
+
+            async function loadRecentUsers() {
+                const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+                const snap = await db.collection('users').where('registeredAt', '>=', fiveMinutesAgo.toISOString()).orderBy('registeredAt', 'desc').get();
+                const container = document.getElementById('recentUsersList');
+                if (container) container.innerHTML = snap.docs.map(doc => `<div class="player-card"><span><strong>${doc.data().username}</strong><br>${doc.data().email}<br>💰 ${doc.data().balance || 0} ₽</span></div>`).join('');
+                if (snap.empty) container.innerHTML = '<div class="player-card">Нет новых аккаунтов</div>';
+            }
+
+            async function loadStats() {
+                const users = await db.collection('users').get();
+                const container = document.getElementById('statsList');
+                if (container) container.innerHTML = `<div class="player-card">👥 Игроков: ${users.size}</div><div class="player-card">💰 Общий баланс: ${users.docs.reduce((sum, d) => sum + (d.data().balance || 0), 0)}₽</div>`;
             }
 
             async function giveCoins(nick, amount) {
@@ -659,21 +661,7 @@
                 showNotification(`Все донаты ${nick} удалены`, 'warning');
             }
 
-            async function loadUserMessages() {
-                if (!currentUser) return;
-                const container = document.getElementById('messagesContainer');
-                if (!container) return;
-                if (messagesUnsub) messagesUnsub();
-                messagesUnsub = db.collection('notifications').where('to', '==', currentUser.uid).orderBy('timestamp', 'desc').onSnapshot((snap) => {
-                    unreadCount = snap.docs.filter(d => !d.data().read).length;
-                    updateUnreadBadge();
-                    if (snap.empty) { container.innerHTML = '<div style="text-align:center;padding:50px;"><i class="fas fa-inbox fa-3x"></i><br><br>У вас нет сообщений</div>'; return; }
-                    container.innerHTML = snap.docs.map(doc => `<div class="message-item"><div class="message-text">${doc.data().text}</div><div class="message-date">${new Date(doc.data().timestamp?.toDate()).toLocaleString()}</div></div>`).join('');
-                    snap.docs.forEach(doc => { if (!doc.data().read) doc.ref.update({ read: true }); });
-                    if (unreadCount > 0) showNotification(`📬 У вас ${unreadCount} новое сообщение!`, 'success');
-                });
-            }
-
+            // МАГАЗИН
             const privileges = [
                 { name: "Премиум", price: 1000 }, { name: "Креатив", price: 2500 }, { name: "Модер", price: 5000 },
                 { name: "Лорд", price: 10000 }, { name: "Админ", price: 20000 }, { name: "Гл админ", price: 50000 },
@@ -682,11 +670,35 @@
                 { name: "Хелпер", price: 750000 }, { name: "Хайп", price: 850000 }, { name: "Стафф", price: 900000 },
                 { name: "Правитель", price: 1000000 }
             ];
+            
             function renderShop() {
                 const container = document.getElementById('shopGrid');
-                if (container) container.innerHTML = privileges.map(p => `<div class="product-card"><div class="product-name">${p.name}</div><div class="price">${p.price.toLocaleString()} ₽</div><div class="donate-note"><i class="fas fa-clock"></i> Донат будет выдан на ваш аккаунт в течение 10 минут</div><button class="buy-btn" onclick="window.openBuyModal('${p.name}',${p.price})">КУПИТЬ</button></div>`).join('');
+                if (container) {
+                    container.innerHTML = privileges.map(p => `
+                        <div class="product-card">
+                            <div class="product-name">${p.name}</div>
+                            <div class="price">${p.price.toLocaleString()} ₽</div>
+                            <div class="donate-note"><i class="fas fa-clock"></i> Донат будет выдан в течение 10 минут</div>
+                            <button class="buy-btn" data-product='${JSON.stringify(p)}'>КУПИТЬ</button>
+                        </div>
+                    `).join('');
+                    
+                    document.querySelectorAll('.buy-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const product = JSON.parse(btn.dataset.product);
+                            window.openBuyModal(product.name, product.price);
+                        });
+                    });
+                }
             }
-            window.openBuyModal = (n, p) => { currentProduct = { name: n, price: p }; document.getElementById('buyProductName').innerText = n; document.getElementById('buyPrice').innerText = p.toLocaleString(); document.getElementById('buyModal').style.display = 'flex'; };
+            
+            window.openBuyModal = (n, p) => {
+                currentProduct = { name: n, price: p };
+                document.getElementById('buyProductName').innerText = n;
+                document.getElementById('buyPrice').innerText = p.toLocaleString();
+                document.getElementById('buyModal').style.display = 'flex';
+            };
             
             async function purchaseProduct(product, serverNick, siteNick) {
                 if (currentBalance < product.price) { showNotification('Недостаточно средств', 'error'); return false; }
@@ -695,13 +707,13 @@
                 currentBalance -= product.price;
                 document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
                 
-                // ОТПРАВКА НА ПОЧТУ ПРИ ПОКУПКЕ ДОНАТА
+                // ОТПРАВКА НА ПОЧТУ
                 await sendAdminEmail(
                     "💰 НОВЫЙ ДОНАТ!",
                     `Пользователь: ${siteNick} (${currentUser.email})\nТовар: ${product.name}\nСумма: ${product.price} ₽\nНик на сервере: ${serverNick}\nДата: ${new Date().toLocaleString()}`
                 );
                 
-                showNotification(`✅ Куплено ${product.name}! Донат придёт через 10 минут`, 'success');
+                showNotification(`✅ Куплено ${product.name}!`, 'success');
                 return true;
             }
 
@@ -713,15 +725,16 @@
                 currentBalance -= price;
                 document.getElementById('userBalance').innerText = currentBalance;
                 
-                // ОТПРАВКА НА ПОЧТУ ПРИ ЗАКАЗЕ ТЕСТ-СЕРВЕРА
+                // ОТПРАВКА НА ПОЧТУ
                 await sendAdminEmail(
                     "🖥️ ЗАКАЗ ТЕСТ-СЕРВЕРА",
                     `Пользователь: ${siteNick} (${currentUser.email})\nДлительность: ${days === 'forever' ? 'Навсегда' : days + ' дней'}\nСумма: ${price} ₽\nНик на сервере: ${serverNick}\nДата: ${new Date().toLocaleString()}`
                 );
                 
-                showNotification(`✅ Тест-сервер заказан! Данные отправлены на почту.`, 'success');
+                showNotification(`✅ Тест-сервер заказан!`, 'success');
             }
 
+            // ПОЛЬЗОВАТЕЛЬ
             async function loadUserData(user) {
                 if (!user) return;
                 const doc = await db.collection('users').doc(user.uid).get();
@@ -735,7 +748,6 @@
                 document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> ${user.email}</p><p><i class="fas fa-calendar-alt"></i> ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`;
                 document.getElementById('userTag').innerHTML = data?.tag || '#user';
                 db.collection('donates').where('userId', '==', user.uid).onSnapshot(snap => { const c = document.getElementById('donatesContainer'); if (c) { c.innerHTML = ''; snap.forEach(d => c.innerHTML += `<span class="donate-tag"><i class="fas fa-gift"></i> ${d.data().product}</span>`); if (snap.empty) c.innerHTML = '<span class="donate-tag">Нет покупок</span>'; } });
-                if (user.email === MAIN_ADMIN_EMAIL) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
             }
 
             function startBalanceUpdater() {
@@ -748,6 +760,7 @@
                 }, 3000);
             }
 
+            // СКРЫТАЯ АДМИНКА
             function initSecretAdmin() {
                 const trigger = document.getElementById('secretAdminTrigger');
                 const adminPage = document.getElementById('adminPagePanel');
@@ -787,15 +800,15 @@
                 document.getElementById('closeTestModal').onclick = () => document.getElementById('testServerModal').style.display = 'none';
                 document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
                 document.getElementById('closePasswordModal').onclick = () => document.getElementById('changePasswordModal').style.display = 'none';
-                document.getElementById('confirmBuyBtn').onclick = async () => { const sn = document.getElementById('buyNick').value.trim(), ss = document.getElementById('buySiteNick').value.trim(); if (!sn || !ss) return showNotification('Заполните поля', 'error'); await purchaseProduct(currentProduct, sn, ss); document.getElementById('buyModal').style.display = 'none'; loadUserData(currentUser); };
+                document.getElementById('confirmBuyBtn').onclick = async () => { const sn = document.getElementById('buyNick').value.trim(), ss = document.getElementById('buySiteNick').value.trim(); if (!sn || !ss) return showNotification('Заполните поля', 'error'); await purchaseProduct(currentProduct, sn, ss); document.getElementById('buyModal').style.display = 'none'; };
                 document.getElementById('testServerBtn').onclick = () => document.getElementById('testServerModal').style.display = 'flex';
-                document.getElementById('confirmTestBtn').onclick = async () => { const duration = document.getElementById('testDuration').value; const sn = document.getElementById('testNick').value.trim(), ss = document.getElementById('testSiteNick').value.trim(); if (!sn || !ss) return showNotification('Заполните поля', 'error'); await orderTestServer(duration, sn, ss); document.getElementById('testServerModal').style.display = 'none'; loadUserData(currentUser); };
+                document.getElementById('confirmTestBtn').onclick = async () => { const duration = document.getElementById('testDuration').value; const sn = document.getElementById('testNick').value.trim(), ss = document.getElementById('testSiteNick').value.trim(); if (!sn || !ss) return showNotification('Заполните поля', 'error'); await orderTestServer(duration, sn, ss); document.getElementById('testServerModal').style.display = 'none'; };
                 document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
                 document.getElementById('saveNameBtn').onclick = async () => { const newName = document.getElementById('newNameInput').value; if (newName) { await db.collection('users').doc(currentUser.uid).update({ username: newName }); await currentUser.updateProfile({ displayName: newName }); showNotification('Имя изменено!', 'success'); document.getElementById('editNameModal').style.display = 'none'; loadUserData(currentUser); } };
                 document.getElementById('changePasswordBtn').onclick = () => document.getElementById('changePasswordModal').style.display = 'flex';
                 document.getElementById('savePasswordBtn').onclick = async () => { try { const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, document.getElementById('oldPasswordInput').value); await currentUser.reauthenticateWithCredential(cred); await currentUser.updatePassword(document.getElementById('newPasswordInput').value); showNotification('Пароль изменён!', 'success'); document.getElementById('changePasswordModal').style.display = 'none'; } catch (e) { showNotification('Неверный старый пароль', 'error'); } };
-                document.getElementById('myMessagesBtn').onclick = () => { document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active')); document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById('messagesPage').classList.add('active'); loadUserMessages(); };
                 
+                // АДМИН КНОПКИ
                 document.getElementById('giveCoinsBtn').onclick = () => giveCoins(document.getElementById('giveNick').value, parseInt(document.getElementById('giveAmount').value));
                 document.getElementById('globalGiveBtn').onclick = () => { const amt = parseInt(prompt('Сумма для всех:')); if (amt) giveCoinsAll(amt); };
                 document.getElementById('sendBroadcastBtn').onclick = () => { const msg = document.getElementById('broadcastMsg').value; if (msg) sendBroadcast(msg); else showNotification('Введите текст', 'error'); };
@@ -832,12 +845,10 @@
                     bindButtons();
                     initSecretAdmin();
                     document.getElementById('authModal').style.display = 'none';
-                    loadUserMessages();
                 } else {
                     if (balanceInterval) clearInterval(balanceInterval);
                     if (siteStatusUnsub) siteStatusUnsub();
                     if (banUnsub) banUnsub();
-                    if (messagesUnsub) messagesUnsub();
                     document.getElementById('authModal').style.display = 'flex';
                     bindButtons();
                     initSecretAdmin();
