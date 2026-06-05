@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>GrifLauncher | Ultimate Admin System</title>
+    <title>GrifLauncher | FULL WORKING</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -13,261 +13,147 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --bg-dark: #0a0a12;
-            --bg-surface: rgba(20, 20, 35, 0.75);
+            --bg-surface: rgba(20,20,35,0.75);
             --bg-surface-solid: #181825;
-            --border-color: rgba(255, 215, 0, 0.12);
-            --border-light: rgba(255, 215, 0, 0.2);
+            --border-color: rgba(255,215,0,0.12);
+            --border-light: rgba(255,215,0,0.2);
             --accent: #ffd700;
             --accent-dark: #ccaa00;
-            --accent-glow: rgba(255, 215, 0, 0.2);
+            --accent-glow: rgba(255,215,0,0.2);
             --purple: #8b5cf6;
             --pink: #ec4899;
             --text-primary: #ffffff;
             --text-secondary: #a0a0b5;
             --text-muted: #6a6a80;
-            --success: #10b981;
             --danger: #ef4444;
             --info: #3b82f6;
-            --warning: #f59e0b;
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --radius-xl: 20px;
+            --success: #10b981;
             --radius-2xl: 28px;
-            --transition: all 0.3s cubic-bezier(0.2,0.9,0.4,1.1);
+            --shadow-glow: 0 0 15px rgba(255,215,0,0.2);
         }
         body { background: linear-gradient(135deg, #0a0a12 0%, #0f0f1a 100%); font-family: 'Montserrat', sans-serif; color: var(--text-primary); min-height: 100vh; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
-        @keyframes rgbTextAnim { 0% { color: #ff0000; text-shadow: 0 0 5px #ff0000; } 25% { color: #00ff00; text-shadow: 0 0 5px #00ff00; } 50% { color: #0000ff; text-shadow: 0 0 5px #0000ff; } 75% { color: #ff00ff; text-shadow: 0 0 5px #ff00ff; } 100% { color: #ff0000; text-shadow: 0 0 5px #ff0000; } }
-        @keyframes rgbBorderAnim { 0% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; } 25% { border-color: #00ff00; box-shadow: 0 0 10px #00ff00; } 50% { border-color: #0000ff; box-shadow: 0 0 10px #0000ff; } 75% { border-color: #ff00ff; box-shadow: 0 0 10px #ff00ff; } 100% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; } }
+        @keyframes rgbTextAnim { 0% { color: #ff0000; } 25% { color: #00ff00; } 50% { color: #0000ff; } 75% { color: #ff00ff; } 100% { color: #ff0000; } }
+        @keyframes rgbBorderAnim { 0% { border-color: #ff0000; } 25% { border-color: #00ff00; } 50% { border-color: #0000ff; } 75% { border-color: #ff00ff; } 100% { border-color: #ff0000; } }
         .rgb-text-animation { animation: rgbTextAnim 3s infinite; }
         .rgb-border-animation { animation: rgbBorderAnim 3s infinite; }
         ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); border-radius: 10px; }
+        ::-webkit-scrollbar-track { background: #151520; border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
 
-        /* ХЕДЕР И МЕНЮ */
         .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(10,10,18,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-color); padding: 6px 30px; }
         .header-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 8px; }
         .logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent), var(--purple)); border-radius: 8px; display: flex; align-items: center; justify-content: center; animation: float 3s ease infinite; }
-        .logo-icon i { font-size: 16px; color: var(--bg-dark); }
-        .logo-text { font-family: 'Orbitron', monospace; font-size: 16px; font-weight: 800; background: linear-gradient(135deg, #fff, var(--accent), var(--purple)); -webkit-background-clip: text; background-clip: text; color: transparent; background-size: 200% auto; animation: shine 3s linear infinite; }
-        @keyframes shine { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+        .logo-icon i { font-size: 16px; color: #0a0a12; }
+        .logo-text { font-family: 'Orbitron', monospace; font-size: 16px; font-weight: 800; background: linear-gradient(135deg, #fff, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .header-right { display: flex; align-items: center; gap: 12px; }
         .balance { display: flex; align-items: center; gap: 6px; background: rgba(0,0,0,0.5); padding: 5px 14px; border-radius: 40px; border: 1px solid var(--border-light); }
-        .balance i { color: var(--accent); font-size: 14px; }
-        .balance span { font-weight: 700; color: var(--accent); font-size: 16px; font-family: 'Orbitron', monospace; }
-        .btn-logout { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: var(--danger); padding: 5px 16px; border-radius: 40px; cursor: pointer; transition: var(--transition); font-weight: 600; font-size: 12px; display: flex; align-items: center; gap: 5px; }
-        .btn-logout:hover { background: rgba(239,68,68,0.3); transform: scale(1.02); }
-
+        .balance i, .balance span { color: var(--accent); font-weight: 700; }
+        .btn-logout { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: var(--danger); padding: 5px 16px; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 12px; }
+        
         .menu-tabs { display: flex; gap: 8px; justify-content: center; margin-top: 6px; flex-wrap: wrap; }
-        .menu-tab { background: rgba(25,25,40,0.6); backdrop-filter: blur(8px); border: 1px solid var(--border-color); padding: 5px 20px; border-radius: 40px; cursor: pointer; font-weight: 600; transition: var(--transition); font-size: 12px; display: flex; align-items: center; gap: 5px; color: var(--text-primary); }
-        .menu-tab i { font-size: 12px; }
-        .menu-tab.active, .menu-tab:hover { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: var(--bg-dark); border-color: transparent; transform: translateY(-1px); box-shadow: 0 0 15px rgba(255,215,0,0.2); }
+        .menu-tab { background: rgba(25,25,40,0.6); backdrop-filter: blur(8px); border: 1px solid var(--border-color); padding: 5px 20px; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 12px; display: flex; align-items: center; gap: 5px; color: var(--text-primary); transition: 0.2s; }
+        .menu-tab.active, .menu-tab:hover { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #0a0a12; border-color: transparent; box-shadow: var(--shadow-glow); }
         .chat-with-creator-btn { background: linear-gradient(135deg, var(--purple), var(--pink)); animation: pulse 2s infinite; }
-
-        .page { display: none; animation: fadeIn 0.3s ease; }
+        
+        .page { display: none; animation: fadeInUp 0.3s ease; }
         .page.active { display: block; }
         #homePage, #shopPage, #chatsPage, #profilePage, #adminPage, #chatWithCreatorPage, #messagesPage { padding-top: 75px; min-height: 100vh; }
 
-        /* ГЛАВНАЯ - ТАЙМЕР */
-        .hero-timer { min-height: calc(100vh - 75px); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: radial-gradient(ellipse at center, rgba(255,215,0,0.08) 0%, transparent 70%); }
-        .hero-timer::before { content: ''; position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background: radial-gradient(circle, rgba(255,215,0,0.03) 0%, transparent 50%); animation: rotate 20s linear infinite; }
-        .hero-timer::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100px; background: linear-gradient(transparent, var(--bg-dark)); pointer-events: none; }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .timer-container { text-align: center; z-index: 2; padding: 30px; animation: fadeInUp 0.8s ease; }
-        .timer-title { font-family: 'Orbitron', monospace; font-size: 48px; font-weight: 800; margin-bottom: 50px; letter-spacing: 3px; }
+        .hero-timer { min-height: calc(100vh - 75px); display: flex; align-items: center; justify-content: center; text-align: center; }
+        .timer-title { font-family: 'Orbitron', monospace; font-size: 48px; font-weight: 800; margin-bottom: 50px; }
         .countdown-wrapper { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
-        .countdown-block { background: rgba(0,0,0,0.5); backdrop-filter: blur(20px); border-radius: var(--radius-2xl); padding: 30px 40px; min-width: 130px; border: 1px solid var(--border-light); transition: var(--transition); }
-        .countdown-block:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 0 15px rgba(255,215,0,0.2); }
-        .countdown-number { font-family: 'Orbitron', monospace; font-size: 56px; font-weight: 800; color: var(--accent); text-shadow: 0 0 20px var(--accent-glow); }
-        .countdown-label { font-size: 14px; color: var(--text-secondary); margin-top: 10px; letter-spacing: 2px; }
+        .countdown-block { background: rgba(0,0,0,0.5); backdrop-filter: blur(20px); border-radius: var(--radius-2xl); padding: 30px 40px; min-width: 130px; border: 1px solid var(--border-light); transition: 0.3s; }
+        .countdown-number { font-family: 'Orbitron', monospace; font-size: 56px; font-weight: 800; color: var(--accent); }
+        .countdown-label { font-size: 14px; color: var(--text-secondary); margin-top: 10px; }
 
-        /* МАГАЗИН */
         .shop-section { max-width: 1300px; margin: 0 auto; padding: 20px; }
-        .shop-header { text-align: center; margin-bottom: 30px; }
-        .shop-header h1 { font-family: 'Orbitron', monospace; font-size: 36px; background: linear-gradient(135deg, #fff, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 25px; }
-        .product-card { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); padding: 25px; text-align: center; transition: var(--transition); border: 1px solid var(--border-color); position: relative; overflow: hidden; }
-        .product-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,215,0,0.05), transparent); transition: 0.5s; }
-        .product-card:hover::before { left: 100%; }
-        .product-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 0 15px rgba(255,215,0,0.2); }
-        .product-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--accent-glow), transparent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; border: 1px solid var(--border-light); }
+        .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 25px; }
+        .product-card { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); padding: 25px; text-align: center; border: 1px solid var(--border-color); transition: 0.3s; }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: var(--shadow-glow); }
+        .product-icon { width: 70px; height: 70px; background: linear-gradient(135deg, var(--accent-glow), transparent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; }
         .product-icon i { font-size: 32px; color: var(--accent); }
-        .product-name { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); }
         .price { font-size: 28px; font-weight: 800; color: var(--accent); margin: 12px 0; font-family: 'Orbitron', monospace; }
-        .buy-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 12px; border-radius: 40px; font-weight: 700; cursor: pointer; width: 100%; transition: var(--transition); font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--bg-dark); }
-        .buy-btn:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(255,215,0,0.2); }
+        .buy-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 12px; border-radius: 40px; font-weight: 700; cursor: pointer; width: 100%; color: #0a0a12; }
 
-        /* ПРОФИЛЬ */
         .profile-section { max-width: 650px; margin: 0 auto; padding: 20px; }
-        .profile-card { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); padding: 30px; text-align: center; border: 1px solid var(--border-color); transition: var(--transition); }
-        .profile-card:hover { border-color: var(--accent); box-shadow: 0 0 15px rgba(255,215,0,0.2); }
+        .profile-card { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); padding: 30px; text-align: center; border: 1px solid var(--border-color); }
         .profile-avatar { width: 100px; height: 100px; background: linear-gradient(135deg, var(--accent), var(--purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; animation: float 3s ease infinite; }
-        .profile-avatar i { font-size: 45px; color: var(--bg-dark); }
-        .profile-name { font-size: 24px; font-weight: 700; margin-bottom: 15px; display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: center; color: var(--text-primary); }
-        .profile-info { text-align: left; margin: 20px 0; background: rgba(0,0,0,0.3); border-radius: var(--radius-lg); padding: 15px; }
-        .profile-info p { padding: 10px 0; border-bottom: 1px solid var(--border-color); display: flex; gap: 12px; align-items: center; font-size: 14px; color: var(--text-primary); }
-        .profile-info i { width: 22px; color: var(--accent); font-size: 16px; }
-        .profile-actions { display: flex; gap: 12px; justify-content: center; margin-top: 15px; flex-wrap: wrap; }
-        .profile-btn { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: var(--info); padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: var(--transition); font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 6px; }
-        .profile-btn:hover { background: rgba(59,130,246,0.3); transform: scale(1.02); }
-        .donates-list { margin: 15px 0; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-        .donate-tag { background: rgba(255,215,0,0.15); padding: 5px 12px; border-radius: 40px; font-size: 12px; border: 1px solid var(--border-light); color: var(--text-primary); }
+        .profile-avatar i { font-size: 45px; color: #0a0a12; }
+        .profile-name { font-size: 24px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
+        .profile-info { text-align: left; margin: 20px 0; background: rgba(0,0,0,0.3); border-radius: 16px; padding: 15px; }
+        .profile-info p { padding: 10px 0; border-bottom: 1px solid var(--border-color); display: flex; gap: 12px; align-items: center; font-size: 14px; }
+        .profile-btn { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: var(--info); padding: 8px 20px; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 13px; }
 
-        /* ГАЛОЧКИ */
-        .badge-icon { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; margin-left: 4px; vertical-align: middle; flex-shrink: 0; }
+        .badge-icon { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; margin-left: 4px; }
         .badge-icon i { font-size: 10px; color: white; }
-        .badge-blue { background: #3b82f6; box-shadow: 0 0 5px #3b82f6; }
-        .badge-red { background: #ef4444; box-shadow: 0 0 5px #ef4444; }
-        .badge-gold { background: #ffd700; box-shadow: 0 0 5px #ffd700; }
+        .badge-blue { background: #3b82f6; }
+        .badge-red { background: #ef4444; }
+        .badge-gold { background: #ffd700; }
         .badge-gold i { color: #1a1a1a; }
-        .badge-purple { background: #8b5cf6; box-shadow: 0 0 5px #8b5cf6; }
-        .badge-teal { background: #14b8a6; box-shadow: 0 0 5px #14b8a6; }
-        .badge-crown { background: none; width: auto; border-radius: 0; }
+        .badge-purple { background: #8b5cf6; }
+        .badge-teal { background: #14b8a6; }
+        .badge-crown { background: none; width: auto; }
         .badge-crown i { color: #ffd700; font-size: 14px; }
 
-        /* ЧАТЫ - ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ */
-        .chats-section { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .chat-window { background: var(--bg-surface); backdrop-filter: blur(20px); border-radius: var(--radius-2xl); border: 1px solid var(--border-color); overflow: hidden; transition: var(--transition); min-height: 400px; display: flex; align-items: center; justify-content: center; flex-direction: column; }
-        .development-message { text-align: center; padding: 60px 20px; }
-        .development-message i { font-size: 64px; color: var(--accent); margin-bottom: 20px; }
-        .development-message h2 { font-size: 28px; margin-bottom: 10px; }
-        .development-message p { color: var(--text-muted); }
-
-        /* СООБЩЕНИЯ (ДЛЯ АДМИНА) */
-        .messages-container { max-width: 1200px; margin: 0 auto; padding: 20px; display: flex; gap: 25px; background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); min-height: 500px; }
-        .users-sidebar { width: 320px; border-right: 1px solid var(--border-color); padding-right: 20px; overflow-y: auto; max-height: 500px; }
-        .user-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: var(--radius-md); cursor: pointer; transition: var(--transition); margin-bottom: 8px; background: rgba(0,0,0,0.3); }
-        .user-item:hover, .user-item.active { background: rgba(255,215,0,0.2); transform: translateX(5px); }
-        .user-avatar { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .user-avatar i { font-size: 18px; color: var(--bg-dark); }
-        .user-info { flex: 1; }
-        .user-name { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-        .user-preview { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-        .unread-count { background: var(--danger); color: white; border-radius: 50%; min-width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; padding: 0 5px; }
-        .messages-chat-area { flex: 1; display: flex; flex-direction: column; height: 500px; }
-        .messages-chat-header { padding-bottom: 12px; border-bottom: 1px solid var(--border-color); margin-bottom: 15px; display: flex; align-items: center; gap: 12px; }
-        .messages-chat-header .user-avatar { width: 45px; height: 45px; }
-        .messages-chat-header .user-avatar i { font-size: 20px; }
-        .messages-list { flex: 1; overflow-y: auto; padding-right: 10px; display: flex; flex-direction: column; gap: 12px; }
-        .message-item { display: flex; gap: 10px; max-width: 80%; }
-        .message-item.outgoing { align-self: flex-end; flex-direction: row-reverse; }
-        .message-item.incoming { align-self: flex-start; flex-direction: row; }
-        .message-avatar-small { width: 30px; height: 30px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .message-avatar-small i { font-size: 14px; color: var(--bg-dark); }
-        .message-bubble-small { background: var(--bg-surface-solid); padding: 8px 12px; border-radius: 14px; border-top-left-radius: 4px; font-size: 12px; }
-        .message-item.outgoing .message-bubble-small { background: var(--accent-glow); border: 1px solid var(--border-light); border-top-right-radius: 4px; border-top-left-radius: 14px; }
-        .message-time-small { font-size: 9px; color: var(--text-muted); margin-top: 3px; }
-        .reply-area { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-        .reply-input { flex: 1; padding: 5px 8px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); border-radius: 40px; color: white; font-size: 11px; outline: none; }
-        .reply-input:focus { border-color: var(--accent); }
-        .reply-badge-btn { background: rgba(0,0,0,0.5); border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; transition: var(--transition); font-size: 14px; display: inline-flex; align-items: center; justify-content: center; }
-        .reply-badge-btn:hover { transform: scale(1.05); background: rgba(255,215,0,0.2); }
-        .message-input-area { padding-top: 15px; border-top: 1px solid var(--border-color); display: flex; gap: 10px; margin-top: 15px; }
-        .message-input-area input { flex: 1; padding: 10px 14px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); border-radius: 40px; color: var(--text-primary); outline: none; font-size: 12px; }
-        .message-input-area input:focus { border-color: var(--accent); }
-        .send-msg-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 8px 20px; border-radius: 40px; font-weight: 600; cursor: pointer; font-size: 12px; color: var(--bg-dark); }
-
-        /* ЧАТ С СОЗДАТЕЛЕМ */
         .chat-with-creator-container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        .chat-with-creator-header { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); padding: 25px; text-align: center; border: 1px solid var(--border-light); margin-bottom: 20px; }
-        .creator-info { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
-        .creator-avatar { width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .creator-avatar i { font-size: 28px; color: var(--bg-dark); }
-        .creator-name { font-size: 24px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
-        .creator-status { color: var(--text-muted); font-size: 14px; margin-top: 5px; }
-        .chat-window-small { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); border: 1px solid var(--border-color); overflow: hidden; margin-top: 20px; }
-        .messages-area-small { height: 350px; overflow-y: auto; padding: 15px 20px; display: flex; flex-direction: column; gap: 12px; }
-        .message { display: flex; gap: 10px; max-width: 80%; animation: fadeInUp 0.2s ease; }
+        .chat-with-creator-header { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); padding: 25px; text-align: center; margin-bottom: 20px; }
+        .creator-name { font-size: 24px; font-weight: 700; }
+        .messages-area-small { height: 400px; overflow-y: auto; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 28px; display: flex; flex-direction: column; gap: 12px; }
+        .message { display: flex; gap: 10px; max-width: 80%; }
         .message.outgoing { align-self: flex-end; flex-direction: row-reverse; }
-        .message-avatar-small { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .message-avatar-small i { font-size: 14px; color: var(--bg-dark); }
-        .message-content { flex: 1; }
-        .message-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
-        .message-name { font-weight: 600; font-size: 12px; display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; color: var(--text-primary); }
-        .message-time { font-size: 9px; color: var(--text-muted); }
-        .message-bubble { background: var(--bg-surface-solid); padding: 8px 12px; border-radius: 14px; border-top-left-radius: 4px; word-break: break-word; font-size: 12px; color: var(--text-primary); }
-        .message.outgoing .message-bubble { background: var(--accent-glow); border: 1px solid var(--border-light); border-top-right-radius: 4px; border-top-left-radius: 14px; }
-        .chat-input-area-small { padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-        .chat-input-area-small input { flex: 1; padding: 10px 14px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); border-radius: 40px; color: var(--text-primary); outline: none; font-size: 12px; min-width: 150px; }
-        .chat-input-area-small input:focus { border-color: var(--accent); }
-        .send-btn-small { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 8px 20px; border-radius: 40px; font-weight: 600; cursor: pointer; transition: var(--transition); font-size: 12px; display: flex; align-items: center; gap: 5px; color: var(--bg-dark); }
+        .message-bubble { background: #181825; padding: 8px 12px; border-radius: 14px; font-size: 12px; }
+        .message.outgoing .message-bubble { background: var(--accent-glow); border: 1px solid var(--border-light); }
+        .chat-input-area-small { display: flex; gap: 10px; margin-top: 15px; }
+        .chat-input-area-small input { flex: 1; padding: 10px; background: rgba(0,0,0,0.4); border-radius: 40px; border: 1px solid var(--border-color); color: white; }
+        .send-btn-small { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 8px 20px; border-radius: 40px; font-weight: 600; cursor: pointer; }
 
-        /* АДМИНКА */
         .admin-section { max-width: 950px; margin: 0 auto; padding: 20px; }
-        .admin-panel { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); padding: 25px; border: 1px solid var(--border-color); }
-        .admin-title { font-family: 'Orbitron', monospace; font-size: 28px; text-align: center; margin-bottom: 25px; background: linear-gradient(135deg, #fff, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .admin-login-box { text-align: center; padding: 20px; }
-        .admin-login-box input { width: 100%; max-width: 260px; padding: 10px 16px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 40px; color: white; outline: none; margin-bottom: 12px; }
-        .admin-login-box input:focus { border-color: var(--accent); }
-        .admin-block { background: rgba(0,0,0,0.3); border-radius: var(--radius-lg); padding: 15px; margin-bottom: 15px; border: 1px solid var(--border-color); }
-        .admin-block h3 { color: var(--accent); margin-bottom: 12px; font-size: 16px; display: flex; align-items: center; gap: 8px; }
-        .admin-input, .admin-select { width: 100%; padding: 8px 12px; margin: 5px 0; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: var(--radius-md); color: white; outline: none; font-size: 13px; }
-        .admin-input:focus, .admin-select:focus { border-color: var(--accent); }
-        .admin-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: var(--bg-dark); border: none; padding: 8px; border-radius: 40px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 6px; transition: var(--transition); font-size: 13px; }
-        .admin-btn:hover { transform: scale(1.01); box-shadow: 0 0 15px rgba(255,215,0,0.2); }
-        .admin-btn-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
+        .admin-panel { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: var(--radius-2xl); padding: 25px; }
+        .admin-block { background: rgba(0,0,0,0.3); border-radius: 16px; padding: 15px; margin-bottom: 15px; }
+        .admin-input, .admin-select { width: 100%; padding: 8px 12px; margin: 5px 0; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 40px; color: white; }
+        .admin-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 8px; border-radius: 40px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 6px; color: #0a0a12; }
         .admin-btn-red { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
-        .admin-btn-purple { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; }
         .admin-btn-green { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+        .admin-btn-blue { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; }
         .admin-btn-pink { background: linear-gradient(135deg, #ec4899, #db2777); color: white; }
         .players-list { max-height: 220px; overflow-y: auto; }
-        .player-card { background: rgba(0,0,0,0.3); border-radius: var(--radius-md); padding: 8px 12px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 13px; color: var(--text-primary); }
-        .log-item { background: rgba(0,0,0,0.3); border-radius: var(--radius-sm); padding: 6px 10px; margin-bottom: 5px; font-size: 11px; border-left: 2px solid var(--accent); color: var(--text-primary); }
-        .toast-notification { position: fixed; bottom: 20px; right: 20px; background: linear-gradient(135deg, var(--bg-surface-solid), var(--bg-tertiary)); border-left: 3px solid var(--accent); padding: 12px 20px; border-radius: var(--radius-lg); color: var(--text-primary); font-size: 13px; z-index: 1000; animation: fadeInUp 0.3s ease; box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 10px; }
-        .toast-notification i { color: var(--accent); font-size: 16px; }
+        .player-card { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 8px 12px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
 
-        /* МОДАЛКИ */
+        .toast-notification { position: fixed; bottom: 20px; right: 20px; background: #181825; border-left: 3px solid var(--accent); padding: 12px 20px; border-radius: 16px; z-index: 1000; animation: fadeInUp 0.3s ease; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); backdrop-filter: blur(20px); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-content, .auth-modal { background: linear-gradient(135deg, var(--bg-surface-solid), var(--bg-tertiary)); border-radius: var(--radius-2xl); padding: 30px; width: 420px; max-width: 90%; border: 1px solid var(--border-light); text-align: center; animation: fadeInUp 0.3s ease; }
-        .auth-input { width: 100%; padding: 12px; margin: 8px 0; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 40px; color: white; outline: none; font-size: 14px; }
-        .auth-input:focus { border-color: var(--accent); }
-        .auth-btn { width: 100%; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 12px; border-radius: 40px; font-weight: 700; cursor: pointer; margin-top: 8px; font-size: 14px; }
+        .modal-content, .auth-modal { background: #181825; border-radius: 28px; padding: 30px; width: 420px; max-width: 90%; text-align: center; }
+        .auth-input { width: 100%; padding: 12px; margin: 8px 0; background: rgba(0,0,0,0.5); border-radius: 40px; border: 1px solid var(--border-color); color: white; }
+        .auth-btn { width: 100%; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 12px; border-radius: 40px; font-weight: 700; cursor: pointer; }
         .admin-only { display: none; }
-        .close-modal { float: right; font-size: 20px; cursor: pointer; color: var(--accent); transition: var(--transition); }
-        .close-modal:hover { transform: scale(1.1); }
-
+        .tabs-auth { display: flex; gap: 12px; justify-content: center; margin-bottom: 20px; }
+        .tab-auth { background: none; border: none; color: var(--text-secondary); font-size: 14px; cursor: pointer; padding: 6px 20px; border-radius: 40px; }
+        .tab-auth.active { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #0a0a12; }
+        .tab-pane-auth { display: none; }
+        .tab-pane-auth.active { display: block; }
+        .empty-message { text-align: center; padding: 40px; color: var(--text-muted); }
+        .empty-message i { font-size: 48px; margin-bottom: 15px; color: var(--accent); }
+        
         @media (max-width: 768px) {
             .countdown-number { font-size: 32px; }
             .countdown-block { padding: 15px 20px; min-width: 80px; }
             .timer-title { font-size: 28px; }
-            .product-card { margin: 0 10px; }
-            .admin-section { padding: 10px; }
-            .admin-block { padding: 12px; }
-            .site-header { padding: 6px 15px; }
-            .logo-text { font-size: 14px; }
-            .logo-icon { width: 28px; height: 28px; }
-            .logo-icon i { font-size: 14px; }
-            .balance span { font-size: 14px; }
-            .balance i { font-size: 12px; }
-            .menu-tab { padding: 4px 16px; font-size: 11px; }
-            #homePage, #shopPage, #chatsPage, #profilePage, #adminPage, #chatWithCreatorPage, #messagesPage { padding-top: 70px; }
-            .messages-container { flex-direction: column; }
-            .users-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 15px; max-height: 200px; }
+            .menu-tab { padding: 4px 12px; font-size: 10px; }
         }
     </style>
 </head>
 <body>
     <div class="site-header">
         <div class="header-content">
-            <div class="logo">
-                <div class="logo-icon"><i class="fas fa-crown"></i></div>
-                <span class="logo-text">GRIFLAUNCHER</span>
-            </div>
-            <div class="header-right">
-                <div class="balance"><i class="fas fa-coins"></i> <span id="userBalance">0</span> ₽</div>
-                <button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Выйти</button>
-            </div>
+            <div class="logo"><div class="logo-icon"><i class="fas fa-crown"></i></div><span class="logo-text">GRIFLAUNCHER</span></div>
+            <div class="header-right"><div class="balance"><i class="fas fa-coins"></i> <span id="userBalance">0</span> ₽</div><button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Выйти</button></div>
         </div>
         <div class="menu-tabs" id="dynamicMenuTabs"></div>
     </div>
 
-    <!-- ГЛАВНАЯ -->
     <div id="homePage" class="page active">
         <div class="hero-timer">
             <div class="timer-container">
@@ -278,202 +164,183 @@
                     <div class="countdown-block"><div class="countdown-number" id="minutes">0</div><div class="countdown-label">Минут</div></div>
                     <div class="countdown-block"><div class="countdown-number" id="seconds">0</div><div class="countdown-label">Секунд</div></div>
                 </div>
-                <div class="timer-footer" id="eventDesc" style="margin-top: 30px; color: var(--text-muted); font-size: 14px;"></div>
+                <div id="eventDesc" style="margin-top: 20px; color: var(--text-muted);"></div>
             </div>
         </div>
     </div>
 
-    <!-- МАГАЗИН -->
     <div id="shopPage" class="page">
         <div class="shop-section">
-            <div class="shop-header">
-                <h1><i class="fas fa-crown"></i> ПРЕМИУМ МАГАЗИН</h1>
-                <p>Выберите привилегию и получите уникальные возможности</p>
-            </div>
             <div class="shop-grid" id="shopGrid"></div>
-            <div style="text-align: center; margin-top: 40px;">
-                <button class="buy-btn test-server-btn" id="testServerBtn" style="width: auto; padding: 15px 40px; font-size: 18px;"><i class="fas fa-server"></i> ЗАКАЗАТЬ ТЕСТ-СЕРВЕР</button>
-            </div>
+            <button class="buy-btn" id="testServerBtn" style="width: auto; margin-top: 30px; padding: 12px 40px;">🎮 ЗАКАЗАТЬ ТЕСТ-СЕРВЕР (5000₽)</button>
         </div>
     </div>
 
-    <!-- ЧАТЫ - ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ (В РАЗРАБОТКЕ) -->
     <div id="chatsPage" class="page">
-        <div class="chats-section">
-            <div class="chat-window">
-                <div class="development-message">
-                    <i class="fas fa-tools"></i>
-                    <h2>🚧 В РАЗРАБОТКЕ</h2>
-                    <p>Функция чатов временно недоступна.<br>Скоро мы её добавим!</p>
-                </div>
-            </div>
-        </div>
+        <div class="empty-message"><i class="fas fa-tools"></i><h2>🚧 В РАЗРАБОТКЕ</h2><p>Скоро добавим!</p></div>
     </div>
 
-    <!-- СООБЩЕНИЯ (ДЛЯ RAMONENOK@BK.RU) -->
     <div id="messagesPage" class="page">
-        <div class="messages-container">
-            <div class="users-sidebar" id="messagesUsersList"></div>
-            <div class="messages-chat-area" id="messagesChatArea">
-                <div class="messages-chat-header" id="messagesChatHeader" style="display: none;">
-                    <div class="user-avatar"><i class="fas fa-user"></i></div>
-                    <div><strong id="chatWithUserName"></strong><div id="chatWithUserStatus" class="user-preview"></div></div>
-                </div>
-                <div class="messages-list" id="messagesList"></div>
-                <div class="message-input-area" id="messageInputArea" style="display: none;">
-                    <input type="text" id="replyMessageInput" placeholder="Написать ответ...">
-                    <button class="send-msg-btn" id="sendReplyBtn">Отправить</button>
-                </div>
-            </div>
+        <div style="padding:20px;">
+            <div id="usersListDiv"></div>
+            <div id="chatPanel" style="margin-top:20px; border-top:1px solid var(--border-color); padding-top:20px; display:none;"></div>
         </div>
     </div>
 
-    <!-- ЧАТ С СОЗДАТЕЛЕМ (ДЛЯ ОБЫЧНЫХ ПОЛЬЗОВАТЕЛЕЙ) -->
     <div id="chatWithCreatorPage" class="page">
         <div class="chat-with-creator-container">
             <div class="chat-with-creator-header">
-                <div class="creator-info">
-                    <div class="creator-avatar"><i class="fas fa-crown"></i></div>
-                    <div class="creator-name" id="creatorName">GrifMcPro <span class="badge-icon badge-gold"><i class="fas fa-check"></i></span></div>
-                </div>
-                <div class="creator-status">📢 Писать только если надо! По пустякам не отвечаем!</div>
+                <div class="creator-name" id="creatorName">GrifMcPro 👑</div>
+                <div class="creator-status">📢 Писать только по делу!</div>
             </div>
-            <div class="chat-window-small">
-                <div class="messages-area-small" id="creatorMessagesArea"></div>
-                <div class="chat-input-area-small">
-                    <input type="text" id="creatorMessageInput" placeholder="Написать сообщение создателю...">
-                    <button class="send-btn-small" id="sendCreatorMsgBtn"><i class="fas fa-paper-plane"></i> Отправить</button>
-                </div>
+            <div class="messages-area-small" id="creatorMessagesArea"></div>
+            <div class="chat-input-area-small">
+                <input type="text" id="creatorMessageInput" placeholder="Написать создателю...">
+                <button class="send-btn-small" id="sendCreatorMsgBtn">Отправить</button>
             </div>
         </div>
     </div>
 
-    <!-- ПРОФИЛЬ -->
     <div id="profilePage" class="page">
         <div class="profile-section">
             <div class="profile-card">
                 <div class="profile-avatar"><i class="fas fa-user"></i></div>
                 <div class="profile-name" id="profileName"></div>
                 <div class="profile-info" id="profileInfo"></div>
-                <div class="profile-info"><p><i class="fas fa-tag"></i> <strong>Тег для поиска:</strong> <span id="userTag"></span></p></div>
-                <div id="donatesContainer" class="donates-list"></div>
+                <div class="profile-info"><p><i class="fas fa-tag"></i> <strong>Тег:</strong> <span id="userTag"></span></p></div>
+                <div id="donatesContainer" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 15px 0;"></div>
                 <div class="profile-actions">
-                    <button class="profile-btn" id="editNameBtn"><i class="fas fa-pen"></i> Сменить имя</button>
-                    <button class="profile-btn" id="editTagBtn"><i class="fas fa-tag"></i> Сменить тег</button>
-                    <button class="profile-btn" id="changePasswordBtn"><i class="fas fa-key"></i> Сменить пароль</button>
+                    <button class="profile-btn" id="editNameBtn">✏️ Сменить имя</button>
+                    <button class="profile-btn" id="changePasswordBtn">🔑 Сменить пароль</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- АДМИНКА -->
     <div id="adminPage" class="page">
         <div class="admin-section">
             <div class="admin-panel">
                 <div class="admin-title">👑 АДМИН-ПАНЕЛЬ</div>
                 <div id="adminLoginPanel">
-                    <div class="admin-login-box">
-                        <input type="password" id="adminPassword" placeholder="Ключ доступа (website)">
-                        <button id="checkAdminPasswordBtn" class="admin-btn">ВОЙТИ В АДМИНКУ</button>
-                    </div>
+                    <input type="password" id="adminPassword" placeholder="Ключ доступа (website)" class="admin-input">
+                    <button id="checkAdminPasswordBtn" class="admin-btn">ВОЙТИ</button>
                 </div>
                 <div id="adminPanelContent" style="display: none;">
-                    <!-- НАСТРОЙКА ТАЙМЕРА -->
                     <div class="admin-block">
-                        <h3><i class="fas fa-clock"></i> НАСТРОЙКА ТАЙМЕРА</h3>
-                        <div style="display: grid; gap: 10px;">
-                            <input type="text" id="timerEventName" placeholder="Название события" class="admin-input">
-                            <textarea id="timerEventDesc" rows="2" placeholder="Описание события" class="admin-input"></textarea>
-                            <input type="datetime-local" id="timerTargetDate" class="admin-input">
-                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                <button id="applyTimerRgbText" class="admin-btn-blue" style="flex:1;">🔴 RGB Текст</button>
-                                <button id="applyTimerRgbBorder" class="admin-btn-pink" style="flex:1;">✨ RGB Рамка</button>
-                            </div>
-                            <button id="updateTimerBtn" class="admin-btn-green">💾 СОХРАНИТЬ ТАЙМЕР</button>
+                        <h3>⚙️ НАСТРОЙКА ТАЙМЕРА</h3>
+                        <input type="text" id="timerEventName" placeholder="Название события" class="admin-input">
+                        <textarea id="timerEventDesc" rows="2" placeholder="Описание" class="admin-input"></textarea>
+                        <input type="datetime-local" id="timerTargetDate" class="admin-input">
+                        <div style="display: flex; gap: 8px;">
+                            <button id="applyTimerRgbText" class="admin-btn-blue">RGB Текст</button>
+                            <button id="applyTimerRgbBorder" class="admin-btn-pink">RGB Рамка</button>
                         </div>
+                        <button id="updateTimerBtn" class="admin-btn-green">💾 СОХРАНИТЬ</button>
                     </div>
-                    <div class="admin-block"><h3><i class="fas fa-users"></i> ПОСЛЕДНИЕ 5 МИНУТ (АККАУНТЫ)</h3><div class="players-list" id="recentUsersList"></div></div>
-                    <div class="admin-block"><h3><i class="fas fa-envelope"></i> МОИ СООБЩЕНИЯ (GrifMcPro)</h3><textarea id="broadcastMsg" rows="3" placeholder="Текст сообщения для всех пользователей..." class="admin-input"></textarea><button id="sendBroadcastBtn" class="admin-btn-pink">📢 ОТПРАВИТЬ ВСЕМ</button></div>
-                    <div class="admin-block"><h3><i class="fas fa-user-shield"></i> МОДЕРАТОРЫ</h3><input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input"><button id="addModeratorBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button><div id="moderatorsList" class="players-list"></div></div>
-                    <div class="admin-block"><h3><i class="fas fa-dice-d6"></i> ПРОКРУТКИ КОЛЕСА</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">🎫 ВЫДАТЬ</button></div>
-                    <div class="admin-block"><h3><i class="fas fa-tags"></i> ГАЛОЧКИ (5 ВИДОВ)</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="purple">🟣 Фиолетовая</option><option value="teal">🔷 Бирюзовая</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div>
-                    <div class="admin-block"><h3><i class="fas fa-coins"></i> МОНЕТЫ</h3><input type="text" id="giveNick" placeholder="Никнейм" class="admin-input"><input type="number" id="giveAmount" placeholder="Сумма" class="admin-input"><button id="giveCoinsBtn" class="admin-btn-blue">💸 ВЫДАТЬ</button><button id="globalGiveBtn" class="admin-btn-purple">🌍 ВСЕМ</button></div>
-                    <div class="admin-block"><h3><i class="fas fa-gavel"></i> БАН / РАЗБАН</h3><input type="text" id="banNick" placeholder="Никнейм" class="admin-input"><input type="text" id="moderatorName" placeholder="Ник модератора" class="admin-input"><textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="banDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="12">12 часов</option><option value="24">1 день</option><option value="168">7 дней</option><option value="720">30 дней</option><option value="forever">Навсегда</option></select><button id="banUserBtn" class="admin-btn-red">⛔ ЗАБАНИТЬ</button><button id="unbanUserBtn" class="admin-btn-green">🔓 РАЗБАНИТЬ</button></div>
-                    <div class="admin-block"><h3><i class="fas fa-lock"></i> УПРАВЛЕНИЕ САЙТОМ</h3><textarea id="closeReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="closeDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="24">1 день</option><option value="168">7 дней</option></select><button id="closeSiteBtn" class="admin-btn-red">🔒 ЗАКРЫТЬ САЙТ</button><button id="openSiteBtn" class="admin-btn-green">🔓 ОТКРЫТЬ САЙТ</button></div>
-                    <div class="admin-block"><h3><i class="fas fa-chart-line"></i> СТАТИСТИКА САЙТА</h3><div id="statsList" class="players-list"></div></div>
+                    <div class="admin-block">
+                        <h3>📢 РАССЫЛКА</h3>
+                        <textarea id="broadcastMsg" rows="2" class="admin-input"></textarea>
+                        <button id="sendBroadcastBtn" class="admin-btn-pink">ОТПРАВИТЬ ВСЕМ</button>
+                    </div>
+                    <div class="admin-block">
+                        <h3>👥 ПОСЛЕДНИЕ 5 МИН</h3>
+                        <div id="recentUsersList" class="players-list"></div>
+                    </div>
+                    <div class="admin-block">
+                        <h3>🛡️ МОДЕРАТОРЫ</h3>
+                        <input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input">
+                        <button id="addModeratorBtn" class="admin-btn-blue">ДОБАВИТЬ</button>
+                        <div id="moderatorsList" class="players-list"></div>
+                    </div>
+                    <div class="admin-block">
+                        <h3>🎫 ПРОКРУТКИ</h3>
+                        <input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input">
+                        <button id="giveSpinBtn" class="admin-btn-blue">ВЫДАТЬ</button>
+                    </div>
+                    <div class="admin-block">
+                        <h3>🏷️ ГАЛОЧКИ</h3>
+                        <input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input">
+                        <select id="badgeType" class="admin-select">
+                            <option value="blue">🔵 Синяя</option>
+                            <option value="red">🔴 Красная</option>
+                            <option value="gold">🟡 Золотая</option>
+                            <option value="purple">🟣 Фиолетовая</option>
+                            <option value="teal">🔷 Бирюзовая</option>
+                        </select>
+                        <button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button>
+                        <button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button>
+                    </div>
+                    <div class="admin-block">
+                        <h3>💰 МОНЕТЫ</h3>
+                        <input type="text" id="giveNick" placeholder="Никнейм" class="admin-input">
+                        <input type="number" id="giveAmount" placeholder="Сумма" class="admin-input">
+                        <button id="giveCoinsBtn" class="admin-btn-blue">ВЫДАТЬ</button>
+                        <button id="globalGiveBtn" class="admin-btn">ВСЕМ</button>
+                    </div>
+                    <div class="admin-block">
+                        <h3>🔨 БАН / РАЗБАН</h3>
+                        <input type="text" id="banNick" placeholder="Никнейм" class="admin-input">
+                        <input type="text" id="moderatorName" placeholder="Модератор" class="admin-input">
+                        <textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea>
+                        <select id="banDuration">
+                            <option value="1">1 час</option>
+                            <option value="24">1 день</option>
+                            <option value="forever">Навсегда</option>
+                        </select>
+                        <button id="banUserBtn" class="admin-btn-red">ЗАБАНИТЬ</button>
+                        <button id="unbanUserBtn" class="admin-btn-green">РАЗБАНИТЬ</button>
+                    </div>
+                    <div class="admin-block">
+                        <h3>📊 СТАТИСТИКА</h3>
+                        <div id="statsList" class="players-list"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- МОДАЛКИ -->
     <div id="authModal" class="modal" style="display: flex;">
         <div class="auth-modal">
-            <i class="fas fa-crown" style="font-size: 40px; color: var(--accent); margin-bottom: 15px;"></i>
-            <h2 style="margin-bottom: 15px; font-size: 24px;">GRIFLAUNCHER</h2>
-            <div class="tabs-auth" id="authTabs">
+            <i class="fas fa-crown" style="font-size: 40px; color: var(--accent);"></i>
+            <h2>GRIFLAUNCHER</h2>
+            <div class="tabs-auth">
                 <button class="tab-auth active" data-tab="login">ВХОД</button>
                 <button class="tab-auth" data-tab="register">РЕГИСТРАЦИЯ</button>
             </div>
             <div id="loginPaneAuth" class="tab-pane-auth active">
                 <input type="email" id="loginEmail" placeholder="Email" class="auth-input">
                 <input type="password" id="loginPass" placeholder="Пароль" class="auth-input">
-                <button id="doLoginBtn" class="auth-btn"><i class="fas fa-sign-in-alt"></i> ВОЙТИ</button>
+                <button id="doLoginBtn" class="auth-btn">ВОЙТИ</button>
             </div>
             <div id="registerPaneAuth" class="tab-pane-auth">
                 <input type="text" id="regUsername" placeholder="Никнейм" class="auth-input">
                 <input type="email" id="regEmail" placeholder="Email" class="auth-input">
                 <input type="password" id="regPass" placeholder="Пароль (мин. 6)" class="auth-input">
-                <button id="doRegisterBtn" class="auth-btn"><i class="fas fa-user-plus"></i> ЗАРЕГИСТРИРОВАТЬСЯ</button>
+                <button id="doRegisterBtn" class="auth-btn">ЗАРЕГИСТРИРОВАТЬСЯ</button>
             </div>
         </div>
     </div>
 
     <div id="buyModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" id="closeBuyModal">&times;</span>
-            <h3 id="buyProductName" style="font-size: 20px;"></h3>
-            <p style="margin: 12px 0;">Цена: <strong id="buyPrice" style="color: var(--accent); font-size: 22px;"></strong> ₽</p>
-            <div class="donate-note">💎 Донат будет выдан на ваш ник в течение 10 минут</div>
-            <input type="text" id="buyNick" placeholder="Ваш ник на сервере" class="admin-input">
-            <input type="text" id="buySiteNick" placeholder="Ваш ник на сайте" class="admin-input" style="margin-top: 5px;">
-            <button id="confirmBuyBtn" class="admin-btn"><i class="fas fa-shopping-cart"></i> КУПИТЬ</button>
-        </div>
-    </div>
-
-    <div id="testServerModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeTestModal">&times;</span>
-            <h3><i class="fas fa-server"></i> ЗАКАЗ ТЕСТ-СЕРВЕРА</h3>
-            <p style="margin: 15px 0;">Стоимость: <strong style="color: var(--accent);">5 000 ₽</strong></p>
-            <div class="donate-note">📧 После оплаты вы получите доступ к тест-серверу на 7 дней</div>
-            <input type="text" id="testNick" placeholder="Ваш ник на сервере" class="admin-input">
-            <input type="text" id="testSiteNick" placeholder="Ваш ник на сайте" class="admin-input" style="margin-top: 5px;">
-            <button id="confirmTestBtn" class="admin-btn test-server-btn"><i class="fas fa-shopping-cart"></i> ЗАКАЗАТЬ</button>
+            <h3 id="buyProductName"></h3>
+            <p>Цена: <strong id="buyPrice"></strong> ₽</p>
+            <input type="text" id="buyNick" placeholder="Ник на сервере" class="admin-input">
+            <input type="text" id="buySiteNick" placeholder="Ник на сайте" class="admin-input">
+            <button id="confirmBuyBtn" class="admin-btn">КУПИТЬ</button>
         </div>
     </div>
 
     <div id="editNameModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" id="closeEditModal">&times;</span>
             <h3>Сменить имя</h3>
-            <input type="text" id="newNameInput" placeholder="Новое имя" class="admin-input">
+            <input type="text" id="newNameInput" class="admin-input">
             <button id="saveNameBtn" class="admin-btn">Сохранить</button>
-        </div>
-    </div>
-
-    <div id="editTagModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeTagModal">&times;</span>
-            <h3>Сменить тег</h3>
-            <input type="text" id="newTagInput" placeholder="Новый тег (например: #игрок)" class="admin-input">
-            <button id="saveTagBtn" class="admin-btn">Сохранить</button>
         </div>
     </div>
 
     <div id="changePasswordModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" id="closePasswordModal">&times;</span>
             <h3>Сменить пароль</h3>
             <input type="password" id="oldPasswordInput" placeholder="Старый пароль" class="admin-input">
             <input type="password" id="newPasswordInput" placeholder="Новый пароль" class="admin-input">
@@ -482,7 +349,7 @@
     </div>
 
     <script>
-        (function() {
+        (function(){
             const firebaseConfig = {
                 apiKey: "AIzaSyCK9vHX-OQIw48SGi8S_8U7pIjq60gahEA",
                 authDomain: "siteorgooo.firebaseapp.com",
@@ -494,44 +361,32 @@
             if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
             const auth = firebase.auth();
             const db = firebase.firestore();
-
             const MAIN_ADMIN_EMAIL = "ramonenok@bk.ru";
             let currentUser = null;
             let currentBalance = 0;
             let currentProduct = null;
             let moderatorsList = [];
-            let balanceInterval = null;
-            let siteStatusUnsub = null;
-            let banUnsub = null;
-            let creatorMessagesUnsub = null;
-            let creatorBadge = "gold";
-            let currentChatWithUser = null;
-            let messagesUnsub = null;
-            let allMessagesUsers = [];
             let timerInterval = null;
 
-            function showToast(message, isError = false) {
-                const toast = document.createElement('div');
-                toast.className = 'toast-notification';
-                toast.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${message}`;
-                document.body.appendChild(toast);
-                setTimeout(() => toast.remove(), 3000);
+            function showToast(msg, isError=false) {
+                let d = document.createElement('div');
+                d.className = 'toast-notification';
+                d.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${msg}`;
+                document.body.appendChild(d);
+                setTimeout(() => d.remove(), 3000);
             }
 
             function getBadgeHtml(type) {
                 if (!type) return '';
-                const icons = { blue: 'fa-check', red: 'fa-check', gold: 'fa-check', purple: 'fa-check', teal: 'fa-check', crown: 'fa-crown' };
-                const icon = icons[type] || 'fa-check';
                 if (type === 'crown') return `<span class="badge-icon badge-crown"><i class="fas fa-crown"></i></span>`;
-                return `<span class="badge-icon badge-${type}"><i class="fas ${icon}"></i></span>`;
+                return `<span class="badge-icon badge-${type}"><i class="fas fa-check"></i></span>`;
             }
 
-            // ДИНАМИЧЕСКОЕ МЕНЮ
             function renderMenu() {
-                const container = document.getElementById('dynamicMenuTabs');
-                if (!container) return;
-                const isAdmin = currentUser?.email === MAIN_ADMIN_EMAIL;
-                container.innerHTML = `
+                let c = document.getElementById('dynamicMenuTabs');
+                if (!c) return;
+                let isAdmin = currentUser?.email === MAIN_ADMIN_EMAIL;
+                c.innerHTML = `
                     <div class="menu-tab active" data-page="home">🏠 Главная</div>
                     <div class="menu-tab" data-page="shop">🛒 Магазин</div>
                     ${isAdmin ? '<div class="menu-tab" data-page="messages">💬 Сообщения</div>' : '<div class="menu-tab" data-page="chats">💬 Чаты</div>'}
@@ -545,9 +400,13 @@
                         tab.classList.add('active');
                         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                         document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
-                        if (tab.dataset.page === 'admin') { loadRecentUsers(); loadModerators(); loadStats(); }
-                        if (tab.dataset.page === 'chatWithCreator') { loadCreatorMessages(); loadCreatorBadge(); }
-                        if (tab.dataset.page === 'messages' && isAdmin) { loadMessagesUsers(); }
+                        if (tab.dataset.page === 'admin') {
+                            loadRecentUsers();
+                            loadModerators();
+                            loadStats();
+                        }
+                        if (tab.dataset.page === 'chatWithCreator') loadCreatorMessages();
+                        if (tab.dataset.page === 'messages' && isAdmin) loadMessagesPage();
                     };
                 });
             }
@@ -558,14 +417,14 @@
                 document.getElementById('eventTitle').innerText = eventName || 'ДО ОТКРЫТИЯ СЕЗОНА';
                 document.getElementById('eventDesc').innerHTML = eventDesc || '';
                 timerInterval = setInterval(() => {
-                    const diff = new Date(targetDate).getTime() - new Date().getTime();
+                    let diff = new Date(targetDate) - new Date();
                     if (diff <= 0) {
                         document.getElementById('days').innerText = '0';
                         document.getElementById('hours').innerText = '0';
                         document.getElementById('minutes').innerText = '0';
                         document.getElementById('seconds').innerText = '0';
                     } else {
-                        document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        document.getElementById('days').innerText = Math.floor(diff / 86400000);
                         document.getElementById('hours').innerText = Math.floor((diff % 86400000) / 3600000);
                         document.getElementById('minutes').innerText = Math.floor((diff % 3600000) / 60000);
                         document.getElementById('seconds').innerText = Math.floor((diff % 60000) / 1000);
@@ -574,7 +433,7 @@
             }
 
             async function loadTimer() {
-                const doc = await db.collection('settings').doc('timer').get();
+                let doc = await db.collection('settings').doc('timer').get();
                 if (doc.exists && doc.data().targetDate) {
                     let target = doc.data().targetDate.toDate ? doc.data().targetDate.toDate() : new Date(doc.data().targetDate);
                     startTimer(target, doc.data().eventName, doc.data().eventDesc);
@@ -590,179 +449,182 @@
                 }
             }
 
-            async function updateTimer(eventName, eventDesc, targetDate) {
-                await db.collection('settings').doc('timer').set({ eventName, eventDesc, targetDate: new Date(targetDate) });
-                startTimer(new Date(targetDate), eventName, eventDesc);
-                showToast('✅ Таймер обновлён!', false);
+            async function updateTimer(name, desc, date) {
+                await db.collection('settings').doc('timer').set({ eventName: name, eventDesc: desc, targetDate: new Date(date) });
+                startTimer(new Date(date), name, desc);
+                showToast('✅ Таймер обновлён!');
             }
 
-            // ЗАГРУЗКА ПОЛЬЗОВАТЕЛЕЙ ДЛЯ СООБЩЕНИЙ
-            async function loadMessagesUsers() {
-                if (!currentUser || currentUser.email !== MAIN_ADMIN_EMAIL) return;
-                const usersSnapshot = await db.collection('users').get();
-                const usersWithMessages = [];
-                for (const userDoc of usersSnapshot.docs) {
+            // ========== СООБЩЕНИЯ (РАБОТАЮТ БЕЗ ИНДЕКСОВ) ==========
+            // КАК РАБОТАЮТ СООБЩЕНИЯ:
+            // 1. Админ заходит в раздел "Сообщения"
+            // 2. Загружается список ВСЕХ пользователей, которые когда-либо писали админу (проверка: есть ли сообщения с to = ID пользователя)
+            // 3. При клике на пользователя открывается чат
+            // 4. Сообщения загружаются из коллекции messages где to = ID пользователя
+            // 5. Админ может ответить обычным текстом или с галочкой (5 цветов)
+            // 6. Ответ с галочкой отправляется и админу (в тот же чат) и пользователю (в чат с создателем)
+
+            async function loadMessagesPage() {
+                let container = document.getElementById('usersListDiv');
+                if (!container) return;
+                
+                let usersSnap = await db.collection('users').get();
+                let usersWithMessages = [];
+                
+                for (let userDoc of usersSnap.docs) {
                     if (userDoc.data().email === MAIN_ADMIN_EMAIL) continue;
-                    const messagesRef = db.collection('chats').doc('creator').collection('messages');
-                    const q = await messagesRef.where('to', '==', userDoc.id).where('from', '!=', 'system').get();
-                    if (!q.empty) {
-                        const userData = userDoc.data();
+                    let msgsSnap = await db.collection('chats').doc('creator').collection('messages').where('to', '==', userDoc.id).get();
+                    let unreadCount = 0;
+                    for (let d of msgsSnap.docs) {
+                        if (!d.data().read && d.data().from !== currentUser.uid) unreadCount++;
+                    }
+                    if (msgsSnap.size > 0) {
                         usersWithMessages.push({
                             uid: userDoc.id,
-                            username: userData.username,
-                            email: userData.email,
-                            badge: userData.badge,
-                            unread: q.docs.filter(d => !d.data().read).length
+                            username: userDoc.data().username,
+                            badge: userDoc.data().badge,
+                            unread: unreadCount
                         });
                     }
                 }
-                allMessagesUsers = usersWithMessages;
-                renderUsersList();
-            }
-
-            function renderUsersList() {
-                const container = document.getElementById('messagesUsersList');
-                if (!container) return;
-                container.innerHTML = allMessagesUsers.map(user => `
-                    <div class="user-item" data-userid="${user.uid}" data-username="${user.username}" data-badge="${user.badge || ''}">
-                        <div class="user-avatar"><i class="fas fa-user"></i></div>
-                        <div class="user-info">
-                            <div class="user-name">${user.username}${getBadgeHtml(user.badge)}</div>
-                            <div class="user-preview">${user.unread > 0 ? `📩 ${user.unread} новых` : 'Нет новых'}</div>
-                        </div>
-                        ${user.unread > 0 ? `<div class="unread-count">${user.unread}</div>` : ''}
-                    </div>
-                `).join('');
-                document.querySelectorAll('.user-item').forEach(el => {
-                    el.onclick = () => {
-                        document.querySelectorAll('.user-item').forEach(e => e.classList.remove('active'));
-                        el.classList.add('active');
-                        const userId = el.dataset.userid;
-                        const username = el.dataset.username;
-                        const badge = el.dataset.badge;
-                        currentChatWithUser = userId;
-                        document.getElementById('chatWithUserName').innerHTML = username + getBadgeHtml(badge);
-                        document.getElementById('chatWithUserStatus').innerHTML = 'Пользователь';
-                        document.getElementById('messagesChatHeader').style.display = 'flex';
-                        document.getElementById('messageInputArea').style.display = 'flex';
-                        loadMessagesWithUser(userId);
-                    };
-                });
-            }
-
-            async function loadMessagesWithUser(userId) {
-                if (messagesUnsub) messagesUnsub();
-                const messagesRef = db.collection('chats').doc('creator').collection('messages').where('from', 'in', [userId, currentUser.uid]).orderBy('timestamp');
-                messagesUnsub = messagesRef.onSnapshot((snapshot) => {
-                    const container = document.getElementById('messagesList');
-                    if (!container) return;
-                    container.innerHTML = '';
-                    snapshot.forEach(doc => {
-                        const msg = doc.data();
-                        if (msg.from === 'system') return;
-                        const isOutgoing = msg.from === currentUser.uid;
-                        const msgId = doc.id;
-                        container.innerHTML += `
-                            <div class="message-item ${isOutgoing ? 'outgoing' : 'incoming'}">
-                                <div class="message-avatar-small"><i class="fas ${isOutgoing ? 'fa-user' : 'fa-user-circle'}"></i></div>
-                                <div>
-                                    <div class="message-bubble-small">${msg.text}</div>
-                                    <div class="message-time-small">${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
-                                    ${!isOutgoing ? `
-                                    <div class="reply-area" id="reply-area-${msgId}">
-                                        <input type="text" id="reply-input-${msgId}" class="reply-input" placeholder="Ответить...">
-                                        <button class="reply-badge-btn" onclick="window.sendReplyWithBadge('${msgId}', '${userId}', 'blue')" style="background:#3b82f6;">🔵</button>
-                                        <button class="reply-badge-btn" onclick="window.sendReplyWithBadge('${msgId}', '${userId}', 'red')" style="background:#ef4444;">🔴</button>
-                                        <button class="reply-badge-btn" onclick="window.sendReplyWithBadge('${msgId}', '${userId}', 'gold')" style="background:#ffd700;">🟡</button>
-                                        <button class="reply-badge-btn" onclick="window.sendReplyWithBadge('${msgId}', '${userId}', 'purple')" style="background:#8b5cf6;">🟣</button>
-                                        <button class="reply-badge-btn" onclick="window.sendReplyWithBadge('${msgId}', '${userId}', 'teal')" style="background:#14b8a6;">🔷</button>
-                                    </div>
-                                    ` : ''}
-                                </div>
-                            </div>
-                        `;
-                        if (!msg.read && !isOutgoing) {
-                            doc.ref.update({ read: true });
-                        }
-                    });
-                    container.scrollTop = container.scrollHeight;
-                });
-                const unreadSnapshot = await db.collection('chats').doc('creator').collection('messages').where('from', '==', userId).where('read', '==', false).get();
-                for (const doc of unreadSnapshot.docs) {
-                    await doc.ref.update({ read: true });
+                
+                if (usersWithMessages.length === 0) {
+                    container.innerHTML = '<div class="empty-message"><i class="fas fa-inbox"></i><br>📭 Нет сообщений</div>';
+                    document.getElementById('chatPanel').style.display = 'none';
+                    return;
                 }
-                loadMessagesUsers();
+                
+                container.innerHTML = `
+                    <div style="padding:10px">
+                        <h3>💬 Список собеседников</h3>
+                        ${usersWithMessages.map(u => `
+                            <div style="background:rgba(0,0,0,0.3);padding:12px;margin-bottom:8px;border-radius:16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center" 
+                                 onclick="window.openChat('${u.uid}','${u.username}','${u.badge || ''}')">
+                                <span><strong>${u.username}</strong>${getBadgeHtml(u.badge)}</span>
+                                ${u.unread > 0 ? `<span style="background:#ef4444;padding:2px 8px;border-radius:20px;font-size:11px;">${u.unread} новых</span>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
             }
 
-            window.sendReplyWithBadge = async (msgId, userId, badgeColor) => {
-                const input = document.getElementById(`reply-input-${msgId}`);
-                const text = input?.value.trim();
-                if (!text) return;
-                const badgeMap = { blue: '🔵', red: '🔴', gold: '🟡', purple: '🟣', teal: '🔷' };
-                const fullText = `${badgeMap[badgeColor]} ${text}`;
-                await db.collection('chats').doc('creator').collection('messages').add({
-                    from: currentUser.uid,
-                    fromName: currentUser.displayName,
-                    to: userId,
-                    text: fullText,
-                    timestamp: new Date(),
-                    read: false
-                });
-                await db.collection('chats').doc('creator').collection('messages').add({
-                    from: currentUser.uid,
-                    fromName: currentUser.displayName,
-                    to: "creator",
-                    text: fullText,
-                    timestamp: new Date(),
-                    read: false
-                });
-                if (input) input.value = '';
-                loadMessagesWithUser(userId);
-                showToast(`✅ Ответ с ${badgeMap[badgeColor]} галочкой отправлен!`, false);
+            window.openChat = async (userId, username, badge) => {
+                let panel = document.getElementById('chatPanel');
+                if (!panel) return;
+                panel.style.display = 'block';
+                panel.innerHTML = `
+                    <h4>💬 Чат с ${username}${getBadgeHtml(badge)}</h4>
+                    <div id="chatMsgs" style="height:300px;overflow-y:auto;background:rgba(0,0,0,0.3);border-radius:16px;padding:15px;margin:10px 0;"></div>
+                    <div style="display:flex;gap:10px;">
+                        <input type="text" id="chatInput" placeholder="Ответ..." style="flex:1;padding:10px;background:rgba(0,0,0,0.4);border-radius:40px;border:1px solid var(--border-color);color:white;">
+                        <button id="sendChatBtn" class="admin-btn-blue" style="width:auto;padding:10px 20px;">Отправить</button>
+                    </div>
+                    <div style="display:flex;gap:8px;margin-top:10px;">
+                        <button onclick="window.sendBadge('${userId}','blue')" style="background:#3b82f6;border:none;border-radius:50%;width:32px;height:32px;">🔵</button>
+                        <button onclick="window.sendBadge('${userId}','red')" style="background:#ef4444;border:none;border-radius:50%;width:32px;height:32px;">🔴</button>
+                        <button onclick="window.sendBadge('${userId}','gold')" style="background:#ffd700;border:none;border-radius:50%;width:32px;height:32px;">🟡</button>
+                        <button onclick="window.sendBadge('${userId}','purple')" style="background:#8b5cf6;border:none;border-radius:50%;width:32px;height:32px;">🟣</button>
+                        <button onclick="window.sendBadge('${userId}','teal')" style="background:#14b8a6;border:none;border-radius:50%;width:32px;height:32px;">🔷</button>
+                    </div>
+                `;
+                
+                // Подписка на сообщения
+                let unsub = db.collection('chats').doc('creator').collection('messages')
+                    .where('to', '==', userId)
+                    .orderBy('timestamp')
+                    .onSnapshot(snap => {
+                        let msgsDiv = document.getElementById('chatMsgs');
+                        if (!msgsDiv) return;
+                        msgsDiv.innerHTML = '';
+                        snap.forEach(doc => {
+                            let msg = doc.data();
+                            if (msg.from === 'system') return;
+                            let isOut = msg.from === currentUser.uid;
+                            msgsDiv.innerHTML += `
+                                <div style="display:flex;justify-content:${isOut ? 'flex-end' : 'flex-start'};margin-bottom:10px;">
+                                    <div style="background:${isOut ? 'var(--accent-glow)' : '#181825'};padding:8px 12px;border-radius:14px;max-width:70%;">
+                                        <div>${msg.text}</div>
+                                        <div style="font-size:9px;color:var(--text-muted);margin-top:3px;">${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
+                                    </div>
+                                </div>
+                            `;
+                            if (!msg.read && !isOut) doc.ref.update({ read: true });
+                        });
+                        msgsDiv.scrollTop = msgsDiv.scrollHeight;
+                    });
+                
+                document.getElementById('sendChatBtn').onclick = () => {
+                    let inp = document.getElementById('chatInput');
+                    let text = inp?.value.trim();
+                    if (!text) return;
+                    db.collection('chats').doc('creator').collection('messages').add({
+                        from: currentUser.uid,
+                        fromName: currentUser.displayName,
+                        to: userId,
+                        text: text,
+                        timestamp: new Date(),
+                        read: false
+                    });
+                    inp.value = '';
+                };
+                
+                window.sendBadge = async (uid, color) => {
+                    let inp = document.getElementById('chatInput');
+                    let text = inp?.value.trim();
+                    if (!text) return;
+                    let map = { blue: '🔵', red: '🔴', gold: '🟡', purple: '🟣', teal: '🔷' };
+                    let fullText = `${map[color]} ${text}`;
+                    
+                    await db.collection('chats').doc('creator').collection('messages').add({
+                        from: currentUser.uid,
+                        fromName: currentUser.displayName,
+                        to: uid,
+                        text: fullText,
+                        timestamp: new Date(),
+                        read: false
+                    });
+                    
+                    await db.collection('chats').doc('creator').collection('messages').add({
+                        from: currentUser.uid,
+                        fromName: currentUser.displayName,
+                        to: "creator",
+                        text: fullText,
+                        timestamp: new Date(),
+                        read: false
+                    });
+                    
+                    inp.value = '';
+                    showToast(`✅ Ответ с ${map[color]} галочкой отправлен!`);
+                };
             };
 
-            async function sendReplyToUser(text) {
-                if (!text.trim() || !currentChatWithUser) return;
-                await db.collection('chats').doc('creator').collection('messages').add({
-                    from: currentUser.uid,
-                    fromName: currentUser.displayName,
-                    to: currentChatWithUser,
-                    text: text,
-                    timestamp: new Date(),
-                    read: false
-                });
-                document.getElementById('replyMessageInput').value = '';
-                loadMessagesWithUser(currentChatWithUser);
-            }
-
-            // ЧАТ С СОЗДАТЕЛЕМ
+            // ЧАТ С СОЗДАТЕЛЕМ (ДЛЯ ОБЫЧНЫХ ИГРОКОВ)
             async function loadCreatorMessages() {
-                if (creatorMessagesUnsub) creatorMessagesUnsub();
                 if (!currentUser) return;
-                const messagesRef = db.collection('chats').doc('creator').collection('messages').where('to', '==', currentUser.uid).orderBy('timestamp');
-                creatorMessagesUnsub = messagesRef.onSnapshot((snapshot) => {
-                    const container = document.getElementById('creatorMessagesArea');
-                    if (!container) return;
-                    container.innerHTML = '';
-                    snapshot.forEach(doc => {
-                        const msg = doc.data();
-                        const isOutgoing = msg.from === currentUser.uid;
-                        const isAdmin = msg.fromName === 'GrifMcPro' || msg.from === 'system';
-                        container.innerHTML += `
-                            <div class="message ${isOutgoing ? 'outgoing' : 'incoming'}">
-                                <div class="message-avatar-small"><i class="fas ${isOutgoing ? 'fa-user' : (isAdmin ? 'fa-crown' : 'fa-user-circle')}"></i></div>
-                                <div class="message-content">
-                                    <div class="message-header">
-                                        <span class="message-name">${msg.fromName}${isAdmin ? getBadgeHtml(creatorBadge) : ''}</span>
-                                        <span class="message-time">${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</span>
-                                    </div>
+                let container = document.getElementById('creatorMessagesArea');
+                if (!container) return;
+                
+                db.collection('chats').doc('creator').collection('messages')
+                    .where('to', '==', currentUser.uid)
+                    .orderBy('timestamp')
+                    .onSnapshot(snap => {
+                        if (snap.empty) {
+                            container.innerHTML = '<div class="empty-message"><i class="fas fa-comments"></i><br>💬 Нет сообщений от создателя</div>';
+                            return;
+                        }
+                        container.innerHTML = '';
+                        snap.forEach(doc => {
+                            let msg = doc.data();
+                            let isOut = msg.from === currentUser.uid;
+                            container.innerHTML += `
+                                <div class="message ${isOut ? 'outgoing' : 'incoming'}">
                                     <div class="message-bubble">${msg.text}</div>
+                                    <div style="font-size:9px;color:var(--text-muted);margin-top:3px;">${new Date(msg.timestamp?.toDate()).toLocaleTimeString()}</div>
                                 </div>
-                            </div>
-                        `;
+                            `;
+                        });
+                        container.scrollTop = container.scrollHeight;
                     });
-                    container.scrollTop = container.scrollHeight;
-                });
             }
 
             async function sendCreatorMessage(text) {
@@ -775,185 +637,172 @@
                     timestamp: new Date()
                 });
                 document.getElementById('creatorMessageInput').value = '';
-                showToast('✅ Сообщение отправлено создателю!', false);
-            }
-
-            async function loadCreatorBadge() {
-                const snap = await db.collection('users').where('email', '==', MAIN_ADMIN_EMAIL).get();
-                if (!snap.empty) {
-                    creatorBadge = snap.docs[0].data().badge || 'gold';
-                    document.getElementById('creatorName').innerHTML = `GrifMcPro ${getBadgeHtml(creatorBadge)}`;
-                }
+                showToast('✅ Сообщение отправлено создателю!');
             }
 
             // АДМИН ФУНКЦИИ
             async function loadModerators() {
-                const doc = await db.collection('settings').doc('moderators').get();
+                let doc = await db.collection('settings').doc('moderators').get();
                 moderatorsList = doc.exists ? doc.data().list || [] : [];
-                const container = document.getElementById('moderatorsList');
-                if (container) container.innerHTML = moderatorsList.map(m => `<div class="player-card"><span>👑 ${m.nick}</span><button onclick="window.removeModerator('${m.email}')" style="background:#ef4444;border:none;padding:4px 12px;border-radius:30px;font-size:11px;">УДАЛИТЬ</button></div>`).join('');
+                document.getElementById('moderatorsList').innerHTML = moderatorsList.map(m => 
+                    `<div class="player-card">${m.nick} <button onclick="window.removeMod('${m.email}')" style="background:#ef4444;border:none;padding:4px 12px;border-radius:30px;">Удалить</button></div>`
+                ).join('');
             }
-            window.removeModerator = async (email) => {
+            
+            window.removeMod = async (email) => {
                 moderatorsList = moderatorsList.filter(m => m.email !== email);
                 await db.collection('settings').doc('moderators').set({ list: moderatorsList });
                 loadModerators();
-                showToast('Модератор удалён', false);
+                showToast('Модератор удалён');
             };
 
             async function loadRecentUsers() {
-                const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-                const snap = await db.collection('users').where('registeredAt', '>=', fiveMinutesAgo.toISOString()).orderBy('registeredAt', 'desc').get();
-                const container = document.getElementById('recentUsersList');
-                if (container) container.innerHTML = snap.docs.map(doc => `<div class="player-card"><span><strong>${doc.data().username}</strong><br>${doc.data().email}<br>💰 ${doc.data().balance || 0} ₽</span><button onclick="window.showUserActions('${doc.id}','${doc.data().username}','${doc.data().email}')" class="admin-btn-blue" style="width:auto;padding:5px 12px;font-size:11px;">ДЕЙСТВИЯ</button></div>`).join('');
-                if (snap.empty) container.innerHTML = '<div class="player-card">Нет новых аккаунтов за последние 5 минут</div>';
+                let ago = new Date(Date.now() - 5 * 60 * 1000);
+                let snap = await db.collection('users').where('registeredAt', '>=', ago.toISOString()).orderBy('registeredAt', 'desc').get();
+                document.getElementById('recentUsersList').innerHTML = snap.docs.map(d => 
+                    `<div class="player-card">${d.data().username}<br>${d.data().email}<br>💰 ${d.data().balance || 0}₽</div>`
+                ).join('') || 'Нет новых';
             }
 
-            window.showUserActions = (userId, username, email) => {
-                const modal = document.createElement('div');
-                modal.className = 'modal';
-                modal.style.display = 'flex';
-                modal.innerHTML = `<div class="modal-content"><span class="close-modal" onclick="this.closest('.modal').remove()">&times;</span><h3>${username}</h3><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:15px;"><button onclick="window.banUserPrompt('${userId}','${username}','${email}')" class="admin-btn-red" style="flex:1;">БАН</button><button onclick="window.unbanUserPrompt('${email}','${username}')" class="admin-btn-green" style="flex:1;">РАЗБАН</button><button onclick="window.giveDonatePrompt('${userId}','${username}')" class="admin-btn-blue" style="flex:1;">ДОНАТ</button><button onclick="window.removeDonatePrompt('${userId}','${username}')" class="admin-btn-purple" style="flex:1;">СНЯТЬ</button></div></div>`;
-                document.body.appendChild(modal);
-            };
+            async function loadStats() {
+                let users = await db.collection('users').get();
+                document.getElementById('statsList').innerHTML = `
+                    <div class="player-card">👥 Игроков: ${users.size}</div>
+                    <div class="player-card">💰 Баланс: ${users.docs.reduce((s, d) => s + (d.data().balance || 0), 0)}₽</div>
+                `;
+            }
 
-            window.banUserPrompt = async (userId, username, email) => {
-                const reason = prompt('Причина:'), duration = prompt('Часы или forever:'), mod = prompt('Модератор:');
-                if (reason && duration && mod) banUser(userId, username, email, reason, duration, mod);
-            };
-            window.unbanUserPrompt = async (email, username) => {
-                const reason = prompt('Причина разбана:'), mod = prompt('Модератор:');
-                if (reason && mod) unbanUser(email, username, reason, mod);
-            };
-            window.giveDonatePrompt = async (userId, username) => { const donateName = prompt('Название доната:'), reason = prompt('Причина:'); if (donateName && reason) await db.collection('donates').add({ userId, username, product: donateName, price: 0, date: new Date(), givenBy: reason }); };
-            window.removeDonatePrompt = async (userId, username) => { const reason = prompt('Причина снятия:'); if (reason) { const snap = await db.collection('donates').where('userId', '==', userId).get(); for (const doc of snap.docs) await doc.ref.delete(); } };
+            async function giveCoins(nick, amount) {
+                let snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return showToast('Не найден', true);
+                await snap.docs[0].ref.update({ balance: (snap.docs[0].data().balance || 0) + amount });
+                showToast(`✅ Выдано ${amount} ₽`);
+            }
 
-            async function giveCoins(nick, amount) { const snap = await db.collection('users').where('username', '==', nick).get(); if (snap.empty) return showToast('Не найден', true); await snap.docs[0].ref.update({ balance: (snap.docs[0].data().balance || 0) + amount }); showToast(`✅ Выдано ${amount} ₽ ${nick}`, false); }
-            async function giveBadge(nick, type) { const snap = await db.collection('users').where('username', '==', nick).get(); if (snap.empty) return showToast('Не найден', true); await snap.docs[0].ref.update({ badge: type }); showToast(`✅ Галочка выдана ${nick}`, false); if (currentUser && currentUser.uid === snap.docs[0].id) document.getElementById('profileName').innerHTML = snap.docs[0].data().username + getBadgeHtml(type); if (nick === 'GrifMcPro') await loadCreatorBadge(); }
-            async function giveSpin(nick) { const snap = await db.collection('users').where('username', '==', nick).get(); if (snap.empty) return showToast('Не найден', true); const spins = (snap.docs[0].data().wheelSpins || 0) + 1; await snap.docs[0].ref.update({ wheelSpins: spins }); showToast(`✅ Прокрутка выдана ${nick}`, false); }
-            async function giveCoinsAll(amount) { const snap = await db.collection('users').get(); for (const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amount }); showToast(`✅ Выдано ${amount} ₽ всем`, false); }
-            async function loadStats() { const users = await db.collection('users').get(); const container = document.getElementById('statsList'); if (container) container.innerHTML = `<div class="player-card">👥 Всего игроков: ${users.size}</div><div class="player-card">💰 Общий баланс: ${users.docs.reduce((sum, d) => sum + (d.data().balance || 0), 0).toLocaleString()} ₽</div><div class="player-card">🎡 Всего прокруток: ${users.docs.reduce((sum, d) => sum + (d.data().wheelSpins || 0), 0)}</div>`; }
-            
-            async function banUser(userId, username, email, reason, duration, moderator) {
-                const until = duration === 'forever' ? null : new Date(Date.now() + parseInt(duration) * 60 * 60 * 1000);
-                await db.collection('bans').add({ userId, username, email, reason, until, active: true, moderator, createdAt: new Date() });
-                showToast(`✅ ${username} забанен`, false);
-                if (currentUser && currentUser.uid === userId) {
-                    setTimeout(() => auth.signOut(), 3000);
+            async function giveBadge(nick, type) {
+                let snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return;
+                await snap.docs[0].ref.update({ badge: type });
+                showToast(`✅ Галочка выдана`);
+                if (currentUser.uid === snap.docs[0].id) {
+                    document.getElementById('profileName').innerHTML = snap.docs[0].data().username + getBadgeHtml(type);
                 }
             }
 
-            async function unbanUser(email, username, reason, moderator) {
-                const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
-                for (const doc of snap.docs) await doc.ref.update({ active: false });
-                showToast(`✅ ${username} разбанен`, false);
+            async function giveSpin(nick) {
+                let snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return;
+                let spins = (snap.docs[0].data().wheelSpins || 0) + 1;
+                await snap.docs[0].ref.update({ wheelSpins: spins });
+                showToast(`✅ Прокрутка выдана`);
             }
 
-            async function closeSite(reason, hours) {
-                const until = new Date(Date.now() + hours * 60 * 60 * 1000);
-                await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until });
-                showToast(`🔒 Сайт закрыт до ${until.toLocaleString()}`, false);
-                if (currentUser && currentUser.email !== MAIN_ADMIN_EMAIL && !moderatorsList.some(m => m.email === currentUser.email)) {
-                    alert(`🔒 САЙТ ЗАКРЫТ!\n\nПричина: ${reason}\nОткроется: ${until.toLocaleString()}`);
-                    setTimeout(() => { window.location.reload(); }, 1500);
+            async function giveCoinsAll(amount) {
+                let snap = await db.collection('users').get();
+                for (let doc of snap.docs) {
+                    await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
                 }
+                showToast(`✅ Всем выдано ${amount} ₽`);
             }
 
-            async function openSite() {
-                await db.collection('settings').doc('siteStatus').update({ closed: false });
-                showToast('🔓 Сайт открыт', false);
-                setTimeout(() => { window.location.reload(); }, 1500);
-            }
-
-            async function checkBanOnLoad(user) {
-                if (!user) return false;
-                const snap = await db.collection('bans').where('userId', '==', user.uid).where('active', '==', true).get();
-                if (!snap.empty) {
-                    const ban = snap.docs[0].data();
-                    if (ban.until && ban.until.toDate() < new Date()) {
-                        await snap.docs[0].ref.update({ active: false });
-                        return false;
-                    }
-                    showToast(`Вы забанены! Причина: ${ban.reason}`, true);
-                    setTimeout(() => auth.signOut(), 3000);
-                    return true;
-                }
-                return false;
-            }
-
-            async function checkSiteClosedOnLoad(user) {
-                if (!user) return false;
-                const doc = await db.collection('settings').doc('siteStatus').get();
-                if (doc.exists && doc.data().closed) {
-                    const data = doc.data();
-                    if (data.until && data.until.toDate() < new Date()) {
-                        await db.collection('settings').doc('siteStatus').update({ closed: false });
-                        return false;
-                    }
-                    if (user.email !== MAIN_ADMIN_EMAIL && !moderatorsList.some(m => m.email === user.email)) {
-                        alert(`🔒 САЙТ ЗАКРЫТ!\n\nПричина: ${data.reason || 'Технические работы'}\nОткроется: ${data.until ? new Date(data.until.toDate()).toLocaleString() : 'Неизвестно'}`);
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            function listenSiteStatus() {
-                if (siteStatusUnsub) siteStatusUnsub();
-                siteStatusUnsub = db.collection('settings').doc('siteStatus').onSnapshot(async (doc) => {
-                    if (doc.exists && doc.data().closed) {
-                        const data = doc.data();
-                        if (data.until && data.until.toDate() < new Date()) {
-                            await db.collection('settings').doc('siteStatus').update({ closed: false });
-                            return;
-                        }
-                        if (currentUser && currentUser.email !== MAIN_ADMIN_EMAIL && !moderatorsList.some(m => m.email === currentUser.email)) {
-                            alert(`🔒 САЙТ ЗАКРЫТ!\n\nПричина: ${data.reason || 'Технические работы'}\nОткроется: ${data.until ? new Date(data.until.toDate()).toLocaleString() : 'Неизвестно'}`);
-                            setTimeout(() => { window.location.reload(); }, 1000);
-                        }
-                    }
+            async function banUser(nick, reason, duration, mod) {
+                let snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return;
+                let user = snap.docs[0];
+                let until = duration === 'forever' ? null : new Date(Date.now() + parseInt(duration) * 3600000);
+                await db.collection('bans').add({
+                    userId: user.id,
+                    username: nick,
+                    email: user.data().email,
+                    reason: reason,
+                    until: until,
+                    active: true,
+                    moderator: mod
                 });
+                showToast(`✅ ${nick} забанен`);
+                if (currentUser.uid === user.id) setTimeout(() => auth.signOut(), 2000);
             }
 
-            function listenBan(user) {
-                if (banUnsub) banUnsub();
-                if (!user) return;
-                banUnsub = db.collection('bans').where('userId', '==', user.uid).where('active', '==', true).onSnapshot((snap) => {
-                    if (!snap.empty) {
-                        const ban = snap.docs[0].data();
-                        if (ban.until && ban.until.toDate() < new Date()) {
-                            snap.docs[0].ref.update({ active: false });
-                            return;
-                        }
-                        showToast(`Вы забанены! Причина: ${ban.reason}`, true);
-                        setTimeout(() => auth.signOut(), 1000);
-                    }
-                });
+            async function unbanUser(nick, mod) {
+                let snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return;
+                let bans = await db.collection('bans').where('email', '==', snap.docs[0].data().email).where('active', '==', true).get();
+                for (let b of bans.docs) await b.ref.update({ active: false });
+                showToast(`✅ ${nick} разбанен`);
             }
 
-            async function sendBroadcast(message) {
-                const users = await db.collection('users').get();
-                let successCount = 0;
-                for (const userDoc of users.docs) {
+            async function sendBroadcast(msg) {
+                let users = await db.collection('users').get();
+                for (let u of users.docs) {
                     await db.collection('chats').doc('creator').collection('messages').add({
-                        from: "system", fromName: "📢 GrifMcPro", to: userDoc.id,
-                        text: `🔔 НОВОЕ СООБЩЕНИЕ ОТ СОЗДАТЕЛЯ:\n${message}`, timestamp: new Date()
+                        from: "system",
+                        fromName: "📢 GrifMcPro",
+                        to: u.id,
+                        text: `🔔 ${msg}`,
+                        timestamp: new Date()
                     });
-                    successCount++;
                 }
-                showToast(`✅ Рассылка отправлена ${successCount} пользователям!`, false);
+                showToast(`✅ Рассылка отправлена ${users.size} пользователям`);
             }
 
+            // МАГАЗИН
+            const privileges = [
+                { name: "Премиум", price: 1000, icon: "fa-crown" },
+                { name: "Админ", price: 20000, icon: "fa-user-tie" },
+                { name: "Создатель", price: 100000, icon: "fa-crown" }
+            ];
+
+            function renderShop() {
+                document.getElementById('shopGrid').innerHTML = privileges.map(p => `
+                    <div class="product-card">
+                        <div class="product-icon"><i class="fas ${p.icon}"></i></div>
+                        <div class="product-name">${p.name}</div>
+                        <div class="price">${p.price.toLocaleString()} ₽</div>
+                        <button class="buy-btn" onclick="window.openBuyModal('${p.name}',${p.price})">КУПИТЬ</button>
+                    </div>
+                `).join('');
+            }
+
+            window.openBuyModal = (n, p) => {
+                currentProduct = { name: n, price: p };
+                document.getElementById('buyProductName').innerText = n;
+                document.getElementById('buyPrice').innerText = p;
+                document.getElementById('buyModal').style.display = 'flex';
+            };
+
+            async function purchaseProduct(product) {
+                if (currentBalance < product.price) return showToast('Недостаточно средств', true);
+                await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - product.price });
+                await db.collection('donates').add({
+                    userId: currentUser.uid,
+                    product: product.name,
+                    price: product.price
+                });
+                currentBalance -= product.price;
+                document.getElementById('userBalance').innerText = currentBalance;
+                showToast(`✅ Куплено ${product.name}!`);
+            }
+
+            async function orderTestServer() {
+                let price = 5000;
+                if (currentBalance < price) return showToast('Недостаточно средств', true);
+                await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - price });
+                currentBalance -= price;
+                document.getElementById('userBalance').innerText = currentBalance;
+                showToast(`✅ Тест-сервер заказан! Данные отправлены на почту.`);
+            }
+
+            // ПОЛЬЗОВАТЕЛЬ
             async function loadUserData(user) {
                 if (!user) return;
-                const doc = await db.collection('users').doc(user.uid).get();
-                const data = doc.data();
+                let doc = await db.collection('users').doc(user.uid).get();
+                let data = doc.data();
                 if (!data) {
                     await db.collection('users').doc(user.uid).set({
                         username: user.displayName || user.email.split('@')[0],
                         email: user.email,
                         balance: 50000,
                         registeredAt: new Date().toISOString(),
-                        wheelSpins: 1,
                         tag: `#${user.displayName?.substring(0, 4) || 'user'}`,
                         badge: user.email === MAIN_ADMIN_EMAIL ? 'crown' : null
                     });
@@ -961,157 +810,161 @@
                 } else {
                     currentBalance = data.balance || 50000;
                 }
-                document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                const profileNameEl = document.getElementById('profileName');
-                if (profileNameEl) profileNameEl.innerHTML = (data?.username || user.displayName) + getBadgeHtml(data?.badge);
-                document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> ${user.email}</p><p><i class="fas fa-calendar-alt"></i> ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`;
+                document.getElementById('userBalance').innerText = currentBalance;
+                document.getElementById('profileName').innerHTML = (data?.username || user.displayName) + getBadgeHtml(data?.badge);
+                document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> ${user.email}</p>`;
                 document.getElementById('userTag').innerHTML = data?.tag || '#unknown';
-                db.collection('donates').where('userId', '==', user.uid).onSnapshot((snap) => {
-                    const container = document.getElementById('donatesContainer');
-                    if (container) { container.innerHTML = ''; snap.forEach(d => container.innerHTML += `<span class="donate-tag"><i class="fas fa-gift"></i> ${d.data().product}</span>`); if (snap.empty) container.innerHTML = '<span class="donate-tag">Нет покупок</span>'; }
-                });
-                const hasAdminAccess = user.email === MAIN_ADMIN_EMAIL || moderatorsList.some(m => m.email === user.email);
-                if (hasAdminAccess) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
-            }
-
-            // МАГАЗИН
-            const privileges = [
-                { name: "Премиум", price: 1000, icon: "fa-crown" }, { name: "Креатив", price: 2500, icon: "fa-palette" },
-                { name: "Модер", price: 5000, icon: "fa-shield-alt" }, { name: "Лорд", price: 10000, icon: "fa-crown" },
-                { name: "Админ", price: 20000, icon: "fa-user-tie" }, { name: "Гл админ", price: 50000, icon: "fa-user-shield" },
-                { name: "Создатель", price: 100000, icon: "fa-crown" }, { name: "Основатель", price: 150000, icon: "fa-star" },
-                { name: "Владелец", price: 250000, icon: "fa-crown" }, { name: "Консоль", price: 350000, icon: "fa-terminal" },
-                { name: "Цезарь", price: 500000, icon: "fa-crown" }, { name: "Сервер", price: 650000, icon: "fa-server" },
-                { name: "Хелпер", price: 750000, icon: "fa-hand-peace" }, { name: "Хайп", price: 850000, icon: "fa-fire" },
-                { name: "Стафф", price: 900000, icon: "fa-users" }, { name: "Правитель", price: 1000000, icon: "fa-chess-king" }
-            ];
-            function renderShop() {
-                const container = document.getElementById('shopGrid');
-                if (container) container.innerHTML = privileges.map(p => `<div class="product-card"><div class="product-icon"><i class="fas ${p.icon}"></i></div><div class="product-name">${p.name}</div><div class="price">${p.price.toLocaleString()} ₽</div><div class="donate-note">💎 Донат будет выдан на ваш ник в течение 10 минут</div><button class="buy-btn" onclick="window.openBuyModal('${p.name}',${p.price})"><i class="fas fa-shopping-cart"></i> КУПИТЬ</button></div>`).join('');
-            }
-            window.openBuyModal = (n, p) => { currentProduct = { name: n, price: p }; document.getElementById('buyProductName').innerText = n; document.getElementById('buyPrice').innerText = p.toLocaleString(); document.getElementById('buyModal').style.display = 'flex'; };
-
-            async function purchaseProduct(product, serverNick, siteNick) {
-                if (currentBalance < product.price) { showToast('Недостаточно средств', true); return false; }
-                await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - product.price });
-                await db.collection('donates').add({ userId: currentUser.uid, username: currentUser.displayName, product: product.name, price: product.price, date: new Date() });
-                currentBalance -= product.price;
-                document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                showToast(`✅ Куплено ${product.name}!`, false);
-                return true;
-            }
-
-            async function orderTestServer(serverNick, siteNick) {
-                const price = 5000;
-                if (currentBalance < price) { showToast('Недостаточно средств для заказа тест-сервера', true); return false; }
-                await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - price });
-                currentBalance -= price;
-                document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                showToast(`✅ Тест-сервер заказан!`, false);
-                return true;
-            }
-
-            function startBalanceUpdater() {
-                if (balanceInterval) clearInterval(balanceInterval);
-                balanceInterval = setInterval(async () => {
-                    if (currentUser) {
-                        const doc = await db.collection('users').doc(currentUser.uid).get();
-                        if (doc.exists) { currentBalance = doc.data().balance || 50000; document.getElementById('userBalance').innerText = currentBalance.toLocaleString(); }
+                
+                db.collection('donates').where('userId', '==', user.uid).onSnapshot(snap => {
+                    let c = document.getElementById('donatesContainer');
+                    if (c) {
+                        c.innerHTML = '';
+                        snap.forEach(d => c.innerHTML += `<span style="background:rgba(255,215,0,0.15);padding:5px 12px;border-radius:40px;font-size:12px;"><i class="fas fa-gift"></i> ${d.data().product}</span>`);
+                        if (snap.empty) c.innerHTML = '<span style="background:rgba(255,215,0,0.15);padding:5px 12px;border-radius:40px;">Нет покупок</span>';
                     }
-                }, 3000);
+                });
+                
+                if (user.email === MAIN_ADMIN_EMAIL) {
+                    document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
+                }
             }
 
+            async function checkBanOnLoad(user) {
+                if (!user) return false;
+                let snap = await db.collection('bans').where('userId', '==', user.uid).where('active', '==', true).get();
+                if (!snap.empty) {
+                    let ban = snap.docs[0].data();
+                    if (ban.until && ban.until.toDate() < new Date()) {
+                        await snap.docs[0].ref.update({ active: false });
+                        return false;
+                    }
+                    showToast(`❌ Вы забанены! Причина: ${ban.reason}`, true);
+                    setTimeout(() => auth.signOut(), 2000);
+                    return true;
+                }
+                return false;
+            }
+
+            // ОБНОВЛЕНИЕ БАЛАНСА
+            setInterval(async () => {
+                if (currentUser) {
+                    let doc = await db.collection('users').doc(currentUser.uid).get();
+                    if (doc.exists) {
+                        currentBalance = doc.data().balance || 50000;
+                        document.getElementById('userBalance').innerText = currentBalance;
+                    }
+                }
+            }, 3000);
+
+            // КНОПКИ
             function bindButtons() {
-                document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); } catch (e) { showToast(e.message, true); } };
-                document.getElementById('doRegisterBtn').onclick = async () => {
-                    const u = document.getElementById('regUsername').value, e = document.getElementById('regEmail').value, p = document.getElementById('regPass').value;
-                    if (p.length < 6) return showToast('Пароль мин 6', true);
-                    try { const cred = await auth.createUserWithEmailAndPassword(e, p); await cred.user.updateProfile({ displayName: u }); await db.collection('users').doc(cred.user.uid).set({ username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1, tag: `#${u.substring(0,4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null }); showToast('✅ Регистрация успешна!', false); } catch (e) { showToast(e.message, true); }
+                document.getElementById('doLoginBtn').onclick = async () => {
+                    try {
+                        await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value);
+                        document.getElementById('authModal').style.display = 'none';
+                    } catch (e) { showToast(e.message, true); }
                 };
+                
+                document.getElementById('doRegisterBtn').onclick = async () => {
+                    let u = document.getElementById('regUsername').value, e = document.getElementById('regEmail').value, p = document.getElementById('regPass').value;
+                    if (p.length < 6) return showToast('Пароль мин 6', true);
+                    try {
+                        let cred = await auth.createUserWithEmailAndPassword(e, p);
+                        await cred.user.updateProfile({ displayName: u });
+                        await db.collection('users').doc(cred.user.uid).set({
+                            username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(),
+                            tag: `#${u.substring(0,4)}`
+                        });
+                        showToast('✅ Регистрация успешна!');
+                    } catch (e) { showToast(e.message, true); }
+                };
+                
                 document.getElementById('logoutBtn').onclick = () => auth.signOut();
-                document.getElementById('closeBuyModal').onclick = () => document.getElementById('buyModal').style.display = 'none';
-                document.getElementById('closeTestModal').onclick = () => document.getElementById('testServerModal').style.display = 'none';
-                document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
-                document.getElementById('closeTagModal').onclick = () => document.getElementById('editTagModal').style.display = 'none';
-                document.getElementById('closePasswordModal').onclick = () => document.getElementById('changePasswordModal').style.display = 'none';
-                document.getElementById('confirmBuyBtn').onclick = async () => { const serverNick = document.getElementById('buyNick').value.trim(), siteNick = document.getElementById('buySiteNick').value.trim(); if (!serverNick || !siteNick) return showToast('Заполните оба поля', true); await purchaseProduct(currentProduct, serverNick, siteNick); document.getElementById('buyModal').style.display = 'none'; loadUserData(currentUser); };
-                document.getElementById('testServerBtn').onclick = () => { document.getElementById('testServerModal').style.display = 'flex'; };
-                document.getElementById('confirmTestBtn').onclick = async () => { const serverNick = document.getElementById('testNick').value.trim(), siteNick = document.getElementById('testSiteNick').value.trim(); if (!serverNick || !siteNick) return showToast('Заполните оба поля', true); await orderTestServer(serverNick, siteNick); document.getElementById('testServerModal').style.display = 'none'; loadUserData(currentUser); };
+                document.getElementById('confirmBuyBtn').onclick = async () => { await purchaseProduct(currentProduct); document.getElementById('buyModal').style.display = 'none'; };
+                document.getElementById('testServerBtn').onclick = async () => { await orderTestServer(); };
                 document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
-                document.getElementById('editTagBtn').onclick = () => document.getElementById('editTagModal').style.display = 'flex';
-                document.getElementById('saveNameBtn').onclick = async () => { const newName = document.getElementById('newNameInput').value; if (newName) { await db.collection('users').doc(currentUser.uid).update({ username: newName }); await currentUser.updateProfile({ displayName: newName }); showToast('Имя изменено!', false); document.getElementById('editNameModal').style.display = 'none'; loadUserData(currentUser); } };
-                document.getElementById('saveTagBtn').onclick = async () => { const newTag = document.getElementById('newTagInput').value; if (newTag) { await db.collection('users').doc(currentUser.uid).update({ tag: newTag }); showToast('Тег изменён!', false); document.getElementById('editTagModal').style.display = 'none'; document.getElementById('userTag').innerHTML = newTag; } };
+                document.getElementById('saveNameBtn').onclick = async () => {
+                    let newName = document.getElementById('newNameInput').value;
+                    if (newName) {
+                        await db.collection('users').doc(currentUser.uid).update({ username: newName });
+                        await currentUser.updateProfile({ displayName: newName });
+                        showToast('Имя изменено!');
+                        document.getElementById('editNameModal').style.display = 'none';
+                        loadUserData(currentUser);
+                    }
+                };
                 document.getElementById('changePasswordBtn').onclick = () => document.getElementById('changePasswordModal').style.display = 'flex';
-                document.getElementById('savePasswordBtn').onclick = async () => { try { const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, document.getElementById('oldPasswordInput').value); await currentUser.reauthenticateWithCredential(cred); await currentUser.updatePassword(document.getElementById('newPasswordInput').value); showToast('Пароль изменён!', false); document.getElementById('changePasswordModal').style.display = 'none'; } catch (e) { showToast('Неверный пароль', true); } };
-                document.getElementById('checkAdminPasswordBtn').onclick = () => { if (document.getElementById('adminPassword').value === 'website') { document.getElementById('adminLoginPanel').style.display = 'none'; document.getElementById('adminPanelContent').style.display = 'block'; loadRecentUsers(); loadModerators(); loadStats(); } else { showToast('❌ Неверный ключ!', true); } };
-                document.getElementById('addModeratorBtn').onclick = async () => { const nick = document.getElementById('moderatorNick').value; const snap = await db.collection('users').where('username', '==', nick).get(); if (snap.empty) return showToast('Не найден', true); const data = snap.docs[0].data(); if (moderatorsList.some(m => m.email === data.email)) return showToast('Уже есть', true); moderatorsList.push({ nick: data.username, email: data.email }); await db.collection('settings').doc('moderators').set({ list: moderatorsList }); loadModerators(); showToast(`Модератор ${nick} добавлен`, false); };
+                document.getElementById('savePasswordBtn').onclick = async () => {
+                    try {
+                        let cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, document.getElementById('oldPasswordInput').value);
+                        await currentUser.reauthenticateWithCredential(cred);
+                        await currentUser.updatePassword(document.getElementById('newPasswordInput').value);
+                        showToast('Пароль изменён!');
+                        document.getElementById('changePasswordModal').style.display = 'none';
+                    } catch (e) { showToast('Неверный пароль', true); }
+                };
+                document.getElementById('checkAdminPasswordBtn').onclick = () => {
+                    if (document.getElementById('adminPassword').value === 'website') {
+                        document.getElementById('adminLoginPanel').style.display = 'none';
+                        document.getElementById('adminPanelContent').style.display = 'block';
+                        loadRecentUsers();
+                        loadModerators();
+                        loadStats();
+                    } else showToast('❌ Неверный ключ!', true);
+                };
+                document.getElementById('addModeratorBtn').onclick = async () => {
+                    let nick = document.getElementById('moderatorNick').value;
+                    let snap = await db.collection('users').where('username', '==', nick).get();
+                    if (snap.empty) return showToast('Не найден', true);
+                    let data = snap.docs[0].data();
+                    if (moderatorsList.some(m => m.email === data.email)) return showToast('Уже есть', true);
+                    moderatorsList.push({ nick: data.username, email: data.email });
+                    await db.collection('settings').doc('moderators').set({ list: moderatorsList });
+                    loadModerators();
+                    showToast(`Модератор ${nick} добавлен`);
+                };
                 document.getElementById('giveBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, document.getElementById('badgeType').value);
                 document.getElementById('removeBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, null);
                 document.getElementById('giveCoinsBtn').onclick = () => giveCoins(document.getElementById('giveNick').value, parseInt(document.getElementById('giveAmount').value));
-                document.getElementById('globalGiveBtn').onclick = () => { const amt = parseInt(prompt('Сумма для всех:')); if (amt) giveCoinsAll(amt); };
+                document.getElementById('globalGiveBtn').onclick = () => { let amt = parseInt(prompt('Сумма для всех:')); if (amt) giveCoinsAll(amt); };
                 document.getElementById('giveSpinBtn').onclick = () => giveSpin(document.getElementById('wheelUserNick').value);
-                document.getElementById('closeSiteBtn').onclick = () => closeSite(document.getElementById('closeReason').value, parseInt(document.getElementById('closeDuration').value));
-                document.getElementById('openSiteBtn').onclick = openSite;
-                document.getElementById('sendBroadcastBtn').onclick = () => { const msg = document.getElementById('broadcastMsg').value; if (msg) sendBroadcast(msg); else showToast('Введите текст сообщения', true); };
-                document.getElementById('banUserBtn').onclick = () => { const nick = document.getElementById('banNick').value, reason = document.getElementById('banReason').value, duration = document.getElementById('banDuration').value, mod = document.getElementById('moderatorName').value; if (nick && reason && mod) banUserByNick(nick, reason, duration, mod); else showToast('Заполните все поля', true); };
-                document.getElementById('unbanUserBtn').onclick = () => { const nick = document.getElementById('banNick').value, mod = document.getElementById('moderatorName').value; if (nick && mod) unbanUserByNick(nick, mod); else showToast('Введите ник и модератора', true); };
-                async function banUserByNick(nick, reason, duration, moderator) { const snap = await db.collection('users').where('username', '==', nick).get(); if (snap.empty) return showToast('Не найден', true); const user = snap.docs[0]; banUser(user.id, nick, user.data().email, reason, duration, moderator); }
-                async function unbanUserByNick(nick, moderator) { const snap = await db.collection('users').where('username', '==', nick).get(); if (snap.empty) return showToast('Не найден', true); unbanUser(snap.docs[0].data().email, nick, 'Разбан по запросу', moderator); }
+                document.getElementById('banUserBtn').onclick = () => banUser(document.getElementById('banNick').value, document.getElementById('banReason').value, document.getElementById('banDuration').value, document.getElementById('moderatorName').value);
+                document.getElementById('unbanUserBtn').onclick = () => unbanUser(document.getElementById('banNick').value, document.getElementById('moderatorName').value);
+                document.getElementById('sendBroadcastBtn').onclick = () => sendBroadcast(document.getElementById('broadcastMsg').value);
                 document.getElementById('sendCreatorMsgBtn').onclick = () => sendCreatorMessage(document.getElementById('creatorMessageInput').value);
-                document.getElementById('sendReplyBtn').onclick = () => sendReplyToUser(document.getElementById('replyMessageInput').value);
-                document.getElementById('updateTimerBtn').onclick = async () => {
-                    const name = document.getElementById('timerEventName').value;
-                    const desc = document.getElementById('timerEventDesc').value;
-                    const date = document.getElementById('timerTargetDate').value;
-                    if (!date) return showToast('Выберите дату', true);
-                    await updateTimer(name, desc, date);
-                };
-                document.getElementById('applyTimerRgbText').onclick = () => {
-                    document.getElementById('eventTitle').classList.add('rgb-text-animation');
-                    showToast('✨ RGB текст включён!', false);
-                };
-                document.getElementById('applyTimerRgbBorder').onclick = () => {
-                    document.querySelectorAll('.countdown-block').forEach(b => b.classList.add('rgb-border-animation'));
-                    showToast('✨ RGB рамка включена!', false);
-                };
+                document.getElementById('updateTimerBtn').onclick = () => updateTimer(document.getElementById('timerEventName').value, document.getElementById('timerEventDesc').value, document.getElementById('timerTargetDate').value);
+                document.getElementById('applyTimerRgbText').onclick = () => { document.getElementById('eventTitle').classList.add('rgb-text-animation'); showToast('✨ RGB текст включён!'); };
+                document.getElementById('applyTimerRgbBorder').onclick = () => { document.querySelectorAll('.countdown-block').forEach(b => b.classList.add('rgb-border-animation')); showToast('✨ RGB рамка включена!'); };
+                
                 document.querySelectorAll('.tab-auth').forEach(btn => {
                     btn.onclick = () => {
                         document.querySelectorAll('.tab-auth').forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
-                        const isLogin = btn.dataset.tab === 'login';
+                        let isLogin = btn.dataset.tab === 'login';
                         document.getElementById('loginPaneAuth').classList.toggle('active', isLogin);
                         document.getElementById('registerPaneAuth').classList.toggle('active', !isLogin);
                     };
                 });
             }
 
+            // AUTH
             auth.onAuthStateChanged(async (user) => {
                 if (user) {
                     currentUser = user;
-                    await loadModerators();
-                    const isBanned = await checkBanOnLoad(user);
-                    if (isBanned) { auth.signOut(); return; }
-                    const isClosed = await checkSiteClosedOnLoad(user);
-                    if (isClosed) { auth.signOut(); return; }
+                    let banned = await checkBanOnLoad(user);
+                    if (banned) { auth.signOut(); return; }
                     await loadUserData(user);
                     renderShop();
                     renderMenu();
                     loadTimer();
-                    listenSiteStatus();
-                    listenBan(user);
-                    startBalanceUpdater();
                     bindButtons();
                     document.getElementById('authModal').style.display = 'none';
                     if (user.email === MAIN_ADMIN_EMAIL) {
-                        loadMessagesUsers();
+                        loadMessagesPage();
                     } else {
                         loadCreatorMessages();
-                        loadCreatorBadge();
                     }
                 } else {
-                    if (balanceInterval) clearInterval(balanceInterval);
-                    if (siteStatusUnsub) siteStatusUnsub();
-                    if (banUnsub) banUnsub();
                     document.getElementById('authModal').style.display = 'flex';
                     bindButtons();
                 }
