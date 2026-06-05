@@ -110,9 +110,25 @@
         .donates-list { margin: 20px 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
         .donate-tag { background: rgba(255,215,0,0.12); padding: 6px 14px; border-radius: 40px; font-size: 12px; }
 
-        /* ===== КРАСИВЫЕ ГАЛОЧКИ (как в старом коде) ===== */
-        .badge-icon { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; margin-left: 6px; vertical-align: middle; }
-        .badge-icon i { font-size: 11px; color: white; }
+        /* ===== КРАСИВЫЕ ГАЛОЧКИ ===== */
+        .badge-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            margin-left: 8px;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+        .badge-icon i { font-size: 12px; color: white; }
+        
+        /* Синяя галочка верификации */
+        .badge-verified { background: #3b82f6; }
+        .badge-verified i { color: white; }
+        
+        /* Остальные галочки */
         .badge-blue { background: #3b82f6; }
         .badge-red { background: #ef4444; }
         .badge-gold { background: #ffd700; }
@@ -315,7 +331,7 @@
     <div id="cat-site" class="admin-category"><div class="admin-block"><h3><i class="fas fa-globe"></i> Управление сайтом</h3><textarea id="closeReason" rows="2" placeholder="Причина закрытия" class="admin-input"></textarea><select id="closeDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="24">1 день</option><option value="168">7 дней</option></select><button id="closeSiteBtn" class="admin-btn-red">ЗАКРЫТЬ САЙТ</button><button id="openSiteBtn" class="admin-btn-green">ОТКРЫТЬ САЙТ</button></div></div>
     <div id="cat-donates" class="admin-category"><div class="admin-block"><h3><i class="fas fa-gift"></i> Выдать донат по нику</h3><input type="text" id="donateNick" placeholder="Никнейм" class="admin-input"><input type="text" id="donateName" placeholder="Название доната" class="admin-input"><button id="giveDonateBtn" class="admin-btn-blue">ВЫДАТЬ ДОНАТ</button><button id="removeDonateBtn" class="admin-btn-red">СНЯТЬ ДОНАТ</button></div></div>
     <div id="cat-timer" class="admin-category"><div class="admin-block"><h3><i class="fas fa-clock"></i> Настройка таймера</h3><input type="text" id="timerEventName" placeholder="Название события" class="admin-input"><textarea id="timerEventDesc" rows="2" placeholder="Описание" class="admin-input"></textarea><input type="datetime-local" id="timerTargetDate" class="admin-input"><div style="display: flex; gap: 10px;"><button id="applyTimerRgbText" class="admin-btn-blue">RGB Текст</button><button id="applyTimerRgbBorder" class="admin-btn-pink">RGB Рамка</button></div><button id="updateTimerBtn" class="admin-btn-green">СОХРАНИТЬ</button></div></div>
-    <div id="cat-badges" class="admin-category"><div class="admin-block"><h3><i class="fas fa-tags"></i> Галочки (30 видов)</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option><option value="diamond">💎 Алмазная</option><option value="star">⭐ Звездная</option><option value="game">🎮 Игровая</option><option value="fire">🔥 Огненная</option><option value="mythic">🔮 Мифическая</option><option value="cosmic">🌌 Космическая</option><option value="ice">❄️ Ледяная</option><option value="shadow">🌑 Теневая</option><option value="light">✨ Светлая</option><option value="dark">🖤 Тёмная</option><option value="nature">🌿 Природная</option><option value="blood">🩸 Кровавая</option><option value="void">🌀 Пустота</option><option value="divine">⚜️ Божественная</option><option value="purple">🟣 Фиолетовая</option><option value="teal">🔷 Бирюзовая</option><option value="sapphire">💙 Сапфировая</option><option value="emerald">💚 Изумрудная</option><option value="ruby">❤️ Рубиновая</option><option value="amber">🧡 Янтарная</option><option value="jade">💚 Нефритовая</option><option value="coral">🪸 Коралловая</option><option value="indigo">🟣 Индиго</option><option value="magenta">🩷 Магента</option><option value="bronze">🥉 Бронзовая</option><option value="platinum">⚪ Платиновая</option><option value="obsidian">⬛ Обсидиановая</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div></div>
+    <div id="cat-badges" class="admin-category"><div class="admin-block"><h3><i class="fas fa-tags"></i> Галочки (30 видов)</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="verified">🔵 Верификация</option><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option><option value="diamond">💎 Алмазная</option><option value="star">⭐ Звездная</option><option value="game">🎮 Игровая</option><option value="fire">🔥 Огненная</option><option value="mythic">🔮 Мифическая</option><option value="cosmic">🌌 Космическая</option><option value="ice">❄️ Ледяная</option><option value="shadow">🌑 Теневая</option><option value="light">✨ Светлая</option><option value="dark">🖤 Тёмная</option><option value="nature">🌿 Природная</option><option value="blood">🩸 Кровавая</option><option value="void">🌀 Пустота</option><option value="divine">⚜️ Божественная</option><option value="purple">🟣 Фиолетовая</option><option value="teal">🔷 Бирюзовая</option><option value="sapphire">💙 Сапфировая</option><option value="emerald">💚 Изумрудная</option><option value="ruby">❤️ Рубиновая</option><option value="amber">🧡 Янтарная</option><option value="jade">💚 Нефритовая</option><option value="coral">🪸 Коралловая</option><option value="indigo">🟣 Индиго</option><option value="magenta">🩷 Магента</option><option value="bronze">🥉 Бронзовая</option><option value="platinum">⚪ Платиновая</option><option value="obsidian">⬛ Обсидиановая</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div></div>
     <div id="cat-spins" class="admin-category"><div class="admin-block"><h3><i class="fas fa-dice-d6"></i> Прокрутки колеса</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">ВЫДАТЬ</button></div></div>
     <div id="cat-purchases" class="admin-category"><div class="admin-block"><h3><i class="fas fa-shopping-cart"></i> ЛОГИ ПОКУПОК</h3><div id="purchasesList" class="players-list" style="max-height: 400px;"></div><button id="clearPurchasesBtn" class="admin-btn-red">ОЧИСТИТЬ ЛОГИ</button></div></div>
     </div></div></div>
@@ -357,11 +373,12 @@
                 setTimeout(() => { notif.style.animation = 'slideOutLeft 0.3s ease'; setTimeout(() => notif.remove(), 300); }, 4000);
             }
 
-            // ===== КРАСИВЫЕ ГАЛОЧКИ (иконки Font Awesome, как в старом коде) =====
+            // ===== КРАСИВЫЕ ГАЛОЧКИ С ИКОНКАМИ =====
             function getBadgeHtml(type) {
                 if (!type) return '';
                 
                 const badgeConfig = {
+                    verified: { bg: 'badge-verified', icon: 'fa-check-circle' },
                     blue: { bg: 'badge-blue', icon: 'fa-check' },
                     red: { bg: 'badge-red', icon: 'fa-check' },
                     gold: { bg: 'badge-gold', icon: 'fa-check' },
@@ -669,7 +686,7 @@
                 if (currentUser) { currentBalance += amount; document.getElementById('userBalance').innerText = currentBalance; }
             }
 
-            // ===== ВЫДАЧА ГАЛОЧКИ С РЕАЛЬНЫМ ВРЕМЕНЕМ =====
+            // ВЫДАЧА ГАЛОЧКИ (можно выдать ЛЮБОМУ пользователю)
             async function giveBadge(nick, type) {
                 const snap = await db.collection('users').where('username', '==', nick).get();
                 if (snap.empty) return showNotification('Не найден', 'error');
@@ -692,7 +709,7 @@
                     if (doc.exists && currentUser) {
                         const data = doc.data();
                         const badgeHtml = getBadgeHtml(data?.badge);
-                        document.getElementById('profileName').innerHTML = (data?.username || currentUser.displayName) + badgeHtml;
+                        document.getElementById('profileName').innerHTML = (data?.username || currentUser.displayName) + ' ' + badgeHtml;
                     }
                 });
             }
@@ -791,11 +808,10 @@
                 const doc = await db.collection('users').doc(user.uid).get();
                 let data = doc.data();
                 if (!data) {
-                    await db.collection('users').doc(user.uid).set({ username: user.displayName || user.email.split('@')[0], email: user.email, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1, tag: `#${user.displayName?.substring(0,4) || 'user'}`, badge: user.email === MAIN_ADMIN_EMAIL ? 'crown' : null });
+                    await db.collection('users').doc(user.uid).set({ username: user.displayName || user.email.split('@')[0], email: user.email, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1, tag: `#${user.displayName?.substring(0,4) || 'user'}`, badge: user.email === MAIN_ADMIN_EMAIL ? 'verified' : null });
                     currentBalance = 50000;
                 } else { currentBalance = data.balance || 50000; }
                 document.getElementById('userBalance').innerText = currentBalance;
-                // ГАЛОЧКА ОТОБРАЗИТСЯ ЧЕРЕЗ listenUserBadge
                 document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> ${user.email}</p><p><i class="fas fa-calendar-alt"></i> ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`;
                 document.getElementById('userTag').innerHTML = data?.tag || '#user';
                 db.collection('donates').where('userId', '==', user.uid).onSnapshot(snap => { const c = document.getElementById('donatesContainer'); if (c) { c.innerHTML = ''; snap.forEach(d => c.innerHTML += `<span class="donate-tag"><i class="fas fa-gift"></i> ${d.data().product}</span>`); if (snap.empty) c.innerHTML = '<span class="donate-tag">Нет покупок</span>'; } });
@@ -845,7 +861,7 @@
 
             function bindButtons() {
                 document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); showNotification('Добро пожаловать!', 'success'); } catch (e) { showNotification(e.message, 'error'); } };
-                document.getElementById('doRegisterBtn').onclick = async () => { const u = document.getElementById('regUsername').value, e = document.getElementById('regEmail').value, p = document.getElementById('regPass').value; if (p.length < 6) return showNotification('Пароль мин 6', 'error'); try { const cred = await auth.createUserWithEmailAndPassword(e, p); await cred.user.updateProfile({ displayName: u }); await db.collection('users').doc(cred.user.uid).set({ username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1, tag: `#${u.substring(0,4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null }); showNotification('Регистрация успешна!', 'success'); } catch (e) { showNotification(e.message, 'error'); } };
+                document.getElementById('doRegisterBtn').onclick = async () => { const u = document.getElementById('regUsername').value, e = document.getElementById('regEmail').value, p = document.getElementById('regPass').value; if (p.length < 6) return showNotification('Пароль мин 6', 'error'); try { const cred = await auth.createUserWithEmailAndPassword(e, p); await cred.user.updateProfile({ displayName: u }); await db.collection('users').doc(cred.user.uid).set({ username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1, tag: `#${u.substring(0,4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'verified' : null }); showNotification('Регистрация успешна!', 'success'); } catch (e) { showNotification(e.message, 'error'); } };
                 document.getElementById('logoutBtn').onclick = () => auth.signOut();
                 document.getElementById('closeBuyModal').onclick = () => document.getElementById('buyModal').style.display = 'none';
                 document.getElementById('closeTestModal').onclick = () => document.getElementById('testServerModal').style.display = 'none';
@@ -893,7 +909,7 @@
                     loadTimerRealtime();
                     listenSiteStatus();
                     listenBan(user);
-                    listenUserBadge(user); // РЕАЛЬНОЕ ВРЕМЯ ДЛЯ ГАЛОЧЕК
+                    listenUserBadge(user);
                     startBalanceUpdater();
                     bindButtons();
                     initSecretAdmin();
