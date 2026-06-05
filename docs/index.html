@@ -95,7 +95,6 @@
         .buy-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 14px; border-radius: 40px; font-weight: 700; cursor: pointer; width: 100%; color: #0a0a12; transition: 0.1s; font-size: 16px; margin-top: 10px; }
         .buy-btn:active { transform: scale(0.98); }
 
-        /* ===== КРАСИВЫЙ ПРОФИЛЬ ===== */
         .profile-section { max-width: 700px; margin: 0 auto; padding: 20px; }
         .profile-card {
             background: linear-gradient(135deg, rgba(20,20,35,0.9), rgba(10,10,25,0.95));
@@ -157,7 +156,7 @@
         .donate-tag { background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05)); padding: 6px 14px; border-radius: 40px; font-size: 12px; border: 1px solid rgba(255,215,0,0.2); }
         .donate-tag i { margin-right: 6px; color: var(--accent); }
 
-        /* ===== 30 КРАСИВЫХ АНИМИРОВАННЫХ ГАЛОЧЕК (из твоего старого кода) ===== */
+        /* ===== 30 ГАЛОЧЕК - ИДЕАЛЬНО ПО ЦЕНТРУ ===== */
         .badge-icon {
             display: inline-flex;
             align-items: center;
@@ -168,16 +167,29 @@
             margin-left: 4px;
             vertical-align: middle;
             flex-shrink: 0;
+            text-align: center;
+            line-height: 1;
         }
-        .badge-icon i { font-size: 10px; color: white; }
+        .badge-icon i {
+            font-size: 10px;
+            color: white;
+            display: inline-block;
+            margin: 0 auto;
+            padding: 0;
+            line-height: 1;
+            vertical-align: middle;
+            position: relative;
+            top: 0;
+            left: 0;
+        }
         .badge-blue { background: #3b82f6; box-shadow: 0 0 5px #3b82f6; }
         .badge-red { background: #ef4444; box-shadow: 0 0 5px #ef4444; }
         .badge-gold { background: #ffd700; box-shadow: 0 0 5px #ffd700; }
         .badge-gold i { color: #1a1a1a; }
         .badge-rainbow { background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); background-size: 200% 200%; animation: rainbowRotate 2s ease infinite; }
         .badge-rgb { background: #1a1a2a; border: 2px solid; animation: rgbBorderAnim 3s infinite; }
-        .badge-crown { background: none; width: auto; border-radius: 0; }
-        .badge-crown i { color: #ffd700; font-size: 14px; }
+        .badge-crown { background: linear-gradient(135deg, #7c3aed, #a855f7); width: auto; border-radius: 20px; padding: 2px 10px; animation: pulse 1.5s infinite; }
+        .badge-crown i { color: #ffd700; font-size: 11px; }
         .badge-diamond { background: linear-gradient(135deg, #00ffff, #0088ff); box-shadow: 0 0 5px #00ffff; }
         .badge-star { background: linear-gradient(135deg, #ffd700, #ff8800); box-shadow: 0 0 5px #ffd700; }
         .badge-game { background: linear-gradient(135deg, #ff00ff, #8800ff); box-shadow: 0 0 5px #ff00ff; }
@@ -416,13 +428,12 @@
                 setTimeout(() => { notif.style.animation = 'slideOutLeft 0.3s ease'; setTimeout(() => notif.remove(), 300); }, 4000);
             }
 
-            // ГАЛОЧКИ (из старого кода)
             function getBadgeHtml(type) {
                 if (!type) return '';
                 const icons = {
                     blue: 'fa-check', red: 'fa-check', gold: 'fa-check', rainbow: 'fa-check', rgb: 'fa-check',
                     crown: 'fa-crown', diamond: 'fa-gem', star: 'fa-star', game: 'fa-gamepad', fire: 'fa-fire',
-                    mythic: 'fa-moon', cosmic: 'fa-globe', ice: 'fa-snowflake', shadow: 'fa-moon', light: 'fa-sun',
+                    mythic: 'fa-dragon', cosmic: 'fa-globe', ice: 'fa-snowflake', shadow: 'fa-moon', light: 'fa-sun',
                     dark: 'fa-moon', nature: 'fa-leaf', blood: 'fa-droplet', void: 'fa-circle', divine: 'fa-feather',
                     purple: 'fa-check', teal: 'fa-check', sapphire: 'fa-gem', emerald: 'fa-leaf', ruby: 'fa-gem',
                     amber: 'fa-sun', jade: 'fa-leaf', coral: 'fa-fish', indigo: 'fa-moon', magenta: 'fa-heart',
@@ -451,7 +462,6 @@
                 if (currentUser?.email === MAIN_ADMIN_EMAIL) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
             }
 
-            // ЛОГИ ПОКУПОК
             async function addPurchaseLog(type, productName, price, serverNick, siteNick, userEmail) {
                 await db.collection('purchases').add({ type, product: productName, price, serverNick, siteNick, userEmail, date: new Date().toISOString(), timestamp: new Date() });
                 if (document.getElementById('cat-purchases')?.classList.contains('active')) loadPurchases();
@@ -478,7 +488,6 @@
                 loadPurchases();
             }
 
-            // ТАЙМЕР
             function startTimer(targetDate, eventName, eventDesc) {
                 if (timerInterval) clearInterval(timerInterval);
                 document.getElementById('eventTitle').innerText = eventName || 'ДО ОТКРЫТИЯ СЕЗОНА';
@@ -517,7 +526,6 @@
                 showNotification('Таймер обновлён!', 'success');
             }
 
-            // БАН
             function showBanModal(reason, untilDate, moderator, banDate) {
                 document.getElementById('banModeratorSpan').innerText = moderator || 'Система';
                 document.getElementById('banReasonSpan').innerText = reason;
@@ -571,7 +579,6 @@
                 });
             }
 
-            // ЗАКРЫТИЕ САЙТА
             async function closeSite(reason, hours) {
                 const until = new Date(Date.now() + hours * 3600000);
                 await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until });
@@ -632,7 +639,6 @@
                 });
             }
 
-            // РАССЫЛКА
             async function sendBroadcast(message) {
                 const users = await db.collection('users').get();
                 const adminDoc = await db.collection('users').doc(currentUser.uid).get();
@@ -652,7 +658,6 @@
                 showNotification(`Рассылка отправлена ${users.size-1} пользователям!`, 'success');
             }
 
-            // АДМИН ФУНКЦИИ
             async function loadModerators() {
                 const doc = await db.collection('settings').doc('moderators').get();
                 moderatorsList = doc.exists ? doc.data().list || [] : [];
@@ -740,7 +745,6 @@
                 showNotification(`Все донаты ${nick} удалены`, 'warning');
             }
 
-            // МАГАЗИН
             const privileges = [
                 { name: "Премиум", price: 1000 }, { name: "Креатив", price: 2500 }, { name: "Модер", price: 5000 },
                 { name: "Лорд", price: 10000 }, { name: "Админ", price: 20000 }, { name: "Гл админ", price: 50000 },
@@ -901,7 +905,6 @@
                 document.getElementById('changePasswordBtn').onclick = () => document.getElementById('changePasswordModal').style.display = 'flex';
                 document.getElementById('savePasswordBtn').onclick = async () => { try { const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, document.getElementById('oldPasswordInput').value); await currentUser.reauthenticateWithCredential(cred); await currentUser.updatePassword(document.getElementById('newPasswordInput').value); showNotification('Пароль изменён!', 'success'); document.getElementById('changePasswordModal').style.display = 'none'; } catch (e) { showNotification('Неверный старый пароль', 'error'); } };
                 
-                // АДМИН КНОПКИ
                 document.getElementById('giveCoinsBtn').onclick = () => giveCoins(document.getElementById('giveNick').value, parseInt(document.getElementById('giveAmount').value));
                 document.getElementById('globalGiveBtn').onclick = () => { const amt = parseInt(prompt('Сумма для всех:')); if (amt) giveCoinsAll(amt); };
                 document.getElementById('sendBroadcastBtn').onclick = () => { const msg = document.getElementById('broadcastMsg').value; if (msg) sendBroadcast(msg); else showNotification('Введите текст', 'error'); };
