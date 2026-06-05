@@ -376,132 +376,77 @@
         .punishment-highlight { background: rgba(255,215,0,0.15); border-radius: 16px; padding: 20px; margin: 20px 0; text-align: center; }
         .punishment-highlight i { font-size: 50px; color: var(--accent); margin-bottom: 10px; }
 
-        /* СТИЛИ ДЛЯ СТРАНИЦЫ ОБЖАЛОВАНИЙ - ФОРУМ */
+        /* СТИЛИ ДЛЯ СТРАНИЦЫ ОБРАЩЕНИЙ */
         .appeals-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .appeals-header { text-align: center; margin-bottom: 40px; }
         .appeals-header h1 { font-family: 'Orbitron', monospace; font-size: 48px; background: linear-gradient(135deg, #fff, var(--accent), var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; animation: rgbTextAnim 3s infinite; }
         
-        .create-topic-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 12px 30px; border-radius: 40px; font-weight: 700; cursor: pointer; color: #0a0a12; transition: 0.3s; margin-bottom: 25px; font-size: 16px; }
-        .create-topic-btn:hover { transform: scale(1.05); box-shadow: var(--shadow-glow); }
-        
-        .topics-list { display: flex; flex-direction: column; gap: 20px; }
-        .topic-card { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: 28px; padding: 20px 25px; border: 1px solid var(--border-color); transition: 0.3s; cursor: pointer; }
-        .topic-card:hover { border-color: var(--accent); box-shadow: var(--shadow-glow); transform: translateX(5px); }
-        .topic-pinned { border-left: 5px solid var(--accent); background: rgba(255,215,0,0.05); }
-        .topic-title { font-size: 22px; font-weight: 700; color: var(--accent); margin-bottom: 10px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-        .topic-info { display: flex; gap: 20px; font-size: 13px; color: var(--text-muted); }
-        .topic-info i { margin-right: 5px; }
-        .pinned-badge { background: var(--accent); color: #0a0a12; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
-        
-        .topic-view { display: none; margin-top: 20px; }
-        .topic-view.active { display: block; }
-        .back-btn { background: rgba(255,215,0,0.15); border: 1px solid var(--border-color); padding: 10px 25px; border-radius: 40px; cursor: pointer; margin-bottom: 20px; color: var(--text-primary); transition: 0.3s; }
-        .back-btn:hover { background: rgba(255,215,0,0.3); }
-        
-        .forum-messages { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; max-height: 550px; overflow-y: auto; padding: 5px; }
-        .forum-post {
-            background: rgba(15,15,25,0.8);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: 0.2s;
+        .appeal-form {
+            background: var(--bg-surface);
+            backdrop-filter: blur(16px);
+            border-radius: 28px;
+            padding: 30px;
+            margin-bottom: 40px;
             border: 1px solid var(--border-color);
         }
-        .forum-post:hover { border-color: var(--accent); }
-        .post-header {
-            background: rgba(0,0,0,0.4);
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .post-author {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .post-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-        .post-author-name {
-            font-weight: 700;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .post-badge {
-            font-size: 11px;
-            background: rgba(255,215,0,0.2);
-            padding: 2px 8px;
-            border-radius: 20px;
-            color: var(--accent);
-        }
-        .post-date { font-size: 11px; color: var(--text-muted); }
-        .post-actions { display: flex; gap: 15px; }
-        .reply-to-btn {
-            background: none;
-            border: none;
-            color: var(--accent);
-            cursor: pointer;
-            font-size: 13px;
-            transition: 0.2s;
-            padding: 5px 10px;
-            border-radius: 20px;
-        }
-        .reply-to-btn:hover { background: rgba(255,215,0,0.15); transform: scale(1.02); }
-        .post-content { padding: 20px; color: var(--text-secondary); line-height: 1.5; }
-        .first-post { border-left: 4px solid var(--accent); }
-        .admin-post { background: rgba(139,92,246,0.08); border-left: 4px solid var(--purple); }
-        
-        .reply-area {
-            background: rgba(0,0,0,0.3);
-            border-radius: 20px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-        .reply-area textarea {
+        .appeal-form h2 { margin-bottom: 20px; color: var(--accent); }
+        .appeal-form input, .appeal-form select, .appeal-form textarea {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
+            margin: 10px 0;
             background: rgba(0,0,0,0.5);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
+            border-radius: 40px;
             color: white;
             outline: none;
             font-size: 14px;
-            resize: vertical;
-            margin-bottom: 15px;
-            font-family: inherit;
         }
-        .reply-area textarea:focus { border-color: var(--accent); }
-        .reply-btn {
+        .appeal-form textarea { border-radius: 20px; resize: vertical; }
+        .appeal-form input:focus, .appeal-form select:focus, .appeal-form textarea:focus { border-color: var(--accent); }
+        .submit-appeal-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             border: none;
-            padding: 12px 30px;
+            padding: 14px 30px;
             border-radius: 40px;
             font-weight: 700;
             cursor: pointer;
             color: #0a0a12;
             transition: 0.3s;
-            font-size: 14px;
+            font-size: 16px;
+            margin-top: 10px;
         }
-        .reply-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
+        .submit-appeal-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
         
-        .new-topic-modal, .appeal-modal-class { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); backdrop-filter: blur(20px); justify-content: center; align-items: center; z-index: 2000; }
-        .new-topic-modal .modal-content, .appeal-modal-class .modal-content { width: 550px; max-width: 90%; }
-        .new-topic-modal input, .new-topic-modal textarea, .appeal-modal-class input, .appeal-modal-class textarea, .appeal-modal-class select { width: 100%; padding: 12px; margin: 10px 0; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 40px; color: white; outline: none; }
-        .new-topic-modal textarea, .appeal-modal-class textarea { border-radius: 20px; resize: vertical; }
+        .appeals-list { display: flex; flex-direction: column; gap: 20px; }
+        .appeal-card {
+            background: var(--bg-surface);
+            backdrop-filter: blur(16px);
+            border-radius: 28px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            transition: 0.3s;
+        }
+        .appeal-card:hover { border-color: var(--accent); box-shadow: var(--shadow-glow); }
+        .appeal-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .status-waiting { background: rgba(245,158,11,0.2); color: var(--warning); }
+        .status-answered { background: rgba(16,185,129,0.2); color: var(--success); }
+        .status-closed { background: rgba(239,68,68,0.2); color: var(--danger); }
+        .appeal-title { font-size: 20px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+        .appeal-info { display: flex; gap: 20px; font-size: 13px; color: var(--text-muted); margin-bottom: 15px; flex-wrap: wrap; }
+        .appeal-message { color: var(--text-secondary); line-height: 1.5; margin-bottom: 15px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 16px; }
+        .appeal-answer { background: rgba(139,92,246,0.1); border-left: 4px solid var(--purple); padding: 15px; border-radius: 12px; margin-top: 10px; }
+        .appeal-answer p { margin: 5px 0; }
+        .answer-form { margin-top: 15px; display: none; }
+        .answer-form textarea { width: 100%; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 16px; color: white; margin-bottom: 10px; }
+        .answer-btn { background: linear-gradient(135deg, var(--purple), #6d28d9); border: none; padding: 8px 20px; border-radius: 40px; font-weight: 700; cursor: pointer; color: white; }
+        .show-answer-btn { background: none; border: none; color: var(--accent); cursor: pointer; font-size: 13px; margin-top: 10px; }
 
         @media (max-width: 768px) {
             .countdown-number { font-size: 38px; }
@@ -516,8 +461,7 @@
             .profile-avatar { width: 80px; height: 80px; }
             .profile-avatar i { font-size: 35px; }
             .profile-name { font-size: 22px; }
-            .topic-title { font-size: 18px; }
-            .post-header { flex-direction: column; align-items: flex-start; }
+            .appeal-info { flex-direction: column; gap: 5px; }
         }
     </style>
 </head>
@@ -549,7 +493,6 @@
                 <button class="rules-nav-btn" data-rule-section="survival">🌍 ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</button>
             </div>
 
-            <!-- ВЫДАЧА НАКАЗАНИЙ -->
             <div id="rule-section-punishment" class="rules-section active">
                 <div class="punishment-card rgb-border-animation">
                     <h3><i class="fas fa-balance-scale"></i> ВЫДАЧА НАКАЗАНИЙ</h3>
@@ -559,131 +502,98 @@
                 <div class="punishment-highlight">
                     <i class="fas fa-file-alt"></i>
                     <h3>ОБЖАЛОВАНИЕ НАКАЗАНИЯ</h3>
-                    <p>Если вы считаете, что наказание было выдано некорректно или без доказательств — вы можете подать жалобу в разделе "Обжалования"!</p>
+                    <p>Если вы считаете, что наказание было выдано некорректно или без доказательств — вы можете подать жалобу в разделе "Обращения"!</p>
                     <p>🔹 Администратор, выдавший наказание без доказательств, получит наказание сам!</p>
-                    <p>🔹 Если вам выдали бан на сайте — вы можете его обжаловать через форум обжалований</p>
+                    <p>🔹 Если вам выдали бан на сайте — вы можете его обжаловать через раздел обращений</p>
                 </div>
                 <div class="rules-card">
                     <h2><i class="fas fa-info-circle"></i> Как работает система наказаний?</h2>
-                    <div class="rule-item"><div class="rule-title">🔴 Наказание в игре = наказание на сайте</div><p>Если вас забанили на сервере, доступ к сайту также будет ограничен до окончания срока бана.</p><div class="rule-punishment">Автоматическая синхронизация наказаний</div></div>
-                    <div class="rule-item"><div class="rule-title">🟡 Администратор обязан иметь доказательства</div><p>Любое наказание должно быть подтверждено скриншотом или видеозаписью. Доказательства хранятся 14 дней.</p><div class="rule-punishment">Нарушение: Бан на 3 дня</div></div>
-                    <div class="rule-item"><div class="rule-title">🟢 Обжалование наказаний</div><p>Если у администратора нет доказательств нарушения — наказание снимается, а администратор получает наказание.</p><div class="rule-punishment">За выдачу наказания без доказательств: Бан на 3 дня</div></div>
+                    <div class="rule-item"><div class="rule-title">🔴 Наказание в игре = наказание на сайте</div><p>Если вас забанили на сервере, доступ к сайту также будет ограничен.</p><div class="rule-punishment">Автоматическая синхронизация</div></div>
+                    <div class="rule-item"><div class="rule-title">🟡 Администратор обязан иметь доказательства</div><p>Любое наказание должно быть подтверждено скриншотом или видео.</p><div class="rule-punishment">Без доказательств: Бан на 3 дня</div></div>
+                    <div class="rule-item"><div class="rule-title">🟢 Обжалование наказаний</div><p>Если у администратора нет доказательств — наказание снимается.</p><div class="rule-punishment">Администратор получает бан на 3 дня</div></div>
                 </div>
             </div>
 
-            <!-- ОБЩИЕ ПРАВИЛА -->
             <div id="rule-section-general" class="rules-section">
-                <div class="rules-card">
-                    <h2><i class="fas fa-globe"></i> 1. ОБЩИЕ ПРАВИЛА</h2>
-                    <div class="rule-item"><div class="rule-title">1.1 | Передача аккаунта</div><p>Разглашение пароля от аккаунта, доступа к нему или совместная игра на нём.</p><div class="rule-punishment">⚠️ Бан навсегда и полное снятие</div></div>
-                    <div class="rule-item"><div class="rule-title">1.2 | Торговля за реальные деньги</div><p>Продажа игровых ценностей за внеигровые ресурсы.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
-                    <div class="rule-item"><div class="rule-title">1.3 | Вред проекту</div><p>Нанесение проекту тяжкого вреда в финансовом или техническом плане.</p><div class="rule-punishment">⚠️ Умышленный: Бан по IP навсегда и полное снятие</div></div>
-                    <div class="rule-item"><div class="rule-title">1.4 | Недопустимые ники</div><p>Регистрация ников, которые оскорбляют игроков, содержат острые политические темы.</p><div class="rule-punishment">⚠️ Бан навсегда</div></div>
-                    <div class="rule-item"><div class="rule-title">1.5 | Притворство командой проекта</div><p>Выдача себя за члена официальной команды проекта.</p><div class="rule-punishment">⚠️ Бан по IP на 3 дня</div></div>
-                    <div class="rule-item"><div class="rule-title">1.6 | Махинации</div><p>Взлом аккаунтов, попытки выманить пароль, обман администрации.</p><div class="rule-punishment">⚠️ Бан по IP навсегда и полное снятие</div></div>
-                    <div class="rule-item"><div class="rule-title">1.7 | Вред официальной команде проекта</div><p>Необоснованная критика, угрозы, помеха работе.</p><div class="rule-punishment">⚠️ Бан на 1 день</div></div>
-                    <div class="rule-item"><div class="rule-title">1.8 | Обход наказаний с продолжением</div><p>Обход корректно полученного наказания через другой аккаунт.</p><div class="rule-punishment">⚠️ Обход по IP: Бан по IP навсегда</div></div>
+                <div class="rules-card"><h2><i class="fas fa-globe"></i> 1. ОБЩИЕ ПРАВИЛА</h2>
+                    <div class="rule-item"><div class="rule-title">1.1 | Передача аккаунта</div><p>Разглашение пароля от аккаунта.</p><div class="rule-punishment">⚠️ Бан навсегда</div></div>
+                    <div class="rule-item"><div class="rule-title">1.2 | Торговля за реальные деньги</div><p>Продажа игровых ценностей за деньги.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
+                    <div class="rule-item"><div class="rule-title">1.3 | Вред проекту</div><p>Краш, DDOS, лаг-машины.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
+                    <div class="rule-item"><div class="rule-title">1.4 | Недопустимые ники</div><p>Оскорбительные или политические ники.</p><div class="rule-punishment">⚠️ Бан навсегда</div></div>
+                    <div class="rule-item"><div class="rule-title">1.5 | Притворство командой</div><p>Выдача себя за администрацию.</p><div class="rule-punishment">⚠️ Бан по IP на 3 дня</div></div>
+                    <div class="rule-item"><div class="rule-title">1.6 | Махинации</div><p>Взлом, обман, подделка доказательств.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
+                    <div class="rule-item"><div class="rule-title">1.7 | Вред команде проекта</div><p>Критика, угрозы, ложные репорты.</p><div class="rule-punishment">⚠️ Бан на 1 день</div></div>
+                    <div class="rule-item"><div class="rule-title">1.8 | Обход наказаний</div><p>Обход бана через другой аккаунт.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
                 </div>
             </div>
 
-            <!-- ПРАВИЛА ОБЩЕНИЯ -->
             <div id="rule-section-communication" class="rules-section">
-                <div class="rules-card">
-                    <h2><i class="fas fa-comments"></i> 2. ПРАВИЛА ОБЩЕНИЯ</h2>
+                <div class="rules-card"><h2><i class="fas fa-comments"></i> 2. ПРАВИЛА ОБЩЕНИЯ</h2>
                     <div class="rule-item"><div class="rule-title">2.1 | Реклама</div><p>Реклама сторонних ресурсов.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
-                    <div class="rule-item"><div class="rule-title">2.2 | Засорение чата</div><p>Написание КАПСом, повторение сообщений, попрошайничество.</p><div class="rule-punishment">⚠️ Мут на 30 минут</div></div>
-                    <div class="rule-item"><div class="rule-title">2.3 | Оскорбительное поведение</div><p>Оскорбления, токсичность, угрозы.</p><div class="rule-punishment">⚠️ Мут на 3 часа - 7 дней</div></div>
-                    <div class="rule-item"><div class="rule-title">2.4 | Политические дискуссии</div><p>Сообщения, задевающие острые политические темы.</p><div class="rule-punishment">⚠️ Мут на 6 часов</div></div>
-                    <div class="rule-item"><div class="rule-title">2.5 | Спам командами</div><p>Ввод схожих команд с промежутком менее минуты.</p><div class="rule-punishment">⚠️ Бан на 10 минут</div></div>
-                    <div class="rule-item"><div class="rule-title">2.6 | Оскорбление проекта</div><p>Оскорбления в сторону проекта или команды.</p><div class="rule-punishment">⚠️ Бан по IP на 3 дня - навсегда</div></div>
+                    <div class="rule-item"><div class="rule-title">2.2 | Засорение чата</div><p>КАПС, повторения, попрошайничество.</p><div class="rule-punishment">⚠️ Мут на 30 минут</div></div>
+                    <div class="rule-item"><div class="rule-title">2.3 | Оскорбления</div><p>Оскорбления, токсичность, угрозы.</p><div class="rule-punishment">⚠️ Мут на 3 часа - 7 дней</div></div>
+                    <div class="rule-item"><div class="rule-title">2.4 | Политика</div><p>Политические дискуссии.</p><div class="rule-punishment">⚠️ Мут на 6 часов</div></div>
+                    <div class="rule-item"><div class="rule-title">2.5 | Спам командами</div><p>Повтор команд /pay, /time и т.д.</p><div class="rule-punishment">⚠️ Бан на 10 минут</div></div>
+                    <div class="rule-item"><div class="rule-title">2.6 | Оскорбление проекта</div><p>Оскорбления в сторону проекта.</p><div class="rule-punishment">⚠️ Бан по IP на 3 дня - навсегда</div></div>
                 </div>
             </div>
 
-            <!-- ИГРОВЫЕ МЕХАНИКИ -->
             <div id="rule-section-mechanics" class="rules-section">
-                <div class="rules-card">
-                    <h2><i class="fas fa-cogs"></i> 3. ИГРОВЫЕ МЕХАНИКИ</h2>
-                    <div class="rule-item"><div class="rule-title">3.1 | Читерство</div><p>Использование читов, хранение предметов читов.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
-                    <div class="rule-item"><div class="rule-title">3.2 | Недопустимые постройки</div><p>Постройки, оскорбляющие игроков, с политическими темами.</p><div class="rule-punishment">⚠️ Бан на 6 часов</div></div>
-                    <div class="rule-item"><div class="rule-title">3.3 | Недопустимая кастомизация</div><p>Скины, плащи, префиксы, которые оскорбляют или выдают за команду.</p><div class="rule-punishment">⚠️ Бан на 6 часов</div></div>
+                <div class="rules-card"><h2><i class="fas fa-cogs"></i> 3. ИГРОВЫЕ МЕХАНИКИ</h2>
+                    <div class="rule-item"><div class="rule-title">3.1 | Читерство</div><p>Использование читов.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
+                    <div class="rule-item"><div class="rule-title">3.2 | Недопустимые постройки</div><p>Оскорбительные или политические постройки.</p><div class="rule-punishment">⚠️ Бан на 6 часов</div></div>
+                    <div class="rule-item"><div class="rule-title">3.3 | Недопустимая кастомизация</div><p>Скины/префиксы, выдающие за админа.</p><div class="rule-punishment">⚠️ Бан на 6 часов</div></div>
                     <div class="rule-item"><div class="rule-title">3.4 | Некорректные наказания</div><p>Выдача наказаний без доказательств.</p><div class="rule-punishment">⚠️ Бан на 3 дня</div></div>
-                    <div class="rule-item"><div class="rule-title">3.5 | Некорректные снятия наказаний</div><p>Снятие корректного наказания с нарушителя.</p><div class="rule-punishment">⚠️ Бан на 1 день</div></div>
-                    <div class="rule-item"><div class="rule-title">3.6 | Фарм статистики</div><p>Накрутка статистик через мультиаккаунты.</p><div class="rule-punishment">⚠️ Бан на 12 часов - 3 дня</div></div>
+                    <div class="rule-item"><div class="rule-title">3.5 | Некорректные снятия</div><p>Снятие корректного наказания.</p><div class="rule-punishment">⚠️ Бан на 1 день</div></div>
+                    <div class="rule-item"><div class="rule-title">3.6 | Фарм статистики</div><p>Накрутка статистики.</p><div class="rule-punishment">⚠️ Бан на 12 часов - 3 дня</div></div>
                 </div>
             </div>
 
-            <!-- ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ -->
             <div id="rule-section-survival" class="rules-section">
-                <div class="rules-card">
-                    <h2><i class="fas fa-tree"></i> 4. ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</h2>
-                    <div class="rule-item"><div class="rule-title">4.1 | Гриферство</div><p>Введение игрока в заблуждение с целью личной выгоды.</p><div class="rule-punishment">⚠️ Бан на 3 дня</div></div>
-                    <div class="rule-item"><div class="rule-title">4.2 | Помеха игрокам</div><p>Отказ покидать регион, нахождение на аренах в /fly,/god.</p><div class="rule-punishment">⚠️ Предупреждение, при повторе бан на 3 часа</div></div>
-                    <div class="rule-item"><div class="rule-title">4.3 | Недопустимые изменения спавна</div><p>Изменения, затрагивающие структуры спавна.</p><div class="rule-punishment">⚠️ Бан на 7 дней</div></div>
-                    <div class="rule-item"><div class="rule-title">4.4 | Злоупотребление правами доната</div><p>Использование привилегий для убийства игроков.</p><div class="rule-punishment">⚠️ Бан на 1 день - навсегда</div></div>
-                    <div class="rule-item"><div class="rule-title">4.5 | Телепортация без разрешения</div><p>Телепортация игрока против его воли.</p><div class="rule-punishment">⚠️ Бан на 2 часа</div></div>
+                <div class="rules-card"><h2><i class="fas fa-tree"></i> 4. ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</h2>
+                    <div class="rule-item"><div class="rule-title">4.1 | Гриферство</div><p>Обман, ловушки, вред регионам.</p><div class="rule-punishment">⚠️ Бан на 3 дня</div></div>
+                    <div class="rule-item"><div class="rule-title">4.2 | Помеха игрокам</div><p>Отказ покидать регион, /fly на аренах.</p><div class="rule-punishment">⚠️ Предупреждение, затем бан на 3 часа</div></div>
+                    <div class="rule-item"><div class="rule-title">4.3 | Изменения спавна</div><p>Порча спавна.</p><div class="rule-punishment">⚠️ Бан на 7 дней</div></div>
+                    <div class="rule-item"><div class="rule-title">4.4 | Злоупотребление донатом</div><p>Использование привилегий против игроков.</p><div class="rule-punishment">⚠️ Бан на 1 день - навсегда</div></div>
+                    <div class="rule-item"><div class="rule-title">4.5 | Телепортация без разрешения</div><p>/tphere, /tpohere без согласия.</p><div class="rule-punishment">⚠️ Бан на 2 часа</div></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- СТРАНИЦА ОБЖАЛОВАНИЙ -->
+    <!-- СТРАНИЦА ОБРАЩЕНИЙ -->
     <div id="appealsPage" class="page">
         <div class="appeals-container">
             <div class="appeals-header">
-                <h1><i class="fas fa-comments"></i> ФОРУМ ОБЖАЛОВАНИЙ</h1>
-                <p class="rgb-text-animation">Здесь вы можете обжаловать наказание или создать тему для обсуждения</p>
+                <h1><i class="fas fa-envelope"></i> СИСТЕМА ОБРАЩЕНИЙ</h1>
+                <p class="rgb-text-animation">Отправьте жалобу на администратора или обжалуйте наказание</p>
             </div>
 
-            <div id="topicsListDiv">
-                <button class="create-topic-btn" id="createTopicBtn"><i class="fas fa-plus"></i> СОЗДАТЬ ТЕМУ</button>
-                <div id="topicsContainer" class="topics-list"></div>
+            <!-- ФОРМА ОТПРАВКИ ОБРАЩЕНИЯ -->
+            <div class="appeal-form">
+                <h2><i class="fas fa-paper-plane"></i> Создать обращение</h2>
+                <input type="text" id="appealPlayerNick" placeholder="Ваш никнейм">
+                <input type="text" id="appealAdminNick" placeholder="Ник администратора (если есть)">
+                <input type="text" id="appealTitle" placeholder="Тема обращения">
+                <select id="appealType">
+                    <option value="complaint">Жалоба на администратора</option>
+                    <option value="ban_appeal">Обжалование бана</option>
+                    <option value="question">Вопрос к администрации</option>
+                    <option value="other">Другое</option>
+                </select>
+                <textarea id="appealMessage" rows="5" placeholder="Подробное описание ситуации..."></textarea>
+                <button id="submitAppealBtn" class="submit-appeal-btn"><i class="fas fa-send"></i> ОТПРАВИТЬ ОБРАЩЕНИЕ</button>
             </div>
 
-            <div id="topicViewDiv" class="topic-view">
-                <button class="back-btn" id="backToTopicsBtn"><i class="fas fa-arrow-left"></i> Назад к темам</button>
-                <div id="currentTopicTitle" class="topic-card" style="margin-bottom: 20px;"></div>
-                <div id="forumMessagesContainer" class="forum-messages"></div>
-                <div class="reply-area">
-                    <h3><i class="fas fa-reply"></i> Написать ответ</h3>
-                    <textarea id="replyMessage" rows="4" placeholder="Ваше сообщение..."></textarea>
-                    <button id="sendReplyBtn" class="reply-btn">ОТПРАВИТЬ</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="newTopicModal" class="new-topic-modal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeTopicModal">&times;</span>
-            <h3><i class="fas fa-plus-circle"></i> Создать новую тему</h3>
-            <input type="text" id="topicTitle" placeholder="Название темы">
-            <textarea id="topicContent" rows="5" placeholder="Текст сообщения (описание темы)..."></textarea>
-            <div style="margin: 10px 0;"><label style="color: var(--accent);"><input type="checkbox" id="topicPinned"> Закрепить тему</label></div>
-            <button id="submitTopicBtn" class="admin-btn">СОЗДАТЬ</button>
-        </div>
-    </div>
-
-    <div id="appealModal" class="appeal-modal-class">
-        <div class="modal-content">
-            <span class="close-modal" id="closeAppealModal">&times;</span>
-            <h3><i class="fas fa-gavel"></i> ПОДАТЬ ОБЖАЛОВАНИЕ</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 10px;">Заполните форму для обжалования наказания</p>
-            <input type="text" id="appealPlayerNick" placeholder="Ваш никнейм">
-            <input type="text" id="appealAdminNick" placeholder="Ник администратора">
-            <input type="text" id="appealBanReason" placeholder="Причина бана">
-            <select id="appealType">
-                <option value="innocent">Я не виноват — прошу проверить доказательства</option>
-                <option value="sorry">Я сожалею — прошу дать 2 шанс</option>
-                <option value="custom">Свой вариант</option>
-            </select>
-            <textarea id="appealMessage" rows="4" placeholder="Подробное описание ситуации..."></textarea>
-            <button id="submitAppealBtn" class="admin-btn">ОТПРАВИТЬ ОБЖАЛОВАНИЕ</button>
+            <!-- СПИСОК ОБРАЩЕНИЙ -->
+            <h2 style="margin: 30px 0 20px 0;"><i class="fas fa-list"></i> Список обращений</h2>
+            <div id="appealsList" class="appeals-list"></div>
         </div>
     </div>
 
     <div class="secret-admin-trigger" id="secretAdminTrigger"><i class="fas fa-lock"></i></div>
 
-    <div id="adminPagePanel" class="admin-page"><div class="close-admin-page" id="closeAdminPageBtn"><i class="fas fa-times"></i></div><div class="admin-rgb-bg"><div class="admin-glass-panel"><h1><i class="fas fa-crown"></i> АДМИН-ПАНЕЛЬ</h1><div class="admin-category-buttons"><button class="admin-cat-btn active" data-cat="monets">Монеты</button><button class="admin-cat-btn" data-cat="broadcast">Рассылка</button><button class="admin-cat-btn" data-cat="bans">Баны / Разбаны</button><button class="admin-cat-btn" data-cat="site">Управление сайтом</button><button class="admin-cat-btn" data-cat="donates">Управление донатами</button><button class="admin-cat-btn" data-cat="timer">Таймер</button><button class="admin-cat-btn" data-cat="badges">Галочки</button><button class="admin-cat-btn" data-cat="spins">Прокрутки</button><button class="admin-cat-btn" data-cat="purchases">📋 Логи покупок</button></div>
+    <div id="adminPagePanel" class="admin-page"><div class="close-admin-page" id="closeAdminPageBtn"><i class="fas fa-times"></i></div><div class="admin-rgb-bg"><div class="admin-glass-panel"><h1><i class="fas fa-crown"></i> АДМИН-ПАНЕЛЬ</h1><div class="admin-category-buttons"><button class="admin-cat-btn active" data-cat="monets">Монеты</button><button class="admin-cat-btn" data-cat="broadcast">Рассылка</button><button class="admin-cat-btn" data-cat="bans">Баны / Разбаны</button><button class="admin-cat-btn" data-cat="site">Управление сайтом</button><button class="admin-cat-btn" data-cat="donates">Управление донатами</button><button class="admin-cat-btn" data-cat="timer">Таймер</button><button class="admin-cat-btn" data-cat="badges">Галочки</button><button class="admin-cat-btn" data-cat="spins">Прокрутки</button><button class="admin-cat-btn" data-cat="purchases">📋 Логи покупок</button><button class="admin-cat-btn" data-cat="appeals">📨 Обращения</button></div>
     <div id="cat-monets" class="admin-category active"><div class="admin-block"><h3><i class="fas fa-coins"></i> Выдать монеты</h3><input type="text" id="giveNick" placeholder="Никнейм" class="admin-input"><input type="number" id="giveAmount" placeholder="Сумма" class="admin-input"><button id="giveCoinsBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="globalGiveBtn" class="admin-btn-purple">ВСЕМ</button></div></div>
     <div id="cat-broadcast" class="admin-category"><div class="admin-block"><h3><i class="fas fa-bullhorn"></i> Рассылка</h3><textarea id="broadcastMsg" rows="3" placeholder="Текст сообщения..." class="admin-input"></textarea><button id="sendBroadcastBtn" class="admin-btn-pink">ОТПРАВИТЬ ВСЕМ</button></div></div>
     <div id="cat-bans" class="admin-category"><div class="admin-block"><h3><i class="fas fa-gavel"></i> Бан / Разбан</h3><input type="text" id="banNick" placeholder="Никнейм" class="admin-input"><input type="text" id="moderatorName" placeholder="Модератор" class="admin-input"><textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="banDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="12">12 часов</option><option value="24">1 день</option><option value="168">7 дней</option><option value="720">30 дней</option><option value="forever">Навсегда</option></select><button id="banUserBtn" class="admin-btn-red">ЗАБАНИТЬ</button><button id="unbanUserBtn" class="admin-btn-green">РАЗБАНИТЬ</button></div></div>
@@ -693,6 +603,7 @@
     <div id="cat-badges" class="admin-category"><div class="admin-block"><h3><i class="fas fa-tags"></i> Галочки (30 видов)</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option><option value="diamond">💎 Алмазная</option><option value="star">⭐ Звездная</option><option value="game">🎮 Игровая</option><option value="fire">🔥 Огненная</option><option value="mythic">🔮 Мифическая</option><option value="cosmic">🌌 Космическая</option><option value="ice">❄️ Ледяная</option><option value="shadow">🌑 Теневая</option><option value="light">✨ Светлая</option><option value="dark">🖤 Тёмная</option><option value="nature">🌿 Природная</option><option value="blood">🩸 Кровавая</option><option value="void">🌀 Пустота</option><option value="divine">⚜️ Божественная</option><option value="purple">🟣 Фиолетовая</option><option value="teal">🔷 Бирюзовая</option><option value="sapphire">💙 Сапфировая</option><option value="emerald">💚 Изумрудная</option><option value="ruby">❤️ Рубиновая</option><option value="amber">🧡 Янтарная</option><option value="jade">💚 Нефритовая</option><option value="coral">🪸 Коралловая</option><option value="indigo">🟣 Индиго</option><option value="magenta">🩷 Магента</option><option value="bronze">🥉 Бронзовая</option><option value="platinum">⚪ Платиновая</option><option value="obsidian">⬛ Обсидиановая</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div></div>
     <div id="cat-spins" class="admin-category"><div class="admin-block"><h3><i class="fas fa-dice-d6"></i> Прокрутки колеса</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">ВЫДАТЬ</button></div></div>
     <div id="cat-purchases" class="admin-category"><div class="admin-block"><h3><i class="fas fa-shopping-cart"></i> ЛОГИ ПОКУПОК</h3><div id="purchasesList" class="players-list" style="max-height: 400px;"></div><button id="clearPurchasesBtn" class="admin-btn-red">ОЧИСТИТЬ ЛОГИ</button></div></div>
+    <div id="cat-appeals" class="admin-category"><div class="admin-block"><h3><i class="fas fa-envelope"></i> ОБРАЩЕНИЯ ИГРОКОВ</h3><div id="adminAppealsList" class="players-list" style="max-height: 500px;"></div></div></div>
     </div></div></div>
 
     <div id="authModal" class="modal" style="display: flex;"><div class="auth-modal"><i class="fas fa-crown" style="font-size: 45px; color: var(--accent); margin-bottom: 15px;"></i><h2 style="margin-bottom:20px;">GrifMcPro</h2><div class="tabs-auth"><button class="tab-auth active" data-tab="login">ВХОД</button><button class="tab-auth" data-tab="register">РЕГИСТРАЦИЯ</button></div><div id="loginPaneAuth" class="tab-pane-auth active"><input type="email" id="loginEmail" placeholder="Email" class="auth-input"><input type="password" id="loginPass" placeholder="Пароль" class="auth-input"><button id="doLoginBtn" class="auth-btn">ВОЙТИ</button></div><div id="registerPaneAuth" class="tab-pane-auth"><input type="text" id="regUsername" placeholder="Никнейм" class="auth-input"><input type="email" id="regEmail" placeholder="Email" class="auth-input"><input type="password" id="regPass" placeholder="Пароль (мин. 6)" class="auth-input"><button id="doRegisterBtn" class="auth-btn">ЗАРЕГИСТРИРОВАТЬСЯ</button></div></div></div>
@@ -721,8 +632,7 @@
             const ADMIN_SECRET_CODE = "website";
             
             let currentUser = null, currentBalance = 0, currentProduct = null, timerInterval = null, timerUnsub = null;
-            let topicsUnsub = null, messagesUnsub = null;
-            let currentTopicId = null;
+            let appealsUnsub = null;
 
             function showNotification(msg, type = 'success') {
                 let container = document.getElementById('notifContainer');
@@ -743,7 +653,7 @@
             function renderMenu() {
                 const container = document.getElementById('dynamicMenuTabs');
                 if (!container) return;
-                container.innerHTML = `<div class="menu-tab active" data-page="home">Главная</div><div class="menu-tab" data-page="shop">Магазин</div><div class="menu-tab" data-page="profile">Профиль</div><div class="menu-tab" data-page="rules">Правила</div><div class="menu-tab" data-page="appeals">Обжалования</div>`;
+                container.innerHTML = `<div class="menu-tab active" data-page="home">Главная</div><div class="menu-tab" data-page="shop">Магазин</div><div class="menu-tab" data-page="profile">Профиль</div><div class="menu-tab" data-page="rules">Правила</div><div class="menu-tab" data-page="appeals">Обращения</div>`;
                 document.querySelectorAll('.menu-tab').forEach(tab => {
                     tab.onclick = () => {
                         document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
@@ -752,7 +662,7 @@
                         document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
                         if (tab.dataset.page === 'profile') loadUserData(currentUser);
                         if (tab.dataset.page === 'rules') initRulesPage();
-                        if (tab.dataset.page === 'appeals') loadTopics();
+                        if (tab.dataset.page === 'appeals') loadAppeals();
                     };
                 });
             }
@@ -768,147 +678,122 @@
                 });
             }
 
-            // ФОРУМ ОБЖАЛОВАНИЙ
-            async function loadTopics() {
-                if (topicsUnsub) topicsUnsub();
-                document.getElementById('topicsListDiv').style.display = 'block';
-                document.getElementById('topicViewDiv').classList.remove('active');
+            // СИСТЕМА ОБРАЩЕНИЙ
+            async function loadAppeals() {
+                if (appealsUnsub) appealsUnsub();
                 
-                topicsUnsub = db.collection('forumTopics').orderBy('pinned', 'desc').orderBy('createdAt', 'desc').onSnapshot((snap) => {
-                    const container = document.getElementById('topicsContainer');
+                appealsUnsub = db.collection('appeals').orderBy('createdAt', 'desc').onSnapshot((snap) => {
+                    const container = document.getElementById('appealsList');
                     if (!container) return;
                     if (snap.empty) {
-                        container.innerHTML = '<div class="topic-card" style="text-align: center;">📭 Нет созданных тем. Нажмите "СОЗДАТЬ ТЕМУ"</div>';
+                        container.innerHTML = '<div class="appeal-card" style="text-align: center;">📭 Нет обращений. Создайте первое!</div>';
                         return;
                     }
                     container.innerHTML = '';
                     snap.forEach(doc => {
-                        const topic = doc.data();
+                        const appeal = doc.data();
+                        const isAdmin = currentUser && currentUser.email === MAIN_ADMIN_EMAIL;
+                        const statusClass = appeal.status === 'waiting' ? 'status-waiting' : (appeal.status === 'answered' ? 'status-answered' : 'status-closed');
+                        const statusText = appeal.status === 'waiting' ? 'Ожидает ответа' : (appeal.status === 'answered' ? 'Ответ дан' : 'Закрыто');
+                        
+                        let answerHtml = '';
+                        if (appeal.answer) {
+                            answerHtml = `<div class="appeal-answer"><strong><i class="fas fa-reply"></i> Ответ администрации:</strong><p>${appeal.answer.replace(/\n/g, '<br>')}</p></div>`;
+                        }
+                        
+                        let answerFormHtml = '';
+                        if (isAdmin && appeal.status !== 'closed') {
+                            answerFormHtml = `
+                                <button class="show-answer-btn" data-id="${doc.id}"><i class="fas fa-reply"></i> Ответить</button>
+                                <div class="answer-form" id="answer-form-${doc.id}">
+                                    <textarea id="answer-text-${doc.id}" rows="3" placeholder="Ваш ответ..."></textarea>
+                                    <button class="answer-btn" data-id="${doc.id}">ОТВЕТИТЬ</button>
+                                </div>
+                            `;
+                        }
+                        
                         container.innerHTML += `
-                            <div class="topic-card ${topic.pinned ? 'topic-pinned' : ''}" data-topic-id="${doc.id}">
-                                <div class="topic-title">${topic.pinned ? '<span class="pinned-badge"><i class="fas fa-thumbtack"></i> Закреплено</span>' : ''} ${topic.title}</div>
-                                <div class="topic-info"><span><i class="fas fa-user"></i> ${topic.authorName || topic.authorEmail}</span><span><i class="fas fa-clock"></i> ${new Date(topic.createdAt?.toDate()).toLocaleString()}</span><span><i class="fas fa-comments"></i> ${topic.repliesCount || 0} ответов</span></div>
+                            <div class="appeal-card" id="appeal-${doc.id}">
+                                <div class="appeal-status ${statusClass}">${statusText}</div>
+                                <div class="appeal-title">${appeal.title || 'Без темы'}</div>
+                                <div class="appeal-info">
+                                    <span><i class="fas fa-user"></i> ${appeal.playerNick}</span>
+                                    <span><i class="fas fa-user-shield"></i> Админ: ${appeal.adminNick || 'Не указан'}</span>
+                                    <span><i class="fas fa-tag"></i> ${appeal.type === 'complaint' ? 'Жалоба' : appeal.type === 'ban_appeal' ? 'Обжалование бана' : appeal.type === 'question' ? 'Вопрос' : 'Другое'}</span>
+                                    <span><i class="fas fa-clock"></i> ${new Date(appeal.createdAt?.toDate()).toLocaleString()}</span>
+                                </div>
+                                <div class="appeal-message"><strong>Сообщение:</strong><br>${appeal.message.replace(/\n/g, '<br>')}</div>
+                                ${answerHtml}
+                                ${answerFormHtml}
                             </div>
                         `;
                     });
-                    document.querySelectorAll('.topic-card[data-topic-id]').forEach(card => {
-                        card.onclick = () => openTopic(card.dataset.topicId);
+                    
+                    // Кнопки ответа
+                    document.querySelectorAll('.show-answer-btn').forEach(btn => {
+                        btn.onclick = () => {
+                            const form = document.getElementById(`answer-form-${btn.dataset.id}`);
+                            if (form) form.style.display = form.style.display === 'none' ? 'block' : 'none';
+                        };
+                    });
+                    document.querySelectorAll('.answer-btn').forEach(btn => {
+                        btn.onclick = async () => {
+                            const answer = document.getElementById(`answer-text-${btn.dataset.id}`).value.trim();
+                            if (!answer) { showNotification('Введите ответ!', 'error'); return; }
+                            await db.collection('appeals').doc(btn.dataset.id).update({
+                                answer: answer,
+                                status: 'answered',
+                                answeredAt: new Date(),
+                                answeredBy: currentUser.email
+                            });
+                            showNotification('Ответ отправлен!', 'success');
+                        };
                     });
                 });
             }
 
-            function setReplyQuote(authorName, content) {
-                const replyTextarea = document.getElementById('replyMessage');
-                if (replyTextarea) {
-                    const shortContent = content.length > 200 ? content.substring(0, 200) + '...' : content;
-                    const quote = `> **${authorName}** писал(а):\n> ${shortContent.split('\n').join('\n> ')}\n\n`;
-                    replyTextarea.value = quote;
-                    replyTextarea.focus();
-                }
-            }
-
-            async function openTopic(topicId) {
-                currentTopicId = topicId;
-                const topicDoc = await db.collection('forumTopics').doc(topicId).get();
-                if (!topicDoc.exists) return;
-                const topic = topicDoc.data();
-                document.getElementById('currentTopicTitle').innerHTML = `
-                    <div class="topic-title">${topic.pinned ? '<span class="pinned-badge"><i class="fas fa-thumbtack"></i> Закреплено</span>' : ''} ${topic.title}</div>
-                    <div class="topic-info"><span><i class="fas fa-user"></i> ${topic.authorName || topic.authorEmail}</span><span><i class="fas fa-clock"></i> ${new Date(topic.createdAt?.toDate()).toLocaleString()}</span></div>
-                `;
-                document.getElementById('topicsListDiv').style.display = 'none';
-                document.getElementById('topicViewDiv').classList.add('active');
-                
-                if (messagesUnsub) messagesUnsub();
-                messagesUnsub = db.collection('forumMessages').where('topicId', '==', topicId).orderBy('createdAt', 'asc').onSnapshot((snap) => {
-                    const container = document.getElementById('forumMessagesContainer');
-                    if (!container) return;
-                    if (snap.empty) {
-                        container.innerHTML = '<div class="forum-post" style="text-align: center; padding: 40px;">💬 Сообщений пока нет. Будьте первым!</div>';
-                        return;
-                    }
-                    container.innerHTML = '';
-                    let isFirst = true;
-                    snap.forEach(doc => {
-                        const msg = doc.data();
-                        const isAdmin = msg.authorEmail === MAIN_ADMIN_EMAIL;
-                        const badgeHtml = getBadgeHtml(msg.authorBadge);
-                        const postClass = isFirst ? 'first-post' : '';
-                        const adminClass = isAdmin ? 'admin-post' : '';
-                        isFirst = false;
-                        const safeContent = msg.content.replace(/"/g, '&quot;').replace(/\n/g, '\\n');
-                        container.innerHTML += `
-                            <div class="forum-post ${postClass} ${adminClass}">
-                                <div class="post-header">
-                                    <div class="post-author">
-                                        <div class="post-avatar"><i class="fas fa-user"></i></div>
-                                        <div class="post-author-name">${badgeHtml} ${msg.authorName || msg.authorEmail}</div>
-                                        ${isAdmin ? '<span class="post-badge"><i class="fas fa-shield-alt"></i> Администрация</span>' : ''}
-                                    </div>
-                                    <div class="post-actions">
-                                        <button class="reply-to-btn" data-author="${msg.authorName || msg.authorEmail}" data-content="${msg.content.replace(/"/g, '&quot;')}"><i class="fas fa-reply"></i> Ответить</button>
-                                    </div>
-                                </div>
-                                <div class="post-content">
-                                    <p>${msg.content.replace(/\n/g, '<br>')}</p>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    document.querySelectorAll('.reply-to-btn').forEach(btn => {
-                        btn.onclick = () => setReplyQuote(btn.dataset.author, btn.dataset.content);
-                    });
-                });
-            }
-
-            async function createTopic(title, content, pinned) {
-                if (!currentUser) { showNotification('Авторизуйтесь!', 'error'); return; }
-                const userDoc = await db.collection('users').doc(currentUser.uid).get();
-                const authorName = userDoc.exists ? userDoc.data().username : currentUser.displayName || currentUser.email;
-                const authorBadge = userDoc.exists ? userDoc.data().badge : null;
-                const topicRef = await db.collection('forumTopics').add({
-                    title: title, authorId: currentUser.uid, authorEmail: currentUser.email,
-                    authorName: authorName, authorBadge: authorBadge, createdAt: new Date(),
-                    pinned: pinned || false, repliesCount: 0
-                });
-                await db.collection('forumMessages').add({
-                    topicId: topicRef.id, authorId: currentUser.uid, authorEmail: currentUser.email,
-                    authorName: authorName, authorBadge: authorBadge, content: content, createdAt: new Date()
-                });
-                showNotification('Тема создана!', 'success');
-                loadTopics();
-            }
-
-            async function sendMessageToTopic(topicId, content) {
+            async function submitAppeal(playerNick, adminNick, title, type, message) {
                 if (!currentUser) { showNotification('Авторизуйтесь!', 'error'); return false; }
-                if (!content.trim()) { showNotification('Введите сообщение!', 'error'); return false; }
-                const userDoc = await db.collection('users').doc(currentUser.uid).get();
-                const authorName = userDoc.exists ? userDoc.data().username : currentUser.displayName || currentUser.email;
-                const authorBadge = userDoc.exists ? userDoc.data().badge : null;
-                await db.collection('forumMessages').add({
-                    topicId: topicId, authorId: currentUser.uid, authorEmail: currentUser.email,
-                    authorName: authorName, authorBadge: authorBadge, content: content, createdAt: new Date()
+                if (!playerNick || !title || !message) { showNotification('Заполните ник, тему и сообщение!', 'error'); return false; }
+                
+                await db.collection('appeals').add({
+                    playerId: currentUser.uid,
+                    playerEmail: currentUser.email,
+                    playerNick: playerNick,
+                    adminNick: adminNick || 'Не указан',
+                    title: title,
+                    type: type,
+                    message: message,
+                    status: 'waiting',
+                    createdAt: new Date()
                 });
-                await db.collection('forumTopics').doc(topicId).update({ repliesCount: firebase.firestore.FieldValue.increment(1) });
-                showNotification('Сообщение отправлено!', 'success');
+                showNotification('Обращение отправлено! Администрация ответит в ближайшее время.', 'success');
                 return true;
             }
 
-            async function submitAppeal(playerNick, adminNick, banReason, type, message) {
-                if (!currentUser) { showNotification('Авторизуйтесь!', 'error'); return; }
-                if (!playerNick || !adminNick || !banReason || !message) { showNotification('Заполните все поля!', 'error'); return; }
-                const typeText = type === 'innocent' ? 'Я не виноват' : (type === 'sorry' ? 'Прошу 2 шанс' : 'Свой вариант');
-                const content = `📋 ОБЖАЛОВАНИЕ НАКАЗАНИЯ\n\n👤 Мой ник: ${playerNick}\n🛡️ Администратор: ${adminNick}\n⚖️ Причина бана: ${banReason}\n📝 Тип обжалования: ${typeText}\n💬 Сообщение: ${message}`;
-                const topicRef = await db.collection('forumTopics').add({
-                    title: `Обжалование от ${playerNick}`, authorId: currentUser.uid, authorEmail: currentUser.email,
-                    authorName: playerNick, authorBadge: null, createdAt: new Date(), pinned: false, repliesCount: 1
-                });
-                await db.collection('forumMessages').add({
-                    topicId: topicRef.id, authorId: currentUser.uid, authorEmail: currentUser.email,
-                    authorName: playerNick, authorBadge: null, content: content, createdAt: new Date()
-                });
-                showNotification('Обжалование отправлено!', 'success');
-                loadTopics();
+            // АДМИН-ПАНЕЛЬ - ЗАГРУЗКА ОБРАЩЕНИЙ
+            async function loadAdminAppeals() {
+                const container = document.getElementById('adminAppealsList');
+                if (!container) return;
+                const snapshot = await db.collection('appeals').orderBy('createdAt', 'desc').get();
+                if (snapshot.empty) {
+                    container.innerHTML = '<div class="player-card">📭 Нет обращений</div>';
+                    return;
+                }
+                container.innerHTML = '';
+                for (const doc of snapshot.docs) {
+                    const appeal = doc.data();
+                    container.innerHTML += `
+                        <div class="player-card" style="flex-direction: column; align-items: flex-start;">
+                            <div><strong>${appeal.title || 'Без темы'}</strong></div>
+                            <div>👤 ${appeal.playerNick} | ${appeal.type === 'complaint' ? 'Жалоба' : appeal.type === 'ban_appeal' ? 'Обжалование' : appeal.type === 'question' ? 'Вопрос' : 'Другое'}</div>
+                            <div>📧 ${appeal.playerEmail}</div>
+                            <div>📝 ${appeal.message.substring(0, 100)}${appeal.message.length > 100 ? '...' : ''}</div>
+                            <div>📅 ${new Date(appeal.createdAt?.toDate()).toLocaleString()}</div>
+                            ${appeal.answer ? `<div style="color: var(--success);">✅ Ответ дан: ${appeal.answer.substring(0, 50)}...</div>` : '<div style="color: var(--warning);">⏳ Ожидает ответа</div>'}
+                        </div>
+                    `;
+                }
             }
 
             // МАГАЗИН
@@ -1016,7 +901,7 @@
                 document.getElementById('closeTestModal').onclick = () => document.getElementById('testServerModal').style.display = 'none';
                 document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
                 document.getElementById('closePasswordModal').onclick = () => document.getElementById('changePasswordModal').style.display = 'none';
-                document.getElementById('confirmBuyBtn').onclick = async () => { showNotification('Покупка выполнена! (демо)', 'success'); document.getElementById('buyModal').style.display = 'none'; };
+                document.getElementById('confirmBuyBtn').onclick = async () => { if(currentBalance >= currentProduct.price) { showNotification('Покупка выполнена! (демо)', 'success'); document.getElementById('buyModal').style.display = 'none'; } else { showNotification('Недостаточно средств!', 'error'); } };
                 document.getElementById('testServerBtn').onclick = () => document.getElementById('testServerModal').style.display = 'flex';
                 document.getElementById('confirmTestBtn').onclick = () => { showNotification('Тест-сервер заказан! (демо)', 'success'); document.getElementById('testServerModal').style.display = 'none'; };
                 document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
@@ -1024,51 +909,24 @@
                 document.getElementById('changePasswordBtn').onclick = () => document.getElementById('changePasswordModal').style.display = 'flex';
                 document.getElementById('savePasswordBtn').onclick = async () => { try { const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, document.getElementById('oldPasswordInput').value); await currentUser.reauthenticateWithCredential(cred); await currentUser.updatePassword(document.getElementById('newPasswordInput').value); showNotification('Пароль изменён!', 'success'); document.getElementById('changePasswordModal').style.display = 'none'; } catch (e) { showNotification('Неверный старый пароль', 'error'); } };
                 
-                document.getElementById('createTopicBtn').onclick = () => {
-                    if (currentUser && currentUser.email === MAIN_ADMIN_EMAIL) document.getElementById('newTopicModal').style.display = 'flex';
-                    else document.getElementById('appealModal').style.display = 'flex';
-                };
-                document.getElementById('closeTopicModal').onclick = () => document.getElementById('newTopicModal').style.display = 'none';
-                document.getElementById('closeAppealModal').onclick = () => document.getElementById('appealModal').style.display = 'none';
-                document.getElementById('submitTopicBtn').onclick = async () => {
-                    const title = document.getElementById('topicTitle').value.trim();
-                    const content = document.getElementById('topicContent').value.trim();
-                    const pinned = document.getElementById('topicPinned').checked;
-                    if (!title || !content) { showNotification('Заполните поля!', 'error'); return; }
-                    await createTopic(title, content, pinned);
-                    document.getElementById('newTopicModal').style.display = 'none';
-                    document.getElementById('topicTitle').value = '';
-                    document.getElementById('topicContent').value = '';
-                    document.getElementById('topicPinned').checked = false;
-                };
+                // Обращения
                 document.getElementById('submitAppealBtn').onclick = async () => {
                     const playerNick = document.getElementById('appealPlayerNick').value.trim();
                     const adminNick = document.getElementById('appealAdminNick').value.trim();
-                    const banReason = document.getElementById('appealBanReason').value.trim();
+                    const title = document.getElementById('appealTitle').value.trim();
                     const type = document.getElementById('appealType').value;
                     const message = document.getElementById('appealMessage').value.trim();
-                    await submitAppeal(playerNick, adminNick, banReason, type, message);
-                    document.getElementById('appealModal').style.display = 'none';
+                    await submitAppeal(playerNick, adminNick, title, type, message);
                     document.getElementById('appealPlayerNick').value = '';
                     document.getElementById('appealAdminNick').value = '';
-                    document.getElementById('appealBanReason').value = '';
+                    document.getElementById('appealTitle').value = '';
                     document.getElementById('appealMessage').value = '';
                 };
-                document.getElementById('sendReplyBtn').onclick = async () => {
-                    const message = document.getElementById('replyMessage').value.trim();
-                    if (!message) { showNotification('Введите сообщение!', 'error'); return; }
-                    if (currentTopicId) { await sendMessageToTopic(currentTopicId, message); document.getElementById('replyMessage').value = ''; }
-                };
-                document.getElementById('backToTopicsBtn').onclick = () => {
-                    if (messagesUnsub) messagesUnsub();
-                    document.getElementById('topicsListDiv').style.display = 'block';
-                    document.getElementById('topicViewDiv').classList.remove('active');
-                    currentTopicId = null;
-                    loadTopics();
-                };
                 
+                // Админ-панель
                 document.getElementById('giveCoinsBtn').onclick = () => showNotification('Выдача монет (демо)', 'success');
-                document.getElementById('sendBroadcastBtn').onclick = () => showNotification('Рассылка (демо)', 'success');
+                document.getElementById('globalGiveBtn').onclick = () => { const amt = prompt('Сумма для всех:'); if(amt) showNotification(`Выдано всем ${amt} (демо)`, 'success'); };
+                document.getElementById('sendBroadcastBtn').onclick = () => { const msg = document.getElementById('broadcastMsg').value; if(msg) showNotification('Рассылка отправлена (демо)', 'success'); else showNotification('Введите текст', 'error'); };
                 document.getElementById('updateTimerBtn').onclick = async () => { const date = document.getElementById('timerTargetDate').value; if(date) await db.collection('settings').doc('timer').set({ targetDate: new Date(date), eventName: document.getElementById('timerEventName').value, eventDesc: document.getElementById('timerEventDesc').value }); showNotification('Таймер обновлён!', 'success'); };
                 document.getElementById('clearPurchasesBtn').onclick = () => showNotification('Логи очищены (демо)', 'success');
                 document.getElementById('banExitBtn').onclick = () => { document.getElementById('banModalOverlay').style.display = 'none'; auth.signOut(); };
@@ -1086,6 +944,7 @@
                             adminPage.classList.add('active');
                             document.querySelector('.site-header').style.display = 'none';
                             document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+                            loadAdminAppeals();
                         } else showNotification('Неверный код!', 'error');
                     } else showNotification('Доступ только для администратора', 'error');
                 };
@@ -1096,6 +955,16 @@
                     document.getElementById('homePage').classList.add('active');
                     document.querySelector('.menu-tab[data-page="home"]').classList.add('active');
                 };
+                document.querySelectorAll('.admin-cat-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.admin-cat-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        document.querySelectorAll('.admin-category').forEach(c => c.classList.remove('active'));
+                        document.getElementById(`cat-${btn.dataset.cat}`).classList.add('active');
+                        if (btn.dataset.cat === 'appeals') loadAdminAppeals();
+                        if (btn.dataset.cat === 'purchases') document.getElementById('purchasesList').innerHTML = '<div class="player-card">📭 Демо-режим</div>';
+                    };
+                });
             }
 
             auth.onAuthStateChanged(async (user) => {
@@ -1108,7 +977,7 @@
                     bindButtons();
                     initSecretAdmin();
                     document.getElementById('authModal').style.display = 'none';
-                    loadTopics();
+                    loadAppeals();
                 } else {
                     document.getElementById('authModal').style.display = 'flex';
                     bindButtons();
