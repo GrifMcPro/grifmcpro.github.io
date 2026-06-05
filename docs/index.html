@@ -43,9 +43,11 @@
         @keyframes rainbowRotate { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes rgbShadow { 0% { box-shadow: 0 0 10px #ff0000; } 25% { box-shadow: 0 0 20px #00ff00; } 50% { box-shadow: 0 0 10px #0000ff; } 75% { box-shadow: 0 0 20px #ff00ff; } 100% { box-shadow: 0 0 10px #ff0000; } }
         
         .rgb-text-animation { animation: rgbTextAnim 3s infinite; }
         .rgb-border-animation { animation: rgbBorderAnim 3s infinite; }
+        .rgb-shadow-animation { animation: rgbShadow 2s infinite; }
         
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #151520; border-radius: 10px; }
@@ -71,7 +73,7 @@
         
         .page { display: none; animation: fadeInUp 0.4s ease; }
         .page.active { display: block; }
-        #homePage, #shopPage, #profilePage, #rulesPage, #appealsPage { padding-top: 85px; min-height: 100vh; }
+        #homePage, #shopPage, #profilePage, #appealsPage { padding-top: 85px; min-height: 100vh; }
 
         .hero-timer { min-height: calc(100vh - 85px); display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
         .hero-timer::before { content: ''; position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background: radial-gradient(circle, rgba(255,215,0,0.05) 0%, transparent 70%); animation: rotate 30s linear infinite; }
@@ -349,47 +351,27 @@
         .tab-pane-auth.active { display: block; }
         .close-modal { float: right; font-size: 22px; cursor: pointer; color: var(--accent); }
 
-        /* СТИЛИ ДЛЯ СТРАНИЦЫ ПРАВИЛ */
-        .rules-container { max-width: 1300px; margin: 0 auto; padding: 20px; }
-        .rules-header { text-align: center; margin-bottom: 40px; }
-        .rules-header h1 { font-family: 'Orbitron', monospace; font-size: 48px; background: linear-gradient(135deg, #fff, var(--accent), var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; animation: rgbTextAnim 3s infinite; }
-        .rules-header p { color: var(--text-secondary); margin-top: 15px; font-size: 16px; }
-        
-        .rules-nav { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-        .rules-nav-btn { background: rgba(25,25,40,0.6); backdrop-filter: blur(8px); border: 1px solid var(--border-color); padding: 12px 28px; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 14px; color: var(--text-primary); transition: 0.3s; }
-        .rules-nav-btn.active, .rules-nav-btn:hover { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #0a0a12; transform: translateY(-2px); box-shadow: var(--shadow-glow); }
-        
-        .rules-section { display: none; animation: fadeInUp 0.4s ease; }
-        .rules-section.active { display: block; }
-        
-        .rules-card { background: var(--bg-surface); backdrop-filter: blur(16px); border-radius: 28px; padding: 30px; margin-bottom: 25px; border: 1px solid var(--border-color); transition: 0.3s; }
-        .rules-card:hover { border-color: var(--accent); box-shadow: var(--shadow-glow); transform: translateY(-3px); }
-        .rules-card h2 { font-family: 'Orbitron', monospace; font-size: 28px; margin-bottom: 20px; background: linear-gradient(135deg, #fff, var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .rule-item { padding: 15px 0; border-bottom: 1px solid var(--border-color); }
-        .rule-item:last-child { border-bottom: none; }
-        .rule-title { font-weight: 700; font-size: 18px; color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .rule-punishment { display: inline-block; background: rgba(239,68,68,0.2); border-left: 3px solid var(--danger); padding: 5px 12px; border-radius: 8px; font-size: 13px; color: var(--danger); margin-top: 8px; }
-        
-        .punishment-card { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05)); border-left: 5px solid var(--danger); border-radius: 20px; padding: 25px; margin-bottom: 25px; animation: rgbBorderAnim 2s infinite; }
-        .punishment-card h3 { color: var(--danger); font-size: 24px; margin-bottom: 15px; }
-        .punishment-card p { color: var(--text-primary); line-height: 1.6; }
-        .punishment-highlight { background: rgba(255,215,0,0.15); border-radius: 16px; padding: 20px; margin: 20px 0; text-align: center; }
-        .punishment-highlight i { font-size: 50px; color: var(--accent); margin-bottom: 10px; }
-
         /* СТИЛИ ДЛЯ СТРАНИЦЫ ОБРАЩЕНИЙ */
         .appeals-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .appeals-header { text-align: center; margin-bottom: 40px; }
         .appeals-header h1 { font-family: 'Orbitron', monospace; font-size: 48px; background: linear-gradient(135deg, #fff, var(--accent), var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; animation: rgbTextAnim 3s infinite; }
+        
+        .appeals-tabs { display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; }
+        .appeals-tab-btn { background: rgba(25,25,40,0.6); backdrop-filter: blur(8px); border: 1px solid var(--border-color); padding: 10px 30px; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 15px; color: var(--text-primary); transition: 0.3s; }
+        .appeals-tab-btn.active, .appeals-tab-btn:hover { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #0a0a12; transform: translateY(-2px); box-shadow: var(--shadow-glow); }
+        
+        .appeals-tab { display: none; animation: fadeInUp 0.4s ease; }
+        .appeals-tab.active { display: block; }
         
         .appeal-form {
             background: var(--bg-surface);
             backdrop-filter: blur(16px);
             border-radius: 28px;
             padding: 30px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             border: 1px solid var(--border-color);
         }
-        .appeal-form h2 { margin-bottom: 20px; color: var(--accent); }
+        .appeal-form h2 { margin-bottom: 20px; color: var(--accent); font-size: 24px; }
         .appeal-form input, .appeal-form select, .appeal-form textarea {
             width: 100%;
             padding: 14px;
@@ -443,10 +425,8 @@
         .appeal-message { color: var(--text-secondary); line-height: 1.5; margin-bottom: 15px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 16px; }
         .appeal-answer { background: rgba(139,92,246,0.1); border-left: 4px solid var(--purple); padding: 15px; border-radius: 12px; margin-top: 10px; }
         .appeal-answer p { margin: 5px 0; }
-        .answer-form { margin-top: 15px; display: none; }
-        .answer-form textarea { width: 100%; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 16px; color: white; margin-bottom: 10px; }
-        .answer-btn { background: linear-gradient(135deg, var(--purple), #6d28d9); border: none; padding: 8px 20px; border-radius: 40px; font-weight: 700; cursor: pointer; color: white; }
-        .show-answer-btn { background: none; border: none; color: var(--accent); cursor: pointer; font-size: 13px; margin-top: 10px; }
+        .admin-reply-name { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .closed-notice { color: var(--danger); text-align: center; padding: 20px; background: rgba(239,68,68,0.1); border-radius: 20px; margin-bottom: 20px; }
 
         @media (max-width: 768px) {
             .countdown-number { font-size: 38px; }
@@ -462,6 +442,7 @@
             .profile-avatar i { font-size: 35px; }
             .profile-name { font-size: 22px; }
             .appeal-info { flex-direction: column; gap: 5px; }
+            .appeals-tab-btn { padding: 6px 16px; font-size: 12px; }
         }
     </style>
 </head>
@@ -477,133 +458,70 @@
 
     <div id="profilePage" class="page"><div class="profile-section"><div class="profile-card"><div class="profile-avatar"><i class="fas fa-user"></i></div><div class="profile-name" id="profileName"></div><div class="profile-stats" id="profileStats"></div><div class="profile-info" id="profileInfo"></div><div class="profile-info"><p><i class="fas fa-tag"></i> <strong>Тег:</strong> <span id="userTag"></span></p></div><div id="donatesContainer" class="donates-list"></div><div class="profile-actions"><button class="profile-btn" id="editNameBtn"><i class="fas fa-user-edit"></i> Сменить имя</button><button class="profile-btn" id="changePasswordBtn"><i class="fas fa-key"></i> Сменить пароль</button></div></div></div></div>
 
-    <!-- СТРАНИЦА ПРАВИЛ -->
-    <div id="rulesPage" class="page">
-        <div class="rules-container">
-            <div class="rules-header">
-                <h1><i class="fas fa-gavel"></i> ПРАВИЛА ПРОЕКТА</h1>
-                <p class="rgb-text-animation">Нарушение правил влечёт за собой наказание! Будьте внимательны!</p>
-            </div>
-            
-            <div class="rules-nav">
-                <button class="rules-nav-btn active" data-rule-section="punishment">⚠️ ВЫДАЧА НАКАЗАНИЙ</button>
-                <button class="rules-nav-btn" data-rule-section="general">📜 ОБЩИЕ ПРАВИЛА</button>
-                <button class="rules-nav-btn" data-rule-section="communication">💬 ПРАВИЛА ОБЩЕНИЯ</button>
-                <button class="rules-nav-btn" data-rule-section="mechanics">🎮 ИГРОВЫЕ МЕХАНИКИ</button>
-                <button class="rules-nav-btn" data-rule-section="survival">🌍 ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</button>
-            </div>
-
-            <div id="rule-section-punishment" class="rules-section active">
-                <div class="punishment-card rgb-border-animation">
-                    <h3><i class="fas fa-balance-scale"></i> ВЫДАЧА НАКАЗАНИЙ</h3>
-                    <p><strong>Важно!</strong> При получении наказания в игре — наказание автоматически действует и на сайте.<br>
-                    Выдача наказания <span class="rgb-text-animation">БЕЗ ДОКАЗАТЕЛЬСТВ</span> является нарушением со стороны администратора!</p>
-                </div>
-                <div class="punishment-highlight">
-                    <i class="fas fa-file-alt"></i>
-                    <h3>ОБЖАЛОВАНИЕ НАКАЗАНИЯ</h3>
-                    <p>Если вы считаете, что наказание было выдано некорректно или без доказательств — вы можете подать жалобу в разделе "Обращения"!</p>
-                    <p>🔹 Администратор, выдавший наказание без доказательств, получит наказание сам!</p>
-                    <p>🔹 Если вам выдали бан на сайте — вы можете его обжаловать через раздел обращений</p>
-                </div>
-                <div class="rules-card">
-                    <h2><i class="fas fa-info-circle"></i> Как работает система наказаний?</h2>
-                    <div class="rule-item"><div class="rule-title">🔴 Наказание в игре = наказание на сайте</div><p>Если вас забанили на сервере, доступ к сайту также будет ограничен.</p><div class="rule-punishment">Автоматическая синхронизация</div></div>
-                    <div class="rule-item"><div class="rule-title">🟡 Администратор обязан иметь доказательства</div><p>Любое наказание должно быть подтверждено скриншотом или видео.</p><div class="rule-punishment">Без доказательств: Бан на 3 дня</div></div>
-                    <div class="rule-item"><div class="rule-title">🟢 Обжалование наказаний</div><p>Если у администратора нет доказательств — наказание снимается.</p><div class="rule-punishment">Администратор получает бан на 3 дня</div></div>
-                </div>
-            </div>
-
-            <div id="rule-section-general" class="rules-section">
-                <div class="rules-card"><h2><i class="fas fa-globe"></i> 1. ОБЩИЕ ПРАВИЛА</h2>
-                    <div class="rule-item"><div class="rule-title">1.1 | Передача аккаунта</div><p>Разглашение пароля от аккаунта.</p><div class="rule-punishment">⚠️ Бан навсегда</div></div>
-                    <div class="rule-item"><div class="rule-title">1.2 | Торговля за реальные деньги</div><p>Продажа игровых ценностей за деньги.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
-                    <div class="rule-item"><div class="rule-title">1.3 | Вред проекту</div><p>Краш, DDOS, лаг-машины.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
-                    <div class="rule-item"><div class="rule-title">1.4 | Недопустимые ники</div><p>Оскорбительные или политические ники.</p><div class="rule-punishment">⚠️ Бан навсегда</div></div>
-                    <div class="rule-item"><div class="rule-title">1.5 | Притворство командой</div><p>Выдача себя за администрацию.</p><div class="rule-punishment">⚠️ Бан по IP на 3 дня</div></div>
-                    <div class="rule-item"><div class="rule-title">1.6 | Махинации</div><p>Взлом, обман, подделка доказательств.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
-                    <div class="rule-item"><div class="rule-title">1.7 | Вред команде проекта</div><p>Критика, угрозы, ложные репорты.</p><div class="rule-punishment">⚠️ Бан на 1 день</div></div>
-                    <div class="rule-item"><div class="rule-title">1.8 | Обход наказаний</div><p>Обход бана через другой аккаунт.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
-                </div>
-            </div>
-
-            <div id="rule-section-communication" class="rules-section">
-                <div class="rules-card"><h2><i class="fas fa-comments"></i> 2. ПРАВИЛА ОБЩЕНИЯ</h2>
-                    <div class="rule-item"><div class="rule-title">2.1 | Реклама</div><p>Реклама сторонних ресурсов.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
-                    <div class="rule-item"><div class="rule-title">2.2 | Засорение чата</div><p>КАПС, повторения, попрошайничество.</p><div class="rule-punishment">⚠️ Мут на 30 минут</div></div>
-                    <div class="rule-item"><div class="rule-title">2.3 | Оскорбления</div><p>Оскорбления, токсичность, угрозы.</p><div class="rule-punishment">⚠️ Мут на 3 часа - 7 дней</div></div>
-                    <div class="rule-item"><div class="rule-title">2.4 | Политика</div><p>Политические дискуссии.</p><div class="rule-punishment">⚠️ Мут на 6 часов</div></div>
-                    <div class="rule-item"><div class="rule-title">2.5 | Спам командами</div><p>Повтор команд /pay, /time и т.д.</p><div class="rule-punishment">⚠️ Бан на 10 минут</div></div>
-                    <div class="rule-item"><div class="rule-title">2.6 | Оскорбление проекта</div><p>Оскорбления в сторону проекта.</p><div class="rule-punishment">⚠️ Бан по IP на 3 дня - навсегда</div></div>
-                </div>
-            </div>
-
-            <div id="rule-section-mechanics" class="rules-section">
-                <div class="rules-card"><h2><i class="fas fa-cogs"></i> 3. ИГРОВЫЕ МЕХАНИКИ</h2>
-                    <div class="rule-item"><div class="rule-title">3.1 | Читерство</div><p>Использование читов.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
-                    <div class="rule-item"><div class="rule-title">3.2 | Недопустимые постройки</div><p>Оскорбительные или политические постройки.</p><div class="rule-punishment">⚠️ Бан на 6 часов</div></div>
-                    <div class="rule-item"><div class="rule-title">3.3 | Недопустимая кастомизация</div><p>Скины/префиксы, выдающие за админа.</p><div class="rule-punishment">⚠️ Бан на 6 часов</div></div>
-                    <div class="rule-item"><div class="rule-title">3.4 | Некорректные наказания</div><p>Выдача наказаний без доказательств.</p><div class="rule-punishment">⚠️ Бан на 3 дня</div></div>
-                    <div class="rule-item"><div class="rule-title">3.5 | Некорректные снятия</div><p>Снятие корректного наказания.</p><div class="rule-punishment">⚠️ Бан на 1 день</div></div>
-                    <div class="rule-item"><div class="rule-title">3.6 | Фарм статистики</div><p>Накрутка статистики.</p><div class="rule-punishment">⚠️ Бан на 12 часов - 3 дня</div></div>
-                </div>
-            </div>
-
-            <div id="rule-section-survival" class="rules-section">
-                <div class="rules-card"><h2><i class="fas fa-tree"></i> 4. ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</h2>
-                    <div class="rule-item"><div class="rule-title">4.1 | Гриферство</div><p>Обман, ловушки, вред регионам.</p><div class="rule-punishment">⚠️ Бан на 3 дня</div></div>
-                    <div class="rule-item"><div class="rule-title">4.2 | Помеха игрокам</div><p>Отказ покидать регион, /fly на аренах.</p><div class="rule-punishment">⚠️ Предупреждение, затем бан на 3 часа</div></div>
-                    <div class="rule-item"><div class="rule-title">4.3 | Изменения спавна</div><p>Порча спавна.</p><div class="rule-punishment">⚠️ Бан на 7 дней</div></div>
-                    <div class="rule-item"><div class="rule-title">4.4 | Злоупотребление донатом</div><p>Использование привилегий против игроков.</p><div class="rule-punishment">⚠️ Бан на 1 день - навсегда</div></div>
-                    <div class="rule-item"><div class="rule-title">4.5 | Телепортация без разрешения</div><p>/tphere, /tpohere без согласия.</p><div class="rule-punishment">⚠️ Бан на 2 часа</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- СТРАНИЦА ОБРАЩЕНИЙ -->
     <div id="appealsPage" class="page">
         <div class="appeals-container">
             <div class="appeals-header">
                 <h1><i class="fas fa-envelope"></i> СИСТЕМА ОБРАЩЕНИЙ</h1>
-                <p class="rgb-text-animation">Отправьте жалобу на администратора или обжалуйте наказание</p>
+                <p class="rgb-text-animation">Отправьте обращение администрации или проверьте статус ваших обращений</p>
             </div>
 
-            <!-- ФОРМА ОТПРАВКИ ОБРАЩЕНИЯ -->
-            <div class="appeal-form">
-                <h2><i class="fas fa-paper-plane"></i> Создать обращение</h2>
-                <input type="text" id="appealPlayerNick" placeholder="Ваш никнейм">
-                <input type="text" id="appealAdminNick" placeholder="Ник администратора (если есть)">
-                <input type="text" id="appealTitle" placeholder="Тема обращения">
-                <select id="appealType">
-                    <option value="complaint">Жалоба на администратора</option>
-                    <option value="ban_appeal">Обжалование бана</option>
-                    <option value="question">Вопрос к администрации</option>
-                    <option value="other">Другое</option>
-                </select>
-                <textarea id="appealMessage" rows="5" placeholder="Подробное описание ситуации..."></textarea>
-                <button id="submitAppealBtn" class="submit-appeal-btn"><i class="fas fa-send"></i> ОТПРАВИТЬ ОБРАЩЕНИЕ</button>
+            <div class="appeals-tabs">
+                <button class="appeals-tab-btn active" data-appeal-tab="create">📝 СОЗДАТЬ ОБРАЩЕНИЕ</button>
+                <button class="appeals-tab-btn" data-appeal-tab="my">📋 МОИ ОБРАЩЕНИЯ</button>
             </div>
 
-            <!-- СПИСОК ОБРАЩЕНИЙ -->
-            <h2 style="margin: 30px 0 20px 0;"><i class="fas fa-list"></i> Список обращений</h2>
-            <div id="appealsList" class="appeals-list"></div>
+            <!-- Вкладка создания обращения -->
+            <div id="appeal-tab-create" class="appeals-tab active">
+                <div class="appeal-form">
+                    <h2><i class="fas fa-paper-plane"></i> Новое обращение</h2>
+                    <input type="text" id="appealPlayerNick" placeholder="Ваш никнейм">
+                    <input type="text" id="appealAdminNick" placeholder="Ник администратора (если есть)">
+                    <input type="text" id="appealTitle" placeholder="Тема обращения">
+                    <select id="appealType">
+                        <option value="complaint">Жалоба на администратора</option>
+                        <option value="ban_appeal">Обжалование бана</option>
+                        <option value="question">Вопрос к администрации</option>
+                        <option value="other">Другое</option>
+                    </select>
+                    <textarea id="appealMessage" rows="5" placeholder="Подробное описание ситуации..."></textarea>
+                    <button id="submitAppealBtn" class="submit-appeal-btn"><i class="fas fa-send"></i> ОТПРАВИТЬ ОБРАЩЕНИЕ</button>
+                </div>
+            </div>
+
+            <!-- Вкладка моих обращений -->
+            <div id="appeal-tab-my" class="appeals-tab">
+                <div id="appealsClosedInfo" class="closed-notice" style="display: none;"></div>
+                <div id="appealsList" class="appeals-list"></div>
+            </div>
         </div>
     </div>
 
     <div class="secret-admin-trigger" id="secretAdminTrigger"><i class="fas fa-lock"></i></div>
 
-    <div id="adminPagePanel" class="admin-page"><div class="close-admin-page" id="closeAdminPageBtn"><i class="fas fa-times"></i></div><div class="admin-rgb-bg"><div class="admin-glass-panel"><h1><i class="fas fa-crown"></i> АДМИН-ПАНЕЛЬ</h1><div class="admin-category-buttons"><button class="admin-cat-btn active" data-cat="monets">Монеты</button><button class="admin-cat-btn" data-cat="broadcast">Рассылка</button><button class="admin-cat-btn" data-cat="bans">Баны / Разбаны</button><button class="admin-cat-btn" data-cat="site">Управление сайтом</button><button class="admin-cat-btn" data-cat="donates">Управление донатами</button><button class="admin-cat-btn" data-cat="timer">Таймер</button><button class="admin-cat-btn" data-cat="badges">Галочки</button><button class="admin-cat-btn" data-cat="spins">Прокрутки</button><button class="admin-cat-btn" data-cat="purchases">📋 Логи покупок</button><button class="admin-cat-btn" data-cat="appeals">📨 Обращения</button></div>
+    <div id="adminPagePanel" class="admin-page"><div class="close-admin-page" id="closeAdminPageBtn"><i class="fas fa-times"></i></div><div class="admin-rgb-bg"><div class="admin-glass-panel"><h1><i class="fas fa-crown"></i> АДМИН-ПАНЕЛЬ</h1><div class="admin-category-buttons"><button class="admin-cat-btn active" data-cat="monets">Монеты</button><button class="admin-cat-btn" data-cat="broadcast">Рассылка</button><button class="admin-cat-btn" data-cat="bans">Баны / Разбаны</button><button class="admin-cat-btn" data-cat="site">Управление сайтом</button><button class="admin-cat-btn" data-cat="donates">Управление донатами</button><button class="admin-cat-btn" data-cat="timer">Таймер</button><button class="admin-cat-btn" data-cat="badges">Галочки</button><button class="admin-cat-btn" data-cat="spins">Прокрутки</button><button class="admin-cat-btn" data-cat="purchases">📋 Логи покупок</button><button class="admin-cat-btn" data-cat="appeals">📨 Обращения</button><button class="admin-cat-btn" data-cat="moderators">👥 Модераторы</button></div>
     <div id="cat-monets" class="admin-category active"><div class="admin-block"><h3><i class="fas fa-coins"></i> Выдать монеты</h3><input type="text" id="giveNick" placeholder="Никнейм" class="admin-input"><input type="number" id="giveAmount" placeholder="Сумма" class="admin-input"><button id="giveCoinsBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="globalGiveBtn" class="admin-btn-purple">ВСЕМ</button></div></div>
     <div id="cat-broadcast" class="admin-category"><div class="admin-block"><h3><i class="fas fa-bullhorn"></i> Рассылка</h3><textarea id="broadcastMsg" rows="3" placeholder="Текст сообщения..." class="admin-input"></textarea><button id="sendBroadcastBtn" class="admin-btn-pink">ОТПРАВИТЬ ВСЕМ</button></div></div>
     <div id="cat-bans" class="admin-category"><div class="admin-block"><h3><i class="fas fa-gavel"></i> Бан / Разбан</h3><input type="text" id="banNick" placeholder="Никнейм" class="admin-input"><input type="text" id="moderatorName" placeholder="Модератор" class="admin-input"><textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="banDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="12">12 часов</option><option value="24">1 день</option><option value="168">7 дней</option><option value="720">30 дней</option><option value="forever">Навсегда</option></select><button id="banUserBtn" class="admin-btn-red">ЗАБАНИТЬ</button><button id="unbanUserBtn" class="admin-btn-green">РАЗБАНИТЬ</button></div></div>
-    <div id="cat-site" class="admin-category"><div class="admin-block"><h3><i class="fas fa-globe"></i> Управление сайтом</h3><textarea id="closeReason" rows="2" placeholder="Причина закрытия" class="admin-input"></textarea><select id="closeDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="24">1 день</option><option value="168">7 дней</option></select><button id="closeSiteBtn" class="admin-btn-red">ЗАКРЫТЬ САЙТ</button><button id="openSiteBtn" class="admin-btn-green">ОТКРЫТЬ САЙТ</button></div></div>
+    <div id="cat-site" class="admin-category"><div class="admin-block"><h3><i class="fas fa-globe"></i> Управление сайтом</h3><textarea id="closeReason" rows="2" placeholder="Причина закрытия" class="admin-input"></textarea><select id="closeDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="24">1 день</option><option value="168">7 дней</option><option value="0">Навсегда</option></select><button id="closeSiteBtn" class="admin-btn-red">ЗАКРЫТЬ САЙТ</button><button id="openSiteBtn" class="admin-btn-green">ОТКРЫТЬ САЙТ</button></div></div>
     <div id="cat-donates" class="admin-category"><div class="admin-block"><h3><i class="fas fa-gift"></i> Выдать донат по нику</h3><input type="text" id="donateNick" placeholder="Никнейм" class="admin-input"><input type="text" id="donateName" placeholder="Название доната" class="admin-input"><button id="giveDonateBtn" class="admin-btn-blue">ВЫДАТЬ ДОНАТ</button><button id="removeDonateBtn" class="admin-btn-red">СНЯТЬ ДОНАТ</button></div></div>
-    <div id="cat-timer" class="admin-category"><div class="admin-block"><h3><i class="fas fa-clock"></i> Настройка таймера</h3><input type="text" id="timerEventName" placeholder="Название события" class="admin-input"><textarea id="timerEventDesc" rows="2" placeholder="Описание" class="admin-input"></textarea><input type="datetime-local" id="timerTargetDate" class="admin-input"><button id="updateTimerBtn" class="admin-btn-green">СОХРАНИТЬ</button></div></div>
+    <div id="cat-timer" class="admin-category"><div class="admin-block"><h3><i class="fas fa-clock"></i> Настройка таймера</h3><input type="text" id="timerEventName" placeholder="Название события" class="admin-input"><textarea id="timerEventDesc" rows="2" placeholder="Описание" class="admin-input"></textarea><input type="datetime-local" id="timerTargetDate" class="admin-input"><div style="display: flex; gap: 10px;"><button id="applyTimerRgbText" class="admin-btn-blue">RGB Текст</button><button id="applyTimerRgbBorder" class="admin-btn-pink">RGB Рамка</button></div><button id="updateTimerBtn" class="admin-btn-green">СОХРАНИТЬ</button></div></div>
     <div id="cat-badges" class="admin-category"><div class="admin-block"><h3><i class="fas fa-tags"></i> Галочки (30 видов)</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option><option value="diamond">💎 Алмазная</option><option value="star">⭐ Звездная</option><option value="game">🎮 Игровая</option><option value="fire">🔥 Огненная</option><option value="mythic">🔮 Мифическая</option><option value="cosmic">🌌 Космическая</option><option value="ice">❄️ Ледяная</option><option value="shadow">🌑 Теневая</option><option value="light">✨ Светлая</option><option value="dark">🖤 Тёмная</option><option value="nature">🌿 Природная</option><option value="blood">🩸 Кровавая</option><option value="void">🌀 Пустота</option><option value="divine">⚜️ Божественная</option><option value="purple">🟣 Фиолетовая</option><option value="teal">🔷 Бирюзовая</option><option value="sapphire">💙 Сапфировая</option><option value="emerald">💚 Изумрудная</option><option value="ruby">❤️ Рубиновая</option><option value="amber">🧡 Янтарная</option><option value="jade">💚 Нефритовая</option><option value="coral">🪸 Коралловая</option><option value="indigo">🟣 Индиго</option><option value="magenta">🩷 Магента</option><option value="bronze">🥉 Бронзовая</option><option value="platinum">⚪ Платиновая</option><option value="obsidian">⬛ Обсидиановая</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div></div>
     <div id="cat-spins" class="admin-category"><div class="admin-block"><h3><i class="fas fa-dice-d6"></i> Прокрутки колеса</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">ВЫДАТЬ</button></div></div>
     <div id="cat-purchases" class="admin-category"><div class="admin-block"><h3><i class="fas fa-shopping-cart"></i> ЛОГИ ПОКУПОК</h3><div id="purchasesList" class="players-list" style="max-height: 400px;"></div><button id="clearPurchasesBtn" class="admin-btn-red">ОЧИСТИТЬ ЛОГИ</button></div></div>
-    <div id="cat-appeals" class="admin-category"><div class="admin-block"><h3><i class="fas fa-envelope"></i> ОБРАЩЕНИЯ ИГРОКОВ</h3><div id="adminAppealsList" class="players-list" style="max-height: 500px;"></div></div></div>
+    <div id="cat-appeals" class="admin-category"><div class="admin-block"><h3><i class="fas fa-envelope"></i> ОБРАЩЕНИЯ ИГРОКОВ</h3>
+        <div style="margin-bottom: 15px; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 16px;">
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="checkbox" id="closeAppealsToggle"> <span>🔒 Закрыть отправку обращений</span>
+            </label>
+            <div id="closeAppealsReasonDiv" style="display: none; margin-top: 10px;">
+                <textarea id="closeAppealsReason" rows="2" placeholder="Причина закрытия отправки обращений..." class="admin-input"></textarea>
+                <button id="saveAppealsCloseBtn" class="admin-btn-red">СОХРАНИТЬ</button>
+            </div>
+        </div>
+        <div id="adminAppealsList" class="players-list" style="max-height: 500px;"></div>
+    </div></div>
+    <div id="cat-moderators" class="admin-category"><div class="admin-block"><h3><i class="fas fa-user-shield"></i> МОДЕРАТОРЫ (могут отвечать)</h3><input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input"><input type="email" id="moderatorEmail" placeholder="Email" class="admin-input"><button id="addModeratorBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button><div id="moderatorsList" class="players-list"></div></div></div>
     </div></div></div>
 
     <div id="authModal" class="modal" style="display: flex;"><div class="auth-modal"><i class="fas fa-crown" style="font-size: 45px; color: var(--accent); margin-bottom: 15px;"></i><h2 style="margin-bottom:20px;">GrifMcPro</h2><div class="tabs-auth"><button class="tab-auth active" data-tab="login">ВХОД</button><button class="tab-auth" data-tab="register">РЕГИСТРАЦИЯ</button></div><div id="loginPaneAuth" class="tab-pane-auth active"><input type="email" id="loginEmail" placeholder="Email" class="auth-input"><input type="password" id="loginPass" placeholder="Пароль" class="auth-input"><button id="doLoginBtn" class="auth-btn">ВОЙТИ</button></div><div id="registerPaneAuth" class="tab-pane-auth"><input type="text" id="regUsername" placeholder="Никнейм" class="auth-input"><input type="email" id="regEmail" placeholder="Email" class="auth-input"><input type="password" id="regPass" placeholder="Пароль (мин. 6)" class="auth-input"><button id="doRegisterBtn" class="auth-btn">ЗАРЕГИСТРИРОВАТЬСЯ</button></div></div></div>
@@ -631,8 +549,8 @@
             const MAIN_ADMIN_EMAIL = "ramonenok@bk.ru";
             const ADMIN_SECRET_CODE = "website";
             
-            let currentUser = null, currentBalance = 0, currentProduct = null, timerInterval = null, timerUnsub = null;
-            let appealsUnsub = null;
+            let currentUser = null, currentBalance = 0, currentProduct = null, moderatorsList = [], timerInterval = null, siteStatusUnsub = null, banUnsub = null, balanceInterval = null, timerUnsub = null, userBadgeUnsub = null;
+            let appealsUnsub = null, adminAppealsUnsub = null;
 
             function showNotification(msg, type = 'success') {
                 let container = document.getElementById('notifContainer');
@@ -646,14 +564,24 @@
 
             function getBadgeHtml(type) {
                 if (!type) return '';
+                const icons = {
+                    blue: 'fa-check', red: 'fa-check', gold: 'fa-check', rainbow: 'fa-check', rgb: 'fa-check',
+                    crown: 'fa-crown', diamond: 'fa-gem', star: 'fa-star', game: 'fa-gamepad', fire: 'fa-fire',
+                    mythic: 'fa-dragon', cosmic: 'fa-globe', ice: 'fa-snowflake', shadow: 'fa-moon', light: 'fa-sun',
+                    dark: 'fa-moon', nature: 'fa-leaf', blood: 'fa-droplet', void: 'fa-circle', divine: 'fa-feather',
+                    purple: 'fa-check', teal: 'fa-check', sapphire: 'fa-gem', emerald: 'fa-leaf', ruby: 'fa-gem',
+                    amber: 'fa-sun', jade: 'fa-leaf', coral: 'fa-fish', indigo: 'fa-moon', magenta: 'fa-heart',
+                    bronze: 'fa-medal', platinum: 'fa-star', obsidian: 'fa-moon'
+                };
+                const icon = icons[type] || 'fa-check';
                 if (type === 'crown') return `<span class="badge-icon badge-crown"><i class="fas fa-crown"></i></span>`;
-                return `<span class="badge-icon badge-${type}"><i class="fas fa-check"></i></span>`;
+                return `<span class="badge-icon badge-${type}"><i class="fas ${icon}"></i></span>`;
             }
 
             function renderMenu() {
                 const container = document.getElementById('dynamicMenuTabs');
                 if (!container) return;
-                container.innerHTML = `<div class="menu-tab active" data-page="home">Главная</div><div class="menu-tab" data-page="shop">Магазин</div><div class="menu-tab" data-page="profile">Профиль</div><div class="menu-tab" data-page="rules">Правила</div><div class="menu-tab" data-page="appeals">Обращения</div>`;
+                container.innerHTML = `<div class="menu-tab active" data-page="home">Главная</div><div class="menu-tab" data-page="shop">Магазин</div><div class="menu-tab" data-page="profile">Профиль</div><div class="menu-tab" data-page="appeals">Обращения</div>`;
                 document.querySelectorAll('.menu-tab').forEach(tab => {
                     tab.onclick = () => {
                         document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
@@ -661,59 +589,37 @@
                         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                         document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
                         if (tab.dataset.page === 'profile') loadUserData(currentUser);
-                        if (tab.dataset.page === 'rules') initRulesPage();
-                        if (tab.dataset.page === 'appeals') loadAppeals();
+                        if (tab.dataset.page === 'appeals') { loadAppeals(); loadAppealsClosedStatus(); }
                     };
                 });
             }
 
-            function initRulesPage() {
-                document.querySelectorAll('.rules-nav-btn').forEach(btn => {
-                    btn.onclick = () => {
-                        document.querySelectorAll('.rules-nav-btn').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        document.querySelectorAll('.rules-section').forEach(s => s.classList.remove('active'));
-                        document.getElementById(`rule-section-${btn.dataset.ruleSection}`).classList.add('active');
-                    };
-                });
-            }
-
-            // СИСТЕМА ОБРАЩЕНИЙ
+            // ОБРАЩЕНИЯ - ЗАГРУЗКА ДЛЯ ПОЛЬЗОВАТЕЛЯ
             async function loadAppeals() {
                 if (appealsUnsub) appealsUnsub();
+                if (!currentUser) return;
                 
-                appealsUnsub = db.collection('appeals').orderBy('createdAt', 'desc').onSnapshot((snap) => {
+                appealsUnsub = db.collection('appeals').where('playerId', '==', currentUser.uid).orderBy('createdAt', 'desc').onSnapshot((snap) => {
                     const container = document.getElementById('appealsList');
                     if (!container) return;
                     if (snap.empty) {
-                        container.innerHTML = '<div class="appeal-card" style="text-align: center;">📭 Нет обращений. Создайте первое!</div>';
+                        container.innerHTML = '<div class="appeal-card" style="text-align: center;">📭 У вас пока нет обращений</div>';
                         return;
                     }
                     container.innerHTML = '';
                     snap.forEach(doc => {
                         const appeal = doc.data();
-                        const isAdmin = currentUser && currentUser.email === MAIN_ADMIN_EMAIL;
                         const statusClass = appeal.status === 'waiting' ? 'status-waiting' : (appeal.status === 'answered' ? 'status-answered' : 'status-closed');
                         const statusText = appeal.status === 'waiting' ? 'Ожидает ответа' : (appeal.status === 'answered' ? 'Ответ дан' : 'Закрыто');
                         
                         let answerHtml = '';
                         if (appeal.answer) {
-                            answerHtml = `<div class="appeal-answer"><strong><i class="fas fa-reply"></i> Ответ администрации:</strong><p>${appeal.answer.replace(/\n/g, '<br>')}</p></div>`;
-                        }
-                        
-                        let answerFormHtml = '';
-                        if (isAdmin && appeal.status !== 'closed') {
-                            answerFormHtml = `
-                                <button class="show-answer-btn" data-id="${doc.id}"><i class="fas fa-reply"></i> Ответить</button>
-                                <div class="answer-form" id="answer-form-${doc.id}">
-                                    <textarea id="answer-text-${doc.id}" rows="3" placeholder="Ваш ответ..."></textarea>
-                                    <button class="answer-btn" data-id="${doc.id}">ОТВЕТИТЬ</button>
-                                </div>
-                            `;
+                            const adminBadge = getBadgeHtml(appeal.answerAdminBadge);
+                            answerHtml = `<div class="appeal-answer"><div class="admin-reply-name"><strong><i class="fas fa-reply"></i> Ответ:</strong> ${adminBadge} ${appeal.answerAdminName || appeal.answerAdminEmail}</div><p>${appeal.answer.replace(/\n/g, '<br>')}</p></div>`;
                         }
                         
                         container.innerHTML += `
-                            <div class="appeal-card" id="appeal-${doc.id}">
+                            <div class="appeal-card">
                                 <div class="appeal-status ${statusClass}">${statusText}</div>
                                 <div class="appeal-title">${appeal.title || 'Без темы'}</div>
                                 <div class="appeal-info">
@@ -724,38 +630,106 @@
                                 </div>
                                 <div class="appeal-message"><strong>Сообщение:</strong><br>${appeal.message.replace(/\n/g, '<br>')}</div>
                                 ${answerHtml}
-                                ${answerFormHtml}
+                            </div>
+                        `;
+                    });
+                });
+            }
+
+            // АДМИН - ЗАГРУЗКА ОБРАЩЕНИЙ
+            async function loadAdminAppeals() {
+                if (adminAppealsUnsub) adminAppealsUnsub();
+                adminAppealsUnsub = db.collection('appeals').orderBy('createdAt', 'desc').onSnapshot((snap) => {
+                    const container = document.getElementById('adminAppealsList');
+                    if (!container) return;
+                    if (snap.empty) {
+                        container.innerHTML = '<div class="player-card">📭 Нет обращений</div>';
+                        return;
+                    }
+                    container.innerHTML = '';
+                    snap.forEach(doc => {
+                        const appeal = doc.data();
+                        const statusText = appeal.status === 'waiting' ? '⏳ Ожидает' : (appeal.status === 'answered' ? '✅ Отвечено' : '🔒 Закрыто');
+                        container.innerHTML += `
+                            <div class="player-card" style="flex-direction: column; align-items: flex-start;" data-appeal-id="${doc.id}">
+                                <div><strong>${appeal.title || 'Без темы'}</strong> <span style="font-size: 11px; color: var(--text-muted);">${statusText}</span></div>
+                                <div>👤 ${appeal.playerNick} | ${appeal.type === 'complaint' ? 'Жалоба' : appeal.type === 'ban_appeal' ? 'Обжалование' : appeal.type === 'question' ? 'Вопрос' : 'Другое'}</div>
+                                <div>📧 ${appeal.playerEmail}</div>
+                                <div>📝 ${appeal.message.substring(0, 100)}${appeal.message.length > 100 ? '...' : ''}</div>
+                                <div>📅 ${new Date(appeal.createdAt?.toDate()).toLocaleString()}</div>
+                                ${appeal.answer ? `<div style="color: var(--success);">✅ Ответ: ${appeal.answer.substring(0, 80)}...</div>` : ''}
+                                <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+                                    <button class="admin-btn-blue answer-appeal-btn" data-id="${doc.id}" style="width: auto; padding: 5px 15px;">✏️ ОТВЕТИТЬ</button>
+                                    <button class="admin-btn-red delete-appeal-btn" data-id="${doc.id}" style="width: auto; padding: 5px 15px;">🗑️ УДАЛИТЬ</button>
+                                </div>
+                                <div id="answer-area-${doc.id}" style="display: none; margin-top: 10px; width: 100%;">
+                                    <textarea id="answer-text-${doc.id}" rows="3" placeholder="Ваш ответ..." style="width: 100%; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 16px; color: white;"></textarea>
+                                    <button class="admin-btn-green submit-answer-btn" data-id="${doc.id}" style="margin-top: 5px;">ОТПРАВИТЬ ОТВЕТ</button>
+                                </div>
                             </div>
                         `;
                     });
                     
-                    // Кнопки ответа
-                    document.querySelectorAll('.show-answer-btn').forEach(btn => {
+                    document.querySelectorAll('.answer-appeal-btn').forEach(btn => {
                         btn.onclick = () => {
-                            const form = document.getElementById(`answer-form-${btn.dataset.id}`);
-                            if (form) form.style.display = form.style.display === 'none' ? 'block' : 'none';
+                            const area = document.getElementById(`answer-area-${btn.dataset.id}`);
+                            area.style.display = area.style.display === 'none' ? 'block' : 'none';
                         };
                     });
-                    document.querySelectorAll('.answer-btn').forEach(btn => {
+                    document.querySelectorAll('.submit-answer-btn').forEach(btn => {
                         btn.onclick = async () => {
                             const answer = document.getElementById(`answer-text-${btn.dataset.id}`).value.trim();
                             if (!answer) { showNotification('Введите ответ!', 'error'); return; }
+                            const userDoc = await db.collection('users').doc(currentUser.uid).get();
+                            const adminName = userDoc.exists ? userDoc.data().username : currentUser.displayName || currentUser.email;
+                            const adminBadge = userDoc.exists ? userDoc.data().badge : null;
                             await db.collection('appeals').doc(btn.dataset.id).update({
                                 answer: answer,
                                 status: 'answered',
                                 answeredAt: new Date(),
-                                answeredBy: currentUser.email
+                                answerAdminId: currentUser.uid,
+                                answerAdminEmail: currentUser.email,
+                                answerAdminName: adminName,
+                                answerAdminBadge: adminBadge
                             });
                             showNotification('Ответ отправлен!', 'success');
+                            document.getElementById(`answer-area-${btn.dataset.id}`).style.display = 'none';
+                            document.getElementById(`answer-text-${btn.dataset.id}`).value = '';
+                        };
+                    });
+                    document.querySelectorAll('.delete-appeal-btn').forEach(btn => {
+                        btn.onclick = async () => {
+                            if (confirm('Удалить это обращение навсегда?')) {
+                                await db.collection('appeals').doc(btn.dataset.id).delete();
+                                showNotification('Обращение удалено!', 'success');
+                            }
                         };
                     });
                 });
             }
 
+            async function loadAppealsClosedStatus() {
+                const doc = await db.collection('settings').doc('appealsSettings').get();
+                if (doc.exists && doc.data().closed) {
+                    document.getElementById('appealsClosedInfo').style.display = 'block';
+                    document.getElementById('appealsClosedInfo').innerHTML = `<i class="fas fa-lock"></i> 🔒 ОТПРАВКА ОБРАЩЕНИЙ ЗАКРЫТА<br>Причина: ${doc.data().reason || 'Технические работы'}`;
+                    document.querySelector('#appeal-tab-create .appeal-form').style.opacity = '0.5';
+                    document.querySelector('#appeal-tab-create .appeal-form').style.pointerEvents = 'none';
+                } else {
+                    document.getElementById('appealsClosedInfo').style.display = 'none';
+                    document.querySelector('#appeal-tab-create .appeal-form').style.opacity = '1';
+                    document.querySelector('#appeal-tab-create .appeal-form').style.pointerEvents = 'auto';
+                }
+            }
+
             async function submitAppeal(playerNick, adminNick, title, type, message) {
                 if (!currentUser) { showNotification('Авторизуйтесь!', 'error'); return false; }
+                const settings = await db.collection('settings').doc('appealsSettings').get();
+                if (settings.exists && settings.data().closed) {
+                    showNotification(`Отправка обращений закрыта! Причина: ${settings.data().reason || 'Технические работы'}`, 'error');
+                    return false;
+                }
                 if (!playerNick || !title || !message) { showNotification('Заполните ник, тему и сообщение!', 'error'); return false; }
-                
                 await db.collection('appeals').add({
                     playerId: currentUser.uid,
                     playerEmail: currentUser.email,
@@ -769,31 +743,6 @@
                 });
                 showNotification('Обращение отправлено! Администрация ответит в ближайшее время.', 'success');
                 return true;
-            }
-
-            // АДМИН-ПАНЕЛЬ - ЗАГРУЗКА ОБРАЩЕНИЙ
-            async function loadAdminAppeals() {
-                const container = document.getElementById('adminAppealsList');
-                if (!container) return;
-                const snapshot = await db.collection('appeals').orderBy('createdAt', 'desc').get();
-                if (snapshot.empty) {
-                    container.innerHTML = '<div class="player-card">📭 Нет обращений</div>';
-                    return;
-                }
-                container.innerHTML = '';
-                for (const doc of snapshot.docs) {
-                    const appeal = doc.data();
-                    container.innerHTML += `
-                        <div class="player-card" style="flex-direction: column; align-items: flex-start;">
-                            <div><strong>${appeal.title || 'Без темы'}</strong></div>
-                            <div>👤 ${appeal.playerNick} | ${appeal.type === 'complaint' ? 'Жалоба' : appeal.type === 'ban_appeal' ? 'Обжалование' : appeal.type === 'question' ? 'Вопрос' : 'Другое'}</div>
-                            <div>📧 ${appeal.playerEmail}</div>
-                            <div>📝 ${appeal.message.substring(0, 100)}${appeal.message.length > 100 ? '...' : ''}</div>
-                            <div>📅 ${new Date(appeal.createdAt?.toDate()).toLocaleString()}</div>
-                            ${appeal.answer ? `<div style="color: var(--success);">✅ Ответ дан: ${appeal.answer.substring(0, 50)}...</div>` : '<div style="color: var(--warning);">⏳ Ожидает ответа</div>'}
-                        </div>
-                    `;
-                }
             }
 
             // МАГАЗИН
@@ -836,6 +785,16 @@
                 document.getElementById('buyPrice').innerText = p.toLocaleString();
                 document.getElementById('buyModal').style.display = 'flex';
             };
+            
+            async function purchaseProduct(product, serverNick, siteNick) {
+                if (currentBalance < product.price) { showNotification('Недостаточно средств', 'error'); return false; }
+                await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - product.price });
+                await db.collection('donates').add({ userId: currentUser.uid, username: currentUser.displayName, product: product.name, price: product.price, date: new Date() });
+                currentBalance -= product.price;
+                document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
+                showNotification(`✅ Куплено ${product.name}!`, 'success');
+                return true;
+            }
 
             // ПРОФИЛЬ
             async function loadUserData(user) {
@@ -843,7 +802,7 @@
                 const doc = await db.collection('users').doc(user.uid).get();
                 let data = doc.data();
                 if (!data) {
-                    await db.collection('users').doc(user.uid).set({ username: user.displayName || user.email.split('@')[0], email: user.email, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1, tag: `#${(user.displayName || user.email).substring(0,4)}`, badge: user.email === MAIN_ADMIN_EMAIL ? 'crown' : null });
+                    await db.collection('users').doc(user.uid).set({ username: user.displayName || user.email.split('@')[0], email: user.email, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1, tag: `#${user.displayName?.substring(0,4) || 'user'}`, badge: user.email === MAIN_ADMIN_EMAIL ? 'crown' : null });
                     currentBalance = 50000;
                 } else { currentBalance = data.balance || 50000; }
                 document.getElementById('userBalance').innerText = currentBalance;
@@ -852,7 +811,8 @@
                 document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> ${user.email}</p><p><i class="fas fa-calendar-alt"></i> Зарегистрирован: ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`;
                 document.getElementById('userTag').innerHTML = data?.tag || '#user';
                 const donatesSnap = await db.collection('donates').where('userId', '==', user.uid).get();
-                document.getElementById('profileStats').innerHTML = `<div class="stat-item"><div class="stat-value">${donatesSnap.size}</div><div class="stat-label">Покупок</div></div><div class="stat-item"><div class="stat-value">${data?.wheelSpins || 0}</div><div class="stat-label">Прокруток</div></div><div class="stat-item"><div class="stat-value">${currentBalance.toLocaleString()} ₽</div><div class="stat-label">Баланс</div></div>`;
+                const totalSpent = donatesSnap.docs.reduce((sum, d) => sum + (d.data().price || 0), 0);
+                document.getElementById('profileStats').innerHTML = `<div class="stat-item"><div class="stat-value">${donatesSnap.size}</div><div class="stat-label">Покупок</div></div><div class="stat-item"><div class="stat-value">${totalSpent.toLocaleString()} ₽</div><div class="stat-label">Потрачено</div></div><div class="stat-item"><div class="stat-value">${data?.wheelSpins || 0}</div><div class="stat-label">Прокруток</div></div>`;
                 db.collection('donates').where('userId', '==', user.uid).onSnapshot(snap => { 
                     const c = document.getElementById('donatesContainer'); 
                     if (c) { 
@@ -888,11 +848,299 @@
                     if (doc.exists && doc.data().targetDate) {
                         let target = doc.data().targetDate.toDate ? doc.data().targetDate.toDate() : new Date(doc.data().targetDate);
                         startTimer(target, doc.data().eventName, doc.data().eventDesc);
+                        if (document.getElementById('timerEventName')) {
+                            document.getElementById('timerEventName').value = doc.data().eventName || '';
+                            document.getElementById('timerEventDesc').value = doc.data().eventDesc || '';
+                            document.getElementById('timerTargetDate').value = target.toISOString().slice(0, 16);
+                        }
                     } else { let def = new Date(); def.setDate(def.getDate() + 7); startTimer(def, "ДО ОТКРЫТИЯ СЕЗОНА", ""); }
                 });
             }
 
-            // КНОПКИ
+            async function updateTimer(name, desc, date) {
+                await db.collection('settings').doc('timer').set({ eventName: name, eventDesc: desc, targetDate: new Date(date) });
+                showNotification('Таймер обновлён!', 'success');
+            }
+
+            // БАН
+            function showBanModal(reason, untilDate, moderator, banDate) {
+                document.getElementById('banModeratorSpan').innerText = moderator || 'Система';
+                document.getElementById('banReasonSpan').innerText = reason;
+                document.getElementById('banDateSpan').innerText = banDate || new Date().toLocaleString();
+                document.getElementById('banUntilSpan').innerText = untilDate || 'Навсегда';
+                document.getElementById('banModalOverlay').style.display = 'flex';
+                document.querySelector('.site-header').style.display = 'none';
+                document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+            }
+
+            async function banUser(userId, username, email, reason, duration, moderator) {
+                const until = duration === 'forever' ? null : new Date(Date.now() + parseInt(duration) * 3600000);
+                const banDate = new Date();
+                await db.collection('bans').add({ userId, username, email, reason, until, active: true, moderator, createdAt: banDate });
+                showNotification(`${username} забанен!`, 'error');
+                if (currentUser && currentUser.uid === userId) {
+                    showBanModal(reason, until ? until.toLocaleString() : 'Навсегда', moderator, banDate.toLocaleString());
+                    setTimeout(() => auth.signOut(), 3000);
+                }
+            }
+
+            async function unbanUser(email, username) {
+                const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
+                for (const doc of snap.docs) await doc.ref.update({ active: false });
+                showNotification(`${username} разбанен!`, 'success');
+                if (currentUser && currentUser.email === email) { await auth.signOut(); setTimeout(() => location.reload(), 1500); }
+            }
+
+            async function checkBanOnLoad(user) {
+                if (!user) return false;
+                const snap = await db.collection('bans').where('userId', '==', user.uid).where('active', '==', true).get();
+                if (!snap.empty) {
+                    const ban = snap.docs[0].data();
+                    if (ban.until && ban.until.toDate() < new Date()) { await snap.docs[0].ref.update({ active: false }); return false; }
+                    showBanModal(ban.reason, ban.until ? new Date(ban.until.toDate()).toLocaleString() : 'Навсегда', ban.moderator, new Date(ban.createdAt.toDate()).toLocaleString());
+                    return true;
+                }
+                return false;
+            }
+
+            function listenBan(user) {
+                if (banUnsub) banUnsub();
+                if (!user) return;
+                banUnsub = db.collection('bans').where('userId', '==', user.uid).where('active', '==', true).onSnapshot((snap) => {
+                    if (!snap.empty) {
+                        const ban = snap.docs[0].data();
+                        if (ban.until && ban.until.toDate() < new Date()) { snap.docs[0].ref.update({ active: false }); return; }
+                        showBanModal(ban.reason, ban.until ? new Date(ban.until.toDate()).toLocaleString() : 'Навсегда', ban.moderator, new Date(ban.createdAt.toDate()).toLocaleString());
+                        setTimeout(() => auth.signOut(), 1000);
+                    }
+                });
+            }
+
+            // САЙТ
+            async function closeSite(reason, hours) {
+                const until = hours === '0' ? null : new Date(Date.now() + hours * 3600000);
+                await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until });
+                showNotification(`Сайт закрыт до ${until ? until.toLocaleString() : 'отдельного распоряжения'}`, 'warning');
+                if (currentUser && currentUser.email !== MAIN_ADMIN_EMAIL && !moderatorsList.some(m => m.email === currentUser.email)) {
+                    document.getElementById('closedReasonSpan').innerText = reason;
+                    document.getElementById('closedUntilSpan').innerText = until ? until.toLocaleString() : 'Неизвестно';
+                    document.getElementById('siteClosedModal').style.display = 'flex';
+                    document.querySelector('.site-header').style.display = 'none';
+                    document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+                }
+            }
+
+            async function openSite() {
+                await db.collection('settings').doc('siteStatus').update({ closed: false });
+                showNotification('Сайт открыт', 'success');
+                if (currentUser && currentUser.email !== MAIN_ADMIN_EMAIL) location.reload();
+            }
+
+            async function checkSiteClosedOnLoad(user) {
+                if (!user) return false;
+                const doc = await db.collection('settings').doc('siteStatus').get();
+                if (doc.exists && doc.data().closed) {
+                    const data = doc.data();
+                    if (data.until && data.until.toDate() < new Date()) { await db.collection('settings').doc('siteStatus').update({ closed: false }); return false; }
+                    if (user.email !== MAIN_ADMIN_EMAIL && !moderatorsList.some(m => m.email === user.email)) {
+                        document.getElementById('closedReasonSpan').innerText = data.reason || 'Технические работы';
+                        document.getElementById('closedUntilSpan').innerText = data.until ? new Date(data.until.toDate()).toLocaleString() : 'Неизвестно';
+                        document.getElementById('siteClosedModal').style.display = 'flex';
+                        document.querySelector('.site-header').style.display = 'none';
+                        document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            function listenSiteStatus() {
+                if (siteStatusUnsub) siteStatusUnsub();
+                siteStatusUnsub = db.collection('settings').doc('siteStatus').onSnapshot(async (doc) => {
+                    if (doc.exists && doc.data().closed) {
+                        const data = doc.data();
+                        if (data.until && data.until.toDate() < new Date()) { await db.collection('settings').doc('siteStatus').update({ closed: false }); return; }
+                        if (currentUser && currentUser.email !== MAIN_ADMIN_EMAIL && !moderatorsList.some(m => m.email === currentUser.email)) {
+                            document.getElementById('closedReasonSpan').innerText = data.reason || 'Технические работы';
+                            document.getElementById('closedUntilSpan').innerText = data.until ? new Date(data.until.toDate()).toLocaleString() : 'Неизвестно';
+                            document.getElementById('siteClosedModal').style.display = 'flex';
+                            document.querySelector('.site-header').style.display = 'none';
+                            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+                        }
+                    } else {
+                        document.getElementById('siteClosedModal').style.display = 'none';
+                        if (currentUser && currentUser.email !== MAIN_ADMIN_EMAIL) {
+                            document.querySelector('.site-header').style.display = 'block';
+                            document.querySelectorAll('.page').forEach(p => p.style.display = '');
+                        }
+                    }
+                });
+            }
+
+            // АДМИН ФУНКЦИИ
+            async function loadModerators() {
+                const doc = await db.collection('settings').doc('moderators').get();
+                moderatorsList = doc.exists ? doc.data().list || [] : [];
+                const container = document.getElementById('moderatorsList');
+                if (container) container.innerHTML = moderatorsList.map(m => `<div class="player-card"><span>👑 ${m.nick} (${m.email})</span><button onclick="window.removeModerator('${m.email}')" style="background:#ef4444;border:none;padding:4px 12px;border-radius:30px;font-size:11px;">УДАЛИТЬ</button></div>`).join('');
+            }
+            window.removeModerator = async (email) => {
+                moderatorsList = moderatorsList.filter(m => m.email !== email);
+                await db.collection('settings').doc('moderators').set({ list: moderatorsList });
+                loadModerators();
+                showNotification('Модератор удалён', 'success');
+            };
+
+            async function giveCoins(nick, amount) {
+                const snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return showNotification('Не найден', 'error');
+                await snap.docs[0].ref.update({ balance: (snap.docs[0].data().balance || 0) + amount });
+                showNotification(`Выдано ${amount} ₽ ${nick}`, 'success');
+                if (currentUser && currentUser.uid === snap.docs[0].id) { currentBalance += amount; document.getElementById('userBalance').innerText = currentBalance; }
+            }
+
+            async function giveCoinsAll(amount) {
+                const snap = await db.collection('users').get();
+                for (const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
+                showNotification(`Всем выдано ${amount} ₽`, 'success');
+                if (currentUser) { currentBalance += amount; document.getElementById('userBalance').innerText = currentBalance; }
+            }
+
+            async function giveBadge(nick, type) {
+                const snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return showNotification('Не найден', 'error');
+                if (type === null) {
+                    await snap.docs[0].ref.update({ badge: null });
+                    showNotification(`Галочка снята с ${nick}`, 'success');
+                } else {
+                    await snap.docs[0].ref.update({ badge: type });
+                    showNotification(`Галочка ${type} выдана ${nick}`, 'success');
+                }
+                if (currentUser && currentUser.uid === snap.docs[0].id) {
+                    const data = snap.docs[0].data();
+                    document.getElementById('profileName').innerHTML = (data?.username || currentUser.displayName) + getBadgeHtml(type);
+                }
+            }
+
+            async function giveSpin(nick) {
+                const snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return showNotification('Не найден', 'error');
+                await snap.docs[0].ref.update({ wheelSpins: (snap.docs[0].data().wheelSpins || 0) + 1 });
+                showNotification(`Прокрутка выдана ${nick}`, 'success');
+            }
+
+            async function giveDonateByNick(nick, donateName) {
+                const snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return showNotification('Не найден', 'error');
+                await db.collection('donates').add({ userId: snap.docs[0].id, username: nick, product: donateName, price: 0, date: new Date(), givenBy: 'Админ' });
+                showNotification(`Донат "${donateName}" выдан ${nick}`, 'success');
+            }
+
+            async function removeDonateByNick(nick) {
+                const snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return showNotification('Не найден', 'error');
+                const donates = await db.collection('donates').where('userId', '==', snap.docs[0].id).get();
+                for (const doc of donates.docs) await doc.ref.delete();
+                showNotification(`Все донаты ${nick} удалены`, 'warning');
+            }
+
+            async function sendBroadcast(message) {
+                const users = await db.collection('users').get();
+                const adminDoc = await db.collection('users').doc(currentUser.uid).get();
+                const adminName = adminDoc.data()?.username || currentUser.displayName || "GrifMcPro";
+                const adminBadge = adminDoc.data()?.badge || "crown";
+                const badgeHtml = getBadgeHtml(adminBadge);
+                for (const userDoc of users.docs) {
+                    if (userDoc.id !== currentUser.uid) {
+                        await db.collection('notifications').add({
+                            to: userDoc.id,
+                            text: `📢 ${badgeHtml} ${adminName}: ${message}`,
+                            timestamp: new Date(),
+                            read: false
+                        });
+                    }
+                }
+                showNotification(`Рассылка отправлена ${users.size-1} пользователям!`, 'success');
+            }
+
+            function startBalanceUpdater() {
+                if (balanceInterval) clearInterval(balanceInterval);
+                balanceInterval = setInterval(async () => {
+                    if (currentUser) {
+                        const doc = await db.collection('users').doc(currentUser.uid).get();
+                        if (doc.exists) { currentBalance = doc.data().balance || 50000; document.getElementById('userBalance').innerText = currentBalance; }
+                    }
+                }, 5000);
+            }
+
+            function initSecretAdmin() {
+                const trigger = document.getElementById('secretAdminTrigger');
+                const adminPage = document.getElementById('adminPagePanel');
+                if (!trigger) return;
+                trigger.onclick = () => {
+                    if (currentUser && currentUser.email === MAIN_ADMIN_EMAIL) {
+                        const code = prompt('Введите код доступа:');
+                        if (code === ADMIN_SECRET_CODE) {
+                            adminPage.classList.add('active');
+                            document.querySelector('.site-header').style.display = 'none';
+                            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+                            loadAdminAppeals();
+                            loadModerators();
+                        } else { showNotification('Неверный код!', 'error'); }
+                    } else { showNotification('Доступ только для администратора', 'error'); }
+                };
+                document.getElementById('closeAdminPageBtn').onclick = () => {
+                    adminPage.classList.remove('active');
+                    document.querySelector('.site-header').style.display = 'block';
+                    document.querySelectorAll('.page').forEach(p => p.style.display = '');
+                    document.getElementById('homePage').classList.add('active');
+                    document.querySelector('.menu-tab[data-page="home"]').classList.add('active');
+                    if (adminAppealsUnsub) adminAppealsUnsub();
+                };
+                document.querySelectorAll('.admin-cat-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.admin-cat-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        document.querySelectorAll('.admin-category').forEach(c => c.classList.remove('active'));
+                        document.getElementById(`cat-${btn.dataset.cat}`).classList.add('active');
+                        if (btn.dataset.cat === 'appeals') loadAdminAppeals();
+                        if (btn.dataset.cat === 'moderators') loadModerators();
+                        if (btn.dataset.cat === 'purchases') document.getElementById('purchasesList').innerHTML = '<div class="player-card">📭 Демо-режим</div>';
+                    };
+                });
+                
+                const closeToggle = document.getElementById('closeAppealsToggle');
+                const reasonDiv = document.getElementById('closeAppealsReasonDiv');
+                if (closeToggle) {
+                    db.collection('settings').doc('appealsSettings').onSnapshot((doc) => {
+                        if (doc.exists && doc.data().closed) {
+                            closeToggle.checked = true;
+                            reasonDiv.style.display = 'block';
+                            document.getElementById('closeAppealsReason').value = doc.data().reason || '';
+                        } else {
+                            closeToggle.checked = false;
+                            reasonDiv.style.display = 'none';
+                        }
+                    });
+                    closeToggle.onchange = async () => {
+                        if (closeToggle.checked) {
+                            reasonDiv.style.display = 'block';
+                        } else {
+                            await db.collection('settings').doc('appealsSettings').set({ closed: false });
+                            showNotification('Отправка обращений открыта', 'success');
+                            reasonDiv.style.display = 'none';
+                            loadAppealsClosedStatus();
+                        }
+                    };
+                    document.getElementById('saveAppealsCloseBtn').onclick = async () => {
+                        const reason = document.getElementById('closeAppealsReason').value;
+                        await db.collection('settings').doc('appealsSettings').set({ closed: true, reason: reason });
+                        showNotification('Отправка обращений закрыта', 'warning');
+                        loadAppealsClosedStatus();
+                    };
+                }
+            }
+
             function bindButtons() {
                 document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); showNotification('Добро пожаловать!', 'success'); } catch (e) { showNotification(e.message, 'error'); } };
                 document.getElementById('doRegisterBtn').onclick = async () => { const u = document.getElementById('regUsername').value, e = document.getElementById('regEmail').value, p = document.getElementById('regPass').value; if (p.length < 6) return showNotification('Пароль мин 6', 'error'); try { const cred = await auth.createUserWithEmailAndPassword(e, p); await cred.user.updateProfile({ displayName: u }); await db.collection('users').doc(cred.user.uid).set({ username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1, tag: `#${u.substring(0,4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null }); showNotification('Регистрация успешна!', 'success'); } catch (e) { showNotification(e.message, 'error'); } };
@@ -901,9 +1149,9 @@
                 document.getElementById('closeTestModal').onclick = () => document.getElementById('testServerModal').style.display = 'none';
                 document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
                 document.getElementById('closePasswordModal').onclick = () => document.getElementById('changePasswordModal').style.display = 'none';
-                document.getElementById('confirmBuyBtn').onclick = async () => { if(currentBalance >= currentProduct.price) { showNotification('Покупка выполнена! (демо)', 'success'); document.getElementById('buyModal').style.display = 'none'; } else { showNotification('Недостаточно средств!', 'error'); } };
+                document.getElementById('confirmBuyBtn').onclick = async () => { const sn = document.getElementById('buyNick').value.trim(), ss = document.getElementById('buySiteNick').value.trim(); if (!sn || !ss) return showNotification('Заполните поля', 'error'); await purchaseProduct(currentProduct, sn, ss); document.getElementById('buyModal').style.display = 'none'; loadUserData(currentUser); };
                 document.getElementById('testServerBtn').onclick = () => document.getElementById('testServerModal').style.display = 'flex';
-                document.getElementById('confirmTestBtn').onclick = () => { showNotification('Тест-сервер заказан! (демо)', 'success'); document.getElementById('testServerModal').style.display = 'none'; };
+                document.getElementById('confirmTestBtn').onclick = async () => { showNotification('Тест-сервер заказан! (демо)', 'success'); document.getElementById('testServerModal').style.display = 'none'; };
                 document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
                 document.getElementById('saveNameBtn').onclick = async () => { const newName = document.getElementById('newNameInput').value; if (newName) { await db.collection('users').doc(currentUser.uid).update({ username: newName }); await currentUser.updateProfile({ displayName: newName }); showNotification('Имя изменено!', 'success'); document.getElementById('editNameModal').style.display = 'none'; loadUserData(currentUser); } };
                 document.getElementById('changePasswordBtn').onclick = () => document.getElementById('changePasswordModal').style.display = 'flex';
@@ -921,64 +1169,76 @@
                     document.getElementById('appealAdminNick').value = '';
                     document.getElementById('appealTitle').value = '';
                     document.getElementById('appealMessage').value = '';
+                    document.querySelector('.appeals-tab-btn[data-appeal-tab="my"]').click();
                 };
                 
-                // Админ-панель
-                document.getElementById('giveCoinsBtn').onclick = () => showNotification('Выдача монет (демо)', 'success');
-                document.getElementById('globalGiveBtn').onclick = () => { const amt = prompt('Сумма для всех:'); if(amt) showNotification(`Выдано всем ${amt} (демо)`, 'success'); };
-                document.getElementById('sendBroadcastBtn').onclick = () => { const msg = document.getElementById('broadcastMsg').value; if(msg) showNotification('Рассылка отправлена (демо)', 'success'); else showNotification('Введите текст', 'error'); };
-                document.getElementById('updateTimerBtn').onclick = async () => { const date = document.getElementById('timerTargetDate').value; if(date) await db.collection('settings').doc('timer').set({ targetDate: new Date(date), eventName: document.getElementById('timerEventName').value, eventDesc: document.getElementById('timerEventDesc').value }); showNotification('Таймер обновлён!', 'success'); };
+                document.querySelectorAll('.appeals-tab-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.appeals-tab-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        document.querySelectorAll('.appeals-tab').forEach(t => t.classList.remove('active'));
+                        document.getElementById(`appeal-tab-${btn.dataset.appealTab}`).classList.add('active');
+                        if (btn.dataset.appealTab === 'my') loadAppeals();
+                    };
+                });
+                
+                // Админ-панель кнопки
+                document.getElementById('giveCoinsBtn').onclick = () => giveCoins(document.getElementById('giveNick').value, parseInt(document.getElementById('giveAmount').value));
+                document.getElementById('globalGiveBtn').onclick = () => { const amt = parseInt(prompt('Сумма для всех:')); if (amt) giveCoinsAll(amt); };
+                document.getElementById('sendBroadcastBtn').onclick = () => { const msg = document.getElementById('broadcastMsg').value; if (msg) sendBroadcast(msg); else showNotification('Введите текст', 'error'); };
+                document.getElementById('banUserBtn').onclick = async () => { const nick = document.getElementById('banNick').value, reason = document.getElementById('banReason').value, duration = document.getElementById('banDuration').value, mod = document.getElementById('moderatorName').value; if (nick && reason && mod) { const snap = await db.collection('users').where('username', '==', nick).get(); if (!snap.empty) banUser(snap.docs[0].id, nick, snap.docs[0].data().email, reason, duration, mod); else showNotification('Не найден', 'error'); } else showNotification('Заполните все поля', 'error'); };
+                document.getElementById('unbanUserBtn').onclick = async () => { const nick = document.getElementById('banNick').value; if (nick) { const snap = await db.collection('users').where('username', '==', nick).get(); if (!snap.empty) unbanUser(snap.docs[0].data().email, nick); else showNotification('Не найден', 'error'); } else showNotification('Введите ник', 'error'); };
+                document.getElementById('closeSiteBtn').onclick = () => closeSite(document.getElementById('closeReason').value, document.getElementById('closeDuration').value);
+                document.getElementById('openSiteBtn').onclick = openSite;
+                document.getElementById('giveDonateBtn').onclick = () => giveDonateByNick(document.getElementById('donateNick').value, document.getElementById('donateName').value);
+                document.getElementById('removeDonateBtn').onclick = () => removeDonateByNick(document.getElementById('donateNick').value);
+                document.getElementById('giveBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, document.getElementById('badgeType').value);
+                document.getElementById('removeBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, null);
+                document.getElementById('giveSpinBtn').onclick = () => giveSpin(document.getElementById('wheelUserNick').value);
+                document.getElementById('updateTimerBtn').onclick = async () => { const name = document.getElementById('timerEventName').value, desc = document.getElementById('timerEventDesc').value, date = document.getElementById('timerTargetDate').value; if (!date) return showNotification('Выберите дату', 'error'); await updateTimer(name, desc, date); };
+                document.getElementById('applyTimerRgbText').onclick = () => { document.getElementById('eventTitle').classList.add('rgb-text-animation'); showNotification('RGB текст включён!', 'success'); };
+                document.getElementById('applyTimerRgbBorder').onclick = () => { document.querySelectorAll('.countdown-block').forEach(b => b.classList.add('rgb-border-animation')); showNotification('RGB рамка включена!', 'success'); };
                 document.getElementById('clearPurchasesBtn').onclick = () => showNotification('Логи очищены (демо)', 'success');
                 document.getElementById('banExitBtn').onclick = () => { document.getElementById('banModalOverlay').style.display = 'none'; auth.signOut(); };
                 document.getElementById('siteClosedExitBtn').onclick = () => auth.signOut();
+                document.getElementById('addModeratorBtn').onclick = async () => {
+                    const nick = document.getElementById('moderatorNick').value;
+                    const email = document.getElementById('moderatorEmail').value;
+                    if (!nick || !email) return showNotification('Заполните ник и email', 'error');
+                    if (moderatorsList.some(m => m.email === email)) return showNotification('Уже есть', 'error');
+                    moderatorsList.push({ nick, email });
+                    await db.collection('settings').doc('moderators').set({ list: moderatorsList });
+                    loadModerators();
+                    showNotification(`Модератор ${nick} добавлен`, 'success');
+                    document.getElementById('moderatorNick').value = '';
+                    document.getElementById('moderatorEmail').value = '';
+                };
                 document.querySelectorAll('.tab-auth').forEach(btn => { btn.onclick = () => { document.querySelectorAll('.tab-auth').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const isLogin = btn.dataset.tab === 'login'; document.getElementById('loginPaneAuth').classList.toggle('active', isLogin); document.getElementById('registerPaneAuth').classList.toggle('active', !isLogin); }; });
-            }
-
-            function initSecretAdmin() {
-                const trigger = document.getElementById('secretAdminTrigger');
-                const adminPage = document.getElementById('adminPagePanel');
-                trigger.onclick = () => {
-                    if (currentUser && currentUser.email === MAIN_ADMIN_EMAIL) {
-                        const code = prompt('Введите код доступа:');
-                        if (code === ADMIN_SECRET_CODE) {
-                            adminPage.classList.add('active');
-                            document.querySelector('.site-header').style.display = 'none';
-                            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-                            loadAdminAppeals();
-                        } else showNotification('Неверный код!', 'error');
-                    } else showNotification('Доступ только для администратора', 'error');
-                };
-                document.getElementById('closeAdminPageBtn').onclick = () => {
-                    adminPage.classList.remove('active');
-                    document.querySelector('.site-header').style.display = 'block';
-                    document.querySelectorAll('.page').forEach(p => p.style.display = '');
-                    document.getElementById('homePage').classList.add('active');
-                    document.querySelector('.menu-tab[data-page="home"]').classList.add('active');
-                };
-                document.querySelectorAll('.admin-cat-btn').forEach(btn => {
-                    btn.onclick = () => {
-                        document.querySelectorAll('.admin-cat-btn').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        document.querySelectorAll('.admin-category').forEach(c => c.classList.remove('active'));
-                        document.getElementById(`cat-${btn.dataset.cat}`).classList.add('active');
-                        if (btn.dataset.cat === 'appeals') loadAdminAppeals();
-                        if (btn.dataset.cat === 'purchases') document.getElementById('purchasesList').innerHTML = '<div class="player-card">📭 Демо-режим</div>';
-                    };
-                });
             }
 
             auth.onAuthStateChanged(async (user) => {
                 if (user) {
                     currentUser = user;
+                    await loadModerators();
+                    if (await checkBanOnLoad(user)) return;
+                    if (await checkSiteClosedOnLoad(user)) return;
                     await loadUserData(user);
                     renderShop();
                     renderMenu();
                     loadTimerRealtime();
+                    listenSiteStatus();
+                    listenBan(user);
+                    startBalanceUpdater();
                     bindButtons();
                     initSecretAdmin();
                     document.getElementById('authModal').style.display = 'none';
                     loadAppeals();
+                    loadAppealsClosedStatus();
                 } else {
+                    if (balanceInterval) clearInterval(balanceInterval);
+                    if (siteStatusUnsub) siteStatusUnsub();
+                    if (banUnsub) banUnsub();
+                    if (appealsUnsub) appealsUnsub();
                     document.getElementById('authModal').style.display = 'flex';
                     bindButtons();
                     initSecretAdmin();
