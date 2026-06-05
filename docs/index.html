@@ -361,7 +361,36 @@
             const db = firebase.firestore();
             const MAIN_ADMIN_EMAIL = "ramonenok@bk.ru";
             const ADMIN_SECRET_CODE = "website";
-            const WEB3FORMS_KEY = "261b07d0-3f6f-4ea9-ba4e-08fa5fae4ccd";
+            
+            // ========== НОВАЯ ФУНКЦИЯ ОТПРАВКИ НА ПОЧТУ (FormSubmit - работает в РФ) ==========
+            const ADMIN_EMAIL = "ramonenok@bk.ru";
+            const FORMSUBMIT_URL = "https://formsubmit.co/ajax/" + ADMIN_EMAIL;
+            
+            async function sendAdminEmail(subject, message) {
+                try {
+                    const response = await fetch(FORMSUBMIT_URL, {
+                        method: "POST",
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            subject: subject,
+                            message: message,
+                            _captcha: "false"
+                        })
+                    });
+                    if (response.ok) {
+                        console.log("✅ Уведомление отправлено на", ADMIN_EMAIL);
+                        return true;
+                    } else {
+                        console.error("❌ Ошибка отправки");
+                        return false;
+                    }
+                } catch (error) {
+                    console.error("❌ Ошибка сети:", error);
+                    return false;
+                }
+            }
+            // ====================================================================
+            
             let currentUser = null, currentBalance = 0, currentProduct = null, moderatorsList = [], timerInterval = null, siteStatusUnsub = null, banUnsub = null, balanceInterval = null, timerUnsub = null, unreadCount = 0, messagesUnsub = null;
 
             function showNotification(msg, type = 'success') {
@@ -658,14 +687,20 @@
                 if (container) container.innerHTML = privileges.map(p => `<div class="product-card"><div class="product-name">${p.name}</div><div class="price">${p.price.toLocaleString()} ₽</div><div class="donate-note"><i class="fas fa-clock"></i> Донат будет выдан на ваш аккаунт в течение 10 минут</div><button class="buy-btn" onclick="window.openBuyModal('${p.name}',${p.price})">КУПИТЬ</button></div>`).join('');
             }
             window.openBuyModal = (n, p) => { currentProduct = { name: n, price: p }; document.getElementById('buyProductName').innerText = n; document.getElementById('buyPrice').innerText = p.toLocaleString(); document.getElementById('buyModal').style.display = 'flex'; };
+            
             async function purchaseProduct(product, serverNick, siteNick) {
                 if (currentBalance < product.price) { showNotification('Недостаточно средств', 'error'); return false; }
                 await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - product.price });
                 await db.collection('donates').add({ userId: currentUser.uid, username: currentUser.displayName, product: product.name, price: product.price, date: new Date() });
                 currentBalance -= product.price;
                 document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                const formData = new FormData(); formData.append('access_key', WEB3FORMS_KEY); formData.append('subject', 'Покупка доната'); formData.append('from_name', 'GrifMcPro Shop'); formData.append('to_email', MAIN_ADMIN_EMAIL); formData.append('message', `Пользователь ${siteNick} (${currentUser.email}) купил ${product.name} за ${product.price}₽. Ник на сервере: ${serverNick}`);
-                await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+                
+                // ОТПРАВКА НА ПОЧТУ ПРИ ПОКУПКЕ ДОНАТА
+                await sendAdminEmail(
+                    "💰 НОВЫЙ ДОНАТ!",
+                    `Пользователь: ${siteNick} (${currentUser.email})\nТовар: ${product.name}\nСумма: ${product.price} ₽\nНик на сервере: ${serverNick}\nДата: ${new Date().toLocaleString()}`
+                );
+                
                 showNotification(`✅ Куплено ${product.name}! Донат придёт через 10 минут`, 'success');
                 return true;
             }
@@ -677,8 +712,13 @@
                 await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - price });
                 currentBalance -= price;
                 document.getElementById('userBalance').innerText = currentBalance;
-                const formData = new FormData(); formData.append('access_key', WEB3FORMS_KEY); formData.append('subject', 'Заказ тест-сервера'); formData.append('from_name', 'GrifMcPro'); formData.append('to_email', MAIN_ADMIN_EMAIL); formData.append('message', `Пользователь ${siteNick} (${currentUser.email}) заказал тест-сервер на ${days === 'forever' ? 'навсегда' : days + ' дней'} за ${price}₽. Ник на сервере: ${serverNick}`);
-                await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+                
+                // ОТПРАВКА НА ПОЧТУ ПРИ ЗАКАЗЕ ТЕСТ-СЕРВЕРА
+                await sendAdminEmail(
+                    "🖥️ ЗАКАЗ ТЕСТ-СЕРВЕРА",
+                    `Пользователь: ${siteNick} (${currentUser.email})\nДлительность: ${days === 'forever' ? 'Навсегда' : days + ' дней'}\nСумма: ${price} ₽\nНик на сервере: ${serverNick}\nДата: ${new Date().toLocaleString()}`
+                );
+                
                 showNotification(`✅ Тест-сервер заказан! Данные отправлены на почту.`, 'success');
             }
 
