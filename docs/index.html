@@ -35,17 +35,30 @@
         body { background: linear-gradient(135deg, #0a0a12 0%, #0f0f1a 100%); font-family: 'Montserrat', sans-serif; color: var(--text-primary); min-height: 100vh; overflow-x: hidden; }
         
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes rgbTextAnim { 0% { color: #ff0000; } 25% { color: #00ff00; } 50% { color: #0000ff; } 75% { color: #ff00ff; } 100% { color: #ff0000; } }
-        @keyframes rgbBorderAnim { 0% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; } 25% { border-color: #00ff00; } 50% { border-color: #0000ff; } 75% { border-color: #ff00ff; } 100% { border-color: #ff0000; } }
-        @keyframes rainbowRotate { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         
+        /* АНИМАЦИИ ГАЛОЧЕК */
+        @keyframes pulseBlue { 0%,100% { background: #3b82f6; box-shadow: 0 0 0px #3b82f6; } 50% { background: #1d4ed8; box-shadow: 0 0 8px #3b82f6; } }
+        @keyframes pulseRed { 0%,100% { background: #ef4444; box-shadow: 0 0 0px #ef4444; } 50% { background: #b91c1c; box-shadow: 0 0 8px #ef4444; } }
+        @keyframes pulseGold { 0%,100% { background: #ffd700; box-shadow: 0 0 0px #ffd700; } 50% { background: #eab308; box-shadow: 0 0 8px #ffd700; } }
+        @keyframes rainbowBorder { 0% { box-shadow: 0 0 2px #ff0000, 0 0 5px #ff0000; } 25% { box-shadow: 0 0 2px #00ff00, 0 0 5px #00ff00; } 50% { box-shadow: 0 0 2px #0000ff, 0 0 5px #0000ff; } 75% { box-shadow: 0 0 2px #ff00ff, 0 0 5px #ff00ff; } 100% { box-shadow: 0 0 2px #ff0000, 0 0 5px #ff0000; } }
+        @keyframes rotateRainbow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes rgbBorder { 0% { border-color: #ff0000; box-shadow: 0 0 3px #ff0000; } 25% { border-color: #00ff00; } 50% { border-color: #0000ff; } 75% { border-color: #ff00ff; } 100% { border-color: #ff0000; } }
+        @keyframes pulseCrown { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        @keyframes floatBadge { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-2px); } }
+        @keyframes shimmerDiamond { 0%,100% { filter: brightness(1); } 50% { filter: brightness(1.3); } }
+        @keyframes starTwinkle { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+        @keyframes firePulse { 0%,100% { filter: brightness(1); } 50% { filter: brightness(1.4); } }
+        @keyframes cosmicSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes shadowPulse { 0%,100% { opacity: 0.8; } 50% { opacity: 1; } }
+        @keyframes lightPulse { 0%,100% { filter: brightness(1); } 50% { filter: brightness(1.2); } }
+        @keyframes darkPulse { 0%,100% { filter: brightness(0.7); } 50% { filter: brightness(1); } }
+        
         .rgb-text-animation { animation: rgbTextAnim 3s infinite; }
-        .rgb-border-animation { animation: rgbBorderAnim 3s infinite; }
         
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #151520; border-radius: 10px; }
@@ -126,7 +139,7 @@
             font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             flex-wrap: wrap;
             justify-content: center;
             background: linear-gradient(135deg, #fff, var(--accent));
@@ -143,70 +156,18 @@
             background: rgba(0,0,0,0.3);
             border-radius: 24px;
         }
-        .stat-item {
-            text-align: center;
-        }
-        .stat-value {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--accent);
-            font-family: 'Orbitron', monospace;
-        }
-        .stat-label {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 5px;
-        }
-        .profile-info {
-            text-align: left;
-            margin: 25px 0;
-            background: rgba(0,0,0,0.3);
-            border-radius: 20px;
-            padding: 20px;
-        }
-        .profile-info p {
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            font-size: 14px;
-        }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 24px; font-weight: 800; color: var(--accent); font-family: 'Orbitron', monospace; }
+        .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 5px; }
+        .profile-info { text-align: left; margin: 25px 0; background: rgba(0,0,0,0.3); border-radius: 20px; padding: 20px; }
+        .profile-info p { padding: 12px 0; border-bottom: 1px solid var(--border-color); display: flex; gap: 15px; align-items: center; font-size: 14px; }
         .profile-info p:last-child { border-bottom: none; }
         .profile-info i { width: 28px; color: var(--accent); font-size: 16px; }
-        .profile-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-        .profile-btn {
-            background: rgba(59,130,246,0.15);
-            border: 1px solid rgba(59,130,246,0.3);
-            color: var(--info);
-            padding: 10px 22px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-            transition: 0.3s;
-        }
+        .profile-actions { display: flex; gap: 12px; justify-content: center; margin-top: 25px; flex-wrap: wrap; }
+        .profile-btn { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: var(--info); padding: 10px 22px; border-radius: 40px; cursor: pointer; font-weight: 600; font-size: 13px; transition: 0.3s; }
         .profile-btn:hover { background: rgba(59,130,246,0.3); transform: scale(1.02); }
-        .donates-list {
-            margin: 20px 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
-        .donate-tag {
-            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05));
-            padding: 6px 14px;
-            border-radius: 40px;
-            font-size: 12px;
-            border: 1px solid rgba(255,215,0,0.2);
-        }
+        .donates-list { margin: 20px 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .donate-tag { background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05)); padding: 6px 14px; border-radius: 40px; font-size: 12px; border: 1px solid rgba(255,215,0,0.2); }
         .donate-tag i { margin-right: 6px; color: var(--accent); }
 
         /* ===== 20 КРАСИВЫХ АНИМИРОВАННЫХ ГАЛОЧЕК ===== */
@@ -214,38 +175,53 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
-            margin-left: 6px;
+            margin-left: 4px;
             vertical-align: middle;
             flex-shrink: 0;
         }
-        .badge-icon i { font-size: 11px; color: white; }
-        .badge-verified { background: #3b82f6; animation: pulse 1.5s ease infinite; }
-        .badge-blue { background: #3b82f6; animation: pulse 1.5s ease infinite; }
-        .badge-red { background: #ef4444; animation: pulse 1.5s ease infinite; }
-        .badge-gold { background: #ffd700; animation: pulse 1.5s ease infinite; }
+        .badge-icon i { font-size: 10px; color: white; }
+        
+        .badge-verified, .badge-blue { background: #3b82f6; animation: pulseBlue 1.2s ease-in-out infinite; }
+        .badge-red { background: #ef4444; animation: pulseRed 1.2s ease-in-out infinite; }
+        .badge-gold { background: #ffd700; animation: pulseGold 1.2s ease-in-out infinite; }
         .badge-gold i { color: #1a1a1a; }
-        .badge-rainbow { background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); background-size: 200% 200%; animation: rainbowRotate 2s ease infinite, pulse 1.5s ease infinite; }
-        .badge-rgb { background: #1a1a2a; border: 2px solid; animation: rgbBorderAnim 2s infinite, pulse 1s ease infinite; }
-        .badge-crown { background: linear-gradient(135deg, #7c3aed, #a855f7); width: auto; border-radius: 20px; padding: 2px 10px; animation: pulse 1.5s ease infinite, float 2s ease infinite; }
-        .badge-crown i { color: #ffd700; font-size: 12px; }
-        .badge-diamond { background: linear-gradient(135deg, #00ffff, #0088ff); animation: pulse 1.5s ease infinite; }
-        .badge-star { background: linear-gradient(135deg, #ffd700, #ff8800); animation: pulse 1.5s ease infinite; }
-        .badge-game { background: linear-gradient(135deg, #ff00ff, #8800ff); animation: pulse 0.8s ease infinite; }
-        .badge-fire { background: linear-gradient(135deg, #ff4400, #ff0000); animation: pulse 0.6s ease infinite; }
-        .badge-mythic { background: linear-gradient(135deg, #a855f7, #7c3aed); animation: pulse 1.5s ease infinite; }
-        .badge-cosmic { background: linear-gradient(135deg, #06b6d4, #0891b2); animation: pulse 2s ease infinite; }
-        .badge-ice { background: linear-gradient(135deg, #ec4899, #db2777); animation: pulse 2s ease infinite; }
-        .badge-shadow { background: #1f2937; border: 1px solid #4b5563; animation: pulse 2s ease infinite; }
-        .badge-light { background: #f3f4f6; animation: pulse 2s ease infinite; }
+        
+        .badge-rainbow {
+            background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff);
+            background-size: 200% 200%;
+            animation: rainbowBorder 2s ease-in-out infinite;
+        }
+        .badge-rainbow i { animation: rotateRainbow 3s linear infinite; }
+        
+        .badge-rgb { background: #1a1a2a; border: 2px solid; animation: rgbBorder 1.5s ease-in-out infinite; }
+        
+        .badge-crown {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            width: auto;
+            border-radius: 20px;
+            padding: 2px 8px;
+            animation: pulseCrown 1.5s ease-in-out infinite, floatBadge 2s ease-in-out infinite;
+        }
+        .badge-crown i { color: #ffd700; font-size: 11px; }
+        
+        .badge-diamond { background: linear-gradient(135deg, #00ffff, #0088ff); animation: shimmerDiamond 1.5s ease-in-out infinite; }
+        .badge-star { background: linear-gradient(135deg, #ffd700, #ff8800); animation: starTwinkle 1s ease-in-out infinite; }
+        .badge-game { background: linear-gradient(135deg, #ff00ff, #8800ff); animation: pulseCrown 0.8s ease-in-out infinite; }
+        .badge-fire { background: linear-gradient(135deg, #ff4400, #ff0000); animation: firePulse 0.6s ease-in-out infinite; }
+        .badge-mythic { background: linear-gradient(135deg, #a855f7, #7c3aed); animation: shimmerDiamond 1.5s ease-in-out infinite; }
+        .badge-cosmic { background: linear-gradient(135deg, #06b6d4, #0891b2); animation: cosmicSpin 2s linear infinite; }
+        .badge-ice { background: linear-gradient(135deg, #ec4899, #db2777); animation: shimmerDiamond 1.5s ease-in-out infinite; }
+        .badge-shadow { background: #1f2937; border: 1px solid #4b5563; animation: shadowPulse 1.5s ease-in-out infinite; }
+        .badge-light { background: #f3f4f6; animation: lightPulse 1.5s ease-in-out infinite; }
         .badge-light i { color: #1a1a1a; }
-        .badge-dark { background: #111827; animation: pulse 2s ease infinite; }
-        .badge-nature { background: linear-gradient(135deg, #10b981, #059669); animation: pulse 2s ease infinite; }
-        .badge-blood { background: linear-gradient(135deg, #dc2626, #991b1b); animation: pulse 1s ease infinite; }
-        .badge-purple { background: #8b5cf6; animation: pulse 2s ease infinite; }
-        .badge-teal { background: #14b8a6; animation: pulse 2s ease infinite; }
+        .badge-dark { background: #111827; animation: darkPulse 1.5s ease-in-out infinite; }
+        .badge-nature { background: linear-gradient(135deg, #10b981, #059669); animation: shimmerDiamond 1.5s ease-in-out infinite; }
+        .badge-blood { background: linear-gradient(135deg, #dc2626, #991b1b); animation: pulseRed 1s ease-in-out infinite; }
+        .badge-purple { background: #8b5cf6; animation: shimmerDiamond 1.5s ease-in-out infinite; }
+        .badge-teal { background: #14b8a6; animation: shimmerDiamond 1.5s ease-in-out infinite; }
 
         /* СЕКРЕТНЫЙ ЗАМОК И АДМИНКА */
         .secret-admin-trigger {
@@ -305,7 +281,6 @@
         .close-admin-page { position: fixed; top: 25px; right: 25px; background: rgba(239,68,68,0.2); border: 1px solid var(--danger); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2100; color: var(--danger); transition: 0.3s; }
         .close-admin-page:hover { background: rgba(239,68,68,0.4); transform: scale(1.08) rotate(90deg); }
 
-        /* МОДАЛЬНЫЕ ОКНА */
         .ban-modal-overlay, .site-closed-modal {
             display: none;
             position: fixed;
@@ -327,7 +302,7 @@
             width: 90%;
             text-align: center;
             border: 2px solid;
-            animation: modalFadeIn 0.4s ease, rgbBorderAnim 3s infinite;
+            animation: modalFadeIn 0.4s ease;
         }
         .site-closed-content { background: linear-gradient(135deg, #1a1a0a, #0a1a1a, #1a0a1a); }
         .ban-modal-content i, .site-closed-content i { font-size: 70px; margin-bottom: 20px; animation: rgbTextAnim 3s infinite; }
@@ -456,9 +431,16 @@
                 setTimeout(() => { notif.style.animation = 'slideOutLeft 0.3s ease'; setTimeout(() => notif.remove(), 300); }, 4000);
             }
 
+            // ГАЛОЧКИ
             function getBadgeHtml(type) {
                 if (!type) return '';
-                const icons = { verified:'fa-check-circle', blue:'fa-check', red:'fa-check', gold:'fa-check', rainbow:'fa-star', rgb:'fa-magic', crown:'fa-crown', diamond:'fa-gem', star:'fa-star', game:'fa-gamepad', fire:'fa-fire', mythic:'fa-dragon', cosmic:'fa-meteor', ice:'fa-snowflake', shadow:'fa-moon', light:'fa-sun', dark:'fa-moon', nature:'fa-leaf', blood:'fa-tint', purple:'fa-gem', teal:'fa-water' };
+                const icons = {
+                    verified: 'fa-check-circle', blue: 'fa-check', red: 'fa-check', gold: 'fa-check',
+                    rainbow: 'fa-star', rgb: 'fa-magic', crown: 'fa-crown', diamond: 'fa-gem',
+                    star: 'fa-star', game: 'fa-gamepad', fire: 'fa-fire', mythic: 'fa-dragon',
+                    cosmic: 'fa-meteor', ice: 'fa-snowflake', shadow: 'fa-moon', light: 'fa-sun',
+                    dark: 'fa-moon', nature: 'fa-leaf', blood: 'fa-tint', purple: 'fa-gem', teal: 'fa-water'
+                };
                 const icon = icons[type] || 'fa-check';
                 return `<span class="badge-icon badge-${type}"><i class="fas ${icon}"></i></span>`;
             }
@@ -483,8 +465,7 @@
 
             // ЛОГИ ПОКУПОК
             async function addPurchaseLog(type, productName, price, serverNick, siteNick, userEmail) {
-                const logEntry = { type, product: productName, price, serverNick, siteNick, userEmail, date: new Date().toISOString(), timestamp: new Date() };
-                await db.collection('purchases').add(logEntry);
+                await db.collection('purchases').add({ type, product: productName, price, serverNick, siteNick, userEmail, date: new Date().toISOString(), timestamp: new Date() });
                 if (document.getElementById('cat-purchases')?.classList.contains('active')) loadPurchases();
             }
 
@@ -687,13 +668,10 @@
             async function loadModerators() {
                 const doc = await db.collection('settings').doc('moderators').get();
                 moderatorsList = doc.exists ? doc.data().list || [] : [];
-                const container = document.getElementById('moderatorsList');
-                if (container) container.innerHTML = moderatorsList.map(m => `<div class="player-card"><span>👑 ${m.nick}</span><button onclick="window.removeModerator('${m.email}')" style="background:#ef4444;border:none;padding:4px 12px;border-radius:30px;font-size:11px;">УДАЛИТЬ</button></div>`).join('');
             }
             window.removeModerator = async (email) => {
                 moderatorsList = moderatorsList.filter(m => m.email !== email);
                 await db.collection('settings').doc('moderators').set({ list: moderatorsList });
-                loadModerators();
                 showNotification('Модератор удалён', 'success');
             };
 
@@ -851,14 +829,14 @@
                 } else { currentBalance = data.balance || 50000; }
                 
                 document.getElementById('userBalance').innerText = currentBalance;
-                document.getElementById('profileName').innerHTML = (data?.username || user.displayName) + getBadgeHtml(data?.badge);
+                const badgeHtml = getBadgeHtml(data?.badge);
+                document.getElementById('profileName').innerHTML = (data?.username || user.displayName) + badgeHtml;
                 document.getElementById('profileInfo').innerHTML = `
                     <p><i class="fas fa-envelope"></i> ${user.email}</p>
                     <p><i class="fas fa-calendar-alt"></i> Зарегистрирован: ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>
                 `;
                 document.getElementById('userTag').innerHTML = data?.tag || '#user';
                 
-                // Статистика профиля
                 const donatesSnap = await db.collection('donates').where('userId', '==', user.uid).get();
                 const totalSpent = donatesSnap.docs.reduce((sum, d) => sum + (d.data().price || 0), 0);
                 document.getElementById('profileStats').innerHTML = `
@@ -950,7 +928,6 @@
                 document.getElementById('giveSpinBtn').onclick = () => giveSpin(document.getElementById('wheelUserNick').value);
                 document.getElementById('updateTimerBtn').onclick = async () => { const name = document.getElementById('timerEventName').value, desc = document.getElementById('timerEventDesc').value, date = document.getElementById('timerTargetDate').value; if (!date) return showNotification('Выберите дату', 'error'); await updateTimer(name, desc, date); };
                 document.getElementById('applyTimerRgbText').onclick = () => { document.getElementById('eventTitle').classList.add('rgb-text-animation'); showNotification('RGB текст включён!', 'success'); };
-                document.getElementById('applyTimerRgbBorder').onclick = () => { document.querySelectorAll('.countdown-block').forEach(b => b.classList.add('rgb-border-animation')); showNotification('RGB рамка включена!', 'success'); };
                 document.getElementById('clearPurchasesBtn').onclick = () => { if (confirm('Очистить все логи покупок?')) clearPurchases(); };
                 document.getElementById('banExitBtn').onclick = () => { document.getElementById('banModalOverlay').style.display = 'none'; auth.signOut(); };
                 document.getElementById('siteClosedExitBtn').onclick = () => auth.signOut();
