@@ -40,6 +40,7 @@
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes rgbTextAnim { 0% { color: #ff0000; } 25% { color: #00ff00; } 50% { color: #0000ff; } 75% { color: #ff00ff; } 100% { color: #ff0000; } }
         @keyframes rgbBorderAnim { 0% { border-color: #ff0000; box-shadow: 0 0 10px #ff0000; } 25% { border-color: #00ff00; } 50% { border-color: #0000ff; } 75% { border-color: #ff00ff; } 100% { border-color: #ff0000; } }
+        @keyframes rainbowRotate { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         
@@ -109,7 +110,7 @@
         .donates-list { margin: 20px 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
         .donate-tag { background: rgba(255,215,0,0.12); padding: 6px 14px; border-radius: 40px; font-size: 12px; }
 
-        /* ГАЛОЧКИ */
+        /* ===== КРАСИВЫЕ ГАЛОЧКИ (как в старом коде) ===== */
         .badge-icon { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; margin-left: 6px; vertical-align: middle; }
         .badge-icon i { font-size: 11px; color: white; }
         .badge-blue { background: #3b82f6; }
@@ -117,7 +118,6 @@
         .badge-gold { background: #ffd700; }
         .badge-gold i { color: #1a1a1a; }
         .badge-rainbow { background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); background-size: 200% 200%; animation: rainbowRotate 2s ease infinite; }
-        @keyframes rainbowRotate { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         .badge-rgb { background: #1a1a2a; border: 2px solid; animation: rgbBorderAnim 3s infinite; }
         .badge-crown { background: linear-gradient(135deg, #7c3aed, #a855f7); width: auto; border-radius: 20px; padding: 2px 10px; animation: pulse 1.5s infinite; }
         .badge-crown i { color: #ffd700; font-size: 12px; }
@@ -331,7 +331,6 @@
 
     <script>
         (function(){
-            // ========== FIREBASE ==========
             const firebaseConfig = {
                 apiKey: "AIzaSyCK9vHX-OQIw48SGi8S_8U7pIjq60gahEA",
                 authDomain: "siteorgooo.firebaseapp.com",
@@ -346,7 +345,7 @@
             const MAIN_ADMIN_EMAIL = "ramonenok@bk.ru";
             const ADMIN_SECRET_CODE = "website";
             
-            let currentUser = null, currentBalance = 0, currentProduct = null, moderatorsList = [], timerInterval = null, siteStatusUnsub = null, banUnsub = null, balanceInterval = null, timerUnsub = null;
+            let currentUser = null, currentBalance = 0, currentProduct = null, moderatorsList = [], timerInterval = null, siteStatusUnsub = null, banUnsub = null, balanceInterval = null, timerUnsub = null, userBadgeUnsub = null;
 
             function showNotification(msg, type = 'success') {
                 let container = document.getElementById('notifContainer');
@@ -358,11 +357,53 @@
                 setTimeout(() => { notif.style.animation = 'slideOutLeft 0.3s ease'; setTimeout(() => notif.remove(), 300); }, 4000);
             }
 
+            // ===== КРАСИВЫЕ ГАЛОЧКИ (иконки Font Awesome, как в старом коде) =====
             function getBadgeHtml(type) {
                 if (!type) return '';
-                if (type === 'crown') return `<span class="badge-icon badge-crown"><i class="fas fa-crown"></i></span>`;
-                const emoji = { blue:'🔵', red:'🔴', gold:'🟡', rainbow:'🌈', rgb:'✨', diamond:'💎', star:'⭐', game:'🎮', fire:'🔥', mythic:'🔮', cosmic:'🌌', ice:'❄️', shadow:'🌑', light:'✨', dark:'🖤', nature:'🌿', blood:'🩸', void:'🌀', divine:'⚜️', purple:'🟣', teal:'🔷', sapphire:'💙', emerald:'💚', ruby:'❤️', amber:'🧡', jade:'💚', coral:'🪸', indigo:'🟣', magenta:'🩷', bronze:'🥉', platinum:'⚪', obsidian:'⬛' };
-                return `<span class="badge-icon badge-${type}" title="${type}">${emoji[type] || '✅'}</span>`;
+                
+                const badgeConfig = {
+                    blue: { bg: 'badge-blue', icon: 'fa-check' },
+                    red: { bg: 'badge-red', icon: 'fa-check' },
+                    gold: { bg: 'badge-gold', icon: 'fa-check' },
+                    rainbow: { bg: 'badge-rainbow', icon: 'fa-star' },
+                    rgb: { bg: 'badge-rgb', icon: 'fa-magic' },
+                    crown: { bg: 'badge-crown', icon: 'fa-crown' },
+                    diamond: { bg: 'badge-diamond', icon: 'fa-gem' },
+                    star: { bg: 'badge-star', icon: 'fa-star' },
+                    game: { bg: 'badge-game', icon: 'fa-gamepad' },
+                    fire: { bg: 'badge-fire', icon: 'fa-fire' },
+                    mythic: { bg: 'badge-mythic', icon: 'fa-dragon' },
+                    cosmic: { bg: 'badge-cosmic', icon: 'fa-meteor' },
+                    ice: { bg: 'badge-ice', icon: 'fa-snowflake' },
+                    shadow: { bg: 'badge-shadow', icon: 'fa-moon' },
+                    light: { bg: 'badge-light', icon: 'fa-sun' },
+                    dark: { bg: 'badge-dark', icon: 'fa-moon' },
+                    nature: { bg: 'badge-nature', icon: 'fa-leaf' },
+                    blood: { bg: 'badge-blood', icon: 'fa-tint' },
+                    void: { bg: 'badge-void', icon: 'fa-circle' },
+                    divine: { bg: 'badge-divine', icon: 'fa-feather-alt' },
+                    purple: { bg: 'badge-purple', icon: 'fa-gem' },
+                    teal: { bg: 'badge-teal', icon: 'fa-water' },
+                    sapphire: { bg: 'badge-sapphire', icon: 'fa-gem' },
+                    emerald: { bg: 'badge-emerald', icon: 'fa-gem' },
+                    ruby: { bg: 'badge-ruby', icon: 'fa-gem' },
+                    amber: { bg: 'badge-amber', icon: 'fa-gem' },
+                    jade: { bg: 'badge-jade', icon: 'fa-gem' },
+                    coral: { bg: 'badge-coral', icon: 'fa-fish' },
+                    indigo: { bg: 'badge-indigo', icon: 'fa-gem' },
+                    magenta: { bg: 'badge-magenta', icon: 'fa-gem' },
+                    bronze: { bg: 'badge-bronze', icon: 'fa-medal' },
+                    platinum: { bg: 'badge-platinum', icon: 'fa-medal' },
+                    obsidian: { bg: 'badge-obsidian', icon: 'fa-gem' }
+                };
+                
+                const config = badgeConfig[type];
+                if (!config) return '';
+                
+                if (type === 'crown') {
+                    return `<span class="badge-icon ${config.bg}"><i class="fas ${config.icon}"></i></span>`;
+                }
+                return `<span class="badge-icon ${config.bg}"><i class="fas ${config.icon}"></i></span>`;
             }
 
             function renderMenu() {
@@ -382,47 +423,25 @@
                 if (currentUser?.email === MAIN_ADMIN_EMAIL) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
             }
 
-            // ========== ЛОГИ ПОКУПОК ==========
+            // ЛОГИ ПОКУПОК
             async function addPurchaseLog(type, productName, price, serverNick, siteNick, userEmail) {
-                const logEntry = {
-                    type: type,
-                    product: productName,
-                    price: price,
-                    serverNick: serverNick,
-                    siteNick: siteNick,
-                    userEmail: userEmail,
-                    date: new Date().toISOString(),
-                    timestamp: new Date()
-                };
+                const logEntry = { type, product: productName, price, serverNick, siteNick, userEmail, date: new Date().toISOString(), timestamp: new Date() };
                 await db.collection('purchases').add(logEntry);
                 showNotification(`📋 Лог покупки сохранён!`, 'success');
-                if (document.getElementById('cat-purchases').classList.contains('active')) {
-                    loadPurchases();
-                }
+                if (document.getElementById('cat-purchases').classList.contains('active')) loadPurchases();
             }
 
             async function loadPurchases() {
                 const container = document.getElementById('purchasesList');
                 if (!container) return;
                 const snapshot = await db.collection('purchases').orderBy('timestamp', 'desc').limit(50).get();
-                if (snapshot.empty) {
-                    container.innerHTML = '<div class="player-card">📭 Нет записей о покупках</div>';
-                    return;
-                }
+                if (snapshot.empty) { container.innerHTML = '<div class="player-card">📭 Нет записей о покупках</div>'; return; }
                 container.innerHTML = '';
                 snapshot.forEach(doc => {
                     const log = doc.data();
                     const date = new Date(log.date || log.timestamp?.toDate()).toLocaleString();
                     const typeIcon = log.type === 'testserver' ? '🖥️' : '💰';
-                    container.innerHTML += `
-                        <div class="player-card" style="flex-direction:column;align-items:flex-start;">
-                            <div><strong>${typeIcon} ${log.product}</strong> | ${log.price.toLocaleString()} ₽</div>
-                            <div>🎮 Ник в игре: ${log.serverNick}</div>
-                            <div>👤 Ник на сайте: ${log.siteNick}</div>
-                            <div>📧 ${log.userEmail}</div>
-                            <div>🕐 ${date}</div>
-                        </div>
-                    `;
+                    container.innerHTML += `<div class="player-card" style="flex-direction:column;align-items:flex-start;"><div><strong>${typeIcon} ${log.product}</strong> | ${log.price.toLocaleString()} ₽</div><div>🎮 Ник в игре: ${log.serverNick}</div><div>👤 Ник на сайте: ${log.siteNick}</div><div>📧 ${log.userEmail}</div><div>🕐 ${date}</div></div>`;
                 });
             }
 
@@ -650,12 +669,32 @@
                 if (currentUser) { currentBalance += amount; document.getElementById('userBalance').innerText = currentBalance; }
             }
 
+            // ===== ВЫДАЧА ГАЛОЧКИ С РЕАЛЬНЫМ ВРЕМЕНЕМ =====
             async function giveBadge(nick, type) {
                 const snap = await db.collection('users').where('username', '==', nick).get();
                 if (snap.empty) return showNotification('Не найден', 'error');
                 await snap.docs[0].ref.update({ badge: type });
-                showNotification(`Галочка выдана ${nick}`, 'success');
-                if (currentUser && currentUser.uid === snap.docs[0].id) { document.getElementById('profileName').innerHTML = snap.docs[0].data().username + getBadgeHtml(type); }
+                showNotification(`Галочка ${type} выдана ${nick}`, 'success');
+            }
+
+            async function removeBadge(nick) {
+                const snap = await db.collection('users').where('username', '==', nick).get();
+                if (snap.empty) return showNotification('Не найден', 'error');
+                await snap.docs[0].ref.update({ badge: null });
+                showNotification(`Галочка снята с ${nick}`, 'success');
+            }
+
+            // СЛУШАЕМ ИЗМЕНЕНИЯ ГАЛОЧКИ ДЛЯ ТЕКУЩЕГО ПОЛЬЗОВАТЕЛЯ (РЕАЛЬНОЕ ВРЕМЯ)
+            function listenUserBadge(user) {
+                if (userBadgeUnsub) userBadgeUnsub();
+                if (!user) return;
+                userBadgeUnsub = db.collection('users').doc(user.uid).onSnapshot((doc) => {
+                    if (doc.exists && currentUser) {
+                        const data = doc.data();
+                        const badgeHtml = getBadgeHtml(data?.badge);
+                        document.getElementById('profileName').innerHTML = (data?.username || currentUser.displayName) + badgeHtml;
+                    }
+                });
             }
 
             async function giveSpin(nick) {
@@ -729,9 +768,7 @@
                 currentBalance -= product.price;
                 document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
                 
-                // ЛОГ ПОКУПКИ В АДМИНКУ
                 await addPurchaseLog('donate', product.name, product.price, serverNick, siteNick, currentUser.email);
-                
                 showNotification(`✅ Куплено ${product.name}!`, 'success');
                 return true;
             }
@@ -745,9 +782,7 @@
                 currentBalance -= price;
                 document.getElementById('userBalance').innerText = currentBalance;
                 
-                // ЛОГ ПОКУПКИ ТЕСТ-СЕРВЕРА В АДМИНКУ
                 await addPurchaseLog('testserver', days === 'forever' ? 'Тест-сервер (навсегда)' : `Тест-сервер ${days} дней`, price, serverNick, siteNick, currentUser.email);
-                
                 showNotification(`✅ Тест-сервер заказан!`, 'success');
             }
 
@@ -760,7 +795,7 @@
                     currentBalance = 50000;
                 } else { currentBalance = data.balance || 50000; }
                 document.getElementById('userBalance').innerText = currentBalance;
-                document.getElementById('profileName').innerHTML = (data?.username || user.displayName) + getBadgeHtml(data?.badge);
+                // ГАЛОЧКА ОТОБРАЗИТСЯ ЧЕРЕЗ listenUserBadge
                 document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> ${user.email}</p><p><i class="fas fa-calendar-alt"></i> ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`;
                 document.getElementById('userTag').innerHTML = data?.tag || '#user';
                 db.collection('donates').where('userId', '==', user.uid).onSnapshot(snap => { const c = document.getElementById('donatesContainer'); if (c) { c.innerHTML = ''; snap.forEach(d => c.innerHTML += `<span class="donate-tag"><i class="fas fa-gift"></i> ${d.data().product}</span>`); if (snap.empty) c.innerHTML = '<span class="donate-tag">Нет покупок</span>'; } });
@@ -835,7 +870,7 @@
                 document.getElementById('giveDonateBtn').onclick = () => giveDonateByNick(document.getElementById('donateNick').value, document.getElementById('donateName').value);
                 document.getElementById('removeDonateBtn').onclick = () => removeDonateByNick(document.getElementById('donateNick').value);
                 document.getElementById('giveBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, document.getElementById('badgeType').value);
-                document.getElementById('removeBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, null);
+                document.getElementById('removeBadgeBtn').onclick = () => removeBadge(document.getElementById('badgeNick').value);
                 document.getElementById('giveSpinBtn').onclick = () => giveSpin(document.getElementById('wheelUserNick').value);
                 document.getElementById('updateTimerBtn').onclick = async () => { const name = document.getElementById('timerEventName').value, desc = document.getElementById('timerEventDesc').value, date = document.getElementById('timerTargetDate').value; if (!date) return showNotification('Выберите дату', 'error'); await updateTimer(name, desc, date); };
                 document.getElementById('applyTimerRgbText').onclick = () => { document.getElementById('eventTitle').classList.add('rgb-text-animation'); showNotification('RGB текст включён!', 'success'); };
@@ -858,6 +893,7 @@
                     loadTimerRealtime();
                     listenSiteStatus();
                     listenBan(user);
+                    listenUserBadge(user); // РЕАЛЬНОЕ ВРЕМЯ ДЛЯ ГАЛОЧЕК
                     startBalanceUpdater();
                     bindButtons();
                     initSecretAdmin();
@@ -866,6 +902,7 @@
                     if (balanceInterval) clearInterval(balanceInterval);
                     if (siteStatusUnsub) siteStatusUnsub();
                     if (banUnsub) banUnsub();
+                    if (userBadgeUnsub) userBadgeUnsub();
                     document.getElementById('authModal').style.display = 'flex';
                     bindButtons();
                     initSecretAdmin();
