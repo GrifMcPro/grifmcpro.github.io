@@ -37,9 +37,11 @@
         @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
         @keyframes rgbTextAnim { 0% { color: #ff0000; } 25% { color: #00ff00; } 50% { color: #0000ff; } 75% { color: #ff00ff; } 100% { color: #ff0000; } }
         @keyframes rgbBorderAnim { 0% { border-color: #ff0000; } 25% { border-color: #00ff00; } 50% { border-color: #0000ff; } 75% { border-color: #ff00ff; } 100% { border-color: #ff0000; } }
+        @keyframes rgbGlow { 0% { box-shadow: 0 0 20px #ff0000; } 25% { box-shadow: 0 0 20px #00ff00; } 50% { box-shadow: 0 0 20px #0000ff; } 75% { box-shadow: 0 0 20px #ff00ff; } 100% { box-shadow: 0 0 20px #ff0000; } }
         @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         .rgb-text-animation { animation: rgbTextAnim 3s infinite; }
         .rgb-border-animation { animation: rgbBorderAnim 3s infinite; }
+        .rgb-glow-animation { animation: rgbGlow 3s infinite; }
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #151520; border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
@@ -82,18 +84,7 @@
         .product-icon i { font-size: 32px; color: var(--accent); }
         .product-name { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
         .price { font-size: 28px; font-weight: 800; color: var(--accent); margin: 12px 0; font-family: 'Orbitron', monospace; }
-        .donate-note { 
-            font-size: 11px; 
-            color: var(--text-muted); 
-            margin: 10px 0; 
-            padding: 10px; 
-            background: rgba(255,215,0,0.05); 
-            border-radius: var(--radius-md); 
-            border: 1px solid rgba(255,215,0,0.2);
-            backdrop-filter: blur(4px);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
+        .donate-note { font-size: 11px; color: var(--text-muted); margin: 10px 0; padding: 10px; background: rgba(255,215,0,0.05); border-radius: 12px; border: 1px solid rgba(255,215,0,0.2); backdrop-filter: blur(4px); }
         .donate-note i { margin-right: 5px; color: var(--accent); }
         .buy-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 12px; border-radius: 40px; font-weight: 700; cursor: pointer; width: 100%; color: #0a0a12; transition: 0.2s; }
         .buy-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
@@ -112,7 +103,7 @@
         .donates-list { margin: 15px 0; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
         .donate-tag { background: rgba(255,215,0,0.15); padding: 5px 12px; border-radius: 40px; font-size: 12px; border: 1px solid var(--border-light); }
 
-        /* ГАЛОЧКИ */
+        /* ГАЛОЧКИ 30 ВИДОВ */
         .badge-icon { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; margin-left: 4px; vertical-align: middle; flex-shrink: 0; }
         .badge-icon i { font-size: 10px; color: white; }
         .badge-blue { background: #3b82f6; box-shadow: 0 0 5px #3b82f6; }
@@ -141,8 +132,21 @@
         .badge-divine { background: linear-gradient(135deg, #eab308, #ca8a04); box-shadow: 0 0 5px #eab308; }
         .badge-purple { background: #8b5cf6; box-shadow: 0 0 5px #8b5cf6; }
         .badge-teal { background: #14b8a6; box-shadow: 0 0 5px #14b8a6; }
+        /* НОВЫЕ 10 ГАЛОЧЕК */
+        .badge-sapphire { background: #0f52ba; box-shadow: 0 0 5px #0f52ba; }
+        .badge-emerald { background: #50c878; box-shadow: 0 0 5px #50c878; }
+        .badge-ruby { background: #e0115f; box-shadow: 0 0 5px #e0115f; }
+        .badge-amber { background: #ffbf00; box-shadow: 0 0 5px #ffbf00; }
+        .badge-jade { background: #00a86b; box-shadow: 0 0 5px #00a86b; }
+        .badge-coral { background: #ff7f50; box-shadow: 0 0 5px #ff7f50; }
+        .badge-indigo { background: #4b0082; box-shadow: 0 0 5px #4b0082; }
+        .badge-magenta { background: #ff00ff; box-shadow: 0 0 5px #ff00ff; }
+        .badge-bronze { background: #cd7f32; box-shadow: 0 0 5px #cd7f32; }
+        .badge-platinum { background: #e5e4e2; box-shadow: 0 0 5px #e5e4e2; }
+        .badge-platinum i { color: #1a1a1a; }
+        .badge-obsidian { background: #000000; border: 1px solid #666; box-shadow: 0 0 5px #666; }
 
-        /* СКРЫТАЯ АДМИНКА - МАЛЕНЬКИЙ ЗАМОК */
+        /* СКРЫТАЯ АДМИНКА */
         .secret-admin-trigger {
             position: fixed;
             bottom: 20px;
@@ -160,17 +164,9 @@
             transition: 0.3s;
             backdrop-filter: blur(4px);
         }
-        .secret-admin-trigger:hover {
-            background: rgba(255,215,0,0.3);
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(255,215,0,0.3);
-        }
-        .secret-admin-trigger i {
-            color: var(--accent);
-            font-size: 18px;
-        }
+        .secret-admin-trigger:hover { background: rgba(255,215,0,0.3); transform: scale(1.1); }
+        .secret-admin-trigger i { color: var(--accent); font-size: 18px; }
 
-        /* МОДАЛКА ВВОДА КОДА АДМИНКИ */
         .admin-code-modal {
             display: none;
             position: fixed;
@@ -193,7 +189,7 @@
             border: 1px solid var(--border-light);
             animation: modalFadeIn 0.3s ease;
         }
-        .admin-code-content h3 { color: var(--accent); margin-bottom: 20px; font-size: 20px; }
+        .admin-code-content h3 { color: var(--accent); margin-bottom: 20px; }
         .admin-code-content input {
             width: 100%;
             padding: 12px;
@@ -202,9 +198,7 @@
             border-radius: 40px;
             color: white;
             outline: none;
-            font-size: 14px;
             text-align: center;
-            letter-spacing: 2px;
         }
         .admin-code-content input:focus { border-color: var(--accent); }
         .admin-code-content button {
@@ -218,14 +212,8 @@
             width: 100%;
             color: #0a0a12;
         }
-        .close-code-modal {
-            float: right;
-            font-size: 20px;
-            cursor: pointer;
-            color: var(--accent);
-        }
+        .close-code-modal { float: right; font-size: 20px; cursor: pointer; color: var(--accent); }
 
-        /* АДМИНКА (СКРЫТА ПО УМОЛЧАНИЮ) */
         .admin-panel-full {
             display: none;
             position: fixed;
@@ -266,14 +254,7 @@
             margin-bottom: 15px;
             border: 1px solid var(--border-color);
         }
-        .admin-panel-container .admin-block h3 {
-            color: var(--accent);
-            margin-bottom: 12px;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .admin-panel-container .admin-block h3 { color: var(--accent); margin-bottom: 12px; font-size: 16px; display: flex; align-items: center; gap: 8px; }
         .admin-panel-container .admin-input, .admin-panel-container .admin-select {
             width: 100%;
             padding: 8px 12px;
@@ -333,7 +314,114 @@
         }
         .close-admin-panel:hover { background: rgba(239,68,68,0.4); transform: scale(1.05); }
 
-        .toast-notification { position: fixed; bottom: 20px; right: 20px; background: #181825; border-left: 3px solid var(--accent); padding: 12px 20px; border-radius: 16px; z-index: 1000; animation: fadeInUp 0.3s ease; display: flex; align-items: center; gap: 10px; }
+        /* КРАСИВЕЙШЕЕ МОДАЛЬНОЕ ОКНО БАНА */
+        .ban-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(20px);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .ban-modal-content {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border-radius: 28px;
+            padding: 35px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            border: 2px solid;
+            animation: modalFadeIn 0.4s ease, rgbBorderAnim 3s infinite;
+            box-shadow: 0 0 50px rgba(255,0,0,0.3);
+        }
+        .ban-modal-content i.ban-icon {
+            font-size: 64px;
+            margin-bottom: 15px;
+            animation: rgbTextAnim 3s infinite;
+        }
+        .ban-modal-content h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            animation: rgbTextAnim 3s infinite;
+            letter-spacing: 2px;
+        }
+        .ban-info-grid {
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: left;
+        }
+        .ban-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .ban-info-row:last-child { border-bottom: none; }
+        .ban-info-label {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 13px;
+        }
+        .ban-info-value {
+            color: var(--text-primary);
+            font-size: 13px;
+            text-align: right;
+            max-width: 60%;
+            word-break: break-word;
+        }
+        .ban-modal-content button {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #0a0a12;
+            transition: 0.2s;
+        }
+        .ban-modal-content button:hover { transform: scale(1.02); box-shadow: 0 0 15px var(--accent); }
+
+        /* УВЕДОМЛЕНИЯ КАК В РОБЛОКСЕ */
+        .notification-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #1a1a2a, #0f0f1a);
+            border-left: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            z-index: 1500;
+            animation: slideInLeft 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 250px;
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .notification-toast.success { border-left-color: var(--success); }
+        .notification-toast.error { border-left-color: var(--danger); }
+        .notification-toast.warning { border-left-color: var(--warning); }
+        .notification-toast i { font-size: 18px; }
+        .notification-toast.success i { color: var(--success); }
+        .notification-toast.error i { color: var(--danger); }
+        .notification-toast.warning i { color: var(--warning); }
+        .notification-toast .ntext { font-size: 13px; font-weight: 500; }
+
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); backdrop-filter: blur(20px); justify-content: center; align-items: center; z-index: 1000; }
         .modal-content, .auth-modal { background: #181825; border-radius: 28px; padding: 30px; width: 420px; max-width: 90%; text-align: center; border: 1px solid var(--border-light); }
         .auth-input { width: 100%; padding: 12px; margin: 8px 0; background: rgba(0,0,0,0.5); border-radius: 40px; border: 1px solid var(--border-color); color: white; outline: none; }
@@ -351,11 +439,37 @@
             .countdown-block { padding: 15px 20px; min-width: 80px; }
             .timer-title { font-size: 28px; }
             .menu-tab { padding: 4px 12px; font-size: 10px; }
-            .site-header { padding: 6px 15px; }
         }
     </style>
 </head>
 <body>
+    <!-- КРАСИВЕЙШЕЕ МОДАЛЬНОЕ ОКНО БАНА -->
+    <div id="banModalOverlay" class="ban-modal-overlay">
+        <div class="ban-modal-content">
+            <i class="fas fa-ban ban-icon"></i>
+            <h2>🔒 АККАУНТ ЗАБЛОКИРОВАН</h2>
+            <div class="ban-info-grid">
+                <div class="ban-info-row">
+                    <span class="ban-info-label"><i class="fas fa-user-shield"></i> Модератор:</span>
+                    <span class="ban-info-value" id="banModeratorSpan">Система</span>
+                </div>
+                <div class="ban-info-row">
+                    <span class="ban-info-label"><i class="fas fa-exclamation-triangle"></i> Причина:</span>
+                    <span class="ban-info-value" id="banReasonSpan">Нарушение правил</span>
+                </div>
+                <div class="ban-info-row">
+                    <span class="ban-info-label"><i class="fas fa-calendar-plus"></i> Дата выдачи:</span>
+                    <span class="ban-info-value" id="banDateSpan">-</span>
+                </div>
+                <div class="ban-info-row">
+                    <span class="ban-info-label"><i class="fas fa-calendar-check"></i> Разблокировка:</span>
+                    <span class="ban-info-value" id="banUntilSpan">Навсегда</span>
+                </div>
+            </div>
+            <button id="banExitBtn"><i class="fas fa-sign-out-alt"></i> Выйти из аккаунта</button>
+        </div>
+    </div>
+
     <div class="site-header">
         <div class="header-content">
             <div class="logo"><div class="logo-icon"><i class="fas fa-crown"></i></div><span class="logo-text">GRIFLAUNCHER</span></div>
@@ -402,12 +516,10 @@
         </div>
     </div>
 
-    <!-- СКРЫТЫЙ ЗАМОК ДЛЯ АДМИНКИ -->
     <div class="secret-admin-trigger" id="secretAdminTrigger">
         <i class="fas fa-lock"></i>
     </div>
 
-    <!-- МОДАЛКА ВВОДА КОДА -->
     <div id="adminCodeModal" class="admin-code-modal">
         <div class="admin-code-content">
             <span class="close-code-modal" id="closeCodeModal">&times;</span>
@@ -418,13 +530,12 @@
         </div>
     </div>
 
-    <!-- СКРЫТАЯ АДМИН-ПАНЕЛЬ -->
     <div id="adminPanelFull" class="admin-panel-full">
         <div class="close-admin-panel" id="closeAdminPanelBtn"><i class="fas fa-times"></i></div>
         <div class="admin-panel-container">
             <div class="admin-title">👑 АДМИН-ПАНЕЛЬ</div>
             <div class="admin-block">
-                <h3><i class="fas fa-clock"></i> НАСТРОЙКА ТАЙМЕРА</h3>
+                <h3><i class="fas fa-clock"></i> НАСТРОЙКА ТАЙМЕРА (РЕАЛЬНОЕ ВРЕМЯ)</h3>
                 <input type="text" id="timerEventName" placeholder="Название события" class="admin-input">
                 <textarea id="timerEventDesc" rows="2" placeholder="Описание события" class="admin-input"></textarea>
                 <input type="datetime-local" id="timerTargetDate" class="admin-input">
@@ -455,7 +566,7 @@
                 <button id="giveSpinBtn" class="admin-btn-blue">🎫 ВЫДАТЬ</button>
             </div>
             <div class="admin-block">
-                <h3><i class="fas fa-tags"></i> ГАЛОЧКИ (20 ВИДОВ)</h3>
+                <h3><i class="fas fa-tags"></i> ГАЛОЧКИ (30 ВИДОВ)</h3>
                 <input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input">
                 <select id="badgeType" class="admin-select">
                     <option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option>
@@ -466,6 +577,12 @@
                     <option value="dark">🖤 Тёмная</option><option value="nature">🌿 Природная</option><option value="blood">🩸 Кровавая</option>
                     <option value="void">🌀 Пустота</option><option value="divine">⚜️ Божественная</option>
                     <option value="purple">🟣 Фиолетовая</option><option value="teal">🔷 Бирюзовая</option>
+                    <option value="sapphire">💙 Сапфировая</option><option value="emerald">💚 Изумрудная</option>
+                    <option value="ruby">❤️ Рубиновая</option><option value="amber">🧡 Янтарная</option>
+                    <option value="jade">💚 Нефритовая</option><option value="coral">🪸 Коралловая</option>
+                    <option value="indigo">🟣 Индиго</option><option value="magenta">🩷 Магента</option>
+                    <option value="bronze">🥉 Бронзовая</option><option value="platinum">⚪ Платиновая</option>
+                    <option value="obsidian">⬛ Обсидиановая</option>
                 </select>
                 <button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button>
                 <button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button>
@@ -583,14 +700,33 @@
             let siteStatusUnsub = null;
             let banUnsub = null;
             let balanceInterval = null;
+            let timerUnsub = null;
 
-            function showToast(message, isError = false) {
-                const toast = document.createElement('div');
-                toast.className = 'toast-notification';
-                toast.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-triangle' : 'fa-check-circle'}"></i> ${message}`;
-                document.body.appendChild(toast);
-                setTimeout(() => toast.remove(), 3000);
+            // КРАСИВЫЕ УВЕДОМЛЕНИЯ
+            function showNotification(message, type = 'success') {
+                const container = document.getElementById('notificationContainer') || (() => {
+                    let div = document.createElement('div');
+                    div.id = 'notificationContainer';
+                    div.style.position = 'fixed';
+                    div.style.bottom = '20px';
+                    div.style.left = '20px';
+                    div.style.zIndex = '1500';
+                    document.body.appendChild(div);
+                    return div;
+                })();
+                const notif = document.createElement('div');
+                notif.className = `notification-toast ${type}`;
+                const icon = type === 'success' ? 'fa-check-circle' : (type === 'error' ? 'fa-exclamation-triangle' : 'fa-info-circle');
+                notif.innerHTML = `<i class="fas ${icon}"></i><span class="ntext">${message}</span>`;
+                container.appendChild(notif);
+                setTimeout(() => {
+                    notif.style.animation = 'slideOutLeft 0.3s ease';
+                    setTimeout(() => notif.remove(), 300);
+                }, 4000);
             }
+            const style = document.createElement('style');
+            style.textContent = `@keyframes slideOutLeft { from { transform: translateX(0); opacity: 1; } to { transform: translateX(-100%); opacity: 0; } }`;
+            document.head.appendChild(style);
 
             function getBadgeHtml(type) {
                 if (!type) return '';
@@ -599,7 +735,9 @@
                     crown: 'fa-crown', diamond: 'fa-gem', star: 'fa-star', game: 'fa-gamepad', fire: 'fa-fire',
                     mythic: 'fa-moon', cosmic: 'fa-globe', ice: 'fa-snowflake', shadow: 'fa-moon', light: 'fa-sun',
                     dark: 'fa-moon', nature: 'fa-leaf', blood: 'fa-droplet', void: 'fa-circle', divine: 'fa-feather',
-                    purple: 'fa-check', teal: 'fa-check'
+                    purple: 'fa-check', teal: 'fa-check', sapphire: 'fa-gem', emerald: 'fa-leaf', ruby: 'fa-gem',
+                    amber: 'fa-sun', jade: 'fa-leaf', coral: 'fa-fish', indigo: 'fa-moon', magenta: 'fa-heart',
+                    bronze: 'fa-medal', platinum: 'fa-star', obsidian: 'fa-moon'
                 };
                 const icon = icons[type] || 'fa-check';
                 if (type === 'crown') return `<span class="badge-icon badge-crown"><i class="fas fa-crown"></i></span>`;
@@ -624,7 +762,7 @@
                 });
             }
 
-            // ТАЙМЕР
+            // ТАЙМЕР В РЕАЛЬНОМ ВРЕМЕНИ
             function startTimer(targetDate, eventName, eventDesc) {
                 if (timerInterval) clearInterval(timerInterval);
                 document.getElementById('eventTitle').innerText = eventName || 'ДО ОТКРЫТИЯ СЕЗОНА';
@@ -645,59 +783,48 @@
                 }, 1000);
             }
 
-            async function loadTimer() {
-                const doc = await db.collection('settings').doc('timer').get();
-                if (doc.exists && doc.data().targetDate) {
-                    let target = doc.data().targetDate.toDate ? doc.data().targetDate.toDate() : new Date(doc.data().targetDate);
-                    startTimer(target, doc.data().eventName, doc.data().eventDesc);
-                    if (document.getElementById('timerEventName')) {
-                        document.getElementById('timerEventName').value = doc.data().eventName || '';
-                        document.getElementById('timerEventDesc').value = doc.data().eventDesc || '';
-                        document.getElementById('timerTargetDate').value = target.toISOString().slice(0, 16);
+            async function loadTimerRealtime() {
+                if (timerUnsub) timerUnsub();
+                timerUnsub = db.collection('settings').doc('timer').onSnapshot((doc) => {
+                    if (doc.exists && doc.data().targetDate) {
+                        let target = doc.data().targetDate.toDate ? doc.data().targetDate.toDate() : new Date(doc.data().targetDate);
+                        startTimer(target, doc.data().eventName, doc.data().eventDesc);
+                        if (document.getElementById('timerEventName')) {
+                            document.getElementById('timerEventName').value = doc.data().eventName || '';
+                            document.getElementById('timerEventDesc').value = doc.data().eventDesc || '';
+                            document.getElementById('timerTargetDate').value = target.toISOString().slice(0, 16);
+                        }
+                    } else {
+                        let def = new Date();
+                        def.setDate(def.getDate() + 7);
+                        startTimer(def, "ДО ОТКРЫТИЯ СЕЗОНА", "");
                     }
-                } else {
-                    let def = new Date();
-                    def.setDate(def.getDate() + 7);
-                    startTimer(def, "ДО ОТКРЫТИЯ СЕЗОНА", "");
-                }
+                });
             }
 
             async function updateTimer(eventName, eventDesc, targetDate) {
                 await db.collection('settings').doc('timer').set({ eventName, eventDesc, targetDate: new Date(targetDate) });
-                startTimer(new Date(targetDate), eventName, eventDesc);
-                showToast('✅ Таймер обновлён!');
+                showNotification('✅ Таймер обновлён!', 'success');
             }
 
-            // БАН
-            function showBanModal(reason, untilDate, moderator) {
-                const modal = document.createElement('div');
-                modal.className = 'modal';
-                modal.style.display = 'flex';
-                modal.innerHTML = `
-                    <div class="modal-content" style="border: 2px solid var(--danger);">
-                        <i class="fas fa-gavel" style="font-size: 48px; color: var(--danger); margin-bottom: 15px;"></i>
-                        <h2 style="color: var(--danger);">🔨 ВЫ ЗАБАНЕНЫ!</h2>
-                        <div style="background: rgba(239,68,68,0.15); padding: 12px; border-radius: 12px; margin: 15px 0;">
-                            <p><strong>Причина:</strong> ${reason}</p>
-                            <p><strong>Разбан:</strong> ${untilDate || 'Навсегда'}</p>
-                            <p><strong>Модератор:</strong> ${moderator || 'Система'}</p>
-                        </div>
-                        <button id="banExitBtn" class="admin-btn-red" style="width: auto; padding: 10px 30px;">Выйти из аккаунта</button>
-                    </div>
-                `;
-                document.body.appendChild(modal);
-                document.getElementById('banExitBtn').onclick = () => {
-                    modal.remove();
-                    auth.signOut();
-                };
+            // БАН С КРАСИВЫМ ОКНОМ
+            function showBanModal(reason, untilDate, moderator, banDate) {
+                document.getElementById('banModeratorSpan').innerText = moderator || 'Система';
+                document.getElementById('banReasonSpan').innerText = reason;
+                document.getElementById('banDateSpan').innerText = banDate || new Date().toLocaleString();
+                document.getElementById('banUntilSpan').innerText = untilDate || 'Навсегда';
+                document.getElementById('banModalOverlay').style.display = 'flex';
+                document.querySelector('.site-header').style.display = 'none';
+                document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
             }
 
             async function banUser(userId, username, email, reason, duration, moderator) {
                 const until = duration === 'forever' ? null : new Date(Date.now() + parseInt(duration) * 60 * 60 * 1000);
-                await db.collection('bans').add({ userId, username, email, reason, until, active: true, moderator, createdAt: new Date() });
-                showToast(`✅ ${username} забанен`);
+                const banDate = new Date();
+                await db.collection('bans').add({ userId, username, email, reason, until, active: true, moderator, createdAt: banDate });
+                showNotification(`🔨 ${username} забанен!`, 'error');
                 if (currentUser && currentUser.uid === userId) {
-                    showBanModal(reason, until ? until.toLocaleString() : 'Навсегда', moderator);
+                    showBanModal(reason, until ? until.toLocaleString() : 'Навсегда', moderator, banDate.toLocaleString());
                     setTimeout(() => auth.signOut(), 3000);
                 }
             }
@@ -705,7 +832,12 @@
             async function unbanUser(email, username) {
                 const snap = await db.collection('bans').where('email', '==', email).where('active', '==', true).get();
                 for (const doc of snap.docs) await doc.ref.update({ active: false });
-                showToast(`✅ ${username} разбанен`);
+                showNotification(`🔓 ${username} разбанен! Теперь может войти.`, 'success');
+                // Принудительно разлогиниваем если это тот же пользователь
+                if (currentUser && currentUser.email === email) {
+                    await auth.signOut();
+                    setTimeout(() => { window.location.reload(); }, 1500);
+                }
             }
 
             async function checkBanOnLoad(user) {
@@ -717,7 +849,7 @@
                         await snap.docs[0].ref.update({ active: false });
                         return false;
                     }
-                    showBanModal(ban.reason, ban.until ? new Date(ban.until.toDate()).toLocaleString() : 'Навсегда', ban.moderator);
+                    showBanModal(ban.reason, ban.until ? new Date(ban.until.toDate()).toLocaleString() : 'Навсегда', ban.moderator, new Date(ban.createdAt.toDate()).toLocaleString());
                     return true;
                 }
                 return false;
@@ -733,7 +865,7 @@
                             snap.docs[0].ref.update({ active: false });
                             return;
                         }
-                        showBanModal(ban.reason, ban.until ? new Date(ban.until.toDate()).toLocaleString() : 'Навсегда', ban.moderator);
+                        showBanModal(ban.reason, ban.until ? new Date(ban.until.toDate()).toLocaleString() : 'Навсегда', ban.moderator, new Date(ban.createdAt.toDate()).toLocaleString());
                         setTimeout(() => auth.signOut(), 1000);
                     }
                 });
@@ -743,7 +875,7 @@
             async function closeSite(reason, hours) {
                 const until = new Date(Date.now() + hours * 60 * 60 * 1000);
                 await db.collection('settings').doc('siteStatus').set({ closed: true, reason, until });
-                showToast(`🔒 Сайт закрыт до ${until.toLocaleString()}`);
+                showNotification(`🔒 Сайт закрыт до ${until.toLocaleString()}`, 'warning');
                 if (currentUser && currentUser.email !== MAIN_ADMIN_EMAIL && !moderatorsList.some(m => m.email === currentUser.email)) {
                     alert(`🔒 САЙТ ЗАКРЫТ!\n\nПричина: ${reason}\nОткроется: ${until.toLocaleString()}`);
                     setTimeout(() => { window.location.reload(); }, 1500);
@@ -752,7 +884,7 @@
 
             async function openSite() {
                 await db.collection('settings').doc('siteStatus').update({ closed: false });
-                showToast('🔓 Сайт открыт');
+                showNotification('🔓 Сайт открыт', 'success');
                 if (currentUser && currentUser.email !== MAIN_ADMIN_EMAIL) {
                     location.reload();
                 }
@@ -803,7 +935,7 @@
                 moderatorsList = moderatorsList.filter(m => m.email !== email);
                 await db.collection('settings').doc('moderators').set({ list: moderatorsList });
                 loadModerators();
-                showToast('Модератор удалён');
+                showNotification('Модератор удалён', 'success');
             };
 
             async function loadRecentUsers() {
@@ -830,14 +962,14 @@
                 const reason = prompt('Причина разбана:'), mod = prompt('Модератор:');
                 if (reason && mod) unbanUser(email, username);
             };
-            window.giveDonatePrompt = async (userId, username) => { const donateName = prompt('Название доната:'), reason = prompt('Причина:'); if (donateName && reason) await db.collection('donates').add({ userId, username, product: donateName, price: 0, date: new Date(), givenBy: reason }); };
-            window.removeDonatePrompt = async (userId, username) => { const reason = prompt('Причина снятия:'); if (reason) { const snap = await db.collection('donates').where('userId', '==', userId).get(); for (const doc of snap.docs) await doc.ref.delete(); } };
+            window.giveDonatePrompt = async (userId, username) => { const donateName = prompt('Название доната:'); if (donateName) await db.collection('donates').add({ userId, username, product: donateName, price: 0, date: new Date(), givenBy: 'Админ' }); showNotification(`🎁 Донат ${donateName} выдан!`, 'success'); };
+            window.removeDonatePrompt = async (userId, username) => { const snap = await db.collection('donates').where('userId', '==', userId).get(); for (const doc of snap.docs) await doc.ref.delete(); showNotification(`🗑️ Все донаты ${username} удалены`, 'warning'); };
 
             async function giveCoins(nick, amount) {
                 const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showToast('Не найден', true);
+                if (snap.empty) return showNotification('Не найден', 'error');
                 await snap.docs[0].ref.update({ balance: (snap.docs[0].data().balance || 0) + amount });
-                showToast(`✅ Выдано ${amount} ₽ ${nick}`);
+                showNotification(`💰 Выдано ${amount} ₽ пользователю ${nick}`, 'success');
                 if (currentUser && currentUser.uid === snap.docs[0].id) {
                     currentBalance += amount;
                     document.getElementById('userBalance').innerText = currentBalance;
@@ -846,9 +978,9 @@
 
             async function giveBadge(nick, type) {
                 const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showToast('Не найден', true);
+                if (snap.empty) return showNotification('Не найден', 'error');
                 await snap.docs[0].ref.update({ badge: type });
-                showToast(`✅ Галочка выдана ${nick}`);
+                showNotification(`🏷️ Галочка ${type} выдана ${nick}`, 'success');
                 if (currentUser && currentUser.uid === snap.docs[0].id) {
                     document.getElementById('profileName').innerHTML = snap.docs[0].data().username + getBadgeHtml(type);
                 }
@@ -856,16 +988,16 @@
 
             async function giveSpin(nick) {
                 const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showToast('Не найден', true);
+                if (snap.empty) return showNotification('Не найден', 'error');
                 const spins = (snap.docs[0].data().wheelSpins || 0) + 1;
                 await snap.docs[0].ref.update({ wheelSpins: spins });
-                showToast(`✅ Прокрутка выдана ${nick}`);
+                showNotification(`🎫 Прокрутка выдана ${nick}`, 'success');
             }
 
             async function giveCoinsAll(amount) {
                 const snap = await db.collection('users').get();
                 for (const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
-                showToast(`✅ Выдано ${amount} ₽ всем`);
+                showNotification(`💰 Всем выдано ${amount} ₽`, 'success');
                 if (currentUser) {
                     currentBalance += amount;
                     document.getElementById('userBalance').innerText = currentBalance;
@@ -880,7 +1012,6 @@
 
             async function sendBroadcast(message) {
                 const users = await db.collection('users').get();
-                let successCount = 0;
                 for (const userDoc of users.docs) {
                     await db.collection('notifications').add({
                         to: userDoc.id,
@@ -888,29 +1019,20 @@
                         timestamp: new Date(),
                         read: false
                     });
-                    successCount++;
                 }
-                showToast(`✅ Рассылка отправлена ${successCount} пользователям!`);
+                showNotification(`📢 Рассылка отправлена ${users.size} пользователям!`, 'success');
             }
 
             // МАГАЗИН
             const privileges = [
-                { name: "Премиум", price: 1000, icon: "fa-crown" },
-                { name: "Креатив", price: 2500, icon: "fa-palette" },
-                { name: "Модер", price: 5000, icon: "fa-shield-alt" },
-                { name: "Лорд", price: 10000, icon: "fa-crown" },
-                { name: "Админ", price: 20000, icon: "fa-user-tie" },
-                { name: "Гл админ", price: 50000, icon: "fa-user-shield" },
-                { name: "Создатель", price: 100000, icon: "fa-crown" },
-                { name: "Основатель", price: 150000, icon: "fa-star" },
-                { name: "Владелец", price: 250000, icon: "fa-crown" },
-                { name: "Консоль", price: 350000, icon: "fa-terminal" },
-                { name: "Цезарь", price: 500000, icon: "fa-crown" },
-                { name: "Сервер", price: 650000, icon: "fa-server" },
-                { name: "Хелпер", price: 750000, icon: "fa-hand-peace" },
-                { name: "Хайп", price: 850000, icon: "fa-fire" },
-                { name: "Стафф", price: 900000, icon: "fa-users" },
-                { name: "Правитель", price: 1000000, icon: "fa-chess-king" }
+                { name: "Премиум", price: 1000, icon: "fa-crown" }, { name: "Креатив", price: 2500, icon: "fa-palette" },
+                { name: "Модер", price: 5000, icon: "fa-shield-alt" }, { name: "Лорд", price: 10000, icon: "fa-crown" },
+                { name: "Админ", price: 20000, icon: "fa-user-tie" }, { name: "Гл админ", price: 50000, icon: "fa-user-shield" },
+                { name: "Создатель", price: 100000, icon: "fa-crown" }, { name: "Основатель", price: 150000, icon: "fa-star" },
+                { name: "Владелец", price: 250000, icon: "fa-crown" }, { name: "Консоль", price: 350000, icon: "fa-terminal" },
+                { name: "Цезарь", price: 500000, icon: "fa-crown" }, { name: "Сервер", price: 650000, icon: "fa-server" },
+                { name: "Хелпер", price: 750000, icon: "fa-hand-peace" }, { name: "Хайп", price: 850000, icon: "fa-fire" },
+                { name: "Стафф", price: 900000, icon: "fa-users" }, { name: "Правитель", price: 1000000, icon: "fa-chess-king" }
             ];
 
             function renderShop() {
@@ -935,20 +1057,14 @@
 
             async function purchaseProduct(product, serverNick, siteNick) {
                 if (currentBalance < product.price) {
-                    showToast('Недостаточно средств', true);
+                    showNotification('Недостаточно средств', 'error');
                     return false;
                 }
                 await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - product.price });
-                await db.collection('donates').add({
-                    userId: currentUser.uid,
-                    username: currentUser.displayName,
-                    product: product.name,
-                    price: product.price,
-                    date: new Date()
-                });
+                await db.collection('donates').add({ userId: currentUser.uid, username: currentUser.displayName, product: product.name, price: product.price, date: new Date() });
                 currentBalance -= product.price;
                 document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                showToast(`✅ Куплено ${product.name}! Донат будет выдан в течение 10 минут`);
+                showNotification(`✅ Куплено ${product.name}! Донат придёт через 10 минут`, 'success');
                 return true;
             }
 
@@ -1016,7 +1132,7 @@
                     if (currentUser && currentUser.email === MAIN_ADMIN_EMAIL) {
                         codeModal.style.display = 'flex';
                     } else {
-                        showToast('❌ Доступ только для администратора', true);
+                        showNotification('❌ Доступ только для администратора', 'error');
                     }
                 };
 
@@ -1030,7 +1146,7 @@
                         loadModerators();
                         loadStats();
                     } else {
-                        showToast('❌ Неверный код доступа!', true);
+                        showNotification('❌ Неверный код доступа!', 'error');
                     }
                 };
                 closeAdminPanel.onclick = () => { adminPanel.classList.remove('active'); };
@@ -1040,11 +1156,12 @@
                 document.getElementById('doLoginBtn').onclick = async () => {
                     try {
                         await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value);
-                    } catch (e) { showToast(e.message, true); }
+                        showNotification('✅ Добро пожаловать!', 'success');
+                    } catch (e) { showNotification(e.message, 'error'); }
                 };
                 document.getElementById('doRegisterBtn').onclick = async () => {
                     const u = document.getElementById('regUsername').value, e = document.getElementById('regEmail').value, p = document.getElementById('regPass').value;
-                    if (p.length < 6) return showToast('Пароль мин 6', true);
+                    if (p.length < 6) return showNotification('Пароль мин 6 символов', 'error');
                     try {
                         const cred = await auth.createUserWithEmailAndPassword(e, p);
                         await cred.user.updateProfile({ displayName: u });
@@ -1052,8 +1169,8 @@
                             username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(),
                             wheelSpins: 1, tag: `#${u.substring(0,4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null
                         });
-                        showToast('✅ Регистрация успешна!');
-                    } catch (e) { showToast(e.message, true); }
+                        showNotification('✅ Регистрация успешна!', 'success');
+                    } catch (e) { showNotification(e.message, 'error'); }
                 };
                 document.getElementById('logoutBtn').onclick = () => auth.signOut();
                 document.getElementById('closeBuyModal').onclick = () => document.getElementById('buyModal').style.display = 'none';
@@ -1061,7 +1178,7 @@
                 document.getElementById('closePasswordModal').onclick = () => document.getElementById('changePasswordModal').style.display = 'none';
                 document.getElementById('confirmBuyBtn').onclick = async () => {
                     const serverNick = document.getElementById('buyNick').value.trim(), siteNick = document.getElementById('buySiteNick').value.trim();
-                    if (!serverNick || !siteNick) return showToast('Заполните оба поля', true);
+                    if (!serverNick || !siteNick) return showNotification('Заполните оба поля', 'error');
                     await purchaseProduct(currentProduct, serverNick, siteNick);
                     document.getElementById('buyModal').style.display = 'none';
                     loadUserData(currentUser);
@@ -1072,7 +1189,7 @@
                     if (newName) {
                         await db.collection('users').doc(currentUser.uid).update({ username: newName });
                         await currentUser.updateProfile({ displayName: newName });
-                        showToast('Имя изменено!');
+                        showNotification('Имя изменено!', 'success');
                         document.getElementById('editNameModal').style.display = 'none';
                         loadUserData(currentUser);
                     }
@@ -1083,20 +1200,20 @@
                         const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, document.getElementById('oldPasswordInput').value);
                         await currentUser.reauthenticateWithCredential(cred);
                         await currentUser.updatePassword(document.getElementById('newPasswordInput').value);
-                        showToast('Пароль изменён!');
+                        showNotification('Пароль изменён!', 'success');
                         document.getElementById('changePasswordModal').style.display = 'none';
-                    } catch (e) { showToast('Неверный пароль', true); }
+                    } catch (e) { showNotification('Неверный старый пароль', 'error'); }
                 };
                 document.getElementById('addModeratorBtn').onclick = async () => {
                     const nick = document.getElementById('moderatorNick').value;
                     const snap = await db.collection('users').where('username', '==', nick).get();
-                    if (snap.empty) return showToast('Не найден', true);
+                    if (snap.empty) return showNotification('Не найден', 'error');
                     const data = snap.docs[0].data();
-                    if (moderatorsList.some(m => m.email === data.email)) return showToast('Уже есть', true);
+                    if (moderatorsList.some(m => m.email === data.email)) return showNotification('Уже есть', 'error');
                     moderatorsList.push({ nick: data.username, email: data.email });
                     await db.collection('settings').doc('moderators').set({ list: moderatorsList });
                     loadModerators();
-                    showToast(`Модератор ${nick} добавлен`);
+                    showNotification(`Модератор ${nick} добавлен`, 'success');
                 };
                 document.getElementById('giveBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, document.getElementById('badgeType').value);
                 document.getElementById('removeBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, null);
@@ -1105,42 +1222,46 @@
                 document.getElementById('giveSpinBtn').onclick = () => giveSpin(document.getElementById('wheelUserNick').value);
                 document.getElementById('closeSiteBtn').onclick = () => closeSite(document.getElementById('closeReason').value, parseInt(document.getElementById('closeDuration').value));
                 document.getElementById('openSiteBtn').onclick = openSite;
-                document.getElementById('sendBroadcastBtn').onclick = () => { const msg = document.getElementById('broadcastMsg').value; if (msg) sendBroadcast(msg); else showToast('Введите текст сообщения', true); };
+                document.getElementById('sendBroadcastBtn').onclick = () => { const msg = document.getElementById('broadcastMsg').value; if (msg) sendBroadcast(msg); else showNotification('Введите текст сообщения', 'error'); };
                 document.getElementById('banUserBtn').onclick = () => {
                     const nick = document.getElementById('banNick').value, reason = document.getElementById('banReason').value, duration = document.getElementById('banDuration').value, mod = document.getElementById('moderatorName').value;
                     if (nick && reason && mod) banUserByNick(nick, reason, duration, mod);
-                    else showToast('Заполните все поля', true);
+                    else showNotification('Заполните все поля', 'error');
                 };
                 document.getElementById('unbanUserBtn').onclick = () => {
                     const nick = document.getElementById('banNick').value, mod = document.getElementById('moderatorName').value;
                     if (nick && mod) unbanUserByNick(nick, mod);
-                    else showToast('Введите ник и модератора', true);
+                    else showNotification('Введите ник и модератора', 'error');
                 };
                 async function banUserByNick(nick, reason, duration, moderator) {
                     const snap = await db.collection('users').where('username', '==', nick).get();
-                    if (snap.empty) return showToast('Не найден', true);
+                    if (snap.empty) return showNotification('Не найден', 'error');
                     const user = snap.docs[0];
                     banUser(user.id, nick, user.data().email, reason, duration, moderator);
                 }
                 async function unbanUserByNick(nick, moderator) {
                     const snap = await db.collection('users').where('username', '==', nick).get();
-                    if (snap.empty) return showToast('Не найден', true);
+                    if (snap.empty) return showNotification('Не найден', 'error');
                     unbanUser(snap.docs[0].data().email, nick);
                 }
                 document.getElementById('applyTimerRgbText').onclick = () => {
                     document.getElementById('eventTitle').classList.add('rgb-text-animation');
-                    showToast('✨ RGB текст включён!');
+                    showNotification('✨ RGB текст включён!', 'success');
                 };
                 document.getElementById('applyTimerRgbBorder').onclick = () => {
                     document.querySelectorAll('.countdown-block').forEach(b => b.classList.add('rgb-border-animation'));
-                    showToast('✨ RGB рамка включена!');
+                    showNotification('✨ RGB рамка включена!', 'success');
                 };
                 document.getElementById('updateTimerBtn').onclick = async () => {
                     const name = document.getElementById('timerEventName').value;
                     const desc = document.getElementById('timerEventDesc').value;
                     const date = document.getElementById('timerTargetDate').value;
-                    if (!date) return showToast('Выберите дату', true);
+                    if (!date) return showNotification('Выберите дату', 'error');
                     await updateTimer(name, desc, date);
+                };
+                document.getElementById('banExitBtn').onclick = () => {
+                    document.getElementById('banModalOverlay').style.display = 'none';
+                    auth.signOut();
                 };
                 document.querySelectorAll('.tab-auth').forEach(btn => {
                     btn.onclick = () => {
@@ -1158,19 +1279,22 @@
                     currentUser = user;
                     await loadModerators();
                     const isBanned = await checkBanOnLoad(user);
-                    if (isBanned) { auth.signOut(); return; }
+                    if (isBanned) { return; }
                     const isClosed = await checkSiteClosedOnLoad(user);
                     if (isClosed) { return; }
                     await loadUserData(user);
                     renderShop();
                     renderMenu();
-                    loadTimer();
+                    loadTimerRealtime();
                     listenSiteStatus();
                     listenBan(user);
                     startBalanceUpdater();
                     bindButtons();
                     initSecretAdmin();
                     document.getElementById('authModal').style.display = 'none';
+                    if (document.getElementById('banModalOverlay').style.display === 'flex') {
+                        document.getElementById('banModalOverlay').style.display = 'none';
+                    }
                 } else {
                     if (balanceInterval) clearInterval(balanceInterval);
                     if (siteStatusUnsub) siteStatusUnsub();
