@@ -370,7 +370,7 @@
         .rule-title { font-weight: 700; font-size: 18px; color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
         .rule-punishment { display: inline-block; background: rgba(239,68,68,0.2); border-left: 3px solid var(--danger); padding: 5px 12px; border-radius: 8px; font-size: 13px; color: var(--danger); margin-top: 8px; }
 
-        /* СТИЛИ ДЛЯ СТРАНИЦЫ ОБЖАЛОВАНИЙ */
+        /* СТИЛИ ДЛЯ СТРАНИЦЫ ОБЖАЛОВАНИЙ - ФОРУМ BLACK RUSSIA STYLE */
         .appeals-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .appeals-header { text-align: center; margin-bottom: 40px; }
         .appeals-header h1 { font-family: 'Orbitron', monospace; font-size: 48px; background: linear-gradient(135deg, #fff, var(--accent), var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; animation: rgbTextAnim 3s infinite; }
@@ -392,22 +392,113 @@
         .back-btn { background: rgba(255,215,0,0.15); border: 1px solid var(--border-color); padding: 10px 25px; border-radius: 40px; cursor: pointer; margin-bottom: 20px; color: var(--text-primary); transition: 0.3s; }
         .back-btn:hover { background: rgba(255,215,0,0.3); }
         
-        .messages-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 30px; max-height: 500px; overflow-y: auto; padding: 5px; }
-        .message-item { background: rgba(0,0,0,0.4); border-radius: 20px; padding: 20px; border-left: 4px solid var(--accent); }
-        .message-creator { border-left-color: var(--purple); background: rgba(139,92,246,0.1); }
-        .message-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
-        .message-author { font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .message-date { font-size: 11px; color: var(--text-muted); }
-        .message-content { color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px; }
-        .reply-form { background: rgba(0,0,0,0.3); border-radius: 24px; padding: 25px; margin-top: 20px; }
-        .reply-form textarea { width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 20px; color: white; outline: none; font-size: 14px; margin-bottom: 15px; resize: vertical; }
-        .reply-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 12px 25px; border-radius: 40px; font-weight: 700; cursor: pointer; color: #0a0a12; transition: 0.3s; }
+        .forum-messages { display: flex; flex-direction: column; gap: 5px; margin-bottom: 30px; }
+        .forum-post {
+            background: rgba(15,15,25,0.6);
+            border-radius: 16px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            transition: 0.2s;
+            border: 1px solid var(--border-color);
+        }
+        .forum-post:hover { border-color: var(--accent); }
+        .post-header {
+            background: rgba(0,0,0,0.4);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .post-author-name {
+            font-weight: 700;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .post-badge {
+            font-size: 11px;
+            background: rgba(255,215,0,0.2);
+            padding: 2px 8px;
+            border-radius: 20px;
+            color: var(--accent);
+        }
+        .post-date { font-size: 11px; color: var(--text-muted); }
+        .post-actions { display: flex; gap: 15px; }
+        .reply-to-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.2s;
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+        .reply-to-btn:hover { background: rgba(255,215,0,0.15); transform: scale(1.02); }
+        .post-content { padding: 20px; color: var(--text-secondary); line-height: 1.5; }
+        .post-content p { margin-bottom: 10px; }
+        .post-content p:last-child { margin-bottom: 0; }
+        .first-post { border-left: 4px solid var(--accent); }
+        .admin-post { background: rgba(139,92,246,0.08); border-left: 4px solid var(--purple); }
+        
+        .reply-area {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .reply-area textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            color: white;
+            outline: none;
+            font-size: 14px;
+            resize: vertical;
+            margin-bottom: 15px;
+            font-family: inherit;
+        }
+        .reply-area textarea:focus { border-color: var(--accent); }
+        .reply-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            color: #0a0a12;
+            transition: 0.3s;
+            font-size: 14px;
+        }
         .reply-btn:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
         
-        .new-topic-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); backdrop-filter: blur(20px); justify-content: center; align-items: center; z-index: 2000; }
-        .new-topic-modal .modal-content { width: 550px; max-width: 90%; }
-        .new-topic-modal input, .new-topic-modal textarea { width: 100%; padding: 12px; margin: 10px 0; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 40px; color: white; outline: none; }
-        .new-topic-modal textarea { border-radius: 20px; resize: vertical; }
+        .new-topic-modal, .appeal-modal-class { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); backdrop-filter: blur(20px); justify-content: center; align-items: center; z-index: 2000; }
+        .new-topic-modal .modal-content, .appeal-modal-class .modal-content { width: 550px; max-width: 90%; }
+        .new-topic-modal input, .new-topic-modal textarea, .appeal-modal-class input, .appeal-modal-class textarea, .appeal-modal-class select { width: 100%; padding: 12px; margin: 10px 0; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 40px; color: white; outline: none; }
+        .new-topic-modal textarea, .appeal-modal-class textarea { border-radius: 20px; resize: vertical; }
 
         @media (max-width: 768px) {
             .countdown-number { font-size: 38px; }
@@ -423,6 +514,7 @@
             .profile-avatar i { font-size: 35px; }
             .profile-name { font-size: 22px; }
             .topic-title { font-size: 18px; }
+            .post-header { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
@@ -445,17 +537,14 @@
                 <h1><i class="fas fa-gavel"></i> ПРАВИЛА ПРОЕКТА</h1>
                 <p class="rgb-text-animation">Нарушение правил влечёт за собой наказание! Будьте внимательны!</p>
             </div>
-            
             <div class="rules-nav">
                 <button class="rules-nav-btn active" data-rule-section="general">📜 ОБЩИЕ ПРАВИЛА</button>
                 <button class="rules-nav-btn" data-rule-section="communication">💬 ПРАВИЛА ОБЩЕНИЯ</button>
                 <button class="rules-nav-btn" data-rule-section="mechanics">🎮 ИГРОВЫЕ МЕХАНИКИ</button>
                 <button class="rules-nav-btn" data-rule-section="survival">🌍 ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</button>
             </div>
-
             <div id="rule-section-general" class="rules-section active">
-                <div class="rules-card">
-                    <h2><i class="fas fa-globe"></i> 1. ОБЩИЕ ПРАВИЛА</h2>
+                <div class="rules-card"><h2><i class="fas fa-globe"></i> 1. ОБЩИЕ ПРАВИЛА</h2>
                     <div class="rule-item"><div class="rule-title">1.1 | Передача аккаунта</div><p>Разглашение пароля от аккаунта, доступа к нему или совместная игра на нём.</p><div class="rule-punishment">⚠️ Бан навсегда и полное снятие</div></div>
                     <div class="rule-item"><div class="rule-title">1.2 | Торговля за реальные деньги</div><p>Продажа игровых ценностей за внеигровые ресурсы.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
                     <div class="rule-item"><div class="rule-title">1.3 | Вред проекту</div><p>Нанесение проекту тяжкого вреда в финансовом или техническом плане.</p><div class="rule-punishment">⚠️ Умышленный: Бан по IP навсегда и полное снятие</div></div>
@@ -466,10 +555,8 @@
                     <div class="rule-item"><div class="rule-title">1.8 | Обход наказаний с продолжением</div><p>Обход корректно полученного наказания через другой аккаунт.</p><div class="rule-punishment">⚠️ Обход по IP: Бан по IP навсегда</div></div>
                 </div>
             </div>
-
             <div id="rule-section-communication" class="rules-section">
-                <div class="rules-card">
-                    <h2><i class="fas fa-comments"></i> 2. ПРАВИЛА ОБЩЕНИЯ</h2>
+                <div class="rules-card"><h2><i class="fas fa-comments"></i> 2. ПРАВИЛА ОБЩЕНИЯ</h2>
                     <div class="rule-item"><div class="rule-title">2.1 | Реклама</div><p>Реклама сторонних ресурсов.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
                     <div class="rule-item"><div class="rule-title">2.2 | Засорение чата</div><p>Написание КАПСом, повторение сообщений, попрошайничество.</p><div class="rule-punishment">⚠️ Мут на 30 минут</div></div>
                     <div class="rule-item"><div class="rule-title">2.3 | Оскорбительное поведение</div><p>Оскорбления, токсичность, угрозы.</p><div class="rule-punishment">⚠️ Мут на 3 часа - 7 дней</div></div>
@@ -478,10 +565,8 @@
                     <div class="rule-item"><div class="rule-title">2.6 | Оскорбление проекта</div><p>Оскорбления в сторону проекта или команды.</p><div class="rule-punishment">⚠️ Бан по IP на 3 дня - навсегда</div></div>
                 </div>
             </div>
-
             <div id="rule-section-mechanics" class="rules-section">
-                <div class="rules-card">
-                    <h2><i class="fas fa-cogs"></i> 3. ИГРОВЫЕ МЕХАНИКИ</h2>
+                <div class="rules-card"><h2><i class="fas fa-cogs"></i> 3. ИГРОВЫЕ МЕХАНИКИ</h2>
                     <div class="rule-item"><div class="rule-title">3.1 | Читерство</div><p>Использование читов, хранение предметов читов.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
                     <div class="rule-item"><div class="rule-title">3.2 | Недопустимые постройки</div><p>Постройки, оскорбляющие игроков, с политическими темами.</p><div class="rule-punishment">⚠️ Бан на 6 часов</div></div>
                     <div class="rule-item"><div class="rule-title">3.3 | Недопустимая кастомизация</div><p>Скины, плащи, префиксы, которые оскорбляют или выдают за команду.</p><div class="rule-punishment">⚠️ Бан на 6 часов</div></div>
@@ -490,10 +575,8 @@
                     <div class="rule-item"><div class="rule-title">3.6 | Фарм статистики</div><p>Накрутка статистик через мультиаккаунты.</p><div class="rule-punishment">⚠️ Бан на 12 часов - 3 дня</div></div>
                 </div>
             </div>
-
             <div id="rule-section-survival" class="rules-section">
-                <div class="rules-card">
-                    <h2><i class="fas fa-tree"></i> 4. ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</h2>
+                <div class="rules-card"><h2><i class="fas fa-tree"></i> 4. ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</h2>
                     <div class="rule-item"><div class="rule-title">4.1 | Гриферство</div><p>Введение игрока в заблуждение с целью личной выгоды.</p><div class="rule-punishment">⚠️ Бан на 3 дня</div></div>
                     <div class="rule-item"><div class="rule-title">4.2 | Помеха игрокам</div><p>Отказ покидать регион, нахождение на аренах в /fly,/god.</p><div class="rule-punishment">⚠️ Предупреждение, при повторе бан на 3 часа</div></div>
                     <div class="rule-item"><div class="rule-title">4.3 | Недопустимые изменения спавна</div><p>Изменения, затрагивающие структуры спавна.</p><div class="rule-punishment">⚠️ Бан на 7 дней</div></div>
@@ -504,12 +587,12 @@
         </div>
     </div>
 
-    <!-- СТРАНИЦА ОБЖАЛОВАНИЙ -->
+    <!-- СТРАНИЦА ОБЖАЛОВАНИЙ - ФОРУМ BLACK RUSSIA STYLE -->
     <div id="appealsPage" class="page">
         <div class="appeals-container">
             <div class="appeals-header">
                 <h1><i class="fas fa-comments"></i> ФОРУМ ОБЖАЛОВАНИЙ</h1>
-                <p class="rgb-text-animation">Здесь вы можете обжаловать наказание или подать заявку</p>
+                <p class="rgb-text-animation">Здесь вы можете обжаловать наказание или создать тему для обсуждения</p>
             </div>
 
             <div id="topicsListDiv">
@@ -520,40 +603,43 @@
             <div id="topicViewDiv" class="topic-view">
                 <button class="back-btn" id="backToTopicsBtn"><i class="fas fa-arrow-left"></i> Назад к темам</button>
                 <div id="currentTopicTitle" class="topic-card" style="margin-bottom: 20px;"></div>
-                <div id="messagesContainer" class="messages-list"></div>
-                <div class="reply-form">
-                    <h3><i class="fas fa-reply"></i> Ответить в тему</h3>
-                    <textarea id="replyMessage" rows="3" placeholder="Ваше сообщение..."></textarea>
+                <div id="forumMessagesContainer" class="forum-messages"></div>
+                <div class="reply-area">
+                    <h3><i class="fas fa-reply"></i> Написать ответ</h3>
+                    <textarea id="replyMessage" rows="4" placeholder="Ваше сообщение..."></textarea>
                     <button id="sendReplyBtn" class="reply-btn">ОТПРАВИТЬ</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Модальное окно для создания темы (только админ) -->
     <div id="newTopicModal" class="new-topic-modal">
         <div class="modal-content">
             <span class="close-modal" id="closeTopicModal">&times;</span>
             <h3><i class="fas fa-plus-circle"></i> Создать новую тему</h3>
             <input type="text" id="topicTitle" placeholder="Название темы">
-            <textarea id="topicContent" rows="5" placeholder="Описание темы (первое сообщение)..."></textarea>
+            <textarea id="topicContent" rows="5" placeholder="Текст сообщения (описание темы)..."></textarea>
             <div style="margin: 10px 0;"><label style="color: var(--accent);"><input type="checkbox" id="topicPinned"> Закрепить тему</label></div>
             <button id="submitTopicBtn" class="admin-btn">СОЗДАТЬ</button>
         </div>
     </div>
 
-    <div id="appealModal" class="modal">
+    <!-- Модальное окно для обжалования (для игроков) -->
+    <div id="appealModal" class="appeal-modal-class">
         <div class="modal-content">
             <span class="close-modal" id="closeAppealModal">&times;</span>
             <h3><i class="fas fa-gavel"></i> ПОДАТЬ ОБЖАЛОВАНИЕ</h3>
-            <input type="text" id="appealPlayerNick" placeholder="Ваш никнейм" class="admin-input">
-            <input type="text" id="appealAdminNick" placeholder="Ник администратора" class="admin-input">
-            <input type="text" id="appealBanReason" placeholder="Причина бана" class="admin-input">
-            <select id="appealType" class="admin-select">
+            <p style="color: var(--text-secondary); margin-bottom: 10px;">Заполните форму для обжалования наказания</p>
+            <input type="text" id="appealPlayerNick" placeholder="Ваш никнейм">
+            <input type="text" id="appealAdminNick" placeholder="Ник администратора">
+            <input type="text" id="appealBanReason" placeholder="Причина бана">
+            <select id="appealType">
                 <option value="innocent">Я не виноват — прошу проверить доказательства</option>
                 <option value="sorry">Я сожалею — прошу дать 2 шанс</option>
                 <option value="custom">Свой вариант</option>
             </select>
-            <textarea id="appealMessage" rows="4" placeholder="Подробное описание ситуации..." class="admin-input"></textarea>
+            <textarea id="appealMessage" rows="4" placeholder="Подробное описание ситуации..."></textarea>
             <button id="submitAppealBtn" class="admin-btn">ОТПРАВИТЬ ОБЖАЛОВАНИЕ</button>
         </div>
     </div>
@@ -613,8 +699,8 @@
 
             function getBadgeHtml(type) {
                 if (!type) return '';
-                const icons = { crown: 'fa-crown', diamond: 'fa-gem', star: 'fa-star', fire: 'fa-fire' };
-                const icon = icons[type] || 'fa-check';
+                const iconMap = { crown: 'fa-crown', diamond: 'fa-gem', star: 'fa-star', fire: 'fa-fire', gold: 'fa-crown' };
+                const icon = iconMap[type] || 'fa-check';
                 if (type === 'crown') return `<span class="badge-icon badge-crown"><i class="fas fa-crown"></i></span>`;
                 return `<span class="badge-icon badge-${type}"><i class="fas ${icon}"></i></span>`;
             }
@@ -664,6 +750,15 @@
                 });
             }
 
+            function setReplyQuote(authorName, content) {
+                const replyTextarea = document.getElementById('replyMessage');
+                if (replyTextarea) {
+                    const quote = `> **${authorName}** писал(а):\n> ${content.split('\n').join('\n> ')}\n\n`;
+                    replyTextarea.value = quote;
+                    replyTextarea.focus();
+                }
+            }
+
             async function openTopic(topicId) {
                 currentTopicId = topicId;
                 const topicDoc = await db.collection('forumTopics').doc(topicId).get();
@@ -678,23 +773,41 @@
                 
                 if (messagesUnsub) messagesUnsub();
                 messagesUnsub = db.collection('forumMessages').where('topicId', '==', topicId).orderBy('createdAt', 'asc').onSnapshot((snap) => {
-                    const container = document.getElementById('messagesContainer');
+                    const container = document.getElementById('forumMessagesContainer');
                     if (!container) return;
                     if (snap.empty) {
-                        container.innerHTML = '<div class="message-item" style="text-align: center;">💬 Сообщений пока нет.</div>';
+                        container.innerHTML = '<div class="forum-post" style="text-align: center; padding: 40px;">💬 Сообщений пока нет. Будьте первым!</div>';
                         return;
                     }
                     container.innerHTML = '';
+                    let isFirst = true;
                     snap.forEach(doc => {
                         const msg = doc.data();
-                        const isCreator = msg.authorEmail === MAIN_ADMIN_EMAIL;
+                        const isAdmin = msg.authorEmail === MAIN_ADMIN_EMAIL;
                         const badgeHtml = getBadgeHtml(msg.authorBadge);
+                        const postClass = isFirst ? 'first-post' : '';
+                        const adminClass = isAdmin ? 'admin-post' : '';
+                        isFirst = false;
                         container.innerHTML += `
-                            <div class="message-item ${isCreator ? 'message-creator' : ''}">
-                                <div class="message-header"><div class="message-author">${badgeHtml} ${msg.authorName || msg.authorEmail}</div><div class="message-date">${new Date(msg.createdAt?.toDate()).toLocaleString()}</div></div>
-                                <div class="message-content">${msg.content.replace(/\n/g, '<br>')}</div>
+                            <div class="forum-post ${postClass} ${adminClass}">
+                                <div class="post-header">
+                                    <div class="post-author">
+                                        <div class="post-avatar"><i class="fas fa-user"></i></div>
+                                        <div class="post-author-name">${badgeHtml} ${msg.authorName || msg.authorEmail}</div>
+                                        ${isAdmin ? '<span class="post-badge"><i class="fas fa-shield-alt"></i> Администрация</span>' : ''}
+                                    </div>
+                                    <div class="post-actions">
+                                        <button class="reply-to-btn" data-author="${msg.authorName || msg.authorEmail}" data-content="${msg.content.replace(/"/g, '&quot;')}"><i class="fas fa-reply"></i> Ответить</button>
+                                    </div>
+                                </div>
+                                <div class="post-content">
+                                    <p>${msg.content.replace(/\n/g, '<br>')}</p>
+                                </div>
                             </div>
                         `;
+                    });
+                    document.querySelectorAll('.reply-to-btn').forEach(btn => {
+                        btn.onclick = () => setReplyQuote(btn.dataset.author, btn.dataset.content);
                     });
                 });
             }
@@ -735,7 +848,7 @@
                 if (!currentUser) { showNotification('Авторизуйтесь!', 'error'); return; }
                 if (!playerNick || !adminNick || !banReason || !message) { showNotification('Заполните все поля!', 'error'); return; }
                 const typeText = type === 'innocent' ? 'Я не виноват' : (type === 'sorry' ? 'Прошу 2 шанс' : 'Свой вариант');
-                const content = `**Обжалование наказания**\n\n👤 Мой ник: ${playerNick}\n🛡️ Администратор: ${adminNick}\n⚖️ Причина бана: ${banReason}\n📝 Тип: ${typeText}\n💬 Сообщение: ${message}`;
+                const content = `**📋 ОБЖАЛОВАНИЕ НАКАЗАНИЯ**\n\n👤 **Мой ник:** ${playerNick}\n🛡️ **Администратор:** ${adminNick}\n⚖️ **Причина бана:** ${banReason}\n📝 **Тип обжалования:** ${typeText}\n💬 **Сообщение:** ${message}`;
                 const topicRef = await db.collection('forumTopics').add({
                     title: `Обжалование от ${playerNick}`, authorId: currentUser.uid, authorEmail: currentUser.email,
                     authorName: playerNick, authorBadge: null, createdAt: new Date(), pinned: false, repliesCount: 1
@@ -744,10 +857,10 @@
                     topicId: topicRef.id, authorId: currentUser.uid, authorEmail: currentUser.email,
                     authorName: playerNick, authorBadge: null, content: content, createdAt: new Date()
                 });
-                showNotification('Обжалование отправлено!', 'success');
+                showNotification('Обжалование отправлено! Ожидайте ответа администрации.', 'success');
             }
 
-            // ОСТАЛЬНЫЕ ФУНКЦИИ (сокращены для длины, но работают)
+            // ОСТАЛЬНЫЕ ФУНКЦИИ
             async function loadUserData(user) {
                 if (!user) return;
                 const doc = await db.collection('users').doc(user.uid).get();
@@ -759,7 +872,7 @@
                 document.getElementById('userBalance').innerText = currentBalance;
                 const badgeHtml = getBadgeHtml(data?.badge);
                 document.getElementById('profileName').innerHTML = (data?.username || user.displayName) + badgeHtml;
-                document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> ${user.email}</p>`;
+                document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> ${user.email}</p><p><i class="fas fa-calendar-alt"></i> Зарегистрирован: ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`;
                 document.getElementById('userTag').innerHTML = data?.tag || '#user';
                 const donatesSnap = await db.collection('donates').where('userId', '==', user.uid).get();
                 document.getElementById('profileStats').innerHTML = `<div class="stat-item"><div class="stat-value">${donatesSnap.size}</div><div class="stat-label">Покупок</div></div><div class="stat-item"><div class="stat-value">${data?.wheelSpins || 0}</div><div class="stat-label">Прокруток</div></div>`;
@@ -789,6 +902,11 @@
                     if (doc.exists && doc.data().targetDate) {
                         let target = doc.data().targetDate.toDate ? doc.data().targetDate.toDate() : new Date(doc.data().targetDate);
                         startTimer(target, doc.data().eventName, doc.data().eventDesc);
+                        if (document.getElementById('timerEventName')) {
+                            document.getElementById('timerEventName').value = doc.data().eventName || '';
+                            document.getElementById('timerEventDesc').value = doc.data().eventDesc || '';
+                            document.getElementById('timerTargetDate').value = target.toISOString().slice(0, 16);
+                        }
                     } else { let def = new Date(); def.setDate(def.getDate() + 7); startTimer(def, "ДО ОТКРЫТИЯ СЕЗОНА", ""); }
                 });
             }
@@ -797,9 +915,13 @@
                 document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); showNotification('Добро пожаловать!', 'success'); } catch (e) { showNotification(e.message, 'error'); } };
                 document.getElementById('doRegisterBtn').onclick = async () => { const u = document.getElementById('regUsername').value, e = document.getElementById('regEmail').value, p = document.getElementById('regPass').value; if (p.length < 6) return showNotification('Пароль мин 6', 'error'); try { const cred = await auth.createUserWithEmailAndPassword(e, p); await cred.user.updateProfile({ displayName: u }); await db.collection('users').doc(cred.user.uid).set({ username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1, tag: `#${u.substring(0,4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null }); showNotification('Регистрация успешна!', 'success'); } catch (e) { showNotification(e.message, 'error'); } };
                 document.getElementById('logoutBtn').onclick = () => auth.signOut();
-                document.getElementById('confirmBuyBtn').onclick = async () => { showNotification('Функция покупки работает!', 'success'); document.getElementById('buyModal').style.display = 'none'; };
+                document.getElementById('closeBuyModal').onclick = () => document.getElementById('buyModal').style.display = 'none';
+                document.getElementById('closeTestModal').onclick = () => document.getElementById('testServerModal').style.display = 'none';
+                document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
+                document.getElementById('closePasswordModal').onclick = () => document.getElementById('changePasswordModal').style.display = 'none';
+                document.getElementById('confirmBuyBtn').onclick = async () => { showNotification('Покупка выполнена! (демо)', 'success'); document.getElementById('buyModal').style.display = 'none'; };
                 document.getElementById('testServerBtn').onclick = () => document.getElementById('testServerModal').style.display = 'flex';
-                document.getElementById('confirmTestBtn').onclick = () => { showNotification('Тест-сервер заказан!', 'success'); document.getElementById('testServerModal').style.display = 'none'; };
+                document.getElementById('confirmTestBtn').onclick = () => { showNotification('Тест-сервер заказан! (демо)', 'success'); document.getElementById('testServerModal').style.display = 'none'; };
                 document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
                 document.getElementById('saveNameBtn').onclick = async () => { const newName = document.getElementById('newNameInput').value; if (newName) { await db.collection('users').doc(currentUser.uid).update({ username: newName }); await currentUser.updateProfile({ displayName: newName }); showNotification('Имя изменено!', 'success'); document.getElementById('editNameModal').style.display = 'none'; loadUserData(currentUser); } };
                 document.getElementById('changePasswordBtn').onclick = () => document.getElementById('changePasswordModal').style.display = 'flex';
@@ -850,10 +972,11 @@
                     loadTopics();
                 };
                 
-                // Админ-панель
+                // Админ-панель (демо)
                 document.getElementById('giveCoinsBtn').onclick = () => showNotification('Выдача монет (демо)', 'success');
-                document.getElementById('sendBroadcastBtn').onclick = () => showNotification('Рассылка (демо)', 'success');
-                document.getElementById('updateTimerBtn').onclick = async () => { const date = document.getElementById('timerTargetDate').value; if(date) await db.collection('settings').doc('timer').set({ targetDate: new Date(date), eventName: document.getElementById('timerEventName').value, eventDesc: document.getElementById('timerEventDesc').value }); showNotification('Таймер обновлён!', 'success'); };
+                document.getElementById('globalGiveBtn').onclick = () => { const amt = prompt('Сумма для всех:'); if(amt) showNotification(`Выдано всем ${amt} (демо)`, 'success'); };
+                document.getElementById('sendBroadcastBtn').onclick = () => { const msg = document.getElementById('broadcastMsg').value; if(msg) showNotification('Рассылка отправлена (демо)', 'success'); else showNotification('Введите текст', 'error'); };
+                document.getElementById('updateTimerBtn').onclick = async () => { const date = document.getElementById('timerTargetDate').value; const name = document.getElementById('timerEventName').value; const desc = document.getElementById('timerEventDesc').value; if(date) await db.collection('settings').doc('timer').set({ targetDate: new Date(date), eventName: name, eventDesc: desc }); showNotification('Таймер обновлён!', 'success'); };
                 document.getElementById('clearPurchasesBtn').onclick = () => showNotification('Логи очищены (демо)', 'success');
                 document.getElementById('banExitBtn').onclick = () => { document.getElementById('banModalOverlay').style.display = 'none'; auth.signOut(); };
                 document.getElementById('siteClosedExitBtn').onclick = () => auth.signOut();
@@ -878,7 +1001,17 @@
                     document.querySelector('.site-header').style.display = 'block';
                     document.querySelectorAll('.page').forEach(p => p.style.display = '');
                     document.getElementById('homePage').classList.add('active');
+                    document.querySelector('.menu-tab[data-page="home"]').classList.add('active');
                 };
+                document.querySelectorAll('.admin-cat-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.admin-cat-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        document.querySelectorAll('.admin-category').forEach(c => c.classList.remove('active'));
+                        document.getElementById(`cat-${btn.dataset.cat}`).classList.add('active');
+                        if (btn.dataset.cat === 'purchases') { document.getElementById('purchasesList').innerHTML = '<div class="player-card">📭 Демо-режим</div>'; }
+                    };
+                });
             }
 
             auth.onAuthStateChanged(async (user) => {
@@ -892,6 +1025,12 @@
                     document.getElementById('authModal').style.display = 'none';
                     loadTopics();
                 } else {
+                    if (balanceInterval) clearInterval(balanceInterval);
+                    if (siteStatusUnsub) siteStatusUnsub();
+                    if (banUnsub) banUnsub();
+                    if (userBadgeUnsub) userBadgeUnsub();
+                    if (topicsUnsub) topicsUnsub();
+                    if (messagesUnsub) messagesUnsub();
                     document.getElementById('authModal').style.display = 'flex';
                     bindButtons();
                     initSecretAdmin();
