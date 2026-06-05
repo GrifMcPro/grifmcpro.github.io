@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>GrifMcPro | Уведомления</title>
+    <title>GrifMcPro | Официальный сайт</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -308,7 +308,7 @@
 
     <div class="secret-admin-trigger" id="secretAdminTrigger"><i class="fas fa-lock"></i></div>
 
-    <div id="adminPagePanel" class="admin-page"><div class="close-admin-page" id="closeAdminPageBtn"><i class="fas fa-times"></i></div><div class="admin-rgb-bg"><div class="admin-glass-panel"><h1><i class="fas fa-crown"></i> АДМИН-ПАНЕЛЬ</h1><div class="admin-category-buttons"><button class="admin-cat-btn active" data-cat="monets">Монеты</button><button class="admin-cat-btn" data-cat="broadcast">Рассылка</button><button class="admin-cat-btn" data-cat="bans">Баны / Разбаны</button><button class="admin-cat-btn" data-cat="site">Управление сайтом</button><button class="admin-cat-btn" data-cat="donates">Управление донатами</button><button class="admin-cat-btn" data-cat="timer">Таймер</button><button class="admin-cat-btn" data-cat="badges">Галочки</button><button class="admin-cat-btn" data-cat="spins">Прокрутки</button></div>
+    <div id="adminPagePanel" class="admin-page"><div class="close-admin-page" id="closeAdminPageBtn"><i class="fas fa-times"></i></div><div class="admin-rgb-bg"><div class="admin-glass-panel"><h1><i class="fas fa-crown"></i> АДМИН-ПАНЕЛЬ</h1><div class="admin-category-buttons"><button class="admin-cat-btn active" data-cat="monets">Монеты</button><button class="admin-cat-btn" data-cat="broadcast">Рассылка</button><button class="admin-cat-btn" data-cat="bans">Баны / Разбаны</button><button class="admin-cat-btn" data-cat="site">Управление сайтом</button><button class="admin-cat-btn" data-cat="donates">Управление донатами</button><button class="admin-cat-btn" data-cat="timer">Таймер</button><button class="admin-cat-btn" data-cat="badges">Галочки</button><button class="admin-cat-btn" data-cat="spins">Прокрутки</button><button class="admin-cat-btn" data-cat="purchases">📋 Логи покупок</button></div>
     <div id="cat-monets" class="admin-category active"><div class="admin-block"><h3><i class="fas fa-coins"></i> Выдать монеты</h3><input type="text" id="giveNick" placeholder="Никнейм" class="admin-input"><input type="number" id="giveAmount" placeholder="Сумма" class="admin-input"><button id="giveCoinsBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="globalGiveBtn" class="admin-btn-purple">ВСЕМ</button></div></div>
     <div id="cat-broadcast" class="admin-category"><div class="admin-block"><h3><i class="fas fa-bullhorn"></i> Рассылка</h3><textarea id="broadcastMsg" rows="3" placeholder="Текст сообщения..." class="admin-input"></textarea><button id="sendBroadcastBtn" class="admin-btn-pink">ОТПРАВИТЬ ВСЕМ</button></div></div>
     <div id="cat-bans" class="admin-category"><div class="admin-block"><h3><i class="fas fa-gavel"></i> Бан / Разбан</h3><input type="text" id="banNick" placeholder="Никнейм" class="admin-input"><input type="text" id="moderatorName" placeholder="Модератор" class="admin-input"><textarea id="banReason" rows="2" placeholder="Причина" class="admin-input"></textarea><select id="banDuration" class="admin-select"><option value="1">1 час</option><option value="6">6 часов</option><option value="12">12 часов</option><option value="24">1 день</option><option value="168">7 дней</option><option value="720">30 дней</option><option value="forever">Навсегда</option></select><button id="banUserBtn" class="admin-btn-red">ЗАБАНИТЬ</button><button id="unbanUserBtn" class="admin-btn-green">РАЗБАНИТЬ</button></div></div>
@@ -317,6 +317,7 @@
     <div id="cat-timer" class="admin-category"><div class="admin-block"><h3><i class="fas fa-clock"></i> Настройка таймера</h3><input type="text" id="timerEventName" placeholder="Название события" class="admin-input"><textarea id="timerEventDesc" rows="2" placeholder="Описание" class="admin-input"></textarea><input type="datetime-local" id="timerTargetDate" class="admin-input"><div style="display: flex; gap: 10px;"><button id="applyTimerRgbText" class="admin-btn-blue">RGB Текст</button><button id="applyTimerRgbBorder" class="admin-btn-pink">RGB Рамка</button></div><button id="updateTimerBtn" class="admin-btn-green">СОХРАНИТЬ</button></div></div>
     <div id="cat-badges" class="admin-category"><div class="admin-block"><h3><i class="fas fa-tags"></i> Галочки (30 видов)</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option><option value="diamond">💎 Алмазная</option><option value="star">⭐ Звездная</option><option value="game">🎮 Игровая</option><option value="fire">🔥 Огненная</option><option value="mythic">🔮 Мифическая</option><option value="cosmic">🌌 Космическая</option><option value="ice">❄️ Ледяная</option><option value="shadow">🌑 Теневая</option><option value="light">✨ Светлая</option><option value="dark">🖤 Тёмная</option><option value="nature">🌿 Природная</option><option value="blood">🩸 Кровавая</option><option value="void">🌀 Пустота</option><option value="divine">⚜️ Божественная</option><option value="purple">🟣 Фиолетовая</option><option value="teal">🔷 Бирюзовая</option><option value="sapphire">💙 Сапфировая</option><option value="emerald">💚 Изумрудная</option><option value="ruby">❤️ Рубиновая</option><option value="amber">🧡 Янтарная</option><option value="jade">💚 Нефритовая</option><option value="coral">🪸 Коралловая</option><option value="indigo">🟣 Индиго</option><option value="magenta">🩷 Магента</option><option value="bronze">🥉 Бронзовая</option><option value="platinum">⚪ Платиновая</option><option value="obsidian">⬛ Обсидиановая</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div></div>
     <div id="cat-spins" class="admin-category"><div class="admin-block"><h3><i class="fas fa-dice-d6"></i> Прокрутки колеса</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">ВЫДАТЬ</button></div></div>
+    <div id="cat-purchases" class="admin-category"><div class="admin-block"><h3><i class="fas fa-shopping-cart"></i> ЛОГИ ПОКУПОК</h3><div id="purchasesList" class="players-list" style="max-height: 400px;"></div><button id="clearPurchasesBtn" class="admin-btn-red">ОЧИСТИТЬ ЛОГИ</button></div></div>
     </div></div></div>
 
     <div id="authModal" class="modal" style="display: flex;"><div class="auth-modal"><i class="fas fa-crown" style="font-size: 45px; color: var(--accent); margin-bottom: 15px;"></i><h2 style="margin-bottom:20px;">GrifMcPro</h2><div class="tabs-auth"><button class="tab-auth active" data-tab="login">ВХОД</button><button class="tab-auth" data-tab="register">РЕГИСТРАЦИЯ</button></div><div id="loginPaneAuth" class="tab-pane-auth active"><input type="email" id="loginEmail" placeholder="Email" class="auth-input"><input type="password" id="loginPass" placeholder="Пароль" class="auth-input"><button id="doLoginBtn" class="auth-btn">ВОЙТИ</button></div><div id="registerPaneAuth" class="tab-pane-auth"><input type="text" id="regUsername" placeholder="Никнейм" class="auth-input"><input type="email" id="regEmail" placeholder="Email" class="auth-input"><input type="password" id="regPass" placeholder="Пароль (мин. 6)" class="auth-input"><button id="doRegisterBtn" class="auth-btn">ЗАРЕГИСТРИРОВАТЬСЯ</button></div></div></div>
@@ -344,34 +345,6 @@
             const db = firebase.firestore();
             const MAIN_ADMIN_EMAIL = "ramonenok@bk.ru";
             const ADMIN_SECRET_CODE = "website";
-            
-            // ========== ОТПРАВКА ЧЕРЕЗ ПРОКСИ (РАБОТАЕТ В РФ) ==========
-            const ADMIN_EMAIL = "ramonenok@bk.ru";
-            const PROXY_URL = "https://smtp-proxy.grifmcpro.workers.dev/send";
-            
-            async function sendNotification(subject, message) {
-                try {
-                    const response = await fetch(PROXY_URL, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            to: ADMIN_EMAIL,
-                            subject: subject,
-                            text: message
-                        })
-                    });
-                    if (response.ok) {
-                        console.log("✅ Уведомление отправлено");
-                        return true;
-                    } else {
-                        console.error("❌ Ошибка отправки");
-                        return false;
-                    }
-                } catch(e) {
-                    console.error("❌ Ошибка:", e);
-                    return false;
-                }
-            }
             
             let currentUser = null, currentBalance = 0, currentProduct = null, moderatorsList = [], timerInterval = null, siteStatusUnsub = null, banUnsub = null, balanceInterval = null, timerUnsub = null;
 
@@ -403,7 +376,7 @@
                         tab.classList.add('active');
                         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                         document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
-                        if (tab.dataset.page === 'admin') { loadRecentUsers(); loadModerators(); loadStats(); }
+                        if (tab.dataset.page === 'admin') { loadRecentUsers(); loadModerators(); loadStats(); loadPurchases(); }
                     };
                 });
                 if (currentUser?.email === MAIN_ADMIN_EMAIL) document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
@@ -446,6 +419,57 @@
             async function updateTimer(name, desc, date) {
                 await db.collection('settings').doc('timer').set({ eventName: name, eventDesc: desc, targetDate: new Date(date) });
                 showNotification('Таймер обновлён!', 'success');
+            }
+
+            // ========== ЛОГИ ПОКУПОК ==========
+            async function addPurchaseLog(type, productName, price, serverNick, siteNick, userEmail) {
+                const logEntry = {
+                    type: type, // 'donate' или 'testserver'
+                    product: productName,
+                    price: price,
+                    serverNick: serverNick,
+                    siteNick: siteNick,
+                    userEmail: userEmail,
+                    date: new Date().toISOString(),
+                    timestamp: new Date()
+                };
+                await db.collection('purchases').add(logEntry);
+                showNotification(`📋 Лог покупки сохранён!`, 'success');
+                if (document.getElementById('cat-purchases').classList.contains('active')) {
+                    loadPurchases();
+                }
+            }
+
+            async function loadPurchases() {
+                const container = document.getElementById('purchasesList');
+                if (!container) return;
+                const snapshot = await db.collection('purchases').orderBy('timestamp', 'desc').limit(50).get();
+                if (snapshot.empty) {
+                    container.innerHTML = '<div class="player-card">📭 Нет записей о покупках</div>';
+                    return;
+                }
+                container.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const log = doc.data();
+                    const date = new Date(log.date || log.timestamp?.toDate()).toLocaleString();
+                    const typeIcon = log.type === 'testserver' ? '🖥️' : '💰';
+                    container.innerHTML += `
+                        <div class="player-card" style="flex-direction:column;align-items:flex-start;">
+                            <div><strong>${typeIcon} ${log.product}</strong> | ${log.price.toLocaleString()} ₽</div>
+                            <div>🎮 Ник в игре: ${log.serverNick}</div>
+                            <div>👤 Ник на сайте: ${log.siteNick}</div>
+                            <div>📧 ${log.userEmail}</div>
+                            <div>🕐 ${date}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            async function clearPurchases() {
+                const snap = await db.collection('purchases').get();
+                for (const doc of snap.docs) await doc.ref.delete();
+                showNotification('✅ Все логи покупок очищены!', 'success');
+                loadPurchases();
             }
 
             // БАН
@@ -601,257 +625,4 @@
                 const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
                 const snap = await db.collection('users').where('registeredAt', '>=', fiveMinutesAgo.toISOString()).orderBy('registeredAt', 'desc').get();
                 const container = document.getElementById('recentUsersList');
-                if (container) container.innerHTML = snap.docs.map(doc => `<div class="player-card"><span><strong>${doc.data().username}</strong><br>${doc.data().email}<br>💰 ${doc.data().balance || 0} ₽</span></div>`).join('');
-                if (snap.empty) container.innerHTML = '<div class="player-card">Нет новых аккаунтов</div>';
-            }
-
-            async function loadStats() {
-                const users = await db.collection('users').get();
-                const container = document.getElementById('statsList');
-                if (container) container.innerHTML = `<div class="player-card">👥 Игроков: ${users.size}</div><div class="player-card">💰 Общий баланс: ${users.docs.reduce((sum, d) => sum + (d.data().balance || 0), 0)}₽</div>`;
-            }
-
-            async function giveCoins(nick, amount) {
-                const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showNotification('Не найден', 'error');
-                await snap.docs[0].ref.update({ balance: (snap.docs[0].data().balance || 0) + amount });
-                showNotification(`Выдано ${amount} ₽ ${nick}`, 'success');
-                if (currentUser && currentUser.uid === snap.docs[0].id) { currentBalance += amount; document.getElementById('userBalance').innerText = currentBalance; }
-            }
-
-            async function giveCoinsAll(amount) {
-                const snap = await db.collection('users').get();
-                for (const doc of snap.docs) await doc.ref.update({ balance: (doc.data().balance || 0) + amount });
-                showNotification(`Всем выдано ${amount} ₽`, 'success');
-                if (currentUser) { currentBalance += amount; document.getElementById('userBalance').innerText = currentBalance; }
-            }
-
-            async function giveBadge(nick, type) {
-                const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showNotification('Не найден', 'error');
-                await snap.docs[0].ref.update({ badge: type });
-                showNotification(`Галочка выдана ${nick}`, 'success');
-                if (currentUser && currentUser.uid === snap.docs[0].id) { document.getElementById('profileName').innerHTML = snap.docs[0].data().username + getBadgeHtml(type); }
-            }
-
-            async function giveSpin(nick) {
-                const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showNotification('Не найден', 'error');
-                await snap.docs[0].ref.update({ wheelSpins: (snap.docs[0].data().wheelSpins || 0) + 1 });
-                showNotification(`Прокрутка выдана ${nick}`, 'success');
-            }
-
-            async function giveDonateByNick(nick, donateName) {
-                const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showNotification('Не найден', 'error');
-                await db.collection('donates').add({ userId: snap.docs[0].id, username: nick, product: donateName, price: 0, date: new Date(), givenBy: 'Админ' });
-                showNotification(`Донат "${donateName}" выдан ${nick}`, 'success');
-            }
-
-            async function removeDonateByNick(nick) {
-                const snap = await db.collection('users').where('username', '==', nick).get();
-                if (snap.empty) return showNotification('Не найден', 'error');
-                const donates = await db.collection('donates').where('userId', '==', snap.docs[0].id).get();
-                for (const doc of donates.docs) await doc.ref.delete();
-                showNotification(`Все донаты ${nick} удалены`, 'warning');
-            }
-
-            // МАГАЗИН
-            const privileges = [
-                { name: "Премиум", price: 1000 }, { name: "Креатив", price: 2500 }, { name: "Модер", price: 5000 },
-                { name: "Лорд", price: 10000 }, { name: "Админ", price: 20000 }, { name: "Гл админ", price: 50000 },
-                { name: "Создатель", price: 100000 }, { name: "Основатель", price: 150000 }, { name: "Владелец", price: 250000 },
-                { name: "Консоль", price: 350000 }, { name: "Цезарь", price: 500000 }, { name: "Сервер", price: 650000 },
-                { name: "Хелпер", price: 750000 }, { name: "Хайп", price: 850000 }, { name: "Стафф", price: 900000 },
-                { name: "Правитель", price: 1000000 }
-            ];
-            
-            function renderShop() {
-                const container = document.getElementById('shopGrid');
-                if (container) {
-                    container.innerHTML = privileges.map(p => `
-                        <div class="product-card" data-name="${p.name}" data-price="${p.price}">
-                            <div class="product-name">${p.name}</div>
-                            <div class="price">${p.price.toLocaleString()} ₽</div>
-                            <div class="donate-note"><i class="fas fa-clock"></i> Донат будет выдан в течение 10 минут</div>
-                            <button class="buy-btn">КУПИТЬ</button>
-                        </div>
-                    `).join('');
-                    
-                    document.querySelectorAll('.product-card').forEach(card => {
-                        card.addEventListener('click', (e) => {
-                            if (e.target.classList.contains('buy-btn') || e.target.classList.contains('product-card')) {
-                                const name = card.dataset.name;
-                                const price = parseInt(card.dataset.price);
-                                openBuyModal(name, price);
-                            }
-                        });
-                    });
-                }
-            }
-            
-            window.openBuyModal = (n, p) => {
-                currentProduct = { name: n, price: p };
-                document.getElementById('buyProductName').innerText = n;
-                document.getElementById('buyPrice').innerText = p.toLocaleString();
-                document.getElementById('buyModal').style.display = 'flex';
-            };
-            
-            async function purchaseProduct(product, serverNick, siteNick) {
-                if (currentBalance < product.price) { showNotification('Недостаточно средств', 'error'); return false; }
-                
-                await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - product.price });
-                await db.collection('donates').add({ userId: currentUser.uid, username: currentUser.displayName, product: product.name, price: product.price, date: new Date() });
-                currentBalance -= product.price;
-                document.getElementById('userBalance').innerText = currentBalance.toLocaleString();
-                
-                showNotification(`✅ Куплено ${product.name}!`, 'success');
-                
-                // Отправка уведомления
-                sendNotification(
-                    "💰 НОВЫЙ ДОНАТ!",
-                    `Пользователь: ${siteNick} (${currentUser.email})\nТовар: ${product.name}\nСумма: ${product.price} ₽\nНик на сервере: ${serverNick}`
-                );
-                
-                return true;
-            }
-
-            async function orderTestServer(days, serverNick, siteNick) {
-                const prices = { 10: 250000, 20: 500000, 30: 900000, forever: 2000000 };
-                const price = prices[days];
-                if (currentBalance < price) { showNotification('Недостаточно средств', 'error'); return; }
-                
-                await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - price });
-                currentBalance -= price;
-                document.getElementById('userBalance').innerText = currentBalance;
-                
-                showNotification(`✅ Тест-сервер заказан!`, 'success');
-                
-                sendNotification(
-                    "🖥️ ЗАКАЗ ТЕСТ-СЕРВЕРА",
-                    `Пользователь: ${siteNick} (${currentUser.email})\nДлительность: ${days === 'forever' ? 'Навсегда' : days + ' дней'}\nСумма: ${price} ₽\nНик на сервере: ${serverNick}`
-                );
-            }
-
-            async function loadUserData(user) {
-                if (!user) return;
-                const doc = await db.collection('users').doc(user.uid).get();
-                let data = doc.data();
-                if (!data) {
-                    await db.collection('users').doc(user.uid).set({ username: user.displayName || user.email.split('@')[0], email: user.email, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1, tag: `#${user.displayName?.substring(0,4) || 'user'}`, badge: user.email === MAIN_ADMIN_EMAIL ? 'crown' : null });
-                    currentBalance = 50000;
-                } else { currentBalance = data.balance || 50000; }
-                document.getElementById('userBalance').innerText = currentBalance;
-                document.getElementById('profileName').innerHTML = (data?.username || user.displayName) + getBadgeHtml(data?.badge);
-                document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> ${user.email}</p><p><i class="fas fa-calendar-alt"></i> ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`;
-                document.getElementById('userTag').innerHTML = data?.tag || '#user';
-                db.collection('donates').where('userId', '==', user.uid).onSnapshot(snap => { const c = document.getElementById('donatesContainer'); if (c) { c.innerHTML = ''; snap.forEach(d => c.innerHTML += `<span class="donate-tag"><i class="fas fa-gift"></i> ${d.data().product}</span>`); if (snap.empty) c.innerHTML = '<span class="donate-tag">Нет покупок</span>'; } });
-            }
-
-            function startBalanceUpdater() {
-                if (balanceInterval) clearInterval(balanceInterval);
-                balanceInterval = setInterval(async () => {
-                    if (currentUser) {
-                        const doc = await db.collection('users').doc(currentUser.uid).get();
-                        if (doc.exists) { currentBalance = doc.data().balance || 50000; document.getElementById('userBalance').innerText = currentBalance; }
-                    }
-                }, 3000);
-            }
-
-            function initSecretAdmin() {
-                const trigger = document.getElementById('secretAdminTrigger');
-                const adminPage = document.getElementById('adminPagePanel');
-                if (!trigger) return;
-                trigger.onclick = () => {
-                    if (currentUser && currentUser.email === MAIN_ADMIN_EMAIL) {
-                        const code = prompt('Введите код доступа:');
-                        if (code === ADMIN_SECRET_CODE) {
-                            adminPage.classList.add('active');
-                            document.querySelector('.site-header').style.display = 'none';
-                            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-                        } else { showNotification('Неверный код!', 'error'); }
-                    } else { showNotification('Доступ только для администратора', 'error'); }
-                };
-                document.getElementById('closeAdminPageBtn').onclick = () => {
-                    adminPage.classList.remove('active');
-                    document.querySelector('.site-header').style.display = 'block';
-                    document.querySelectorAll('.page').forEach(p => p.style.display = '');
-                    document.getElementById('homePage').classList.add('active');
-                    document.querySelector('.menu-tab[data-page="home"]').classList.add('active');
-                };
-                document.querySelectorAll('.admin-cat-btn').forEach(btn => {
-                    btn.onclick = () => {
-                        document.querySelectorAll('.admin-cat-btn').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        document.querySelectorAll('.admin-category').forEach(c => c.classList.remove('active'));
-                        document.getElementById(`cat-${btn.dataset.cat}`).classList.add('active');
-                    };
-                });
-            }
-
-            function bindButtons() {
-                document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); showNotification('Добро пожаловать!', 'success'); } catch (e) { showNotification(e.message, 'error'); } };
-                document.getElementById('doRegisterBtn').onclick = async () => { const u = document.getElementById('regUsername').value, e = document.getElementById('regEmail').value, p = document.getElementById('regPass').value; if (p.length < 6) return showNotification('Пароль мин 6', 'error'); try { const cred = await auth.createUserWithEmailAndPassword(e, p); await cred.user.updateProfile({ displayName: u }); await db.collection('users').doc(cred.user.uid).set({ username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1, tag: `#${u.substring(0,4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null }); showNotification('Регистрация успешна!', 'success'); } catch (e) { showNotification(e.message, 'error'); } };
-                document.getElementById('logoutBtn').onclick = () => auth.signOut();
-                document.getElementById('closeBuyModal').onclick = () => document.getElementById('buyModal').style.display = 'none';
-                document.getElementById('closeTestModal').onclick = () => document.getElementById('testServerModal').style.display = 'none';
-                document.getElementById('closeEditModal').onclick = () => document.getElementById('editNameModal').style.display = 'none';
-                document.getElementById('closePasswordModal').onclick = () => document.getElementById('changePasswordModal').style.display = 'none';
-                document.getElementById('confirmBuyBtn').onclick = async () => { const sn = document.getElementById('buyNick').value.trim(), ss = document.getElementById('buySiteNick').value.trim(); if (!sn || !ss) return showNotification('Заполните поля', 'error'); await purchaseProduct(currentProduct, sn, ss); document.getElementById('buyModal').style.display = 'none'; };
-                document.getElementById('testServerBtn').onclick = () => document.getElementById('testServerModal').style.display = 'flex';
-                document.getElementById('confirmTestBtn').onclick = async () => { const duration = document.getElementById('testDuration').value; const sn = document.getElementById('testNick').value.trim(), ss = document.getElementById('testSiteNick').value.trim(); if (!sn || !ss) return showNotification('Заполните поля', 'error'); await orderTestServer(duration, sn, ss); document.getElementById('testServerModal').style.display = 'none'; };
-                document.getElementById('editNameBtn').onclick = () => document.getElementById('editNameModal').style.display = 'flex';
-                document.getElementById('saveNameBtn').onclick = async () => { const newName = document.getElementById('newNameInput').value; if (newName) { await db.collection('users').doc(currentUser.uid).update({ username: newName }); await currentUser.updateProfile({ displayName: newName }); showNotification('Имя изменено!', 'success'); document.getElementById('editNameModal').style.display = 'none'; loadUserData(currentUser); } };
-                document.getElementById('changePasswordBtn').onclick = () => document.getElementById('changePasswordModal').style.display = 'flex';
-                document.getElementById('savePasswordBtn').onclick = async () => { try { const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, document.getElementById('oldPasswordInput').value); await currentUser.reauthenticateWithCredential(cred); await currentUser.updatePassword(document.getElementById('newPasswordInput').value); showNotification('Пароль изменён!', 'success'); document.getElementById('changePasswordModal').style.display = 'none'; } catch (e) { showNotification('Неверный старый пароль', 'error'); } };
-                
-                // АДМИН КНОПКИ
-                document.getElementById('giveCoinsBtn').onclick = () => giveCoins(document.getElementById('giveNick').value, parseInt(document.getElementById('giveAmount').value));
-                document.getElementById('globalGiveBtn').onclick = () => { const amt = parseInt(prompt('Сумма для всех:')); if (amt) giveCoinsAll(amt); };
-                document.getElementById('sendBroadcastBtn').onclick = () => { const msg = document.getElementById('broadcastMsg').value; if (msg) sendBroadcast(msg); else showNotification('Введите текст', 'error'); };
-                document.getElementById('banUserBtn').onclick = async () => { const nick = document.getElementById('banNick').value, reason = document.getElementById('banReason').value, duration = document.getElementById('banDuration').value, mod = document.getElementById('moderatorName').value; if (nick && reason && mod) { const snap = await db.collection('users').where('username', '==', nick).get(); if (!snap.empty) banUser(snap.docs[0].id, nick, snap.docs[0].data().email, reason, duration, mod); else showNotification('Не найден', 'error'); } else showNotification('Заполните все поля', 'error'); };
-                document.getElementById('unbanUserBtn').onclick = async () => { const nick = document.getElementById('banNick').value; if (nick) { const snap = await db.collection('users').where('username', '==', nick).get(); if (!snap.empty) unbanUser(snap.docs[0].data().email, nick); else showNotification('Не найден', 'error'); } else showNotification('Введите ник', 'error'); };
-                document.getElementById('closeSiteBtn').onclick = () => closeSite(document.getElementById('closeReason').value, parseInt(document.getElementById('closeDuration').value));
-                document.getElementById('openSiteBtn').onclick = openSite;
-                document.getElementById('giveDonateBtn').onclick = () => giveDonateByNick(document.getElementById('donateNick').value, document.getElementById('donateName').value);
-                document.getElementById('removeDonateBtn').onclick = () => removeDonateByNick(document.getElementById('donateNick').value);
-                document.getElementById('giveBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, document.getElementById('badgeType').value);
-                document.getElementById('removeBadgeBtn').onclick = () => giveBadge(document.getElementById('badgeNick').value, null);
-                document.getElementById('giveSpinBtn').onclick = () => giveSpin(document.getElementById('wheelUserNick').value);
-                document.getElementById('updateTimerBtn').onclick = async () => { const name = document.getElementById('timerEventName').value, desc = document.getElementById('timerEventDesc').value, date = document.getElementById('timerTargetDate').value; if (!date) return showNotification('Выберите дату', 'error'); await updateTimer(name, desc, date); };
-                document.getElementById('applyTimerRgbText').onclick = () => { document.getElementById('eventTitle').classList.add('rgb-text-animation'); showNotification('RGB текст включён!', 'success'); };
-                document.getElementById('applyTimerRgbBorder').onclick = () => { document.querySelectorAll('.countdown-block').forEach(b => b.classList.add('rgb-border-animation')); showNotification('RGB рамка включена!', 'success'); };
-                document.getElementById('banExitBtn').onclick = () => { document.getElementById('banModalOverlay').style.display = 'none'; auth.signOut(); };
-                document.getElementById('siteClosedExitBtn').onclick = () => auth.signOut();
-                document.querySelectorAll('.tab-auth').forEach(btn => { btn.onclick = () => { document.querySelectorAll('.tab-auth').forEach(b => b.classList.remove('active')); btn.classList.add('active'); const isLogin = btn.dataset.tab === 'login'; document.getElementById('loginPaneAuth').classList.toggle('active', isLogin); document.getElementById('registerPaneAuth').classList.toggle('active', !isLogin); }; });
-            }
-
-            auth.onAuthStateChanged(async (user) => {
-                if (user) {
-                    currentUser = user;
-                    await loadModerators();
-                    if (await checkBanOnLoad(user)) return;
-                    if (await checkSiteClosedOnLoad(user)) return;
-                    await loadUserData(user);
-                    renderShop();
-                    renderMenu();
-                    loadTimerRealtime();
-                    listenSiteStatus();
-                    listenBan(user);
-                    startBalanceUpdater();
-                    bindButtons();
-                    initSecretAdmin();
-                    document.getElementById('authModal').style.display = 'none';
-                } else {
-                    if (balanceInterval) clearInterval(balanceInterval);
-                    if (siteStatusUnsub) siteStatusUnsub();
-                    if (banUnsub) banUnsub();
-                    document.getElementById('authModal').style.display = 'flex';
-                    bindButtons();
-                    initSecretAdmin();
-                }
-            });
-        })();
-    </script>
-</body>
-</html>
+                if (container) container.innerHTML = snap.docs.map(doc => `<div class="player-card"><span><strong>${doc.data().username}</strong><br>${doc.data().email}<
