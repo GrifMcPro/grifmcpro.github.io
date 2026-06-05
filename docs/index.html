@@ -369,8 +369,14 @@
         .rule-item:last-child { border-bottom: none; }
         .rule-title { font-weight: 700; font-size: 18px; color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
         .rule-punishment { display: inline-block; background: rgba(239,68,68,0.2); border-left: 3px solid var(--danger); padding: 5px 12px; border-radius: 8px; font-size: 13px; color: var(--danger); margin-top: 8px; }
+        
+        .punishment-card { background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05)); border-left: 5px solid var(--danger); border-radius: 20px; padding: 25px; margin-bottom: 25px; animation: rgbBorderAnim 2s infinite; }
+        .punishment-card h3 { color: var(--danger); font-size: 24px; margin-bottom: 15px; }
+        .punishment-card p { color: var(--text-primary); line-height: 1.6; }
+        .punishment-highlight { background: rgba(255,215,0,0.15); border-radius: 16px; padding: 20px; margin: 20px 0; text-align: center; }
+        .punishment-highlight i { font-size: 50px; color: var(--accent); margin-bottom: 10px; }
 
-        /* СТИЛИ ДЛЯ СТРАНИЦЫ ОБЖАЛОВАНИЙ - ФОРУМ BLACK RUSSIA STYLE */
+        /* СТИЛИ ДЛЯ СТРАНИЦЫ ОБЖАЛОВАНИЙ - ФОРУМ */
         .appeals-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .appeals-header { text-align: center; margin-bottom: 40px; }
         .appeals-header h1 { font-family: 'Orbitron', monospace; font-size: 48px; background: linear-gradient(135deg, #fff, var(--accent), var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; animation: rgbTextAnim 3s infinite; }
@@ -392,11 +398,10 @@
         .back-btn { background: rgba(255,215,0,0.15); border: 1px solid var(--border-color); padding: 10px 25px; border-radius: 40px; cursor: pointer; margin-bottom: 20px; color: var(--text-primary); transition: 0.3s; }
         .back-btn:hover { background: rgba(255,215,0,0.3); }
         
-        .forum-messages { display: flex; flex-direction: column; gap: 5px; margin-bottom: 30px; }
+        .forum-messages { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; max-height: 550px; overflow-y: auto; padding: 5px; }
         .forum-post {
-            background: rgba(15,15,25,0.6);
+            background: rgba(15,15,25,0.8);
             border-radius: 16px;
-            margin-bottom: 10px;
             overflow: hidden;
             transition: 0.2s;
             border: 1px solid var(--border-color);
@@ -457,8 +462,6 @@
         }
         .reply-to-btn:hover { background: rgba(255,215,0,0.15); transform: scale(1.02); }
         .post-content { padding: 20px; color: var(--text-secondary); line-height: 1.5; }
-        .post-content p { margin-bottom: 10px; }
-        .post-content p:last-child { margin-bottom: 0; }
         .first-post { border-left: 4px solid var(--accent); }
         .admin-post { background: rgba(139,92,246,0.08); border-left: 4px solid var(--purple); }
         
@@ -537,14 +540,41 @@
                 <h1><i class="fas fa-gavel"></i> ПРАВИЛА ПРОЕКТА</h1>
                 <p class="rgb-text-animation">Нарушение правил влечёт за собой наказание! Будьте внимательны!</p>
             </div>
+            
             <div class="rules-nav">
-                <button class="rules-nav-btn active" data-rule-section="general">📜 ОБЩИЕ ПРАВИЛА</button>
+                <button class="rules-nav-btn active" data-rule-section="punishment">⚠️ ВЫДАЧА НАКАЗАНИЙ</button>
+                <button class="rules-nav-btn" data-rule-section="general">📜 ОБЩИЕ ПРАВИЛА</button>
                 <button class="rules-nav-btn" data-rule-section="communication">💬 ПРАВИЛА ОБЩЕНИЯ</button>
                 <button class="rules-nav-btn" data-rule-section="mechanics">🎮 ИГРОВЫЕ МЕХАНИКИ</button>
                 <button class="rules-nav-btn" data-rule-section="survival">🌍 ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</button>
             </div>
-            <div id="rule-section-general" class="rules-section active">
-                <div class="rules-card"><h2><i class="fas fa-globe"></i> 1. ОБЩИЕ ПРАВИЛА</h2>
+
+            <!-- ВЫДАЧА НАКАЗАНИЙ -->
+            <div id="rule-section-punishment" class="rules-section active">
+                <div class="punishment-card rgb-border-animation">
+                    <h3><i class="fas fa-balance-scale"></i> ВЫДАЧА НАКАЗАНИЙ</h3>
+                    <p><strong>Важно!</strong> При получении наказания в игре — наказание автоматически действует и на сайте.<br>
+                    Выдача наказания <span class="rgb-text-animation">БЕЗ ДОКАЗАТЕЛЬСТВ</span> является нарушением со стороны администратора!</p>
+                </div>
+                <div class="punishment-highlight">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>ОБЖАЛОВАНИЕ НАКАЗАНИЯ</h3>
+                    <p>Если вы считаете, что наказание было выдано некорректно или без доказательств — вы можете подать жалобу в разделе "Обжалования"!</p>
+                    <p>🔹 Администратор, выдавший наказание без доказательств, получит наказание сам!</p>
+                    <p>🔹 Если вам выдали бан на сайте — вы можете его обжаловать через форум обжалований</p>
+                </div>
+                <div class="rules-card">
+                    <h2><i class="fas fa-info-circle"></i> Как работает система наказаний?</h2>
+                    <div class="rule-item"><div class="rule-title">🔴 Наказание в игре = наказание на сайте</div><p>Если вас забанили на сервере, доступ к сайту также будет ограничен до окончания срока бана.</p><div class="rule-punishment">Автоматическая синхронизация наказаний</div></div>
+                    <div class="rule-item"><div class="rule-title">🟡 Администратор обязан иметь доказательства</div><p>Любое наказание должно быть подтверждено скриншотом или видеозаписью. Доказательства хранятся 14 дней.</p><div class="rule-punishment">Нарушение: Бан на 3 дня</div></div>
+                    <div class="rule-item"><div class="rule-title">🟢 Обжалование наказаний</div><p>Если у администратора нет доказательств нарушения — наказание снимается, а администратор получает наказание.</p><div class="rule-punishment">За выдачу наказания без доказательств: Бан на 3 дня</div></div>
+                </div>
+            </div>
+
+            <!-- ОБЩИЕ ПРАВИЛА -->
+            <div id="rule-section-general" class="rules-section">
+                <div class="rules-card">
+                    <h2><i class="fas fa-globe"></i> 1. ОБЩИЕ ПРАВИЛА</h2>
                     <div class="rule-item"><div class="rule-title">1.1 | Передача аккаунта</div><p>Разглашение пароля от аккаунта, доступа к нему или совместная игра на нём.</p><div class="rule-punishment">⚠️ Бан навсегда и полное снятие</div></div>
                     <div class="rule-item"><div class="rule-title">1.2 | Торговля за реальные деньги</div><p>Продажа игровых ценностей за внеигровые ресурсы.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
                     <div class="rule-item"><div class="rule-title">1.3 | Вред проекту</div><p>Нанесение проекту тяжкого вреда в финансовом или техническом плане.</p><div class="rule-punishment">⚠️ Умышленный: Бан по IP навсегда и полное снятие</div></div>
@@ -555,8 +585,11 @@
                     <div class="rule-item"><div class="rule-title">1.8 | Обход наказаний с продолжением</div><p>Обход корректно полученного наказания через другой аккаунт.</p><div class="rule-punishment">⚠️ Обход по IP: Бан по IP навсегда</div></div>
                 </div>
             </div>
+
+            <!-- ПРАВИЛА ОБЩЕНИЯ -->
             <div id="rule-section-communication" class="rules-section">
-                <div class="rules-card"><h2><i class="fas fa-comments"></i> 2. ПРАВИЛА ОБЩЕНИЯ</h2>
+                <div class="rules-card">
+                    <h2><i class="fas fa-comments"></i> 2. ПРАВИЛА ОБЩЕНИЯ</h2>
                     <div class="rule-item"><div class="rule-title">2.1 | Реклама</div><p>Реклама сторонних ресурсов.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
                     <div class="rule-item"><div class="rule-title">2.2 | Засорение чата</div><p>Написание КАПСом, повторение сообщений, попрошайничество.</p><div class="rule-punishment">⚠️ Мут на 30 минут</div></div>
                     <div class="rule-item"><div class="rule-title">2.3 | Оскорбительное поведение</div><p>Оскорбления, токсичность, угрозы.</p><div class="rule-punishment">⚠️ Мут на 3 часа - 7 дней</div></div>
@@ -565,8 +598,11 @@
                     <div class="rule-item"><div class="rule-title">2.6 | Оскорбление проекта</div><p>Оскорбления в сторону проекта или команды.</p><div class="rule-punishment">⚠️ Бан по IP на 3 дня - навсегда</div></div>
                 </div>
             </div>
+
+            <!-- ИГРОВЫЕ МЕХАНИКИ -->
             <div id="rule-section-mechanics" class="rules-section">
-                <div class="rules-card"><h2><i class="fas fa-cogs"></i> 3. ИГРОВЫЕ МЕХАНИКИ</h2>
+                <div class="rules-card">
+                    <h2><i class="fas fa-cogs"></i> 3. ИГРОВЫЕ МЕХАНИКИ</h2>
                     <div class="rule-item"><div class="rule-title">3.1 | Читерство</div><p>Использование читов, хранение предметов читов.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div>
                     <div class="rule-item"><div class="rule-title">3.2 | Недопустимые постройки</div><p>Постройки, оскорбляющие игроков, с политическими темами.</p><div class="rule-punishment">⚠️ Бан на 6 часов</div></div>
                     <div class="rule-item"><div class="rule-title">3.3 | Недопустимая кастомизация</div><p>Скины, плащи, префиксы, которые оскорбляют или выдают за команду.</p><div class="rule-punishment">⚠️ Бан на 6 часов</div></div>
@@ -575,8 +611,11 @@
                     <div class="rule-item"><div class="rule-title">3.6 | Фарм статистики</div><p>Накрутка статистик через мультиаккаунты.</p><div class="rule-punishment">⚠️ Бан на 12 часов - 3 дня</div></div>
                 </div>
             </div>
+
+            <!-- ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ -->
             <div id="rule-section-survival" class="rules-section">
-                <div class="rules-card"><h2><i class="fas fa-tree"></i> 4. ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</h2>
+                <div class="rules-card">
+                    <h2><i class="fas fa-tree"></i> 4. ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</h2>
                     <div class="rule-item"><div class="rule-title">4.1 | Гриферство</div><p>Введение игрока в заблуждение с целью личной выгоды.</p><div class="rule-punishment">⚠️ Бан на 3 дня</div></div>
                     <div class="rule-item"><div class="rule-title">4.2 | Помеха игрокам</div><p>Отказ покидать регион, нахождение на аренах в /fly,/god.</p><div class="rule-punishment">⚠️ Предупреждение, при повторе бан на 3 часа</div></div>
                     <div class="rule-item"><div class="rule-title">4.3 | Недопустимые изменения спавна</div><p>Изменения, затрагивающие структуры спавна.</p><div class="rule-punishment">⚠️ Бан на 7 дней</div></div>
@@ -587,7 +626,7 @@
         </div>
     </div>
 
-    <!-- СТРАНИЦА ОБЖАЛОВАНИЙ - ФОРУМ BLACK RUSSIA STYLE -->
+    <!-- СТРАНИЦА ОБЖАЛОВАНИЙ -->
     <div id="appealsPage" class="page">
         <div class="appeals-container">
             <div class="appeals-header">
@@ -613,7 +652,6 @@
         </div>
     </div>
 
-    <!-- Модальное окно для создания темы (только админ) -->
     <div id="newTopicModal" class="new-topic-modal">
         <div class="modal-content">
             <span class="close-modal" id="closeTopicModal">&times;</span>
@@ -625,7 +663,6 @@
         </div>
     </div>
 
-    <!-- Модальное окно для обжалования (для игроков) -->
     <div id="appealModal" class="appeal-modal-class">
         <div class="modal-content">
             <span class="close-modal" id="closeAppealModal">&times;</span>
@@ -683,7 +720,7 @@
             const MAIN_ADMIN_EMAIL = "ramonenok@bk.ru";
             const ADMIN_SECRET_CODE = "website";
             
-            let currentUser = null, currentBalance = 0, currentProduct = null, moderatorsList = [], timerInterval = null, siteStatusUnsub = null, banUnsub = null, balanceInterval = null, timerUnsub = null, userBadgeUnsub = null;
+            let currentUser = null, currentBalance = 0, currentProduct = null, timerInterval = null, timerUnsub = null;
             let topicsUnsub = null, messagesUnsub = null;
             let currentTopicId = null;
 
@@ -699,10 +736,8 @@
 
             function getBadgeHtml(type) {
                 if (!type) return '';
-                const iconMap = { crown: 'fa-crown', diamond: 'fa-gem', star: 'fa-star', fire: 'fa-fire', gold: 'fa-crown' };
-                const icon = iconMap[type] || 'fa-check';
                 if (type === 'crown') return `<span class="badge-icon badge-crown"><i class="fas fa-crown"></i></span>`;
-                return `<span class="badge-icon badge-${type}"><i class="fas ${icon}"></i></span>`;
+                return `<span class="badge-icon badge-${type}"><i class="fas fa-check"></i></span>`;
             }
 
             function renderMenu() {
@@ -716,7 +751,19 @@
                         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
                         document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
                         if (tab.dataset.page === 'profile') loadUserData(currentUser);
+                        if (tab.dataset.page === 'rules') initRulesPage();
                         if (tab.dataset.page === 'appeals') loadTopics();
+                    };
+                });
+            }
+
+            function initRulesPage() {
+                document.querySelectorAll('.rules-nav-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.rules-nav-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        document.querySelectorAll('.rules-section').forEach(s => s.classList.remove('active'));
+                        document.getElementById(`rule-section-${btn.dataset.ruleSection}`).classList.add('active');
                     };
                 });
             }
@@ -731,7 +778,7 @@
                     const container = document.getElementById('topicsContainer');
                     if (!container) return;
                     if (snap.empty) {
-                        container.innerHTML = '<div class="topic-card" style="text-align: center;">📭 Нет созданных тем</div>';
+                        container.innerHTML = '<div class="topic-card" style="text-align: center;">📭 Нет созданных тем. Нажмите "СОЗДАТЬ ТЕМУ"</div>';
                         return;
                     }
                     container.innerHTML = '';
@@ -753,7 +800,8 @@
             function setReplyQuote(authorName, content) {
                 const replyTextarea = document.getElementById('replyMessage');
                 if (replyTextarea) {
-                    const quote = `> **${authorName}** писал(а):\n> ${content.split('\n').join('\n> ')}\n\n`;
+                    const shortContent = content.length > 200 ? content.substring(0, 200) + '...' : content;
+                    const quote = `> **${authorName}** писал(а):\n> ${shortContent.split('\n').join('\n> ')}\n\n`;
                     replyTextarea.value = quote;
                     replyTextarea.focus();
                 }
@@ -788,6 +836,7 @@
                         const postClass = isFirst ? 'first-post' : '';
                         const adminClass = isAdmin ? 'admin-post' : '';
                         isFirst = false;
+                        const safeContent = msg.content.replace(/"/g, '&quot;').replace(/\n/g, '\\n');
                         container.innerHTML += `
                             <div class="forum-post ${postClass} ${adminClass}">
                                 <div class="post-header">
@@ -827,6 +876,7 @@
                     authorName: authorName, authorBadge: authorBadge, content: content, createdAt: new Date()
                 });
                 showNotification('Тема создана!', 'success');
+                loadTopics();
             }
 
             async function sendMessageToTopic(topicId, content) {
@@ -848,7 +898,7 @@
                 if (!currentUser) { showNotification('Авторизуйтесь!', 'error'); return; }
                 if (!playerNick || !adminNick || !banReason || !message) { showNotification('Заполните все поля!', 'error'); return; }
                 const typeText = type === 'innocent' ? 'Я не виноват' : (type === 'sorry' ? 'Прошу 2 шанс' : 'Свой вариант');
-                const content = `**📋 ОБЖАЛОВАНИЕ НАКАЗАНИЯ**\n\n👤 **Мой ник:** ${playerNick}\n🛡️ **Администратор:** ${adminNick}\n⚖️ **Причина бана:** ${banReason}\n📝 **Тип обжалования:** ${typeText}\n💬 **Сообщение:** ${message}`;
+                const content = `📋 ОБЖАЛОВАНИЕ НАКАЗАНИЯ\n\n👤 Мой ник: ${playerNick}\n🛡️ Администратор: ${adminNick}\n⚖️ Причина бана: ${banReason}\n📝 Тип обжалования: ${typeText}\n💬 Сообщение: ${message}`;
                 const topicRef = await db.collection('forumTopics').add({
                     title: `Обжалование от ${playerNick}`, authorId: currentUser.uid, authorEmail: currentUser.email,
                     authorName: playerNick, authorBadge: null, createdAt: new Date(), pinned: false, repliesCount: 1
@@ -857,10 +907,52 @@
                     topicId: topicRef.id, authorId: currentUser.uid, authorEmail: currentUser.email,
                     authorName: playerNick, authorBadge: null, content: content, createdAt: new Date()
                 });
-                showNotification('Обжалование отправлено! Ожидайте ответа администрации.', 'success');
+                showNotification('Обжалование отправлено!', 'success');
+                loadTopics();
             }
 
-            // ОСТАЛЬНЫЕ ФУНКЦИИ
+            // МАГАЗИН
+            const privileges = [
+                { name: "Премиум", price: 1000 }, { name: "Креатив", price: 2500 }, { name: "Модер", price: 5000 },
+                { name: "Лорд", price: 10000 }, { name: "Админ", price: 20000 }, { name: "Гл админ", price: 50000 },
+                { name: "Создатель", price: 100000 }, { name: "Основатель", price: 150000 }, { name: "Владелец", price: 250000 },
+                { name: "Консоль", price: 350000 }, { name: "Цезарь", price: 500000 }, { name: "Сервер", price: 650000 },
+                { name: "Хелпер", price: 750000 }, { name: "Хайп", price: 850000 }, { name: "Стафф", price: 900000 },
+                { name: "Правитель", price: 1000000 }
+            ];
+            
+            function renderShop() {
+                const container = document.getElementById('shopGrid');
+                if (container) {
+                    container.innerHTML = privileges.map(p => `
+                        <div class="product-card" data-name="${p.name}" data-price="${p.price}">
+                            <div class="product-name">${p.name}</div>
+                            <div class="price">${p.price.toLocaleString()} ₽</div>
+                            <div class="donate-note"><i class="fas fa-clock"></i> Донат будет выдан в течение 10 минут</div>
+                            <button class="buy-btn">КУПИТЬ</button>
+                        </div>
+                    `).join('');
+                    
+                    document.querySelectorAll('.product-card').forEach(card => {
+                        card.addEventListener('click', (e) => {
+                            if (e.target.classList.contains('buy-btn') || e.target.classList.contains('product-card')) {
+                                const name = card.dataset.name;
+                                const price = parseInt(card.dataset.price);
+                                openBuyModal(name, price);
+                            }
+                        });
+                    });
+                }
+            }
+            
+            window.openBuyModal = (n, p) => {
+                currentProduct = { name: n, price: p };
+                document.getElementById('buyProductName').innerText = n;
+                document.getElementById('buyPrice').innerText = p.toLocaleString();
+                document.getElementById('buyModal').style.display = 'flex';
+            };
+
+            // ПРОФИЛЬ
             async function loadUserData(user) {
                 if (!user) return;
                 const doc = await db.collection('users').doc(user.uid).get();
@@ -875,9 +967,18 @@
                 document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> ${user.email}</p><p><i class="fas fa-calendar-alt"></i> Зарегистрирован: ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`;
                 document.getElementById('userTag').innerHTML = data?.tag || '#user';
                 const donatesSnap = await db.collection('donates').where('userId', '==', user.uid).get();
-                document.getElementById('profileStats').innerHTML = `<div class="stat-item"><div class="stat-value">${donatesSnap.size}</div><div class="stat-label">Покупок</div></div><div class="stat-item"><div class="stat-value">${data?.wheelSpins || 0}</div><div class="stat-label">Прокруток</div></div>`;
+                document.getElementById('profileStats').innerHTML = `<div class="stat-item"><div class="stat-value">${donatesSnap.size}</div><div class="stat-label">Покупок</div></div><div class="stat-item"><div class="stat-value">${data?.wheelSpins || 0}</div><div class="stat-label">Прокруток</div></div><div class="stat-item"><div class="stat-value">${currentBalance.toLocaleString()} ₽</div><div class="stat-label">Баланс</div></div>`;
+                db.collection('donates').where('userId', '==', user.uid).onSnapshot(snap => { 
+                    const c = document.getElementById('donatesContainer'); 
+                    if (c) { 
+                        c.innerHTML = ''; 
+                        snap.forEach(d => c.innerHTML += `<span class="donate-tag"><i class="fas fa-gift"></i> ${d.data().product}</span>`); 
+                        if (snap.empty) c.innerHTML = '<span class="donate-tag">Нет покупок</span>'; 
+                    } 
+                });
             }
 
+            // ТАЙМЕР
             function startTimer(targetDate, eventName, eventDesc) {
                 if (timerInterval) clearInterval(timerInterval);
                 document.getElementById('eventTitle').innerText = eventName || 'ДО ОТКРЫТИЯ СЕЗОНА';
@@ -902,15 +1003,11 @@
                     if (doc.exists && doc.data().targetDate) {
                         let target = doc.data().targetDate.toDate ? doc.data().targetDate.toDate() : new Date(doc.data().targetDate);
                         startTimer(target, doc.data().eventName, doc.data().eventDesc);
-                        if (document.getElementById('timerEventName')) {
-                            document.getElementById('timerEventName').value = doc.data().eventName || '';
-                            document.getElementById('timerEventDesc').value = doc.data().eventDesc || '';
-                            document.getElementById('timerTargetDate').value = target.toISOString().slice(0, 16);
-                        }
                     } else { let def = new Date(); def.setDate(def.getDate() + 7); startTimer(def, "ДО ОТКРЫТИЯ СЕЗОНА", ""); }
                 });
             }
 
+            // КНОПКИ
             function bindButtons() {
                 document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); showNotification('Добро пожаловать!', 'success'); } catch (e) { showNotification(e.message, 'error'); } };
                 document.getElementById('doRegisterBtn').onclick = async () => { const u = document.getElementById('regUsername').value, e = document.getElementById('regEmail').value, p = document.getElementById('regPass').value; if (p.length < 6) return showNotification('Пароль мин 6', 'error'); try { const cred = await auth.createUserWithEmailAndPassword(e, p); await cred.user.updateProfile({ displayName: u }); await db.collection('users').doc(cred.user.uid).set({ username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 1, tag: `#${u.substring(0,4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null }); showNotification('Регистрация успешна!', 'success'); } catch (e) { showNotification(e.message, 'error'); } };
@@ -943,7 +1040,6 @@
                     document.getElementById('topicTitle').value = '';
                     document.getElementById('topicContent').value = '';
                     document.getElementById('topicPinned').checked = false;
-                    loadTopics();
                 };
                 document.getElementById('submitAppealBtn').onclick = async () => {
                     const playerNick = document.getElementById('appealPlayerNick').value.trim();
@@ -957,7 +1053,6 @@
                     document.getElementById('appealAdminNick').value = '';
                     document.getElementById('appealBanReason').value = '';
                     document.getElementById('appealMessage').value = '';
-                    loadTopics();
                 };
                 document.getElementById('sendReplyBtn').onclick = async () => {
                     const message = document.getElementById('replyMessage').value.trim();
@@ -972,11 +1067,9 @@
                     loadTopics();
                 };
                 
-                // Админ-панель (демо)
                 document.getElementById('giveCoinsBtn').onclick = () => showNotification('Выдача монет (демо)', 'success');
-                document.getElementById('globalGiveBtn').onclick = () => { const amt = prompt('Сумма для всех:'); if(amt) showNotification(`Выдано всем ${amt} (демо)`, 'success'); };
-                document.getElementById('sendBroadcastBtn').onclick = () => { const msg = document.getElementById('broadcastMsg').value; if(msg) showNotification('Рассылка отправлена (демо)', 'success'); else showNotification('Введите текст', 'error'); };
-                document.getElementById('updateTimerBtn').onclick = async () => { const date = document.getElementById('timerTargetDate').value; const name = document.getElementById('timerEventName').value; const desc = document.getElementById('timerEventDesc').value; if(date) await db.collection('settings').doc('timer').set({ targetDate: new Date(date), eventName: name, eventDesc: desc }); showNotification('Таймер обновлён!', 'success'); };
+                document.getElementById('sendBroadcastBtn').onclick = () => showNotification('Рассылка (демо)', 'success');
+                document.getElementById('updateTimerBtn').onclick = async () => { const date = document.getElementById('timerTargetDate').value; if(date) await db.collection('settings').doc('timer').set({ targetDate: new Date(date), eventName: document.getElementById('timerEventName').value, eventDesc: document.getElementById('timerEventDesc').value }); showNotification('Таймер обновлён!', 'success'); };
                 document.getElementById('clearPurchasesBtn').onclick = () => showNotification('Логи очищены (демо)', 'success');
                 document.getElementById('banExitBtn').onclick = () => { document.getElementById('banModalOverlay').style.display = 'none'; auth.signOut(); };
                 document.getElementById('siteClosedExitBtn').onclick = () => auth.signOut();
@@ -1003,21 +1096,13 @@
                     document.getElementById('homePage').classList.add('active');
                     document.querySelector('.menu-tab[data-page="home"]').classList.add('active');
                 };
-                document.querySelectorAll('.admin-cat-btn').forEach(btn => {
-                    btn.onclick = () => {
-                        document.querySelectorAll('.admin-cat-btn').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        document.querySelectorAll('.admin-category').forEach(c => c.classList.remove('active'));
-                        document.getElementById(`cat-${btn.dataset.cat}`).classList.add('active');
-                        if (btn.dataset.cat === 'purchases') { document.getElementById('purchasesList').innerHTML = '<div class="player-card">📭 Демо-режим</div>'; }
-                    };
-                });
             }
 
             auth.onAuthStateChanged(async (user) => {
                 if (user) {
                     currentUser = user;
                     await loadUserData(user);
+                    renderShop();
                     renderMenu();
                     loadTimerRealtime();
                     bindButtons();
@@ -1025,12 +1110,6 @@
                     document.getElementById('authModal').style.display = 'none';
                     loadTopics();
                 } else {
-                    if (balanceInterval) clearInterval(balanceInterval);
-                    if (siteStatusUnsub) siteStatusUnsub();
-                    if (banUnsub) banUnsub();
-                    if (userBadgeUnsub) userBadgeUnsub();
-                    if (topicsUnsub) topicsUnsub();
-                    if (messagesUnsub) messagesUnsub();
                     document.getElementById('authModal').style.display = 'flex';
                     bindButtons();
                     initSecretAdmin();
