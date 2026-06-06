@@ -76,7 +76,7 @@
         
         .page { display: none; animation: fadeInUp 0.4s ease; }
         .page.active { display: block; }
-        #homePage, #shopPage, #profilePage, #appealsPage, #wheelPage, #messagesPage, #rulesPage { padding-top: 85px; min-height: 100vh; }
+        #homePage, #shopPage, #profilePage, #appealsPage, #messagesPage, #rulesPage { padding-top: 85px; min-height: 100vh; }
 
         .hero-timer { min-height: calc(100vh - 85px); display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
         .hero-timer::before { content: ''; position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background: radial-gradient(circle, rgba(255,215,0,0.05) 0%, transparent 70%); animation: rotate 30s linear infinite; }
@@ -451,7 +451,7 @@
         .tab-pane-auth.active { display: block; }
         .close-modal { float: right; font-size: 22px; cursor: pointer; color: var(--accent); }
 
-        /* СТИЛИ ДЛЯ СТРАНИЦЫ ПОДДЕРЖКИ - КРАСИВЕЙШАЯ ФОРМА */
+        /* СТИЛИ ДЛЯ СТРАНИЦЫ ПОДДЕРЖКИ */
         .appeals-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .appeals-header { text-align: center; margin-bottom: 40px; }
         .appeals-header h1 { font-family: 'Orbitron', monospace; font-size: 48px; background: linear-gradient(135deg, #fff, var(--accent), var(--purple), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; animation: rgbTextAnim 3s infinite; }
@@ -587,7 +587,6 @@
 
     <div id="homePage" class="page active"><div class="hero-timer"><div class="timer-container"><div class="timer-title" id="eventTitle">ДО ОТКРЫТИЯ СЕЗОНА</div><div class="countdown-wrapper"><div class="countdown-block"><div class="countdown-number" id="days">0</div><div class="countdown-label">Дней</div></div><div class="countdown-block"><div class="countdown-number" id="hours">0</div><div class="countdown-label">Часов</div></div><div class="countdown-block"><div class="countdown-number" id="minutes">0</div><div class="countdown-label">Минут</div></div><div class="countdown-block"><div class="countdown-number" id="seconds">0</div><div class="countdown-label">Секунд</div></div></div><div id="eventDesc" style="margin-top: 35px; color: var(--text-muted); font-size: 14px;"></div></div></div></div>
 
-    <!-- СТРАНИЦА МАГАЗИНА С 2 ВКЛАДКАМИ -->
     <div id="shopPage" class="page">
         <div class="shop-section">
             <div class="shop-header"><h1><i class="fas fa-store"></i> МАГАЗИН</h1></div>
@@ -602,10 +601,8 @@
 
     <div id="profilePage" class="page"><div class="profile-section"><div class="profile-card"><div class="profile-avatar"><i class="fas fa-user"></i></div><div class="profile-name" id="profileName"></div><div class="profile-stats" id="profileStats"></div><div class="profile-info" id="profileInfo"></div><div class="profile-info"><p><i class="fas fa-tag"></i> <strong>Тег:</strong> <span id="userTag"></span></p></div><div id="donatesContainer" class="donates-list"></div><div class="profile-actions"><button class="profile-btn" id="editNameBtn"><i class="fas fa-user-edit"></i> Сменить имя</button><button class="profile-btn" id="changePasswordBtn"><i class="fas fa-key"></i> Сменить пароль</button><button class="profile-btn messages-btn" id="myMessagesBtn"><i class="fas fa-envelope"></i> 📨 МОИ СООБЩЕНИЯ <span id="unreadCount" style="background:red;border-radius:50%;padding:2px 6px;font-size:10px;margin-left:5px;display:none;">0</span></button></div></div></div></div>
 
-    <!-- СТРАНИЦА СООБЩЕНИЙ -->
     <div id="messagesPage" class="page"><div class="messages-container"><div class="appeals-header"><h1><i class="fas fa-envelope"></i> МОИ СООБЩЕНИЯ</h1><p class="rgb-text-animation">Сообщения от администрации</p></div><div id="messagesList" class="appeals-list"></div></div></div>
 
-    <!-- СТРАНИЦА ПОДДЕРЖКИ - КРАСИВЕЙШАЯ -->
     <div id="appealsPage" class="page">
         <div class="appeals-container">
             <div class="appeals-header"><h1><i class="fas fa-headset"></i> ПОДДЕРЖКА</h1><p class="smooth-gradient" style="background-clip: text; -webkit-background-clip: text; color: transparent; font-weight: 700;">Мы всегда готовы помочь вам!</p></div>
@@ -636,7 +633,6 @@
         </div>
     </div>
 
-    <!-- СТРАНИЦА ПРАВИЛ -->
     <div id="rulesPage" class="page">
         <div class="rules-container">
             <div class="rules-header"><h1><i class="fas fa-gavel"></i> ПРАВИЛА ПРОЕКТА</h1><p class="rgb-text-animation">Нарушение правил влечёт за собой наказание! Будьте внимательны!</p></div>
@@ -647,15 +643,9 @@
                 <button class="rules-nav-btn" data-rule-section="mechanics">🎮 ИГРОВЫЕ МЕХАНИКИ</button>
                 <button class="rules-nav-btn" data-rule-section="survival">🌍 ПРАВИЛА ДЛЯ ВЫЖИВАНИЙ</button>
             </div>
-            <div id="rule-section-punishment" class="rules-section active">
-                <div class="punishment-card rgb-border-animation"><h3><i class="fas fa-balance-scale"></i> ВЫДАЧА НАКАЗАНИЙ</h3><p><strong>Важно!</strong> При получении наказания в игре — наказание автоматически действует и на сайте.<br>Выдача наказания <span class="rgb-text-animation">БЕЗ ДОКАЗАТЕЛЬСТВ</span> является нарушением со стороны администратора!</p></div>
-                <div class="punishment-highlight"><i class="fas fa-file-alt"></i><h3>ОБЖАЛОВАНИЕ НАКАЗАНИЯ</h3><p>Если вы считаете, что наказание было выдано некорректно или без доказательств — вы можете подать жалобу в разделе "Поддержка"!</p><p>🔹 Администратор, выдавший наказание без доказательств, получит наказание сам!</p><p>🔹 Вы можете прикрепить ссылку на видео/фото доказательства в запросе</p></div>
-                <div class="rules-card"><h2><i class="fas fa-info-circle"></i> Как работает система наказаний?</h2>
-                    <div class="rule-item"><div class="rule-title">🔴 Наказание в игре = наказание на сайте</div><p>Если вас забанили на сервере, доступ к сайту также будет ограничен.</p><div class="rule-punishment">Автоматическая синхронизация</div></div>
-                    <div class="rule-item"><div class="rule-title">🟡 Администратор обязан иметь доказательства</div><p>Любое наказание должно быть подтверждено скриншотом или видео.</p><div class="rule-punishment">Без доказательств: Бан на 3 дня</div></div>
-                    <div class="rule-item"><div class="rule-title">🟢 Обжалование наказаний</div><p>Если у администратора нет доказательств — наказание снимается.</p><div class="rule-punishment">Администратор получает бан на 3 дня</div></div>
-                </div>
-            </div>
+            <div id="rule-section-punishment" class="rules-section active"><div class="punishment-card rgb-border-animation"><h3><i class="fas fa-balance-scale"></i> ВЫДАЧА НАКАЗАНИЙ</h3><p><strong>Важно!</strong> При получении наказания в игре — наказание автоматически действует и на сайте.<br>Выдача наказания <span class="rgb-text-animation">БЕЗ ДОКАЗАТЕЛЬСТВ</span> является нарушением со стороны администратора!</p></div>
+            <div class="punishment-highlight"><i class="fas fa-file-alt"></i><h3>ОБЖАЛОВАНИЕ НАКАЗАНИЯ</h3><p>Если вы считаете, что наказание было выдано некорректно или без доказательств — вы можете подать жалобу в разделе "Поддержка"!</p><p>🔹 Администратор, выдавший наказание без доказательств, получит наказание сам!</p><p>🔹 Вы можете прикрепить ссылку на видео/фото доказательства в запросе</p></div>
+            <div class="rules-card"><h2><i class="fas fa-info-circle"></i> Как работает система наказаний?</h2><div class="rule-item"><div class="rule-title">🔴 Наказание в игре = наказание на сайте</div><p>Если вас забанили на сервере, доступ к сайту также будет ограничен.</p><div class="rule-punishment">Автоматическая синхронизация</div></div><div class="rule-item"><div class="rule-title">🟡 Администратор обязан иметь доказательства</div><p>Любое наказание должно быть подтверждено скриншотом или видео.</p><div class="rule-punishment">Без доказательств: Бан на 3 дня</div></div><div class="rule-item"><div class="rule-title">🟢 Обжалование наказаний</div><p>Если у администратора нет доказательств — наказание снимается.</p><div class="rule-punishment">Администратор получает бан на 3 дня</div></div></div></div>
             <div id="rule-section-general" class="rules-section"><div class="rules-card"><h2><i class="fas fa-globe"></i> 1. ОБЩИЕ ПРАВИЛА</h2><div class="rule-item"><div class="rule-title">1.1 | Передача аккаунта</div><p>Разглашение пароля от аккаунта.</p><div class="rule-punishment">⚠️ Бан навсегда</div></div><div class="rule-item"><div class="rule-title">1.2 | Торговля за реальные деньги</div><p>Продажа игровых ценностей за деньги.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div><div class="rule-item"><div class="rule-title">1.3 | Вред проекту</div><p>Краш, DDOS, лаг-машины.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div><div class="rule-item"><div class="rule-title">1.4 | Недопустимые ники</div><p>Оскорбительные или политические ники.</p><div class="rule-punishment">⚠️ Бан навсегда</div></div><div class="rule-item"><div class="rule-title">1.5 | Притворство командой</div><p>Выдача себя за администрацию.</p><div class="rule-punishment">⚠️ Бан по IP на 3 дня</div></div><div class="rule-item"><div class="rule-title">1.6 | Махинации</div><p>Взлом, обман, подделка доказательств.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div><div class="rule-item"><div class="rule-title">1.7 | Вред команде проекта</div><p>Критика, угрозы, ложные репорты.</p><div class="rule-punishment">⚠️ Бан на 1 день</div></div><div class="rule-item"><div class="rule-title">1.8 | Обход наказаний</div><p>Обход бана через другой аккаунт.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div></div></div>
             <div id="rule-section-communication" class="rules-section"><div class="rules-card"><h2><i class="fas fa-comments"></i> 2. ПРАВИЛА ОБЩЕНИЯ</h2><div class="rule-item"><div class="rule-title">2.1 | Реклама</div><p>Реклама сторонних ресурсов.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div><div class="rule-item"><div class="rule-title">2.2 | Засорение чата</div><p>КАПС, повторения, попрошайничество.</p><div class="rule-punishment">⚠️ Мут на 30 минут</div></div><div class="rule-item"><div class="rule-title">2.3 | Оскорбления</div><p>Оскорбления, токсичность, угрозы.</p><div class="rule-punishment">⚠️ Мут на 3 часа - 7 дней</div></div><div class="rule-item"><div class="rule-title">2.4 | Политика</div><p>Политические дискуссии.</p><div class="rule-punishment">⚠️ Мут на 6 часов</div></div><div class="rule-item"><div class="rule-title">2.5 | Спам командами</div><p>Повтор команд /pay, /time и т.д.</p><div class="rule-punishment">⚠️ Бан на 10 минут</div></div><div class="rule-item"><div class="rule-title">2.6 | Оскорбление проекта</div><p>Оскорбления в сторону проекта.</p><div class="rule-punishment">⚠️ Бан по IP на 3 дня - навсегда</div></div></div></div>
             <div id="rule-section-mechanics" class="rules-section"><div class="rules-card"><h2><i class="fas fa-cogs"></i> 3. ИГРОВЫЕ МЕХАНИКИ</h2><div class="rule-item"><div class="rule-title">3.1 | Читерство</div><p>Использование читов.</p><div class="rule-punishment">⚠️ Бан по IP навсегда</div></div><div class="rule-item"><div class="rule-title">3.2 | Недопустимые постройки</div><p>Оскорбительные или политические постройки.</p><div class="rule-punishment">⚠️ Бан на 6 часов</div></div><div class="rule-item"><div class="rule-title">3.3 | Недопустимая кастомизация</div><p>Скины/префиксы, выдающие за админа.</p><div class="rule-punishment">⚠️ Бан на 6 часов</div></div><div class="rule-item"><div class="rule-title">3.4 | Некорректные наказания</div><p>Выдача наказаний без доказательств.</p><div class="rule-punishment">⚠️ Бан на 3 дня</div></div><div class="rule-item"><div class="rule-title">3.5 | Некорректные снятия</div><p>Снятие корректного наказания.</p><div class="rule-punishment">⚠️ Бан на 1 день</div></div><div class="rule-item"><div class="rule-title">3.6 | Фарм статистики</div><p>Накрутка статистики.</p><div class="rule-punishment">⚠️ Бан на 12 часов - 3 дня</div></div></div></div>
@@ -707,7 +697,7 @@
             const ADMIN_SECRET_CODE = "website";
             
             let currentUser = null, currentBalance = 0, currentProduct = null, moderatorsList = [], timerInterval = null, siteStatusUnsub = null, banUnsub = null, balanceInterval = null, timerUnsub = null;
-            let myAppealsUnsub = null, adminAppealsUnsub = null, messagesUnsub = null, wheelSpinning = false, wheelPrizes = [], wheelCanvas = null, wheelCtx = null;
+            let myAppealsUnsub = null, adminAppealsUnsub = null, messagesUnsub = null, wheelSpinning = false, wheelPrizes = [];
             let isMainAdmin = false, isModerator = false, moderatorPermissions = { coinLimit: 10000, banMaxHours: 1, banMaxMinutes: 30, closeMaxHours: 1, closeMaxMinutes: 30, replyLimit: 1, allowedBadges: [] };
             let customBanMode = false, customCloseMode = false;
 
@@ -719,14 +709,6 @@
                 notif.innerHTML = `<i class="fas ${icon}"></i><span>${msg}</span>`;
                 container.appendChild(notif);
                 setTimeout(() => { notif.remove(); }, 4000);
-            }
-
-            function showMessageNotification(senderName, preview, messageId) {
-                const notif = document.createElement('div'); notif.className = 'notification-popup';
-                notif.innerHTML = `<i class="fas fa-envelope"></i><div><strong>📨 Новое сообщение</strong><br>От: ${senderName}<br>${preview}</div>`;
-                notif.onclick = () => { openMessageDetail(messageId); notif.remove(); };
-                document.body.appendChild(notif);
-                setTimeout(() => { if(notif.parentNode) notif.remove(); }, 8000);
             }
 
             function getBadgeHtml(type) {
@@ -781,27 +763,30 @@
 
             function drawWheelCanvas() {
                 const canvas = document.getElementById('wheelCanvas'); if (!canvas) return;
-                wheelCtx = canvas.getContext('2d'); const size = 400; canvas.width = size; canvas.height = size;
+                const ctx = canvas.getContext('2d'); const size = 400; canvas.width = size; canvas.height = size;
                 const centerX = size/2, centerY = size/2, radius = size/2;
                 let totalChance = 0; wheelPrizes.forEach(p => totalChance += p.chance);
                 let startAngle = -Math.PI/2;
                 wheelPrizes.forEach((prize, i) => {
                     const angle = (prize.chance / totalChance) * Math.PI * 2, endAngle = startAngle + angle;
-                    wheelCtx.beginPath(); wheelCtx.fillStyle = prize.color || `hsl(${i * 72}, 70%, 55%)`;
-                    wheelCtx.moveTo(centerX, centerY); wheelCtx.arc(centerX, centerY, radius, startAngle, endAngle); wheelCtx.fill();
-                    wheelCtx.strokeStyle = 'white'; wheelCtx.lineWidth = 2; wheelCtx.stroke();
-                    wheelCtx.save(); wheelCtx.translate(centerX, centerY); wheelCtx.rotate(startAngle + angle/2);
-                    wheelCtx.textAlign = 'center'; wheelCtx.textBaseline = 'middle'; wheelCtx.font = 'bold 14px Montserrat';
-                    wheelCtx.fillStyle = 'white'; wheelCtx.shadowBlur = 0;
-                    wheelCtx.fillText(`${prize.icon} ${prize.name.split(' ')[0]}`, radius * 0.65, 0);
-                    wheelCtx.restore(); startAngle = endAngle;
+                    ctx.beginPath(); ctx.fillStyle = prize.color || `hsl(${i * 72}, 70%, 55%)`;
+                    ctx.moveTo(centerX, centerY); ctx.arc(centerX, centerY, radius, startAngle, endAngle); ctx.fill();
+                    ctx.strokeStyle = 'white'; ctx.lineWidth = 2; ctx.stroke();
+                    ctx.save(); ctx.translate(centerX, centerY); ctx.rotate(startAngle + angle/2);
+                    ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = 'bold 14px Montserrat';
+                    ctx.fillStyle = 'white';
+                    ctx.fillText(`${prize.icon} ${prize.name.split(' ')[0]}`, radius * 0.65, 0);
+                    ctx.restore(); startAngle = endAngle;
                 });
-                wheelCtx.beginPath(); wheelCtx.fillStyle = '#1a1a2e'; wheelCtx.arc(centerX, centerY, 30, 0, Math.PI*2); wheelCtx.fill();
-                wheelCtx.fillStyle = '#ffd700'; wheelCtx.font = 'bold 20px Montserrat'; wheelCtx.fillText('🎡', centerX-12, centerY+8);
+                ctx.beginPath(); ctx.fillStyle = '#1a1a2e'; ctx.arc(centerX, centerY, 30, 0, Math.PI*2); ctx.fill();
+                ctx.fillStyle = '#ffd700'; ctx.font = 'bold 20px Montserrat'; ctx.fillText('🎡', centerX-12, centerY+8);
             }
 
             async function loadUserSpins() { if (!currentUser) return; const doc = await db.collection('users').doc(currentUser.uid).get(); document.getElementById('spinsCount').innerText = doc.data()?.wheelSpins || 0; }
-            async function spinWheel() { if (wheelSpinning) { showNotification('Колесо уже крутится!', 'error'); return; } if (!currentUser) { showNotification('Авторизуйтесь!', 'error'); return; }
+            
+            async function spinWheel() { 
+                if (wheelSpinning) { showNotification('Колесо уже крутится!', 'error'); return; } 
+                if (!currentUser) { showNotification('Авторизуйтесь!', 'error'); return; }
                 const userDoc = await db.collection('users').doc(currentUser.uid).get(); const spins = userDoc.data()?.wheelSpins || 0;
                 if (spins < 1) { showNotification('Нет прокруток!', 'error'); return; }
                 await db.collection('users').doc(currentUser.uid).update({ wheelSpins: spins - 1 }); document.getElementById('spinsCount').innerText = spins - 1;
@@ -811,29 +796,108 @@
                 const selectedPrize = wheelPrizes[selectedIndex];
                 wheelSpinning = true; const canvas = document.getElementById('wheelCanvas');
                 let targetRotation = 360 * 8 + Math.random() * 360; let startTime = null; const duration = 3000;
-                function animateSpin(timestamp) { if (!startTime) startTime = timestamp; const elapsed = timestamp - startTime; const progress = Math.min(1, elapsed / duration); const easeOut = 1 - Math.pow(1 - progress, 3); canvas.style.transform = `rotate(${targetRotation * easeOut}deg)`; if (progress < 1) requestAnimationFrame(animateSpin); else { canvas.style.transform = `rotate(${targetRotation % 360}deg)`; db.collection('users').doc(currentUser.uid).update({ balance: currentBalance + selectedPrize.value }); currentBalance += selectedPrize.value; document.getElementById('userBalance').innerText = currentBalance; document.getElementById('wheelResult').innerHTML = `🎉 Поздравляем! Вы выиграли ${selectedPrize.name}! 🎉`; showNotification(`🎉 Вы выиграли ${selectedPrize.name}!`, 'success'); wheelSpinning = false; setTimeout(() => { document.getElementById('wheelResult').innerHTML = 'Нажмите на кнопку, чтобы крутить колесо!'; }, 5000); } }
+                function animateSpin(timestamp) { 
+                    if (!startTime) startTime = timestamp; const elapsed = timestamp - startTime; const progress = Math.min(1, elapsed / duration); 
+                    const easeOut = 1 - Math.pow(1 - progress, 3); canvas.style.transform = `rotate(${targetRotation * easeOut}deg)`; 
+                    if (progress < 1) requestAnimationFrame(animateSpin); 
+                    else { 
+                        canvas.style.transform = `rotate(${targetRotation % 360}deg)`; 
+                        db.collection('users').doc(currentUser.uid).update({ balance: currentBalance + selectedPrize.value });
+                        currentBalance += selectedPrize.value; document.getElementById('userBalance').innerText = currentBalance; 
+                        document.getElementById('wheelResult').innerHTML = `🎉 Поздравляем! Вы выиграли ${selectedPrize.name}! 🎉`; 
+                        showNotification(`🎉 Вы выиграли ${selectedPrize.name}!`, 'success'); wheelSpinning = false; 
+                        setTimeout(() => { document.getElementById('wheelResult').innerHTML = 'Нажмите на кнопку, чтобы крутить колесо!'; }, 5000); 
+                    } 
+                }
                 requestAnimationFrame(animateSpin);
             }
 
-            async function loadMessages() { if (messagesUnsub) messagesUnsub(); if (!currentUser) return; messagesUnsub = db.collection('messages').where('to', '==', currentUser.uid).orderBy('createdAt', 'desc').onSnapshot((snap) => { const container = document.getElementById('messagesList'); const unreadCountSpan = document.getElementById('unreadCount'); let unread = 0; if (!container) return; if (snap.empty) { container.innerHTML = '<div class="appeal-card" style="text-align: center;">📭 У вас нет сообщений</div>'; if(unreadCountSpan) unreadCountSpan.style.display = 'none'; return; } container.innerHTML = ''; snap.forEach(doc => { const msg = doc.data(); if (!msg.read) unread++; const senderBadge = getBadgeHtml(msg.senderBadge); container.innerHTML += `<div class="message-item ${!msg.read ? 'unread' : ''}" data-msg-id="${doc.id}"><div class="message-sender">${senderBadge} ${msg.senderName || msg.senderEmail}</div><div class="message-preview">${msg.message.substring(0, 100)}${msg.message.length > 100 ? '...' : ''}</div><div class="message-date">${new Date(msg.createdAt?.toDate()).toLocaleString()}</div></div>`; }); if (unreadCountSpan) { if (unread > 0) { unreadCountSpan.innerText = unread; unreadCountSpan.style.display = 'inline-block'; } else unreadCountSpan.style.display = 'none'; } document.querySelectorAll('.message-item').forEach(el => { el.onclick = () => openMessageDetail(el.dataset.msgId); }); }); }
-            async function openMessageDetail(msgId) { const doc = await db.collection('messages').doc(msgId).get(); if (!doc.exists) return; const msg = doc.data(); if (!msg.read) { await db.collection('messages').doc(msgId).update({ read: true, readAt: new Date() }); loadMessages(); } const senderBadge = getBadgeHtml(msg.senderBadge); document.getElementById('messageDetailContent').innerHTML = `<div class="message-sender" style="margin-bottom:15px;">${senderBadge} ${msg.senderName || msg.senderEmail}</div><div class="message-content">${msg.message.replace(/\n/g, '<br>')}</div><div class="message-date">${new Date(msg.createdAt?.toDate()).toLocaleString()}</div>`; document.getElementById('markReadBtn').onclick = async () => { if (!msg.read) await db.collection('messages').doc(msgId).update({ read: true, readAt: new Date() }); document.getElementById('messageDetailModal').style.display = 'none'; loadMessages(); }; document.getElementById('messageDetailModal').style.display = 'flex'; }
+            async function loadMessages() { 
+                if (messagesUnsub) messagesUnsub(); if (!currentUser) return; 
+                messagesUnsub = db.collection('messages').where('to', '==', currentUser.uid).onSnapshot((snap) => { 
+                    const container = document.getElementById('messagesList'); const unreadCountSpan = document.getElementById('unreadCount'); let unread = 0; 
+                    if (!container) return; if (snap.empty) { container.innerHTML = '<div class="appeal-card" style="text-align: center;">📭 У вас нет сообщений</div>'; if(unreadCountSpan) unreadCountSpan.style.display = 'none'; return; } 
+                    const msgs = []; snap.forEach(doc => msgs.push({ id: doc.id, ...doc.data() })); msgs.sort((a,b) => (b.createdAt?.toDate()||0) - (a.createdAt?.toDate()||0));
+                    container.innerHTML = ''; 
+                    msgs.forEach(msg => { if (!msg.read) unread++; const senderBadge = getBadgeHtml(msg.senderBadge); 
+                        container.innerHTML += `<div class="message-item ${!msg.read ? 'unread' : ''}" data-msg-id="${msg.id}"><div class="message-sender">${senderBadge} ${msg.senderName || msg.senderEmail}</div><div class="message-preview">${msg.message.substring(0, 100)}${msg.message.length > 100 ? '...' : ''}</div><div class="message-date">${msg.createdAt ? new Date(msg.createdAt.toDate()).toLocaleString() : 'Дата неизвестна'}</div></div>`; 
+                    }); 
+                    if (unreadCountSpan) { if (unread > 0) { unreadCountSpan.innerText = unread; unreadCountSpan.style.display = 'inline-block'; } else unreadCountSpan.style.display = 'none'; } 
+                    document.querySelectorAll('.message-item').forEach(el => { el.onclick = () => openMessageDetail(el.dataset.msgId); }); 
+                }); 
+            }
 
-            async function sendBroadcast(message) { const users = await db.collection('users').get(); const adminDoc = await db.collection('users').doc(currentUser.uid).get(); const adminName = adminDoc.data()?.username || currentUser.displayName || currentUser.email; const adminBadge = adminDoc.data()?.badge || null; for (const userDoc of users.docs) { if (userDoc.id !== currentUser.uid) { await db.collection('messages').add({ to: userDoc.id, from: currentUser.uid, senderEmail: currentUser.email, senderName: adminName, senderBadge: adminBadge, message: message, read: false, createdAt: new Date() }); } } showNotification(`📨 Рассылка отправлена ${users.size-1} пользователям!`, 'success'); }
+            async function openMessageDetail(msgId) { 
+                const doc = await db.collection('messages').doc(msgId).get(); if (!doc.exists) return; const msg = doc.data(); 
+                if (!msg.read) { await db.collection('messages').doc(msgId).update({ read: true, readAt: new Date() }); loadMessages(); } 
+                const senderBadge = getBadgeHtml(msg.senderBadge); 
+                document.getElementById('messageDetailContent').innerHTML = `<div class="message-sender" style="margin-bottom:15px;">${senderBadge} ${msg.senderName || msg.senderEmail}</div><div class="message-content">${msg.message.replace(/\n/g, '<br>')}</div><div class="message-date">${msg.createdAt ? new Date(msg.createdAt.toDate()).toLocaleString() : 'Дата неизвестна'}</div>`; 
+                document.getElementById('markReadBtn').onclick = async () => { if (!msg.read) await db.collection('messages').doc(msgId).update({ read: true, readAt: new Date() }); document.getElementById('messageDetailModal').style.display = 'none'; loadMessages(); }; 
+                document.getElementById('messageDetailModal').style.display = 'flex'; 
+            }
 
-            async function loadMyAppeals() { if (myAppealsUnsub) myAppealsUnsub(); if (!currentUser) return; myAppealsUnsub = db.collection('appeals').where('playerId', '==', currentUser.uid).orderBy('createdAt', 'desc').onSnapshot((snap) => { const container = document.getElementById('myAppealsList'); if (!container) return; if (snap.empty) { container.innerHTML = '<div class="appeal-card" style="text-align: center;">📭 У вас пока нет обращений</div>'; return; } container.innerHTML = ''; snap.forEach(doc => { const appeal = doc.data(); const statusClass = appeal.status === 'waiting' ? 'status-waiting' : (appeal.status === 'answered' ? 'status-answered' : 'status-closed'); const statusText = appeal.status === 'waiting' ? 'Ожидает ответа' : (appeal.status === 'answered' ? 'Ответ дан' : 'Закрыто'); let answerHtml = ''; if (appeal.answer) { const adminBadge = getBadgeHtml(appeal.answerAdminBadge); answerHtml = `<div class="appeal-answer"><div class="admin-reply-name"><strong><i class="fas fa-reply"></i> Ответ:</strong> ${appeal.answerAdminName || appeal.answerAdminEmail} ${adminBadge}</div><p>${appeal.answer.replace(/\n/g, '<br>')}</p></div>`; } container.innerHTML += `<div class="appeal-card"><div class="appeal-status ${statusClass}">${statusText}</div><div class="appeal-title">${appeal.title || 'Без темы'}</div><div class="appeal-info"><span><i class="fas fa-user"></i> ${appeal.playerNick}</span><span><i class="fas fa-user-shield"></i> Админ: ${appeal.adminNick || 'Не указан'}</span><span><i class="fas fa-tag"></i> ${appeal.type === 'complaint' ? 'Жалоба' : appeal.type === 'ban_appeal' ? 'Обжалование бана' : appeal.type === 'question' ? 'Вопрос' : 'Другое'}</span><span><i class="fas fa-clock"></i> ${new Date(appeal.createdAt?.toDate()).toLocaleString()}</span></div><div class="appeal-message"><strong>Сообщение:</strong><br>${appeal.message.replace(/\n/g, '<br>')}</div>${appeal.evidence ? `<div><i class="fas fa-link"></i> <a href="${appeal.evidence}" target="_blank" class="evidence-link">Доказательства</a></div>` : ''}${answerHtml}</div>`; }); }); }
+            async function sendBroadcast(message) { 
+                const users = await db.collection('users').get(); 
+                const adminDoc = await db.collection('users').doc(currentUser.uid).get(); 
+                const adminName = adminDoc.data()?.username || currentUser.displayName || currentUser.email; 
+                const adminBadge = adminDoc.data()?.badge || null; 
+                for (const userDoc of users.docs) { if (userDoc.id !== currentUser.uid) { 
+                    await db.collection('messages').add({ to: userDoc.id, from: currentUser.uid, senderEmail: currentUser.email, senderName: adminName, senderBadge: adminBadge, message: message, read: false, createdAt: new Date() }); 
+                } } 
+                showNotification(`📨 Рассылка отправлена ${users.size-1} пользователям!`, 'success'); 
+            }
 
-            function loadAdminAppeals() { if (adminAppealsUnsub) adminAppealsUnsub(); adminAppealsUnsub = db.collection('appeals').orderBy('createdAt', 'desc').onSnapshot((snap) => { const container = document.getElementById('adminAppealsList'); if (!container) return; if (snap.empty) { container.innerHTML = '<div class="player-card">📭 Нет обращений</div>'; return; } container.innerHTML = ''; snap.forEach(doc => { const appeal = doc.data(); const statusText = appeal.status === 'waiting' ? '⏳ Ожидает' : (appeal.status === 'answered' ? '✅ Отвечено' : '🔒 Закрыто'); container.innerHTML += `<div class="player-card" style="flex-direction: column; align-items: flex-start;" data-appeal-id="${doc.id}"><div><strong>${appeal.title || 'Без темы'}</strong> <span style="font-size: 11px; color: var(--text-muted);">${statusText}</span></div><div>👤 ${appeal.playerNick} | ${appeal.type === 'complaint' ? 'Жалоба' : appeal.type === 'ban_appeal' ? 'Обжалование' : appeal.type === 'question' ? 'Вопрос' : 'Другое'}</div><div>📧 ${appeal.playerEmail}</div><div>📝 ${appeal.message.substring(0, 100)}${appeal.message.length > 100 ? '...' : ''}</div>${appeal.evidence ? `<div><i class="fas fa-link"></i> <a href="${appeal.evidence}" target="_blank" style="color:#3b82f6;">Доказательства</a></div>` : ''}<div>📅 ${new Date(appeal.createdAt?.toDate()).toLocaleString()}</div>${appeal.answer ? `<div style="color: var(--success);">✅ Ответ: ${appeal.answer.substring(0, 80)}...</div>` : ''}<div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;"><button class="admin-btn-blue answer-appeal-btn" data-id="${doc.id}" style="width: auto; padding: 5px 15px;">✏️ ОТВЕТИТЬ</button><button class="admin-btn-red delete-appeal-btn" data-id="${doc.id}" style="width: auto; padding: 5px 15px;">🗑️ УДАЛИТЬ</button></div><div id="answer-area-${doc.id}" style="display: none; margin-top: 10px; width: 100%;"><textarea id="answer-text-${doc.id}" rows="3" placeholder="Ваш ответ..." style="width: 100%; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 16px; color: white;"></textarea><button class="admin-btn-green submit-answer-btn" data-id="${doc.id}" style="margin-top: 5px;">ОТПРАВИТЬ ОТВЕТ</button></div></div>`; });
-                document.querySelectorAll('.answer-appeal-btn').forEach(btn => { btn.onclick = () => { const area = document.getElementById(`answer-area-${btn.dataset.id}`); area.style.display = area.style.display === 'none' ? 'block' : 'none'; }; });
-                document.querySelectorAll('.submit-answer-btn').forEach(btn => { btn.onclick = async () => { const answer = document.getElementById(`answer-text-${btn.dataset.id}`).value.trim(); if (!answer) { showNotification('Введите ответ!', 'error'); return; } const userDoc = await db.collection('users').doc(currentUser.uid).get(); const adminName = userDoc.exists ? userDoc.data().username : currentUser.displayName || currentUser.email; const adminBadge = userDoc.exists ? userDoc.data().badge : null; await db.collection('appeals').doc(btn.dataset.id).update({ answer: answer, status: 'answered', answeredAt: new Date(), answerAdminId: currentUser.uid, answerAdminEmail: currentUser.email, answerAdminName: adminName, answerAdminBadge: adminBadge }); showNotification('Ответ отправлен!', 'success'); document.getElementById(`answer-area-${btn.dataset.id}`).style.display = 'none'; document.getElementById(`answer-text-${btn.dataset.id}`).value = ''; }; });
-                document.querySelectorAll('.delete-appeal-btn').forEach(btn => { btn.onclick = async () => { if (confirm('Удалить это обращение навсегда?')) { await db.collection('appeals').doc(btn.dataset.id).delete(); showNotification('Обращение удалено!', 'success'); } }; });
-            }); }
+            async function loadMyAppeals() { 
+                if (myAppealsUnsub) myAppealsUnsub(); if (!currentUser) return; 
+                myAppealsUnsub = db.collection('appeals').where('playerId', '==', currentUser.uid).onSnapshot((snap) => { 
+                    const container = document.getElementById('myAppealsList'); if (!container) return; 
+                    if (snap.empty) { container.innerHTML = '<div class="appeal-card" style="text-align: center;">📭 У вас пока нет обращений</div>'; return; } 
+                    const appeals = []; snap.forEach(doc => appeals.push({ id: doc.id, ...doc.data() })); appeals.sort((a,b) => (b.createdAt?.toDate()||0) - (a.createdAt?.toDate()||0));
+                    container.innerHTML = ''; 
+                    appeals.forEach(appeal => { 
+                        const statusClass = appeal.status === 'waiting' ? 'status-waiting' : (appeal.status === 'answered' ? 'status-answered' : 'status-closed'); 
+                        const statusText = appeal.status === 'waiting' ? 'Ожидает ответа' : (appeal.status === 'answered' ? 'Ответ дан' : 'Закрыто'); 
+                        let answerHtml = ''; 
+                        if (appeal.answer) { const adminBadge = getBadgeHtml(appeal.answerAdminBadge); answerHtml = `<div class="appeal-answer"><div class="admin-reply-name"><strong><i class="fas fa-reply"></i> Ответ:</strong> ${appeal.answerAdminName || appeal.answerAdminEmail} ${adminBadge}</div><p>${appeal.answer.replace(/\n/g, '<br>')}</p></div>`; } 
+                        container.innerHTML += `<div class="appeal-card"><div class="appeal-status ${statusClass}">${statusText}</div><div class="appeal-title">${appeal.title || 'Без темы'}</div><div class="appeal-info"><span><i class="fas fa-user"></i> ${appeal.playerNick}</span><span><i class="fas fa-user-shield"></i> Админ: ${appeal.adminNick || 'Не указан'}</span><span><i class="fas fa-tag"></i> ${appeal.type === 'complaint' ? 'Жалоба' : appeal.type === 'ban_appeal' ? 'Обжалование бана' : appeal.type === 'question' ? 'Вопрос' : 'Другое'}</span><span><i class="fas fa-clock"></i> ${appeal.createdAt ? new Date(appeal.createdAt.toDate()).toLocaleString() : 'Дата неизвестна'}</span></div><div class="appeal-message"><strong>Сообщение:</strong><br>${appeal.message.replace(/\n/g, '<br>')}</div>${appeal.evidence ? `<div><i class="fas fa-link"></i> <a href="${appeal.evidence}" target="_blank" class="evidence-link">Доказательства</a></div>` : ''}${answerHtml}</div>`; 
+                    }); 
+                }); 
+            }
+
+            function loadAdminAppeals() { 
+                if (adminAppealsUnsub) adminAppealsUnsub(); 
+                adminAppealsUnsub = db.collection('appeals').onSnapshot((snap) => { 
+                    const container = document.getElementById('adminAppealsList'); if (!container) return; 
+                    if (snap.empty) { container.innerHTML = '<div class="player-card">📭 Нет обращений</div>'; return; } 
+                    const appeals = []; snap.forEach(doc => appeals.push({ id: doc.id, ...doc.data() })); appeals.sort((a,b) => (b.createdAt?.toDate()||0) - (a.createdAt?.toDate()||0));
+                    container.innerHTML = ''; 
+                    appeals.forEach(appeal => { 
+                        const statusText = appeal.status === 'waiting' ? '⏳ Ожидает' : (appeal.status === 'answered' ? '✅ Отвечено' : '🔒 Закрыто'); 
+                        container.innerHTML += `<div class="player-card" style="flex-direction: column; align-items: flex-start;" data-appeal-id="${appeal.id}"><div><strong>${appeal.title || 'Без темы'}</strong> <span style="font-size: 11px; color: var(--text-muted);">${statusText}</span></div><div>👤 ${appeal.playerNick} | ${appeal.type === 'complaint' ? 'Жалоба' : appeal.type === 'ban_appeal' ? 'Обжалование' : appeal.type === 'question' ? 'Вопрос' : 'Другое'}</div><div>📧 ${appeal.playerEmail}</div><div>📝 ${appeal.message.substring(0, 100)}${appeal.message.length > 100 ? '...' : ''}</div>${appeal.evidence ? `<div><i class="fas fa-link"></i> <a href="${appeal.evidence}" target="_blank" style="color:#3b82f6;">Доказательства</a></div>` : ''}<div>📅 ${appeal.createdAt ? new Date(appeal.createdAt.toDate()).toLocaleString() : 'Дата неизвестна'}</div>${appeal.answer ? `<div style="color: var(--success);">✅ Ответ: ${appeal.answer.substring(0, 80)}...</div>` : ''}<div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;"><button class="admin-btn-blue answer-appeal-btn" data-id="${appeal.id}" style="width: auto; padding: 5px 15px;">✏️ ОТВЕТИТЬ</button><button class="admin-btn-red delete-appeal-btn" data-id="${appeal.id}" style="width: auto; padding: 5px 15px;">🗑️ УДАЛИТЬ</button></div><div id="answer-area-${appeal.id}" style="display: none; margin-top: 10px; width: 100%;"><textarea id="answer-text-${appeal.id}" rows="3" placeholder="Ваш ответ..." style="width: 100%; padding: 10px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 16px; color: white;"></textarea><button class="admin-btn-green submit-answer-btn" data-id="${appeal.id}" style="margin-top: 5px;">ОТПРАВИТЬ ОТВЕТ</button></div></div>`; 
+                    }); 
+                    document.querySelectorAll('.answer-appeal-btn').forEach(btn => { btn.onclick = () => { const area = document.getElementById(`answer-area-${btn.dataset.id}`); area.style.display = area.style.display === 'none' ? 'block' : 'none'; }; }); 
+                    document.querySelectorAll('.submit-answer-btn').forEach(btn => { btn.onclick = async () => { const answer = document.getElementById(`answer-text-${btn.dataset.id}`).value.trim(); if (!answer) { showNotification('Введите ответ!', 'error'); return; } const userDoc = await db.collection('users').doc(currentUser.uid).get(); const adminName = userDoc.exists ? userDoc.data().username : currentUser.displayName || currentUser.email; const adminBadge = userDoc.exists ? userDoc.data().badge : null; await db.collection('appeals').doc(btn.dataset.id).update({ answer: answer, status: 'answered', answeredAt: new Date(), answerAdminId: currentUser.uid, answerAdminEmail: currentUser.email, answerAdminName: adminName, answerAdminBadge: adminBadge }); showNotification('Ответ отправлен!', 'success'); document.getElementById(`answer-area-${btn.dataset.id}`).style.display = 'none'; document.getElementById(`answer-text-${btn.dataset.id}`).value = ''; }; }); 
+                    document.querySelectorAll('.delete-appeal-btn').forEach(btn => { btn.onclick = async () => { if (confirm('Удалить это обращение навсегда?')) { await db.collection('appeals').doc(btn.dataset.id).delete(); showNotification('Обращение удалено!', 'success'); } }; }); 
+                }); 
+            }
 
             async function loadAppealsClosedStatus() { const doc = await db.collection('settings').doc('appealsSettings').get(); const closedInfo = document.getElementById('appealsClosedInfo'); const formBlock = document.getElementById('appealFormBlock'); if (doc.exists && doc.data().closed) { if(closedInfo){ closedInfo.style.display='block'; closedInfo.innerHTML=`<i class="fas fa-lock"></i> 🔒 ОТПРАВКА ОБРАЩЕНИЙ ЗАКРЫТА<br>Причина: ${doc.data().reason || 'Технические работы'}`; } if(formBlock){ formBlock.style.opacity='0.5'; formBlock.style.pointerEvents='none'; } } else { if(closedInfo) closedInfo.style.display='none'; if(formBlock){ formBlock.style.opacity='1'; formBlock.style.pointerEvents='auto'; } } }
-            async function submitAppeal(playerNick, adminNick, title, type, message, evidence, userType) { if (!currentUser) { showNotification('Авторизуйтесь!', 'error'); return false; } const settings = await db.collection('settings').doc('appealsSettings').get(); if (settings.exists && settings.data().closed) { showNotification(`Отправка обращений закрыта! Причина: ${settings.data().reason || 'Технические работы'}`, 'error'); return false; } if (!playerNick || !title || !message) { showNotification('Заполните ник, тему и сообщение!', 'error'); return false; } await db.collection('appeals').add({ playerId: currentUser.uid, playerEmail: currentUser.email, playerNick: playerNick, adminNick: adminNick || 'Не указан', title: title, type: type, message: message, evidence: evidence || null, userType: userType, status: 'waiting', createdAt: new Date() }); showNotification('Обращение отправлено!', 'success'); return true; }
+            
+            async function submitAppeal(playerNick, adminNick, title, type, message, evidence, userType) { 
+                if (!currentUser) { showNotification('Авторизуйтесь!', 'error'); return false; } 
+                const settings = await db.collection('settings').doc('appealsSettings').get(); 
+                if (settings.exists && settings.data().closed) { showNotification(`Отправка обращений закрыта! Причина: ${settings.data().reason || 'Технические работы'}`, 'error'); return false; } 
+                if (!playerNick || !title || !message) { showNotification('Заполните ник, тему и сообщение!', 'error'); return false; } 
+                await db.collection('appeals').add({ playerId: currentUser.uid, playerEmail: currentUser.email, playerNick: playerNick, adminNick: adminNick || 'Не указан', title: title, type: type, message: message, evidence: evidence || null, userType: userType, status: 'waiting', createdAt: new Date() }); 
+                showNotification('Обращение отправлено!', 'success'); return true; 
+            }
 
             const privileges = [ { name: "Премиум", price: 1000 }, { name: "Креатив", price: 2500 }, { name: "Модер", price: 5000 }, { name: "Лорд", price: 10000 }, { name: "Админ", price: 20000 }, { name: "Гл админ", price: 50000 }, { name: "Создатель", price: 100000 }, { name: "Основатель", price: 150000 }, { name: "Владелец", price: 250000 }, { name: "Консоль", price: 350000 }, { name: "Цезарь", price: 500000 }, { name: "Сервер", price: 650000 }, { name: "Хелпер", price: 750000 }, { name: "Хайп", price: 850000 }, { name: "Стафф", price: 900000 }, { name: "Правитель", price: 1000000 } ];
+            
             function renderShop() { const container = document.getElementById('shopGrid'); if(container){ container.innerHTML = privileges.map(p => `<div class="product-card" data-name="${p.name}" data-price="${p.price}"><div class="product-name">${p.name}</div><div class="price">${p.price.toLocaleString()} ₽</div><div class="donate-note"><i class="fas fa-clock"></i> Донат будет выдан в течение 10 минут</div><button class="buy-btn">КУПИТЬ</button></div>`).join(''); document.querySelectorAll('.product-card').forEach(card => { card.addEventListener('click', (e) => { if(e.target.classList.contains('buy-btn')||e.target.classList.contains('product-card')){ const name=card.dataset.name; const price=parseInt(card.dataset.price); openBuyModal(name,price); } }); }); } }
+            
             window.openBuyModal = (n, p) => { currentProduct = { name: n, price: p }; document.getElementById('buyProductName').innerText = n; document.getElementById('buyPrice').innerText = p.toLocaleString(); document.getElementById('buyModal').style.display = 'flex'; };
+            
             async function purchaseProduct(product, serverNick, siteNick) { if (currentBalance < product.price) { showNotification('Недостаточно средств', 'error'); return false; } await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance - product.price }); await db.collection('donates').add({ userId: currentUser.uid, username: currentUser.displayName, product: product.name, price: product.price, date: new Date() }); currentBalance -= product.price; document.getElementById('userBalance').innerText = currentBalance.toLocaleString(); showNotification(`✅ Куплено ${product.name}!`, 'success'); return true; }
 
             async function loadUserData(user) { if (!user) return; const doc = await db.collection('users').doc(user.uid).get(); let data = doc.data(); if (!data) { await db.collection('users').doc(user.uid).set({ username: user.displayName || user.email.split('@')[0], email: user.email, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 3, tag: `#${user.displayName?.substring(0,4) || 'user'}`, badge: user.email === MAIN_ADMIN_EMAIL ? 'crown' : null }); currentBalance = 50000; } else { currentBalance = data.balance || 50000; } document.getElementById('userBalance').innerText = currentBalance; const badgeHtml = getBadgeHtml(data?.badge); document.getElementById('profileName').innerHTML = (data?.username || user.displayName) + badgeHtml; document.getElementById('profileInfo').innerHTML = `<p><i class="fas fa-envelope"></i> ${user.email}</p><p><i class="fas fa-calendar-alt"></i> Зарегистрирован: ${data?.registeredAt ? new Date(data.registeredAt).toLocaleDateString() : 'Сегодня'}</p>`; document.getElementById('userTag').innerHTML = data?.tag || '#user'; const donatesSnap = await db.collection('donates').where('userId', '==', user.uid).get(); const totalSpent = donatesSnap.docs.reduce((sum, d) => sum + (d.data().price || 0), 0); document.getElementById('profileStats').innerHTML = `<div class="stat-item"><div class="stat-value">${donatesSnap.size}</div><div class="stat-label">Покупок</div></div><div class="stat-item"><div class="stat-value">${totalSpent.toLocaleString()} ₽</div><div class="stat-label">Потрачено</div></div><div class="stat-item"><div class="stat-value">${data?.wheelSpins || 0}</div><div class="stat-label">Прокруток</div></div>`; db.collection('donates').where('userId', '==', user.uid).onSnapshot(snap => { const c = document.getElementById('donatesContainer'); if(c){ c.innerHTML = ''; snap.forEach(d => c.innerHTML += `<span class="donate-tag"><i class="fas fa-gift"></i> ${d.data().product}</span>`); if(snap.empty) c.innerHTML = '<span class="donate-tag">Нет покупок</span>'; } }); }
