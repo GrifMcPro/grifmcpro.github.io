@@ -1047,7 +1047,7 @@ auth.onAuthStateChanged(async user => {
 
         // Загружаем список модераторов
         await loadModerators();
-        isAdmin    = (user.email === ramonenok@bk.ru);
+        isAdmin    = (user.email === 'ramonenok@bk.ru');
         isModerator = moderatorsList.some(m => m.email === user.email);
 
         // Проверяем бан
