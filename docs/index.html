@@ -569,11 +569,49 @@
             function startBalanceUpdater() { if(balanceInterval) clearInterval(balanceInterval); balanceInterval = setInterval(async() => { if(currentUser){ const doc = await db.collection('users').doc(currentUser.uid).get(); if(doc.exists){ currentBalance = doc.data().balance || 50000; document.getElementById('userBalance').innerText = currentBalance; } } },5000); }
 
             function initSecretAdmin() {
-                const trigger = document.getElementById('secretAdminTrigger'); const adminPage = document.getElementById('adminPagePanel');
+                const trigger = document.getElementById('secretAdminTrigger');
+                const adminPage = document.getElementById('adminPagePanel');
                 if(!trigger) return;
-                trigger.onclick = () => { if(currentUser && (isMainAdmin || isModerator)){ const code = prompt('Введите код доступа:'); if(code === ADMIN_SECRET_CODE){ adminPage.classList.add('active'); document.querySelector('.site-header').style.display = 'none'; document.querySelectorAll('.page').forEach(p => p.style.display = 'none'); loadAdminAppeals(); loadModerators(); loadPurchases(); drawWheelAdmin(); updateModeratorUILimits(); } else { showNotification('Неверный код!','error'); } } else { showNotification('Доступ только для администрации','error'); } };
-                document.getElementById('closeAdminPageBtn').onclick = () => { adminPage.classList.remove('active'); document.querySelector('.site-header').style.display = 'block'; document.querySelectorAll('.page').forEach(p => p.style.display = ''); document.getElementById('homePage').classList.add('active'); document.querySelector('.menu-tab[data-page="home"]').classList.add('active'); if(adminAppealsUnsub) adminAppealsUnsub(); };
-                document.querySelectorAll('.admin-cat-btn').forEach(btn => { btn.onclick = () => { document.querySelectorAll('.admin-cat-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); document.querySelectorAll('.admin-category').forEach(c => c.classList.remove('active')); document.getElementById(`cat-${btn.dataset.cat}`).classList.add('active'); if(btn.dataset.cat === 'appeals') loadAdminAppeals(); if(btn.dataset.cat === 'moderators') loadModerators(); if(btn.dataset.cat === 'purchases') loadPurchases(); }; });
+                trigger.onclick = () => { 
+                    if(currentUser && (isMainAdmin || isModerator)){ 
+                        const code = prompt('Введите код доступа:'); 
+                        if(code === ADMIN_SECRET_CODE){ 
+                            adminPage.classList.add('active'); 
+                            document.querySelector('.site-header').style.display = 'none'; 
+                            document.querySelectorAll('.page').forEach(p => p.style.display = 'none'); 
+                            loadAdminAppeals(); 
+                            loadModerators(); 
+                            loadPurchases(); 
+                            drawWheelAdmin(); 
+                            updateModeratorUILimits();
+                            showNotification('Админ-панель открыта', 'success');
+                        } else { 
+                            showNotification('Неверный код!','error'); 
+                        } 
+                    } else { 
+                        showNotification('Доступ только для администрации','error'); 
+                    } 
+                };
+                document.getElementById('closeAdminPageBtn').onclick = () => { 
+                    adminPage.classList.remove('active'); 
+                    document.querySelector('.site-header').style.display = 'block'; 
+                    document.querySelectorAll('.page').forEach(p => p.style.display = ''); 
+                    document.getElementById('homePage').classList.add('active'); 
+                    document.querySelector('.menu-tab[data-page="home"]').classList.add('active'); 
+                    if(adminAppealsUnsub) adminAppealsUnsub(); 
+                    showNotification('Админ-панель закрыта', 'info');
+                };
+                document.querySelectorAll('.admin-cat-btn').forEach(btn => { 
+                    btn.onclick = () => { 
+                        document.querySelectorAll('.admin-cat-btn').forEach(b => b.classList.remove('active')); 
+                        btn.classList.add('active'); 
+                        document.querySelectorAll('.admin-category').forEach(c => c.classList.remove('active')); 
+                        document.getElementById(`cat-${btn.dataset.cat}`).classList.add('active'); 
+                        if(btn.dataset.cat === 'appeals') loadAdminAppeals(); 
+                        if(btn.dataset.cat === 'moderators') loadModerators(); 
+                        if(btn.dataset.cat === 'purchases') loadPurchases(); 
+                    }; 
+                });
                 document.getElementById('giveSpinBtn').onclick = () => giveSpin(document.getElementById('wheelUserNick').value);
                 document.getElementById('removeSpinBtn').onclick = () => removeSpin(document.getElementById('wheelUserNick').value);
                 document.getElementById('toggleCustomBanBtn').onclick = () => { customBanMode = !customBanMode; document.getElementById('customBanDiv').style.display = customBanMode ? 'block' : 'none'; };
