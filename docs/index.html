@@ -959,19 +959,21 @@
             }
 
             function bindButtons() {
-                // ВХОД
+                // ВХОД - ИСПРАВЛЕН
                 document.getElementById('doLoginBtn').onclick = async () => { 
                     const email = document.getElementById('loginEmail').value;
                     const password = document.getElementById('loginPass').value;
                     if (!email || !password) { showNotification('Введите email и пароль!', 'error'); return; }
                     try { 
                         await auth.signInWithEmailAndPassword(email, password); 
-                        showNotification('Добро пожаловать!', 'success'); 
+                        showNotification('Добро пожаловать!', 'success');
+                        // Перезагрузка страницы после входа для обновления интерфейса
+                        setTimeout(() => { window.location.reload(); }, 1000);
                     } catch (e) { 
                         showNotification(e.message, 'error'); 
                     } 
                 };
-                // РЕГИСТРАЦИЯ
+                // РЕГИСТРАЦИЯ - ИСПРАВЛЕНА
                 document.getElementById('doRegisterBtn').onclick = async () => { 
                     const u = document.getElementById('regUsername').value; 
                     const e = document.getElementById('regEmail').value; 
@@ -985,7 +987,9 @@
                             username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), 
                             wheelSpins: 3, tag: `#${u.substring(0,4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null 
                         }); 
-                        showNotification('Регистрация успешна!', 'success'); 
+                        showNotification('Регистрация успешна!', 'success');
+                        // Перезагрузка страницы после регистрации
+                        setTimeout(() => { window.location.reload(); }, 1000);
                     } catch(e) { 
                         showNotification(e.message, 'error'); 
                     } 
