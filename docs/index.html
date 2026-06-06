@@ -959,8 +959,48 @@
             }
 
             function bindButtons() {
-                document.getElementById('doLoginBtn').onclick = async () => { try { await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPass').value); showNotification('Добро пожаловать!', 'success'); } catch (e) { showNotification(e.message, 'error'); } };
-                document.getElementById('doRegisterBtn').onclick = async () => { const u = document.getElementById('regUsername').value, e = document.getElementById('regEmail').value, p = document.getElementById('regPass').value; if(p.length<6) return showNotification('Пароль мин 6','error'); try { const cred = await auth.createUserWithEmailAndPassword(e,p); await cred.user.updateProfile({ displayName: u }); await db.collection('users').doc(cred.user.uid).set({ username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), wheelSpins: 3, tag: `#${u.substring(0,4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null }); showNotification('Регистрация успешна!', 'success'); } catch(e) { showNotification(e.message,'error'); } };
+                // ВХОД
+                document.getElementById('doLoginBtn').onclick = async () => { 
+                    const email = document.getElementById('loginEmail').value;
+                    const password = document.getElementById('loginPass').value;
+                    if (!email || !password) { showNotification('Введите email и пароль!', 'error'); return; }
+                    try { 
+                        await auth.signInWithEmailAndPassword(email, password); 
+                        showNotification('Добро пожаловать!', 'success'); 
+                    } catch (e) { 
+                        showNotification(e.message, 'error'); 
+                    } 
+                };
+                // РЕГИСТРАЦИЯ
+                document.getElementById('doRegisterBtn').onclick = async () => { 
+                    const u = document.getElementById('regUsername').value; 
+                    const e = document.getElementById('regEmail').value; 
+                    const p = document.getElementById('regPass').value; 
+                    if (p.length < 6) { showNotification('Пароль мин 6 символов', 'error'); return; }
+                    if (!u || !e || !p) { showNotification('Заполните все поля!', 'error'); return; }
+                    try { 
+                        const cred = await auth.createUserWithEmailAndPassword(e, p); 
+                        await cred.user.updateProfile({ displayName: u }); 
+                        await db.collection('users').doc(cred.user.uid).set({ 
+                            username: u, email: e, balance: 50000, registeredAt: new Date().toISOString(), 
+                            wheelSpins: 3, tag: `#${u.substring(0,4)}`, badge: e === MAIN_ADMIN_EMAIL ? 'crown' : null 
+                        }); 
+                        showNotification('Регистрация успешна!', 'success'); 
+                    } catch(e) { 
+                        showNotification(e.message, 'error'); 
+                    } 
+                };
+                // ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ВХОДА/РЕГИСТРАЦИИ
+                document.querySelectorAll('.tab-auth').forEach(btn => { 
+                    btn.onclick = () => { 
+                        document.querySelectorAll('.tab-auth').forEach(b => b.classList.remove('active')); 
+                        btn.classList.add('active'); 
+                        const isLogin = btn.dataset.tab === 'login'; 
+                        document.getElementById('loginPaneAuth').classList.toggle('active', isLogin); 
+                        document.getElementById('registerPaneAuth').classList.toggle('active', !isLogin); 
+                    }; 
+                });
+                
                 document.getElementById('logoutBtn').onclick = () => auth.signOut();
                 document.getElementById('closeBuyModal').onclick = () => document.getElementById('buyModal').style.display = 'none';
                 document.getElementById('closeTestModal').onclick = () => document.getElementById('testServerModal').style.display = 'none';
@@ -1000,7 +1040,6 @@
                 document.getElementById('siteClosedExitBtn').onclick = () => auth.signOut();
                 document.getElementById('addModeratorBtn').onclick = async () => { if(!isMainAdmin){ showNotification('Только главный администратор может добавлять модераторов!','error'); return; } const nick = document.getElementById('moderatorNick').value; const email = document.getElementById('moderatorEmail').value; if(!nick||!email) return showNotification('Заполните ник и email','error'); if(moderatorsList.some(m=>m.email===email)) return showNotification('Уже есть','error'); moderatorsList.push({ nick, email }); await db.collection('settings').doc('moderators').set({ list: moderatorsList }); loadModerators(); showNotification(`Модератор ${nick} добавлен`,'success'); document.getElementById('moderatorNick').value=''; document.getElementById('moderatorEmail').value=''; };
                 document.getElementById('saveModeratorPermissionsBtn').onclick = async () => { if(!isMainAdmin){ showNotification('Только главный администратор может изменять права!','error'); return; } const coinLimit = parseInt(document.getElementById('moderatorCoinLimitInput').value)||10000; const banHours = parseInt(document.getElementById('moderatorBanHoursInput').value)||1; const banMinutes = parseInt(document.getElementById('moderatorBanMinutesInput').value)||30; const closeHours = parseInt(document.getElementById('moderatorCloseHoursInput').value)||1; const closeMinutes = parseInt(document.getElementById('moderatorCloseMinutesInput').value)||30; const replyLimit = parseInt(document.getElementById('moderatorReplyLimitInput').value)||1; const allowedBadges = Array.from(document.querySelectorAll('#moderatorBadgesSelect input:checked')).map(cb=>cb.value); moderatorPermissions = { coinLimit, banMaxHours: banHours, banMaxMinutes: banMinutes, closeMaxHours: closeHours, closeMaxMinutes: closeMinutes, replyLimit, allowedBadges }; await db.collection('settings').doc('moderatorPermissions').set(moderatorPermissions); updateModeratorUILimits(); showNotification('Права модераторов сохранены!','success'); };
-                document.querySelectorAll('.tab-auth').forEach(btn => { btn.onclick = () => { document.querySelectorAll('.tab-auth').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); const isLogin=btn.dataset.tab==='login'; document.getElementById('loginPaneAuth').classList.toggle('active',isLogin); document.getElementById('registerPaneAuth').classList.toggle('active',!isLogin); }; });
             }
 
             auth.onAuthStateChanged(async (user) => {
