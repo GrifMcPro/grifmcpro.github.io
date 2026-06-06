@@ -280,13 +280,67 @@
         .close-admin-page { position: fixed; top: 25px; right: 25px; background: rgba(239,68,68,0.2); border: 1px solid var(--danger); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2100; color: var(--danger); transition: 0.3s; }
         .close-admin-page:hover { background: rgba(239,68,68,0.4); transform: scale(1.08) rotate(90deg); }
 
-        /* КОЛЕСО УДАЧИ */
-        .wheel-container { display: flex; justify-content: center; align-items: center; flex-direction: column; padding: 30px; }
-        .wheel { width: 350px; height: 350px; border-radius: 50%; position: relative; overflow: hidden; transition: transform 0.1s; box-shadow: 0 0 30px rgba(255,215,0,0.3); margin-bottom: 30px; }
-        .wheel-segment { position: absolute; width: 50%; height: 50%; transform-origin: 100% 100%; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 14px; font-weight: bold; color: white; text-shadow: 1px 1px 0 rgba(0,0,0,0.5); }
-        .wheel-spin-btn { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border: none; padding: 15px 50px; border-radius: 50px; font-weight: 700; cursor: pointer; color: #0a0a12; transition: 0.3s; font-size: 20px; margin: 20px; }
+        /* КОЛЕСО УДАЧИ - НАСТОЯЩИЙ КРУГ */
+        .wheel-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            position: relative;
+        }
+        .wheel-wrapper {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+        }
+        .wheel-canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255,215,0,0.4), 0 0 15px rgba(0,0,0,0.5);
+            transition: transform 0.1s;
+        }
+        .wheel-pointer {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 50px solid var(--accent);
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+            z-index: 10;
+        }
+        .wheel-pointer::after {
+            content: '';
+            position: absolute;
+            top: -55px;
+            left: -12px;
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+        }
+        .wheel-spin-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            border: none;
+            padding: 15px 50px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            color: #0a0a12;
+            transition: 0.3s;
+            font-size: 20px;
+            margin: 20px;
+        }
         .wheel-spin-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .wheel-result { background: rgba(0,0,0,0.6); border-radius: 20px; padding: 15px 30px; margin-top: 20px; text-align: center; }
+        .spins-count { font-size: 18px; margin-top: 15px; }
 
         /* СООБЩЕНИЯ */
         .messages-container { max-width: 800px; margin: 0 auto; padding: 20px; }
@@ -484,7 +538,7 @@
             .profile-name { font-size: 22px; }
             .appeal-info { flex-direction: column; gap: 5px; }
             .appeals-tab-btn { padding: 6px 16px; font-size: 12px; }
-            .wheel { width: 280px; height: 280px; }
+            .wheel-wrapper { width: 280px; height: 280px; }
         }
     </style>
 </head>
@@ -503,10 +557,13 @@
     <!-- СТРАНИЦА КОЛЕСА УДАЧИ -->
     <div id="wheelPage" class="page">
         <div class="wheel-container">
-            <div class="wheel" id="wheel"></div>
+            <div class="wheel-wrapper">
+                <canvas id="wheelCanvas" class="wheel-canvas" width="400" height="400"></canvas>
+                <div class="wheel-pointer"></div>
+            </div>
             <button class="wheel-spin-btn" id="spinWheelBtn"><i class="fas fa-dice-d6"></i> КРУТИТЬ КОЛЕСО</button>
             <div class="wheel-result" id="wheelResult">Нажмите на кнопку, чтобы крутить колесо!</div>
-            <div class="wheel-result" id="wheelSpinsCount">🎫 Прокруток: <span id="spinsCount">0</span></div>
+            <div class="spins-count">🎫 Прокруток: <span id="spinsCount">0</span></div>
         </div>
     </div>
 
@@ -568,7 +625,7 @@
     <div id="cat-donates" class="admin-category"><div class="admin-block"><h3><i class="fas fa-gift"></i> Выдать донат по нику</h3><input type="text" id="donateNick" placeholder="Никнейм" class="admin-input"><input type="text" id="donateName" placeholder="Название доната" class="admin-input"><button id="giveDonateBtn" class="admin-btn-blue">ВЫДАТЬ ДОНАТ</button><button id="removeDonateBtn" class="admin-btn-red">СНЯТЬ ДОНАТ</button></div></div>
     <div id="cat-timer" class="admin-category"><div class="admin-block"><h3><i class="fas fa-clock"></i> Настройка таймера</h3><input type="text" id="timerEventName" placeholder="Название события" class="admin-input"><textarea id="timerEventDesc" rows="2" placeholder="Описание" class="admin-input"></textarea><input type="datetime-local" id="timerTargetDate" class="admin-input"><div style="display: flex; gap: 10px;"><button id="applyTimerRgbText" class="admin-btn-blue">RGB Текст</button><button id="applyTimerRgbBorder" class="admin-btn-pink">RGB Рамка</button></div><button id="updateTimerBtn" class="admin-btn-green">СОХРАНИТЬ</button></div></div>
     <div id="cat-badges" class="admin-category"><div class="admin-block"><h3><i class="fas fa-tags"></i> Галочки (30 видов)</h3><input type="text" id="badgeNick" placeholder="Никнейм" class="admin-input"><select id="badgeType" class="admin-select"><option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option><option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option><option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option><option value="diamond">💎 Алмазная</option><option value="star">⭐ Звездная</option><option value="game">🎮 Игровая</option><option value="fire">🔥 Огненная</option><option value="mythic">🔮 Мифическая</option><option value="cosmic">🌌 Космическая</option><option value="ice">❄️ Ледяная</option><option value="shadow">🌑 Теневая</option><option value="light">✨ Светлая</option><option value="dark">🖤 Тёмная</option><option value="nature">🌿 Природная</option><option value="blood">🩸 Кровавая</option><option value="void">🌀 Пустота</option><option value="divine">⚜️ Божественная</option><option value="purple">🟣 Фиолетовая</option><option value="teal">🔷 Бирюзовая</option><option value="sapphire">💙 Сапфировая</option><option value="emerald">💚 Изумрудная</option><option value="ruby">❤️ Рубиновая</option><option value="amber">🧡 Янтарная</option><option value="jade">💚 Нефритовая</option><option value="coral">🪸 Коралловая</option><option value="indigo">🟣 Индиго</option><option value="magenta">🩷 Магента</option><option value="bronze">🥉 Бронзовая</option><option value="platinum">⚪ Платиновая</option><option value="obsidian">⬛ Обсидиановая</option></select><button id="giveBadgeBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeBadgeBtn" class="admin-btn-red">СНЯТЬ</button></div></div>
-    <div id="cat-spins" class="admin-category"><div class="admin-block"><h3><i class="fas fa-dice-d6"></i> Прокрутки колеса</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeSpinBtn" class="admin-btn-red">ЗАБРАТЬ</button><select id="wheelPrizeSelect" class="admin-select" style="margin-top:10px;"><option value="coins_50000">💰 50 000 монет (30%)</option><option value="coins_25000">💰 25 000 монет (25%)</option><option value="coins_10000">💰 10 000 монет (20%)</option><option value="coins_5000">💰 5 000 монет (15%)</option><option value="coins_1000">💰 1 000 монет (10%)</option></select><button id="updateWheelBtn" class="admin-btn-orange">🔄 ОБНОВИТЬ КОЛЕСО</button></div></div>
+    <div id="cat-spins" class="admin-category"><div class="admin-block"><h3><i class="fas fa-dice-d6"></i> Прокрутки колеса</h3><input type="text" id="wheelUserNick" placeholder="Никнейм" class="admin-input"><button id="giveSpinBtn" class="admin-btn-blue">ВЫДАТЬ</button><button id="removeSpinBtn" class="admin-btn-red">ЗАБРАТЬ</button></div></div>
     <div id="cat-purchases" class="admin-category"><div class="admin-block"><h3><i class="fas fa-shopping-cart"></i> ЛОГИ ПОКУПОК</h3><div id="purchasesList" class="players-list" style="max-height: 400px;"></div><button id="clearPurchasesBtn" class="admin-btn-red">ОЧИСТИТЬ ЛОГИ</button></div></div>
     <div id="cat-appeals" class="admin-category"><div class="admin-block"><h3><i class="fas fa-envelope"></i> ОБРАЩЕНИЯ ЛЮДЕЙ</h3><div id="adminAppealsList" class="players-list" style="max-height: 500px;"></div></div></div>
     <div id="cat-moderators" class="admin-category"><div class="admin-block"><h3><i class="fas fa-user-shield"></i> МОДЕРАТОРЫ (могут отвечать)</h3><input type="text" id="moderatorNick" placeholder="Никнейм" class="admin-input"><input type="email" id="moderatorEmail" placeholder="Email" class="admin-input"><button id="addModeratorBtn" class="admin-btn-blue">➕ ДОБАВИТЬ</button><div id="moderatorsList" class="players-list"></div></div></div>
@@ -603,7 +660,7 @@
             const ADMIN_SECRET_CODE = "website";
             
             let currentUser = null, currentBalance = 0, currentProduct = null, moderatorsList = [], timerInterval = null, siteStatusUnsub = null, banUnsub = null, balanceInterval = null, timerUnsub = null;
-            let myAppealsUnsub = null, adminAppealsUnsub = null, messagesUnsub = null, wheelSpinning = false, wheelPrizes = [];
+            let myAppealsUnsub = null, adminAppealsUnsub = null, messagesUnsub = null, wheelSpinning = false, wheelPrizes = [], wheelCanvas = null, wheelCtx = null, currentRotation = 0;
             let isMainAdmin = false, isModerator = false;
 
             function showNotification(msg, type = 'success') {
@@ -617,7 +674,6 @@
             }
 
             function showMessageNotification(senderName, preview, messageId) {
-                const container = document.getElementById('notifContainer');
                 const notif = document.createElement('div');
                 notif.className = 'notification-popup';
                 notif.innerHTML = `<i class="fas fa-envelope"></i><div><strong>📨 Новое сообщение</strong><br>От: ${senderName}<br>${preview}</div>`;
@@ -654,74 +710,81 @@
                         document.getElementById(`${tab.dataset.page}Page`).classList.add('active');
                         if (tab.dataset.page === 'profile') loadUserData(currentUser);
                         if (tab.dataset.page === 'appeals') { loadMyAppeals(); loadAppealsClosedStatus(); }
-                        if (tab.dataset.page === 'wheel') loadUserSpins();
+                        if (tab.dataset.page === 'wheel') { loadUserSpins(); drawWheelCanvas(); }
                     };
                 });
             }
 
-            // ЗАГРУЗКА КОЛЕСА
+            // КОЛЕСО УДАЧИ - НАСТОЯЩИЙ КРУГ CANVAS
             async function loadWheelSettings() {
                 const doc = await db.collection('settings').doc('wheel').get();
-                if (doc.exists && doc.data().prizes) {
+                if (doc.exists && doc.data().prizes && doc.data().prizes.length > 0) {
                     wheelPrizes = doc.data().prizes;
                 } else {
                     wheelPrizes = [
-                        { name: "50 000 монет", value: 50000, chance: 30, icon: "💰" },
-                        { name: "25 000 монет", value: 25000, chance: 25, icon: "💰" },
-                        { name: "10 000 монет", value: 10000, chance: 20, icon: "💰" },
-                        { name: "5 000 монет", value: 5000, chance: 15, icon: "💰" },
-                        { name: "1 000 монет", value: 1000, chance: 10, icon: "💰" }
+                        { name: "50 000 монет", value: 50000, chance: 30, icon: "💰", color: "#ff6b6b" },
+                        { name: "25 000 монет", value: 25000, chance: 25, icon: "💰", color: "#4ecdc4" },
+                        { name: "10 000 монет", value: 10000, chance: 20, icon: "💰", color: "#45b7d1" },
+                        { name: "5 000 монет", value: 5000, chance: 15, icon: "💰", color: "#96ceb4" },
+                        { name: "1 000 монет", value: 1000, chance: 10, icon: "💰", color: "#ffeaa7" }
                     ];
                     await db.collection('settings').doc('wheel').set({ prizes: wheelPrizes });
                 }
-                drawWheel();
+                drawWheelCanvas();
             }
 
-            function drawWheel() {
-                const wheel = document.getElementById('wheel');
-                if (!wheel) return;
-                let total = 0;
-                wheelPrizes.forEach(p => total += p.chance);
-                let startAngle = 0;
-                wheel.innerHTML = '';
+            function drawWheelCanvas() {
+                const canvas = document.getElementById('wheelCanvas');
+                if (!canvas) return;
+                wheelCtx = canvas.getContext('2d');
+                const size = 400;
+                canvas.width = size;
+                canvas.height = size;
+                const centerX = size / 2;
+                const centerY = size / 2;
+                const radius = size / 2;
+                
+                let totalChance = 0;
+                wheelPrizes.forEach(p => totalChance += p.chance);
+                
+                let startAngle = -Math.PI / 2;
                 const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dfe6e9', '#ff9ff3', '#feca57', '#ff6b6b', '#48dbfb'];
+                
                 wheelPrizes.forEach((prize, i) => {
-                    const angle = (prize.chance / total) * 360;
+                    const angle = (prize.chance / totalChance) * Math.PI * 2;
                     const endAngle = startAngle + angle;
-                    const largeArc = angle > 180 ? 1 : 0;
-                    const startRad = (startAngle - 90) * Math.PI / 180;
-                    const endRad = (endAngle - 90) * Math.PI / 180;
-                    const x1 = 175 + 175 * Math.cos(startRad);
-                    const y1 = 175 + 175 * Math.sin(startRad);
-                    const x2 = 175 + 175 * Math.cos(endRad);
-                    const y2 = 175 + 175 * Math.sin(endRad);
-                    const path = `M 175 175 L ${x1} ${y1} A 175 175 0 ${largeArc} 1 ${x2} ${y2} Z`;
-                    const midAngle = startAngle + angle / 2;
-                    const textRad = (midAngle - 90) * Math.PI / 180;
-                    const textX = 175 + 120 * Math.cos(textRad);
-                    const textY = 175 + 120 * Math.sin(textRad);
-                    const element = document.createElement('div');
-                    element.style.position = 'absolute';
-                    element.style.width = '100%';
-                    element.style.height = '100%';
-                    element.style.clipPath = `polygon(50% 50%, ${(x1/350)*100}% ${(y1/350)*100}%, ${(x2/350)*100}% ${(y2/350)*100}%)`;
-                    element.style.background = colors[i % colors.length];
-                    element.style.transformOrigin = 'center';
-                    const span = document.createElement('span');
-                    span.innerText = `${prize.icon} ${prize.name.split(' ')[0]}`;
-                    span.style.position = 'absolute';
-                    span.style.left = `${textX}px`;
-                    span.style.top = `${textY}px`;
-                    span.style.transform = 'translate(-50%, -50%)';
-                    span.style.fontSize = '11px';
-                    span.style.fontWeight = 'bold';
-                    span.style.color = 'white';
-                    span.style.textShadow = '1px 1px 0 rgba(0,0,0,0.5)';
-                    span.style.whiteSpace = 'nowrap';
-                    element.appendChild(span);
-                    wheel.appendChild(element);
+                    
+                    wheelCtx.beginPath();
+                    wheelCtx.fillStyle = prize.color || colors[i % colors.length];
+                    wheelCtx.moveTo(centerX, centerY);
+                    wheelCtx.arc(centerX, centerY, radius, startAngle, endAngle);
+                    wheelCtx.fill();
+                    wheelCtx.strokeStyle = 'white';
+                    wheelCtx.lineWidth = 2;
+                    wheelCtx.stroke();
+                    
+                    wheelCtx.save();
+                    wheelCtx.translate(centerX, centerY);
+                    wheelCtx.rotate(startAngle + angle / 2);
+                    wheelCtx.textAlign = 'center';
+                    wheelCtx.textBaseline = 'middle';
+                    wheelCtx.font = 'bold 14px Montserrat';
+                    wheelCtx.fillStyle = 'white';
+                    wheelCtx.shadowBlur = 0;
+                    const text = `${prize.icon} ${prize.name.split(' ')[0]}`;
+                    wheelCtx.fillText(text, radius * 0.65, 0);
+                    wheelCtx.restore();
+                    
                     startAngle = endAngle;
                 });
+                
+                wheelCtx.beginPath();
+                wheelCtx.fillStyle = '#1a1a2e';
+                wheelCtx.arc(centerX, centerY, 30, 0, Math.PI * 2);
+                wheelCtx.fill();
+                wheelCtx.fillStyle = '#ffd700';
+                wheelCtx.font = 'bold 20px Montserrat';
+                wheelCtx.fillText('🎡', centerX - 12, centerY + 8);
             }
 
             async function loadUserSpins() {
@@ -741,34 +804,46 @@
                 await db.collection('users').doc(currentUser.uid).update({ wheelSpins: spins - 1 });
                 document.getElementById('spinsCount').innerText = spins - 1;
                 
-                let total = 0;
-                wheelPrizes.forEach(p => total += p.chance);
-                const random = Math.random() * total;
+                let totalChance = 0;
+                wheelPrizes.forEach(p => totalChance += p.chance);
+                const random = Math.random() * totalChance;
                 let accumulated = 0;
-                let selectedPrize = wheelPrizes[0];
-                for (const prize of wheelPrizes) {
-                    accumulated += prize.chance;
-                    if (random <= accumulated) { selectedPrize = prize; break; }
+                let selectedIndex = 0;
+                for (let i = 0; i < wheelPrizes.length; i++) {
+                    accumulated += wheelPrizes[i].chance;
+                    if (random <= accumulated) { selectedIndex = i; break; }
                 }
+                const selectedPrize = wheelPrizes[selectedIndex];
+                
+                const segmentAngle = (selectedPrize.chance / totalChance) * 360;
+                let targetRotation = 360 * 8 + (360 - (selectedPrize.chance / totalChance * 360 / 2));
                 
                 wheelSpinning = true;
-                const wheelDiv = document.getElementById('wheel');
-                let rotations = 360 * 8;
-                const finalAngle = random / total * 360;
-                wheelDiv.style.transition = 'transform 3s cubic-bezier(0.2, 0.9, 0.1, 1.1)';
-                wheelDiv.style.transform = `rotate(${rotations + finalAngle}deg)`;
+                const canvas = document.getElementById('wheelCanvas');
+                let startTime = null;
+                const duration = 3000;
                 
-                setTimeout(async () => {
-                    wheelDiv.style.transition = 'none';
-                    wheelDiv.style.transform = `rotate(${finalAngle}deg)`;
-                    await db.collection('users').doc(currentUser.uid).update({ balance: currentBalance + selectedPrize.value });
-                    currentBalance += selectedPrize.value;
-                    document.getElementById('userBalance').innerText = currentBalance;
-                    document.getElementById('wheelResult').innerHTML = `🎉 Поздравляем! Вы выиграли ${selectedPrize.name}! 🎉`;
-                    showNotification(`🎉 Вы выиграли ${selectedPrize.name}!`, 'success');
-                    wheelSpinning = false;
-                    setTimeout(() => { document.getElementById('wheelResult').innerHTML = 'Нажмите на кнопку, чтобы крутить колесо!'; }, 5000);
-                }, 3000);
+                function animateSpin(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    const elapsed = timestamp - startTime;
+                    const progress = Math.min(1, elapsed / duration);
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    const currentRot = targetRotation * easeOut;
+                    canvas.style.transform = `rotate(${currentRot}deg)`;
+                    if (progress < 1) {
+                        requestAnimationFrame(animateSpin);
+                    } else {
+                        canvas.style.transform = `rotate(${targetRotation % 360}deg)`;
+                        db.collection('users').doc(currentUser.uid).update({ balance: currentBalance + selectedPrize.value });
+                        currentBalance += selectedPrize.value;
+                        document.getElementById('userBalance').innerText = currentBalance;
+                        document.getElementById('wheelResult').innerHTML = `🎉 Поздравляем! Вы выиграли ${selectedPrize.name}! 🎉`;
+                        showNotification(`🎉 Вы выиграли ${selectedPrize.name}!`, 'success');
+                        wheelSpinning = false;
+                        setTimeout(() => { document.getElementById('wheelResult').innerHTML = 'Нажмите на кнопку, чтобы крутить колесо!'; }, 5000);
+                    }
+                }
+                requestAnimationFrame(animateSpin);
             }
 
             // СООБЩЕНИЯ
@@ -787,7 +862,7 @@
                         if (!msg.read) unread++;
                         const senderBadge = getBadgeHtml(msg.senderBadge);
                         container.innerHTML += `
-                            <div class="message-item ${!msg.read ? 'unread' : ''}" data-msg-id="${doc.id}" data-read="${msg.read}">
+                            <div class="message-item ${!msg.read ? 'unread' : ''}" data-msg-id="${doc.id}">
                                 <div class="message-sender">${senderBadge} ${msg.senderName || msg.senderEmail}</div>
                                 <div class="message-preview">${msg.message.substring(0, 100)}${msg.message.length > 100 ? '...' : ''}</div>
                                 <div class="message-date">${new Date(msg.createdAt?.toDate()).toLocaleString()}</div>
@@ -826,12 +901,13 @@
                 document.getElementById('messageDetailModal').style.display = 'flex';
             }
 
-            // РАССЫЛКА (СОХРАНЯЕТСЯ КАК ЛИЧНОЕ СООБЩЕНИЕ КАЖДОМУ)
+            // РАССЫЛКА - РАБОТАЕТ!
             async function sendBroadcast(message) {
                 const users = await db.collection('users').get();
                 const adminDoc = await db.collection('users').doc(currentUser.uid).get();
                 const adminName = adminDoc.data()?.username || currentUser.displayName || currentUser.email;
                 const adminBadge = adminDoc.data()?.badge || null;
+                let sentCount = 0;
                 for (const userDoc of users.docs) {
                     if (userDoc.id !== currentUser.uid) {
                         await db.collection('messages').add({
@@ -844,10 +920,13 @@
                             read: false,
                             createdAt: new Date()
                         });
+                        sentCount++;
+                        if (currentUser && currentUser.uid === userDoc.id && currentUser.email !== MAIN_ADMIN_EMAIL) {
+                            showMessageNotification(adminName, message.substring(0, 50), null);
+                        }
                     }
                 }
-                showNotification(`📨 Рассылка отправлена ${users.size-1} пользователям!`, 'success');
-                if (currentUser && currentUser.uid) loadMessages();
+                showNotification(`📨 Рассылка отправлена ${sentCount} пользователям!`, 'success');
             }
 
             // МОИ ОБРАЩЕНИЯ
@@ -926,7 +1005,7 @@
             async function removeSpin(nick) { const snap = await db.collection('users').where('username','==',nick).get(); if(snap.empty) return showNotification('Не найден','error'); const spins = snap.docs[0].data().wheelSpins||0; if(spins>0) await snap.docs[0].ref.update({ wheelSpins: spins-1 }); showNotification(`Прокрутка забрана у ${nick}`,'warning'); }
             async function giveDonateByNick(nick, donateName) { const snap = await db.collection('users').where('username','==',nick).get(); if(snap.empty) return showNotification('Не найден','error'); await db.collection('donates').add({ userId: snap.docs[0].id, username: nick, product: donateName, price: 0, date: new Date(), givenBy: 'Админ' }); showNotification(`Донат "${donateName}" выдан ${nick}`,'success'); }
             async function removeDonateByNick(nick) { const snap = await db.collection('users').where('username','==',nick).get(); if(snap.empty) return showNotification('Не найден','error'); const donates = await db.collection('donates').where('userId','==',snap.docs[0].id).get(); for(const doc of donates.docs) await doc.ref.delete(); showNotification(`Все донаты ${nick} удалены`,'warning'); }
-            async function loadPurchases() { const container = document.getElementById('purchasesList'); if(!container) return; const snapshot = await db.collection('purchases').orderBy('timestamp','desc').limit(50).get(); if(snapshot.empty){ container.innerHTML='<div class="player-card">📭 Нет записей о покупках</div>'; return; } container.innerHTML=''; snapshot.forEach(doc => { const log = doc.data(); const date = new Date(log.date || log.timestamp?.toDate()).toLocaleString(); container.innerHTML+=`<div class="player-card" style="flex-direction:column;align-items:flex-start;"><div><strong>${log.type==='donate'?'💰':''} ${log.product}</strong> | ${log.price.toLocaleString()} ₽</div><div>🎮 Ник в игре: ${log.serverNick}</div><div>👤 Ник на сайте: ${log.siteNick}</div><div>📧 ${log.userEmail}</div><div>🕐 ${date}</div></div>`; }); }
+            async function loadPurchases() { const container = document.getElementById('purchasesList'); if(!container) return; const snapshot = await db.collection('purchases').orderBy('timestamp','desc').limit(50).get(); if(snapshot.empty){ container.innerHTML='<div class="player-card">📭 Нет записей о покупках</div>'; return; } container.innerHTML=''; snapshot.forEach(doc => { const log = doc.data(); const date = new Date(log.date || log.timestamp?.toDate()).toLocaleString(); container.innerHTML+=`<div class="player-card" style="flex-direction:column;align-items:flex-start;"><div><strong>${log.type==='donate'?'💰':'🖥️'} ${log.product}</strong> | ${log.price.toLocaleString()} ₽</div><div>🎮 Ник в игре: ${log.serverNick}</div><div>👤 Ник на сайте: ${log.siteNick}</div><div>📧 ${log.userEmail}</div><div>🕐 ${date}</div></div>`; }); }
             async function addPurchaseLog(type, productName, price, serverNick, siteNick, userEmail) { await db.collection('purchases').add({ type, product: productName, price, serverNick, siteNick, userEmail, date: new Date().toISOString(), timestamp: new Date() }); if(document.getElementById('cat-purchases')?.classList.contains('active')) loadPurchases(); }
 
             function startBalanceUpdater() { if(balanceInterval) clearInterval(balanceInterval); balanceInterval = setInterval(async() => { if(currentUser){ const doc = await db.collection('users').doc(currentUser.uid).get(); if(doc.exists){ currentBalance = doc.data().balance || 50000; document.getElementById('userBalance').innerText = currentBalance; } } },5000); }
@@ -966,15 +1045,14 @@
                         if(btn.dataset.cat === 'purchases') loadPurchases();
                     };
                 });
-                
                 document.getElementById('giveSpinBtn').onclick = () => giveSpin(document.getElementById('wheelUserNick').value);
                 document.getElementById('removeSpinBtn').onclick = () => removeSpin(document.getElementById('wheelUserNick').value);
             }
 
-            function drawWheelAdmin() { const container = document.getElementById('wheelPrizesList'); if(!container) return; container.innerHTML = ''; wheelPrizes.forEach((prize,i) => { container.innerHTML += `<div class="player-card" style="flex-direction:column"><input type="text" value="${prize.name}" id="prizeName${i}" placeholder="Название" style="background:rgba(0,0,0,0.5);border:1px solid var(--border-color);border-radius:40px;padding:8px;color:white"><input type="number" value="${prize.value}" id="prizeValue${i}" placeholder="Значение" style="background:rgba(0,0,0,0.5);border:1px solid var(--border-color);border-radius:40px;padding:8px;color:white"><input type="number" value="${prize.chance}" id="prizeChance${i}" placeholder="Шанс %" style="background:rgba(0,0,0,0.5);border:1px solid var(--border-color);border-radius:40px;padding:8px;color:white"><input type="text" value="${prize.icon}" id="prizeIcon${i}" placeholder="Иконка" style="background:rgba(0,0,0,0.5);border:1px solid var(--border-color);border-radius:40px;padding:8px;color:white"><button class="admin-btn-red remove-prize" data-index="${i}" style="margin-top:5px;">УДАЛИТЬ</button></div>`; }); container.innerHTML += `<button id="addPrizeBtn" class="admin-btn-blue" style="margin-top:10px;">➕ ДОБАВИТЬ ПРИЗ</button>`;
-                document.querySelectorAll('.remove-prize').forEach(btn => { btn.onclick = () => { wheelPrizes.splice(parseInt(btn.dataset.index),1); drawWheelAdmin(); drawWheel(); }; });
-                document.getElementById('addPrizeBtn').onclick = () => { wheelPrizes.push({ name: "Новый приз", value: 1000, chance: 10, icon: "💰" }); drawWheelAdmin(); drawWheel(); };
-                document.getElementById('saveWheelSettingsBtn').onclick = async () => { const newPrizes = []; for(let i=0; i<wheelPrizes.length; i++){ const name = document.getElementById(`prizeName${i}`)?.value || wheelPrizes[i].name; const value = parseInt(document.getElementById(`prizeValue${i}`)?.value) || wheelPrizes[i].value; const chance = parseInt(document.getElementById(`prizeChance${i}`)?.value) || wheelPrizes[i].chance; const icon = document.getElementById(`prizeIcon${i}`)?.value || wheelPrizes[i].icon; newPrizes.push({ name, value, chance, icon }); } wheelPrizes = newPrizes; await db.collection('settings').doc('wheel').set({ prizes: wheelPrizes }); drawWheel(); showNotification('Настройки колеса сохранены!', 'success'); };
+            function drawWheelAdmin() { const container = document.getElementById('wheelPrizesList'); if(!container) return; container.innerHTML = ''; wheelPrizes.forEach((prize,i) => { container.innerHTML += `<div class="player-card" style="flex-direction:column"><input type="text" value="${prize.name}" id="prizeName${i}" placeholder="Название" style="background:rgba(0,0,0,0.5);border:1px solid var(--border-color);border-radius:40px;padding:8px;color:white"><input type="number" value="${prize.value}" id="prizeValue${i}" placeholder="Значение" style="background:rgba(0,0,0,0.5);border:1px solid var(--border-color);border-radius:40px;padding:8px;color:white"><input type="number" value="${prize.chance}" id="prizeChance${i}" placeholder="Шанс %" style="background:rgba(0,0,0,0.5);border:1px solid var(--border-color);border-radius:40px;padding:8px;color:white"><input type="text" value="${prize.icon}" id="prizeIcon${i}" placeholder="Иконка" style="background:rgba(0,0,0,0.5);border:1px solid var(--border-color);border-radius:40px;padding:8px;color:white"><input type="color" value="${prize.color || '#ff6b6b'}" id="prizeColor${i}" style="margin:5px 0;width:100%;"><button class="admin-btn-red remove-prize" data-index="${i}" style="margin-top:5px;">УДАЛИТЬ</button></div>`; }); container.innerHTML += `<button id="addPrizeBtn" class="admin-btn-blue" style="margin-top:10px;">➕ ДОБАВИТЬ ПРИЗ</button>`;
+                document.querySelectorAll('.remove-prize').forEach(btn => { btn.onclick = () => { wheelPrizes.splice(parseInt(btn.dataset.index),1); drawWheelAdmin(); drawWheelCanvas(); }; });
+                document.getElementById('addPrizeBtn').onclick = () => { wheelPrizes.push({ name: "Новый приз", value: 1000, chance: 10, icon: "💰", color: "#ff6b6b" }); drawWheelAdmin(); drawWheelCanvas(); };
+                document.getElementById('saveWheelSettingsBtn').onclick = async () => { const newPrizes = []; for(let i=0; i<wheelPrizes.length; i++){ const name = document.getElementById(`prizeName${i}`)?.value || wheelPrizes[i].name; const value = parseInt(document.getElementById(`prizeValue${i}`)?.value) || wheelPrizes[i].value; const chance = parseInt(document.getElementById(`prizeChance${i}`)?.value) || wheelPrizes[i].chance; const icon = document.getElementById(`prizeIcon${i}`)?.value || wheelPrizes[i].icon; const color = document.getElementById(`prizeColor${i}`)?.value || wheelPrizes[i].color || '#ff6b6b'; newPrizes.push({ name, value, chance, icon, color }); } wheelPrizes = newPrizes; await db.collection('settings').doc('wheel').set({ prizes: wheelPrizes }); drawWheelCanvas(); showNotification('Настройки колеса сохранены!', 'success'); };
             }
 
             function bindButtons() {
