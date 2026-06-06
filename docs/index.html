@@ -43,9 +43,15 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
 @keyframes annoBlink{0%,100%{opacity:1}50%{opacity:.7}}
 @keyframes chatIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes onlinePulse{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}70%{box-shadow:0 0 0 8px rgba(16,185,129,0)}}
+@keyframes tickerScroll{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
 
 .rgb-text{animation:rgbT 3s infinite}.rgb-border{animation:rgbB 3s infinite}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:#151520;border-radius:10px}::-webkit-scrollbar-thumb{background:var(--acc);border-radius:10px}
+
+/* TICKER MARQUEE */
+#tickerBanner{display:none;position:fixed;top:0;left:0;right:0;z-index:210;background:linear-gradient(135deg,#1a0a2a,#0a1a3a);border-bottom:1px solid rgba(255,215,0,.3);height:32px;overflow:hidden}
+#tickerBanner.active{display:block}
+.ticker-inner{display:flex;align-items:center;height:32px;white-space:nowrap;animation:tickerScroll 20s linear infinite;font-size:13px;font-weight:700;color:var(--acc)}
 
 /* ANNOUNCEMENT BANNER */
 #announceBanner{display:none;position:fixed;top:0;left:0;right:0;z-index:200;padding:10px 20px;text-align:center;font-weight:700;font-size:14px;animation:annoBlink 2s ease infinite}
@@ -93,6 +99,13 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
 .promo-input{flex:1;padding:12px 18px;background:rgba(0,0,0,.5);border:1px solid var(--bc);border-radius:40px;color:#fff;outline:none;font-size:14px;font-family:'Montserrat',sans-serif}
 .promo-input:focus{border-color:var(--acc)}
 .promo-btn{background:linear-gradient(135deg,var(--acc),var(--adark));border:none;padding:12px 22px;border-radius:40px;font-weight:700;cursor:pointer;color:#0a0a12;font-size:13px;font-family:'Montserrat',sans-serif;white-space:nowrap}
+
+/* EVENTS on main page */
+#activeEvents{max-width:700px;margin:20px auto 0}
+.event-card-home{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:20px;padding:16px 22px;margin-bottom:12px;display:flex;align-items:center;gap:14px}
+.event-card-home i{font-size:22px;color:var(--ok)}
+.event-card-home .ec-title{font-weight:700;font-size:15px;color:var(--ok)}
+.event-card-home .ec-desc{font-size:12px;color:var(--ts);margin-top:3px}
 
 /* SHOP */
 .shop-section{max-width:1300px;margin:0 auto;padding:20px}
@@ -187,12 +200,14 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
 .badge-platinum i{color:#1a1a1a}
 .badge-obsidian{background:linear-gradient(135deg,#1c1917,#0c0a09);border:1px solid #666;animation:gR 2s ease-in-out infinite;filter:brightness(.4)}
 
-/* MESSAGES */
+/* MESSAGES — sender name is always YELLOW (gold), never RGB */
 .messages-container{max-width:800px;margin:0 auto;padding:20px}
 .msg-item{background:var(--surface);backdrop-filter:blur(16px);border-radius:20px;padding:20px;margin-bottom:15px;border:1px solid var(--bc);transition:.3s;cursor:pointer}
 .msg-item:hover{border-color:var(--acc);transform:translateX(5px)}
 .msg-item.unread{background:rgba(255,215,0,.08);border-left:4px solid var(--acc)}
-.msg-from{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-weight:700;color:var(--acc)}
+.msg-from{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-weight:700;color:#ffd700}
+/* Messages page title — static yellow/gold, not RGB */
+#messagesPage .section-header h1{font-family:'Orbitron',monospace;font-size:42px;background:linear-gradient(135deg,#fff,#ffd700);-webkit-background-clip:text;background-clip:text;color:transparent;animation:none}
 
 /* APPEALS */
 .appeals-container{max-width:1200px;margin:0 auto;padding:20px}
@@ -322,6 +337,8 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
 .ab-pink{background:linear-gradient(135deg,#ec4899,#db2777);color:#fff}
 .ab-orange{background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff}
 .ab-gray{background:linear-gradient(135deg,#6b7280,#4b5563);color:#fff}
+.ab-teal{background:linear-gradient(135deg,#14b8a6,#0d9488);color:#fff}
+.ab-indigo{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff}
 .list-box{max-height:400px;overflow-y:auto;margin-top:10px}
 .list-item{background:rgba(0,0,0,.35);border-radius:16px;padding:12px 15px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:13px;transition:.3s}
 .close-admin{position:fixed;top:25px;right:25px;background:rgba(239,68,68,.2);border:1px solid var(--err);border-radius:50%;width:50px;height:50px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:2100;color:var(--err);transition:.3s}
@@ -357,6 +374,62 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
 .warn-card{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:20px;padding:18px;margin-bottom:15px;animation:warnP 2s infinite}
 .warn-count{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:var(--err);border-radius:50%;font-weight:800;font-size:13px;color:#fff;margin-right:8px}
 
+/* GLOBAL CHAT (admin) */
+.gchat-box{max-height:350px;overflow-y:auto;margin-bottom:12px;padding:10px;background:rgba(0,0,0,.3);border-radius:16px}
+.gchat-msg{padding:8px 12px;border-radius:14px;margin-bottom:8px;animation:chatIn .3s ease;font-size:13px;border:1px solid rgba(255,215,0,.1)}
+.gchat-msg .gchat-author{font-weight:700;color:var(--acc);font-size:11px;margin-bottom:3px}
+.gchat-msg .gchat-text{color:#fff;line-height:1.5}
+.gchat-msg .gchat-time{font-size:10px;color:var(--tm);margin-top:3px}
+
+/* MODERATOR PERMISSIONS */
+.mod-perm-box{background:rgba(0,0,0,.3);border-radius:16px;padding:16px;margin:10px 0;border:1px solid rgba(139,92,246,.2)}
+.mod-perm-box h4{color:var(--pur);font-size:14px;margin-bottom:12px}
+.perm-row{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
+.perm-row label{font-size:13px;color:var(--ts);display:flex;align-items:center;gap:6px;cursor:pointer}
+.perm-row input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--acc)}
+.perm-row input[type=number],.perm-row select{padding:6px 12px;background:rgba(0,0,0,.5);border:1px solid var(--bc);border-radius:20px;color:#fff;outline:none;font-size:12px;font-family:'Montserrat',sans-serif;width:130px}
+.perm-row input[type=number]:focus,.perm-row select:focus{border-color:var(--acc)}
+.mod-list-perm{font-size:11px;color:var(--ts);margin-top:4px;display:flex;gap:6px;flex-wrap:wrap}
+.perm-tag{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);padding:2px 8px;border-radius:10px;color:var(--pur)}
+.perm-tag.limited{background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);color:var(--wrn)}
+
+/* LOTTERY */
+.lottery-ball{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--adark));font-weight:800;color:#0a0a12;font-size:14px;animation:pulse 1s infinite}
+
+/* QUICK COINS */
+.quick-btn-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.quick-coin-btn{background:rgba(255,215,0,.15);border:1px solid rgba(255,215,0,.3);color:var(--acc);padding:8px 16px;border-radius:30px;cursor:pointer;font-weight:700;font-size:13px;transition:.3s;font-family:'Montserrat',sans-serif}
+.quick-coin-btn:hover{background:rgba(255,215,0,.35);transform:scale(1.05)}
+
+/* ACTIVITY FEED */
+.activity-item{padding:10px 14px;border-radius:14px;margin-bottom:8px;border:1px solid var(--bc);background:rgba(0,0,0,.3);font-size:12px;animation:chatIn .3s ease}
+.activity-item.reg{border-left:3px solid var(--ok)}
+.activity-item.buy{border-left:3px solid var(--acc)}
+.activity-item.promo{border-left:3px solid var(--pur)}
+.activity-item.ban{border-left:3px solid var(--err)}
+
+/* FINANCE CARD */
+.finance-card{background:rgba(0,0,0,.4);border-radius:18px;padding:18px;margin-bottom:12px;border:1px solid rgba(255,215,0,.15);display:flex;justify-content:space-between;align-items:center}
+.finance-card .fc-label{font-size:13px;color:var(--ts)}
+.finance-card .fc-val{font-family:'Orbitron',monospace;font-size:22px;font-weight:800;color:var(--acc)}
+
+/* EVENTS */
+.event-admin-card{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:16px;padding:14px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.event-admin-card .ea-title{font-weight:700;color:var(--ok)}
+.event-admin-card .ea-info{font-size:11px;color:var(--tm);margin-top:4px}
+
+/* NEWS CARD */
+.news-admin-card{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:16px;padding:14px;margin-bottom:10px}
+.news-admin-card .na-title{font-weight:700;color:var(--inf)}
+.news-admin-card .na-text{font-size:12px;color:var(--ts);margin-top:5px}
+
+/* KEYS */
+.key-item{background:rgba(0,0,0,.4);border-radius:14px;padding:10px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.key-code{font-family:monospace;font-size:15px;color:var(--acc);font-weight:700;letter-spacing:2px}
+
+/* RAFFLE */
+.raffle-entry{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);border-radius:14px;padding:10px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;font-size:13px}
+
 @media(max-width:768px){
   .cn{font-size:38px}.cb{padding:15px 12px;width:95px}.timer-title{font-size:28px}
   .menu-tab{padding:6px 16px;font-size:12px}.logo-text{font-size:16px}
@@ -366,6 +439,9 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
 </style>
 </head>
 <body>
+
+<!-- TICKER BANNER -->
+<div id="tickerBanner"><div class="ticker-inner" id="tickerInner">📣 Добро пожаловать на GrifMcPro!</div></div>
 
 <!-- ANNOUNCEMENT BANNER -->
 <div id="announceBanner"></div>
@@ -524,6 +600,7 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
         <div class="cb"><div class="cn" id="seconds">0</div><div class="cl">СЕКУНД</div></div>
       </div>
       <div id="eventDesc" style="margin-top:32px;color:var(--tm);font-size:14px"></div>
+      <div id="activeEvents"></div>
       <div class="promo-section">
         <h3><i class="fas fa-ticket-alt"></i> Активировать промокод</h3>
         <div class="promo-row">
@@ -582,7 +659,7 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
   </div>
 </div>
 
-<!-- MESSAGES -->
+<!-- MESSAGES — title is static yellow/gold, NOT RGB -->
 <div id="messagesPage" class="page">
   <div class="messages-container">
     <div class="section-header"><h1><i class="fas fa-envelope"></i> МОИ СООБЩЕНИЯ</h1></div>
@@ -685,6 +762,7 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
     <div class="admin-panel">
       <h1><i class="fas fa-crown"></i> ПАНЕЛЬ УПРАВЛЕНИЯ</h1>
       <div class="admin-cats">
+        <!-- ORIGINAL 22 FUNCTIONS -->
         <button class="admin-cat active" data-sec="monets">💰 Монеты</button>
         <button class="admin-cat" data-sec="search">🔍 Поиск</button>
         <button class="admin-cat" data-sec="online">🟢 Онлайн</button>
@@ -707,6 +785,27 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
         <button class="admin-cat" data-sec="messages">✉️ Сообщения</button>
         <button class="admin-cat" data-sec="logs">📝 Логи</button>
         <button class="admin-cat" data-sec="moderators">👥 Модераторы</button>
+        <!-- 20 НОВЫХ ФУНКЦИЙ -->
+        <button class="admin-cat" data-sec="gchat">💬 Чат</button>
+        <button class="admin-cat" data-sec="lottery">🎲 Лотерея</button>
+        <button class="admin-cat" data-sec="news">📰 Новости</button>
+        <button class="admin-cat" data-sec="events">🎪 Ивенты</button>
+        <button class="admin-cat" data-sec="quickcoins">⚡ Быстро</button>
+        <button class="admin-cat" data-sec="activity">🌡️ Активность</button>
+        <button class="admin-cat" data-sec="mutes">🚫 Муты</button>
+        <button class="admin-cat" data-sec="templates">📋 Шаблоны</button>
+        <button class="admin-cat" data-sec="ticker">📣 Строка</button>
+        <button class="admin-cat" data-sec="finance">💳 Финансы</button>
+        <button class="admin-cat" data-sec="keys">🔑 Ключи</button>
+        <button class="admin-cat" data-sec="raffle">🎰 Розыгрыш</button>
+        <button class="admin-cat" data-sec="quests">🎯 Задания</button>
+        <button class="admin-cat" data-sec="siteconfig">⚙️ Настройки</button>
+        <button class="admin-cat" data-sec="maintenance">🔧 Техработы</button>
+        <button class="admin-cat" data-sec="randomgift">🎁 Рандом-приз</button>
+        <button class="admin-cat" data-sec="toprating">🏆 Рейтинг</button>
+        <button class="admin-cat" data-sec="alertgroups">🔔 Оповещения</button>
+        <button class="admin-cat" data-sec="resetpass">🔐 Сброс пароля</button>
+        <button class="admin-cat" data-sec="colorizer">🎨 Тема сайта</button>
       </div>
 
       <!-- МОНЕТЫ -->
@@ -735,7 +834,7 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
         </div>
       </div>
 
-      <!-- ОНЛАЙН ИГРОКИ (НОВАЯ) -->
+      <!-- ОНЛАЙН ИГРОКИ -->
       <div id="sec-online" class="admin-section">
         <div class="admin-block">
           <h3><i class="fas fa-circle" style="color:var(--ok)"></i> Игроки онлайн прямо сейчас <span class="rt-badge">● LIVE</span></h3>
@@ -754,7 +853,7 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
         </div>
       </div>
 
-      <!-- ОБЪЯВЛЕНИЕ НА САЙТЕ (НОВАЯ) -->
+      <!-- ОБЪЯВЛЕНИЕ НА САЙТЕ -->
       <div id="sec-announce" class="admin-section">
         <div class="admin-block">
           <h3><i class="fas fa-bullhorn"></i> Объявление на сайте <span class="rt-badge">● LIVE</span></h3>
@@ -783,10 +882,11 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
         </div>
       </div>
 
-      <!-- РАССЫЛКА -->
+      <!-- РАССЫЛКА — с проверкой почты перед отправкой -->
       <div id="sec-broadcast" class="admin-section">
         <div class="admin-block">
           <h3><i class="fas fa-paper-plane"></i> Отправить сообщение игроку</h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:8px">Получатель увидит ваш никнейм и галочку. Email не показывается.</p>
           <input type="text" id="msgToNick" class="ai" placeholder="Никнейм получателя">
           <input type="text" id="msgTitle" class="ai" placeholder="Заголовок">
           <textarea id="msgBody" rows="4" class="ai ai-ta" placeholder="Текст сообщения..."></textarea>
@@ -794,6 +894,7 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
         </div>
         <div class="admin-block">
           <h3><i class="fas fa-bullhorn"></i> Рассылка всем</h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:8px">⚠️ Перед отправкой система проверит вашу почту. Все увидят: <strong style="color:var(--acc)">Администрация ✓</strong></p>
           <input type="text" id="broadcastTitle" class="ai" placeholder="Заголовок сообщения">
           <textarea id="broadcastMsg" rows="4" class="ai ai-ta" placeholder="Текст сообщения..."></textarea>
           <button class="ab ab-pink" onclick="sendBroadcast()">📢 ОТПРАВИТЬ ВСЕМ</button>
@@ -854,7 +955,7 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
           <button class="ab ab-red" onclick="clearAllWarns()">❌ СНЯТЬ ВСЕ ВАРНЫ</button>
         </div>
         <div class="admin-block">
-          <h3><i class="fas fa-list"></i> Все предупреждения <span class="rt-badge">● LIVE</span></h3>
+          <h3><i class="fas fa-list"></i> Игроки с варнами <span class="rt-badge">● LIVE</span></h3>
           <div id="warnsList" class="list-box"><div class="list-item">Загрузка...</div></div>
         </div>
       </div>
@@ -862,51 +963,55 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
       <!-- САЙТ -->
       <div id="sec-site" class="admin-section">
         <div class="admin-block">
-          <h3><i class="fas fa-globe"></i> Управление сайтом</h3>
-          <textarea id="closeReason" rows="2" class="ai ai-ta" placeholder="Причина закрытия..."></textarea>
-          <select id="closeDuration" class="ai">
-            <option value="1">1 час</option><option value="6">6 часов</option>
-            <option value="24">1 день</option><option value="168">7 дней</option><option value="0">Бессрочно</option>
+          <h3><i class="fas fa-lock"></i> Закрыть / Открыть сайт <span class="rt-badge">● LIVE</span></h3>
+          <input type="text" id="siteCloseReason" class="ai" placeholder="Причина закрытия...">
+          <select id="siteCloseDuration" class="ai">
+            <option value="30">30 минут</option><option value="60">1 час</option>
+            <option value="180">3 часа</option><option value="360">6 часов</option>
+            <option value="720">12 часов</option><option value="1440">24 часа</option>
           </select>
           <button class="ab ab-red" onclick="closeSite()">🔒 ЗАКРЫТЬ САЙТ</button>
           <button class="ab ab-green" onclick="openSite()">🔓 ОТКРЫТЬ САЙТ</button>
         </div>
         <div class="admin-block">
-          <h3><i class="fas fa-lock"></i> Приём обращений</h3>
-          <textarea id="appealsCloseReason" rows="2" class="ai ai-ta" placeholder="Причина закрытия..."></textarea>
-          <button class="ab ab-red" onclick="closeAppeals()">🔒 ЗАКРЫТЬ ПРИЁМ</button>
-          <button class="ab ab-green" onclick="openAppeals()">🔓 ОТКРЫТЬ ПРИЁМ</button>
+          <h3><i class="fas fa-info-circle"></i> Статус сайта <span class="rt-badge">● LIVE</span></h3>
+          <div id="siteStatusDisplay" style="color:var(--ok);font-weight:700;padding:10px">✅ Сайт открыт</div>
         </div>
       </div>
 
       <!-- ДОНАТЫ -->
       <div id="sec-donates" class="admin-section">
         <div class="admin-block">
-          <h3><i class="fas fa-gift"></i> Выдать / Снять донат</h3>
+          <h3><i class="fas fa-gift"></i> Добавить донат вручную</h3>
           <input type="text" id="donateNick" class="ai" placeholder="Никнейм игрока">
-          <input type="text" id="donateName" class="ai" placeholder="Название привилегии">
-          <button class="ab ab-blue" onclick="giveDonate()">🎁 ВЫДАТЬ ДОНАТ</button>
-          <button class="ab ab-red" onclick="removeDonate()">❌ СНЯТЬ ВСЕ ДОНАТЫ</button>
+          <input type="text" id="donateProduct" class="ai" placeholder="Привилегия">
+          <input type="number" id="donatePrice" class="ai" placeholder="Цена">
+          <button class="ab ab-gold" onclick="addDonate()">🎁 ДОБАВИТЬ ДОНАТ</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-list"></i> Последние донаты <span class="rt-badge">● LIVE</span></h3>
+          <div id="donatesList" class="list-box"><div class="list-item">Загрузка...</div></div>
         </div>
       </div>
 
       <!-- ТАЙМЕР -->
       <div id="sec-timer" class="admin-section">
         <div class="admin-block">
-          <h3><i class="fas fa-clock"></i> Таймер обратного отсчёта</h3>
+          <h3><i class="fas fa-clock"></i> Таймер обратного отсчёта <span class="rt-badge">● LIVE</span></h3>
           <input type="text" id="timerName" class="ai" placeholder="Название события">
-          <textarea id="timerDesc" rows="2" class="ai ai-ta" placeholder="Описание события..."></textarea>
+          <input type="text" id="timerDesc" class="ai" placeholder="Описание события">
           <input type="datetime-local" id="timerDate" class="ai">
-          <button class="ab ab-green" onclick="saveTimer()">💾 СОХРАНИТЬ ТАЙМЕР</button>
+          <button class="ab ab-blue" onclick="saveTimer()">⏰ СОХРАНИТЬ ТАЙМЕР</button>
         </div>
       </div>
 
       <!-- ГАЛОЧКИ -->
       <div id="sec-badges" class="admin-section">
         <div class="admin-block">
-          <h3><i class="fas fa-tags"></i> Выдача галочек (33 вида)</h3>
+          <h3><i class="fas fa-certificate"></i> Выдать / Снять галочку</h3>
           <input type="text" id="badgeNick" class="ai" placeholder="Никнейм игрока">
           <select id="badgeType" class="ai">
+            <option value="">— Снять галочку —</option>
             <option value="blue">🔵 Синяя</option><option value="red">🔴 Красная</option>
             <option value="gold">🟡 Золотая</option><option value="rainbow">🌈 Радужная</option>
             <option value="rgb">✨ RGB</option><option value="crown">👑 Корона</option>
@@ -914,30 +1019,25 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
             <option value="game">🎮 Игровая</option><option value="fire">🔥 Огненная</option>
             <option value="mythic">🔮 Мифическая</option><option value="cosmic">🌌 Космическая</option>
             <option value="ice">❄️ Ледяная</option><option value="shadow">🌑 Теневая</option>
-            <option value="light">✨ Светлая</option><option value="dark">🖤 Тёмная</option>
-            <option value="nature">🌿 Природная</option><option value="blood">🩸 Кровавая</option>
-            <option value="void">🌀 Пустота</option><option value="divine">⚜️ Божественная</option>
-            <option value="purple">🟣 Фиолетовая</option><option value="teal">🔷 Бирюзовая</option>
-            <option value="sapphire">💙 Сапфировая</option><option value="emerald">💚 Изумрудная</option>
-            <option value="ruby">❤️ Рубиновая</option><option value="amber">🧡 Янтарная</option>
-            <option value="jade">💚 Нефритовая</option><option value="coral">🪸 Коралловая</option>
-            <option value="indigo">🟣 Индиго</option><option value="magenta">🩷 Магента</option>
+            <option value="light">✨ Светлая</option><option value="nature">🌿 Природная</option>
+            <option value="blood">🩸 Кровавая</option><option value="divine">⚜️ Божественная</option>
+            <option value="purple">🟣 Фиолетовая</option><option value="sapphire">💙 Сапфировая</option>
+            <option value="emerald">💚 Изумрудная</option><option value="ruby">❤️ Рубиновая</option>
+            <option value="amber">🧡 Янтарная</option><option value="magenta">🩷 Магента</option>
             <option value="bronze">🥉 Бронзовая</option><option value="platinum">⚪ Платиновая</option>
             <option value="obsidian">⬛ Обсидиановая</option>
           </select>
-          <button class="ab ab-blue" onclick="giveBadge()">✅ ВЫДАТЬ ГАЛОЧКУ</button>
-          <button class="ab ab-red" onclick="removeBadge()">❌ СНЯТЬ ГАЛОЧКУ</button>
+          <button class="ab ab-gold" onclick="giveBadge()">🏅 ВЫДАТЬ ГАЛОЧКУ</button>
         </div>
       </div>
 
       <!-- ПРОКРУТКИ -->
       <div id="sec-spins" class="admin-section">
         <div class="admin-block">
-          <h3><i class="fas fa-dice-d6"></i> Управление прокрутками</h3>
+          <h3><i class="fas fa-dice"></i> Прокрутки колеса</h3>
           <input type="text" id="spinNick" class="ai" placeholder="Никнейм игрока">
-          <input type="number" id="spinAmount" class="ai" placeholder="Количество (по умолчанию 1)" min="1">
-          <button class="ab ab-blue" onclick="giveSpin()">🎫 ВЫДАТЬ ПРОКРУТКИ</button>
-          <button class="ab ab-red" onclick="removeSpin()">❌ ЗАБРАТЬ ПРОКРУТКУ</button>
+          <input type="number" id="spinAmount" class="ai" placeholder="Количество прокруток">
+          <button class="ab ab-purple" onclick="giveSpins()">🎡 ВЫДАТЬ ПРОКРУТКИ</button>
         </div>
       </div>
 
@@ -945,10 +1045,10 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
       <div id="sec-promo" class="admin-section">
         <div class="admin-block">
           <h3><i class="fas fa-ticket-alt"></i> Создать промокод</h3>
-          <input type="text" id="promoCode" class="ai" placeholder="Код (напр. GRIFMC2024)">
+          <input type="text" id="promoCode" class="ai" placeholder="Код (напр. GRIF2024)">
           <input type="number" id="promoAmount" class="ai" placeholder="Сумма монет">
-          <input type="number" id="promoUses" class="ai" placeholder="Лимит использований (0 = безлимит)">
-          <button class="ab ab-gold" onclick="createPromo()">🎟️ СОЗДАТЬ</button>
+          <input type="number" id="promoMaxUses" class="ai" placeholder="Кол-во использований (0 = бесконечно)">
+          <button class="ab ab-gold" onclick="createPromo()">🎟️ СОЗДАТЬ ПРОМОКОД</button>
         </div>
         <div class="admin-block">
           <h3><i class="fas fa-list"></i> Активные промокоды <span class="rt-badge">● LIVE</span></h3>
@@ -959,40 +1059,44 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
       <!-- РЕДАКТОР МАГАЗИНА -->
       <div id="sec-shopeditor" class="admin-section">
         <div class="admin-block">
-          <h3><i class="fas fa-store"></i> Редактор товаров <span class="rt-badge">● LIVE</span></h3>
-          <div id="shopEditorList"></div>
-          <button class="ab ab-green" onclick="addShopItem()">➕ ДОБАВИТЬ ТОВАР</button>
+          <h3><i class="fas fa-store"></i> Редактор магазина <span class="rt-badge">● LIVE</span></h3>
+          <button class="ab ab-green" onclick="addShopItem()">➕ Добавить товар</button>
+          <div id="shopEditorList" style="margin-top:12px"></div>
         </div>
       </div>
 
-      <!-- УСТАНОВИТЬ БАЛАНС -->
+      <!-- БАЛАНС -->
       <div id="sec-setbalance" class="admin-section">
         <div class="admin-block">
-          <h3><i class="fas fa-coins"></i> Управление балансом игрока</h3>
+          <h3><i class="fas fa-wallet"></i> Установить баланс</h3>
           <input type="text" id="setBalNick" class="ai" placeholder="Никнейм игрока">
-          <input type="number" id="setBalAmount" class="ai" placeholder="Сумма">
-          <button class="ab ab-gold" onclick="setExactBalance()">💳 УСТАНОВИТЬ ТОЧНО</button>
-          <button class="ab ab-green" onclick="addCoinsToPlayer()">➕ ДОБАВИТЬ К БАЛАНСУ</button>
-          <button class="ab ab-red" onclick="setZeroBalance()">🚫 ОБНУЛИТЬ БАЛАНС</button>
+          <input type="number" id="setBalAmount" class="ai" placeholder="Новый баланс">
+          <button class="ab ab-gold" onclick="setBalance()">💳 УСТАНОВИТЬ БАЛАНС</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-minus-circle"></i> Снять монеты</h3>
+          <input type="text" id="takeNick" class="ai" placeholder="Никнейм игрока">
+          <input type="number" id="takeAmount" class="ai" placeholder="Сумма снятия">
+          <button class="ab ab-red" onclick="takeCoins()">💸 СНЯТЬ МОНЕТЫ</button>
         </div>
       </div>
 
       <!-- СТАТИСТИКА -->
       <div id="sec-stats" class="admin-section">
         <div class="admin-block">
-          <h3><i class="fas fa-chart-bar"></i> Статистика <span class="rt-badge">● LIVE</span></h3>
+          <h3><i class="fas fa-chart-bar"></i> Общая статистика <span class="rt-badge">● LIVE</span></h3>
           <div class="stats-grid">
-            <div class="stat-card"><div class="stat-card-val" id="stat-users">—</div><div class="stat-card-lbl">Пользователей</div></div>
-            <div class="stat-card"><div class="stat-card-val" id="stat-purchases">—</div><div class="stat-card-lbl">Покупок</div></div>
-            <div class="stat-card"><div class="stat-card-val" id="stat-appeals">—</div><div class="stat-card-lbl">Обращений</div></div>
-            <div class="stat-card"><div class="stat-card-val" id="stat-bans">—</div><div class="stat-card-lbl">Активных банов</div></div>
-            <div class="stat-card"><div class="stat-card-val" id="stat-promos">—</div><div class="stat-card-lbl">Промокодов</div></div>
-            <div class="stat-card"><div class="stat-card-val" id="stat-ipbans">—</div><div class="stat-card-lbl">IP-банов</div></div>
+            <div class="stat-card"><div class="stat-card-val" id="stat-users">-</div><div class="stat-card-lbl">Игроков</div></div>
+            <div class="stat-card"><div class="stat-card-val" id="stat-purchases">-</div><div class="stat-card-lbl">Покупок</div></div>
+            <div class="stat-card"><div class="stat-card-val" id="stat-appeals">-</div><div class="stat-card-lbl">Обращений</div></div>
+            <div class="stat-card"><div class="stat-card-val" id="stat-bans">-</div><div class="stat-card-lbl">Активных банов</div></div>
+            <div class="stat-card"><div class="stat-card-val" id="stat-promos">-</div><div class="stat-card-lbl">Промокодов</div></div>
+            <div class="stat-card"><div class="stat-card-val" id="stat-ipbans">-</div><div class="stat-card-lbl">IP-банов</div></div>
           </div>
         </div>
         <div class="admin-block">
-          <h3><i class="fas fa-trophy"></i> Топ-10 по балансу</h3>
-          <div id="topPlayersList" class="list-box"></div>
+          <h3><i class="fas fa-trophy"></i> Топ игроков <span class="rt-badge">● LIVE</span></h3>
+          <div id="topPlayersList" class="list-box"><div class="list-item">Загрузка...</div></div>
         </div>
       </div>
 
@@ -1005,7 +1109,7 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
         </div>
       </div>
 
-      <!-- ОБРАЩЕНИЯ — с живым чатом внутри тикетов -->
+      <!-- ОБРАЩЕНИЯ -->
       <div id="sec-appeals" class="admin-section">
         <div class="admin-block">
           <h3><i class="fas fa-envelope"></i> Обращения пользователей <span class="rt-badge">● LIVE</span></h3>
@@ -1036,17 +1140,530 @@ body{background:linear-gradient(135deg,#0a0a12,#0f0f1a);font-family:'Montserrat'
         </div>
       </div>
 
-      <!-- МОДЕРАТОРЫ -->
+      <!-- ================================================================ -->
+      <!-- МОДЕРАТОРЫ — ПОЛНАЯ СИСТЕМА С ПРАВАМИ И ОГРАНИЧИТЕЛЯМИ -->
+      <!-- ================================================================ -->
       <div id="sec-moderators" class="admin-section">
         <div class="admin-block">
-          <h3><i class="fas fa-users-cog"></i> Добавить модератора</h3>
+          <h3><i class="fas fa-users-cog"></i> Добавить модератора с правами</h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:12px">Укажите ник, email и настройте права доступа с ограничителями</p>
           <input type="text" id="modNick" class="ai" placeholder="Никнейм модератора">
           <input type="email" id="modEmail" class="ai" placeholder="Email модератора">
-          <button class="ab ab-green" onclick="addModerator()">➕ ДОБАВИТЬ</button>
+
+          <div class="mod-perm-box">
+            <h4><i class="fas fa-shield-alt"></i> Уровень доступа</h4>
+            <div class="perm-row">
+              <label><input type="radio" name="modLevel" value="moderator" checked> 🛡️ Модератор</label>
+              <label><input type="radio" name="modLevel" value="senior"> ⭐ Ст. Модератор</label>
+              <label><input type="radio" name="modLevel" value="admin"> 👑 Администратор</label>
+            </div>
+          </div>
+
+          <div class="mod-perm-box">
+            <h4><i class="fas fa-coins"></i> Монеты</h4>
+            <div class="perm-row">
+              <label><input type="checkbox" id="perm-coins" checked> Выдавать монеты</label>
+            </div>
+            <div class="perm-row">
+              <label>Максимум за раз:</label>
+              <input type="number" id="perm-coins-max" value="10000" min="1" placeholder="Макс. монет">
+              <span style="font-size:12px;color:var(--tm)">(0 = без лимита)</span>
+            </div>
+          </div>
+
+          <div class="mod-perm-box">
+            <h4><i class="fas fa-gavel"></i> Баны</h4>
+            <div class="perm-row">
+              <label><input type="checkbox" id="perm-ban" checked> Выдавать баны</label>
+            </div>
+            <div class="perm-row">
+              <label>Макс. длительность:</label>
+              <select id="perm-ban-max">
+                <option value="1">1 час</option>
+                <option value="6">6 часов</option>
+                <option value="12">12 часов</option>
+                <option value="24">1 день</option>
+                <option value="72">3 дня</option>
+                <option value="168">7 дней</option>
+                <option value="720">30 дней</option>
+                <option value="0">Навсегда (без лимита)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mod-perm-box">
+            <h4><i class="fas fa-exclamation-triangle"></i> Варны</h4>
+            <div class="perm-row">
+              <label><input type="checkbox" id="perm-warn" checked> Выдавать варны</label>
+            </div>
+          </div>
+
+          <div class="mod-perm-box">
+            <h4><i class="fas fa-lock"></i> Сайт</h4>
+            <div class="perm-row">
+              <label><input type="checkbox" id="perm-site"> Закрывать сайт</label>
+            </div>
+            <div class="perm-row">
+              <label>Макс. время закрытия:</label>
+              <select id="perm-site-max">
+                <option value="30">30 минут</option>
+                <option value="60">1 час</option>
+                <option value="180">3 часа</option>
+                <option value="0">Без лимита</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mod-perm-box">
+            <h4><i class="fas fa-bullhorn"></i> Рассылки и объявления</h4>
+            <div class="perm-row">
+              <label><input type="checkbox" id="perm-broadcast"> Делать рассылки</label>
+              <label><input type="checkbox" id="perm-announce"> Публиковать объявления</label>
+            </div>
+          </div>
+
+          <div class="mod-perm-box">
+            <h4><i class="fas fa-trophy"></i> Дополнительные права</h4>
+            <div class="perm-row">
+              <label><input type="checkbox" id="perm-badges"> Выдавать галочки</label>
+              <label><input type="checkbox" id="perm-spins"> Выдавать прокрутки</label>
+            </div>
+            <div class="perm-row">
+              <label><input type="checkbox" id="perm-promo"> Создавать промокоды</label>
+              <label><input type="checkbox" id="perm-appeals"> Отвечать на обращения</label>
+            </div>
+            <div class="perm-row">
+              <label><input type="checkbox" id="perm-ipban"> IP-баны</label>
+              <label><input type="checkbox" id="perm-editplayer"> Редактировать игроков</label>
+            </div>
+          </div>
+
+          <button class="ab ab-green" onclick="addModerator()">➕ ДОБАВИТЬ МОДЕРАТОРА</button>
         </div>
         <div class="admin-block">
-          <h3><i class="fas fa-list"></i> Список модераторов</h3>
+          <h3><i class="fas fa-list"></i> Список модераторов <span class="rt-badge">● LIVE</span></h3>
           <div id="moderatorsList" class="list-box"><div class="list-item">Загрузка...</div></div>
+        </div>
+      </div>
+
+      <!-- ================================================================ -->
+      <!-- 20 НОВЫХ ФУНКЦИЙ В РЕАЛЬНОМ ВРЕМЕНИ -->
+      <!-- ================================================================ -->
+
+      <!-- 1. ГЛОБАЛЬНЫЙ ЧАТ -->
+      <div id="sec-gchat" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-comments"></i> Глобальный чат <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:10px">Все сообщения видны в реальном времени. Вы пишете от имени Администрации.</p>
+          <div class="gchat-box" id="gchatBox"></div>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <input type="text" id="gchatInput" class="ai" style="margin:0;flex:1" placeholder="Написать в чат..." onkeydown="if(event.key==='Enter')sendGlobalChat()">
+            <button class="ab ab-blue" style="margin:0;width:auto;padding:0 20px" onclick="sendGlobalChat()">📨</button>
+          </div>
+          <button class="ab ab-red" onclick="clearGlobalChat()" style="margin-top:8px">🗑️ Очистить весь чат</button>
+        </div>
+      </div>
+
+      <!-- 2. ЛОТЕРЕЯ -->
+      <div id="sec-lottery" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-dice"></i> Лотерея <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:10px">Создайте лотерею. Победитель выбирается случайно и получает приз автоматически.</p>
+          <input type="text" id="lotteryName" class="ai" placeholder="Название лотереи">
+          <input type="number" id="lotteryPrize" class="ai" placeholder="Приз в монетах">
+          <input type="number" id="lotteryTicketCost" class="ai" placeholder="Стоимость билета (0 = бесплатно)">
+          <button class="ab ab-gold" onclick="createLottery()">🎲 СОЗДАТЬ ЛОТЕРЕЮ</button>
+          <button class="ab ab-purple" onclick="drawLotteryWinner()">🏆 ВЫБРАТЬ ПОБЕДИТЕЛЯ</button>
+          <button class="ab ab-red" onclick="cancelLottery()">❌ ОТМЕНИТЬ ЛОТЕРЕЮ</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-ticket-alt"></i> Участники лотереи <span class="rt-badge">● LIVE</span></h3>
+          <div id="lotteryStatus" style="color:var(--tm);padding:10px;font-size:13px">Нет активной лотереи</div>
+          <div id="lotteryParticipants" class="list-box"><div class="list-item">Нет участников</div></div>
+        </div>
+      </div>
+
+      <!-- 3. НОВОСТИ -->
+      <div id="sec-news" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-newspaper"></i> Создать новость <span class="rt-badge">● LIVE</span></h3>
+          <input type="text" id="newsTitle" class="ai" placeholder="Заголовок новости">
+          <textarea id="newsText" rows="4" class="ai ai-ta" placeholder="Текст новости..."></textarea>
+          <select id="newsIcon" class="ai">
+            <option value="📰">📰 Новость</option>
+            <option value="🔥">🔥 Важно</option>
+            <option value="🎉">🎉 Событие</option>
+            <option value="⚠️">⚠️ Внимание</option>
+            <option value="🎮">🎮 Игровое</option>
+            <option value="💰">💰 Экономика</option>
+            <option value="🏆">🏆 Турнир</option>
+          </select>
+          <button class="ab ab-blue" onclick="publishNews()">📰 ОПУБЛИКОВАТЬ</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-list"></i> Опубликованные новости <span class="rt-badge">● LIVE</span></h3>
+          <div id="newsList" class="list-box"><div class="list-item">Загрузка...</div></div>
+        </div>
+      </div>
+
+      <!-- 4. ИВЕНТЫ -->
+      <div id="sec-events" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-calendar-star"></i> Создать ивент <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:8px">Ивент отображается на главной странице сайта для всех игроков.</p>
+          <input type="text" id="eventName" class="ai" placeholder="Название ивента">
+          <textarea id="eventDesc2" rows="3" class="ai ai-ta" placeholder="Описание ивента..."></textarea>
+          <input type="number" id="eventReward" class="ai" placeholder="Награда в монетах (0 = без награды)">
+          <input type="datetime-local" id="eventEnd" class="ai">
+          <button class="ab ab-green" onclick="createEvent()">🎪 СОЗДАТЬ ИВЕНТ</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-list"></i> Активные ивенты <span class="rt-badge">● LIVE</span></h3>
+          <div id="eventsList" class="list-box"><div class="list-item">Загрузка...</div></div>
+        </div>
+      </div>
+
+      <!-- 5. БЫСТРЫЕ МОНЕТЫ -->
+      <div id="sec-quickcoins" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-bolt"></i> Быстрая выдача монет <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:12px">Введите ник и нажмите кнопку с нужной суммой — монеты выдаются мгновенно.</p>
+          <input type="text" id="quickNick" class="ai" placeholder="Никнейм игрока">
+          <div class="quick-btn-row">
+            <button class="quick-coin-btn" onclick="quickGive(100)">+100 ₽</button>
+            <button class="quick-coin-btn" onclick="quickGive(500)">+500 ₽</button>
+            <button class="quick-coin-btn" onclick="quickGive(1000)">+1 000 ₽</button>
+            <button class="quick-coin-btn" onclick="quickGive(5000)">+5 000 ₽</button>
+            <button class="quick-coin-btn" onclick="quickGive(10000)">+10 000 ₽</button>
+            <button class="quick-coin-btn" onclick="quickGive(50000)">+50 000 ₽</button>
+            <button class="quick-coin-btn" onclick="quickGive(100000)">+100 000 ₽</button>
+            <button class="quick-coin-btn" style="background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.4);color:var(--err)" onclick="quickTake(1000)">-1 000 ₽</button>
+            <button class="quick-coin-btn" style="background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.4);color:var(--err)" onclick="quickTake(5000)">-5 000 ₽</button>
+          </div>
+          <div id="quickResult" style="margin-top:12px;padding:10px;border-radius:14px;background:rgba(0,0,0,.3);font-size:13px;color:var(--tm)">Выберите игрока и сумму</div>
+        </div>
+      </div>
+
+      <!-- 6. АКТИВНОСТЬ -->
+      <div id="sec-activity" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-chart-line"></i> Лента активности <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:10px">Новые регистрации, покупки, активированные промокоды — в реальном времени.</p>
+          <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+            <span style="display:flex;align-items:center;gap:5px;font-size:12px"><span style="display:inline-block;width:10px;height:10px;background:var(--ok);border-radius:3px"></span>Регистрации</span>
+            <span style="display:flex;align-items:center;gap:5px;font-size:12px"><span style="display:inline-block;width:10px;height:10px;background:var(--acc);border-radius:3px"></span>Покупки</span>
+            <span style="display:flex;align-items:center;gap:5px;font-size:12px"><span style="display:inline-block;width:10px;height:10px;background:var(--pur);border-radius:3px"></span>Промокоды</span>
+            <span style="display:flex;align-items:center;gap:5px;font-size:12px"><span style="display:inline-block;width:10px;height:10px;background:var(--err);border-radius:3px"></span>Баны</span>
+          </div>
+          <div id="activityFeed" class="list-box" style="max-height:500px"><div class="list-item">Загрузка...</div></div>
+          <button class="ab ab-gray" onclick="clearActivityFeed()">🗑️ Очистить ленту</button>
+        </div>
+      </div>
+
+      <!-- 7. МУТЫ -->
+      <div id="sec-mutes" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-microphone-slash"></i> Мут / Размут игрока <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:10px">Замьюченный игрок не может отправлять обращения и сообщения.</p>
+          <input type="text" id="muteNick" class="ai" placeholder="Никнейм игрока">
+          <input type="text" id="muteReason" class="ai" placeholder="Причина мута">
+          <select id="muteDuration" class="ai">
+            <option value="30">30 минут</option>
+            <option value="60">1 час</option>
+            <option value="360">6 часов</option>
+            <option value="1440">24 часа</option>
+            <option value="10080">7 дней</option>
+            <option value="0">Навсегда</option>
+          </select>
+          <button class="ab ab-orange" onclick="muteUser()">🔇 ЗАМЬЮТИТЬ</button>
+          <button class="ab ab-green" onclick="unmuteUser()">🔊 РАЗМЬЮТИТЬ</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-list"></i> Активные муты <span class="rt-badge">● LIVE</span></h3>
+          <div id="mutesList" class="list-box"><div class="list-item">Загрузка...</div></div>
+        </div>
+      </div>
+
+      <!-- 8. ШАБЛОНЫ СООБЩЕНИЙ -->
+      <div id="sec-templates" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-file-alt"></i> Создать шаблон сообщения</h3>
+          <input type="text" id="tplName" class="ai" placeholder="Название шаблона">
+          <input type="text" id="tplTitle" class="ai" placeholder="Заголовок сообщения">
+          <textarea id="tplText" rows="4" class="ai ai-ta" placeholder="Текст шаблона..."></textarea>
+          <button class="ab ab-blue" onclick="saveTemplate()">💾 СОХРАНИТЬ ШАБЛОН</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-list"></i> Сохранённые шаблоны <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:10px">Нажмите «Отправить всем» чтобы мгновенно разослать шаблон.</p>
+          <div id="templatesList" class="list-box"><div class="list-item">Загрузка...</div></div>
+        </div>
+      </div>
+
+      <!-- 9. БЕГУЩАЯ СТРОКА -->
+      <div id="sec-ticker" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-scroll"></i> Бегущая строка <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:10px">Текст прокручивается в верхней части сайта для ВСЕХ пользователей.</p>
+          <input type="text" id="tickerText" class="ai" placeholder="Текст бегущей строки...">
+          <input type="number" id="tickerSpeed" class="ai" placeholder="Скорость (сек., по умолчанию 20)" value="20">
+          <button class="ab ab-orange" onclick="publishTicker()">📣 ЗАПУСТИТЬ СТРОКУ</button>
+          <button class="ab ab-gray" onclick="stopTicker()">⏹️ ОСТАНОВИТЬ СТРОКУ</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-eye"></i> Текущая строка <span class="rt-badge">● LIVE</span></h3>
+          <div id="currentTicker" style="color:var(--tm);padding:10px">Нет активной строки</div>
+        </div>
+      </div>
+
+      <!-- 10. ФИНАНСЫ -->
+      <div id="sec-finance" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-chart-pie"></i> Финансовый обзор <span class="rt-badge">● LIVE</span></h3>
+          <div id="financeStats">
+            <div class="finance-card"><span class="fc-label">💰 Всего монет в обороте</span><span class="fc-val" id="fin-total">-</span></div>
+            <div class="finance-card"><span class="fc-label">👤 Среднее на игрока</span><span class="fc-val" id="fin-avg">-</span></div>
+            <div class="finance-card"><span class="fc-label">🏆 Максимальный баланс</span><span class="fc-val" id="fin-max">-</span></div>
+            <div class="finance-card"><span class="fc-label">📦 Всего потрачено на донаты</span><span class="fc-val" id="fin-spent">-</span></div>
+            <div class="finance-card"><span class="fc-label">👥 Всего игроков</span><span class="fc-val" id="fin-players">-</span></div>
+          </div>
+          <button class="ab ab-blue" onclick="loadFinance()" style="margin-top:12px">🔄 Обновить данные</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-fire"></i> Сжечь монеты (глобально)</h3>
+          <p style="color:var(--err);font-size:12px;margin-bottom:8px">⚠️ Снять указанный % монет У ВСЕХ игроков. Используйте с осторожностью!</p>
+          <input type="number" id="burnPercent" class="ai" placeholder="Процент сжигания (напр. 10 = -10%)" min="1" max="99">
+          <button class="ab ab-red" onclick="burnAllCoins()">🔥 СЖЕЧЬ МОНЕТЫ</button>
+        </div>
+      </div>
+
+      <!-- 11. КЛЮЧИ АКТИВАЦИИ -->
+      <div id="sec-keys" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-key"></i> Создать ключ активации</h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:8px">Ключи используются для получения привилегий или монет без промокода.</p>
+          <input type="text" id="keyCode" class="ai" placeholder="Ключ (или оставьте пустым для авто)">
+          <select id="keyType" class="ai">
+            <option value="coins">💰 Монеты</option>
+            <option value="spins">🎡 Прокрутки</option>
+            <option value="badge">🏅 Галочка</option>
+          </select>
+          <input type="text" id="keyValue" class="ai" placeholder="Значение (кол-во монет / прокруток / тип галочки)">
+          <button class="ab ab-gold" onclick="createKey()">🔑 СОЗДАТЬ КЛЮЧ</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-list"></i> Активные ключи <span class="rt-badge">● LIVE</span></h3>
+          <div id="keysList" class="list-box"><div class="list-item">Загрузка...</div></div>
+        </div>
+      </div>
+
+      <!-- 12. РОЗЫГРЫШ -->
+      <div id="sec-raffle" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-random"></i> Создать розыгрыш <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:8px">Пользователи участвуют, тратя монеты. Победитель получает приз.</p>
+          <input type="text" id="raffleName" class="ai" placeholder="Название розыгрыша">
+          <input type="number" id="raffleEntryFee" class="ai" placeholder="Стоимость участия (монет)">
+          <input type="number" id="rafflePrize" class="ai" placeholder="Приз победителю (монет)">
+          <button class="ab ab-purple" onclick="createRaffle()">🎰 СОЗДАТЬ РОЗЫГРЫШ</button>
+          <button class="ab ab-gold" onclick="drawRaffleWinner()">🏆 ОПРЕДЕЛИТЬ ПОБЕДИТЕЛЯ</button>
+          <button class="ab ab-red" onclick="cancelRaffle()">❌ ОТМЕНИТЬ РОЗЫГРЫШ</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-users"></i> Участники розыгрыша <span class="rt-badge">● LIVE</span></h3>
+          <div id="raffleStatus" style="color:var(--tm);padding:10px;font-size:13px">Нет активного розыгрыша</div>
+          <div id="raffleParticipants" class="list-box"><div class="list-item">Нет участников</div></div>
+        </div>
+      </div>
+
+      <!-- 13. ЕЖЕДНЕВНЫЕ ЗАДАНИЯ -->
+      <div id="sec-quests" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-tasks"></i> Создать задание <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:8px">Задания отображаются для всех игроков и сбрасываются ежедневно.</p>
+          <input type="text" id="questTitle" class="ai" placeholder="Название задания">
+          <input type="text" id="questDesc" class="ai" placeholder="Описание (что нужно сделать)">
+          <input type="number" id="questReward" class="ai" placeholder="Награда в монетах">
+          <select id="questType" class="ai">
+            <option value="promo">🎟️ Активировать промокод</option>
+            <option value="buy">🛒 Купить привилегию</option>
+            <option value="spin">🎡 Прокрутить колесо</option>
+            <option value="manual">✅ Ручное подтверждение</option>
+          </select>
+          <button class="ab ab-teal" onclick="createQuest()">🎯 СОЗДАТЬ ЗАДАНИЕ</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-list-check"></i> Активные задания <span class="rt-badge">● LIVE</span></h3>
+          <div id="questsList" class="list-box"><div class="list-item">Загрузка...</div></div>
+        </div>
+      </div>
+
+      <!-- 14. НАСТРОЙКИ САЙТА -->
+      <div id="sec-siteconfig" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-cog"></i> Настройки сайта <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:12px">Изменения применяются мгновенно для всех пользователей.</p>
+          <div style="display:flex;flex-direction:column;gap:14px" id="siteConfigPanel">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:rgba(0,0,0,.3);border-radius:14px">
+              <span><i class="fas fa-user-plus" style="color:var(--acc);margin-right:8px"></i>Регистрация</span>
+              <button class="quick-coin-btn" id="toggleRegBtn" onclick="toggleSiteConfig('registration')">⏳ Загрузка...</button>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:rgba(0,0,0,.3);border-radius:14px">
+              <span><i class="fas fa-store" style="color:var(--acc);margin-right:8px"></i>Магазин</span>
+              <button class="quick-coin-btn" id="toggleShopBtn" onclick="toggleSiteConfig('shop')">⏳ Загрузка...</button>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:rgba(0,0,0,.3);border-radius:14px">
+              <span><i class="fas fa-dice" style="color:var(--acc);margin-right:8px"></i>Колесо удачи</span>
+              <button class="quick-coin-btn" id="toggleWheelBtn" onclick="toggleSiteConfig('wheel')">⏳ Загрузка...</button>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:rgba(0,0,0,.3);border-radius:14px">
+              <span><i class="fas fa-ticket-alt" style="color:var(--acc);margin-right:8px"></i>Промокоды</span>
+              <button class="quick-coin-btn" id="togglePromoBtn" onclick="toggleSiteConfig('promos')">⏳ Загрузка...</button>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:rgba(0,0,0,.3);border-radius:14px">
+              <span><i class="fas fa-headset" style="color:var(--acc);margin-right:8px"></i>Поддержка/Обращения</span>
+              <button class="quick-coin-btn" id="toggleAppealsBtn" onclick="toggleSiteConfig('appeals')">⏳ Загрузка...</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 15. ТЕХНИЧЕСКИЕ РАБОТЫ С ТАЙМЕРОМ -->
+      <div id="sec-maintenance" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-tools"></i> Технические работы с таймером <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:10px">Показывает баннер с обратным отсчётом. Сайт остаётся доступным.</p>
+          <input type="text" id="maintTitle" class="ai" placeholder="Что делаем? (напр. Обновление сервера)">
+          <input type="datetime-local" id="maintEnd" class="ai">
+          <input type="color" id="maintColor" value="#f59e0b" style="width:50px;height:40px;border:none;border-radius:12px;cursor:pointer;margin:7px 0">
+          <label style="font-size:12px;color:var(--tm)">← Цвет баннера</label>
+          <button class="ab ab-orange" onclick="startMaintenance()">🔧 ЗАПУСТИТЬ ТЕХ. РАБОТЫ</button>
+          <button class="ab ab-green" onclick="stopMaintenance()">✅ ЗАВЕРШИТЬ ТЕХ. РАБОТЫ</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-info-circle"></i> Статус тех. работ <span class="rt-badge">● LIVE</span></h3>
+          <div id="maintStatus" style="color:var(--ok);font-weight:700;padding:10px">✅ Технических работ нет</div>
+        </div>
+      </div>
+
+      <!-- 16. СЛУЧАЙНЫЙ ПРИЗ -->
+      <div id="sec-randomgift" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-gift"></i> Случайный приз случайному игроку <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:10px">Система выбирает случайного онлайн-игрока и выдаёт ему монеты + уведомление.</p>
+          <input type="number" id="randomGiftAmount" class="ai" placeholder="Сумма приза (монет)">
+          <input type="text" id="randomGiftMsg" class="ai" placeholder="Сообщение победителю (необязательно)">
+          <select id="randomGiftTarget" class="ai">
+            <option value="online">🟢 Только онлайн-игроки</option>
+            <option value="all">👥 Любой игрок</option>
+            <option value="rich">💰 Игроки с балансом > 1000</option>
+            <option value="poor">💸 Игроки с балансом < 1000</option>
+          </select>
+          <button class="ab ab-pink" onclick="sendRandomGift()">🎁 ОТПРАВИТЬ СЛУЧАЙНЫЙ ПРИЗ</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-history"></i> История призов <span class="rt-badge">● LIVE</span></h3>
+          <div id="randomGiftHistory" class="list-box"><div class="list-item">Загрузка...</div></div>
+        </div>
+      </div>
+
+      <!-- 17. РЕЙТИНГ / ТОП -->
+      <div id="sec-toprating" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-trophy"></i> Подробный рейтинг <span class="rt-badge">● LIVE</span></h3>
+          <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+            <button class="quick-coin-btn" onclick="loadTopBy('balance')">💰 По балансу</button>
+            <button class="quick-coin-btn" onclick="loadTopBy('purchases')">🛒 По покупкам</button>
+            <button class="quick-coin-btn" onclick="loadTopBy('spins')">🎡 По прокруткам</button>
+            <button class="quick-coin-btn" onclick="loadTopBy('reg')">📅 По дате регистр.</button>
+          </div>
+          <div id="topRatingList" class="list-box"><div class="list-item">Выберите категорию</div></div>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-medal"></i> Наградить ТОП-3 игроков</h3>
+          <input type="number" id="topRewardAmount" class="ai" placeholder="Сумма монет для ТОП-1">
+          <p style="color:var(--tm);font-size:12px;margin:5px 0">ТОП-2 получит 50%, ТОП-3 — 25% от суммы</p>
+          <button class="ab ab-gold" onclick="rewardTopPlayers()">🏆 НАГРАДИТЬ ТОП-3</button>
+        </div>
+      </div>
+
+      <!-- 18. ГРУППОВЫЕ ОПОВЕЩЕНИЯ -->
+      <div id="sec-alertgroups" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-bell"></i> Групповые оповещения <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:10px">Отправьте сообщение определённой группе игроков сразу.</p>
+          <select id="alertGroup" class="ai">
+            <option value="all">👥 Всем игрокам</option>
+            <option value="online">🟢 Только онлайн</option>
+            <option value="rich">💰 Богатые (баланс > 50 000)</option>
+            <option value="poor">💸 Бедные (баланс < 1 000)</option>
+            <option value="newbies">🆕 Новички (регистр. < 7 дней)</option>
+            <option value="veterans">⭐ Ветераны (регистр. > 30 дней)</option>
+            <option value="nobadge">🏅 Без галочки</option>
+          </select>
+          <input type="text" id="alertTitle" class="ai" placeholder="Заголовок оповещения">
+          <textarea id="alertText" rows="3" class="ai ai-ta" placeholder="Текст оповещения..."></textarea>
+          <button class="ab ab-teal" onclick="sendGroupAlert()">🔔 ОТПРАВИТЬ ОПОВЕЩЕНИЕ</button>
+          <div id="alertResult" style="margin-top:10px;font-size:13px;color:var(--tm)"></div>
+        </div>
+      </div>
+
+      <!-- 19. СБРОС ПАРОЛЯ / УПРАВЛЕНИЕ АККАУНТАМИ -->
+      <div id="sec-resetpass" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-key"></i> Управление аккаунтами</h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:10px">Операции с аккаунтами игроков. Логируются в систему.</p>
+          <input type="text" id="accNick" class="ai" placeholder="Никнейм игрока">
+          <button class="ab ab-orange" onclick="sendPasswordResetByNick()">🔐 ОТПРАВИТЬ СБРОС ПАРОЛЯ НА EMAIL</button>
+          <button class="ab ab-blue" onclick="forceRenamePlayer()">✏️ ПЕРЕИМЕНОВАТЬ ИГРОКА</button>
+          <button class="ab ab-purple" onclick="lockPlayerAccount()">🔒 ЗАМОРОЗИТЬ АККАУНТ (без бана)</button>
+          <button class="ab ab-green" onclick="unlockPlayerAccount()">🔓 РАЗМОРОЗИТЬ АККАУНТ</button>
+          <button class="ab ab-red" onclick="wipePlayerBalance()">💸 ОБНУЛИТЬ БАЛАНС ИГРОКА</button>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-shield-alt"></i> Замороженные аккаунты <span class="rt-badge">● LIVE</span></h3>
+          <div id="frozenList" class="list-box"><div class="list-item">Загрузка...</div></div>
+        </div>
+      </div>
+
+      <!-- 20. ТЕМА САЙТА -->
+      <div id="sec-colorizer" class="admin-section">
+        <div class="admin-block">
+          <h3><i class="fas fa-palette"></i> Тема оформления сайта <span class="rt-badge">● LIVE</span></h3>
+          <p style="color:var(--tm);font-size:12px;margin-bottom:12px">Изменение цветов применяется у ВСЕХ пользователей мгновенно.</p>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <input type="color" id="themeAccent" value="#ffd700" style="width:50px;height:40px;border:none;border-radius:12px;cursor:pointer">
+              <span style="font-size:13px;color:var(--ts)">🌟 Основной цвет (акцент)</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <input type="color" id="themePurple" value="#8b5cf6" style="width:50px;height:40px;border:none;border-radius:12px;cursor:pointer">
+              <span style="font-size:13px;color:var(--ts)">🟣 Вторичный цвет</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <input type="color" id="themeBg" value="#0a0a12" style="width:50px;height:40px;border:none;border-radius:12px;cursor:pointer">
+              <span style="font-size:13px;color:var(--ts)">🌑 Фоновый цвет</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+            <button class="ab ab-gold" onclick="applyTheme()" style="flex:1">🎨 ПРИМЕНИТЬ ТЕМУ</button>
+            <button class="ab ab-gray" onclick="resetTheme()" style="flex:1">↩️ СБРОСИТЬ</button>
+          </div>
+          <div style="margin-top:14px">
+            <p style="font-size:13px;color:var(--ts);margin-bottom:10px">Быстрые темы:</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button onclick="setQuickTheme('gold')" style="background:linear-gradient(135deg,#ffd700,#ccaa00);border:none;padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:700;font-size:12px;color:#0a0a12">⭐ Золото</button>
+              <button onclick="setQuickTheme('red')" style="background:linear-gradient(135deg,#ef4444,#dc2626);border:none;padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:700;font-size:12px;color:#fff">🔴 Кровь</button>
+              <button onclick="setQuickTheme('blue')" style="background:linear-gradient(135deg,#3b82f6,#2563eb);border:none;padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:700;font-size:12px;color:#fff">💙 Океан</button>
+              <button onclick="setQuickTheme('green')" style="background:linear-gradient(135deg,#10b981,#059669);border:none;padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:700;font-size:12px;color:#fff">💚 Лес</button>
+              <button onclick="setQuickTheme('purple')" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);border:none;padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:700;font-size:12px;color:#fff">🟣 Мистика</button>
+              <button onclick="setQuickTheme('pink')" style="background:linear-gradient(135deg,#ec4899,#db2777);border:none;padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:700;font-size:12px;color:#fff">🩷 Закат</button>
+            </div>
+          </div>
+        </div>
+        <div class="admin-block">
+          <h3><i class="fas fa-eye"></i> Текущая тема <span class="rt-badge">● LIVE</span></h3>
+          <div id="currentTheme" style="color:var(--tm);padding:10px">Загрузка...</div>
         </div>
       </div>
 
@@ -1093,7 +1710,10 @@ let allPlayersCache=[],allIPCache=[],allAdminAppeals=[];
 let uTimer=null,uMessages=null,uMyAppeals=null,uPlayers=null,uBans=null;
 let uAdminAppeals=null,uPurchases=null,uAllMsgs=null,uUserBal=null;
 let uWarns=null,uPromo=null,uIPBans=null,uAdminLogs=null,uAnnounce=null;
-let uOnline=null;
+let uOnline=null,uGChat=null,uLottery=null,uNews=null,uEvents=null;
+let uMutes=null,uTemplates=null,uTicker=null,uKeys=null,uRaffle=null;
+let uQuests=null,uSiteConfig=null,uMaint=null,uRandomGifts=null,uTheme=null;
+let uFrozen=null,uActivity=null,uDonates=null;
 // Per-ticket chat unsubs: { [ticketId]: unsubFn }
 const uTicketChats={};
 
@@ -1213,6 +1833,9 @@ auth.onAuthStateChanged(async user=>{
     startBalanceListener(user.uid);
     startTimerListener();
     listenAnnounceBanner();
+    listenTickerBanner();
+    listenTheme();
+    listenActiveEvents();
     startPresence(user.uid);
     listenOwnBan(user.uid);
     loadShopFromFirestore();
@@ -1228,6 +1851,9 @@ auth.onAuthStateChanged(async user=>{
     if(document.getElementById('profilePage').classList.contains('active')) showPage('homePage');
     startTimerListener();
     listenAnnounceBanner();
+    listenTickerBanner();
+    listenTheme();
+    listenActiveEvents();
     loadShopFromFirestore();
   }
 });
@@ -1309,9 +1935,7 @@ db.collection('settings').doc('siteStatus').onSnapshot(snap=>{
   }else ov.classList.remove('visible');
 });
 
-// ──────────────────────────────────────────────────
-// НОВАЯ ФУНКЦИЯ 1: LIVE ОБЪЯВЛЕНИЕ НА САЙТЕ
-// ──────────────────────────────────────────────────
+// ─── LIVE ОБЪЯВЛЕНИЕ НА САЙТЕ ───
 function listenAnnounceBanner(){
   if(uAnnounce){uAnnounce();uAnnounce=null;}
   uAnnounce=db.collection('settings').doc('announcement').onSnapshot(snap=>{
@@ -1324,7 +1948,6 @@ function listenAnnounceBanner(){
       banner.style.color=d.textColor||'#fff';
       banner.classList.add('active');
       header.classList.add('shifted');
-      // Also update admin panel current announce display
       const ca=document.getElementById('currentAnnounce');
       if(ca) ca.innerHTML=`<div style="background:${d.bgColor||'#ef4444'};color:${d.textColor||'#fff'};padding:10px 20px;border-radius:12px;font-weight:700">${d.icon||'📢'} ${d.text}</div>`;
     }else{
@@ -1357,9 +1980,94 @@ async function removeAnnounce(){
   }catch(e){toast('Ошибка: '+e.message,'error');}
 }
 
-// ──────────────────────────────────────────────────
-// НОВАЯ ФУНКЦИЯ 2: ОНЛАЙН ИГРОКИ (lastSeen < 3 мин)
-// ──────────────────────────────────────────────────
+// ─── БЕГУЩАЯ СТРОКА (TICKER) ───
+function listenTickerBanner(){
+  if(uTicker){uTicker();uTicker=null;}
+  uTicker=db.collection('settings').doc('ticker').onSnapshot(snap=>{
+    const tickerBanner=document.getElementById('tickerBanner');
+    const tickerInner=document.getElementById('tickerInner');
+    if(snap.exists&&snap.data().active&&snap.data().text){
+      const d=snap.data();
+      tickerInner.innerText='📣 '+d.text+' 📣 '+d.text+' 📣 '+d.text;
+      const speed=d.speed||20;
+      tickerInner.style.animationDuration=speed+'s';
+      tickerBanner.classList.add('active');
+      const ct=document.getElementById('currentTicker');
+      if(ct) ct.innerHTML=`<div style="background:rgba(255,215,0,.1);padding:10px;border-radius:10px;color:var(--acc);font-weight:700">📣 ${d.text}</div>`;
+    }else{
+      tickerBanner.classList.remove('active');
+      const ct=document.getElementById('currentTicker');
+      if(ct) ct.innerHTML='<span style="color:var(--tm)">Нет активной строки</span>';
+    }
+  });
+}
+async function publishTicker(){
+  const text=document.getElementById('tickerText').value.trim();
+  const speed=parseInt(document.getElementById('tickerSpeed').value)||20;
+  if(!text){toast('Введите текст строки!','error');return;}
+  try{
+    await db.collection('settings').doc('ticker').set({text,active:true,speed,createdBy:currentUser?.email,createdAt:new Date()});
+    await adminLog('Бегущая строка запущена',text);
+    toast('📣 Бегущая строка запущена!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function stopTicker(){
+  try{
+    await db.collection('settings').doc('ticker').set({active:false,text:''});
+    await adminLog('Бегущая строка остановлена','');
+    toast('⏹️ Строка остановлена!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ─── ТЕМА САЙТА ───
+function listenTheme(){
+  if(uTheme){uTheme();uTheme=null;}
+  uTheme=db.collection('settings').doc('theme').onSnapshot(snap=>{
+    if(snap.exists&&snap.data().accent){
+      const d=snap.data();
+      document.documentElement.style.setProperty('--acc',d.accent||'#ffd700');
+      document.documentElement.style.setProperty('--adark',d.accentDark||'#ccaa00');
+      document.documentElement.style.setProperty('--pur',d.purple||'#8b5cf6');
+      if(d.bg) document.body.style.background=`linear-gradient(135deg,${d.bg},${d.bg}22)`;
+      const ct=document.getElementById('currentTheme');
+      if(ct) ct.innerHTML=`<div style="display:flex;gap:10px;align-items:center"><span style="display:inline-block;width:30px;height:30px;border-radius:50%;background:${d.accent}"></span><span style="color:${d.accent};font-weight:700">${d.accent}</span><span style="color:var(--tm);font-size:12px">Применена кем: ${d.appliedBy||'?'}</span></div>`;
+    }
+  });
+}
+async function applyTheme(){
+  const accent=document.getElementById('themeAccent').value;
+  const purple=document.getElementById('themePurple').value;
+  const bg=document.getElementById('themeBg').value;
+  const accentDark=accent+'bb';
+  try{
+    await db.collection('settings').doc('theme').set({accent,accentDark,purple,bg,appliedBy:currentUser?.displayName||currentUser?.email,appliedAt:new Date()});
+    await adminLog('Тема изменена',accent);
+    toast('🎨 Тема применена для всех!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function resetTheme(){
+  try{
+    await db.collection('settings').doc('theme').set({accent:'#ffd700',accentDark:'#ccaa00',purple:'#8b5cf6',bg:'#0a0a12',appliedBy:currentUser?.email,appliedAt:new Date()});
+    toast('↩️ Тема сброшена!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+function setQuickTheme(t){
+  const themes={
+    gold:{accent:'#ffd700',purple:'#8b5cf6',bg:'#0a0a12'},
+    red:{accent:'#ef4444',purple:'#f97316',bg:'#120808'},
+    blue:{accent:'#3b82f6',purple:'#06b6d4',bg:'#080a12'},
+    green:{accent:'#10b981',purple:'#22c55e',bg:'#08120a'},
+    purple:{accent:'#a855f7',purple:'#8b5cf6',bg:'#0a0812'},
+    pink:{accent:'#ec4899',purple:'#f472b6',bg:'#12080f'}
+  };
+  const th=themes[t]||themes.gold;
+  document.getElementById('themeAccent').value=th.accent;
+  document.getElementById('themePurple').value=th.purple;
+  document.getElementById('themeBg').value=th.bg;
+  applyTheme();
+}
+
+// ─── ОНЛАЙН ИГРОКИ ───
 function listenOnlinePlayers(){
   if(uOnline){uOnline();uOnline=null;}
   const el=document.getElementById('onlineList');
@@ -1391,9 +2099,7 @@ function listenOnlinePlayers(){
   });
 }
 
-// ──────────────────────────────────────────────────
-// НОВАЯ ФУНКЦИЯ 3: РЕДАКТОР ПРОФИЛЯ ИГРОКА (клик на игрока)
-// ──────────────────────────────────────────────────
+// ─── РЕДАКТОР ПРОФИЛЯ ИГРОКА ───
 function openEditPlayer(uid,data){
   document.getElementById('epmUid').value=uid;
   document.getElementById('epmNick').value=data.username||'';
@@ -1422,14 +2128,12 @@ async function deletePlayerFull(){
   if(!confirm(`⚠️ УДАЛИТЬ АККАУНТ ${nick} ПОЛНОСТЬЮ? Это действие необратимо!`)) return;
   if(!confirm('Вы уверены? ВСЕ данные будут удалены.')) return;
   try{
-    // Delete all sub-collections
     const batch=db.batch();
-    const [bans,donates,msgs,appeals,warns]=await Promise.all([
+    const [bans,donates,msgs,appeals]=await Promise.all([
       db.collection('bans').where('userId','==',uid).get(),
       db.collection('donates').where('userId','==',uid).get(),
       db.collection('messages').where('userId','==',uid).get(),
-      db.collection('appeals').where('playerId','==',uid).get(),
-      db.collection('users').doc(uid).get()
+      db.collection('appeals').where('playerId','==',uid).get()
     ]);
     bans.docs.forEach(d=>batch.delete(d.ref));
     donates.docs.forEach(d=>batch.delete(d.ref));
@@ -1439,74 +2143,65 @@ async function deletePlayerFull(){
     await batch.commit();
     await adminLog('Удаление аккаунта',`${nick} (uid:${uid})`);
     closeModal('editPlayerModal');
-    toast(`🗑️ Аккаунт ${nick} удалён полностью!`,'warning');
+    toast(`🗑️ Аккаунт ${nick} удалён!`,'success');
   }catch(e){toast('Ошибка: '+e.message,'error');}
 }
 
-// ──────────────────────────────────────────────────
-// НОВАЯ ФУНКЦИЯ 4: LIVE-ЧАТ ВНУТРИ ТИКЕТОВ
-// ──────────────────────────────────────────────────
+// ─── LIVE TICKET CHAT (admin) ───
 function openTicketChat(ticketId, container){
-  // Unsubscribe previous if any
-  if(uTicketChats[ticketId]){uTicketChats[ticketId]();delete uTicketChats[ticketId];}
-  container.innerHTML='<div style="font-size:12px;color:var(--tm);padding:5px">Загрузка чата...</div>';
-  uTicketChats[ticketId]=db.collection('appeals').doc(ticketId)
-    .collection('chat').orderBy('at','asc')
-    .onSnapshot(snap=>{
-      const msgs=[];snap.forEach(d=>msgs.push({id:d.id,...d.data()}));
-      let html='<div class="ticket-chat">';
-      if(!msgs.length) html+='<div style="font-size:12px;color:var(--tm);text-align:center;padding:10px">Нет сообщений в чате</div>';
-      msgs.forEach(m=>{
-        const isAdmin=m.role==='admin';
-        const time=m.at?.toDate?new Date(m.at.toDate()).toLocaleString('ru-RU'):'';
-        html+=`<div class="chat-msg ${isAdmin?'admin-msg':'user-msg'}">
-          <div class="cm-from">${isAdmin?'👑 '+m.from:'👤 '+m.from}</div>
-          <div class="cm-text">${(m.text||'').replace(/\n/g,'<br>')}</div>
-          <div class="cm-time">${time}</div>
-        </div>`;
-      });
-      html+=`<div class="chat-input-row">
-        <input type="text" id="chat-inp-${ticketId}" placeholder="Ответить в чате..." onkeydown="if(event.key==='Enter')sendTicketMsg('${ticketId}')">
-        <button class="chat-send-btn" onclick="sendTicketMsg('${ticketId}')">Отправить</button>
-      </div></div>`;
-      container.innerHTML=html;
+  if(uTicketChats[ticketId]){try{uTicketChats[ticketId]();}catch(_){} delete uTicketChats[ticketId];}
+  let html=`<div class="ticket-chat"><strong style="font-size:12px;color:var(--acc)">💬 Чат тикета:</strong><div id="adm-chat-${ticketId}" style="max-height:200px;overflow-y:auto;margin:8px 0">`;
+  uTicketChats[ticketId]=db.collection('appeals').doc(ticketId).collection('chat').orderBy('at').onSnapshot(snap=>{
+    const chatEl=document.getElementById('adm-chat-'+ticketId);
+    if(!chatEl) return;
+    chatEl.innerHTML='';
+    snap.forEach(m=>{
+      const d=m.data();
+      const isAdmin=(d.role==='admin');
+      const time=d.at?.toDate?new Date(d.at.toDate()).toLocaleTimeString('ru-RU'):'?';
+      const div=document.createElement('div');
+      div.className='chat-msg '+(isAdmin?'admin-msg':'user-msg');
+      div.innerHTML=`<div class="cm-from">${d.from||'?'}</div><div class="cm-text">${(d.text||'').replace(/\n/g,'<br>')}</div><div class="cm-time">${time}</div>`;
+      chatEl.appendChild(div);
     });
+    chatEl.scrollTop=chatEl.scrollHeight;
+  });
+  container.innerHTML=`<div class="ticket-chat"><strong style="font-size:12px;color:var(--acc)">💬 Чат тикета:</strong><div id="adm-chat-${ticketId}" style="max-height:200px;overflow-y:auto;margin:8px 0"></div><div class="chat-input-row"><input type="text" id="achat-${ticketId}" placeholder="Ответить..." onkeydown="if(event.key==='Enter')sendAdminTicketMsg('${ticketId}')"><button class="chat-send-btn" onclick="sendAdminTicketMsg('${ticketId}')">Ответить</button></div></div>`;
 }
-async function sendTicketMsg(ticketId){
-  const inp=document.getElementById('chat-inp-'+ticketId);
-  const text=inp?.value.trim(); if(!text) return;
+async function sendAdminTicketMsg(ticketId){
+  const inp=document.getElementById('achat-'+ticketId);
+  const text=inp?.value.trim(); if(!text||!currentUser) return;
   try{
     await db.collection('appeals').doc(ticketId).collection('chat').add({
-      text,from:currentUser?.displayName||currentUser?.email,
+      text,from:currentUser.displayName||'Администрация',
       role:'admin',at:new Date()
     });
-    await db.collection('appeals').doc(ticketId).update({status:'answered',lastReply:new Date()});
+    await db.collection('appeals').doc(ticketId).update({status:'answered'});
     inp.value='';
   }catch(e){toast('Ошибка: '+e.message,'error');}
 }
 
-// Пользователь тоже видит чат в своих обращениях
+// ─── USER TICKET CHAT ───
 function openUserTicketChat(ticketId, container){
-  if(uTicketChats['u_'+ticketId]){uTicketChats['u_'+ticketId]();delete uTicketChats['u_'+ticketId];}
-  uTicketChats['u_'+ticketId]=db.collection('appeals').doc(ticketId)
-    .collection('chat').orderBy('at','asc')
-    .onSnapshot(snap=>{
-      let html='<div class="ticket-chat">';
-      snap.forEach(d=>{
-        const m=d.data(), isAdm=m.role==='admin';
-        const time=m.at?.toDate?new Date(m.at.toDate()).toLocaleTimeString('ru-RU'):'';
-        html+=`<div class="chat-msg ${isAdm?'admin-msg':'user-msg'}">
-          <div class="cm-from">${isAdm?'👑 Администрация':'👤 '+m.from}</div>
-          <div class="cm-text">${(m.text||'').replace(/\n/g,'<br>')}</div>
-          <div class="cm-time">${time}</div>
-        </div>`;
-      });
-      html+=`<div class="chat-input-row">
-        <input type="text" id="uchat-${ticketId}" placeholder="Написать в поддержку..." onkeydown="if(event.key==='Enter')sendUserTicketMsg('${ticketId}')">
-        <button class="chat-send-btn" onclick="sendUserTicketMsg('${ticketId}')">Отправить</button>
-      </div></div>`;
-      container.innerHTML=html;
+  if(uTicketChats['u_'+ticketId]){try{uTicketChats['u_'+ticketId]();}catch(_){} delete uTicketChats['u_'+ticketId];}
+  let html=`<div class="ticket-chat"><strong style="font-size:12px;color:var(--acc)">💬 Живой чат с поддержкой:</strong><div id="uchat-box-${ticketId}" style="max-height:180px;overflow-y:auto;margin:8px 0"></div>`;
+  uTicketChats['u_'+ticketId]=db.collection('appeals').doc(ticketId).collection('chat').orderBy('at').onSnapshot(snap=>{
+    const chatEl=document.getElementById('uchat-box-'+ticketId);
+    if(!chatEl) return;
+    chatEl.innerHTML='';
+    snap.forEach(m=>{
+      const d=m.data();
+      const isAdmin=(d.role==='admin');
+      const time=d.at?.toDate?new Date(d.at.toDate()).toLocaleTimeString('ru-RU'):'?';
+      const div=document.createElement('div');
+      div.className='chat-msg '+(isAdmin?'admin-msg':'user-msg');
+      div.innerHTML=`<div class="cm-from">${isAdmin?'👑 Администрация':d.from||'?'}</div><div class="cm-text">${(d.text||'').replace(/\n/g,'<br>')}</div><div class="cm-time">${time}</div>`;
+      chatEl.appendChild(div);
     });
+    chatEl.scrollTop=chatEl.scrollHeight;
+  });
+  html+=`<div class="chat-input-row"><input type="text" id="uchat-${ticketId}" placeholder="Написать в поддержку..." onkeydown="if(event.key==='Enter')sendUserTicketMsg('${ticketId}')"><button class="chat-send-btn" onclick="sendUserTicketMsg('${ticketId}')">Отправить</button></div></div>`;
+  container.innerHTML=html;
 }
 async function sendUserTicketMsg(ticketId){
   const inp=document.getElementById('uchat-'+ticketId);
@@ -1519,12 +2214,6 @@ async function sendUserTicketMsg(ticketId){
     inp.value='';
   }catch(e){toast('Ошибка: '+e.message,'error');}
 }
-
-// ──────────────────────────────────────────────────
-// НОВАЯ ФУНКЦИЯ 5: УДАЛЕНИЕ АККАУНТА (полное, из редактора)
-// — реализовано в openEditPlayer / deletePlayerFull выше —
-// ДОПОЛНИТЕЛЬНО: команда из поиска
-// ──────────────────────────────────────────────────
 
 // ─── TIMER ───
 function startTimerListener(){
@@ -1552,6 +2241,22 @@ function startTimerListener(){
   });
 }
 
+// ─── АКТИВНЫЕ ИВЕНТЫ (на главной) ───
+function listenActiveEvents(){
+  const container=document.getElementById('activeEvents');
+  if(!container) return;
+  db.collection('events').where('active','==',true).onSnapshot(snap=>{
+    container.innerHTML='';
+    if(snap.empty) return;
+    snap.forEach(doc=>{
+      const e=doc.data();
+      const div=document.createElement('div');div.className='event-card-home';
+      div.innerHTML=`<i class="fas fa-star"></i><div><div class="ec-title">🎪 ${e.name||'Ивент'}</div><div class="ec-desc">${e.desc||''} ${e.reward>0?'• 💰 Награда: '+e.reward.toLocaleString()+' ₽':''}</div></div>`;
+      container.appendChild(div);
+    });
+  });
+}
+
 // ─── USER DATA ───
 async function loadUserData(user){
   const snap=await db.collection('users').doc(user.uid).get();
@@ -1566,10 +2271,11 @@ async function loadUserData(user){
   pn.dataset.username=data.username||user.displayName||'Игрок';
   pn.innerHTML=pn.dataset.username+getBadge(data.badge);
   document.getElementById('userTag').innerText=data.tag||'#user';
+  // Показываем ник, НЕ email, и IP только администратору
   document.getElementById('profileInfoBlock').innerHTML=`
-    <p><i class="fas fa-envelope"></i> ${user.email}</p>
+    <p><i class="fas fa-user"></i> ${data.username||user.displayName||'Игрок'}</p>
     <p><i class="fas fa-calendar-alt"></i> ${data.registeredAt?new Date(data.registeredAt).toLocaleDateString('ru-RU'):'Сегодня'}</p>
-    ${data.ip?`<p><i class="fas fa-globe"></i> IP: <code style="color:var(--tm);font-size:11px">${isAdmin?data.ip:'●●●.●●●.●●●.●●●'}</code></p>`:''}`;
+    ${data.ip&&isAdmin?`<p><i class="fas fa-globe"></i> IP: <code style="color:var(--tm);font-size:11px">${data.ip}</code></p>`:''}`;
   if(data.warns&&data.warns.length>0) renderUserWarns(data.warns);
   const donatesSnap=await db.collection('donates').where('userId','==',user.uid).get();
   const totalSpent=donatesSnap.docs.reduce((s,d)=>s+(d.data().price||0),0);
@@ -1694,7 +2400,10 @@ async function activatePromo(){
 function saveNick(){const nick=document.getElementById('newNickInput').value.trim();if(!nick){toast('Введите никнейм!','error');return;}Promise.all([db.collection('users').doc(currentUser.uid).update({username:nick}),currentUser.updateProfile({displayName:nick})]).then(()=>{closeModal('editNameModal');toast('Никнейм изменён!','success');loadUserData(currentUser);}).catch(e=>toast('Ошибка: '+e.message,'error'));}
 function savePass(){const pass=document.getElementById('newPassInput').value;if(!pass||pass.length<6){toast('Пароль минимум 6 символов!','error');return;}currentUser.updatePassword(pass).then(()=>{closeModal('changePassModal');toast('Пароль изменён!','success');}).catch(e=>{if(e.code==='auth/requires-recent-login'){toast('Войдите заново!','error');auth.signOut();}else toast('Ошибка: '+e.message,'error');});}
 
-// ─── MESSAGES ───
+// ================================================================
+// СООБЩЕНИЯ — ПОКАЗЫВАЕМ НИК + ГАЛОЧКУ, НЕ EMAIL
+// Имя отправителя — жёлтое (#ffd700), не RGB
+// ================================================================
 function listenMessages(){
   if(!currentUser)return;
   if(uMessages){uMessages();uMessages=null;}
@@ -1705,8 +2414,16 @@ function listenMessages(){
     list.innerHTML='';
     snap.forEach(doc=>{
       const m=doc.data(),el=document.createElement('div');el.className='msg-item'+(m.read?'':' unread');
-      el.innerHTML=`<div class="msg-from"><i class="fas fa-crown"></i> ${m.from||'Администрация'}</div><div style="font-weight:700;margin-bottom:5px">${m.title||'Сообщение'}</div><div style="color:var(--ts);font-size:13px">${(m.text||'').substring(0,120)}${(m.text||'').length>120?'...':''}</div><div style="font-size:11px;color:var(--tm);margin-top:8px">${m.createdAt?.toDate?new Date(m.createdAt.toDate()).toLocaleString('ru-RU'):''}</div>`;
-      el.addEventListener('click',async()=>{alert(`От: ${m.from||'Администрация'}\n${m.title?'Тема: '+m.title+'\n':''}\n${m.text||''}`);if(!m.read){await doc.ref.update({read:true});el.classList.remove('unread');}});
+      // Отображаем: иконка + ник + галочка (badge). Email никогда не показываем.
+      // Имя всегда жёлтое (#ffd700), задаётся через CSS .msg-from
+      const senderBadge=m.fromBadge?getBadge(m.fromBadge):'';
+      const senderName=m.fromNick||m.from||'Администрация';
+      el.innerHTML=`<div class="msg-from"><i class="fas fa-crown"></i> <strong>${senderName}</strong>${senderBadge}</div><div style="font-weight:700;margin-bottom:5px">${m.title||'Сообщение'}</div><div style="color:var(--ts);font-size:13px">${(m.text||'').substring(0,120)}${(m.text||'').length>120?'...':''}</div><div style="font-size:11px;color:var(--tm);margin-top:8px">${m.createdAt?.toDate?new Date(m.createdAt.toDate()).toLocaleString('ru-RU'):''}</div>`;
+      el.addEventListener('click',async()=>{
+        const fullText=`👑 От: ${senderName}\n${m.title?'Тема: '+m.title+'\n':''}\n${m.text||''}`;
+        alert(fullText);
+        if(!m.read){await doc.ref.update({read:true});el.classList.remove('unread');}
+      });
       list.appendChild(el);
     });
   });
@@ -1755,16 +2472,110 @@ function listenMyAppeals(){
         <div class="ap-msg">${(ap.message||'').replace(/\n/g,'<br>')}</div>
         ${ap.answer?`<div class="ap-answer"><strong style="color:var(--pur)">Ответ:</strong><br><br>${ap.answer.replace(/\n/g,'<br>')}</div>`:''}`;
       card.appendChild(chatDiv);
-      // Open live chat for this ticket
       openUserTicketChat(ap.id, chatDiv);
       container.appendChild(card);
     });
   });
 }
 
-// ─── MODERATORS ───
-async function loadModerators(){try{const s=await db.collection('settings').doc('moderators').get();moderatorsList=s.exists?(s.data().list||[]):[]}catch(_){moderatorsList=[];}renderModeratorsList();}
-function renderModeratorsList(){const el=document.getElementById('moderatorsList');if(!el)return;if(!moderatorsList.length){el.innerHTML='<div class="list-item">Нет модераторов</div>';return;}el.innerHTML=moderatorsList.map(m=>`<div class="list-item"><span>👑 <strong>${m.nick}</strong> — ${m.email}</span><button onclick="removeMod('${m.email}')" style="background:#ef4444;border:none;padding:5px 14px;border-radius:30px;color:#fff;cursor:pointer;font-weight:600;font-size:12px;font-family:'Montserrat',sans-serif">Удалить</button></div>`).join('');}
+// ================================================================
+// МОДЕРАТОРЫ — ПОЛНАЯ СИСТЕМА С ПРАВАМИ И ОГРАНИЧИТЕЛЯМИ
+// ================================================================
+async function loadModerators(){
+  try{const s=await db.collection('settings').doc('moderators').get();moderatorsList=s.exists?(s.data().list||[]):[]}catch(_){moderatorsList=[];}
+  renderModeratorsList();
+}
+
+function renderModeratorsList(){
+  const el=document.getElementById('moderatorsList');if(!el)return;
+  if(!moderatorsList.length){el.innerHTML='<div class="list-item">Нет модераторов</div>';return;}
+  el.innerHTML='';
+  moderatorsList.forEach(m=>{
+    const div=document.createElement('div');div.className='list-item';div.style.cssText='flex-direction:column;align-items:flex-start;gap:8px';
+    const levelLabels={moderator:'🛡️ Модератор',senior:'⭐ Ст. Модератор',admin:'👑 Администратор'};
+    const perms=m.permissions||{};
+    let permTags='';
+    if(perms.coins) permTags+=`<span class="perm-tag ${perms.coinsMax>0?'limited':''}">💰 Монеты${perms.coinsMax>0?' (макс '+perms.coinsMax.toLocaleString()+'₽)':''}</span>`;
+    if(perms.ban) permTags+=`<span class="perm-tag ${perms.banMax>0?'limited':''}">🔨 Баны${perms.banMax>0?' (макс '+perms.banMax+'ч)':''}</span>`;
+    if(perms.warn) permTags+=`<span class="perm-tag">⚠️ Варны</span>`;
+    if(perms.site) permTags+=`<span class="perm-tag ${perms.siteMax>0?'limited':''}">🔒 Сайт${perms.siteMax>0?' (макс '+perms.siteMax+'мин)':''}</span>`;
+    if(perms.broadcast) permTags+=`<span class="perm-tag">📢 Рассылка</span>`;
+    if(perms.announce) permTags+=`<span class="perm-tag">📣 Объявл.</span>`;
+    if(perms.badges) permTags+=`<span class="perm-tag">🏅 Галочки</span>`;
+    if(perms.spins) permTags+=`<span class="perm-tag">🎡 Прокрутки</span>`;
+    if(perms.promo) permTags+=`<span class="perm-tag">🎟️ Промокоды</span>`;
+    if(perms.appeals) permTags+=`<span class="perm-tag">📨 Обращения</span>`;
+    if(perms.ipban) permTags+=`<span class="perm-tag">🌐 IP-баны</span>`;
+    if(perms.editplayer) permTags+=`<span class="perm-tag">✏️ Ред. игроков</span>`;
+    div.innerHTML=`<div style="display:flex;justify-content:space-between;width:100%;align-items:center">
+      <div><strong style="color:var(--acc)">${m.nick}</strong> <span style="font-size:11px;color:var(--tm)">${m.email}</span><br><span style="font-size:12px;color:var(--pur)">${levelLabels[m.level]||'🛡️ Модератор'}</span></div>
+      <button onclick="removeMod('${m.email}')" style="background:#ef4444;border:none;padding:5px 14px;border-radius:30px;color:#fff;cursor:pointer;font-weight:600;font-size:12px;font-family:'Montserrat',sans-serif">Удалить</button>
+    </div>
+    <div class="mod-list-perm">${permTags||'<span style="color:var(--tm)">Нет прав</span>'}</div>`;
+    el.appendChild(div);
+  });
+}
+
+async function addModerator(){
+  const nick=document.getElementById('modNick').value.trim();
+  const email=document.getElementById('modEmail').value.trim();
+  if(!nick||!email){toast('Укажите ник и email!','error');return;}
+  const level=document.querySelector('input[name="modLevel"]:checked')?.value||'moderator';
+  const coinsMax=parseInt(document.getElementById('perm-coins-max').value)||0;
+  const banMax=parseInt(document.getElementById('perm-ban-max').value)||0;
+  const siteMax=parseInt(document.getElementById('perm-site-max').value)||0;
+  const permissions={
+    coins:document.getElementById('perm-coins').checked,
+    coinsMax:coinsMax,
+    ban:document.getElementById('perm-ban').checked,
+    banMax:banMax,
+    warn:document.getElementById('perm-warn').checked,
+    site:document.getElementById('perm-site').checked,
+    siteMax:siteMax,
+    broadcast:document.getElementById('perm-broadcast').checked,
+    announce:document.getElementById('perm-announce').checked,
+    badges:document.getElementById('perm-badges').checked,
+    spins:document.getElementById('perm-spins').checked,
+    promo:document.getElementById('perm-promo').checked,
+    appeals:document.getElementById('perm-appeals').checked,
+    ipban:document.getElementById('perm-ipban').checked,
+    editplayer:document.getElementById('perm-editplayer').checked
+  };
+  const newMod={nick,email,level,permissions,addedAt:new Date().toISOString()};
+  const exists=moderatorsList.find(m=>m.email===email);
+  if(exists){toast('Этот email уже есть!','warning');return;}
+  moderatorsList.push(newMod);
+  try{
+    await db.collection('settings').doc('moderators').set({list:moderatorsList});
+    await adminLog('Добавлен модератор',`${nick} (${email}) — уровень: ${level}`);
+    renderModeratorsList();
+    document.getElementById('modNick').value='';document.getElementById('modEmail').value='';
+    toast(`✅ Модератор ${nick} добавлен с правами!`,'success');
+  }catch(e){moderatorsList.pop();toast('Ошибка: '+e.message,'error');}
+}
+
+async function removeMod(email){
+  if(!confirm('Удалить модератора?'))return;
+  moderatorsList=moderatorsList.filter(m=>m.email!==email);
+  try{
+    await db.collection('settings').doc('moderators').set({list:moderatorsList});
+    await adminLog('Удалён модератор',email);
+    renderModeratorsList();
+    toast('🗑️ Модератор удалён!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// Проверка прав модератора
+function modCanDo(perm){
+  if(isAdmin) return true;
+  const mod=moderatorsList.find(m=>m.email===currentUser?.email);
+  return mod&&mod.permissions&&mod.permissions[perm];
+}
+function modGetLimit(perm){
+  if(isAdmin) return 0;
+  const mod=moderatorsList.find(m=>m.email===currentUser?.email);
+  return mod&&mod.permissions?mod.permissions[perm+'Max']||0:0;
+}
 
 // ─── ADMIN PANEL OPEN/CLOSE ───
 document.getElementById('adminTrigger').addEventListener('click',()=>{
@@ -1785,6 +2596,10 @@ function openAdminPanel(){
   listenPlayers(); listenActiveBans(); listenAdminAppeals(); loadPurchases();
   listenAdminMessages(); renderModeratorsList(); listenWarns(); listenPromos();
   listenIPBans(); listenAdminLogs(); listenStats(); renderShopEditor();
+  listenDonates(); listenSiteStatus(); listenSiteConfig(); listenGlobalChat();
+  listenLottery(); listenNews(); listenEvents(); listenMutes(); listenTemplates();
+  listenKeys(); listenRaffle(); listenQuests(); listenMaintenance(); listenRandomGiftHistory();
+  listenFrozenAccounts(); listenActivityFeed();
   if('Notification' in window&&Notification.permission==='default') Notification.requestPermission();
 }
 function closeAdminPanel(){
@@ -1792,8 +2607,8 @@ function closeAdminPanel(){
   document.getElementById('siteHeader').style.display='block';
   document.querySelectorAll('.page').forEach(p=>p.style.display='');
   document.getElementById('adminTrigger').style.display='flex';
-  [uPlayers,uBans,uAdminAppeals,uPurchases,uAllMsgs,uWarns,uPromo,uIPBans,uAdminLogs,uOnline].forEach(u=>{try{if(u)u();}catch(_){}});
-  uPlayers=uBans=uAdminAppeals=uPurchases=uAllMsgs=uWarns=uPromo=uIPBans=uAdminLogs=uOnline=null;
+  const allUnsubs=[uPlayers,uBans,uAdminAppeals,uPurchases,uAllMsgs,uWarns,uPromo,uIPBans,uAdminLogs,uOnline,uGChat,uLottery,uNews,uEvents,uMutes,uTemplates,uKeys,uRaffle,uQuests,uMaint,uRandomGifts,uFrozen,uActivity,uDonates,uSiteConfig];
+  allUnsubs.forEach(u=>{try{if(u)u();}catch(_){}});
   Object.keys(uTicketChats).forEach(k=>{try{uTicketChats[k]();}catch(_){} delete uTicketChats[k];});
   showPage('homePage');
 }
@@ -1804,6 +2619,8 @@ document.querySelectorAll('.admin-cat').forEach(btn=>{btn.addEventListener('clic
   document.getElementById('sec-'+btn.dataset.sec).classList.add('active');
   if(btn.dataset.sec==='online') listenOnlinePlayers();
   if(btn.dataset.sec==='stats') listenStats();
+  if(btn.dataset.sec==='finance') loadFinance();
+  if(btn.dataset.sec==='siteconfig') listenSiteConfig();
 });});
 
 // ─── LIVE PLAYERS LIST ───
@@ -1879,14 +2696,13 @@ function listenActiveBans(){
 }
 async function quickUnban(docId){try{await db.collection('bans').doc(docId).update({active:false});toast('✅ Разбанен!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
 
-// ─── LIVE APPEALS (ADMIN) — с чатом ───
+// ─── LIVE APPEALS (ADMIN) ───
 function listenAdminAppeals(){
   if(uAdminAppeals){uAdminAppeals();uAdminAppeals=null;}
   const el=document.getElementById('adminAppealsList');el.innerHTML='<div class="list-item">Загрузка...</div>';
   uAdminAppeals=db.collection('appeals').orderBy('createdAt','desc').onSnapshot(snap=>{
     allAdminAppeals=[];snap.forEach(doc=>allAdminAppeals.push({id:doc.id,...doc.data()}));
     filterAdminAppeals();
-    // Browser notification for new waiting
     const waiting=allAdminAppeals.filter(a=>a.status==='waiting').length;
     if(waiting>0&&'Notification' in window&&Notification.permission==='granted')
       new Notification('GrifMcPro',{body:`⏳ Новых обращений: ${waiting}`});
@@ -2037,43 +2853,1167 @@ async function findUserByNick(nick){
   return snap.empty?null:snap.docs[0];
 }
 
-async function giveCoins(){const nick=document.getElementById('giveNick').value.trim(),amount=parseInt(document.getElementById('giveAmount').value)||0;if(!nick||!amount){toast('Укажите ник и сумму!','error');return;}try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}await doc.ref.update({balance:firebase.firestore.FieldValue.increment(amount)});await adminLog('Монеты',`+${amount.toLocaleString()} → ${nick}`);toast(`✅ Выдано ${amount.toLocaleString()} ₽ → ${nick}`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function giveCoinsAll(){if(!isAdmin){toast('Только главный администратор!','error');return;}const amount=parseInt(document.getElementById('giveAmount').value)||0;if(!amount){toast('Укажите сумму!','error');return;}if(!confirm(`Выдать ${amount.toLocaleString()} ₽ ВСЕМ?`))return;try{const snap=await db.collection('users').get();const batch=db.batch();snap.docs.forEach(d=>batch.update(d.ref,{balance:firebase.firestore.FieldValue.increment(amount)}));await batch.commit();await adminLog('Монеты всем',`+${amount.toLocaleString()} × ${snap.size}`);toast(`✅ Выдано всем!`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function sendBroadcast(){const title=document.getElementById('broadcastTitle').value.trim(),text=document.getElementById('broadcastMsg').value.trim();if(!text){toast('Введите текст!','error');return;}try{const snap=await db.collection('users').get();const from=isAdmin?'Администрация':(moderatorsList.find(m=>m.email===currentUser.email)?.nick||'Модератор');const batch=db.batch();snap.docs.forEach(d=>batch.set(db.collection('messages').doc(),{userId:d.id,from,title:title||'Сообщение',text,read:false,createdAt:new Date(),toNick:'Всем'}));await batch.commit();document.getElementById('broadcastTitle').value='';document.getElementById('broadcastMsg').value='';await adminLog('Рассылка',title||text.substring(0,50));toast(`📢 Рассылка ${snap.size} пользователям!`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function sendPrivateMsg(){const nick=document.getElementById('msgToNick').value.trim(),title=document.getElementById('msgTitle').value.trim(),text=document.getElementById('msgBody').value.trim();if(!nick||!text){toast('Укажите получателя и текст!','error');return;}try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}const from=isAdmin?'Администрация':(moderatorsList.find(m=>m.email===currentUser.email)?.nick||'Модератор');await db.collection('messages').add({userId:doc.id,from,title:title||'Личное сообщение',text,read:false,createdAt:new Date(),toNick:nick});document.getElementById('msgToNick').value='';document.getElementById('msgTitle').value='';document.getElementById('msgBody').value='';await adminLog('Сообщение',`→ ${nick}`);toast(`📨 Отправлено → ${nick}!`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function banUser(){const nick=document.getElementById('banNick').value.trim(),moderator=document.getElementById('banModeratorName').value.trim()||(currentUser?.displayName||currentUser?.email),reason=document.getElementById('banReason').value.trim(),duration=document.getElementById('banDuration').value;if(!nick||!reason){toast('Укажите ник и причину!','error');return;}try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}const until=duration==='forever'?null:new Date(Date.now()+parseInt(duration)*3600000);await db.collection('bans').add({userId:doc.id,username:nick,email:doc.data().email,reason,until,active:true,moderator,createdAt:new Date()});await adminLog('Бан',`${nick} — ${reason}`);toast(`🔨 ${nick} забанен!`,'warning');document.getElementById('banNick').value='';document.getElementById('banReason').value='';document.getElementById('banModeratorName').value='';}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function unbanUser(){const nick=document.getElementById('banNick').value.trim();if(!nick){toast('Укажите ник!','error');return;}try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}const snap=await db.collection('bans').where('userId','==',doc.id).where('active','==',true).get();if(snap.empty){toast('Активных банов нет!','warning');return;}const batch=db.batch();snap.docs.forEach(d=>batch.update(d.ref,{active:false}));await batch.commit();await adminLog('Разбан',nick);toast(`✅ ${nick} разбанен!`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function banByIP(){const ip=document.getElementById('ipBanAddress').value.trim(),reason=document.getElementById('ipBanReason').value.trim()||'Нарушение правил';if(!ip){toast('Укажите IP!','error');return;}try{await db.collection('ipBans').add({ip,reason,active:true,bannedBy:currentUser?.email,createdAt:new Date()});await adminLog('IP-бан',`${ip} — ${reason}`);document.getElementById('ipBanAddress').value='';document.getElementById('ipBanReason').value='';toast(`🌐 IP ${ip} заблокирован!`,'warning');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function unbanIP(){const ip=document.getElementById('ipBanAddress').value.trim();if(!ip){toast('Укажите IP!','error');return;}try{const snap=await db.collection('ipBans').where('ip','==',ip).where('active','==',true).get();if(snap.empty){toast('IP-бан не найден!','warning');return;}const batch=db.batch();snap.docs.forEach(d=>batch.update(d.ref,{active:false}));await batch.commit();await adminLog('Разбан IP',ip);toast(`✅ IP ${ip} разбанен!`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function giveWarn(){const nick=document.getElementById('warnNick').value.trim(),reason=document.getElementById('warnReason').value.trim();if(!nick||!reason){toast('Укажите ник и причину!','error');return;}try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}const warns=(doc.data().warns||[]);warns.push({reason,by:currentUser?.displayName||currentUser?.email,at:new Date().toISOString()});await doc.ref.update({warns});await adminLog('Варн',`${nick} — ${reason}`);toast(`⚠️ Варн выдан ${nick}!`,'warning');document.getElementById('warnNick').value='';document.getElementById('warnReason').value='';if(warns.length>=3){await db.collection('bans').add({userId:doc.id,username:nick,email:doc.data().email,reason:'Автобан: 3 предупреждения',until:null,active:true,moderator:'Система',createdAt:new Date()});toast(`🔨 ${nick} автоматически забанен за 3 варна!`,'error');}}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function removeWarn(){const nick=document.getElementById('warnNick').value.trim();if(!nick){toast('Укажите ник!','error');return;}try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}const warns=(doc.data().warns||[]);if(!warns.length){toast('Варнов нет!','warning');return;}warns.pop();await doc.ref.update({warns});toast(`✅ Варн снят с ${nick}!`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function clearAllWarns(){const nick=document.getElementById('warnNick').value.trim();if(!nick){toast('Укажите ник!','error');return;}try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}await doc.ref.update({warns:[]});await adminLog('Снятие варнов',nick);toast(`✅ Все варны сняты с ${nick}!`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function removeWarnById(uid,idx){try{const doc=await db.collection('users').doc(uid).get();const warns=[...(doc.data().warns||[])];warns.splice(idx,1);await db.collection('users').doc(uid).update({warns});toast('✅ Варн удалён!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function closeSite(){const reason=document.getElementById('closeReason').value.trim()||'Технические работы',duration=document.getElementById('closeDuration').value,until=duration==='0'?null:new Date(Date.now()+parseInt(duration)*3600000);try{await db.collection('settings').doc('siteStatus').set({closed:true,reason,until});await adminLog('Закрытие сайта',reason);toast('🔒 Сайт закрыт!','warning');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function openSite(){try{await db.collection('settings').doc('siteStatus').set({closed:false});document.getElementById('closedOverlay').classList.remove('visible');await adminLog('Открытие сайта','');toast('🔓 Сайт открыт!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function closeAppeals(){const reason=document.getElementById('appealsCloseReason').value.trim()||'Технические работы';try{await db.collection('settings').doc('appealsSettings').set({closed:true,reason});await adminLog('Закрытие обращений',reason);toast('🔒 Закрыто!','warning');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function openAppeals(){try{await db.collection('settings').doc('appealsSettings').set({closed:false});await adminLog('Открытие обращений','');toast('🔓 Открыто!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function giveDonate(){const nick=document.getElementById('donateNick').value.trim(),donate=document.getElementById('donateName').value.trim();if(!nick||!donate){toast('Укажите ник и донат!','error');return;}try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}await db.collection('donates').add({userId:doc.id,username:nick,product:donate,price:0,date:new Date(),givenBy:'Админ'});await adminLog('Выдача доната',`${nick} — ${donate}`);toast(`🎁 "${donate}" выдан ${nick}!`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function removeDonate(){const nick=document.getElementById('donateNick').value.trim();if(!nick||!confirm(`Удалить ВСЕ донаты ${nick}?`))return;try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}const ds=await db.collection('donates').where('userId','==',doc.id).get();const batch=db.batch();ds.docs.forEach(d=>batch.delete(d.ref));await batch.commit();await adminLog('Снятие донатов',nick);toast(`❌ Все донаты ${nick} удалены!`,'warning');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function saveTimer(){const name=document.getElementById('timerName').value.trim()||'ДО ОТКРЫТИЯ СЕЗОНА',desc=document.getElementById('timerDesc').value.trim(),date=document.getElementById('timerDate').value;if(!date){toast('Выберите дату!','error');return;}try{await db.collection('settings').doc('timer').set({eventName:name,eventDesc:desc,targetDate:new Date(date)});await adminLog('Таймер',name);toast('⏰ Таймер сохранён!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function giveBadge(){const nick=document.getElementById('badgeNick').value.trim(),type=document.getElementById('badgeType').value;if(!nick){toast('Укажите ник!','error');return;}try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}await doc.ref.update({badge:type});await adminLog('Галочка',`${type} → ${nick}`);toast(`✅ Галочка "${type}" → ${nick}!`,'success');document.getElementById('badgeNick').value='';}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function removeBadge(){const nick=document.getElementById('badgeNick').value.trim();if(!nick){toast('Укажите ник!','error');return;}try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}await doc.ref.update({badge:null});await adminLog('Снятие галочки',nick);toast(`❌ Галочка снята с ${nick}!`,'success');document.getElementById('badgeNick').value='';}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function giveSpin(){const nick=document.getElementById('spinNick').value.trim(),amount=parseInt(document.getElementById('spinAmount').value)||1;if(!nick){toast('Укажите ник!','error');return;}try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}await doc.ref.update({wheelSpins:firebase.firestore.FieldValue.increment(amount)});await adminLog('Прокрутки',`+${amount} → ${nick}`);toast(`🎫 ${amount} прокруток → ${nick}!`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function removeSpin(){const nick=document.getElementById('spinNick').value.trim();if(!nick){toast('Укажите ник!','error');return;}try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}const spins=doc.data().wheelSpins||0;if(spins<=0){toast('Нет прокруток!','warning');return;}await doc.ref.update({wheelSpins:firebase.firestore.FieldValue.increment(-1)});toast(`❌ Прокрутка забрана у ${nick}!`,'warning');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function setExactBalance(){const nick=document.getElementById('setBalNick').value.trim(),amount=parseInt(document.getElementById('setBalAmount').value);if(!nick||isNaN(amount)){toast('Укажите ник и баланс!','error');return;}if(!confirm(`Установить баланс ${nick} = ${amount.toLocaleString()} ₽?`))return;try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}await doc.ref.update({balance:amount});await adminLog('Установка баланса',`${nick} = ${amount.toLocaleString()} ₽`);toast(`💳 Баланс ${nick} = ${amount.toLocaleString()} ₽`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function addCoinsToPlayer(){const nick=document.getElementById('setBalNick').value.trim(),amount=parseInt(document.getElementById('setBalAmount').value);if(!nick||isNaN(amount)){toast('Укажите ник и сумму!','error');return;}try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}await doc.ref.update({balance:firebase.firestore.FieldValue.increment(amount)});await adminLog('Монеты',`+${amount.toLocaleString()} → ${nick}`);toast(`✅ +${amount.toLocaleString()} ₽ → ${nick}`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function setZeroBalance(){const nick=document.getElementById('setBalNick').value.trim();if(!nick||!confirm(`Обнулить баланс ${nick}?`))return;try{const doc=await findUserByNick(nick);if(!doc){toast('Игрок не найден!','error');return;}await doc.ref.update({balance:0});await adminLog('Обнуление баланса',nick);toast(`🚫 Баланс ${nick} обнулён!`,'warning');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function createPromo(){const code=(document.getElementById('promoCode').value.trim()||'').toUpperCase(),amount=parseInt(document.getElementById('promoAmount').value)||0,maxUses=parseInt(document.getElementById('promoUses').value)||0;if(!code||!amount){toast('Укажите код и сумму!','error');return;}try{const ex=await db.collection('promoCodes').where('code','==',code).get();if(!ex.empty){toast('Такой код уже есть!','error');return;}await db.collection('promoCodes').add({code,amount,maxUses,usesLeft:maxUses,usedCount:0,usedBy:[],active:true,createdAt:new Date(),createdBy:currentUser?.email});await adminLog('Промокод',`${code} — ${amount.toLocaleString()} ₽ × ${maxUses||'∞'}`);document.getElementById('promoCode').value='';document.getElementById('promoAmount').value='';document.getElementById('promoUses').value='';toast(`🎟️ Промокод ${code} создан!`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function deletePromo(id){try{await db.collection('promoCodes').doc(id).delete();toast('🗑️ Промокод удалён!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function clearAdminLogs(){if(!isAdmin){toast('Только главный администратор!','error');return;}if(!confirm('Очистить ВСЕ логи?'))return;try{const snap=await db.collection('adminLogs').get();const batch=db.batch();snap.docs.forEach(d=>batch.delete(d.ref));await batch.commit();toast('🗑️ Логи очищены!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function addModerator(){if(!isAdmin){toast('Только главный администратор!','error');return;}const nick=document.getElementById('modNick').value.trim(),email=document.getElementById('modEmail').value.trim();if(!nick||!email){toast('Укажите ник и email!','error');return;}if(moderatorsList.some(m=>m.email===email)){toast('Уже модератор!','warning');return;}try{moderatorsList.push({nick,email});await db.collection('settings').doc('moderators').set({list:moderatorsList});document.getElementById('modNick').value='';document.getElementById('modEmail').value='';renderModeratorsList();await adminLog('Модератор добавлен',`${nick} (${email})`);toast(`✅ ${nick} добавлен!`,'success');}catch(e){toast('Ошибка: '+e.message,'error');}}
-async function removeMod(email){moderatorsList=moderatorsList.filter(m=>m.email!==email);try{await db.collection('settings').doc('moderators').set({list:moderatorsList});renderModeratorsList();toast('✅ Модератор удалён!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
+async function giveCoins(){
+  const nick=document.getElementById('giveNick').value.trim();
+  const amount=parseInt(document.getElementById('giveAmount').value)||0;
+  if(!nick||!amount){toast('Укажите ник и сумму!','error');return;}
+  // Проверка лимита для модераторов
+  if(!isAdmin){
+    const limit=modGetLimit('coins');
+    if(limit>0&&amount>limit){toast(`Ваш лимит выдачи: ${limit.toLocaleString()} ₽ за раз!`,'error');return;}
+  }
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    await doc.ref.update({balance:firebase.firestore.FieldValue.increment(amount)});
+    await adminLog('Монеты',`+${amount.toLocaleString()} → ${nick}`);
+    toast(`✅ Выдано ${amount.toLocaleString()} ₽ → ${nick}`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
 
-// ─── INIT ───
-fetchUserIP();
-startTimerListener();
-listenAnnounceBanner();
-loadShopFromFirestore();
+async function giveCoinsAll(){
+  if(!isAdmin){toast('Только главный администратор!','error');return;}
+  const amount=parseInt(document.getElementById('giveAmount').value)||0;
+  if(!amount){toast('Укажите сумму!','error');return;}
+  if(!confirm(`Выдать ${amount.toLocaleString()} ₽ ВСЕМ?`))return;
+  try{
+    const snap=await db.collection('users').get();
+    const batch=db.batch();
+    snap.docs.forEach(d=>batch.update(d.ref,{balance:firebase.firestore.FieldValue.increment(amount)}));
+    await batch.commit();
+    await adminLog('Монеты всем',`+${amount.toLocaleString()} × ${snap.size}`);
+    toast(`✅ Выдано всем!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ================================================================
+// РАССЫЛКА — ПРОВЕРКА ПОЧТЫ ПЕРЕД ОТПРАВКОЙ
+// Сохраняем fromNick (ник) и fromBadge (галочка), НЕ email
+// ================================================================
+async function sendBroadcast(){
+  const title=document.getElementById('broadcastTitle').value.trim();
+  const text=document.getElementById('broadcastMsg').value.trim();
+  if(!text){toast('Введите текст!','error');return;}
+
+  // Проверка прав модератора
+  if(!isAdmin&&!modCanDo('broadcast')){toast('У вас нет прав на рассылку!','error');return;}
+
+  // ПРОВЕРКА ПОЧТЫ: показываем подтверждение с email администратора
+  const adminEmail=currentUser?.email||'';
+  const adminVerified=currentUser?.emailVerified;
+  if(!adminVerified){
+    toast('⚠️ Ваш email не подтверждён! Подтвердите email перед рассылкой.','error');
+    try{await currentUser.sendEmailVerification();}catch(_){}
+    return;
+  }
+  const confirmed=confirm(`📨 Подтверждение рассылки\n\nОтправитель: ${currentUser?.displayName||'Администрация'}\nEmail: ${adminEmail}\n\nВсе игроки получат это сообщение.\nОтправить?`);
+  if(!confirmed) return;
+
+  try{
+    const snap=await db.collection('users').get();
+    // Получаем данные текущего пользователя для badge
+    const meSnap=await db.collection('users').doc(currentUser.uid).get();
+    const meData=meSnap.exists?meSnap.data():{};
+    const fromNick=meData.username||currentUser.displayName||'Администрация';
+    const fromBadge=meData.badge||null;
+    const batch=db.batch();
+    snap.docs.forEach(d=>batch.set(db.collection('messages').doc(),{
+      userId:d.id,
+      from:'Администрация',
+      fromNick:'Администрация',
+      fromBadge:null,
+      title:title||'Сообщение от Администрации',
+      text,
+      read:false,
+      createdAt:new Date(),
+      toNick:'Всем',
+      type:'broadcast'
+    }));
+    await batch.commit();
+    document.getElementById('broadcastTitle').value='';
+    document.getElementById('broadcastMsg').value='';
+    await adminLog('Рассылка',title||text.substring(0,50));
+    toast(`📢 Рассылка отправлена ${snap.size} пользователям!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function sendPrivateMsg(){
+  const nick=document.getElementById('msgToNick').value.trim();
+  const title=document.getElementById('msgTitle').value.trim();
+  const text=document.getElementById('msgBody').value.trim();
+  if(!nick||!text){toast('Укажите получателя и текст!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    // Получаем данные отправителя (ник + галочка, НЕ email)
+    const meSnap=await db.collection('users').doc(currentUser.uid).get();
+    const meData=meSnap.exists?meSnap.data():{};
+    const fromNick=meData.username||currentUser.displayName||'Администрация';
+    const fromBadge=meData.badge||null;
+    await db.collection('messages').add({
+      userId:doc.id,
+      from:fromNick,
+      fromNick:fromNick,
+      fromBadge:fromBadge,
+      title:title||'Личное сообщение',
+      text,
+      read:false,
+      createdAt:new Date(),
+      toNick:nick
+    });
+    document.getElementById('msgToNick').value='';
+    document.getElementById('msgTitle').value='';
+    document.getElementById('msgBody').value='';
+    await adminLog('Сообщение',`→ ${nick}`);
+    toast(`📨 Отправлено → ${nick}!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function banUser(){
+  const nick=document.getElementById('banNick').value.trim();
+  const moderator=document.getElementById('banModeratorName').value.trim()||(currentUser?.displayName||currentUser?.email);
+  const reason=document.getElementById('banReason').value.trim();
+  const duration=document.getElementById('banDuration').value;
+  if(!nick||!reason){toast('Укажите ник и причину!','error');return;}
+  // Лимит для модераторов
+  if(!isAdmin){
+    const limit=modGetLimit('ban');
+    if(limit>0&&duration!=='forever'&&parseInt(duration)>limit){toast(`Ваш лимит бана: ${limit} ч!`,'error');return;}
+    if(duration==='forever'&&limit>0){toast('У вас нет права на перманентный бан!','error');return;}
+  }
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    const until=duration==='forever'?null:new Date(Date.now()+parseInt(duration)*3600000);
+    await db.collection('bans').add({userId:doc.id,username:nick,email:doc.data().email,reason,until,active:true,moderator,createdAt:new Date()});
+    await adminLog('Бан',`${nick} — ${reason}`);
+    toast(`🔨 ${nick} забанен!`,'warning');
+    document.getElementById('banNick').value='';document.getElementById('banReason').value='';document.getElementById('banModeratorName').value='';
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function unbanUser(){
+  const nick=document.getElementById('banNick').value.trim();
+  if(!nick){toast('Укажите ник!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    const snap=await db.collection('bans').where('userId','==',doc.id).where('active','==',true).get();
+    if(snap.empty){toast('Активных банов нет!','warning');return;}
+    const batch=db.batch();snap.docs.forEach(d=>batch.update(d.ref,{active:false}));await batch.commit();
+    await adminLog('Разбан',nick);toast(`✅ ${nick} разбанен!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function banByIP(){
+  const ip=document.getElementById('ipBanAddress').value.trim();
+  const reason=document.getElementById('ipBanReason').value.trim()||'Нарушение правил';
+  if(!ip){toast('Укажите IP!','error');return;}
+  try{
+    await db.collection('ipBans').add({ip,reason,active:true,bannedBy:currentUser?.email,createdAt:new Date()});
+    await adminLog('IP-бан',`${ip} — ${reason}`);
+    document.getElementById('ipBanAddress').value='';document.getElementById('ipBanReason').value='';
+    toast(`🌐 IP ${ip} заблокирован!`,'warning');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function unbanIP(){
+  const ip=document.getElementById('ipBanAddress').value.trim();
+  if(!ip){toast('Укажите IP!','error');return;}
+  try{
+    const snap=await db.collection('ipBans').where('ip','==',ip).where('active','==',true).get();
+    if(snap.empty){toast('IP-бан не найден!','warning');return;}
+    const batch=db.batch();snap.docs.forEach(d=>batch.update(d.ref,{active:false}));await batch.commit();
+    await adminLog('Разбан IP',ip);toast(`✅ IP ${ip} разбанен!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function giveWarn(){
+  const nick=document.getElementById('warnNick').value.trim();
+  const reason=document.getElementById('warnReason').value.trim();
+  if(!nick||!reason){toast('Укажите ник и причину!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    const data=doc.data();
+    const warns=[...(data.warns||[]),{reason,by:currentUser?.displayName||currentUser?.email,date:new Date().toISOString()}];
+    await doc.ref.update({warns});
+    if(warns.length>=3){await db.collection('bans').add({userId:doc.id,username:nick,reason:'3 варна',active:true,until:null,moderator:'Система',createdAt:new Date()});toast(`⚠️ ${nick} получил 3 варна — автобан!`,'error');}
+    else toast(`⚠️ Варн выдан ${nick}!`,'warning');
+    await adminLog('Варн',`${nick} — ${reason}`);
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function removeWarn(){
+  const nick=document.getElementById('warnNick').value.trim();
+  if(!nick){toast('Укажите ник!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    const warns=(doc.data().warns||[]);
+    if(!warns.length){toast('Нет варнов!','warning');return;}
+    warns.pop();
+    await doc.ref.update({warns});
+    await adminLog('Снят варн',nick);
+    toast(`✅ Варн снят у ${nick}!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function removeWarnById(uid,idx){
+  try{
+    const doc=await db.collection('users').doc(uid).get();
+    const warns=(doc.data().warns||[]);
+    warns.splice(idx,1);
+    await db.collection('users').doc(uid).update({warns});
+    toast('✅ Варн удалён!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function clearAllWarns(){
+  const nick=document.getElementById('warnNick').value.trim();
+  if(!nick){toast('Укажите ник!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    await doc.ref.update({warns:[]});
+    await adminLog('Все варны сняты',nick);
+    toast(`✅ Все варны ${nick} сняты!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function closeSite(){
+  const reason=document.getElementById('siteCloseReason').value.trim()||'Технические работы';
+  const mins=parseInt(document.getElementById('siteCloseDuration').value)||60;
+  // Лимит для модераторов
+  if(!isAdmin&&modCanDo('site')){
+    const limit=modGetLimit('site');
+    if(limit>0&&mins>limit){toast(`Ваш лимит закрытия сайта: ${limit} мин!`,'error');return;}
+  }
+  const until=new Date(Date.now()+mins*60000);
+  try{
+    await db.collection('settings').doc('siteStatus').set({closed:true,reason,until});
+    await adminLog('Сайт закрыт',reason);
+    toast('🔒 Сайт закрыт!','warning');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function openSite(){
+  try{
+    await db.collection('settings').doc('siteStatus').set({closed:false,reason:'',until:null});
+    await adminLog('Сайт открыт','');
+    toast('🔓 Сайт открыт!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+function listenSiteStatus(){
+  db.collection('settings').doc('siteStatus').onSnapshot(snap=>{
+    const el=document.getElementById('siteStatusDisplay');if(!el)return;
+    if(snap.exists&&snap.data().closed){
+      const d=snap.data();
+      el.innerHTML=`<span style="color:var(--err);font-weight:700">🔒 Закрыт: ${d.reason||'-'}</span> <span style="color:var(--tm);font-size:12px">До: ${d.until?.toDate?d.until.toDate().toLocaleString('ru-RU'):'?'}</span>`;
+    }else{
+      el.innerHTML='<span style="color:var(--ok);font-weight:700">✅ Сайт открыт</span>';
+    }
+  });
+}
+
+async function addDonate(){
+  const nick=document.getElementById('donateNick').value.trim();
+  const product=document.getElementById('donateProduct').value.trim();
+  const price=parseInt(document.getElementById('donatePrice').value)||0;
+  if(!nick||!product){toast('Укажите ник и привилегию!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    await db.collection('donates').add({userId:doc.id,username:nick,product,price,date:new Date(),manual:true});
+    await adminLog('Донат добавлен',`${nick} — ${product}`);
+    document.getElementById('donateNick').value='';document.getElementById('donateProduct').value='';document.getElementById('donatePrice').value='';
+    toast(`✅ Донат ${product} добавлен → ${nick}!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+function listenDonates(){
+  if(uDonates){uDonates();uDonates=null;}
+  const el=document.getElementById('donatesList');if(!el)return;
+  el.innerHTML='<div class="list-item">Загрузка...</div>';
+  uDonates=db.collection('donates').orderBy('date','desc').limit(30).onSnapshot(snap=>{
+    if(snap.empty){el.innerHTML='<div class="list-item">Нет донатов</div>';return;}
+    el.innerHTML='';
+    snap.forEach(doc=>{
+      const d=doc.data(),div=document.createElement('div');div.className='list-item';
+      div.innerHTML=`<div><strong>${d.username||'?'}</strong> — <span style="color:var(--acc)">${d.product||'-'}</span></div><span style="color:var(--acc);font-weight:700">${(d.price||0).toLocaleString()} ₽</span>`;
+      el.appendChild(div);
+    });
+  },()=>{el.innerHTML='<div class="list-item">⚠️ Нужен индекс: donates → date DESC</div>';});
+}
+
+async function saveTimer(){
+  const name=document.getElementById('timerName').value.trim()||'ДО ОТКРЫТИЯ СЕЗОНА';
+  const desc=document.getElementById('timerDesc').value.trim();
+  const dateStr=document.getElementById('timerDate').value;
+  if(!dateStr){toast('Укажите дату!','error');return;}
+  try{
+    await db.collection('settings').doc('timer').set({eventName:name,eventDesc:desc,targetDate:new Date(dateStr)});
+    await adminLog('Таймер обновлён',name);
+    toast('⏰ Таймер обновлён!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function giveBadge(){
+  const nick=document.getElementById('badgeNick').value.trim();
+  const badge=document.getElementById('badgeType').value||null;
+  if(!nick){toast('Укажите ник!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    await doc.ref.update({badge});
+    await adminLog('Галочка',`${nick} → ${badge||'убрана'}`);
+    toast(`🏅 ${badge?'Галочка '+badge+' выдана':'Галочка снята'} → ${nick}!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function giveSpins(){
+  const nick=document.getElementById('spinNick').value.trim();
+  const amount=parseInt(document.getElementById('spinAmount').value)||0;
+  if(!nick||!amount){toast('Укажите ник и кол-во!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    await doc.ref.update({wheelSpins:firebase.firestore.FieldValue.increment(amount)});
+    await adminLog('Прокрутки',`+${amount} → ${nick}`);
+    toast(`🎡 +${amount} прокруток → ${nick}!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function createPromo(){
+  const code=document.getElementById('promoCode').value.trim().toUpperCase()||(Math.random().toString(36).substring(2,10).toUpperCase());
+  const amount=parseInt(document.getElementById('promoAmount').value)||0;
+  const maxUses=parseInt(document.getElementById('promoMaxUses').value)||0;
+  if(!amount){toast('Укажите сумму!','error');return;}
+  try{
+    await db.collection('promoCodes').add({code,amount,maxUses,usesLeft:maxUses,usedCount:0,usedBy:[],active:true,createdAt:new Date(),createdBy:currentUser?.email});
+    await adminLog('Промокод создан',`${code} — ${amount.toLocaleString()} ₽`);
+    document.getElementById('promoCode').value='';document.getElementById('promoAmount').value='';document.getElementById('promoMaxUses').value='';
+    toast(`🎟️ Промокод ${code} создан!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function deletePromo(id){try{await db.collection('promoCodes').doc(id).update({active:false});toast('🗑️ Промокод деактивирован!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
+
+async function setBalance(){
+  const nick=document.getElementById('setBalNick').value.trim();
+  const amount=parseInt(document.getElementById('setBalAmount').value)||0;
+  if(!nick){toast('Укажите ник!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    await doc.ref.update({balance:amount});
+    await adminLog('Баланс установлен',`${nick} → ${amount.toLocaleString()} ₽`);
+    toast(`💳 Баланс ${nick} = ${amount.toLocaleString()} ₽!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function takeCoins(){
+  const nick=document.getElementById('takeNick').value.trim();
+  const amount=parseInt(document.getElementById('takeAmount').value)||0;
+  if(!nick||!amount){toast('Укажите ник и сумму!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    await doc.ref.update({balance:firebase.firestore.FieldValue.increment(-amount)});
+    await adminLog('Монеты сняты',`-${amount.toLocaleString()} → ${nick}`);
+    toast(`💸 Снято ${amount.toLocaleString()} ₽ у ${nick}!`,'warning');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+async function clearAdminLogs(){
+  if(!confirm('Удалить ВСЕ логи?'))return;
+  try{
+    const snap=await db.collection('adminLogs').get();
+    const batch=db.batch();snap.docs.forEach(d=>batch.delete(d.ref));await batch.commit();
+    toast('🗑️ Логи очищены!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 1: ГЛОБАЛЬНЫЙ ЧАТ — LIVE
+// ================================================================
+function listenGlobalChat(){
+  if(uGChat){uGChat();uGChat=null;}
+  const el=document.getElementById('gchatBox');if(!el)return;
+  el.innerHTML='';
+  uGChat=db.collection('globalChat').orderBy('at').limitToLast(50).onSnapshot(snap=>{
+    el.innerHTML='';
+    snap.forEach(doc=>{
+      const m=doc.data();
+      const div=document.createElement('div');div.className='gchat-msg';
+      const time=m.at?.toDate?new Date(m.at.toDate()).toLocaleTimeString('ru-RU'):'?';
+      const isAdm=(m.role==='admin');
+      div.style.background=isAdm?'rgba(255,215,0,.08)':'rgba(0,0,0,.3)';
+      div.style.border=isAdm?'1px solid rgba(255,215,0,.2)':'1px solid rgba(255,255,255,.05)';
+      div.innerHTML=`<div class="gchat-author">${isAdm?'👑 ':''}<strong style="color:${isAdm?'var(--acc)':'var(--ts)'}">${m.from||'?'}</strong> ${getBadge(m.badge)} <span style="color:var(--tm);font-size:10px;font-weight:400">${time}</span><button onclick="deleteChatMsg('${doc.id}')" style="background:none;border:none;color:var(--err);cursor:pointer;font-size:11px;margin-left:8px;float:right">✕</button></div><div class="gchat-text">${(m.text||'').replace(/\n/g,'<br>')}</div>`;
+      el.appendChild(div);
+    });
+    el.scrollTop=el.scrollHeight;
+  });
+}
+async function sendGlobalChat(){
+  const inp=document.getElementById('gchatInput');
+  const text=inp?.value.trim();if(!text||!currentUser)return;
+  const meSnap=await db.collection('users').doc(currentUser.uid).get();
+  const me=meSnap.exists?meSnap.data():{};
+  try{
+    await db.collection('globalChat').add({text,from:me.username||currentUser.displayName||'Администрация',badge:me.badge||null,role:'admin',at:new Date(),uid:currentUser.uid});
+    inp.value='';
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function deleteChatMsg(id){try{await db.collection('globalChat').doc(id).delete();}catch(e){toast('Ошибка: '+e.message,'error');}}
+async function clearGlobalChat(){
+  if(!confirm('Удалить весь чат?'))return;
+  try{
+    const snap=await db.collection('globalChat').get();
+    const batch=db.batch();snap.docs.forEach(d=>batch.delete(d.ref));await batch.commit();
+    toast('🗑️ Чат очищен!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 2: ЛОТЕРЕЯ — LIVE
+// ================================================================
+function listenLottery(){
+  if(uLottery){uLottery();uLottery=null;}
+  uLottery=db.collection('settings').doc('lottery').onSnapshot(snap=>{
+    const statusEl=document.getElementById('lotteryStatus');
+    const partEl=document.getElementById('lotteryParticipants');
+    if(!statusEl||!partEl)return;
+    if(snap.exists&&snap.data().active){
+      const d=snap.data();
+      statusEl.innerHTML=`<div style="background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:12px;padding:12px"><strong style="color:var(--acc)">🎲 ${d.name||'Лотерея'}</strong><br><span style="font-size:12px;color:var(--ts)">Приз: <strong style="color:var(--acc)">${(d.prize||0).toLocaleString()} ₽</strong> | Билет: ${(d.ticketCost||0).toLocaleString()} ₽ | Участников: <strong>${(d.participants||[]).length}</strong></span></div>`;
+      const parts=d.participants||[];
+      if(!parts.length){partEl.innerHTML='<div class="list-item">Нет участников</div>';return;}
+      partEl.innerHTML='';
+      parts.forEach(p=>{const div=document.createElement('div');div.className='list-item raffle-entry';div.innerHTML=`<span>🎫 ${p.nick||'?'}</span><span style="font-size:11px;color:var(--tm)">${p.at||'-'}</span>`;partEl.appendChild(div);});
+    }else{
+      statusEl.innerHTML='<span style="color:var(--tm)">Нет активной лотереи</span>';
+      partEl.innerHTML='<div class="list-item">Нет участников</div>';
+    }
+  });
+}
+async function createLottery(){
+  const name=document.getElementById('lotteryName').value.trim()||'Лотерея GrifMcPro';
+  const prize=parseInt(document.getElementById('lotteryPrize').value)||0;
+  const ticketCost=parseInt(document.getElementById('lotteryTicketCost').value)||0;
+  if(!prize){toast('Укажите приз!','error');return;}
+  try{
+    await db.collection('settings').doc('lottery').set({name,prize,ticketCost,participants:[],active:true,createdAt:new Date(),createdBy:currentUser?.email});
+    await adminLog('Лотерея создана',name+' ('+prize.toLocaleString()+'₽)');
+    toast(`🎲 Лотерея "${name}" создана!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function drawLotteryWinner(){
+  const snap=await db.collection('settings').doc('lottery').get();
+  if(!snap.exists||!snap.data().active){toast('Нет активной лотереи!','error');return;}
+  const d=snap.data();
+  const parts=d.participants||[];
+  if(!parts.length){toast('Нет участников!','error');return;}
+  const winner=parts[Math.floor(Math.random()*parts.length)];
+  try{
+    const doc=await findUserByNick(winner.nick);
+    if(doc){await doc.ref.update({balance:firebase.firestore.FieldValue.increment(d.prize||0)});}
+    await db.collection('messages').add({userId:doc?.id||'',from:'Администрация',fromNick:'Администрация',fromBadge:null,title:'🎉 Вы выиграли в лотерее!',text:`Поздравляем! Вы стали победителем лотереи "${d.name}" и получаете ${(d.prize||0).toLocaleString()} ₽!`,read:false,createdAt:new Date(),toNick:winner.nick});
+    await db.collection('settings').doc('lottery').update({active:false,winner:winner.nick,endedAt:new Date()});
+    await adminLog('Победитель лотереи',`${winner.nick} — ${(d.prize||0).toLocaleString()}₽`);
+    toast(`🏆 Победитель: ${winner.nick}! Приз ${(d.prize||0).toLocaleString()} ₽ выдан!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function cancelLottery(){
+  if(!confirm('Отменить лотерею?'))return;
+  try{await db.collection('settings').doc('lottery').update({active:false});toast('❌ Лотерея отменена!','warning');}catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 3: НОВОСТИ — LIVE
+// ================================================================
+function listenNews(){
+  if(uNews){uNews();uNews=null;}
+  const el=document.getElementById('newsList');if(!el)return;
+  el.innerHTML='<div class="list-item">Загрузка...</div>';
+  uNews=db.collection('news').orderBy('createdAt','desc').limit(20).onSnapshot(snap=>{
+    if(snap.empty){el.innerHTML='<div class="list-item">Нет новостей</div>';return;}
+    el.innerHTML='';
+    snap.forEach(doc=>{
+      const n=doc.data();
+      const div=document.createElement('div');div.className='news-admin-card';
+      const date=n.createdAt?.toDate?new Date(n.createdAt.toDate()).toLocaleString('ru-RU'):'-';
+      div.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><div class="na-title">${n.icon||'📰'} ${n.title||'Без названия'}</div><button onclick="deleteNews('${doc.id}')" style="background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.4);color:var(--err);padding:3px 10px;border-radius:12px;cursor:pointer;font-size:11px;font-family:'Montserrat',sans-serif">🗑️</button></div><div class="na-text">${(n.text||'').substring(0,100)}${(n.text||'').length>100?'...':''}</div><div style="font-size:11px;color:var(--tm);margin-top:4px">📅 ${date}</div>`;
+      el.appendChild(div);
+    });
+  },()=>{el.innerHTML='<div class="list-item">⚠️ Нужен индекс: news → createdAt DESC</div>';});
+}
+async function publishNews(){
+  const title=document.getElementById('newsTitle').value.trim();
+  const text=document.getElementById('newsText').value.trim();
+  const icon=document.getElementById('newsIcon').value||'📰';
+  if(!title||!text){toast('Заполните заголовок и текст!','error');return;}
+  try{
+    await db.collection('news').add({title,text,icon,createdAt:new Date(),createdBy:currentUser?.email,author:currentUser?.displayName||'Администрация'});
+    await adminLog('Новость опубликована',title);
+    document.getElementById('newsTitle').value='';document.getElementById('newsText').value='';
+    toast(`📰 Новость "${title}" опубликована!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function deleteNews(id){try{await db.collection('news').doc(id).delete();toast('🗑️ Новость удалена!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 4: ИВЕНТЫ — LIVE
+// ================================================================
+function listenEvents(){
+  if(uEvents){uEvents();uEvents=null;}
+  const el=document.getElementById('eventsList');if(!el)return;
+  el.innerHTML='<div class="list-item">Загрузка...</div>';
+  uEvents=db.collection('events').where('active','==',true).onSnapshot(snap=>{
+    if(snap.empty){el.innerHTML='<div class="list-item">Нет активных ивентов</div>';return;}
+    el.innerHTML='';
+    snap.forEach(doc=>{
+      const e=doc.data();
+      const div=document.createElement('div');div.className='event-admin-card';
+      const end=e.endAt?.toDate?new Date(e.endAt.toDate()).toLocaleString('ru-RU'):'?';
+      div.innerHTML=`<div><div class="ea-title">🎪 ${e.name||'Ивент'}</div><div class="ea-info">${e.desc||''} | 💰 ${(e.reward||0).toLocaleString()} ₽ | До: ${end}</div></div><button onclick="deleteEvent('${doc.id}')" style="background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.4);color:var(--err);padding:5px 12px;border-radius:16px;cursor:pointer;font-size:12px;font-family:'Montserrat',sans-serif;white-space:nowrap">🗑️ Закрыть</button>`;
+      el.appendChild(div);
+    });
+  });
+}
+async function createEvent(){
+  const name=document.getElementById('eventName').value.trim();
+  const desc=document.getElementById('eventDesc2').value.trim();
+  const reward=parseInt(document.getElementById('eventReward').value)||0;
+  const endStr=document.getElementById('eventEnd').value;
+  if(!name){toast('Укажите название!','error');return;}
+  try{
+    await db.collection('events').add({name,desc,reward,endAt:endStr?new Date(endStr):null,active:true,createdAt:new Date(),createdBy:currentUser?.email});
+    await adminLog('Ивент создан',name);
+    document.getElementById('eventName').value='';document.getElementById('eventDesc2').value='';document.getElementById('eventReward').value='';document.getElementById('eventEnd').value='';
+    toast(`🎪 Ивент "${name}" создан!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function deleteEvent(id){try{await db.collection('events').doc(id).update({active:false});toast('🗑️ Ивент закрыт!','warning');}catch(e){toast('Ошибка: '+e.message,'error');}}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 5: БЫСТРЫЕ МОНЕТЫ — LIVE
+// ================================================================
+async function quickGive(amount){
+  const nick=document.getElementById('quickNick').value.trim();
+  if(!nick){toast('Введите ник!','error');return;}
+  if(!isAdmin){
+    const limit=modGetLimit('coins');
+    if(limit>0&&amount>limit){toast(`Ваш лимит: ${limit.toLocaleString()} ₽!`,'error');return;}
+  }
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){document.getElementById('quickResult').innerHTML=`<span style="color:var(--err)">❌ Игрок "${nick}" не найден!</span>`;return;}
+    await doc.ref.update({balance:firebase.firestore.FieldValue.increment(amount)});
+    await adminLog('Быстрые монеты',`+${amount.toLocaleString()} → ${nick}`);
+    document.getElementById('quickResult').innerHTML=`<span style="color:var(--ok)">✅ +${amount.toLocaleString()} ₽ → ${nick}</span>`;
+    toast(`✅ +${amount.toLocaleString()} ₽ → ${nick}`,'success');
+  }catch(e){document.getElementById('quickResult').innerHTML=`<span style="color:var(--err)">❌ ${e.message}</span>`;}
+}
+async function quickTake(amount){
+  const nick=document.getElementById('quickNick').value.trim();
+  if(!nick){toast('Введите ник!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){document.getElementById('quickResult').innerHTML=`<span style="color:var(--err)">❌ Игрок "${nick}" не найден!</span>`;return;}
+    await doc.ref.update({balance:firebase.firestore.FieldValue.increment(-amount)});
+    await adminLog('Быстрое снятие',`-${amount.toLocaleString()} → ${nick}`);
+    document.getElementById('quickResult').innerHTML=`<span style="color:var(--wrn)">💸 -${amount.toLocaleString()} ₽ у ${nick}</span>`;
+    toast(`💸 -${amount.toLocaleString()} ₽ у ${nick}`,'warning');
+  }catch(e){document.getElementById('quickResult').innerHTML=`<span style="color:var(--err)">❌ ${e.message}</span>`;}
+}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 6: ЛЕНТА АКТИВНОСТИ — LIVE
+// ================================================================
+function listenActivityFeed(){
+  if(uActivity){uActivity();uActivity=null;}
+  const el=document.getElementById('activityFeed');if(!el)return;
+  el.innerHTML='<div class="list-item">Загрузка...</div>';
+  const now=new Date(Date.now()-24*60*60*1000);
+  uActivity=db.collection('activityLog').orderBy('at','desc').limit(100).onSnapshot(snap=>{
+    if(snap.empty){el.innerHTML='<div class="list-item">Нет активности</div>';return;}
+    el.innerHTML='';
+    snap.forEach(doc=>{
+      const a=doc.data();
+      const div=document.createElement('div');
+      div.className='activity-item '+(a.type||'');
+      const time=a.at?.toDate?new Date(a.at.toDate()).toLocaleString('ru-RU'):'-';
+      const icons={reg:'🆕',buy:'🛒',promo:'🎟️',ban:'🔨',login:'🔑',wheel:'🎡'};
+      div.innerHTML=`<div style="display:flex;justify-content:space-between"><span>${icons[a.type]||'📌'} <strong>${a.nick||'?'}</strong> — ${a.desc||'-'}</span><span style="font-size:10px;color:var(--tm)">${time}</span></div>`;
+      el.appendChild(div);
+    });
+  },()=>{el.innerHTML='<div class="list-item">⚠️ Нужен индекс: activityLog → at DESC</div>';});
+}
+async function clearActivityFeed(){
+  if(!confirm('Очистить ленту активности?'))return;
+  try{
+    const snap=await db.collection('activityLog').get();
+    const batch=db.batch();snap.docs.forEach(d=>batch.delete(d.ref));await batch.commit();
+    toast('🗑️ Лента очищена!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 7: МУТ СИСТЕМА — LIVE
+// ================================================================
+function listenMutes(){
+  if(uMutes){uMutes();uMutes=null;}
+  const el=document.getElementById('mutesList');if(!el)return;
+  el.innerHTML='<div class="list-item">Загрузка...</div>';
+  uMutes=db.collection('mutes').where('active','==',true).onSnapshot(snap=>{
+    if(snap.empty){el.innerHTML='<div class="list-item" style="color:var(--ok)">✅ Нет мутов</div>';return;}
+    el.innerHTML='';
+    snap.forEach(doc=>{
+      const m=doc.data();
+      const div=document.createElement('div');div.className='list-item';
+      const until=m.until?.toDate?m.until.toDate().toLocaleString('ru-RU'):'Навсегда';
+      div.innerHTML=`<div><strong>${m.username||'?'}</strong> <span style="color:var(--wrn);font-size:12px">🔇 ${m.reason||'-'}</span><br><span style="font-size:11px;color:var(--tm)">До: ${until}</span></div><button onclick="quickUnmute('${doc.id}')" style="background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.4);color:var(--ok);padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;font-size:12px;font-family:'Montserrat',sans-serif">🔊</button>`;
+      el.appendChild(div);
+    });
+  });
+}
+async function muteUser(){
+  const nick=document.getElementById('muteNick').value.trim();
+  const reason=document.getElementById('muteReason').value.trim()||'Нарушение';
+  const mins=parseInt(document.getElementById('muteDuration').value)||60;
+  if(!nick){toast('Укажите ник!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    const until=mins===0?null:new Date(Date.now()+mins*60000);
+    await db.collection('mutes').add({userId:doc.id,username:nick,reason,until,active:true,mutedBy:currentUser?.email,createdAt:new Date()});
+    await doc.ref.update({muted:true,mutedUntil:until});
+    await adminLog('Мут',`${nick} — ${reason}`);
+    toast(`🔇 ${nick} замьючен!`,'warning');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function unmuteUser(){
+  const nick=document.getElementById('muteNick').value.trim();
+  if(!nick){toast('Укажите ник!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    const snap=await db.collection('mutes').where('userId','==',doc.id).where('active','==',true).get();
+    if(snap.empty){toast('Мут не найден!','warning');return;}
+    const batch=db.batch();snap.docs.forEach(d=>batch.update(d.ref,{active:false}));await batch.commit();
+    await doc.ref.update({muted:false,mutedUntil:null});
+    await adminLog('Размут',nick);
+    toast(`🔊 ${nick} размьючен!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function quickUnmute(docId){try{await db.collection('mutes').doc(docId).update({active:false});toast('🔊 Размьючен!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 8: ШАБЛОНЫ СООБЩЕНИЙ — LIVE
+// ================================================================
+function listenTemplates(){
+  if(uTemplates){uTemplates();uTemplates=null;}
+  const el=document.getElementById('templatesList');if(!el)return;
+  el.innerHTML='<div class="list-item">Загрузка...</div>';
+  uTemplates=db.collection('msgTemplates').orderBy('createdAt','desc').onSnapshot(snap=>{
+    if(snap.empty){el.innerHTML='<div class="list-item">Нет шаблонов</div>';return;}
+    el.innerHTML='';
+    snap.forEach(doc=>{
+      const t=doc.data();
+      const div=document.createElement('div');div.className='list-item';div.style.cssText='flex-direction:column;align-items:flex-start;gap:6px';
+      div.innerHTML=`<div style="display:flex;justify-content:space-between;width:100%"><strong>${t.name||'Шаблон'}</strong><button onclick="deleteTemplate('${doc.id}')" style="background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.4);color:var(--err);padding:3px 10px;border-radius:12px;cursor:pointer;font-size:11px;font-family:'Montserrat',sans-serif">🗑️</button></div>
+      <div style="font-size:12px;color:var(--ts)">${(t.text||'').substring(0,80)}...</div>
+      <button onclick="sendTemplateAll('${doc.id}')" style="background:linear-gradient(135deg,var(--acc),var(--adark));border:none;padding:6px 16px;border-radius:20px;cursor:pointer;font-weight:700;font-size:12px;color:#0a0a12;font-family:'Montserrat',sans-serif">📢 Отправить всем</button>`;
+      el.appendChild(div);
+    });
+  },()=>{el.innerHTML='<div class="list-item">Нет шаблонов</div>';});
+}
+async function saveTemplate(){
+  const name=document.getElementById('tplName').value.trim();
+  const title=document.getElementById('tplTitle').value.trim();
+  const text=document.getElementById('tplText').value.trim();
+  if(!name||!text){toast('Заполните название и текст!','error');return;}
+  try{
+    await db.collection('msgTemplates').add({name,title,text,createdAt:new Date(),createdBy:currentUser?.email});
+    document.getElementById('tplName').value='';document.getElementById('tplTitle').value='';document.getElementById('tplText').value='';
+    toast(`💾 Шаблон "${name}" сохранён!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function sendTemplateAll(id){
+  const tSnap=await db.collection('msgTemplates').doc(id).get();
+  if(!tSnap.exists){toast('Шаблон не найден!','error');return;}
+  const t=tSnap.data();
+  if(!confirm(`Отправить шаблон "${t.name}" всем игрокам?`))return;
+  try{
+    const snap=await db.collection('users').get();
+    const batch=db.batch();
+    snap.docs.forEach(d=>batch.set(db.collection('messages').doc(),{userId:d.id,from:'Администрация',fromNick:'Администрация',fromBadge:null,title:t.title||t.name,text:t.text,read:false,createdAt:new Date(),toNick:'Всем'}));
+    await batch.commit();
+    await adminLog('Шаблон отправлен',t.name);
+    toast(`📢 Шаблон "${t.name}" разослан!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function deleteTemplate(id){try{await db.collection('msgTemplates').doc(id).delete();toast('🗑️ Шаблон удалён!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 9: БЕГУЩАЯ СТРОКА — реализована выше (listenTicker/publishTicker/stopTicker)
+// ================================================================
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 10: ФИНАНСЫ — LIVE
+// ================================================================
+async function loadFinance(){
+  try{
+    const [users,purchases]=await Promise.all([db.collection('users').get(),db.collection('purchases').get()]);
+    let total=0,max=0,totalSpent=0;
+    users.forEach(doc=>{const b=doc.data().balance||0;total+=b;if(b>max)max=b;});
+    purchases.forEach(doc=>{totalSpent+=(doc.data().price||0);});
+    const avg=users.size>0?Math.round(total/users.size):0;
+    const sv=(id,v)=>{const e=document.getElementById(id);if(e)e.innerText=v.toLocaleString()+' ₽';};
+    sv('fin-total',total);sv('fin-avg',avg);sv('fin-max',max);sv('fin-spent',totalSpent);
+    const fp=document.getElementById('fin-players');if(fp)fp.innerText=users.size+' чел.';
+  }catch(e){toast('Ошибка загрузки финансов: '+e.message,'error');}
+}
+async function burnAllCoins(){
+  const percent=parseInt(document.getElementById('burnPercent').value)||0;
+  if(!percent||percent<1||percent>99){toast('Укажите % от 1 до 99!','error');return;}
+  if(!confirm(`⚠️ СЖЕЧЬ ${percent}% МОНЕТ У ВСЕХ ИГРОКОВ? Необратимо!`))return;
+  if(!confirm('Вы абсолютно уверены?'))return;
+  try{
+    const snap=await db.collection('users').get();
+    const batch=db.batch();
+    snap.docs.forEach(d=>{
+      const bal=d.data().balance||0;
+      const newBal=Math.floor(bal*(1-percent/100));
+      batch.update(d.ref,{balance:newBal});
+    });
+    await batch.commit();
+    await adminLog('Сжигание монет',`-${percent}% у всех`);
+    toast(`🔥 Сжжено ${percent}% монет у всех!`,'warning');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 11: КЛЮЧИ АКТИВАЦИИ — LIVE
+// ================================================================
+function listenKeys(){
+  if(uKeys){uKeys();uKeys=null;}
+  const el=document.getElementById('keysList');if(!el)return;
+  el.innerHTML='<div class="list-item">Загрузка...</div>';
+  uKeys=db.collection('activationKeys').where('used','==',false).onSnapshot(snap=>{
+    if(snap.empty){el.innerHTML='<div class="list-item">Нет ключей</div>';return;}
+    el.innerHTML='';
+    snap.forEach(doc=>{
+      const k=doc.data();
+      const div=document.createElement('div');div.className='key-item';
+      div.innerHTML=`<div><code class="key-code">${k.code}</code><span style="font-size:11px;color:var(--tm);margin-left:8px">${k.type==='coins'?'💰 '+k.value+' ₽':k.type==='spins'?'🎡 '+k.value+' прокр.':'🏅 '+k.value}</span></div><button onclick="deleteKey('${doc.id}')" style="background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.4);color:var(--err);padding:5px 12px;border-radius:16px;cursor:pointer;font-size:12px;font-family:'Montserrat',sans-serif">🗑️</button>`;
+      el.appendChild(div);
+    });
+  });
+}
+async function createKey(){
+  const type=document.getElementById('keyType').value;
+  const value=document.getElementById('keyValue').value.trim();
+  let code=document.getElementById('keyCode').value.trim().toUpperCase();
+  if(!value){toast('Укажите значение!','error');return;}
+  if(!code){code='KEY-'+Math.random().toString(36).substring(2,8).toUpperCase();}
+  try{
+    await db.collection('activationKeys').add({code,type,value,used:false,createdAt:new Date(),createdBy:currentUser?.email});
+    await adminLog('Ключ создан',`${code} — ${type}: ${value}`);
+    document.getElementById('keyCode').value='';document.getElementById('keyValue').value='';
+    toast(`🔑 Ключ ${code} создан!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function deleteKey(id){try{await db.collection('activationKeys').doc(id).delete();toast('🗑️ Ключ удалён!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 12: РОЗЫГРЫШ — LIVE
+// ================================================================
+function listenRaffle(){
+  if(uRaffle){uRaffle();uRaffle=null;}
+  uRaffle=db.collection('settings').doc('raffle').onSnapshot(snap=>{
+    const statusEl=document.getElementById('raffleStatus');
+    const partEl=document.getElementById('raffleParticipants');
+    if(!statusEl||!partEl)return;
+    if(snap.exists&&snap.data().active){
+      const d=snap.data();
+      statusEl.innerHTML=`<div style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:12px;padding:12px"><strong style="color:var(--pur)">🎰 ${d.name||'Розыгрыш'}</strong><br><span style="font-size:12px;color:var(--ts)">Взнос: ${(d.entryFee||0).toLocaleString()} ₽ | Приз: <strong style="color:var(--acc)">${(d.prize||0).toLocaleString()} ₽</strong> | Участников: <strong>${(d.participants||[]).length}</strong></span></div>`;
+      const parts=d.participants||[];
+      if(!parts.length){partEl.innerHTML='<div class="list-item">Нет участников</div>';return;}
+      partEl.innerHTML='';
+      parts.forEach(p=>{const div=document.createElement('div');div.className='list-item raffle-entry';div.innerHTML=`<span>🎫 ${p.nick||'?'}</span><span style="font-size:11px;color:var(--tm)">+${(d.entryFee||0).toLocaleString()} ₽</span>`;partEl.appendChild(div);});
+    }else{
+      statusEl.innerHTML='<span style="color:var(--tm)">Нет активного розыгрыша</span>';
+      partEl.innerHTML='<div class="list-item">Нет участников</div>';
+    }
+  });
+}
+async function createRaffle(){
+  const name=document.getElementById('raffleName').value.trim()||'Розыгрыш GrifMcPro';
+  const entryFee=parseInt(document.getElementById('raffleEntryFee').value)||0;
+  const prize=parseInt(document.getElementById('rafflePrize').value)||0;
+  if(!prize){toast('Укажите приз!','error');return;}
+  try{
+    await db.collection('settings').doc('raffle').set({name,entryFee,prize,participants:[],active:true,createdAt:new Date(),createdBy:currentUser?.email});
+    await adminLog('Розыгрыш создан',name);
+    toast(`🎰 Розыгрыш "${name}" создан!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function drawRaffleWinner(){
+  const snap=await db.collection('settings').doc('raffle').get();
+  if(!snap.exists||!snap.data().active){toast('Нет активного розыгрыша!','error');return;}
+  const d=snap.data();
+  const parts=d.participants||[];
+  if(!parts.length){toast('Нет участников!','error');return;}
+  const winner=parts[Math.floor(Math.random()*parts.length)];
+  try{
+    const doc=await findUserByNick(winner.nick);
+    if(doc){await doc.ref.update({balance:firebase.firestore.FieldValue.increment(d.prize||0)});}
+    await db.collection('messages').add({userId:doc?.id||'',from:'Администрация',fromNick:'Администрация',fromBadge:null,title:'🏆 Вы выиграли розыгрыш!',text:`Поздравляем! Вы победили в розыгрыше "${d.name}" и получаете ${(d.prize||0).toLocaleString()} ₽!`,read:false,createdAt:new Date(),toNick:winner.nick});
+    await db.collection('settings').doc('raffle').update({active:false,winner:winner.nick,endedAt:new Date()});
+    await adminLog('Победитель розыгрыша',`${winner.nick} — ${(d.prize||0).toLocaleString()}₽`);
+    toast(`🏆 Победитель розыгрыша: ${winner.nick}! Приз ${(d.prize||0).toLocaleString()} ₽!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function cancelRaffle(){
+  if(!confirm('Отменить розыгрыш?'))return;
+  try{await db.collection('settings').doc('raffle').update({active:false});toast('❌ Розыгрыш отменён!','warning');}catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 13: ЕЖЕДНЕВНЫЕ ЗАДАНИЯ — LIVE
+// ================================================================
+function listenQuests(){
+  if(uQuests){uQuests();uQuests=null;}
+  const el=document.getElementById('questsList');if(!el)return;
+  el.innerHTML='<div class="list-item">Загрузка...</div>';
+  uQuests=db.collection('quests').where('active','==',true).onSnapshot(snap=>{
+    if(snap.empty){el.innerHTML='<div class="list-item">Нет заданий</div>';return;}
+    el.innerHTML='';
+    snap.forEach(doc=>{
+      const q=doc.data();
+      const div=document.createElement('div');div.className='list-item';div.style.cssText='flex-direction:column;align-items:flex-start;gap:5px';
+      div.innerHTML=`<div style="display:flex;justify-content:space-between;width:100%"><strong>${q.title||'Задание'}</strong><button onclick="deleteQuest('${doc.id}')" style="background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.4);color:var(--err);padding:3px 10px;border-radius:12px;cursor:pointer;font-size:11px;font-family:'Montserrat',sans-serif">🗑️</button></div>
+      <div style="font-size:12px;color:var(--ts)">${q.desc||''}</div>
+      <div style="font-size:12px;color:var(--acc)">💰 Награда: ${(q.reward||0).toLocaleString()} ₽</div>`;
+      el.appendChild(div);
+    });
+  });
+}
+async function createQuest(){
+  const title=document.getElementById('questTitle').value.trim();
+  const desc=document.getElementById('questDesc').value.trim();
+  const reward=parseInt(document.getElementById('questReward').value)||0;
+  const type=document.getElementById('questType').value;
+  if(!title){toast('Укажите название!','error');return;}
+  try{
+    await db.collection('quests').add({title,desc,reward,type,active:true,completedBy:[],createdAt:new Date(),createdBy:currentUser?.email});
+    await adminLog('Задание создано',title);
+    document.getElementById('questTitle').value='';document.getElementById('questDesc').value='';document.getElementById('questReward').value='';
+    toast(`🎯 Задание "${title}" создано!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function deleteQuest(id){try{await db.collection('quests').doc(id).update({active:false});toast('🗑️ Задание удалено!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 14: НАСТРОЙКИ САЙТА — LIVE
+// ================================================================
+function listenSiteConfig(){
+  if(uSiteConfig){uSiteConfig();uSiteConfig=null;}
+  uSiteConfig=db.collection('settings').doc('siteConfig').onSnapshot(snap=>{
+    const d=snap.exists?snap.data():{};
+    const config={registration:true,shop:true,wheel:true,promos:true,appeals:true,...d};
+    const btnMap={registration:'toggleRegBtn',shop:'toggleShopBtn',wheel:'toggleWheelBtn',promos:'togglePromoBtn',appeals:'toggleAppealsBtn'};
+    Object.keys(btnMap).forEach(key=>{
+      const btn=document.getElementById(btnMap[key]);if(!btn)return;
+      const enabled=config[key]!==false;
+      btn.textContent=enabled?'✅ Включено':'❌ Выключено';
+      btn.style.background=enabled?'rgba(16,185,129,.2)':'rgba(239,68,68,.2)';
+      btn.style.borderColor=enabled?'rgba(16,185,129,.4)':'rgba(239,68,68,.4)';
+      btn.style.color=enabled?'var(--ok)':'var(--err)';
+    });
+  });
+}
+async function toggleSiteConfig(key){
+  const snap=await db.collection('settings').doc('siteConfig').get();
+  const d=snap.exists?snap.data():{};
+  const current=d[key]!==false;
+  try{
+    await db.collection('settings').doc('siteConfig').set({...d,[key]:!current},{merge:true});
+    await adminLog('Настройки сайта',`${key}: ${!current?'вкл':'выкл'}`);
+    toast(`${key}: ${!current?'✅ Включено':'❌ Выключено'}`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 15: ТЕХНИЧЕСКИЕ РАБОТЫ — LIVE
+// ================================================================
+function listenMaintenance(){
+  if(uMaint){uMaint();uMaint=null;}
+  uMaint=db.collection('settings').doc('maintenance').onSnapshot(snap=>{
+    const el=document.getElementById('maintStatus');if(!el)return;
+    if(snap.exists&&snap.data().active){
+      const d=snap.data();
+      const end=d.endAt?.toDate?d.endAt.toDate().toLocaleString('ru-RU'):'?';
+      el.innerHTML=`<div style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:12px"><span style="color:var(--wrn);font-weight:700">🔧 ${d.title||'Технические работы'}</span><br><span style="font-size:12px;color:var(--ts)">Завершение: ${end}</span></div>`;
+    }else{
+      el.innerHTML='<span style="color:var(--ok);font-weight:700">✅ Технических работ нет</span>';
+    }
+  });
+}
+async function startMaintenance(){
+  const title=document.getElementById('maintTitle').value.trim()||'Технические работы';
+  const endStr=document.getElementById('maintEnd').value;
+  const color=document.getElementById('maintColor').value||'#f59e0b';
+  if(!endStr){toast('Укажите время завершения!','error');return;}
+  try{
+    await db.collection('settings').doc('maintenance').set({title,endAt:new Date(endStr),color,active:true,startedBy:currentUser?.email,startedAt:new Date()});
+    await adminLog('Тех. работы начаты',title);
+    toast(`🔧 Тех. работы "${title}" запущены!`,'warning');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function stopMaintenance(){
+  try{
+    await db.collection('settings').doc('maintenance').update({active:false});
+    await adminLog('Тех. работы завершены','');
+    toast('✅ Тех. работы завершены!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 16: СЛУЧАЙНЫЙ ПРИЗ — LIVE
+// ================================================================
+function listenRandomGiftHistory(){
+  if(uRandomGifts){uRandomGifts();uRandomGifts=null;}
+  const el=document.getElementById('randomGiftHistory');if(!el)return;
+  el.innerHTML='<div class="list-item">Загрузка...</div>';
+  uRandomGifts=db.collection('randomGifts').orderBy('sentAt','desc').limit(20).onSnapshot(snap=>{
+    if(snap.empty){el.innerHTML='<div class="list-item">Нет истории призов</div>';return;}
+    el.innerHTML='';
+    snap.forEach(doc=>{
+      const g=doc.data();
+      const div=document.createElement('div');div.className='list-item';
+      const date=g.sentAt?.toDate?new Date(g.sentAt.toDate()).toLocaleString('ru-RU'):'-';
+      div.innerHTML=`<div><strong style="color:var(--ok)">🎁 ${g.winner||'?'}</strong> <span style="color:var(--acc);font-weight:700">+${(g.amount||0).toLocaleString()} ₽</span></div><span style="font-size:11px;color:var(--tm)">${date}</span>`;
+      el.appendChild(div);
+    });
+  },()=>{el.innerHTML='<div class="list-item">⚠️ Нужен индекс: randomGifts → sentAt DESC</div>';});
+}
+async function sendRandomGift(){
+  const amount=parseInt(document.getElementById('randomGiftAmount').value)||0;
+  const msg=document.getElementById('randomGiftMsg').value.trim()||'Вам выпал случайный приз от Администрации!';
+  const target=document.getElementById('randomGiftTarget').value;
+  if(!amount){toast('Укажите сумму приза!','error');return;}
+  try{
+    const now=Date.now(),threshold=3*60*1000;
+    let snap=await db.collection('users').get();
+    let players=[];
+    snap.forEach(doc=>{
+      const d=doc.data();
+      const last=d.lastSeen?.toDate?d.lastSeen.toDate():(d.lastSeen?new Date(d.lastSeen):null);
+      const isOnline=last&&(now-last.getTime()<threshold);
+      const bal=d.balance||0;
+      let include=false;
+      if(target==='online'&&isOnline) include=true;
+      else if(target==='all') include=true;
+      else if(target==='rich'&&bal>1000) include=true;
+      else if(target==='poor'&&bal<1000) include=true;
+      if(include) players.push({id:doc.id,...d});
+    });
+    if(!players.length){toast('Нет подходящих игроков!','error');return;}
+    const winner=players[Math.floor(Math.random()*players.length)];
+    await db.collection('users').doc(winner.id).update({balance:firebase.firestore.FieldValue.increment(amount)});
+    await db.collection('messages').add({userId:winner.id,from:'Администрация',fromNick:'Администрация',fromBadge:null,title:'🎁 Случайный приз!',text:msg+` Ваш приз: ${amount.toLocaleString()} ₽`,read:false,createdAt:new Date(),toNick:winner.username||'?'});
+    await db.collection('randomGifts').add({winner:winner.username||'?',winnerId:winner.id,amount,sentBy:currentUser?.email,sentAt:new Date()});
+    await adminLog('Случайный приз',`${winner.username||'?'} — ${amount.toLocaleString()}₽`);
+    toast(`🎁 Приз ${amount.toLocaleString()} ₽ выдан → ${winner.username||'?'}!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 17: РЕЙТИНГ — LIVE
+// ================================================================
+async function loadTopBy(category){
+  const el=document.getElementById('topRatingList');if(!el)return;
+  el.innerHTML='<div class="list-item">Загрузка...</div>';
+  try{
+    let snap=await db.collection('users').get();
+    let players=[];snap.forEach(doc=>players.push({id:doc.id,...doc.data()}));
+    if(category==='balance') players.sort((a,b)=>(b.balance||0)-(a.balance||0));
+    else if(category==='spins') players.sort((a,b)=>(b.wheelSpins||0)-(a.wheelSpins||0));
+    else if(category==='reg') players.sort((a,b)=>new Date(a.registeredAt||0)-new Date(b.registeredAt||0));
+    else if(category==='purchases'){
+      const pSnap=await db.collection('purchases').get();
+      const counts={};pSnap.forEach(d=>{const e=d.data().userEmail||'?';counts[e]=(counts[e]||0)+1;});
+      players.sort((a,b)=>(counts[b.email||'']||0)-(counts[a.email||'']||0));
+    }
+    el.innerHTML='';
+    players.slice(0,20).forEach((p,i)=>{
+      const div=document.createElement('div');div.className='list-item';
+      const icons=['🥇','🥈','🥉'];
+      const val=category==='balance'?(p.balance||0).toLocaleString()+' ₽':category==='spins'?(p.wheelSpins||0)+' прокр.':category==='reg'?new Date(p.registeredAt||0).toLocaleDateString('ru-RU'):'';
+      div.innerHTML=`<div><span style="color:var(--acc);font-weight:800;margin-right:8px">${icons[i]||'#'+(i+1)}</span><strong>${p.username||'?'}</strong> ${getBadge(p.badge)}</div><span style="color:var(--acc);font-weight:700;font-size:12px">${val}</span>`;
+      el.appendChild(div);
+    });
+  }catch(e){el.innerHTML='<div class="list-item">Ошибка: '+e.message+'</div>';}
+}
+async function rewardTopPlayers(){
+  const amount=parseInt(document.getElementById('topRewardAmount').value)||0;
+  if(!amount){toast('Укажите сумму!','error');return;}
+  if(!confirm(`Наградить ТОП-3 игроков? ТОП-1: ${amount.toLocaleString()}₽, ТОП-2: ${Math.floor(amount*0.5).toLocaleString()}₽, ТОП-3: ${Math.floor(amount*0.25).toLocaleString()}₽`))return;
+  try{
+    let snap=await db.collection('users').get();
+    let players=[];snap.forEach(doc=>players.push({id:doc.id,...doc.data()}));
+    players.sort((a,b)=>(b.balance||0)-(a.balance||0));
+    const rewards=[amount,Math.floor(amount*0.5),Math.floor(amount*0.25)];
+    const batch=db.batch();
+    for(let i=0;i<Math.min(3,players.length);i++){
+      batch.update(db.collection('users').doc(players[i].id),{balance:firebase.firestore.FieldValue.increment(rewards[i])});
+      await db.collection('messages').add({userId:players[i].id,from:'Администрация',fromNick:'Администрация',fromBadge:null,title:`🏆 Вы в ТОП-${i+1}!`,text:`Вы заняли ${i+1} место в рейтинге! Ваша награда: ${rewards[i].toLocaleString()} ₽`,read:false,createdAt:new Date(),toNick:players[i].username||'?'});
+    }
+    await batch.commit();
+    await adminLog('Награда ТОП-3',`${amount.toLocaleString()}₽`);
+    toast(`🏆 ТОП-3 игроков награждены!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 18: ГРУППОВЫЕ ОПОВЕЩЕНИЯ — LIVE
+// ================================================================
+async function sendGroupAlert(){
+  const group=document.getElementById('alertGroup').value;
+  const title=document.getElementById('alertTitle').value.trim();
+  const text=document.getElementById('alertText').value.trim();
+  if(!title||!text){toast('Заполните заголовок и текст!','error');return;}
+  const resultEl=document.getElementById('alertResult');
+  resultEl.innerText='⏳ Отправка...';
+  try{
+    const snap=await db.collection('users').get();
+    const now=Date.now(),threshold=3*60*1000;
+    let targets=[];
+    snap.forEach(doc=>{
+      const d=doc.data();
+      const last=d.lastSeen?.toDate?d.lastSeen.toDate():(d.lastSeen?new Date(d.lastSeen):null);
+      const isOnline=last&&(now-last.getTime()<threshold);
+      const regDate=d.registeredAt?new Date(d.registeredAt):null;
+      const daysOld=regDate?(Date.now()-regDate.getTime())/(86400000):0;
+      let include=false;
+      if(group==='all') include=true;
+      else if(group==='online'&&isOnline) include=true;
+      else if(group==='rich'&&(d.balance||0)>50000) include=true;
+      else if(group==='poor'&&(d.balance||0)<1000) include=true;
+      else if(group==='newbies'&&daysOld<7) include=true;
+      else if(group==='veterans'&&daysOld>30) include=true;
+      else if(group==='nobadge'&&!d.badge) include=true;
+      if(include) targets.push({id:doc.id,...d});
+    });
+    if(!targets.length){resultEl.innerHTML='<span style="color:var(--err)">Нет подходящих игроков</span>';return;}
+    const batch=db.batch();
+    targets.forEach(t=>batch.set(db.collection('messages').doc(),{userId:t.id,from:'Администрация',fromNick:'Администрация',fromBadge:null,title,text,read:false,createdAt:new Date(),toNick:group}));
+    await batch.commit();
+    await adminLog('Групповое оповещение',`${group} — ${targets.length} чел.`);
+    resultEl.innerHTML=`<span style="color:var(--ok)">✅ Отправлено ${targets.length} игрокам!</span>`;
+    toast(`🔔 Оповещение отправлено ${targets.length} игрокам!`,'success');
+    document.getElementById('alertTitle').value='';document.getElementById('alertText').value='';
+  }catch(e){resultEl.innerHTML=`<span style="color:var(--err)">❌ ${e.message}</span>`;}
+}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 19: УПРАВЛЕНИЕ АККАУНТАМИ — LIVE
+// ================================================================
+function listenFrozenAccounts(){
+  if(uFrozen){uFrozen();uFrozen=null;}
+  const el=document.getElementById('frozenList');if(!el)return;
+  el.innerHTML='<div class="list-item">Загрузка...</div>';
+  uFrozen=db.collection('users').where('frozen','==',true).onSnapshot(snap=>{
+    if(snap.empty){el.innerHTML='<div class="list-item" style="color:var(--ok)">✅ Нет замороженных аккаунтов</div>';return;}
+    el.innerHTML='';
+    snap.forEach(doc=>{
+      const d=doc.data();
+      const div=document.createElement('div');div.className='list-item';
+      div.innerHTML=`<strong>${d.username||'?'}</strong><button onclick="unfreezeById('${doc.id}')" style="background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.4);color:var(--ok);padding:5px 14px;border-radius:20px;cursor:pointer;font-weight:600;font-size:12px;font-family:'Montserrat',sans-serif">🔓 Разморозить</button>`;
+      el.appendChild(div);
+    });
+  });
+}
+async function lockPlayerAccount(){
+  const nick=document.getElementById('accNick').value.trim();
+  if(!nick){toast('Укажите ник!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    await doc.ref.update({frozen:true});
+    await adminLog('Заморозка аккаунта',nick);
+    toast(`🔒 Аккаунт ${nick} заморожен!`,'warning');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function unlockPlayerAccount(){
+  const nick=document.getElementById('accNick').value.trim();
+  if(!nick){toast('Укажите ник!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    await doc.ref.update({frozen:false});
+    await adminLog('Разморозка аккаунта',nick);
+    toast(`🔓 Аккаунт ${nick} разморожен!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function unfreezeById(id){try{await db.collection('users').doc(id).update({frozen:false});toast('🔓 Разморожен!','success');}catch(e){toast('Ошибка: '+e.message,'error');}}
+async function forceRenamePlayer(){
+  const nick=document.getElementById('accNick').value.trim();
+  if(!nick){toast('Укажите текущий ник!','error');return;}
+  const newNick=prompt('Новый никнейм для игрока:');
+  if(!newNick){return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    await doc.ref.update({username:newNick});
+    await adminLog('Принудительный ренейм',`${nick} → ${newNick}`);
+    toast(`✏️ ${nick} → ${newNick}!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function wipePlayerBalance(){
+  const nick=document.getElementById('accNick').value.trim();
+  if(!nick){toast('Укажите ник!','error');return;}
+  if(!confirm(`Обнулить баланс ${nick}? Монеты будут удалены безвозвратно!`))return;
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    await doc.ref.update({balance:0});
+    await adminLog('Обнуление баланса',nick);
+    toast(`💸 Баланс ${nick} обнулён!`,'warning');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+async function sendPasswordResetByNick(){
+  const nick=document.getElementById('accNick').value.trim();
+  if(!nick){toast('Укажите ник!','error');return;}
+  try{
+    const doc=await findUserByNick(nick);
+    if(!doc){toast('Игрок не найден!','error');return;}
+    const email=doc.data().email;
+    if(!email){toast('Email игрока не найден!','error');return;}
+    await auth.sendPasswordResetEmail(email);
+    await adminLog('Сброс пароля отправлен',`${nick} (${email})`);
+    toast(`🔐 Письмо сброса пароля отправлено → ${email}!`,'success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ================================================================
+// НОВАЯ ФУНКЦИЯ 20: ТЕМА САЙТА — реализована выше (applyTheme/resetTheme/setQuickTheme/listenTheme)
+// ================================================================
+
+// ─── ОСТАВШИЕСЯ ADMIN ФУНКЦИИ ───
+async function clearAdminLogs(){
+  if(!confirm('Удалить ВСЕ логи?'))return;
+  try{
+    const snap=await db.collection('adminLogs').get();
+    const batch=db.batch();snap.docs.forEach(d=>batch.delete(d.ref));await batch.commit();
+    toast('🗑️ Логи очищены!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
 </script>
 </body>
 </html>
