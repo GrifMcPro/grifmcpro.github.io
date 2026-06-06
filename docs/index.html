@@ -158,7 +158,7 @@
         .donate-tag { background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05)); padding: 6px 14px; border-radius: 40px; font-size: 12px; border: 1px solid rgba(255,215,0,0.2); }
         .donate-tag i { margin-right: 6px; color: var(--accent); }
 
-        /* ===== 30 ГАЛОЧЕК ===== */
+        /* ===== 30 ГАЛОЧЕК - ИДЕАЛЬНО ПО ЦЕНТРУ ===== */
         .badge-icon {
             display: inline-flex;
             align-items: center;
@@ -175,14 +175,16 @@
         .badge-icon i {
             font-size: 10px;
             color: white;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             margin: 0 auto;
             padding: 0;
             line-height: 1;
             vertical-align: middle;
-            position: relative;
-            top: 0;
-            left: 0;
+            position: static;
+            width: 100%;
+            height: 100%;
         }
         .badge-blue { background: #3b82f6; box-shadow: 0 0 5px #3b82f6; }
         .badge-red { background: #ef4444; box-shadow: 0 0 5px #ef4444; }
@@ -597,7 +599,7 @@
                 });
             }
 
-            // МОИ ОБРАЩЕНИЯ
+            // МОИ ОБРАЩЕНИЯ - галочка ПОСЛЕ ника
             async function loadMyAppeals() {
                 if (myAppealsUnsub) myAppealsUnsub();
                 if (!currentUser) return;
@@ -618,7 +620,8 @@
                         let answerHtml = '';
                         if (appeal.answer) {
                             const adminBadge = getBadgeHtml(appeal.answerAdminBadge);
-                            answerHtml = `<div class="appeal-answer"><div class="admin-reply-name"><strong><i class="fas fa-reply"></i> Ответ:</strong> ${adminBadge} ${appeal.answerAdminName || appeal.answerAdminEmail}</div><p>${appeal.answer.replace(/\n/g, '<br>')}</p></div>`;
+                            // ГАЛОЧКА ПОСЛЕ НИКА АДМИНА
+                            answerHtml = `<div class="appeal-answer"><div class="admin-reply-name"><strong><i class="fas fa-reply"></i> Ответ:</strong> ${appeal.answerAdminName || appeal.answerAdminEmail} ${adminBadge}</div><p>${appeal.answer.replace(/\n/g, '<br>')}</p></div>`;
                         }
                         
                         container.innerHTML += `
