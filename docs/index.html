@@ -552,6 +552,56 @@ main{max-width:1200px;margin:0 auto;padding:20px 14px;}
 .activity-item{padding:7px 10px;background:rgba(255,255,255,.03);border-radius:8px;font-size:11px;display:flex;gap:8px;align-items:center;}
 .activity-time{color:var(--tm);flex-shrink:0;font-size:10px;}
 
+/* ── CHATS PAGE ── */
+.chats-tab-row{display:flex;gap:6px;margin-bottom:16px;background:rgba(255,255,255,.03);border-radius:14px;padding:5px;}
+.chats-tab{flex:1;padding:10px 14px;border-radius:10px;border:none;background:transparent;color:var(--tm);font-weight:700;font-size:13px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:.2s;display:flex;align-items:center;justify-content:center;gap:7px;}
+.chats-tab.active{background:rgba(255,215,0,.15);color:var(--acc);}
+.chats-tab:hover{background:rgba(255,255,255,.05);color:var(--ts);}
+.chats-pane{display:none;}
+.chats-pane.active{display:flex;flex-direction:column;}
+
+/* Channel */
+.channel-header{background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(255,215,0,.05));border:1px solid rgba(59,130,246,.3);border-radius:var(--radius) var(--radius) 0 0;padding:16px 20px;display:flex;align-items:center;gap:14px;}
+.channel-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#1E3A8A,#3B82F6);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;border:2px solid rgba(59,130,246,.5);}
+.channel-name{font-family:'Orbitron',sans-serif;font-weight:700;font-size:15px;color:#60a5fa;}
+.channel-subs{font-size:11px;color:var(--tm);margin-top:2px;}
+.channel-feed{flex:1;overflow-y:auto;max-height:480px;padding:14px;background:rgba(10,10,18,.7);border-left:1px solid var(--border);border-right:1px solid var(--border);display:flex;flex-direction:column;gap:10px;}
+.channel-msg{background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.15);border-radius:14px;padding:14px 16px;border-bottom-left-radius:4px;}
+.channel-msg-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.channel-msg-author{font-weight:700;color:#60a5fa;font-size:13px;display:flex;align-items:center;gap:6px;}
+.channel-msg-time{margin-left:auto;font-size:11px;color:var(--tm);}
+.channel-msg-text{color:var(--ts);font-size:14px;line-height:1.7;white-space:pre-wrap;}
+.channel-input-area{background:rgba(59,130,246,.05);border:1px solid rgba(59,130,246,.2);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:12px 14px;display:flex;gap:8px;align-items:flex-end;}
+.channel-input-area.hidden{display:none;}
+
+/* Bot message style */
+.bot-msg{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:14px;border-bottom-left-radius:4px;}
+.bot-msg .channel-msg-author{color:var(--ok);}
+.bot-badge{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#3B82F6;border:1.5px solid #fff;flex-shrink:0;}
+.bot-badge svg{display:block;}
+
+/* Global chat new */
+.gchat-header{background:var(--card);border:1px solid var(--border);border-radius:var(--radius) var(--radius) 0 0;padding:14px 18px;display:flex;align-items:center;gap:12px;}
+.gchat-feed{flex:1;overflow-y:auto;max-height:460px;padding:14px;background:rgba(10,10,18,.6);border-left:1px solid var(--border);border-right:1px solid var(--border);display:flex;flex-direction:column;gap:4px;}
+.gchat-msg{display:flex;gap:8px;align-items:flex-end;margin:1px 0;animation:slideUp .15s ease;}
+.gchat-msg.own{flex-direction:row-reverse;}
+.gchat-bubble{max-width:72%;padding:9px 13px;border-radius:18px;word-break:break-word;}
+.gchat-bubble.other{background:#1e1e30;border:1px solid rgba(255,255,255,.08);border-bottom-left-radius:4px;}
+.gchat-bubble.own{background:linear-gradient(135deg,rgba(255,215,0,.2),rgba(255,215,0,.1));border:1px solid rgba(255,215,0,.25);border-bottom-right-radius:4px;}
+.gchat-bubble.bot-bubble{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-bottom-left-radius:4px;}
+.gchat-bubble.admin-bubble{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-bottom-left-radius:4px;}
+.gchat-author{font-size:11px;font-weight:700;color:var(--acc);margin-bottom:2px;display:flex;align-items:center;gap:4px;}
+.gchat-text{font-size:13px;line-height:1.5;color:var(--ts);}
+.gchat-text.me-action{font-style:italic;color:var(--pur);}
+.gchat-footer{font-size:10px;color:var(--tm);margin-top:4px;display:flex;align-items:center;gap:8px;}
+.gchat-like-btn{background:none;border:none;color:var(--tm);cursor:pointer;font-size:12px;padding:0;font-family:'Montserrat',sans-serif;transition:.2s;}
+.gchat-like-btn:hover{color:var(--err);}
+.gchat-like-btn.liked{color:var(--err);}
+.gchat-input-area{background:var(--card);border:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius);padding:11px 14px;display:flex;gap:8px;align-items:flex-end;}
+.gchat-login-bar{background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.1);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:12px 14px;text-align:center;color:var(--tm);font-size:13px;}
+.gchat-login-bar button{background:rgba(255,215,0,.15);border:1px solid rgba(255,215,0,.3);color:var(--acc);padding:5px 16px;border-radius:20px;cursor:pointer;font-weight:700;font-size:12px;margin-left:6px;font-family:'Montserrat',sans-serif;}
+.coin-earned{display:inline-block;font-size:10px;color:var(--acc);font-weight:700;margin-left:4px;animation:slideUp .3s ease;}
+
 @media(max-width:600px){nav .menu-tab .tab-label{display:none;}main{padding:14px 8px;}.stat-strip{grid-template-columns:repeat(3,1fr);}.ban-modal{padding:24px 18px;}.ban-title{font-size:20px;}.ban-dur-grid{grid-template-columns:repeat(3,1fr);}}
 </style>
 </head>
@@ -572,6 +622,7 @@ main{max-width:1200px;margin:0 auto;padding:20px 14px;}
   <nav id="mainNav">
     <button class="menu-tab active" data-page="homePage"><i class="fas fa-home"></i><span class="tab-label"> Главная</span></button>
     <button class="menu-tab" data-page="shopPage"><i class="fas fa-store"></i><span class="tab-label"> Магазин</span></button>
+    <button class="menu-tab" data-page="chatsPage"><i class="fas fa-satellite-dish"></i><span class="tab-label"> Чаты</span></button>
     <button class="menu-tab" data-page="chatPage"><i class="fas fa-comments"></i><span class="tab-label"> Чат</span><span class="notif-dot" id="chatDot"></span></button>
     <button class="menu-tab" data-page="newsPage"><i class="fas fa-newspaper"></i><span class="tab-label"> Новости</span></button>
     <button class="menu-tab" data-page="leaderboardPage"><i class="fas fa-trophy"></i><span class="tab-label"> Рейтинг</span></button>
@@ -641,6 +692,69 @@ main{max-width:1200px;margin:0 auto;padding:20px 14px;}
       <div id="keyResult"></div>
     </div>
     <div style="color:var(--tm);font-size:13px;margin-top:8px">🔑 Ключи выдаются администрацией и дают монеты, прокрутки или галочки. Каждый ключ одноразовый.</div>
+  </div>
+</div>
+
+<!-- ══════════ CHATS PAGE ══════════ -->
+<div id="chatsPage" class="page">
+  <div class="page-section-title">📡 Чаты <span>Канал и Глобальный чат</span></div>
+
+  <div class="chats-tab-row">
+    <button class="chats-tab active" id="ctab-channel" onclick="switchChatsTab('channel')">
+      📢 КАНАЛ
+    </button>
+    <button class="chats-tab" id="ctab-global" onclick="switchChatsTab('global')">
+      💬 ГЛОБАЛ ЧАТ
+    </button>
+  </div>
+
+  <!-- ── ВКЛАДКА: КАНАЛ ── -->
+  <div id="cpane-channel" class="chats-pane active">
+    <div class="channel-header">
+      <div class="channel-avatar">📢</div>
+      <div>
+        <div class="channel-name">Официальный канал GrifMcPro</div>
+        <div class="channel-subs" id="channelSubsCount">👥 Загрузка участников...</div>
+      </div>
+    </div>
+    <div class="channel-feed" id="channelFeed">
+      <div style="color:var(--tm);text-align:center;padding:20px">Загрузка сообщений...</div>
+    </div>
+    <!-- Поле видно ТОЛЬКО ramonenok@bk.ru -->
+    <div class="channel-input-area hidden" id="channelInputArea">
+      <textarea id="channelInput" class="chat-input" rows="1" placeholder="✏️ Введите сообщение для канала..." style="flex:1" onkeydown="channelKeyHandler(event)"></textarea>
+      <button class="chat-send-btn" onclick="sendChannelMsg()" title="Отправить в канал">📢</button>
+    </div>
+    <div id="channelReadonlyBar" style="background:rgba(59,130,246,.05);border:1px solid rgba(59,130,246,.15);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:10px 14px;text-align:center;font-size:12px;color:var(--tm)">
+      🔒 Только администратор может писать в канал
+    </div>
+  </div>
+
+  <!-- ── ВКЛАДКА: ГЛОБАЛ ЧАТ ── -->
+  <div id="cpane-global" class="chats-pane">
+    <div class="gchat-header">
+      <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--pur));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">💬</div>
+      <div style="flex:1">
+        <div style="font-weight:700;color:var(--acc);font-family:'Orbitron',sans-serif;font-size:14px">Глобальный чат GrifMcPro</div>
+        <div style="font-size:11px;color:var(--ok)" id="gchatOnlineCount">● Загрузка...</div>
+      </div>
+      <div style="font-size:11px;color:var(--tm);text-align:right" id="gchatDailyEarnings">💰 0/100 монет сегодня</div>
+    </div>
+    <div class="gchat-feed" id="gchatFeed">
+      <div style="color:var(--tm);text-align:center;padding:20px">Загрузка чата...</div>
+    </div>
+    <!-- Поле ввода (авторизованным) -->
+    <div class="gchat-input-area" id="gchatInputArea" style="display:none">
+      <button onclick="insertEmoji('😀')" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 2px" title="Смайлики">😀</button>
+      <textarea id="gchatInput" class="chat-input" rows="1" placeholder="Написать сообщение... (/help для команд)" style="flex:1" onkeydown="gchatKeyHandler(event)" oninput="gchatTyping()"></textarea>
+      <button class="chat-send-btn" onclick="sendGchatMsg()" title="Отправить">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+    <div class="gchat-login-bar" id="gchatLoginBar">
+      Войдите чтобы общаться в чате
+      <button onclick="openModal('authModal')">Войти</button>
+    </div>
   </div>
 </div>
 
@@ -2089,6 +2203,7 @@ function showPage(id){
   const tab=document.querySelector(`.menu-tab[data-page="${id}"]`);if(tab)tab.classList.add('active');
   if(id==='messagesPage')listenMessages();
   if(id==='appealsPage')checkAppealsStatus();
+  if(id==='chatsPage')initChatsPage();
   if(id==='chatPage')listenUserChat();
   if(id==='newsPage')loadUserNews();
   if(id==='vipPage')loadVIPList();
@@ -2153,6 +2268,8 @@ function doRegister(){
     cred.user.updateProfile({displayName:u});
     db.collection('users').doc(cred.user.uid).set({username:u,email:e,balance:50000,registeredAt:new Date().toISOString(),wheelSpins:3,tag:'#'+u.substring(0,4).toUpperCase(),galochka:null,ip:userIP||null,lastSeen:new Date(),online:true});
     closeModal('authModal');toast('Аккаунт создан! Привет, '+u+'!','success');
+    // Бот приветствует нового игрока
+    setTimeout(()=>sendWelcomeFromBot(u),1500);
   }).catch(err=>toast('Ошибка: '+authErr(err.code),'error'));
 }
 function authErr(code){return({'auth/user-not-found':'Пользователь не найден','auth/wrong-password':'Неверный пароль','auth/email-already-in-use':'Email занят','auth/invalid-email':'Неверный email','auth/weak-password':'Слабый пароль','auth/too-many-requests':'Слишком много попыток','auth/invalid-credential':'Неверный email или пароль'})[code]||code;}
@@ -2291,6 +2408,9 @@ auth.onAuthStateChanged(async user=>{
     document.getElementById('adminPanelBtn')?.remove();
     const cia=document.getElementById('chatInputArea');const clb=document.getElementById('chatLoginBar');
     if(cia)cia.style.display='none';if(clb)clb.style.display='block';
+    // Обновляем глобал-чат (новый)
+    const gia=document.getElementById('gchatInputArea');const glb=document.getElementById('gchatLoginBar');
+    if(gia)gia.style.display='none';if(glb)glb.style.display='block';
     // Update messages/appeals UI for logged-out state
     const msgLogin=document.getElementById('msgLoginWarn');if(msgLogin)msgLogin.style.display='block';
     const msgList=document.getElementById('msgList');if(msgList)msgList.innerHTML='';
@@ -3568,6 +3688,351 @@ function spinWheel(){
   }
   requestAnimationFrame(anim);
 }
+
+// ══════════════════════════════════════════════
+// ── ЧАТЫ: КАНАЛ + ГЛОБАЛ ЧАТ + БОТ ──
+// ══════════════════════════════════════════════
+
+const BOT_NAME='🤖 GrifMcPro Бот';
+const BOT_UID='__bot__';
+let uChannel=null,uGchat=null,gchatLastCoinTime=0,gchatDailyCoins=0;
+
+// ── Синяя галочка бота (Telegram-style) ──
+function makeBotBadge(){return`<span class="bot-badge"><svg width="9" height="8" viewBox="0 0 12 10" fill="none"><path d="M1 5L4 8L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;}
+
+// ── Инициализация страницы ЧАТЫ ──
+function initChatsPage(){
+  // Показываем/скрываем поле ввода в канале в зависимости от роли
+  const cArea=document.getElementById('channelInputArea');
+  const cBar=document.getElementById('channelReadonlyBar');
+  const isMainAdmin=currentUser&&currentUser.email===ADMIN_EMAIL;
+  if(cArea)cArea.classList.toggle('hidden',!isMainAdmin);
+  if(cBar)cBar.style.display=isMainAdmin?'none':'block';
+  // Загружаем подписчиков
+  loadChannelSubs();
+  // Слушаем канал
+  listenChannel();
+  // Слушаем глобал-чат
+  listenGchat();
+  // Обновляем UI глобал-чата в зависимости от авторизации
+  updateGchatAuthUI();
+  // Обновляем счётчик монет
+  updateDailyEarningsUI();
+}
+
+// ── Переключение вкладок ──
+function switchChatsTab(tab){
+  document.querySelectorAll('.chats-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.chats-pane').forEach(p=>p.classList.remove('active'));
+  const btn=document.getElementById('ctab-'+tab);if(btn)btn.classList.add('active');
+  const pane=document.getElementById('cpane-'+tab);if(pane)pane.classList.add('active');
+  if(tab==='global'){listenGchat();updateGchatAuthUI();}
+  if(tab==='channel'){listenChannel();}
+}
+
+// ── Количество подписчиков канала ──
+async function loadChannelSubs(){
+  try{
+    const snap=await db.collection('users').get();
+    const el=document.getElementById('channelSubsCount');
+    if(el)el.innerText=`👥 ${snap.size.toLocaleString()} участников`;
+  }catch(_){}
+}
+
+// ── Форматирование даты ──
+function fmtTime(ts){
+  const d=ts?.toDate?ts.toDate():new Date(ts);
+  const now=new Date();const today=now.toDateString()===d.toDateString();
+  return(today?'Сегодня, ':d.toLocaleDateString('ru-RU')+', ')+d.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+}
+
+// ══════════ КАНАЛ ══════════
+function listenChannel(){
+  if(uChannel){uChannel();uChannel=null;}
+  const feed=document.getElementById('channelFeed');if(!feed)return;
+  uChannel=db.collection('channelMessages').orderBy('timestamp','asc').limit(50).onSnapshot(snap=>{
+    feed.innerHTML='';
+    if(snap.empty){feed.innerHTML='<div style="color:var(--tm);text-align:center;padding:30px">Нет сообщений в канале</div>';return;}
+    snap.forEach(doc=>{
+      const m=doc.data();
+      const div=document.createElement('div');
+      div.className='channel-msg'+(m.isBot?' bot-msg':'');
+      const badge=m.isBot?makeBotBadge():`<span class="mod-badge mod-admin" style="font-size:10px">A</span>`;
+      const authorColor=m.isBot?'var(--ok)':'#60a5fa';
+      div.innerHTML=`
+        <div class="channel-msg-header">
+          <div class="channel-msg-author" style="color:${authorColor}">
+            ${badge} ${escapeHtml(m.author||'Администратор')}
+            ${!m.isBot?makeGalochka('blue'):''}
+          </div>
+          <div class="channel-msg-time">${m.timestamp?fmtTime(m.timestamp):''}</div>
+        </div>
+        <div class="channel-msg-text">${escapeHtml(m.text||'')}</div>`;
+      feed.appendChild(div);
+    });
+    feed.scrollTop=feed.scrollHeight;
+  });
+}
+
+async function sendChannelMsg(){
+  if(!currentUser||currentUser.email!==ADMIN_EMAIL)return;
+  const input=document.getElementById('channelInput');const text=input.value.trim();if(!text)return;
+  try{
+    await db.collection('channelMessages').add({
+      author:currentUser.displayName||'Администратор',
+      authorEmail:currentUser.email,
+      authorBadge:'admin',
+      text,
+      timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+      verified:true,
+      isBot:false
+    });
+    input.value='';toast('📢 Опубликовано в канале!','success');
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+function channelKeyHandler(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChannelMsg();}}
+
+// ── Отправка от бота в канал ──
+async function botSendToChannel(text){
+  try{
+    await db.collection('channelMessages').add({
+      author:BOT_NAME,authorEmail:'bot@grifmcpro',
+      text,timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+      verified:true,isBot:true
+    });
+  }catch(_){}
+}
+
+// ══════════ ГЛОБАЛ ЧАТ ══════════
+function updateGchatAuthUI(){
+  const ia=document.getElementById('gchatInputArea');
+  const lb=document.getElementById('gchatLoginBar');
+  if(currentUser){if(ia)ia.style.display='flex';if(lb)lb.style.display='none';}
+  else{if(ia)ia.style.display='none';if(lb)lb.style.display='block';}
+}
+
+async function updateDailyEarningsUI(){
+  if(!currentUser)return;
+  try{
+    const snap=await db.collection('userDailyBonus').doc(currentUser.uid).get();
+    const d=snap.data()||{};const today=new Date().toDateString();
+    const lastDay=d.lastDate||'';
+    gchatDailyCoins=lastDay===today?(d.dailyEarnings||0):0;
+    const el=document.getElementById('gchatDailyEarnings');
+    if(el)el.innerText=`💰 ${gchatDailyCoins}/100 монет сегодня`;
+  }catch(_){}
+}
+
+function listenGchat(){
+  if(uGchat){uGchat();uGchat=null;}
+  const feed=document.getElementById('gchatFeed');if(!feed)return;
+  uGchat=db.collection('chatMessages').orderBy('timestamp','asc').limit(60).onSnapshot(async snap=>{
+    feed.innerHTML='';
+    if(snap.empty){feed.innerHTML='<div style="color:var(--tm);text-align:center;padding:20px">Нет сообщений. Начните общение!</div>';return;}
+    // Online count
+    try{const us=await db.collection('users').where('online','==',true).get();const oc=document.getElementById('gchatOnlineCount');if(oc)oc.innerText=`🟢 ${us.size} онлайн`;}catch(_){}
+    const docs=[];snap.forEach(doc=>docs.push({id:doc.id,...doc.data()}));
+    docs.forEach(m=>renderGchatMsg(m,feed));
+    feed.scrollTop=feed.scrollHeight;
+  });
+}
+
+function renderGchatMsg(m,feed){
+  const isOwn=currentUser&&m.userId===currentUser.uid;
+  const isBot=m.userId===BOT_UID;
+  const wrap=document.createElement('div');
+  wrap.className='gchat-msg'+(isOwn?' own':'');
+  const col=getAvatarColor(m.from||'?');
+  const avEl=`<div class="chat-user-avatar" style="background:${col};width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0">${isBot?'🤖':(m.from||'?')[0]?.toUpperCase()}</div>`;
+  const badgeHtml=isBot?makeBotBadge():m.badge?makeModBadge(m.badge):'';
+  const galHtml=m.galochka?makeGalochka(m.galochka):'';
+  const bubbleClass=isOwn?'own':isBot?'bot-bubble':m.badge?'admin-bubble':'other';
+  const textHtml=m.isMe?`<em style="color:var(--pur)">${escapeHtml(m.text||'')}</em>`:escapeHtml(m.text||'');
+  const time=m.timestamp?.toDate?m.timestamp.toDate().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}):'';
+  const likes=m.reactions?.like||0;
+  const myLike=currentUser&&(m.likedBy||[]).includes(currentUser.uid);
+  const likeBtnHtml=!isOwn?`<button class="gchat-like-btn${myLike?' liked':''}" onclick="likeGchatMsg('${m.id}',${myLike})" title="Лайк">❤️ ${likes>0?likes:''}</button>`:'';
+  const coinHint=m.coinEarned&&isOwn?`<span class="coin-earned">+1💰</span>`:'';
+  wrap.innerHTML=`${isOwn?'':avEl}
+    <div class="gchat-bubble ${bubbleClass}">
+      <div class="gchat-author">${badgeHtml}${escapeHtml(m.from||'?')}${galHtml}</div>
+      <div class="gchat-text">${textHtml}</div>
+      <div class="gchat-footer"><span>${time}</span>${coinHint}${likeBtnHtml}</div>
+    </div>
+    ${isOwn?avEl:''}`;
+  feed.appendChild(wrap);
+}
+
+async function sendGchatMsg(){
+  if(!currentUser){openModal('authModal');return;}
+  const input=document.getElementById('gchatInput');const rawText=input.value.trim();if(!rawText)return;
+  // Фильтр слов
+  if(chatFilterWordsCache.some(w=>rawText.toLowerCase().includes(w.toLowerCase()))){toast('Сообщение содержит запрещённое слово!','error');return;}
+
+  // Команды бота
+  if(rawText.startsWith('/')){const handled=await handleChatCommand(rawText);if(handled){input.value='';return;}}
+
+  const snap=await db.collection('users').doc(currentUser.uid).get();const ud=snap.data()||{};
+  const nick=ud.username||currentUser.displayName||'?';
+  const isMe=rawText.startsWith('/me ');
+  const text=isMe?rawText.slice(4):rawText;
+
+  // Начисление монеты (не чаще 1 в минуту, макс 100 в день)
+  const now=Date.now();const coinEarned=(!isMe)&&(now-gchatLastCoinTime>60000)&&(gchatDailyCoins<100);
+  if(coinEarned){
+    gchatLastCoinTime=now;gchatDailyCoins++;
+    db.collection('users').doc(currentUser.uid).update({balance:firebase.firestore.FieldValue.increment(1)}).catch(_=>{});
+    // Обновить суточный счётчик
+    const today=new Date().toDateString();
+    db.collection('userDailyBonus').doc(currentUser.uid).set({lastDate:today,dailyEarnings:firebase.firestore.FieldValue.increment(1)},{merge:true}).catch(_=>{});
+    updateDailyEarningsUI();
+  }
+
+  await db.collection('chatMessages').add({
+    from:nick,userId:currentUser.uid,
+    badge:isAdmin?'admin':isModerator?'moderator':null,
+    galochka:ud.galochka||null,
+    text,isMe,
+    timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+    reactions:{like:0},likedBy:[],
+    coinEarned
+  });
+  input.value='';
+
+  // Проверяем ежедневный бонус (20+ сообщений)
+  checkDailyActivityBonus(nick);
+}
+
+async function checkDailyActivityBonus(nick){
+  if(!currentUser)return;
+  try{
+    const today=new Date().toDateString();
+    const ref=db.collection('userDailyBonus').doc(currentUser.uid);
+    const snap=await ref.get();const d=snap.data()||{};
+    if(d.lastDate===today){
+      const cnt=(d.dailyMessagesCount||0)+1;
+      await ref.set({lastDate:today,dailyMessagesCount:cnt},{merge:true});
+      // Бонус 100 монет за 20 сообщений (1 раз в день)
+      if(cnt===20&&!d.dailyBonusClaimed){
+        await db.collection('users').doc(currentUser.uid).update({balance:firebase.firestore.FieldValue.increment(100)});
+        await ref.set({dailyBonusClaimed:true},{merge:true});
+        toast('🎁 Бонус за активность: +100 монет!','success');
+        // Бот поздравляет в канале
+        await botSendToChannel(`🎉 Игрок ${nick} получил ежедневный бонус активности +100 монет за 20 сообщений в чате!`);
+      }
+    }else{
+      await ref.set({lastDate:today,dailyMessagesCount:1,dailyBonusClaimed:false,dailyEarnings:0},{merge:true});
+    }
+  }catch(_){}
+}
+
+async function likeGchatMsg(msgId,alreadyLiked){
+  if(!currentUser){toast('Войдите!','error');return;}
+  const ref=db.collection('chatMessages').doc(msgId);
+  if(alreadyLiked){
+    await ref.update({'reactions.like':firebase.firestore.FieldValue.increment(-1),likedBy:firebase.firestore.FieldValue.arrayRemove(currentUser.uid)});
+  }else{
+    await ref.update({'reactions.like':firebase.firestore.FieldValue.increment(1),likedBy:firebase.firestore.FieldValue.arrayUnion(currentUser.uid)});
+    // +5 монет автору сообщения
+    const snap=await ref.get();const d=snap.data()||{};
+    if(d.userId&&d.userId!==currentUser.uid&&d.userId!==BOT_UID){
+      db.collection('users').doc(d.userId).update({balance:firebase.firestore.FieldValue.increment(5)}).catch(_=>{});
+    }
+  }
+}
+
+function gchatKeyHandler(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendGchatMsg();}}
+function gchatTyping(){}// будущий typing indicator
+function insertEmoji(e){const inp=document.getElementById('gchatInput');if(inp){inp.value+=e;inp.focus();}}
+
+// ══════════ БОТ ══════════
+async function handleChatCommand(rawText){
+  const parts=rawText.trim().split(/\s+/);const cmd=parts[0].toLowerCase();
+  const snap=await db.collection('users').doc(currentUser.uid).get();const ud=snap.data()||{};
+  const nick=ud.username||currentUser.displayName||'?';
+
+  if(cmd==='/help'){
+    await botReply(nick,`📋 Команды GrifMcPro:\n/daily — ежедневный бонус\n/bal — мой баланс\n/rules — правила сервера\n/me текст — действие\n/w ник текст — личное сообщение`);return true;
+  }
+  if(cmd==='/daily'){
+    await doDailyBonus(nick);return true;
+  }
+  if(cmd==='/bal'){
+    const bal=(ud.balance||0).toLocaleString();
+    await botReply(nick,`💰 Твой баланс: ${bal} монет`);return true;
+  }
+  if(cmd==='/rules'){
+    await botReply(nick,`📜 Правила сервера — перейди в раздел ПРАВИЛА на сайте. Кратко: не читерь, не груби, не рекламируй!`);return true;
+  }
+  if(cmd==='/me'){
+    return false;// обрабатывается как /me сообщение
+  }
+  if(cmd==='/w'&&parts.length>=3){
+    const targetNick=parts[1];const msg=parts.slice(2).join(' ');
+    await botReply(nick,`📨 Личное сообщение для ${targetNick} отправлено!`);
+    // Создаём системное сообщение игроку
+    await db.collection('messages').add({to:targetNick,title:`Личное сообщение от ${nick}`,text:msg,from:nick,fromBadge:null,sentAt:new Date(),read:false});
+    toast(`📨 Сообщение отправлено ${targetNick}!`,'success');return true;
+  }
+  // Ответы на ключевые слова
+  const lc=rawText.toLowerCase();
+  if(lc.includes('правила')){await botReply(nick,'📜 Правила — раздел ПРАВИЛА на сайте!');return false;}
+  if(lc.includes('донат')||lc.includes('магазин')){await botReply(nick,'🛒 Магазин — раздел МАГАЗИН на сайте! Покупай привилегии за монеты!');return false;}
+  if(lc.includes('баланс')||lc.includes('монет')){const bal=(ud.balance||0).toLocaleString();await botReply(nick,`💰 Твой баланс: ${bal} монет. Зарабатывай монеты в чате!`);return false;}
+  if(lc.includes('как начать')||lc.includes('помогите')||lc.includes('новичок')){await botReply(nick,'👋 Добро пожаловать! Напиши /help — получи список команд. /daily — ежедневный бонус!');return false;}
+  if(lc.includes('промокод')||lc.includes('ключ')){await botReply(nick,'🔑 Ключи активируются в разделе МАГАЗИН → Ключ. Следи за новостями в канале!');return false;}
+  return false;
+}
+
+async function botReply(toNick,text){
+  await db.collection('chatMessages').add({
+    from:BOT_NAME,userId:BOT_UID,badge:null,galochka:'blue',
+    text:`@${toNick}, ${text}`,isMe:false,
+    timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+    reactions:{like:0},likedBy:[],coinEarned:false
+  });
+}
+
+async function doDailyBonus(nick){
+  if(!currentUser)return;
+  try{
+    const today=new Date().toDateString();
+    const ref=db.collection('userDailyBonus').doc(currentUser.uid);
+    const snap=await ref.get();const d=snap.data()||{};
+    if(d.lastDaily===today){
+      await botReply(nick,'⏰ Ежедневный бонус уже получен! Приходи завтра.');return;
+    }
+    await db.collection('users').doc(currentUser.uid).update({balance:firebase.firestore.FieldValue.increment(100)});
+    await ref.set({lastDaily:today},{merge:true});
+    toast('🎁 +100 монет! Ежедневный бонус получен!','success');
+    await botReply(nick,'🎁 +100 монет! Ежедневный бонус получен! Приходи завтра за новым бонусом!');
+    updateDailyEarningsUI();
+  }catch(e){toast('Ошибка: '+e.message,'error');}
+}
+
+// ── Приветствие нового игрока от бота ──
+async function sendWelcomeFromBot(nick){
+  try{
+    await db.collection('chatMessages').add({
+      from:BOT_NAME,userId:BOT_UID,badge:null,galochka:'blue',
+      text:`🎉 Добро пожаловать на сервер, ${nick}!\n📜 Правила: раздел ПРАВИЛА\n🎁 Ежедневный бонус: /daily\n💰 Мой баланс: /bal\n🛒 Магазин: МАГАЗИН\n\nПриятной игры на GrifMcPro! 🔥`,
+      isMe:false,timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+      reactions:{like:0},likedBy:[],coinEarned:false
+    });
+    // Также в личные сообщения
+    await db.collection('messages').add({
+      to:nick,title:'🤖 Добро пожаловать на GrifMcPro!',
+      text:`Привет, ${nick}!\n\nДобро пожаловать на сервер GrifMcPro! 🎮\n\n📜 Прочитай правила в разделе ПРАВИЛА\n🎁 Забери ежедневный бонус: /daily (+100 монет)\n💰 Зарабатывай монеты в чате (+1 за сообщение)\n🛒 Покупай привилегии в магазине\n\nПриятной игры! 🔥`,
+      from:BOT_NAME,fromBadge:'admin',sentAt:new Date(),read:false
+    });
+  }catch(_){}
+}
+
+// ── Подключение бота к регистрации ──
+// Вызывается после doRegister (patched below via auth state change)
+
+// ══════════════════════════════════════════════
 
 // ── INIT ──
 renderPrizesList();
